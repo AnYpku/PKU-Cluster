@@ -1,0 +1,45 @@
+imax 1   number of channels
+jmax 10   number of processes-1
+kmax 28  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin recobin3
+observation 60.09
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3
+process	genbin1	genbin2	genbin3	genbin4	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
+process	-4	-3	-2	-1	0	1	2	3	4	5	6
+rate	0.00	0.34	15.22	0.31	31.14	8.00	1.07	2.28	0.19	0.00	1.52
+------------
+lumi_16	lnN	1.022	1.022	1.022	1.022	1.022	-	1.022	1.022	1.022	1.022	1.022
+genbin1_Stat_recobin3_16	lnN	1.00	-	-	-	-	-	-	-	-	-	-
+genbin2_Stat_recobin3_16	lnN	-	1.20	-	-	-	-	-	-	-	-	-
+genbin3_Stat_recobin3_16	lnN	-	-	1.03	-	-	-	-	-	-	-	-
+genbin4_Stat_recobin3_16	lnN	-	-	-	1.20	-	-	-	-	-	-	-
+QCD_Stat_recobin3_16	lnN	-	-	-	-	1.09	-	-	-	-	-	-
+non_prompt_Stat_recobin3_16	lnN	-	-	-	-	-	1.18	-	-	-	-	-
+TTA_Stat_recobin3_16	lnN	-	-	-	-	-	-	1.33	-	-	-	-
+VV_Stat_recobin3_16	lnN	-	-	-	-	-	-	-	1.78	-	-	-
+ST_Stat_recobin3_16	lnN	-	-	-	-	-	-	-	-	2.00	-	-
+WA_Stat_recobin3_16	lnN	-	-	-	-	-	-	-	-	-	1.00	-
+ZA_SigOut_Stat_recobin3_16	lnN	-	-	-	-	-	-	-	-	-	-	1.09
+fake_16	lnN	-	-	-	-	-	1.20	-	-	-	-	-
+JES_16	lnN	-	-	-	-	1.06	-	1.00	1.00	1.00	1.02	1.02
+JER_16	lnN	-	-	-	-	1.02	-	1.00	1.00	1.00	1.00	1.00
+pdf_QCD	lnN	-	-	-	-	1.02	-	-	-	-	-	-
+pdf_EW	lnN	1.00	1.05	1.04	1.05	-	-	-	-	-	-	1.04
+Scale_QCD	lnN	-	-	-	-	1.13	-	-	-	-	-	-
+Scale_EW	lnN	1.00	1.09	1.08	1.10	-	-	-	-	-	-	1.07
+mu_trigger_16	lnN	-	-	-	-	1.02	-	1.02	1.02	1.02	1.02	1.02
+mu_eff_16	lnN	-	-	-	-	1.005	-	1.005	1.005	1.005	1.005	1.005
+ele_trigger_16	lnN	-	-	-	-	1.02	-	1.02	1.02	1.02	1.02	1.02
+ele_eff_16	lnN	-	-	-	-	1.023	-	1.023	1.023	1.023	1.023	1.023
+pileup	lnN	-	-	-	-	1.001	-	1.001	1.001	1.001	1.001	1.001
+photon_id_16	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03	1.03
+ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-	-
+VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-	-
+l1pref	lnN	-	-	-	-	1.02	-	1.02	1.02	1.02	1.02	1.02

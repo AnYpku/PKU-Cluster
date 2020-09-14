@@ -1,0 +1,25 @@
+imax 1   number of channels
+jmax 3   number of processes-1
+kmax 8  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin ele2
+observation 0.00
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	ele2	ele2	ele2	ele2
+process	sig	QCD	non_prompt	others
+process	0	1	2	3
+rate	0.43	4.04	0.39	0.12
+------------
+lumi	lnN	1.026	-	-	1.026	#lumi
+QCD_ele_barrel	lnN	-	1.06	-	-	#0.06 uncertainty on QCD ZA cross section in ele_barrel
+fake_ele_barrel	lnN	-	-	1.069	-	#0.069 uncertainty on ele_barrel
+VBS_stat_ele_barrel	lnN	1.17	-	-	-
+QCD_stat_ele_barrel	lnN	-	1.21	-	-
+non_prompt_stat_ele_barrel	lnN	-	-	1.71	-
+others_stat_ele_barrel	lnN	-	-	-	1.92
+JERC_ele_barrel	lnN	1.009	1.009	1.009	1.009

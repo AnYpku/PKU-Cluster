@@ -1,0 +1,39 @@
+imax 1   number of channels
+jmax 6   number of processes-1
+kmax 22  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin mb
+observation 1995.50
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	mb	mb	mb	mb	mb	mb	mb
+process	VBS	QCD	non_prompt	TTA	VV	ST	WA
+process	0	1	2	3	4	5	6
+rate	30.99	1416.77	479.05	48.37	14.49	5.82	0.00
+------------
+lumi	lnN	1.025	-	-	1.025	1.025	1.025	1.025	#lumi
+fake_muon18_barrel	lnN	-	-	1.11	-	-	-	-	#0. uncertainty on muon18_barrel_control
+VBS_stat_muon18_barrel_control_bin_1	lnN	1.03	-	-	-	-	-	-
+QCD_stat_muon18_barrel_control_bin_1	lnN	-	1.23	-	-	-	-	-
+non_prompt_stat_muon18_barrel_control_bin_1	lnN	-	-	1.03	-	-	-	-
+TTA_stat_muon18_barrel_control_bin_1	lnN	-	-	-	1.10	-	-	-
+VV_stat_muon18_barrel_control_bin_1	lnN	-	-	-	-	1.21	-	-
+ST_stat_muon18_barrel_control_bin_1	lnN	-	-	-	-	-	1.25	-
+WA_stat_muon18_barrel_control_bin_1	lnN	-	-	-	-	-	-	1.00
+JES_18	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+JER_18	lnN	1.00	1.00	-	1.00	1.00	1.00	1.00
+QCDZA_pdf	lnN	-	1.02	-	-	-	-	-
+QCDZA_scale	lnN	-	1.14	-	-	-	-	-
+QCDZA_scale_extra	lnN	-	1.00/1.00	-	-	-	-	-
+signal_pdf	lnN	1.04	-	-	-	-	-	-
+signal_scale	lnN	1.00	-	-	-	-	-	-
+muon18_trigger	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+muon18_efficiency	lnN	1.005	1.005	-	1.005	1.005	1.005	1.005
+photon_id_18	lnN	1.03	-	-	1.03	1.03	1.03	1.03
+interference	lnN	1.04	-	-	-	-	-	-
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-
+VVgamma_xs	lnN	-	-	-	-	1.1	-	-

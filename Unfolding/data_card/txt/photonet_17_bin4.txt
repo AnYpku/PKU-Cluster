@@ -1,0 +1,46 @@
+imax 1   number of channels
+jmax 10   number of processes-1
+kmax 29  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin recobin4
+observation 12.13
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	recobin4	recobin4	recobin4	recobin4	recobin4	recobin4	recobin4	recobin4	recobin4	recobin4	recobin4
+process	genbin1	genbin2	genbin3	genbin4	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
+process	-4	-3	-2	-1	0	1	2	3	4	5	6
+rate	0.00	0.00	0.03	4.62	6.16	0.50	0.37	0.23	0.00	0.00	0.21
+------------
+lumi_17	lnN	1.020	1.020	1.020	1.020	1.020	-	1.020	1.020	1.020	1.020	1.020
+genbin1_Stat_recobin4_17	lnN	1.00	-	-	-	-	-	-	-	-	-	-
+genbin2_Stat_recobin4_17	lnN	-	1.00	-	-	-	-	-	-	-	-	-
+genbin3_Stat_recobin4_17	lnN	-	-	1.71	-	-	-	-	-	-	-	-
+genbin4_Stat_recobin4_17	lnN	-	-	-	1.05	-	-	-	-	-	-	-
+QCD_Stat_recobin4_17	lnN	-	-	-	-	1.21	-	-	-	-	-	-
+non_prompt_Stat_recobin4_17	lnN	-	-	-	-	-	1.51	-	-	-	-	-
+TTA_Stat_recobin4_17	lnN	-	-	-	-	-	-	1.60	-	-	-	-
+VV_Stat_recobin4_17	lnN	-	-	-	-	-	-	-	2.00	-	-	-
+ST_Stat_recobin4_17	lnN	-	-	-	-	-	-	-	-	1.00	-	-
+WA_Stat_recobin4_17	lnN	-	-	-	-	-	-	-	-	-	1.00	-
+ZA_SigOut_Stat_recobin4_17	lnN	-	-	-	-	-	-	-	-	-	-	1.27
+fake_17	lnN	-	-	-	-	-	1.27	-	-	-	-	-
+JES_17	lnN	-	-	-	-	1.23	-	1.60	1.00	1.00	1.03	1.03
+JER_17	lnN	-	-	-	-	1.03	-	1.26	1.00	1.00	1.01	1.01
+pdf_EW	lnN	1.00	1.00	1.00	1.00	-	-	-	-	-	-	1.09
+pdf_QCD	lnN	-	-	-	-	1.03	-	-	-	-	-	-
+Scale_EW	lnN	1.00	1.00	1.10	1.10	-	-	-	-	-	-	1.08
+Scale_QCD	lnN	-	-	-	-	1.13	-	-	-	-	-	-
+Scale_QCD_extra	lnN	-	-	-	-	1.02/0.99	-	-	-	-	-	-
+mu_trigger_17	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
+mu_eff	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
+ele_reco	lnN	-	-	-	-	1.004	-	1.004	1.004	1.004	1.004	1.004
+ele_ID	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03	1.03
+photon_id	lnN	-	-	-	-	1.02	-	1.02	1.02	1.02	1.02	1.02
+pileup	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-	-
+VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-	-
+l1pref	lnN	-	-	-	-	1.05	-	1.05	1.05	1.05	1.05	1.05

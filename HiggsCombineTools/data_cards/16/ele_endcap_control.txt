@@ -1,0 +1,41 @@
+imax 1   number of channels
+jmax 6   number of processes-1
+kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin ee
+observation 217.25
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	ee	ee	ee	ee	ee	ee	ee
+process	VBS	QCD	non_prompt	TTA	VV	ST	WA
+process	0	1	2	3	4	5	6
+rate	2.73	112.86	97.38	2.52	1.24	0.52	0.00
+------------
+lumi	lnN	1.025	1.025	-	1.025	1.025	1.025	1.025	#lumi
+fake_ele_endcap	lnN	-	-	1.32	-	-	-	-	#0. uncertainty on ele_endcap
+VBS_stat_ele_endcap_control	lnN	1.07	-	-	-	-	-	-
+QCD_stat_ele_endcap_control	lnN	-	1.04	-	-	-	-	-
+non_prompt_stat_ele_endcap_control	lnN	-	-	1.06	-	-	-	-
+TTA_stat_ele_endcap_control	lnN	-	-	-	1.19	-	-	-
+VV_stat_ele_endcap_control	lnN	-	-	-	-	1.51	-	-
+ST_stat_ele_endcap_control	lnN	-	-	-	-	-	1.60	-
+WA_stat_ele_endcap_control	lnN	-	-	-	-	-	-	1.00
+JES	lnN	1.001	1.001	-	1.001	1.001	1.001	1.001
+JER	lnN	1.006	1.006	-	1.006	1.006	1.006	1.006
+QCDZA_pdf	lnN	-	1.016	-	-	-	-	-
+QCDZA_scale	lnN	-	1.19	-	-	-	-	-
+QCDZA_scale_extra       lnN     -       0.946/1.045     -       -       -       -       -
+signal_pdf	lnN	1.04	-	-	-	-	-	-
+signal_scale	lnN	1.005	-	-	-	-	-	-
+ele_trigger	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+ele_efficiency	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
+interference	lnN	1.04	-	-	-	-	-	-
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-
+VV_xs	lnN	-	-	-	-	1.1	-	-
+l1prefiring	lnN	1.01	1.004	-	1.004	1.004	1.004	1.004

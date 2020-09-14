@@ -1,0 +1,39 @@
+imax 1   number of channels
+jmax 6   number of processes-1
+kmax 22  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin 1
+observation 23.40
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	1	1	1	1	1	1	1
+process	VBS	QCD	non_prompt	TTA	VV	ST	WA
+process	0	1	2	3	4	5	6
+rate	0.98	16.27	5.17	0.17	0.81	0.00	0.00
+------------
+lumi	lnN	1.025	-	-	1.025	1.025	1.025	1.025	#lumi
+QCD_muon_barrel	lnN	-	1.07	-	-	-	-	-	#0.06 uncertainty on QCD ZA cross section in muon_barrel
+fake_muon_barrel	lnN	-	-	1.07	-	-	-	-	#0. uncertainty on muon_barrel
+VBS_stat_muon_barrel_bin_4	lnN	1.11	-	-	-	-	-	-
+QCD_stat_muon_barrel_bin_4	lnN	-	1.10	-	-	-	-	-
+non_prompt_stat_muon_barrel_bin_4	lnN	-	-	1.28	-	-	-	-
+TTA_stat_muon_barrel_bin_4	lnN	-	-	-	1.81	-	-	-
+VV_stat_muon_barrel_bin_4	lnN	-	-	-	-	1.72	-	-
+ST_stat_muon_barrel_bin_4	lnN	-	-	-	-	-	1.00	-
+WA_stat_muon_barrel_bin_4	lnN	-	-	-	-	-	-	1.00
+JES_muon_barrel	lnN	1.02	-	-	1.02	1.02	1.02	1.02
+JER_muon_barrel	lnN	1.03	-	-	1.03	1.03	1.03	1.03
+QCDZA_pdf_muon_barrel	lnN	-	1.02	-	-	-	-	-
+QCDZA_scale_muon_barrel	lnN	-	1.14	-	-	-	-	-
+pdf_muon_barrel	lnN	1.04	-	-	1.04	1.04	1.04	1.04
+scale_muon_barrel	lnN	1.02	-	-	1.02	1.02	1.02	1.02
+trigger	lnN	1.02	-	-	1.02	1.02	1.02	1.02
+lepton_efficiency	lnN	1.005	-	-	1.005	1.005	1.005	1.005
+pileup	lnN	1.001	-	-	1.001	1.001	1.001	1.001
+photon_id	lnN	1.03	-	-	1.03	1.03	1.03	1.03
+interference	lnN	1.01	-	-	-	-	-	-
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-

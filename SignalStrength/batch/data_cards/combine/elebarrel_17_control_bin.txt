@@ -1,0 +1,43 @@
+imax 1   number of channels
+jmax 7   number of processes-1
+kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin elebarrel1
+observation 364.17
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1
+process	Sig	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
+process	0	1	2	3	4	5	6	7
+rate	4.43	211.58	132.59	9.06	3.98	0.87	0.00	1.65
+------------
+lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020	1.020
+VBS_Stat_control_bin1_elebarrel17	lnN	1.06	-	-	-	-	-	-	-
+QCD_Stat_control_bin1_elebarrel17	lnN	-	1.03	-	-	-	-	-	-
+non_prompt_Stat_control_bin1_elebarrel17	lnN	-	-	1.05	-	-	-	-	-
+TTA_Stat_control_bin1_elebarrel17	lnN	-	-	-	1.13	-	-	-	-
+VV_Stat_control_bin1_elebarrel17	lnN	-	-	-	-	1.26	-	-	-
+ST_Stat_control_bin1_elebarrel17	lnN	-	-	-	-	-	1.46	-	-
+WA_Stat_control_bin1_elebarrel17	lnN	-	-	-	-	-	-	1.00	-
+ZA_SigOut_Stat_control_bin1_elebarrel17	lnN	-	-	-	-	-	-	-	1.10
+fake_elebarrel17	lnN	-	-	1.08	-	-	-	-	-
+JES_17	lnN	1.02	1.09	-	1.06	1.08	1.13	1.00	1.02
+JER_17	lnN	1.03	1.07	-	1.01	1.23	1.11	1.00	1.01
+pdf_EW	lnN	-	-	-	-	-	-	-	1.00
+pdf_QCD	lnN	-	1.01	-	-	-	-	-	-
+Scale_EW	lnN	-	-	-	-	-	-	-	1.01
+Scale_QCD	lnN	-	1.17	-	-	-	-	-	-
+Scale_QCD_extra	lnN	-	1.01/0.99	-	-	-	-	-	-
+interf	lnN	1.26	-	-	-	-	-	-	-
+theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
+ele_reco	lnN	1.012	1.010	-	1.010	1.010	1.010	1.010	1.010
+ele_ID	lnN	1.04	1.04	-	1.04	1.04	1.04	1.04	1.04
+photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-	-
+VV_xs	lnN	-	-	-	-	1.1	-	-	-
+l1pref	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01

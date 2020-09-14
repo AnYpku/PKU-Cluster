@@ -1,0 +1,22 @@
+imax 1   number of channels
+jmax 3   number of processes-1
+kmax 5  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin mu1
+observation 67.30
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	mu1	mu1	mu1	mu1
+process	sig	QCD	non_prompt	others
+process	0	1	2	3
+rate	17.69	43.14	6.02	0.45
+------------
+lumi	lnN	1.025	1.025	-	1.025	#lumi
+VBS_stat_all_full_bin_1	lnN	1.03	-	-	-
+QCD_stat_all_full_bin_1	lnN	-	1.09	-	-
+non_prompt_stat_all_full_bin_1	lnN	-	-	1.17	-
+others_stat_all_full_bin_1	lnN	-	-	-	1.69

@@ -151,6 +151,11 @@ class ZPKUTreeMaker : public edm::EDAnalyzer {
 		std::string badMuonFilter_Selector_;
 		std::string duplicateMuonFilter_Selector_;
 
+                edm::EDGetTokenT< double > prefweight_token;
+                edm::EDGetTokenT< double > prefweightup_token;
+                edm::EDGetTokenT< double > prefweightdown_token;
+
+
 
 //		edm::EDGetTokenT<edm::ValueMap<float> > full5x5SigmaIEtaIEtaMapToken_;
 //		edm::EDGetTokenT<edm::ValueMap<float> > phoChargedIsolationToken_;
@@ -218,6 +223,7 @@ class ZPKUTreeMaker : public edm::EDAnalyzer {
 		double drla,drla2;
 		double drla_f,drla2_f;
 		bool passEleVeto, passEleVetonew, passPixelSeedVeto;
+                double _prefiringweight,_prefiringweightup,_prefiringweightdown;
 		//Photon gen match
 		int   isTrue_;
 		bool ISRPho;
@@ -415,6 +421,9 @@ ZPKUTreeMaker::ZPKUTreeMaker(const edm::ParameterSet& iConfig)//:
 	goodeleToken_    = (consumes<edm::View<pat::Electron> > (iConfig.getParameter<edm::InputTag>("goodeleSrc")))              ;
 	beamSpotToken_    = (consumes<reco::BeamSpot>(iConfig.getParameter<edm::InputTag>("beamSpot"))) ;
 	conversionsToken_ = (consumes<std::vector<reco::Conversion> >(iConfig.getParameter<edm::InputTag>("conversions"))) ;
+        prefweight_token = consumes< double >(edm::InputTag("prefiringweight:nonPrefiringProb"));
+        prefweightup_token = consumes< double >(edm::InputTag("prefiringweight:nonPrefiringProbUp"));
+        prefweightdown_token = consumes< double >(edm::InputTag("prefiringweight:nonPrefiringProbDown"));
 
 
 	jetCorrLabel_ = jecAK4chsLabels_;
@@ -641,7 +650,10 @@ ZPKUTreeMaker::ZPKUTreeMaker(const edm::ParameterSet& iConfig)//:
 	outTree_->Branch("lumiWeight"      ,&lumiWeight     ,"lumiWeight/D"     );
 	outTree_->Branch("pileupWeight"    ,&pileupWeight   ,"pileupWeight/D"   );
 	outTree_->Branch("pweight"         ,pweight         ,"pweight[703]/D"   );
-
+        //L1 prefiring
+        outTree_->Branch("prefWeight"   ,&_prefiringweight,"prefWeight/D"  );
+        outTree_->Branch("prefWeightUp" ,&_prefiringweightup,"prefWeightUp/D"  );
+        outTree_->Branch("prefWeightDown",&_prefiringweightdown,"prefWeightDown/D"  );
 	// muon station2 retrieve, L1 issue, Meng 2017/3/26
 	outTree_->Branch("lep1_eta_station2"  ,&lep1_eta_station2  ,"lep1_eta_station2/D"); 
 	outTree_->Branch("lep1_phi_station2"  ,&lep1_phi_station2  ,"lep1_phi_station2/D");
@@ -993,6 +1005,17 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 				npIT = PVI->getPU_NumInteractions();
 			}
 		} 
+                edm::Handle< double > theprefweight;
+                iEvent.getByToken(prefweight_token, theprefweight ) ;
+                _prefiringweight =(*theprefweight);
+
+                edm::Handle< double > theprefweightup;
+                iEvent.getByToken(prefweightup_token, theprefweightup ) ;
+                _prefiringweightup =(*theprefweightup);
+
+                edm::Handle< double > theprefweightdown;
+                iEvent.getByToken(prefweightdown_token, theprefweightdown ) ;
+                _prefiringweightdown =(*theprefweightdown);
 	} 
 
 	Handle<TriggerResults> trigRes;
@@ -1852,7 +1875,9 @@ void ZPKUTreeMaker::setDummyValues() {
 	Mjj=-1e1;   Mjj_f=-1e1;
 	deltaetajj=-1e1;   deltaetajj_f=-1e1;
 	zepp=-1e1;   zepp_f=-1e1;
-	
+        _prefiringweight=-10;
+        _prefiringweightup=-10;
+        _prefiringweightdown=-10;	
 
 	HLT_Ele1=-99;
 	HLT_Ele2=-99;

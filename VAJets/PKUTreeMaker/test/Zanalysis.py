@@ -15,7 +15,7 @@ process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_condD
 from Configuration.AlCa.GlobalTag import GlobalTag
 if runOnMC:
 #   process.GlobalTag.globaltag = '94X_mc2017_realistic_v17'
-   process.GlobalTag.globaltag = '102X_mc2017_realistic_v7'
+   process.GlobalTag.globaltag = '102X_mc2017_realistic_v8'
 elif not(runOnMC):
    process.GlobalTag.globaltag = '94X_dataRun2_v11'
 
@@ -50,24 +50,30 @@ if chsorpuppi:
 else:
       process.goodAK4Jets.src = "slimmedJetsPuppi"
 
-#from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
-#process.load("RecoJets.JetProducers.PileupJetID_cfi")
-#process.pileupJetId.jets = cms.InputTag("goodAK4Jets")
-#process.pileupJetId.inputIsCorrected = True
-#process.pileupJetId.applyJec = False
-#process.pileupJetId.vertexes = cms.InputTag("offlineSlimmedPrimaryVertices")
-#process.pileupJetId.algos = cms.VPSet(_chsalgos_94x) # for 2017
-#process.pileupJetId.algos = cms.VPSet(_chsalgos_102x) # for 2018
+process.load("PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff")
+process.patJetCorrFactorsReapplyJEC = process.updatedPatJetCorrFactors.clone(
+  src = cms.InputTag("slimmedJets"),
+  levels = ['L1FastJet','L2Relative','L3Absolute'],
+  payload = 'AK4PFchs'
+)
+ 
+process.patJetsReapplyJEC = process.updatedPatJets.clone(
+  jetSource = cms.InputTag("slimmedJets"),
+  jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
+)
 
-#from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
-#process.load("RecoJets.JetProducers.PileupJetID_cfi")
-#process.pileupJetIdUpdated = pileupJetId.clone(
+from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
+process.load("RecoJets.JetProducers.PileupJetID_cfi")
+process.pileupJetIdUpdated = process.pileupJetId.clone(
+		jets=cms.InputTag("patJetsReapplyJEC"),
 #		jets=cms.InputTag("slimmedJets"),
-#		inputIsCorrected=True,
-#		applyJec=False,
-#		vertexes=cms.InputTag("offlineSlimmedPrimaryVertices")
-#               algos = cms.VPSet(_chsalgos_94x)
-#		)
+		inputIsCorrected=False,
+		applyJec=True,
+		vertexes=cms.InputTag("offlineSlimmedPrimaryVertices"),
+#                algos = cms.VPSet(_chsalgos_94x)
+		)
+process.jetSequence = cms.Sequence(process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
+                                  +process.pileupJetIdUpdated + process.NJetsSequence)
 
 ZBOSONCUT = "pt > 0.0"
 process.leptonicVSelector = cms.EDFilter("CandViewSelector",
@@ -88,8 +94,6 @@ process.leptonSequence = cms.Sequence(process.muSequence +
                                       process.leptonicVSequence +
                                       process.leptonicVSelector +
                                       process.leptonicVFilter )
-
-process.jetSequence = cms.Sequence(process.NJetsSequence)
 
 process.load('RecoMET.METFilters.BadPFMuonFilter_cfi')
 process.load("RecoMET.METFilters.BadChargedCandidateFilter_cfi")
@@ -130,6 +134,13 @@ if chsorpuppi:
       ak4jecsrc = jecLevelsAK4chs
 else:
       ak4jecsrc = jecLevelsAK4puppi
+
+from PhysicsTools.PatUtils.l1ECALPrefiringWeightProducer_cfi import l1ECALPrefiringWeightProducer
+process.prefiringweight = l1ECALPrefiringWeightProducer.clone(
+    DataEra = cms.string("2017BtoF"), #Use 2016BtoH for 2016
+    UseJetEMPt = cms.bool(False),
+    PrefiringRateSystematicUncty = cms.double(0.2),
+    SkipWarnings = False)
 
 process.treeDumper = cms.EDAnalyzer("ZPKUTreeMaker",
                                     originalNEvents = cms.int32(1),
@@ -191,27 +202,29 @@ process.treeDumper = cms.EDAnalyzer("ZPKUTreeMaker",
 
 process.analysis = cms.Path(
                             process.leptonSequence+ 
-                            process.jetSequence +
+                            process.jetSequence  +
                             process.metfilterSequence +
-			    process.treeDumper
+			    process.prefiringweight*process.treeDumper
                            )
 
 ### Source
 process.load("VAJets.PKUCommon.data.RSGravitonToWW_kMpl01_M_1000_Tune4C_13TeV_pythia8")
 process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring(
-		       "/store/mc/RunIIFall17MiniAODv2/ZGToLLG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v3/40000/766C7223-B52D-E911-92E0-1866DA85DFA0.root"
+#		       "/store/mc/RunIIFall17MiniAODv2/ZGJJ_EW_13TeV-sherpa/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/270000/DCA17E81-7CEB-EA11-8453-7CD30ACE0FE7.root"
+		"/store/mc/RunIIFall17MiniAODv2/LLAJJ_EWK_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/A68BCAE9-29A6-E811-97EA-FA163E16CD5F.root"
+#'file:./B06575F2-4642-E811-A124-A4BF01125848.root'
 		),
    )
          
                        
-process.maxEvents.input = 100
+process.maxEvents.input = 500
 
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 20
+process.MessageLogger.cerr.FwkReport.reportEvery = 50
 process.MessageLogger.cerr.FwkReport.limit = 99999999
 
 process.TFileService = cms.Service("TFileService",
-                                    fileName = cms.string("Ztest.root")
+                                    fileName = cms.string("Ztest_PU.root")
                                    )
 

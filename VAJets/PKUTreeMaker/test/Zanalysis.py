@@ -45,35 +45,45 @@ process.goodMuons.src = "slimmedMuons"
 process.goodElectrons.src = "slimmedElectrons"
 process.goodPhotons.src = "slimmedPhotons"
 
+from PhysicsTools.SelectorUtils.pfJetIDSelector_cfi import pfJetIDSelector
+process.goodAK4Jets = cms.EDFilter("PFJetIDSelectionFunctorFilter",
+                        filterParams = pfJetIDSelector.clone(),
+                        src = cms.InputTag("slimmedJets"),
+                        filter = cms.bool(True)
+                        )
 if chsorpuppi:
        process.goodAK4Jets.src = "slimmedJets"
 else:
       process.goodAK4Jets.src = "slimmedJetsPuppi"
-
-process.load("PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff")
-process.patJetCorrFactorsReapplyJEC = process.updatedPatJetCorrFactors.clone(
-  src = cms.InputTag("slimmedJets"),
-  levels = ['L1FastJet','L2Relative','L3Absolute'],
-  payload = 'AK4PFchs'
-)
+#process.load("PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff")
+#process.patJetCorrFactorsReapplyJEC = process.updatedPatJetCorrFactors.clone(
+#  src = cms.InputTag("slimmedJets"),
+#  src = cms.InputTag("goodAK4Jets"),
+#  levels = ['L1FastJet','L2Relative','L3Absolute'],
+#  payload = 'AK4PFchs'
+#)
  
-process.patJetsReapplyJEC = process.updatedPatJets.clone(
-  jetSource = cms.InputTag("slimmedJets"),
-  jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
-)
+#process.patJetsReapplyJEC = process.updatedPatJets.clone(
+#  jetSource = cms.InputTag("goodAK4Jets"),
+#  jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
+#)
 
 from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
 process.load("RecoJets.JetProducers.PileupJetID_cfi")
 process.pileupJetIdUpdated = process.pileupJetId.clone(
-		jets=cms.InputTag("patJetsReapplyJEC"),
+		jets=cms.InputTag("cleanAK4Jets"),
+#		jets=cms.InputTag("patJetsReapplyJEC"),
 #		jets=cms.InputTag("slimmedJets"),
 		inputIsCorrected=False,
 		applyJec=True,
 		vertexes=cms.InputTag("offlineSlimmedPrimaryVertices"),
 #                algos = cms.VPSet(_chsalgos_94x)
 		)
-process.jetSequence = cms.Sequence(process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
-                                  +process.pileupJetIdUpdated + process.NJetsSequence)
+process.jetSequence = cms.Sequence(process.goodAK4Jets
+#		                  +process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
+				  +process.NJetsSequence
+                                  +process.pileupJetIdUpdated 
+                                  )
 
 ZBOSONCUT = "pt > 0.0"
 process.leptonicVSelector = cms.EDFilter("CandViewSelector",

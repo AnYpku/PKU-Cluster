@@ -81,11 +81,10 @@ process.pileupJetId.vertexes = cms.InputTag("offlineSlimmedPrimaryVertices")
 #		vertexes=cms.InputTag("offlineSlimmedPrimaryVertices"),
 #		)
 process.jetSequence = cms.Sequence(
-#		                  process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
-                                 process.goodAK4Jets
+		                  process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
+                                 +process.goodAK4Jets
 				 +process.cleanJets
-#                                 +process.pileupJetId
-#                                  +process.pileupJetIdUpdated 
+                                 +process.pileupJetId
                                   )
 
 ZBOSONCUT = "pt > 0.0"

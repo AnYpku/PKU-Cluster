@@ -45,44 +45,47 @@ process.goodMuons.src = "slimmedMuons"
 process.goodElectrons.src = "slimmedElectrons"
 process.goodPhotons.src = "slimmedPhotons"
 
+process.load("PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff")
+process.patJetCorrFactorsReapplyJEC = process.updatedPatJetCorrFactors.clone(
+  src = cms.InputTag("slimmedJets"),
+  levels = ['L1FastJet','L2Relative','L3Absolute'],
+  payload = 'AK4PFchs'
+)
+ 
+process.patJetsReapplyJEC = process.updatedPatJets.clone(
+  jetSource = cms.InputTag("slimmedJets"),
+  jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
+)
+#define the tightID jets
 from PhysicsTools.SelectorUtils.pfJetIDSelector_cfi import pfJetIDSelector
 process.goodAK4Jets = cms.EDFilter("PFJetIDSelectionFunctorFilter",
                         filterParams = pfJetIDSelector.clone(),
                         src = cms.InputTag("slimmedJets"),
                         filter = cms.bool(True)
                         )
-if chsorpuppi:
-       process.goodAK4Jets.src = "slimmedJets"
-else:
-      process.goodAK4Jets.src = "slimmedJetsPuppi"
-#process.load("PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff")
-#process.patJetCorrFactorsReapplyJEC = process.updatedPatJetCorrFactors.clone(
-#  src = cms.InputTag("slimmedJets"),
-#  src = cms.InputTag("goodAK4Jets"),
-#  levels = ['L1FastJet','L2Relative','L3Absolute'],
-#  payload = 'AK4PFchs'
-#)
- 
-#process.patJetsReapplyJEC = process.updatedPatJets.clone(
-#  jetSource = cms.InputTag("goodAK4Jets"),
-#  jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
-#)
-
-from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
+#define the cleanJets
+process.cleanJets = cms.Sequence(process.NJetsSequence)
+#--- define the pileup id -------------------------------
 process.load("RecoJets.JetProducers.PileupJetID_cfi")
-process.pileupJetIdUpdated = process.pileupJetId.clone(
-		jets=cms.InputTag("cleanAK4Jets"),
-#		jets=cms.InputTag("patJetsReapplyJEC"),
-#		jets=cms.InputTag("slimmedJets"),
-		inputIsCorrected=False,
-		applyJec=True,
-		vertexes=cms.InputTag("offlineSlimmedPrimaryVertices"),
-#                algos = cms.VPSet(_chsalgos_94x)
-		)
-process.jetSequence = cms.Sequence(process.goodAK4Jets
-#		                  +process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
-				  +process.NJetsSequence
-                                  +process.pileupJetIdUpdated 
+process.pileupJetId.jets = cms.InputTag("cleanAK4Jets")
+process.pileupJetId.inputIsCorrected = True
+process.pileupJetId.applyJec = False
+process.pileupJetId.vertexes = cms.InputTag("offlineSlimmedPrimaryVertices") 
+
+#from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
+#process.load("RecoJets.JetProducers.PileupJetID_cfi")
+#process.pileupJetIdUpdated = process.pileupJetId.clone(
+#		jets=cms.InputTag("cleanAK4Jets"),
+#		inputIsCorrected=False,
+#		applyJec=True,
+#		vertexes=cms.InputTag("offlineSlimmedPrimaryVertices"),
+#		)
+process.jetSequence = cms.Sequence(
+#		                  process.patJetCorrFactorsReapplyJEC*process.patJetsReapplyJEC
+                                 process.goodAK4Jets
+				 +process.cleanJets
+#                                 +process.pileupJetId
+#                                  +process.pileupJetIdUpdated 
                                   )
 
 ZBOSONCUT = "pt > 0.0"
@@ -112,6 +115,11 @@ process.BadPFMuonFilter.PFCandidates = cms.InputTag("packedPFCandidates")
 process.BadChargedCandidateFilter.muons = cms.InputTag("slimmedMuons")
 process.BadChargedCandidateFilter.PFCandidates = cms.InputTag("packedPFCandidates")
 process.metfilterSequence = cms.Sequence(process.BadPFMuonFilter+process.BadChargedCandidateFilter)
+
+if chsorpuppi:
+       process.goodAK4Jets.src = "slimmedJets"
+else:
+      process.goodAK4Jets.src = "slimmedJetsPuppi"
 
 #begin------------JEC on the fly--------
 if runOnMC:
@@ -208,6 +216,9 @@ process.treeDumper = cms.EDAnalyzer("ZPKUTreeMaker",
                                     noiseFilterSelection_badChargedHadron = cms.InputTag('BadChargedCandidateFilter'),
 				    badMuonFilterSelection = cms.string('Flag_badMuons'),
 				    duplicateMuonFilterSelection = cms.string('Flag_duplicateMuons'),
+                                    pileupJetId             = cms.InputTag('pileupJetId'),
+				    pileupJetIdFlag         = cms.InputTag('pileupJetId:fullId'),
+				    pileupJetIdDiscriminant = cms.InputTag('pileupJetId:fullDiscriminant'),
                                     )
 
 process.analysis = cms.Path(

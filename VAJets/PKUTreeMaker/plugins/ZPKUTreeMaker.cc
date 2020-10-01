@@ -62,6 +62,7 @@
 #include "MuonAnalysis/MuonAssociators/interface/PropagateToMuon.h"
 #include "TrackingTools/Records/interface/TrackingComponentsRecord.h"
 #include "TrackingTools/Records/interface/TransientTrackRecord.h"
+#include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 struct ZsortPt
 {
 	bool operator()(TLorentzVector* s1, TLorentzVector* s2) const
@@ -201,6 +202,13 @@ class ZPKUTreeMaker : public edm::EDAnalyzer {
 		// AK4 Jets
 		double ak4jet_pt[6],ak4jet_eta[6],ak4jet_phi[6],ak4jet_e[6];
 		double ak4jet_pt_jer[6];
+                double ak4jet_puIdLoose[6], ak4jet_puIdMedium[6],ak4jet_puIdTight[6];
+		double jet1puIdLoose;
+		double jet1puIdMedium;
+		double jet1puIdTight;
+		double jet2puIdLoose;
+		double jet2puIdMedium;
+		double jet2puIdTight;
 		double ak4jet_csv[6],ak4jet_icsv[6];
 		double drjetlep[6], drjetphoton[6];
 		double genphoton_pt[6],genphoton_eta[6],genphoton_phi[6];
@@ -312,8 +320,12 @@ class ZPKUTreeMaker : public edm::EDAnalyzer {
 		edm::EDGetTokenT<edm::View<reco::GenParticle>> genSrc_;
 		edm::EDGetTokenT<edm::View<reco::Candidate>> metSrc_;
 		edm::EDGetTokenT<reco::VertexCollection> VertexToken_;
+		//PU JetID
+		edm::EDGetTokenT<edm::ValueMap<int> > pileupJetIdFlagToken;
+		edm::EDGetTokenT<edm::ValueMap<float> > pileupJetIdDiscriminantToken;
+		edm::EDGetTokenT<edm::ValueMap<StoredPileupJetIdentifier> > pileupJetIdToken;
+		//PU JetID
 		edm::EDGetTokenT<pat::JetCollection> t1jetSrc_;
-//		edm::EDGetTokenT<pat::Jet> t1jetSrc_;
 		edm::EDGetTokenT<edm::View<pat::Muon>> t1muSrc_;
 
 };
@@ -393,12 +405,17 @@ ZPKUTreeMaker::ZPKUTreeMaker(const edm::ParameterSet& iConfig)//:
 	PUToken_=consumes<std::vector<PileupSummaryInfo>>(iConfig.getParameter<edm::InputTag>("pileup") ) ;
 	leptonicVSrc_=consumes<edm::View<reco::Candidate> >(iConfig.getParameter<edm::InputTag>( "leptonicVSrc") ) ;
 	ak4jetsSrc_      = consumes<edm::View<pat::Jet>>(iConfig.getParameter<edm::InputTag>( "ak4jetsSrc") ) ;
+	//PU JetID
+	pileupJetIdToken = consumes<edm::ValueMap<StoredPileupJetIdentifier> >(iConfig.getParameter<edm::InputTag>("pileupJetId"));
+	pileupJetIdFlagToken = consumes<edm::ValueMap<int> >(iConfig.getParameter<edm::InputTag>("pileupJetIdFlag"));
+	pileupJetIdDiscriminantToken = consumes<edm::ValueMap<float> >(iConfig.getParameter<edm::InputTag>("pileupJetIdDiscriminant"));
+	//PU JetID
+	
 	photonSrc_      = consumes<edm::View<pat::Photon>>(iConfig.getParameter<edm::InputTag>( "photonSrc") ) ;
 	genSrc_      = consumes<edm::View<reco::GenParticle>>(iConfig.getParameter<edm::InputTag>( "genSrc") ) ;
 	metSrc_      = consumes<edm::View<reco::Candidate>>(iConfig.getParameter<edm::InputTag>( "metSrc") ) ;	VertexToken_ =consumes<reco::VertexCollection> (iConfig.getParameter<edm::InputTag>( "vertex" ) ) ;
 	VertexToken_ =consumes<reco::VertexCollection> (iConfig.getParameter<edm::InputTag>( "vertex" ) ) ;
 	t1jetSrc_      = consumes<pat::JetCollection>(iConfig.getParameter<edm::InputTag>( "t1jetSrc") ) ;
-//	t1jetSrc_      = consumes<pat::Jet>(iConfig.getParameter<edm::InputTag>( "t1jetSrc") ) ;
 	t1muSrc_      = consumes<edm::View<pat::Muon>>(iConfig.getParameter<edm::InputTag>( "t1muSrc") ) ;
 	originalNEvents_ = iConfig.getParameter<int>("originalNEvents");
 	crossSectionPb_  = iConfig.getParameter<double>("crossSectionPb");
@@ -559,6 +576,15 @@ ZPKUTreeMaker::ZPKUTreeMaker(const edm::ParameterSet& iConfig)//:
 	outTree_->Branch("ak4jet_e"         ,ak4jet_e          ,"ak4jet_e[6]/D"   );
 	outTree_->Branch("ak4jet_csv"       ,ak4jet_csv        ,"ak4jet_csv[6]/D" );
 	outTree_->Branch("ak4jet_icsv"      ,ak4jet_icsv       ,"ak4jet_icsv[6]/D");
+	outTree_->Branch("ak4jet_puIdLoose"      ,ak4jet_puIdLoose       ,"ak4jet_puIdLoose[6]/D");
+	outTree_->Branch("ak4jet_puIdMedium"      ,ak4jet_puIdMedium       ,"ak4jet_puIdMedium[6]/D");
+	outTree_->Branch("ak4jet_puIdTight"      ,ak4jet_puIdTight       ,"ak4jet_puIdTight[6]/D");
+	outTree_->Branch("jet1puIdLoose"      ,&jet1puIdLoose       ,"jet1puIdLoose/D");
+	outTree_->Branch("jet1puIdMedium"      ,&jet1puIdMedium       ,"jet1puIdMedium/D");
+	outTree_->Branch("jet1puIdTight"      ,&jet1puIdTight       ,"jet1puIdTight/D");
+	outTree_->Branch("jet2puIdLoose"      ,&jet2puIdLoose       ,"jet2puIdLoose/D");
+	outTree_->Branch("jet2puIdMedium"      ,&jet2puIdMedium       ,"jet2puIdMedium/D");
+	outTree_->Branch("jet2puIdTight"      ,&jet2puIdTight       ,"jet2puIdTight/D");
 	outTree_->Branch("jet1pt"           ,&jet1pt           ,"jet1pt/D"        );
 	outTree_->Branch("jet1pt_f"         ,&jet1pt_f         ,"jet1pt_f/D"      );
 	outTree_->Branch("jet1eta"          ,&jet1eta          ,"jet1eta/D"       );
@@ -1045,16 +1071,6 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
                 xtemp5 = (int)trigRes->accept(hltConfig.triggerIndex(elPaths5[i]));
                 if(HLT_Ele5<xtemp5) HLT_Ele5=xtemp5;
         }
-        /*int xtemp6=0;
-        for (size_t i=0; i<elPaths6.size();i++) {
-                xtemp6 = (int)trigRes->accept(hltConfig.triggerIndex(elPaths6[i]));
-                if(HLT_Ele6<xtemp6) HLT_Ele6=xtemp6;
-        }
-	int xtemp7=0;
-        for (size_t i=0; i<elPaths7.size();i++) {
-                xtemp7 = (int)trigRes->accept(hltConfig.triggerIndex(elPaths7[i]));
-                if(HLT_Ele7<xtemp7) HLT_Ele7=xtemp7;
-        }*/
 	int mtemp1=0;
 	for (size_t i=0; i<muPaths1.size();i++) {
 		mtemp1 = (int)trigRes->accept(hltConfig.triggerIndex(muPaths1[i]));
@@ -1171,7 +1187,14 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         edm::Handle<edm::View<pat::Jet> > ak4jets;
         iEvent.getByToken(ak4jetsSrc_, ak4jets);
-
+        //PU Jet ID
+	edm::Handle<edm::ValueMap<StoredPileupJetIdentifier> > pileupJetId; 
+        iEvent.getByToken(pileupJetIdToken,pileupJetId);  
+	edm::Handle<edm::ValueMap<int> > pileupJetIdFlag;
+	iEvent.getByToken(pileupJetIdFlagToken,pileupJetIdFlag);  
+	edm::Handle<edm::ValueMap<float> > pileupJetIdDiscriminant;
+	iEvent.getByToken(pileupJetIdDiscriminantToken,pileupJetIdDiscriminant);  
+        //PU Jet ID
         edm::Handle<edm::View<pat::Photon> > photons;
         iEvent.getByToken(photonSrc_, photons);
 
@@ -1561,7 +1584,14 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
                         ak4jet_phi[ik] = (*ak4jets)[ik].phi();
                         ak4jet_e[ik] =   corr*uncorrJet.energy();
                         ak4jet_csv[ik] = (*ak4jets)[ik].bDiscriminator("pfCombinedSecondaryVertexV2BJetTags");
-                        ak4jet_icsv[ik] = (*ak4jets)[ik].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");   }
+                        ak4jet_icsv[ik] = (*ak4jets)[ik].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");   
+			//PU Jet ID
+//			edm::RefToBase<pat::Jet> jetRef(edm::Ref<pat::JetCollection>(ak4jets, ak4jets->at(ik)-ak4jets->begin()));
+			int idflag = (*pileupJetIdFlag)[ak4jets->refAt(ik)];
+			ak4jet_puIdLoose[ik]  =  (PileupJetIdentifier::passJetId(idflag, PileupJetIdentifier::kLoose));
+			ak4jet_puIdMedium[ik] =  (PileupJetIdentifier::passJetId(idflag, PileupJetIdentifier::kMedium));
+			ak4jet_puIdTight[ik]  =  (PileupJetIdentifier::passJetId(idflag, PileupJetIdentifier::kTight));
+		}
 }
 	sort (jets.begin (), jets.end (), ZmysortPt);
 	for (size_t i=0;i<jets.size();i++) {
@@ -1605,6 +1635,15 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 		jet2csv =(*ak4jets)[jetindexphoton12[1]].bDiscriminator("pfCombinedSecondaryVertexV2BJetTags");
 		jet1icsv =(*ak4jets)[jetindexphoton12[0]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
 		jet2icsv =(*ak4jets)[jetindexphoton12[1]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
+		int idflag1 = (*pileupJetIdFlag)[ak4jets->refAt(jetindexphoton12[0])];
+		int idflag2 = (*pileupJetIdFlag)[ak4jets->refAt(jetindexphoton12[1])];
+		jet1puIdLoose  =  (PileupJetIdentifier::passJetId(idflag1, PileupJetIdentifier::kLoose));
+		jet1puIdMedium =  (PileupJetIdentifier::passJetId(idflag1, PileupJetIdentifier::kMedium));
+		jet1puIdTight  =  (PileupJetIdentifier::passJetId(idflag1, PileupJetIdentifier::kTight));
+		jet2puIdLoose  =  (PileupJetIdentifier::passJetId(idflag2, PileupJetIdentifier::kLoose));
+		jet2puIdMedium =  (PileupJetIdentifier::passJetId(idflag2, PileupJetIdentifier::kMedium));
+		jet2puIdTight  =  (PileupJetIdentifier::passJetId(idflag2, PileupJetIdentifier::kTight));
+
 		drj1a=deltaR(jet1eta,jet1phi,photoneta,photonphi);
 		drj2a=deltaR(jet2eta,jet2phi,photoneta,photonphi);
 		drj1l=deltaR(jet1eta,jet1phi,etalep1,philep1);
@@ -1801,8 +1840,16 @@ void ZPKUTreeMaker::setDummyValues() {
 		ak4jet_e[i]=-1e1;
 		ak4jet_csv[i]=-1e1;
 		ak4jet_icsv[i]=-1e1;
+		ak4jet_puIdLoose[i]=-1e1;
+		ak4jet_puIdMedium[i]=-1e1;
+		ak4jet_puIdTight[i]=-1e1;
 	}
-
+	jet1puIdLoose=-1e1;
+	jet1puIdMedium=-1e1;
+	jet1puIdTight=-1e1;
+	jet2puIdLoose=-1e1;
+	jet2puIdMedium=-1e1;
+	jet2puIdTight=-1e1;
 	photonet=-1e1;	 photonet_f=-1e1;
 	photoneta=-1e1;  photoneta_f=-1e1;
 	photonphi=-1e1;  photonphi_f=-1e1;
@@ -1977,20 +2024,6 @@ void ZPKUTreeMaker::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup
                         foundPaths.pop_back();
                 }
         }
-	/*for (size_t i = 0; i < elPaths6_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths6_[i] );
-                while ( !foundPaths.empty() ){
-                        elPaths6.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }*/
-	/*for (size_t i = 0; i < elPaths7_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths7_[i] );
-                while ( !foundPaths.empty() ){
-                        elPaths7.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }*/
 	for (size_t i = 0; i < muPaths1_.size(); i++) {
 		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths1_[i] );
 		while ( !foundPaths.empty() ){
@@ -2033,41 +2066,6 @@ void ZPKUTreeMaker::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup
 			foundPaths.pop_back();
 		}
 	}
-	/*for (size_t i = 0; i < muPaths7_.size(); i++) {
-		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths7_[i] );
-		while ( !foundPaths.empty() ){
-			muPaths7.push_back( foundPaths.back() );
-			foundPaths.pop_back();
-		}
-	}
-	for (size_t i = 0; i < muPaths8_.size(); i++) {
-		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths8_[i] );
-		while ( !foundPaths.empty() ){
-			muPaths8.push_back( foundPaths.back() );
-			foundPaths.pop_back();
-		}
-	}
-	for (size_t i = 0; i < muPaths9_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths9_[i] );
-                while ( !foundPaths.empty() ){
-                        muPaths9.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }
-	for (size_t i = 0; i < muPaths10_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths10_[i] );
-                while ( !foundPaths.empty() ){
-                        muPaths10.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }
-	for (size_t i = 0; i < muPaths11_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths11_[i] );
-                while ( !foundPaths.empty() ){
-                        muPaths11.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }*/
 	std::cout<<"\n************** HLT Information **************\n";
 	for (size_t i=0; i < elPaths1.size(); i++) std::cout << "\n Electron paths: " << elPaths1[i].c_str() <<"\t"<< std::endl;
 	for (size_t i=0; i < elPaths2.size(); i++) std::cout << "\n Electron paths: " << elPaths2[i].c_str() <<"\t"<< std::endl;

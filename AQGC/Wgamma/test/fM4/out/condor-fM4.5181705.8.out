@@ -1,0 +1,34 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed -1664783198
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (35.7025) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.40079, JER_muon=0.459855, JES_ele=-2.1603, JES_muon=-5.81786, QCD_stat_ele=-0.77992, QCD_stat_muon=-3.86229, VBS_stat_ele=-3.75838, VBS_stat_muon=-6.75851, ele_efficiency=-1.37859, ele_trigger=-1.79133, fakephoton_ele=5.19542, fakephoton_muon=-5.19422, interference=4.31724, lumi=1.17797, mu_efficiency=2.67692, mu_trigger=-4.24851, non_prompt_stat_ele=4.28143, non_prompt_stat_muon=-0.638784, others_stat_ele=-1.67761, others_stat_muon=-6.55422, others_xs=-0.279807, param=-4.68047, pdf_ele=-6.66885, pdf_muon=0.777186, photon_id=-0.921249, pileup=-2.93004, scale_ele=-2.8002, scale_muon=-4.98066
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (442.183) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.804408, JER_muon=0.300189, JES_ele=2.19286, JES_muon=2.61457, QCD_stat_ele=5.88233, QCD_stat_muon=-3.49386, VBS_stat_ele=-2.8974, VBS_stat_muon=-1.82496, ele_efficiency=-0.64581, ele_trigger=0.243012, fakephoton_ele=6.70991, fakephoton_muon=2.51402, interference=1.95257, lumi=1.81252, mu_efficiency=-0.191669, mu_trigger=2.76056, non_prompt_stat_ele=6.1663, non_prompt_stat_muon=5.25527, others_stat_ele=0.361084, others_stat_muon=2.1791, others_xs=1.24348, param=0.121607, pdf_ele=2.15331, pdf_muon=4.41813, photon_id=6.05599, pileup=1.46295, scale_ele=4.48892, scale_muon=-1.87802
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (43.8429) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=6.81269, JER_muon=6.0399, JES_ele=-6.82363, JES_muon=-1.11998, QCD_stat_ele=-1.29155, QCD_stat_muon=-6.90651, VBS_stat_ele=-6.00119, VBS_stat_muon=-6.97405, ele_efficiency=1.2955, ele_trigger=-5.96921, fakephoton_ele=6.49439, fakephoton_muon=-6.9443, interference=4.46595, lumi=4.34405, mu_efficiency=-0.526245, mu_trigger=-0.961184, non_prompt_stat_ele=5.27522, non_prompt_stat_muon=-3.66443, others_stat_ele=-2.65695, others_stat_muon=4.19897, others_xs=4.09998, param=3.2716, pdf_ele=-6.99498, pdf_muon=2.92867, photon_id=6.15082, pileup=0.414952, scale_ele=3.80054, scale_muon=-6.49991
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (172.874) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-0.958511, JER_muon=1.01443, JES_ele=1.27415, JES_muon=1.66562, QCD_stat_ele=0.963849, QCD_stat_muon=0.113223, VBS_stat_ele=1.50833, VBS_stat_muon=0.461255, ele_efficiency=-0.235939, ele_trigger=0.0643798, fakephoton_ele=4.68177, fakephoton_muon=0.234696, interference=1.23977, lumi=1.09084, mu_efficiency=-0.457734, mu_trigger=-0.631486, non_prompt_stat_ele=5.94036, non_prompt_stat_muon=-0.602883, others_stat_ele=-0.0833842, others_stat_muon=1.80795, others_xs=0.703588, param=-2.2435, pdf_ele=1.75134, pdf_muon=0.847829, photon_id=1.80753, pileup=2.31992, scale_ele=1.80383, scale_muon=1.45718
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.752 +/- 0.019313
+Done in 7.88 min (cpu), 8.03 min (real)

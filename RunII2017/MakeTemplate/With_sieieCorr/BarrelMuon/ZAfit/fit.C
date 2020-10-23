@@ -6,10 +6,10 @@
 #include "RooAddPdf.h"
 using namespace RooFit;
 ofstream file3("info_fit.txt");
-TFile* fdata = TFile::Open("../root/Data_template-Data.root");
-TFile* ffake = TFile::Open("../root/Fake_template-Data.root");
-//TFile* ftrue = TFile::Open("../root/True_template-ZA.root");
-TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK.root");
+TFile* fdata = TFile::Open("../root/Data_template-DMuon17.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DMuon17.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA17.root");
+//TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK17.root");
 //TFile* ftrue = TFile::Open("../root/True_template-TTA.root");
 TString name;
 void fit(float lowpt, float highpt){
@@ -184,8 +184,8 @@ void fit(float lowpt, float highpt){
         textFR->Draw();
 
     char buffer[256];
-	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
-//	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
+//	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
+	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
 	c1->Print(buffer);
 
 }

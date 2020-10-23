@@ -24,7 +24,7 @@ TString filename= name+".root";
 cout<<name<<endl;
 
 TFile *file1 =new TFile(dir+filename);
-TTree *tree1 = (TTree*) file1->Get("demo");
+TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 MakeTemplate m1(tree1);
 cout<<filename<<endl;
 m1.Loop(name,gr);

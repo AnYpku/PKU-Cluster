@@ -18,7 +18,9 @@ double get_ele_Reco(double etalep, double ptlep, TH2F* Reco){
 
 double get_photon_ID(double photoneta, double photonet, TH2F* ID_photon){
 	double photon_ID_scale=-1;
-	photon_ID_scale=ID_photon->GetBinContent(ID_photon->FindBin(photoneta,photonet));
+        double photonet_tmp=photonet;
+        if(photonet>500) photonet_tmp=499.;
+	photon_ID_scale=ID_photon->GetBinContent(ID_photon->FindBin(photoneta,photonet_tmp));
 
 	return photon_ID_scale;
 }

@@ -18,9 +18,9 @@ getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
 infilename = /*"cutlep-"out"+*/infilename;
-TString outname="out"+infilename;
+TString outname="cutlep-out"+infilename;
 
-cout<<outname<<endl;
+cout<<dir<<infilename<<" -> "<<outname<<endl;
 
 TFile *file1 =new TFile(dir+infilename);
 TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");

@@ -8,7 +8,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
 	     file=new TFile(dir+"unfold_"+sample+".root");
              tree=(TTree*)file->Get("ZPKUCandidates");     
      }
-     else{   file=new TFile(dir+"JEC_cutla-out"+sample+".root");
+     else{   
+//	     file=new TFile(dir+"JEC_cutla-out"+sample+".root");
+	     file=new TFile(dir+"cutla-out"+sample+".root");
              tree=(TTree*)file->Get("ZPKUCandidates");     
      }
 
@@ -178,19 +180,20 @@ int Uncer_batch_bkg(){
 	TString JET_down;
 	TString JET_up;
 
-        vector<TString> tags={"16","17","18"};
-//        vector<TString> tags={"17"};
+//        vector<TString> tags={"16","17","18"};
+        vector<TString> tags={"18"};
 	TString cut[3];  
 	TString cut1[3]; 
 	TString Reco[3]; 
 	TString dir1[3];
-	dir1[0]="/eos/user/y/yian/2016cutla/";     
+	dir1[0]="/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII2018/step1_add_weight/JEC/";     
+//	dir1[0]="/eos/user/y/yian/2016cutla/";     
 	dir1[1]="/eos/user/y/yian/2017cutla/";     
 	dir1[2]="/eos/user/y/yian/2018cutla/";     
 	TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/JEC/";     
-	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-//	vector<TString> sample={"WA"};
-	//	vector<TString> sample={"ZA-EWK"};
+//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+	vector<TString> sample={"ZA_JESR18"};
+//	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
 			JET_new="( ((!(fabs(jet2eta_new)<3.14 && fabs(jet2eta_new)>2.65) && !(fabs(jet1eta_new)<3.14 && fabs(jet1eta_new)>2.65) &&  jet1pt_new<50 && jet2pt_new<50 && jet1pt_new>30 && jet2pt_new>30 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7) || (jet1pt_new>50 && jet2pt_new>50 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
@@ -214,7 +217,6 @@ int Uncer_batch_bkg(){
 		for(int j=0;j<sample.size();j++){
 			cout<<sample[j]<<endl;
 			if(sample[j].Contains("EWK")){
-				run(dir,tags[i]+"outJEC_ZA-EWK",Reco,3,tags[i],0);
 				//run(dir,tags[i]+"outJEC_ZA-EWK",Reco,3,tags[i],0);
 				//run(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
 			}

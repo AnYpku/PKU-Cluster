@@ -17,7 +17,7 @@ TString outname="cutla-outplj_weight"+name+".root";
 cout<<outname<<endl;
 
 TFile *file1 =new TFile(dir+inname);
-TTree *tree1 = (TTree*) file1->Get("demo");
+TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 plj m1(tree1,outname);
 m1.Loop(name);
 m1.endJob();
@@ -27,8 +27,7 @@ m1.endJob();
 }
 int main(){
   runjet("");
-  runjet("_up");
-  runjet("_down");
+  
   return 1;
 }
 

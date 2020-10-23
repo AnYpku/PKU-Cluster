@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 1276591544
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (70.2642) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=6.14181, JES_16=4.2716, QCDZA_pdf=2.13561, QCDZA_scale=5.24334, QCD_stat_ele_16_bin_1=6.39617, QCD_stat_ele_16_bin_2=6.9967, QCD_stat_ele_16_bin_3=-4.38083, QCD_stat_ele_16_bin_4=-2.79957, QCD_stat_ele_16_bin_5=-2.06571, QCD_stat_muon_16_bin_1=1.88067, QCD_stat_muon_16_bin_2=-2.18448, QCD_stat_muon_16_bin_3=0.654496, QCD_stat_muon_16_bin_4=1.57528, QCD_stat_muon_16_bin_5=-1.70574, VBS_stat_ele_16_bin_1=3.23229, VBS_stat_ele_16_bin_2=-1.64348, VBS_stat_ele_16_bin_3=-3.17019, VBS_stat_ele_16_bin_4=4.22191, VBS_stat_ele_16_bin_5=-1.37116, VBS_stat_muon_16_bin_1=1.99029, VBS_stat_muon_16_bin_2=-2.36913, VBS_stat_muon_16_bin_3=-4.30887, VBS_stat_muon_16_bin_4=6.62988, VBS_stat_muon_16_bin_5=-6.6249, ele16_efficiency=3.27072, ele16_trigger=2.66584, fake_ele_16=3.26069, fake_muon_16=4.64957, interference=-0.0163005, l1prefiring=4.5878, lumi=4.19563, mu16_efficiency=-6.90762, mu16_trigger=-0.741097, non_prompt_stat_ele_16_bin_1=1.48551, non_prompt_stat_ele_16_bin_2=4.05688, non_prompt_stat_muon_16_bin_1=-2.39413, non_prompt_stat_muon_16_bin_2=-4.68105, others_stat_ele_16_bin_1=-2.49763, others_stat_ele_16_bin_2=-4.43122, others_stat_ele_16_bin_3=5.11102, others_stat_muon_16_bin_1=1.96794, others_xs=5.73857, param=0.0519654, photon_id_16=6.14214, pileup=-6.27227, signal_pdf=2.60958, signal_scale=-5.43522
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.00304878 +/- 0.00305212
+Done in 14.32 min (cpu), 14.35 min (real)

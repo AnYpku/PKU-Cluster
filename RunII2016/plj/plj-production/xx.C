@@ -4,7 +4,6 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
-#include "L1_weight.C"
 #include "ele_channel_scale.C"
 #include "muon_channel_scale.C"
 #include <iostream>
@@ -15,18 +14,30 @@ void xx::Loop()
 	if (fChain == 0) return;
 
 	Long64_t nentries = fChain->GetEntriesFast();
-
 	Long64_t nbytes = 0, nb = 0;
-	for (Long64_t jentry=0; jentry<nentries;jentry++) {
+        Long64_t npp = fChain->GetEntries("theWeight>0.");
+        Long64_t nmm = fChain->GetEntries("theWeight<0.");
+        std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
+         
+        Bool_t LEPmu=0,LEPele=0;
 
+	for (Long64_t jentry=0; jentry<nentries;jentry++) {
 		Long64_t ientry = LoadTree(jentry);
 		if (ientry < 0) break;
-		nb = fChain->GetEntry(jentry);   nbytes += nb;
+		nb = fChain->GetEntry(jentry);
 		if(jentry%100000==0) cout<<" "<<HLT_Ele2<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<endl;
 		modify_photon_jets();
-                Set();
+		// if (Cut(ientry) < 0) continue;
 
-		newtree->Fill();
+		if(m_dataset.Contains("plj")==1){ scalef=1.0; run_period=6;}
+
+		pileupWeight=1;
+                Set();
+                LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0||HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. ;
+                LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70.;
+                if( !( (LEPmu) || (LEPele) ) )
+                    continue;
+		ExTree->Fill();
 	}
 }
 void xx::Set(){
@@ -39,7 +50,8 @@ void xx::Set(){
 	muon2_id_scale=1;
 	muon1_iso_scale=1;
 	muon2_iso_scale=1;
-	muon1_track_scale=1;
-	muon2_track_scale=1;
+//	muon1_track_scale=1;
+//	muon2_track_scale=1;
 	muon_hlt_scale=1;
+	scalef=1;
     }

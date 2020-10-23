@@ -1,0 +1,47 @@
+imax 1   number of channels
+jmax 7   number of processes-1
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin muendcap1
+observation 224.10
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
+process	Sig	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
+process	0	1	2	3	4	5	6	7
+rate	2.46	109.30	102.97	4.10	3.91	0.39	0.00	0.97
+------------
+lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020	1.020
+VBS_Stat_control_bin1_muendcap17	lnN	1.08	-	-	-	-	-	-	-
+QCD_Stat_control_bin1_muendcap17	lnN	-	1.04	-	-	-	-	-	-
+non_prompt_Stat_control_bin1_muendcap17	lnN	-	-	1.05	-	-	-	-	-
+TTA_Stat_control_bin1_muendcap17	lnN	-	-	-	1.17	-	-	-	-
+VV_Stat_control_bin1_muendcap17	lnN	-	-	-	-	1.26	-	-	-
+ST_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	1.66	-	-
+WA_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	-	1.00	-
+ZA_SigOut_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	-	-	1.13
+fake_muendcap17	lnN	-	-	1.27	-	-	-	-	-
+JES_17	lnN	1.02	1.09	-	1.06	1.08	1.13	1.00	1.02
+JER_17	lnN	1.03	1.07	-	1.01	1.23	1.11	1.00	1.01
+pdf_EW	lnN	-	-	-	-	-	-	-	1.001
+pdf_QCD	lnN	-	1.01	-	-	-	-	-	-
+Scale_EW	lnN	-	-	-	-	-	-	-	1.01
+QCDZA_Scale_band1	lnN	-	1.01	-	-	-	-	-	-
+QCDZA_Scale_band2	lnN	-	1.16	-	-	-	-	-	-
+QCDZA_Scale_band3	lnN	-	1.17	-	-	-	-	-	-
+interf	lnN	1.26	-	-	-	-	-	-	-
+mu_trigger_17	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
+mu_eff	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
+muon group = mu_eff mu_trigger_17
+photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-	-
+VV_xs	lnN	-	-	-	-	1.1	-	-	-
+l1pref	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
+Others group = pileup ttgamma_xs VV_xs lumi_17 l1pref 
+Stat group = VBS_Stat_control_bin1_muendcap17 QCD_Stat_control_bin1_muendcap17 non_prompt_Stat_control_bin1_muendcap17 TTA_Stat_control_bin1_muendcap17 VV_Stat_control_bin1_muendcap17 
+JESR group = JES_17 JER_17

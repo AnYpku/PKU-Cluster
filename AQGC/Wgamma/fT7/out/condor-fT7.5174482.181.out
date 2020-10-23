@@ -1,0 +1,34 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 1215936624
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (33.9047) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-1.87429, JER_muon=0.129944, JES_ele=2.23337, JES_muon=1.6984, QCD_stat_ele=5.38862, QCD_stat_muon=3.33012, VBS_stat_ele=-0.964317, VBS_stat_muon=2.92141, ele_efficiency=6.29146, ele_trigger=2.6754, fakephoton_ele=2.5882, fakephoton_muon=2.86645, interference=-0.969143, lumi=-4.50362, mu_efficiency=2.22316, mu_trigger=5.14825, non_prompt_stat_ele=3.17622, non_prompt_stat_muon=4.87001, others_stat_ele=1.30997, others_stat_muon=6.20629, others_xs=-1.15126, param=0.185778, pdf_ele=3.57904, pdf_muon=3.93201, photon_id=6.40071, pileup=-1.26293, scale_ele=6.06929, scale_muon=6.80336
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (35.0481) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.447029, JER_muon=6.81073, JES_ele=-4.14808, JES_muon=3.59305, QCD_stat_ele=2.48883, QCD_stat_muon=6.69096, VBS_stat_ele=4.59199, VBS_stat_muon=2.60722, ele_efficiency=1.5912, ele_trigger=-0.527625, fakephoton_ele=3.12745, fakephoton_muon=-4.39169, interference=3.83466, lumi=1.99129, mu_efficiency=-1.29964, mu_trigger=3.60639, non_prompt_stat_ele=1.03433, non_prompt_stat_muon=2.61291, others_stat_ele=6.01344, others_stat_muon=1.00516, others_xs=3.89127, param=0.196342, pdf_ele=1.555, pdf_muon=6.99608, photon_id=6.92207, pileup=-2.45804, scale_ele=0.427142, scale_muon=6.33915
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (45.5931) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-6.82722, JER_muon=0.0392538, JES_ele=6.60715, JES_muon=6.31086, QCD_stat_ele=5.15994, QCD_stat_muon=6.28724, VBS_stat_ele=-0.29984, VBS_stat_muon=3.52068, ele_efficiency=1.5551, ele_trigger=-1.64257, fakephoton_ele=1.18457, fakephoton_muon=-0.385643, interference=2.64438, lumi=0.591262, mu_efficiency=-5.50667, mu_trigger=0.713079, non_prompt_stat_ele=-1.01336, non_prompt_stat_muon=6.83457, others_stat_ele=5.85554, others_stat_muon=6.86074, others_xs=1.93644, param=0.0528873, pdf_ele=0.937068, pdf_muon=3.83496, photon_id=6.67428, pileup=5.35761, scale_ele=4.99724, scale_muon=5.19513
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (47.3988) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-1.48266, JER_muon=2.05849, JES_ele=6.53056, JES_muon=6.23531, QCD_stat_ele=2.49578, QCD_stat_muon=6.13093, VBS_stat_ele=4.41552, VBS_stat_muon=2.77033, ele_efficiency=3.28798, ele_trigger=5.04184, fakephoton_ele=6.11604, fakephoton_muon=-5.86292, interference=-0.742384, lumi=5.37926, mu_efficiency=0.877884, mu_trigger=6.99933, non_prompt_stat_ele=5.84851, non_prompt_stat_muon=3.12168, others_stat_ele=-0.0361772, others_stat_muon=6.94424, others_xs=-5.67728, param=0.0400998, pdf_ele=-5.33572, pdf_muon=6.99964, photon_id=6.92572, pileup=3.21963, scale_ele=1.21793, scale_muon=4.0175
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.0582524 +/- 0.0118491
+Done in 10.52 min (cpu), 10.53 min (real)

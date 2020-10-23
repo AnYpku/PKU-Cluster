@@ -27,6 +27,7 @@ int Print_Uncer_all(){
 //			TString f_Sigout_pdf  ="./pdf/uncer_Sigout_"+tag[j]+"CR.txt";
 			TString f_Sig_pdf     ="./pdf/uncer_ewk_"+tag[j]+"CR.txt";
 			TString f_QCD_scale   ="./scale/uncer_qcd_"+tag[j]+"CR.txt";
+			TString f_QCD_scaleband   ="./scale/uncer_qcd_scaleband_"+tag[j]+"CR.txt";
 			TString f_QCD_scale_extra_up  ="./scale/uncer_QCD_extra_up_"+tag[j]+"CR.txt";
 			TString f_QCD_scale_extra_down  ="./scale/uncer_QCD_extra_down_"+tag[j]+"CR.txt";
 //			TString f_Sigout_scale="./scale/uncer_SigOut_"+tag[j]+"CR.txt";
@@ -44,6 +45,7 @@ int Print_Uncer_all(){
 			run(channel[i],tag[j],f_QCD_pdf);
 //			run(channel[i],tag[j],f_Sigout_pdf);
 			run(channel[i],tag[j],f_QCD_scale);
+			run(channel[i],tag[j], f_QCD_scaleband);
 			run(channel[i],tag[j],f_QCD_scale_extra_up);
 			run(channel[i],tag[j],f_QCD_scale_extra_down);
 //			run(channel[i],tag[j],f_Sigout_scale);

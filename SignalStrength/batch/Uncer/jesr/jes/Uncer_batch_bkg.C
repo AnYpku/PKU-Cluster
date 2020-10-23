@@ -1,5 +1,6 @@
 #define num 3
 #define pi 3.1415926
+void run_1d (TString dir, TString sample,TString cut1[num],int kk,TString tag,bool turn);
 void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool turn){
      Double_t Mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
@@ -181,14 +182,96 @@ int Uncer_batch_bkg(){
 		for(int j=0;j<sample.size();j++){
 			cout<<sample[j]<<endl;
 			if(sample[j].Contains("EWK")){
-				run(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
-				//run(dir,tags[i]+"outJEC_ZA-EWK",Reco,3,tags[i],0);
-				run(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
+//				run(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
+//				run(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
+				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
+				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
 			}
 			else{
-				run(dir1[i],sample[j],Reco,3,tags[i],0);
+//				run(dir1[i],sample[j],Reco,3,tags[i],0);
+				run_1d(dir1[i],sample[j],Reco,3,tags[i],0);
 			}
 		}
 	}
 	return 1;
+}
+void run_1d (TString dir, TString sample,TString cut1[num],int kk,TString tag,bool turn){
+     Double_t Mjj_bins[4]={500, 800, 1200, 2000};
+     Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
+     TFile*file;  TTree*tree;
+     if(sample.Contains("EWK")){
+	     file=new TFile(dir+"unfold_"+sample+".root");
+             tree=(TTree*)file->Get("ZPKUCandidates");     
+     }
+     else{   file=new TFile(dir+"JEC_cutla-out"+sample+".root");
+             tree=(TTree*)file->Get("ZPKUCandidates");     
+     }
+
+     Double_t scalef,pileupWeight;
+     Double_t Mjj_new,jet1eta_new,jet2eta_new;
+     Double_t Mjj_JEC_up,jet1eta_JEC_up,jet2eta_JEC_up;
+     Double_t Mjj_JEC_down,jet1eta_JEC_down,jet2eta_JEC_down;
+     tree->SetBranchAddress("scalef",&scalef);
+     tree->SetBranchAddress("Mjj_new",&Mjj_new);
+     tree->SetBranchAddress("Mjj_JEC_up",&Mjj_JEC_up);
+     tree->SetBranchAddress("Mjj_JEC_down",&Mjj_JEC_down);
+     tree->SetBranchAddress("jet1eta_new",&jet1eta_new);
+     tree->SetBranchAddress("jet1eta_JEC_up",&jet1eta_JEC_up);
+     tree->SetBranchAddress("jet1eta_JEC_down",&jet1eta_JEC_down);
+     tree->SetBranchAddress("jet2eta_new",&jet2eta_new);
+     tree->SetBranchAddress("jet2eta_JEC_up",&jet2eta_JEC_up);
+     tree->SetBranchAddress("jet2eta_JEC_down",&jet2eta_JEC_down);
+     TTreeFormula *tformula1=new TTreeFormula("formula1", cut1[0], tree);
+     TTreeFormula *tformula2=new TTreeFormula("formula2", cut1[1], tree);
+     TTreeFormula *tformula3=new TTreeFormula("formula3", cut1[2], tree);
+     TH1D*th1[kk];
+     TString th1name[kk];
+     for(int j=0;j<kk;j++){
+	     th1name[j]=Form("hist_%i",j);
+	     th1[j] = new TH1D(th1name[j],th1name[j],3,0,3);
+	     th1[j]->Sumw2(); 
+     }
+     for(int k=0;k<tree->GetEntries();k++){
+             tree->GetEntry(k);
+             double detajj_new     =fabs(jet1eta_new     -jet2eta_new);
+             double detajj_JEC_up  =fabs(jet1eta_JEC_up  -jet2eta_JEC_up);
+             double detajj_JEC_down=fabs(jet1eta_JEC_down-jet2eta_JEC_down);
+//             cout<<detajj_new<<" "<<Mjj_new<<"; "<<detajj_JEC_up<<" "<<Mjj_JEC_up<<"; "<<detajj_JEC_down<<" "<<Mjj_JEC_down<<endl;
+	     if (  tformula1->EvalInstance() ){
+		     if(detajj_new>=2.5&&detajj_new<4.5)
+			     th1[0]->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
+		     if(detajj_new>=4.5&&detajj_new<6)
+			     th1[0]->Fill(1.5,scalef);//1~2 2.5~4.5 and 800~1200
+		     if(detajj_new>6)
+			     th1[0]->Fill(2.5,scalef);//2~3 2.5~4.5 1200~2000
+	     }
+	     if (  tformula2->EvalInstance() ){
+		     if(detajj_JEC_up>=2.5&&detajj_JEC_up<4.5)
+			     th1[1]->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
+		     if(detajj_JEC_up>=4.5&&detajj_JEC_up<6)
+			     th1[1]->Fill(1.5,scalef);//1~2 2.5~4.5 and 800~1200
+		     if(detajj_JEC_up>=6)
+			     th1[1]->Fill(2.5,scalef);//2~3 2.5~4.5 1200~2000
+
+	     }
+	     if (  tformula3->EvalInstance() ){
+		     if(detajj_JEC_down>=2.5&&detajj_JEC_down<4.5)
+			     th1[2]->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
+		     if(detajj_JEC_down>=4.5&&detajj_JEC_down<6)
+			     th1[2]->Fill(1.5,scalef);//1~2 2.5~4.5 and 800~1200
+		     if(detajj_JEC_down>=6)
+			     th1[2]->Fill(2.5,scalef);//2~3 2.5~4.5 1200~2000
+	     }
+
+     }
+     TFile*fout;
+     if(sample.Contains("EWK")&&turn==1)
+	     fout=new TFile("./hist_1d_"+sample+"out_jes"+tag+".root","recreate");
+     else 
+	     fout=new TFile("./hist_1d_"+sample+"_jes"+tag+".root","recreate");
+     fout->cd();
+     for(int i=0;i<kk;i++){
+	     th1[i]->Write();
+     }
+     fout->Close();
 }

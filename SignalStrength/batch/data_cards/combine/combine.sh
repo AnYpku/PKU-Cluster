@@ -11,8 +11,8 @@
 #text2workspace.py full16_test.txt -m 125 
 #text2workspace.py full17_test.txt -m 125 
 #text2workspace.py full18_test.txt -m 125 
+#full_RunII.root
 files="\
-full_RunII.root
 full18_test.root
 full16_test.root
 full17_test.root
@@ -34,9 +34,13 @@ sed -i ':label;N;s/\n/,/;t label' tmp
 #sed -i "$ a $theory" tmp
 mv tmp freeze_${name}.txt
 NP=`cat freeze_${name}.txt`
-echo "$NP"
-combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n nominal ${name}.root --expectSignal=1 #-t -1 
-combine -M MultiDimFit --algo none --rMin 0.2 --rMax 4 -m 125 -n bestfit_${name} --saveWorkspace ${name}.root --expectSignal=1  #-t -1 
+#echo "$NP"
+#combineCards.py ${name}.txt -S > shape_${name}.txt
+#combine -M FitDiagnostics shape_${name}.txt -t -1 --expectSignal 1
+#combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n nominal ${name}.root --expectSignal=1 #-t -1 
+#combine -M MultiDimFit --algo none --rMin 0.2 --rMax 4 -m 125 -n bestfit_${name} --saveWorkspace ${name}.root --expectSignal=1  #-t -1 
+#combine -M MultiDimFit -m 125 --algo impact -P Scale_QCD ${name}.txt --expectSignal=1 >> impact_${name}.txt
+#combine -M MultiDimFit -m 125 --algo impact -P Scale_QCD_extra ${name}.txt --expectSignal=1 >> impact_${name}.txt
 #combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n stat higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --expectSignal=1 #-t -1 
 
 #plot1DScan.py higgsCombinenominal.MultiDimFit.mH125.root \
@@ -50,4 +54,13 @@ combine -M MultiDimFit --algo none --rMin 0.2 --rMax 4 -m 125 -n bestfit_${name}
 #'higgsCombinestat.MultiDimFit.mH125.root:Freeze all:2' \
 #--breakdown theory,syst,stat -o scan_freeze_${name}
 
+done
+years="\
+16
+17
+18
+"
+for year in $years
+do 
+combine -M MultiDimFit -m 125 --algo impact -P JES_${year} --expectSignal=1 full${year}_test.txt >> impact_JES${year}.txt
 done

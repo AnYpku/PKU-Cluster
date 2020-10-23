@@ -55,14 +55,15 @@ void run(TString sample,TString tag){
 		 ftxt.close();
 }
 int uncer_jesr(){
-     vector<TString> sample={"ZA","ZA-EWK","ZA-EWKout","TTA","VV","ST"};
+//     vector<TString> sample={"ZA","ZA-EWK","ZA-EWKout","TTA","VV","ST"};
+     vector<TString> sample={"ZA_JESR18"};
      vector<TString> genvars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
      for(int j=0;j<sample.size();j++){
 //	     run_1d(sample[j],"16");
 //	     run_1d(sample[j],"17");
-//	     run_1d(sample[j],"18");
-	     run(sample[j],"16");
-	     run(sample[j],"17");
+	     run_1d(sample[j],"18");
+//	     run(sample[j],"16");
+//	     run(sample[j],"17");
 	     run(sample[j],"18");
      }
      return 1;
@@ -83,9 +84,12 @@ void run_1d(TString sample,TString tag){
         f1<<"jes_"<<sample<<"=[";
         ftxt<<"jes"<<tag<<"_"<<sample<<"=[";
 	for(int i=0;i<num;i++){
-		bincontent_new[i]=h1->GetBinContent(3*i+1)+h1->GetBinContent(3*i+2)+h1->GetBinContent(3*i+3);            
-		bincontent_up[i]=h2->GetBinContent(3*i+1)+h2->GetBinContent(3*i+2)+h2->GetBinContent(3*i+3);            
-		bincontent_down[i]=h3->GetBinContent(3*i+1)+h3->GetBinContent(3*i+2)+h3->GetBinContent(3*i+3);            
+//		bincontent_new[i]=h1->GetBinContent(3*i+1)+h1->GetBinContent(3*i+2)+h1->GetBinContent(3*i+3);            
+//		bincontent_up[i]=h2->GetBinContent(3*i+1)+h2->GetBinContent(3*i+2)+h2->GetBinContent(3*i+3);            
+//		bincontent_down[i]=h3->GetBinContent(3*i+1)+h3->GetBinContent(3*i+2)+h3->GetBinContent(3*i+3);            
+		bincontent_new[i]=h1->GetBinContent(i+1)+h1->GetBinContent(i+4)+h1->GetBinContent(i+7);            
+		bincontent_up[i]=h2->GetBinContent(i+1)+h2->GetBinContent(i+4)+h2->GetBinContent(i+7);            
+		bincontent_down[i]=h3->GetBinContent(i+1)+h3->GetBinContent(i+4)+h3->GetBinContent(i+7);            
 		double max;
 		if(fabs(bincontent_up[i]-bincontent_new[i])>fabs(bincontent_down[i]-bincontent_new[i]))                               
 			max=fabs(bincontent_up[i]-bincontent_new[i]);

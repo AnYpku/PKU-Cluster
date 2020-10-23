@@ -2,7 +2,8 @@
 #include <fstream>
 void runxx() {
 //gROOT->LoadMacro("xx.C");
-TString dir="/data/pku/home/anying/cms/file_in_cms/cutLEP/";
+TString dir="/eos/user/y/yian/2016cutla/";
+
 ifstream infile("file");
 string buffer; 
 TString name;
@@ -10,21 +11,24 @@ TString name;
 int k=1;
 
 while (k>0){
-getline (infile, buffer) ;
-name = buffer;
-if(name.Contains("out")==0) {k=-2; continue;}
-TString outname= name+"_plj.root";
-TString inname=name+".root";
-cout<<inname<<endl;
-cout<<outname<<endl;
+	getline (infile, buffer) ;
+	name = buffer;
+	if(name.Contains("D")==0) {k=-2; continue;}
+	TString outname= "cutlep-out"+name+"_plj.root";
+	TString inname="cutlep-out"+name+".root";
+        cout<<"open file"<<endl;
+	cout<<dir<<inname<<endl;
+	cout<<outname<<endl;
+	TFile *file1;
+	TTree *tree1; 
+	file1 =new TFile(dir+inname);
+//	TDirectory *dir1 = (TDirectory*)file1->Get("treeDumper");
+	tree1 = (TTree*) file1->Get("ZPKUCandidates");
+	xx m1(tree1,outname);
+	cout<<outname<<endl;
+	m1.Loop();
+	m1.endJob();
 
-TFile *file1 =new TFile(dir+inname);
-TTree *tree1 = (TTree*) file1->Get("demo");
-xx m1(tree1,outname);
-cout<<outname<<endl;
-m1.Loop();
-m1.endJob();
- 
 }
 }
 

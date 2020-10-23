@@ -18,8 +18,8 @@ void xx::Loop()
 	bool LEPmu,LEPele,JET,PHOTON,SignalRegion;
         int cut0=0,cut1=0;
 
-	Long64_t npp = fChain->GetEntries("theWeight>0.");
-	Long64_t nmm = fChain->GetEntries("theWeight<0.");
+	npp = fChain->GetEntries("theWeight>0.");
+	nmm = fChain->GetEntries("theWeight<0.");
 	std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
 	double lep1_phi_station2_tmp = 0;
 	double lep2_phi_station2_tmp = 0;

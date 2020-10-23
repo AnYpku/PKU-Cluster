@@ -162,7 +162,7 @@ for i in range(1,nbins):
    f.write('Scale_EW\tlnN\t')
    f.write('%0.2f\t-\t-\t-\t-\t-\t-\n'%(arr['Sig_scale'][i-1]))
 #
-   f.write('Scale_QCD\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(QCD_scale[i-1]))
+   f.write('Scale_QCD\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr[QCD_scale][i-1]))
 #
    f.write('Scale_QCD_extra\tlnN\t-\t%0.2f/%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale_up'][i-1],arr['QCD_scale_down'][i-1]))
 #

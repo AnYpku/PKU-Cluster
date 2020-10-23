@@ -17,15 +17,12 @@ num=`sed -n -e '/rate/=' tmp`
 line=$[$num+1]
 echo "$line"
 sed -i "1,$line d" tmp
- while read line; do
- 
- done < tmp
-done
 
-#sed -i ':label;N;s/\n/,/;t label' tmp
-#mv tmp freeze_${name}.txt
-#NP=`cat freeze_${name}.txt`
+sed -i ':label;N;s/\n/,/;t label' tmp
+mv tmp freeze_${name}.txt
+NP=`cat freeze_${name}.txt`
 #echo "$NP"
+done
 
 
 #cp /afs/cern.ch/user/y/yian/work/PKU-Cluster/Significance/CR/data_cards/txt/*16* .
@@ -40,3 +37,12 @@ done
 #combine -M Significance --expectSignal=1 -t -1 full16_test.txt > result16.txt  
 #combine -M Significance --expectSignal=1 -t -1 full17_test.txt > result17.txt
 #combine -M Significance --expectSignal=1 -t -1 full18_test.txt > result18.txt
+years="\
+16
+17
+18
+"
+for year in $years
+do
+combine -M MultiDimFit -m 125 --algo impact -P JES_${year} --expectSignal=1 full${year}_test.txt >> impact_JES${year}.txt
+done

@@ -46,24 +46,24 @@ void loopPlot() {
 	const int nDATA = 1;
 	std::cout << "set data imformation, we have " << nDATA << "data file"
 			<< std::endl;
-	std::string dataLabels[nDATA] = { "Muon" };
+	std::string dataLabels[nDATA] = { "Muon17" };
 	std::vector < std::string > fData;
 	for (int ii = 0; ii < nDATA; ii++) {
 		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
 	}
 // set mc imformation
-		const int nMC = 6;
+		const int nMC = 5;
 		std::cout << "set data imformation, we have " << nMC << "mc file"
 				<< std::endl;
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
-		std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA",
-                                            "plj_mubarrel","ZA"};
+		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17",
+                                            "plj_weight","ZA17"};
 		/*std::string mcLabels[nMC] = {"ZA"}; 
 		double kFactorsMC_array[nMC] = { lumiValue};*/
 
-		double kFactorsMC_array[nMC] = {lumiValue, lumiValue,lumiValue,lumiValue,1,lumiValue};
+		double kFactorsMC_array[nMC] = {lumiValue,lumiValue,lumiValue,1,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
 			fMC.push_back(pathToTrees +"cutla-out"+ mcLabels[ii] + ".root");
@@ -77,7 +77,7 @@ void loopPlot() {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 			<< std::endl;
-	std::string mcLabelsSig[nMCSig] = { "ZA-EWK" };
+	std::string mcLabelsSig[nMCSig] = { "ZA-EWK17" };
 	double kFactorsSig_array[nMCSig] = { 1 };
 	std::vector < std::string > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
@@ -120,10 +120,10 @@ void loopPlot() {
 		TFile *fileData = TFile::Open(fData.at(i).c_str());
 		std::cout << "retrieve tree of data file" << std::endl;
 		//TTree *treeData = (TTree*) fileData->Get("demo");
-		TTree *treeData = (TTree*) fileData->Get("demo");
+		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
 //		std::cout<<"OK"<<std::endl;
 		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
-		TTree *treeMC = (TTree*) fileMC->Get("demo");
+		TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (dopileupreweight) {
 			hisRatio = test(treeData, treeMC);
@@ -159,7 +159,7 @@ void loopPlot() {
 			TFile *fileMC = TFile::Open(fMC.at(i).c_str());
 			std::cout << "retrieve tree of mc file" << std::endl;
 			TTree *treeMC;
-			treeMC = (TTree*) fileMC->Get("demo");
+			treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
                         /*TString name = fMC.at(i);
 			if(name.Contains("pweight")==1)  
 				treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
@@ -192,7 +192,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i).c_str());
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("demo");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
                         std::cout<<"OK1"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer, &rc);
@@ -249,19 +249,18 @@ void loopPlot() {
 	////// {DYJetsToLL_HT-200to400,DYJetsToLL_HT-200to400,DYJetsToLL_HT-600toInf}
 	std::vector<int> fColorsMC;
 
-        fColorsMC.push_back(kGreen-4);
-        fColorsMC.push_back(kGreen-10);
-        fColorsMC.push_back(kBlue - 4);
-        fColorsMC.push_back(kBlue - 7);
-        fColorsMC.push_back(kOrange - 2);
-        fColorsMC.push_back(kRed - 7);
+        fColorsMC.push_back(kGreen+2);//ST
+        fColorsMC.push_back(kCyan);//TTA
+        fColorsMC.push_back(kGray);//VV
+        fColorsMC.push_back(kYellow);//plj
+//        fColorsMC.push_back(kBlue-9);//ZA
+        fColorsMC.push_back(9);//ZA
+	fColorsMC.push_back(kRed-7);//EWK
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
-	fColorsMC.push_back(2);
-	fColorsMC.push_back(210);
 	std::vector<int> fColorsMCSig;
-	fColorsMCSig.push_back(kRed);
+	fColorsMCSig.push_back(kRed-7);
 	fColorsMCSig.push_back(kBlue + 3);
 
 	plotter->setFillColor(fColorsMC);

@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 624352006
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (72.8019) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=4.11964, JES_16=6.72514, QCDZA_pdf=6.93781, QCDZA_scale=5.88194, QCD_stat_ele_16_bin_1=-6.71613, QCD_stat_ele_16_bin_2=0.0671181, QCD_stat_ele_16_bin_3=-6.20107, QCD_stat_ele_16_bin_4=-2.8882, QCD_stat_ele_16_bin_5=-6.81666, QCD_stat_muon_16_bin_1=1.35553, QCD_stat_muon_16_bin_2=4.40398, QCD_stat_muon_16_bin_3=4.56056, QCD_stat_muon_16_bin_4=6.44853, QCD_stat_muon_16_bin_5=5.93498, VBS_stat_ele_16_bin_1=0.408938, VBS_stat_ele_16_bin_2=-2.01696, VBS_stat_ele_16_bin_3=-3.74461, VBS_stat_ele_16_bin_4=-6.59595, VBS_stat_ele_16_bin_5=6.85761, VBS_stat_muon_16_bin_1=1.98733, VBS_stat_muon_16_bin_2=-4.08581, VBS_stat_muon_16_bin_3=4.25596, VBS_stat_muon_16_bin_4=3.98999, VBS_stat_muon_16_bin_5=-6.25431, ele16_efficiency=-6.76326, ele16_trigger=-4.2875, fake_ele_16=0.879202, fake_muon_16=6.85742, interference=-5.93722, l1prefiring=-5.5766, lumi=6.64619, mu16_efficiency=3.45832, mu16_trigger=-5.89537, non_prompt_stat_ele_16_bin_1=3.58443, non_prompt_stat_ele_16_bin_2=-0.586283, non_prompt_stat_muon_16_bin_1=3.78108, non_prompt_stat_muon_16_bin_2=-0.174161, others_stat_ele_16_bin_1=-1.10642, others_stat_ele_16_bin_2=-0.108824, others_stat_ele_16_bin_3=6.1093, others_stat_muon_16_bin_1=-6.47273, others_xs=3.62038, param=10.2578, photon_id_16=6.01, pileup=4.43405, signal_pdf=-3.97707, signal_scale=6.7949
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.157303 +/- 0.0217358
+Done in 12.87 min (cpu), 12.88 min (real)

@@ -1,0 +1,46 @@
+imax 1   number of channels
+jmax 7   number of processes-1
+kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin eleendcap2
+observation 10.29
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second process line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2
+process	Sig	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
+process	0	1	2	3	4	5	6	7
+rate	1.51	5.85	2.82	0.01	0.00	0.00	0.00	0.11
+------------
+lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015	1.015
+VBS_Stat_bin2_eleendcap18	lnN	1.12	-	-	-	-	-	-	-
+QCD_Stat_bin2_eleendcap18	lnN	-	1.26	-	-	-	-	-	-
+non_prompt_Stat_bin2_eleendcap18	lnN	-	-	1.29	-	-	-	-	-
+TTA_Stat_bin2_eleendcap18	lnN	-	-	-	2.00	-	-	-	-
+VV_Stat_bin2_eleendcap18	lnN	-	-	-	-	1.00	-	-	-
+ST_Stat_bin2_eleendcap18	lnN	-	-	-	-	-	1.00	-	-
+WA_Stat_bin2_eleendcap18	lnN	-	-	-	-	-	-	1.00	-
+ZA_SigOut_Stat_bin2_eleendcap18	lnN	-	-	-	-	-	-	-	1.45
+Stat group = VBS_Stat_bin2_eleendcap18 QCD_Stat_bin2_eleendcap18 non_prompt_Stat_bin2_eleendcap18 
+fake_eleendcap18	lnN	-	-	1.28	-	-	-	-	-
+JES_18	lnN	1.05	1.20	-	1.27	1.62	1.00	1.00	1.06
+JER_18	lnN	1.00	1.07	-	1.01	1.15	1.00	1.00	1.00
+JESR group = JES_18 JER_18
+pdf_EW	lnN	-	-	-	-	-	-	-	1.002
+pdf_QCD	lnN	-	1.03	-	-	-	-	-	-
+Scale_EW	lnN	-	-	-	-	-	-	-	1.06
+QCDZA_Scale_band1	lnN	-	1.05	-	-	-	-	-	-
+QCDZA_Scale_band2	lnN	-	1.14	-	-	-	-	-	-
+QCDZA_Scale_band3	lnN	-	1.19	-	-	-	-	-	-
+interf	lnN	1.03	-	-	-	-	-	-	-
+photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
+ele_reco	lnN	1.013	1.013	-	1.013	1.013	1.013	1.013	1.013
+ele_ID	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03	1.03
+egamma group = ele_reco ele_ID photon_id
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-	-
+VV_xs	lnN	-	-	-	-	1.1	-	-	-
+Others group = pileup ttgamma_xs VV_xs lumi_18 

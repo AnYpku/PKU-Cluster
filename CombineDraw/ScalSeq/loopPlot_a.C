@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	// Path to wherever the files with the trees are. 
-	vector<TString> pathToTrees = {"/eos/user/y/yian/2016legacy/","/eos/user/y/yian/2017cutla/","/eos/user/y/yian/2018cutla/"};
+	vector<TString> pathToTrees = {"/eos/user/y/yian/2016cutla/","/eos/user/y/yian/2017cutla/","/eos/user/y/yian/2018cutla/"};
 	std::string outputDir = "./fig-output_a/";
 	RoccoR  rc;
         /// file for scale factors

@@ -1,5 +1,5 @@
 #include "fit.C"
-#define num 5
+#define num 6
 void run_fit(){
     float lowchiso[21];
     float highchiso[21];
@@ -11,8 +11,8 @@ for(Int_t j=0;j<21;j++){
     if(17<j&&j<20){lowchiso[j]=7;highchiso[j]=j-6;}
     if(j==20)     {lowchiso[j]=8;highchiso[j]=j-7;}
   }
- Double_t lowpt[num]= {20,25,30,40,60};
- Double_t highpt[num]={25,30,40,60,400};
+ Double_t lowpt[num]= {20,25,30,40,50,60};
+ Double_t highpt[num]={25,30,40,50,60,400};
 
 // Double_t lowpt[num]= {25,30,40,50,65,80,130};
 // Double_t highpt[num]={30,40,50,65,80,130,400};

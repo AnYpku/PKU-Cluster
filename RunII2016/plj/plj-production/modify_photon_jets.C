@@ -53,20 +53,26 @@ void xx::modify_photon_jets()
 	Mjj=-99;
 	zepp = -99;
 	//set dummy value
-        Int_t ijet=0;	
+	Int_t ijet=0;
+	
 	for (Int_t ip = 0; ip < 6; ip++)
 	{
 	Int_t isfake_medium = 0;
-	//barrel
-	if(/*chiso invert*/(photon_sieie[ip]<0.01022 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]>1.295 && photon_chiso[ip]<std::min(0.2*photon_pt[ip], 5.*1.295) && photon_nhiso[ip]<(2.725 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(2.571+0.0047*photon_pt[ip])) || 
-	  (/*sieie invert*/photon_sieie[ip]>0.01031 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]<0.441 && photon_nhiso[ip]<(2.725 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(2.571+0.0047*photon_pt[ip])) || 
-	  (/*nhiso invert*/photon_sieie[ip]<0.01022 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]<0.441 && photon_nhiso[ip]>(10.91 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_nhiso[ip] < std::min(0.2*photon_pt[ip], 5.*(10.91 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(2.571+0.0047*photon_pt[ip])) ||
-	  (/*phoiso invert*/photon_sieie[ip]<0.01022 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]<0.441 && photon_nhiso[ip]<(2.725 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]>(3.630+0.0047*photon_pt[ip]) && photon_phoiso[ip]<std::min(0.2*photon_pt[ip], 5.*(3.630+0.0047*photon_pt[ip])))) isfake_medium=1;
+	//barrel 2016
+//	if(/*chiso invert*/(photon_sieie[ip]<0.01022 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]>1.295 && photon_chiso[ip]<std::min(0.2*photon_pt[ip], 5.*1.295) && photon_nhiso[ip]<(2.725 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(2.571+0.0047*photon_pt[ip])) || 
+//	  (/*sieie invert*/photon_sieie[ip]>0.01031 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]<0.441 && photon_nhiso[ip]<(2.725 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(2.571+0.0047*photon_pt[ip])) || 
+//	  (/*nhiso invert*/photon_sieie[ip]<0.01022 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]<0.441 && photon_nhiso[ip]>(10.91 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_nhiso[ip] < std::min(0.2*photon_pt[ip], 5.*(10.91 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(2.571+0.0047*photon_pt[ip])) ||
+//	  (/*phoiso invert*/photon_sieie[ip]<0.01022 && photon_pevnew[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.0396 && photon_chiso[ip]<0.441 && photon_nhiso[ip]<(2.725 + 0.0148*photon_pt[ip]+0.000017*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]>(3.630+0.0047*photon_pt[ip]) && photon_phoiso[ip]<std::min(0.2*photon_pt[ip], 5.*(3.630+0.0047*photon_pt[ip])))) isfake_medium=1;
+//
+	if(/*chiso invert*/(photon_sieie[ip]<0.01015 && photon_pev[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.02197 &&photon_chiso[ip]>1.694 && photon_chiso[ip]<std::min(0.2*photon_pt[ip], 5.*1.694) && photon_nhiso[ip]<(1.189 + (0.01512*photon_pt[ip]+0.00002259*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(2.08+0.004017*photon_pt[ip]))||
+	(/*sieie invert*/photon_sieie[ip]>0.0106 && photon_pev[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.02197 &&photon_chiso[ip]<1.141 && photon_nhiso[ip]<(1.189 + (0.01512*photon_pt[ip]+0.00002259*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(2.08+0.004017*photon_pt[ip])) ||
+	(/*nhiso invert*/photon_sieie[ip]<0.01015 && photon_pev[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.02197 &&photon_chiso[ip]<1.141 && photon_nhiso[ip]>(24.032 + (0.01512*photon_pt[ip]+0.00002259*photon_pt[ip]*photon_pt[ip]))&&photon_nhiso[ip] < std::min(0.2*photon_pt[ip], 5.*(24.032 + 0.01512*photon_pt[ip]+0.00002259*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(2.08+0.004017*photon_pt[ip])) ||
+	(/*phoiso invert*/photon_sieie[ip]<0.01015 && photon_pev[ip] && fabs(photon_eta[ip])<1.4442 && photon_hoe[ip]<0.02197 &&photon_chiso[ip]<1.141 && photon_nhiso[ip]<(1.189 + (0.01512*photon_pt[ip]+0.00002259*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]>(2.876+0.004017*photon_pt[ip])&&photon_phoiso[ip]<std::min(0.2*photon_pt[ip], 5.*(2.876+0.004017*photon_pt[ip]))  ))isfake_medium=1; 
 	// endcap
-	if(/*chiso invert*/(photon_sieie[ip]<0.03001 && photon_pevnew[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0219 && photon_chiso[ip]>1.011 && photon_chiso[ip]<std::min(0.2*photon_pt[ip], 5.*1.011) && photon_nhiso[ip]<(1.715+0.0163*photon_pt[ip]+0.000014*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(3.863+0.0034*photon_pt[ip])) || 
-          (/*sieie invert*/photon_sieie[ip]>0.03013 && photon_pevnew[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0219 && photon_chiso[ip]<0.442 && photon_nhiso[ip]<(1.715+0.0163*photon_pt[ip]+0.000014*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(3.863+0.0034*photon_pt[ip])) || 
-          (/*nhiso invert*/photon_sieie[ip]<0.03001 && photon_pevnew[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0219 && photon_chiso[ip]<0.442 && photon_nhiso[ip]>(5.931+0.0163*photon_pt[ip]+0.000014*photon_pt[ip]*photon_pt[ip]) && photon_nhiso[ip] < std::min(0.2*photon_pt[ip], 5.*(5.931+0.0163*photon_pt[ip]+0.000014*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(3.863+0.0034*photon_pt[ip])) || 
-          (/*phoiso invert*/photon_sieie[ip]<0.03001 && photon_pevnew[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0219 && photon_chiso[ip]<0.442 && photon_nhiso[ip]<(1.715+0.0163*photon_pt[ip]+0.000014*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]>(6.641+0.0034*photon_pt[ip]) && photon_phoiso[ip]<std::min(0.2*photon_pt[ip], 5.*(6.641+0.0034*photon_pt[ip])))) isfake_medium=1;
+	if(/*chiso invert*/(photon_sieie[ip]<0.0272 && photon_pev[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0326 && photon_chiso[ip]>2.089 && photon_chiso[ip]<std::min(0.2*photon_pt[ip], 5.*2.089) && photon_nhiso[ip]<(2.718+0.0117*photon_pt[ip]+0.000023*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(3.867+0.0037*photon_pt[ip])) || 
+          (/*sieie invert*/photon_sieie[ip]>0.0272 && photon_pev[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0326 && photon_chiso[ip]<1.051 && photon_nhiso[ip]<(2.718+0.0117*photon_pt[ip]+0.000023*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]<(3.867+0.0037*photon_pt[ip])) || 
+          (/*nhiso invert*/photon_sieie[ip]<0.0272 && photon_pev[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0326 && photon_chiso[ip]<1.051 && photon_nhiso[ip]>(19.722+0.0117*photon_pt[ip]+0.000023*photon_pt[ip]*photon_pt[ip]) && photon_nhiso[ip] < std::min(0.2*photon_pt[ip], 5.*(19.722+0.0117*photon_pt[ip]+0.000023*photon_pt[ip]*photon_pt[ip])) && photon_phoiso[ip]<(3.867+0.0037*photon_pt[ip])) || 
+          (/*phoiso invert*/photon_sieie[ip]<0.0272 && photon_pev[ip] && fabs(photon_eta[ip])>1.566 && fabs(photon_eta[ip])<2.5 && photon_hoe[ip]<0.0326 && photon_chiso[ip]<1.051 && photon_nhiso[ip]<(2.718+0.0117*photon_pt[ip]+0.000023*photon_pt[ip]*photon_pt[ip]) && photon_phoiso[ip]>(4.162+0.0037*photon_pt[ip]) && photon_phoiso[ip]<std::min(0.2*photon_pt[ip], 5.*(4.162+0.0037*photon_pt[ip])))) isfake_medium=1;
 
 	if(isfake_medium==1 && delta_R(photon_eta[ip], photon_phi[ip], etalep1, philep1) > 0.7 && delta_R(photon_eta[ip], photon_phi[ip], etalep2, philep2) > 0.7)
 	{
@@ -74,9 +80,9 @@ void xx::modify_photon_jets()
 	if(photon_pt[ip]>photonet) {
 	photonet=photon_pt[ip]; iphoton=ip; }
 	}	
-        if(ak4jet_pt[ip]>30 && fabs(ak4jet_eta[ip])<4.7) ijet++;
+	if(ak4jet_pt[ip]>30 && fabs(ak4jet_eta[ip])<4.7) ijet++;
 	}
-	if(iphoton>-1){	
+	if(iphoton>-1/*&& (jet_flag==true)*/ ){	
 	photonet=photon_pt[iphoton];
 	photoneta=photon_eta[iphoton];
 	photonphi=photon_phi[iphoton];
@@ -92,32 +98,31 @@ void xx::modify_photon_jets()
 	TLorentzVector  glepton;
 	glepton.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.0005);
 	TLorentzVector  glepton2;
-	glepton2.SetPtEtaPhiE(ptlep2, etalep2, philep2, 0.0005);
+	glepton2.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.0005);
 	Mla=(photonp4+glepton).M();
 	Mla2=(photonp4+glepton2).M();
 	TLorentzVector wp4;
 	wp4.SetPtEtaPhiM(ptVlep,yVlep,phiVlep,massVlep);;
 	Mva=(photonp4+wp4).M();
-	
-	Int_t jetindexphoton12[2] = {-1,-1};
-	for(Int_t i=0; i<6; i++)
-	{
-		if(iphoton>-1){
-			double drtmp1=delta_R(ak4jet_eta[i], ak4jet_phi[i], photoneta,photonphi);
-			if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1) {
-				jetindexphoton12[0] = i;
-				continue;
-			}
-			if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1) {
-				jetindexphoton12[1] = i;
-				continue;
-			}
-		}
-	}
 
+        Int_t jetindexphoton12[2] = {-1,-1};
+        for(Int_t i=0; i<6; i++)
+        {
+                if(iphoton>-1){
+                        double drtmp1=delta_R(ak4jet_eta[i], ak4jet_phi[i], photoneta,photonphi);
+                        if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1) {
+                                jetindexphoton12[0] = i;
+                                continue;
+                        }
+                        if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1) {
+                                jetindexphoton12[1] = i;
+                                continue;
+                        }
+                }
+        }
+	
 	if(jetindexphoton12[0]>-1 && jetindexphoton12[1]>-1) 
 	{
-	//	std::cout<<photoneta<<" "<<photonphi<<ak4jet_eta[jetindexphoton12[0]]<<" "<<ak4jet_phi[jetindexphoton12[0]]<<std::endl;
 		jet1pt=ak4jet_pt[jetindexphoton12[0]];
 		jet1eta=ak4jet_eta[jetindexphoton12[0]];
 		jet1phi=ak4jet_phi[jetindexphoton12[0]];
@@ -141,7 +146,7 @@ void xx::modify_photon_jets()
 		TLorentzVector j2p4;
 		j2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
 		TLorentzVector photonp42;
-		photonp42.SetPtEtaPhiM(photonet, photoneta, photonphi, photone);
+		photonp42.SetPtEtaPhiE(photonet, photoneta, photonphi, photone);
 		TLorentzVector vp4;
 		vp4.SetPtEtaPhiM(ptVlep,yVlep,phiVlep,massVlep);
 		j1metPhi=fabs(jet1phi-MET_phi);

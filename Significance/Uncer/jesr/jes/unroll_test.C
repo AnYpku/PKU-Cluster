@@ -158,10 +158,10 @@ void unroll_name(TString filename,TString tag){
 }
 int unroll_test(){
 
-	TString sample[2]={"ZA","outJEC_ZA-EWK"};
+	TString sample[3]={"ZA","ZA_JESR18","outJEC_ZA-EWK"};
 	for(int i=0;i<2;i++){
-		unroll_name(sample[i],"16");
-		unroll_name(sample[i],"17");
+//		unroll_name(sample[i],"16");
+//		unroll_name(sample[i],"17");
 		unroll_name(sample[i],"18");
 	}
 	return 0;

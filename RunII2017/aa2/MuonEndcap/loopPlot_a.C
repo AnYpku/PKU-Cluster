@@ -22,12 +22,6 @@ void loopPlot() {
 	//#####################EDIT THE OPTIONS##############################
 
 	double lumiValue = 41.52;
-	double lumiValue_tot = 41.52;
-//	double lumiValue = 4.79;//B
-//	double lumiValue = 9.63;//C
-//	double lumiValue = 4.25;//D
-//	double lumiValue = 9.31;//E
-//	double lumiValue = 13.54;//F
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?
@@ -42,7 +36,6 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	//std::string pathToTrees = "./output-slimmed-rootfiles/root/";
-//	std::string pathToTrees = "/eos/user/y/yian/2017cutla/DMuon/";
 	std::string pathToTrees = "/eos/user/y/yian/2017cutla/";
 	std::string outputDir = "./fig-output_a/";
 	
@@ -53,8 +46,7 @@ void loopPlot() {
 	const int nDATA = 1;
 	std::cout << "set data imformation, we have " << nDATA << "data file"
 			<< std::endl;
-//	std::string dataLabels[nDATA] = { "MuonB" };
-	std::string dataLabels[nDATA] = { "Muon" };
+	std::string dataLabels[nDATA] = { "Muon17" };
 	std::vector < std::string > fData;
 	for (int ii = 0; ii < nDATA; ii++) {
 		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
@@ -66,12 +58,12 @@ void loopPlot() {
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
-		std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA",
-                                            "plj_muendcap","ZA"};
+		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17","WA17",
+                                            "plj_weight","ZA17"};
 		/*std::string mcLabels[nMC] = {"ZA"}; 
 		double kFactorsMC_array[nMC] = { lumiValue};*/
 
-		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue/lumiValue_tot,lumiValue};
+		double kFactorsMC_array[nMC] = {lumiValue, lumiValue,lumiValue,lumiValue,1,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
 			fMC.push_back(pathToTrees +"cutla-out"+ mcLabels[ii] + ".root");
@@ -85,7 +77,7 @@ void loopPlot() {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 			<< std::endl;
-	std::string mcLabelsSig[nMCSig] = { "ZA-EWK" };
+	std::string mcLabelsSig[nMCSig] = { "ZA-EWK17" };
 	double kFactorsSig_array[nMCSig] = { 1 };
 	std::vector < std::string > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
@@ -128,10 +120,10 @@ void loopPlot() {
 		TFile *fileData = TFile::Open(fData.at(i).c_str());
 		std::cout << "retrieve tree of data file" << std::endl;
 		//TTree *treeData = (TTree*) fileData->Get("demo");
-		TTree *treeData = (TTree*) fileData->Get("demo");
-		std::cout<<"Data tree OK"<<std::endl;
+		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
+//		std::cout<<"OK"<<std::endl;
 		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
-		TTree *treeMC = (TTree*) fileMC->Get("demo");
+		TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (dopileupreweight) {
 			hisRatio = test(treeData, treeMC);
@@ -166,7 +158,13 @@ void loopPlot() {
 			std::cout << "retrieve ith mc file" << std::endl;
 			TFile *fileMC = TFile::Open(fMC.at(i).c_str());
 			std::cout << "retrieve tree of mc file" << std::endl;
-			TTree *treeMC = (TTree*) fileMC->Get("demo");
+			TTree *treeMC;
+			treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
+                        /*TString name = fMC.at(i);
+			if(name.Contains("pweight")==1)  
+				treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
+			else
+				treeMC = (TTree*) fileMC->Get("demo");*/
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMC, fileMC,
 					hisRatio, out_buffer, &rc);
 			maker->setUnitaryWeights(false);
@@ -194,7 +192,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i).c_str());
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("demo");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
                         std::cout<<"OK1"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer, &rc);

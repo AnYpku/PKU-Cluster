@@ -98,7 +98,7 @@ void xx::modify_photon_jets()
 	TLorentzVector  glepton;
 	glepton.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.0005);
 	TLorentzVector  glepton2;
-	glepton2.SetPtEtaPhiE(ptlep2, etalep2, philep2, 0.0005);
+	glepton2.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.0005);
 	Mla=(photonp4+glepton).M();
 	Mla2=(photonp4+glepton2).M();
 	TLorentzVector wp4;

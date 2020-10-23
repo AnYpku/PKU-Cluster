@@ -1,6 +1,6 @@
 #include "TGraphAsymmErrors.h"
 
-double get_muon_ID(double etalep, double ptlep, TH2F* ID_BF, TH2F* ID_GH ){
+double get_muon_ID(double etalep, double ptlep, TH2D* ID_BF, TH2D* ID_GH ){
 	double ptlep_tmp=ptlep;
 	if(ptlep>110) ptlep_tmp=110.;
 	double lep_ID_scale=-1;
@@ -9,7 +9,7 @@ double get_muon_ID(double etalep, double ptlep, TH2F* ID_BF, TH2F* ID_GH ){
 	return lep_ID_scale;
 }
 
-double get_muon_iso(double etalep, double ptlep, TH2F* iso_BF, TH2F* iso_GH){
+double get_muon_iso(double etalep, double ptlep, TH2D* iso_BF, TH2D* iso_GH){
 	double ptlep_tmp=ptlep;
         if(ptlep>110) ptlep_tmp=110.;
         double lep_iso_scale=-1;

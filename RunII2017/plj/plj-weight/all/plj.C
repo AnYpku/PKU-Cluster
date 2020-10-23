@@ -6,7 +6,7 @@
 #include <TCanvas.h>
 #include <fstream>
 using namespace std;
-void plj::Loop(TString name)
+void plj::Loop(TString flag)
 {
    if (fChain == 0) return;
 
@@ -15,10 +15,10 @@ void plj::Loop(TString name)
    double lep2_phi_station2_tmp = 0;
 
    ifstream f1,f2,f3,f4;
-   f1.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2017/fakephoton/elebarrel/step1/pljweight"+name+".txt");
-   f2.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2017/fakephoton/eleendcap/step1/pljweight"+name+".txt");
-   f3.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2017/fakephoton/mubarrel/step1/pljweight"+name+".txt");
-   f4.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2017/fakephoton/muendcap/step1/pljweight"+name+".txt");
+   f1.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII2017/plj/plj-plot/all/pljweight_mubarrel"+flag+"_2017.txt");
+   f2.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII2017/plj/plj-plot/all/pljweight_muendcap"+flag+"_2017.txt");
+   f3.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII2017/plj/plj-plot/all/pljweight_elebarrel"+flag+"_2017.txt");
+   f4.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII2017/plj/plj-plot/all/pljweight_eleendcap"+flag+"_2017.txt");
    Double_t scalef_f1[8];
    Double_t scalef_f2[8];
    Double_t scalef_f3[8];

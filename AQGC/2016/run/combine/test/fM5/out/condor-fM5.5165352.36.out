@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 1127940562
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (89.0633) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=6.9853, JES_16=2.37123, QCDZA_pdf=6.0776, QCDZA_scale=5.82977, QCD_stat_ele_16_bin_1=4.75521, QCD_stat_ele_16_bin_2=-4.08937, QCD_stat_ele_16_bin_3=5.10458, QCD_stat_ele_16_bin_4=3.61368, QCD_stat_ele_16_bin_5=-6.51314, QCD_stat_muon_16_bin_1=3.20084, QCD_stat_muon_16_bin_2=3.19801, QCD_stat_muon_16_bin_3=0.519314, QCD_stat_muon_16_bin_4=-2.23083, QCD_stat_muon_16_bin_5=-4.15318, VBS_stat_ele_16_bin_1=6.96853, VBS_stat_ele_16_bin_2=4.04204, VBS_stat_ele_16_bin_3=-2.7917, VBS_stat_ele_16_bin_4=6.95645, VBS_stat_ele_16_bin_5=5.39201, VBS_stat_muon_16_bin_1=2.31805, VBS_stat_muon_16_bin_2=-6.65117, VBS_stat_muon_16_bin_3=6.80102, VBS_stat_muon_16_bin_4=0.453012, VBS_stat_muon_16_bin_5=5.14236, ele16_efficiency=5.24435, ele16_trigger=-6.37196, fake_ele_16=-0.22669, fake_muon_16=6.92416, interference=-0.0120537, l1prefiring=3.35314, lumi=5.50944, mu16_efficiency=5.4942, mu16_trigger=-3.52726, non_prompt_stat_ele_16_bin_1=6.11556, non_prompt_stat_ele_16_bin_2=-0.0351204, non_prompt_stat_muon_16_bin_1=-6.06559, non_prompt_stat_muon_16_bin_2=-6.22337, others_stat_ele_16_bin_1=5.60161, others_stat_ele_16_bin_2=-0.233683, others_stat_ele_16_bin_3=-5.50791, others_stat_muon_16_bin_1=-3.27066, others_xs=-6.36525, param=8.26864, photon_id_16=6.97117, pileup=3.83608, signal_pdf=5.27223, signal_scale=3.31337
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.0543478 +/- 0.0122578
+Done in 16.66 min (cpu), 16.75 min (real)

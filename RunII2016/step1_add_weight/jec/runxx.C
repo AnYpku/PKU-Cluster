@@ -6,7 +6,7 @@ using namespace std;
 void runxx() {
 //TString dir = "/data/pku/home/anying/cms/CMSSW_8_0_26_patch2/analysis_code/MakeTemplate/ZAJetfakeohoton/pesudo/";
 //TString dir = "/data/pku/home/anying/cms/file_in_cms/files_weighted/";
-TString dir = "/eos/user/y/yian/2016cutla/";
+TString dir = "/eos/user/y/yian/2016legacy/ZA-EWK-JESR/";
 ifstream infile("file");
 string buffer;
 TString infilename;

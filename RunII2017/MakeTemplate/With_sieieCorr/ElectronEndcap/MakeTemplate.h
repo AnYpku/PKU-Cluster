@@ -16,7 +16,7 @@
 #include <TH1D.h>
 #include <TGraph.h>
 #include <vector>
-#define num 5
+#define num 8
 using namespace std;
 
 // Header file for the classes stored in the TTree if any.
@@ -37,12 +37,14 @@ public :
 
    // Declaration of leaf types
    Double_t        scalef;
+   Double_t        prefWeight;
+   Double_t        prefWeightUp;
+   Double_t        prefWeightDown;
    Int_t           run_period;
    Double_t        ele1_id_scale;
    Double_t        ele2_id_scale;
    Double_t        ele1_reco_scale;
    Double_t        ele2_reco_scale;
-   Double_t        photon_id_scale;
    Double_t        muon1_id_scale;
    Double_t        muon2_id_scale;
    Double_t        muon1_iso_scale;
@@ -50,6 +52,8 @@ public :
    Double_t        muon1_track_scale;
    Double_t        muon2_track_scale;
    Double_t        muon_hlt_scale;
+   Double_t photon_id_scale;
+   Double_t photon_veto_scale;
    Int_t           event;
    Int_t           nVtx;
    Double_t        theWeight;
@@ -229,7 +233,6 @@ public :
    Bool_t          passFilter_duplicateMuon;
    Double_t        lumiWeight;
    Double_t        pileupWeight;
-   Double_t        prefWeight;
    Double_t        lep1_eta_station2;
    Double_t        lep1_phi_station2;
    Int_t           lep1_sign;
@@ -267,6 +270,9 @@ public :
 
    // List of branches
    TBranch        *b_scalef;   //!
+   TBranch        *b_prefWeight;   //!
+   TBranch        *b_prefWeightUp;   //!
+   TBranch        *b_prefWeightDown;   //!
    TBranch        *b_run_period;   //!
    TBranch        *b_ele1_id_scale;   //!
    TBranch        *b_ele2_id_scale;   //!
@@ -459,7 +465,6 @@ public :
    TBranch        *b_passFilter_duplicateMuon_;   //!
    TBranch        *b_lumiWeight;   //!
    TBranch        *b_pileupWeight;   //!
-   TBranch        *b_prefWeight;   //!
    TBranch        *b_lep1_eta_station2;   //!
    TBranch        *b_lep1_phi_station2;   //!
    TBranch        *b_lep1_sign;   //!
@@ -501,7 +506,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString name,TGraph*gr);
+   virtual void     Loop(TString name,TGraph* gr);
    virtual void     endJob();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
@@ -509,12 +514,10 @@ public :
 /* Add some variable and histos*/
  Double_t m1[num],m2[num],m3[num];
  Double_t TrueNumber[num],FakeNumber[num];
- Double_t lowpt[num]= {20,25,30,40,60};
- Double_t highpt[num]={25,30,40,60,400};
-
-//  Double_t lowpt[num]= {25,30,35,45,55,65,85,130};
-//  Double_t highpt[num]={30,35,45,55,65,85,130,400};
-
+// Double_t lowpt[num]= {20,25,30,35,40,45,50,60,80,120};
+// Double_t highpt[num]={25,30,35,40,45,50,60,80,120,400};
+ Double_t lowpt[num]= {20,25,30,40,50,60};
+ Double_t highpt[num]={25,30,40,50,60,400};
  Int_t    bin;  
  Double_t xlow; 
  Double_t xhigh;
@@ -531,7 +534,7 @@ public :
  TH1D* h4[num];
  TH1D* hsieie[num];
  TCanvas *c1[num];
- bool LEP,Photon_cut[6];
+ bool LEP,Photon_cut[6],JET[6],SignalRegion;
 /* Add some variable and histos*/
 
 /* Add some function*/
@@ -541,6 +544,7 @@ void select(TTree *tree,TH1D *h1[num],TH1D *h2[num]/*[21]*/,TH1D *h3[num]);
 void draw(TCanvas *c,TH1D *h1,TH1D *h2,TH1D *h3,Double_t ptlow,Double_t pthigh);
 void creatfiles();
 void ResetVal();
+double delta_R(Double_t eta1, Double_t phi1, Double_t eta2, Double_t phi2);
 /* Add some function*/
  private:
     TFile *f1;
@@ -609,6 +613,9 @@ void MakeTemplate::Init(TTree *tree)
    fChain->SetMakeClass(1);
 
    fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+   fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
+   fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
+   fChain->SetBranchAddress("prefWeightDown", &prefWeightDown, &b_prefWeightDown);
    fChain->SetBranchAddress("run_period", &run_period, &b_run_period);
    fChain->SetBranchAddress("ele1_id_scale", &ele1_id_scale, &b_ele1_id_scale);
    fChain->SetBranchAddress("ele2_id_scale", &ele2_id_scale, &b_ele2_id_scale);
@@ -801,7 +808,6 @@ void MakeTemplate::Init(TTree *tree)
    fChain->SetBranchAddress("passFilter_duplicateMuon", &passFilter_duplicateMuon, &b_passFilter_duplicateMuon_);
    fChain->SetBranchAddress("lumiWeight", &lumiWeight, &b_lumiWeight);
    fChain->SetBranchAddress("pileupWeight", &pileupWeight, &b_pileupWeight);
-   fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
    fChain->SetBranchAddress("lep1_eta_station2", &lep1_eta_station2, &b_lep1_eta_station2);
    fChain->SetBranchAddress("lep1_phi_station2", &lep1_phi_station2, &b_lep1_phi_station2);
    fChain->SetBranchAddress("lep1_sign", &lep1_sign, &b_lep1_sign);

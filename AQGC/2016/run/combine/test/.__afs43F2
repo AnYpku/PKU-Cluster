@@ -1,0 +1,402 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (285.606) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=-6.99561, JES_16=5.28954, QCDZA_pdf=3.23131, QCDZA_scale=6.95022, QCD_stat_ele_16_bin_1=-0.897787, QCD_stat_ele_16_bin_2=5.11243, QCD_stat_ele_16_bin_3=4.00061, QCD_stat_ele_16_bin_4=1.35044, QCD_stat_ele_16_bin_5=5.58807, QCD_stat_muon_16_bin_1=-3.2449, QCD_stat_muon_16_bin_2=2.59008, QCD_stat_muon_16_bin_3=6.95093, QCD_stat_muon_16_bin_4=5.67168, QCD_stat_muon_16_bin_5=6.55295, VBS_stat_ele_16_bin_1=-2.5274, VBS_stat_ele_16_bin_2=0.841672, VBS_stat_ele_16_bin_3=1.92452, VBS_stat_ele_16_bin_4=1.28085, VBS_stat_ele_16_bin_5=-6.75684, VBS_stat_muon_16_bin_1=-1.81113, VBS_stat_muon_16_bin_2=2.31863, VBS_stat_muon_16_bin_3=3.89801, VBS_stat_muon_16_bin_4=3.30022, VBS_stat_muon_16_bin_5=-6.99699, ele16_efficiency=3.27387, ele16_trigger=1.67652, fake_ele_16=5.90869, fake_muon_16=-4.62698, interference=4.03699, l1prefiring=5.7276, lumi=5.32075, mu16_efficiency=1.97333, mu16_trigger=6.87579, non_prompt_stat_ele_16_bin_1=-1.81465, non_prompt_stat_ele_16_bin_2=4.29628, non_prompt_stat_muon_16_bin_1=-1.26527, non_prompt_stat_muon_16_bin_2=3.36802, others_stat_ele_16_bin_1=-2.2697, others_stat_ele_16_bin_2=3.07936, others_stat_ele_16_bin_3=0.971744, others_stat_muon_16_bin_1=0.0570446, others_xs=-0.0402829, param=5.54887, photon_id_16=3.58691, pileup=0.612373, signal_pdf=4.58406, signal_scale=6.22002
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (285.606) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=6.543, JES_16=5.86381, QCDZA_pdf=1.6575, QCDZA_scale=3.03479, QCD_stat_ele_16_bin_1=-1.34781, QCD_stat_ele_16_bin_2=1.67715, QCD_stat_ele_16_bin_3=0.459137, QCD_stat_ele_16_bin_4=0.287999, QCD_stat_ele_16_bin_5=2.61302, QCD_stat_muon_16_bin_1=-0.907496, QCD_stat_muon_16_bin_2=1.41137, QCD_stat_muon_16_bin_3=3.19921, QCD_stat_muon_16_bin_4=1.86866, QCD_stat_muon_16_bin_5=3.92252, VBS_stat_ele_16_bin_1=-0.822725, VBS_stat_ele_16_bin_2=-0.193316, VBS_stat_ele_16_bin_3=1.07283, VBS_stat_ele_16_bin_4=0.341235, VBS_stat_ele_16_bin_5=6.27968, VBS_stat_muon_16_bin_1=-1.47196, VBS_stat_muon_16_bin_2=1.08192, VBS_stat_muon_16_bin_3=1.23768, VBS_stat_muon_16_bin_4=0.997304, VBS_stat_muon_16_bin_5=2.63183, ele16_efficiency=1.49951, ele16_trigger=-0.0849143, fake_ele_16=1.2889, fake_muon_16=5.4818, interference=0.212322, l1prefiring=1.77605, lumi=3.63833, mu16_efficiency=0.183873, mu16_trigger=1.58801, non_prompt_stat_ele_16_bin_1=0.320117, non_prompt_stat_ele_16_bin_2=2.5545, non_prompt_stat_muon_16_bin_1=0.303968, non_prompt_stat_muon_16_bin_2=1.4529, others_stat_ele_16_bin_1=-1.51967, others_stat_ele_16_bin_2=1.91744, others_stat_ele_16_bin_3=0.55608, others_stat_muon_16_bin_1=0.428964, others_xs=-0.141537, param=15.7144, photon_id_16=4.62324, pileup=0.135152, signal_pdf=3.94914, signal_scale=3.52456
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (312.132) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.81309, JES_16=6.44397, QCDZA_pdf=3.4538, QCDZA_scale=-0.933466, QCD_stat_ele_16_bin_1=3.05975, QCD_stat_ele_16_bin_2=3.99833, QCD_stat_ele_16_bin_3=0.666661, QCD_stat_ele_16_bin_4=0.995993, QCD_stat_ele_16_bin_5=3.34468, QCD_stat_muon_16_bin_1=6.28719, QCD_stat_muon_16_bin_2=6.32814, QCD_stat_muon_16_bin_3=5.53027, QCD_stat_muon_16_bin_4=2.28608, QCD_stat_muon_16_bin_5=5.48516, VBS_stat_ele_16_bin_1=1.44244, VBS_stat_ele_16_bin_2=0.287545, VBS_stat_ele_16_bin_3=1.13394, VBS_stat_ele_16_bin_4=0.180904, VBS_stat_ele_16_bin_5=2.28185, VBS_stat_muon_16_bin_1=0.62856, VBS_stat_muon_16_bin_2=1.8932, VBS_stat_muon_16_bin_3=0.588665, VBS_stat_muon_16_bin_4=0.647927, VBS_stat_muon_16_bin_5=4.59392, ele16_efficiency=3.50818, ele16_trigger=1.72072, fake_ele_16=6.98912, fake_muon_16=-3.17378, interference=0.267628, l1prefiring=3.61448, lumi=6.65652, mu16_efficiency=0.758001, mu16_trigger=3.46755, non_prompt_stat_ele_16_bin_1=3.67581, non_prompt_stat_ele_16_bin_2=3.93781, non_prompt_stat_muon_16_bin_1=6.78805, non_prompt_stat_muon_16_bin_2=2.94584, others_stat_ele_16_bin_1=-0.481349, others_stat_ele_16_bin_2=2.55335, others_stat_ele_16_bin_3=0.564224, others_stat_muon_16_bin_1=3.12848, others_xs=0.767445, param=22.2261, photon_id_16=6.99026, pileup=0.339633, signal_pdf=2.13071, signal_scale=4.22891
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (607.749) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.35243, JES_16=6.5412, QCDZA_pdf=0.701922, QCDZA_scale=3.44014, QCD_stat_ele_16_bin_1=2.60448, QCD_stat_ele_16_bin_2=-0.205659, QCD_stat_ele_16_bin_3=-0.00122646, QCD_stat_ele_16_bin_4=-1.09164, QCD_stat_ele_16_bin_5=0.999519, QCD_stat_muon_16_bin_1=2.3125, QCD_stat_muon_16_bin_2=1.02334, QCD_stat_muon_16_bin_3=-0.414767, QCD_stat_muon_16_bin_4=-0.466333, QCD_stat_muon_16_bin_5=1.02813, VBS_stat_ele_16_bin_1=-0.69123, VBS_stat_ele_16_bin_2=0.252203, VBS_stat_ele_16_bin_3=2.08133, VBS_stat_ele_16_bin_4=-0.601143, VBS_stat_ele_16_bin_5=0.483935, VBS_stat_muon_16_bin_1=0.341762, VBS_stat_muon_16_bin_2=0.214907, VBS_stat_muon_16_bin_3=0.0283094, VBS_stat_muon_16_bin_4=-0.554971, VBS_stat_muon_16_bin_5=-0.421932, ele16_efficiency=0.189737, ele16_trigger=-0.370968, fake_ele_16=1.45875, fake_muon_16=5.79668, interference=0.857131, l1prefiring=0.436155, lumi=-0.832252, mu16_efficiency=1.47924, mu16_trigger=-1.07989, non_prompt_stat_ele_16_bin_1=-0.193448, non_prompt_stat_ele_16_bin_2=0.61032, non_prompt_stat_muon_16_bin_1=-0.374353, non_prompt_stat_muon_16_bin_2=-0.10352, others_stat_ele_16_bin_1=0.231565, others_stat_ele_16_bin_2=0.581036, others_stat_ele_16_bin_3=0.605776, others_stat_muon_16_bin_1=-0.585204, others_xs=-0.34718, param=3.52162, photon_id_16=0.24837, pileup=-2.50138, signal_pdf=-0.0701359, signal_scale=1.00459
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (607.749) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.18197, JES_16=6.3167, QCDZA_pdf=0.674387, QCDZA_scale=3.25407, QCD_stat_ele_16_bin_1=2.52935, QCD_stat_ele_16_bin_2=-0.20562, QCD_stat_ele_16_bin_3=0.0019993, QCD_stat_ele_16_bin_4=-1.06573, QCD_stat_ele_16_bin_5=0.972475, QCD_stat_muon_16_bin_1=2.18594, QCD_stat_muon_16_bin_2=0.972878, QCD_stat_muon_16_bin_3=-0.398775, QCD_stat_muon_16_bin_4=-0.455785, QCD_stat_muon_16_bin_5=0.986019, VBS_stat_ele_16_bin_1=-0.679378, VBS_stat_ele_16_bin_2=0.246648, VBS_stat_ele_16_bin_3=2.03596, VBS_stat_ele_16_bin_4=-0.587999, VBS_stat_ele_16_bin_5=0.430943, VBS_stat_muon_16_bin_1=0.331909, VBS_stat_muon_16_bin_2=0.208246, VBS_stat_muon_16_bin_3=0.0260698, VBS_stat_muon_16_bin_4=-0.544297, VBS_stat_muon_16_bin_5=-0.489992, ele16_efficiency=0.173804, ele16_trigger=-0.372974, fake_ele_16=1.37155, fake_muon_16=5.59993, interference=0.830657, l1prefiring=0.407163, lumi=-0.861425, mu16_efficiency=1.44069, mu16_trigger=-1.08557, non_prompt_stat_ele_16_bin_1=-0.192371, non_prompt_stat_ele_16_bin_2=0.594862, non_prompt_stat_muon_16_bin_1=-0.362539, non_prompt_stat_muon_16_bin_2=-0.102743, others_stat_ele_16_bin_1=0.223567, others_stat_ele_16_bin_2=0.568132, others_stat_ele_16_bin_3=0.591435, others_stat_muon_16_bin_1=-0.571743, others_xs=-0.340026, param=1.66475, photon_id_16=0.183974, pileup=-2.44105, signal_pdf=-0.0884412, signal_scale=0.964236
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (718.431) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.32001, JES_16=6.65216, QCDZA_pdf=0.820031, QCDZA_scale=3.49507, QCD_stat_ele_16_bin_1=3.14475, QCD_stat_ele_16_bin_2=-0.448265, QCD_stat_ele_16_bin_3=-0.111578, QCD_stat_ele_16_bin_4=-1.4819, QCD_stat_ele_16_bin_5=1.32585, QCD_stat_muon_16_bin_1=2.47141, QCD_stat_muon_16_bin_2=1.07581, QCD_stat_muon_16_bin_3=-0.621326, QCD_stat_muon_16_bin_4=-0.66607, QCD_stat_muon_16_bin_5=1.3143, VBS_stat_ele_16_bin_1=-1.02638, VBS_stat_ele_16_bin_2=0.306755, VBS_stat_ele_16_bin_3=2.73082, VBS_stat_ele_16_bin_4=-0.815234, VBS_stat_ele_16_bin_5=0.688542, VBS_stat_muon_16_bin_1=0.362147, VBS_stat_muon_16_bin_2=0.215499, VBS_stat_muon_16_bin_3=0.0399226, VBS_stat_muon_16_bin_4=-0.765904, VBS_stat_muon_16_bin_5=-0.459156, ele16_efficiency=0.121661, ele16_trigger=-0.615596, fake_ele_16=1.35995, fake_muon_16=6.09203, interference=1.1106, l1prefiring=0.419651, lumi=-1.44683, mu16_efficiency=1.92736, mu16_trigger=-1.62846, non_prompt_stat_ele_16_bin_1=-0.372369, non_prompt_stat_ele_16_bin_2=0.795199, non_prompt_stat_muon_16_bin_1=-0.702283, non_prompt_stat_muon_16_bin_2=-0.235548, others_stat_ele_16_bin_1=0.224204, others_stat_ele_16_bin_2=0.756425, others_stat_ele_16_bin_3=0.815137, others_stat_muon_16_bin_1=-0.845705, others_xs=-0.505642, param=3.53504, photon_id_16=-0.128757, pileup=-3.23802, signal_pdf=-0.130009, signal_scale=1.19937
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (60.1889) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.04233, JES_16=6.80563, QCDZA_pdf=-6.60624, QCDZA_scale=6.65788, QCD_stat_ele_16_bin_1=5.89474, QCD_stat_ele_16_bin_2=-5.42098, QCD_stat_ele_16_bin_3=5.57126, QCD_stat_ele_16_bin_4=0.926203, QCD_stat_ele_16_bin_5=3.52287, QCD_stat_muon_16_bin_1=0.733062, QCD_stat_muon_16_bin_2=6.9325, QCD_stat_muon_16_bin_3=1.39615, QCD_stat_muon_16_bin_4=5.48827, QCD_stat_muon_16_bin_5=5.30773, VBS_stat_ele_16_bin_1=-2.14938, VBS_stat_ele_16_bin_2=-4.46101, VBS_stat_ele_16_bin_3=5.2225, VBS_stat_ele_16_bin_4=1.44683, VBS_stat_ele_16_bin_5=4.99969, VBS_stat_muon_16_bin_1=-0.710496, VBS_stat_muon_16_bin_2=-6.39328, VBS_stat_muon_16_bin_3=5.231, VBS_stat_muon_16_bin_4=0.902586, VBS_stat_muon_16_bin_5=6.94771, ele16_efficiency=4.44707, ele16_trigger=2.66964, fake_ele_16=-5.6205, fake_muon_16=6.97734, interference=3.97406, l1prefiring=-2.19071, lumi=-5.3661, mu16_efficiency=-2.43094, mu16_trigger=-6.80402, non_prompt_stat_ele_16_bin_1=-6.93554, non_prompt_stat_ele_16_bin_2=-6.61027, non_prompt_stat_muon_16_bin_1=2.29354, non_prompt_stat_muon_16_bin_2=-6.87646, others_stat_ele_16_bin_1=-4.31916, others_stat_ele_16_bin_2=-3.15475, others_stat_ele_16_bin_3=1.56036, others_stat_muon_16_bin_1=1.00812, others_xs=-1.99838, param=-28.5198, photon_id_16=-5.55249, pileup=-0.264185, signal_pdf=-4.87909, signal_scale=4.72379
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0 +/- 0
+Done in 4.30 min (cpu), 4.31 min (real)
+fM0, 27
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (59.6983) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.09072, JES_16=6.79447, QCDZA_pdf=-6.60704, QCDZA_scale=6.65898, QCD_stat_ele_16_bin_1=5.89542, QCD_stat_ele_16_bin_2=-5.41727, QCD_stat_ele_16_bin_3=5.57018, QCD_stat_ele_16_bin_4=0.924263, QCD_stat_ele_16_bin_5=3.51976, QCD_stat_muon_16_bin_1=0.727953, QCD_stat_muon_16_bin_2=6.93274, QCD_stat_muon_16_bin_3=1.38903, QCD_stat_muon_16_bin_4=5.4869, QCD_stat_muon_16_bin_5=5.30256, VBS_stat_ele_16_bin_1=-2.15971, VBS_stat_ele_16_bin_2=-4.46568, VBS_stat_ele_16_bin_3=5.22175, VBS_stat_ele_16_bin_4=1.44253, VBS_stat_ele_16_bin_5=4.98348, VBS_stat_muon_16_bin_1=-0.715961, VBS_stat_muon_16_bin_2=-6.38759, VBS_stat_muon_16_bin_3=5.22696, VBS_stat_muon_16_bin_4=0.889418, VBS_stat_muon_16_bin_5=6.97547, ele16_efficiency=4.44255, ele16_trigger=2.66506, fake_ele_16=-5.62139, fake_muon_16=6.97735, interference=3.98017, l1prefiring=-2.18557, lumi=-5.35731, mu16_efficiency=-2.42718, mu16_trigger=-6.80017, non_prompt_stat_ele_16_bin_1=-6.9351, non_prompt_stat_ele_16_bin_2=-6.60936, non_prompt_stat_muon_16_bin_1=2.28012, non_prompt_stat_muon_16_bin_2=-6.87772, others_stat_ele_16_bin_1=-4.31921, others_stat_ele_16_bin_2=-3.15486, others_stat_ele_16_bin_3=1.55942, others_stat_muon_16_bin_1=1.00404, others_xs=-1.99917, param=0.522933, photon_id_16=-5.54253, pileup=-0.263624, signal_pdf=-4.85421, signal_scale=4.72121
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0 +/- 0
+Done in 3.48 min (cpu), 3.48 min (real)
+fM0, 24
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.002 +/- 0.001998
+Done in 4.49 min (cpu), 4.49 min (real)
+fM0, 21
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.03 +/- 0.00762889
+Done in 4.70 min (cpu), 4.70 min (real)
+fM0, 18
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.054 +/- 0.0101078
+Done in 3.57 min (cpu), 3.57 min (real)
+fM0, 15
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.17 +/- 0.0167988
+Done in 3.47 min (cpu), 3.48 min (real)
+fM0, 12
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.362 +/- 0.0214921
+Done in 3.52 min (cpu), 3.52 min (real)
+fM0, 9
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (822.333) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=4.78248, JES_16=6.99679, QCDZA_pdf=0.397238, QCDZA_scale=6.83034, QCD_stat_ele_16_bin_1=1.38246, QCD_stat_ele_16_bin_2=0.596186, QCD_stat_ele_16_bin_3=0.415624, QCD_stat_ele_16_bin_4=-0.979897, QCD_stat_ele_16_bin_5=-0.636278, QCD_stat_muon_16_bin_1=1.2978, QCD_stat_muon_16_bin_2=2.1701, QCD_stat_muon_16_bin_3=6.21818, QCD_stat_muon_16_bin_4=-1.1361, QCD_stat_muon_16_bin_5=-1.67359, VBS_stat_ele_16_bin_1=-0.234029, VBS_stat_ele_16_bin_2=-0.926236, VBS_stat_ele_16_bin_3=0.248657, VBS_stat_ele_16_bin_4=-0.330812, VBS_stat_ele_16_bin_5=0.192668, VBS_stat_muon_16_bin_1=0.560585, VBS_stat_muon_16_bin_2=0.655931, VBS_stat_muon_16_bin_3=-5.42648, VBS_stat_muon_16_bin_4=-0.0546519, VBS_stat_muon_16_bin_5=0.491906, ele16_efficiency=0.628789, ele16_trigger=-0.224766, fake_ele_16=6.98177, fake_muon_16=-6.71939, interference=-0.357591, l1prefiring=0.171749, lumi=0.454023, mu16_efficiency=0.292845, mu16_trigger=0.985248, non_prompt_stat_ele_16_bin_1=-6.59997, non_prompt_stat_ele_16_bin_2=-0.406987, non_prompt_stat_muon_16_bin_1=2.16525, non_prompt_stat_muon_16_bin_2=1.34379, others_stat_ele_16_bin_1=-0.140752, others_stat_ele_16_bin_2=-0.590179, others_stat_ele_16_bin_3=0.277138, others_stat_muon_16_bin_1=6.98993, others_xs=1.05539, param=-1.50172, photon_id_16=-3.42978, pileup=0.0411414, signal_pdf=-0.309989, signal_scale=-1.53526
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.668 +/- 0.0210607
+Done in 3.49 min (cpu), 3.49 min (real)
+fM0, 6
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (951.545) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=-0.612437, JES_16=6.79804, QCDZA_pdf=0.923898, QCDZA_scale=5.45645, QCD_stat_ele_16_bin_1=0.604765, QCD_stat_ele_16_bin_2=1.77734, QCD_stat_ele_16_bin_3=-0.237514, QCD_stat_ele_16_bin_4=-0.925197, QCD_stat_ele_16_bin_5=-0.0578775, QCD_stat_muon_16_bin_1=-2.12207, QCD_stat_muon_16_bin_2=6.95913, QCD_stat_muon_16_bin_3=-1.67187, QCD_stat_muon_16_bin_4=-1.48818, QCD_stat_muon_16_bin_5=-1.60011, VBS_stat_ele_16_bin_1=-1.01468, VBS_stat_ele_16_bin_2=-0.658635, VBS_stat_ele_16_bin_3=1.17722, VBS_stat_ele_16_bin_4=4.60573, VBS_stat_ele_16_bin_5=-5.78467, VBS_stat_muon_16_bin_1=-0.796237, VBS_stat_muon_16_bin_2=-0.587541, VBS_stat_muon_16_bin_3=1.09108, VBS_stat_muon_16_bin_4=6.91769, VBS_stat_muon_16_bin_5=-0.674552, ele16_efficiency=-1.31255, ele16_trigger=-1.82513, fake_ele_16=1.89468, fake_muon_16=5.56107, interference=2.00234, l1prefiring=0.823201, lumi=3.28228, mu16_efficiency=0.439003, mu16_trigger=3.26554, non_prompt_stat_ele_16_bin_1=2.43026, non_prompt_stat_ele_16_bin_2=0.750593, non_prompt_stat_muon_16_bin_1=-1.62077, non_prompt_stat_muon_16_bin_2=0.638338, others_stat_ele_16_bin_1=0.0428471, others_stat_ele_16_bin_2=-1.75144, others_stat_ele_16_bin_3=-0.103437, others_stat_muon_16_bin_1=-0.5642, others_xs=-0.873594, param=-26.7745, photon_id_16=2.59748, pileup=0.830422, signal_pdf=-0.937976, signal_scale=6.76745
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.918 +/- 0.01227
+Done in 3.54 min (cpu), 3.54 min (real)
+fM0, 3
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (893.848) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=-0.643956, JES_16=6.67946, QCDZA_pdf=0.898254, QCDZA_scale=5.25136, QCD_stat_ele_16_bin_1=0.569927, QCD_stat_ele_16_bin_2=1.7016, QCD_stat_ele_16_bin_3=-0.179317, QCD_stat_ele_16_bin_4=-0.915653, QCD_stat_ele_16_bin_5=-0.0410242, QCD_stat_muon_16_bin_1=-2.04209, QCD_stat_muon_16_bin_2=6.89059, QCD_stat_muon_16_bin_3=-1.65153, QCD_stat_muon_16_bin_4=-1.46849, QCD_stat_muon_16_bin_5=-1.56405, VBS_stat_ele_16_bin_1=-1.0368, VBS_stat_ele_16_bin_2=-0.678724, VBS_stat_ele_16_bin_3=1.212, VBS_stat_ele_16_bin_4=4.41952, VBS_stat_ele_16_bin_5=-5.56814, VBS_stat_muon_16_bin_1=-0.763462, VBS_stat_muon_16_bin_2=-0.470061, VBS_stat_muon_16_bin_3=2.08717, VBS_stat_muon_16_bin_4=6.81701, VBS_stat_muon_16_bin_5=-1.73834, ele16_efficiency=-1.31812, ele16_trigger=-1.82994, fake_ele_16=1.77193, fake_muon_16=5.33186, interference=1.96858, l1prefiring=0.758942, lumi=3.13983, mu16_efficiency=0.407925, mu16_trigger=3.15478, non_prompt_stat_ele_16_bin_1=2.40387, non_prompt_stat_ele_16_bin_2=0.732743, non_prompt_stat_muon_16_bin_1=-1.54794, non_prompt_stat_muon_16_bin_2=0.574792, others_stat_ele_16_bin_1=0.0345903, others_stat_ele_16_bin_2=-1.75813, others_stat_ele_16_bin_3=-0.103086, others_stat_muon_16_bin_1=-0.54314, others_xs=-0.873916, param=-29.5844, photon_id_16=2.41535, pileup=0.823986, signal_pdf=-0.950005, signal_scale=6.62075
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (59.1102) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=-1.24925, JES_16=6.91858, QCDZA_pdf=1.37131, QCDZA_scale=6.89043, QCD_stat_ele_16_bin_1=1.32346, QCD_stat_ele_16_bin_2=6.19205, QCD_stat_ele_16_bin_3=-1.83207, QCD_stat_ele_16_bin_4=-0.508563, QCD_stat_ele_16_bin_5=-0.569206, QCD_stat_muon_16_bin_1=-4.39884, QCD_stat_muon_16_bin_2=6.42754, QCD_stat_muon_16_bin_3=-1.18467, QCD_stat_muon_16_bin_4=-0.0542913, QCD_stat_muon_16_bin_5=-1.12873, VBS_stat_ele_16_bin_1=1.42045, VBS_stat_ele_16_bin_2=0.326892, VBS_stat_ele_16_bin_3=0.570183, VBS_stat_ele_16_bin_4=6.81304, VBS_stat_ele_16_bin_5=-6.66205, VBS_stat_muon_16_bin_1=1.78544, VBS_stat_muon_16_bin_2=-3.81722, VBS_stat_muon_16_bin_3=-6.94035, VBS_stat_muon_16_bin_4=2.5742, VBS_stat_muon_16_bin_5=5.66629, ele16_efficiency=0.535293, ele16_trigger=1.67649, fake_ele_16=5.95003, fake_muon_16=5.43253, interference=1.11626, l1prefiring=2.10669, lumi=5.23008, mu16_efficiency=1.44119, mu16_trigger=2.57418, non_prompt_stat_ele_16_bin_1=1.75857, non_prompt_stat_ele_16_bin_2=3.59641, non_prompt_stat_muon_16_bin_1=-2.305, non_prompt_stat_muon_16_bin_2=2.84383, others_stat_ele_16_bin_1=0.335847, others_stat_ele_16_bin_2=0.327358, others_stat_ele_16_bin_3=0.291017, others_stat_muon_16_bin_1=-0.63566, others_xs=1.25356, param=28.0748, photon_id_16=5.96194, pileup=-0.0664232, signal_pdf=0.741681, signal_scale=4.25104
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.944 +/- 0.0102824
+Done in 3.43 min (cpu), 3.43 min (real)
+fM0, 0
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (598.325) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=-0.630924, JES_16=6.74469, QCDZA_pdf=0.909469, QCDZA_scale=5.35005, QCD_stat_ele_16_bin_1=0.586205, QCD_stat_ele_16_bin_2=1.73697, QCD_stat_ele_16_bin_3=-0.209027, QCD_stat_ele_16_bin_4=-0.921465, QCD_stat_ele_16_bin_5=-0.0511546, QCD_stat_muon_16_bin_1=-2.07989, QCD_stat_muon_16_bin_2=6.92781, QCD_stat_muon_16_bin_3=-1.66758, QCD_stat_muon_16_bin_4=-1.48123, QCD_stat_muon_16_bin_5=-1.58906, VBS_stat_ele_16_bin_1=-1.02901, VBS_stat_ele_16_bin_2=-0.670978, VBS_stat_ele_16_bin_3=1.19581, VBS_stat_ele_16_bin_4=4.50573, VBS_stat_ele_16_bin_5=-5.66902, VBS_stat_muon_16_bin_1=-0.781916, VBS_stat_muon_16_bin_2=-0.535567, VBS_stat_muon_16_bin_3=1.64127, VBS_stat_muon_16_bin_4=6.86817, VBS_stat_muon_16_bin_5=-1.26751, ele16_efficiency=-1.31699, ele16_trigger=-1.82893, fake_ele_16=1.83005, fake_muon_16=5.44893, interference=1.98129, l1prefiring=0.786067, lumi=3.20006, mu16_efficiency=0.421326, mu16_trigger=3.20237, non_prompt_stat_ele_16_bin_1=2.41568, non_prompt_stat_ele_16_bin_2=0.74103, non_prompt_stat_muon_16_bin_1=-1.58888, non_prompt_stat_muon_16_bin_2=0.60481, others_stat_ele_16_bin_1=0.0382741, others_stat_ele_16_bin_2=-1.7549, others_stat_ele_16_bin_3=-0.103211, others_stat_muon_16_bin_1=-0.554772, others_xs=-0.873943, param=5.52423, photon_id_16=2.49311, pileup=0.826543, signal_pdf=-0.946152, signal_scale=6.68889
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.918 +/- 0.01227
+Done in 3.52 min (cpu), 3.53 min (real)
+fM0, -3
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.64 +/- 0.0214663
+Done in 4.71 min (cpu), 4.71 min (real)
+fM0, -6
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.364 +/- 0.0215176
+Done in 4.64 min (cpu), 4.64 min (real)
+fM0, -9
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1209.28) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.62358, JES_16=6.49689, QCDZA_pdf=-0.553053, QCDZA_scale=2.86958, QCD_stat_ele_16_bin_1=3.14718, QCD_stat_ele_16_bin_2=1.92836, QCD_stat_ele_16_bin_3=1.09457, QCD_stat_ele_16_bin_4=0.414055, QCD_stat_ele_16_bin_5=1.40402, QCD_stat_muon_16_bin_1=3.05195, QCD_stat_muon_16_bin_2=0.473947, QCD_stat_muon_16_bin_3=2.49411, QCD_stat_muon_16_bin_4=-2.50162, QCD_stat_muon_16_bin_5=-1.61963, VBS_stat_ele_16_bin_1=-0.85499, VBS_stat_ele_16_bin_2=1.31625, VBS_stat_ele_16_bin_3=-0.58779, VBS_stat_ele_16_bin_4=2.5104, VBS_stat_ele_16_bin_5=-2.28005, VBS_stat_muon_16_bin_1=2.52479, VBS_stat_muon_16_bin_2=2.62877, VBS_stat_muon_16_bin_3=0.267851, VBS_stat_muon_16_bin_4=-0.925005, VBS_stat_muon_16_bin_5=2.75634, ele16_efficiency=1.0018, ele16_trigger=2.92611, fake_ele_16=4.14428, fake_muon_16=5.59028, interference=1.12136, l1prefiring=-1.80497, lumi=3.42467, mu16_efficiency=0.345553, mu16_trigger=-0.803848, non_prompt_stat_ele_16_bin_1=0.967768, non_prompt_stat_ele_16_bin_2=0.944552, non_prompt_stat_muon_16_bin_1=0.847041, non_prompt_stat_muon_16_bin_2=2.87258, others_stat_ele_16_bin_1=-1.90737, others_stat_ele_16_bin_2=-0.0931528, others_stat_ele_16_bin_3=-1.62006, others_stat_muon_16_bin_1=-0.10772, others_xs=-0.272895, param=29.9999, photon_id_16=3.71451, pileup=0.136384, signal_pdf=-0.8161, signal_scale=-1.45791
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1209.28) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=5.95742, JES_16=4.14142, QCDZA_pdf=1.31098, QCDZA_scale=5.32792, QCD_stat_ele_16_bin_1=6.06171, QCD_stat_ele_16_bin_2=4.22243, QCD_stat_ele_16_bin_3=2.26173, QCD_stat_ele_16_bin_4=0.379065, QCD_stat_ele_16_bin_5=1.37239, QCD_stat_muon_16_bin_1=6.08894, QCD_stat_muon_16_bin_2=4.28005, QCD_stat_muon_16_bin_3=5.48065, QCD_stat_muon_16_bin_4=-0.9983, QCD_stat_muon_16_bin_5=-0.618129, VBS_stat_ele_16_bin_1=1.30668, VBS_stat_ele_16_bin_2=1.67652, VBS_stat_ele_16_bin_3=0.0407133, VBS_stat_ele_16_bin_4=2.15891, VBS_stat_ele_16_bin_5=-2.18249, VBS_stat_muon_16_bin_1=3.82139, VBS_stat_muon_16_bin_2=3.08642, VBS_stat_muon_16_bin_3=0.277233, VBS_stat_muon_16_bin_4=-0.463205, VBS_stat_muon_16_bin_5=1.76551, ele16_efficiency=3.12438, ele16_trigger=3.98984, fake_ele_16=5.8613, fake_muon_16=0.767508, interference=1.7574, l1prefiring=0.443445, lumi=6.65537, mu16_efficiency=0.976452, mu16_trigger=2.35484, non_prompt_stat_ele_16_bin_1=3.14279, non_prompt_stat_ele_16_bin_2=1.42975, non_prompt_stat_muon_16_bin_1=5.64413, non_prompt_stat_muon_16_bin_2=3.33192, others_stat_ele_16_bin_1=-0.350757, others_stat_ele_16_bin_2=0.581977, others_stat_ele_16_bin_3=-0.965252, others_stat_muon_16_bin_1=1.60055, others_xs=0.506108, param=21.5139, photon_id_16=6.96625, pileup=0.352483, signal_pdf=0.628851, signal_scale=2.33323
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1209.28) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.86284, JES_16=6.30382, QCDZA_pdf=-0.036484, QCDZA_scale=3.60405, QCD_stat_ele_16_bin_1=2.69868, QCD_stat_ele_16_bin_2=1.69463, QCD_stat_ele_16_bin_3=0.92391, QCD_stat_ele_16_bin_4=0.134316, QCD_stat_ele_16_bin_5=0.87096, QCD_stat_muon_16_bin_1=2.46441, QCD_stat_muon_16_bin_2=1.07746, QCD_stat_muon_16_bin_3=2.38861, QCD_stat_muon_16_bin_4=-1.41349, QCD_stat_muon_16_bin_5=-0.902418, VBS_stat_ele_16_bin_1=-0.0135458, VBS_stat_ele_16_bin_2=0.945474, VBS_stat_ele_16_bin_3=-0.222841, VBS_stat_ele_16_bin_4=1.81847, VBS_stat_ele_16_bin_5=-2.28394, VBS_stat_muon_16_bin_1=2.09696, VBS_stat_muon_16_bin_2=2.52321, VBS_stat_muon_16_bin_3=0.162242, VBS_stat_muon_16_bin_4=-0.504795, VBS_stat_muon_16_bin_5=1.12633, ele16_efficiency=1.077, ele16_trigger=2.34173, fake_ele_16=4.42549, fake_muon_16=5.75604, interference=0.844539, l1prefiring=-1.45041, lumi=3.12678, mu16_efficiency=0.320577, mu16_trigger=-0.00571764, non_prompt_stat_ele_16_bin_1=1.22812, non_prompt_stat_ele_16_bin_2=0.72973, non_prompt_stat_muon_16_bin_1=1.84507, non_prompt_stat_muon_16_bin_2=1.94929, others_stat_ele_16_bin_1=-0.973851, others_stat_ele_16_bin_2=0.102933, others_stat_ele_16_bin_3=-0.924877, others_stat_muon_16_bin_1=0.315463, others_xs=0.00564292, param=16.2698, photon_id_16=3.51065, pileup=0.12421, signal_pdf=-0.287599, signal_scale=-0.242567
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1209.28) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=4.59504, JES_16=4.47279, QCDZA_pdf=0.0797286, QCDZA_scale=4.47144, QCD_stat_ele_16_bin_1=3.07216, QCD_stat_ele_16_bin_2=1.93768, QCD_stat_ele_16_bin_3=1.04762, QCD_stat_ele_16_bin_4=0.146731, QCD_stat_ele_16_bin_5=0.919907, QCD_stat_muon_16_bin_1=2.8652, QCD_stat_muon_16_bin_2=1.38354, QCD_stat_muon_16_bin_3=2.71162, QCD_stat_muon_16_bin_4=-1.38824, QCD_stat_muon_16_bin_5=-0.881857, VBS_stat_ele_16_bin_1=0.101618, VBS_stat_ele_16_bin_2=1.01459, VBS_stat_ele_16_bin_3=-0.201206, VBS_stat_ele_16_bin_4=1.86643, VBS_stat_ele_16_bin_5=-2.32334, VBS_stat_muon_16_bin_1=2.27114, VBS_stat_muon_16_bin_2=2.6056, VBS_stat_muon_16_bin_3=0.165388, VBS_stat_muon_16_bin_4=-0.510919, VBS_stat_muon_16_bin_5=1.11664, ele16_efficiency=1.26449, ele16_trigger=2.51094, fake_ele_16=5.09171, fake_muon_16=6.38758, interference=0.92357, l1prefiring=-1.32187, lumi=3.55299, mu16_efficiency=0.376771, mu16_trigger=0.190857, non_prompt_stat_ele_16_bin_1=1.40849, non_prompt_stat_ele_16_bin_2=0.79449, non_prompt_stat_muon_16_bin_1=2.24543, non_prompt_stat_muon_16_bin_2=2.08192, others_stat_ele_16_bin_1=-0.928857, others_stat_ele_16_bin_2=0.144898, others_stat_ele_16_bin_3=-0.934887, others_stat_muon_16_bin_1=0.429838, others_xs=0.0490978, param=13.4423, photon_id_16=3.99833, pileup=0.144042, signal_pdf=-0.226325, signal_scale=-0.0366013
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1209.28) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.44962, JES_16=6.74469, QCDZA_pdf=-0.255295, QCDZA_scale=1.94078, QCD_stat_ele_16_bin_1=2.09645, QCD_stat_ele_16_bin_2=1.30982, QCD_stat_ele_16_bin_3=0.735664, QCD_stat_ele_16_bin_4=0.101936, QCD_stat_ele_16_bin_5=0.822565, QCD_stat_muon_16_bin_1=1.80421, QCD_stat_muon_16_bin_2=0.557366, QCD_stat_muon_16_bin_3=1.87628, QCD_stat_muon_16_bin_4=-1.5227, QCD_stat_muon_16_bin_5=-0.973077, VBS_stat_ele_16_bin_1=-0.225244, VBS_stat_ele_16_bin_2=0.861735, VBS_stat_ele_16_bin_3=-0.273015, VBS_stat_ele_16_bin_4=1.8177, VBS_stat_ele_16_bin_5=-2.34641, VBS_stat_muon_16_bin_1=1.8766, VBS_stat_muon_16_bin_2=2.49187, VBS_stat_muon_16_bin_3=0.14731, VBS_stat_muon_16_bin_4=-0.531029, VBS_stat_muon_16_bin_5=1.07815, ele16_efficiency=0.772896, ele16_trigger=2.13323, fake_ele_16=3.17079, fake_muon_16=4.31076, interference=0.729396, l1prefiring=-1.76978, lumi=2.42164, mu16_efficiency=0.227703, mu16_trigger=-0.386242, non_prompt_stat_ele_16_bin_1=0.952792, non_prompt_stat_ele_16_bin_2=0.643759, non_prompt_stat_muon_16_bin_1=1.18664, non_prompt_stat_muon_16_bin_2=1.79126, others_stat_ele_16_bin_1=-1.10208, others_stat_ele_16_bin_2=0.0300545, others_stat_ele_16_bin_3=-0.950492, others_stat_muon_16_bin_1=0.122368, others_xs=-0.0733452, param=12.5591, photon_id_16=2.68141, pileup=0.0923177, signal_pdf=-0.440377, signal_scale=-0.660428
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1209.28) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.02251, JES_16=6.9993, QCDZA_pdf=-0.16606, QCDZA_scale=2.62687, QCD_stat_ele_16_bin_1=2.33445, QCD_stat_ele_16_bin_2=1.46074, QCD_stat_ele_16_bin_3=0.809327, QCD_stat_ele_16_bin_4=0.111921, QCD_stat_ele_16_bin_5=0.83891, QCD_stat_muon_16_bin_1=2.06633, QCD_stat_muon_16_bin_2=0.765477, QCD_stat_muon_16_bin_3=2.07802, QCD_stat_muon_16_bin_4=-1.47258, QCD_stat_muon_16_bin_5=-0.941288, VBS_stat_ele_16_bin_1=-0.138641, VBS_stat_ele_16_bin_2=0.892064, VBS_stat_ele_16_bin_3=-0.251618, VBS_stat_ele_16_bin_4=1.81078, VBS_stat_ele_16_bin_5=-2.31824, VBS_stat_muon_16_bin_1=1.95882, VBS_stat_muon_16_bin_2=2.49515, VBS_stat_muon_16_bin_3=0.149576, VBS_stat_muon_16_bin_4=-0.520764, VBS_stat_muon_16_bin_5=1.07158, ele16_efficiency=0.892295, ele16_trigger=2.20898, fake_ele_16=3.6885, fake_muon_16=4.93799, interference=0.771224, l1prefiring=-1.63676, lumi=2.69696, mu16_efficiency=0.263488, mu16_trigger=-0.234313, non_prompt_stat_ele_16_bin_1=1.06094, non_prompt_stat_ele_16_bin_2=0.675979, non_prompt_stat_muon_16_bin_1=1.45054, non_prompt_stat_muon_16_bin_2=1.84805, others_stat_ele_16_bin_1=-1.04585, others_stat_ele_16_bin_2=0.0593693, others_stat_ele_16_bin_3=-0.936339, others_stat_muon_16_bin_1=0.200017, others_xs=-0.0411336, param=11.4623, photon_id_16=3.00781, pileup=0.10464, signal_pdf=-0.381882, signal_scale=-0.49416
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.16 +/- 0.0163951
+Done in 4.65 min (cpu), 4.65 min (real)
+fM0, -12
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.054 +/- 0.0101078
+Done in 6.99 min (cpu), 6.99 min (real)
+fM0, -15
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (745.941) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.19912, JES_16=4.6356, QCDZA_pdf=3.62343, QCDZA_scale=-2.47353, QCD_stat_ele_16_bin_1=3.34197, QCD_stat_ele_16_bin_2=4.10549, QCD_stat_ele_16_bin_3=0.904292, QCD_stat_ele_16_bin_4=1.02152, QCD_stat_ele_16_bin_5=3.36841, QCD_stat_muon_16_bin_1=6.56366, QCD_stat_muon_16_bin_2=6.53806, QCD_stat_muon_16_bin_3=6.02695, QCD_stat_muon_16_bin_4=2.34779, QCD_stat_muon_16_bin_5=5.73106, VBS_stat_ele_16_bin_1=1.50361, VBS_stat_ele_16_bin_2=0.27373, VBS_stat_ele_16_bin_3=1.20889, VBS_stat_ele_16_bin_4=0.169167, VBS_stat_ele_16_bin_5=1.22023, VBS_stat_muon_16_bin_1=0.696083, VBS_stat_muon_16_bin_2=1.91, VBS_stat_muon_16_bin_3=0.545319, VBS_stat_muon_16_bin_4=0.570634, VBS_stat_muon_16_bin_5=2.57289, ele16_efficiency=3.56183, ele16_trigger=1.75013, fake_ele_16=6.93941, fake_muon_16=-4.17605, interference=0.067572, l1prefiring=3.62877, lumi=6.66729, mu16_efficiency=0.755334, mu16_trigger=3.38332, non_prompt_stat_ele_16_bin_1=3.84582, non_prompt_stat_ele_16_bin_2=3.95398, non_prompt_stat_muon_16_bin_1=6.86179, non_prompt_stat_muon_16_bin_2=2.94584, others_stat_ele_16_bin_1=-0.436972, others_stat_ele_16_bin_2=2.55917, others_stat_ele_16_bin_3=0.590432, others_stat_muon_16_bin_1=3.20727, others_xs=0.790079, param=17.5225, photon_id_16=6.98584, pileup=0.341408, signal_pdf=1.67171, signal_scale=4.02737
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (745.941) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.74861, JES_16=6.25606, QCDZA_pdf=1.87604, QCDZA_scale=6.07028, QCD_stat_ele_16_bin_1=-0.147815, QCD_stat_ele_16_bin_2=1.47568, QCD_stat_ele_16_bin_3=-0.359996, QCD_stat_ele_16_bin_4=0.29499, QCD_stat_ele_16_bin_5=1.97051, QCD_stat_muon_16_bin_1=2.29145, QCD_stat_muon_16_bin_2=3.32519, QCD_stat_muon_16_bin_3=2.63239, QCD_stat_muon_16_bin_4=0.75441, QCD_stat_muon_16_bin_5=2.70177, VBS_stat_ele_16_bin_1=0.506685, VBS_stat_ele_16_bin_2=-0.254395, VBS_stat_ele_16_bin_3=0.914261, VBS_stat_ele_16_bin_4=0.0229052, VBS_stat_ele_16_bin_5=-2.92073, VBS_stat_muon_16_bin_1=-0.502948, VBS_stat_muon_16_bin_2=1.1512, VBS_stat_muon_16_bin_3=0.239041, VBS_stat_muon_16_bin_4=0.110289, VBS_stat_muon_16_bin_5=-5.89561, ele16_efficiency=1.48209, ele16_trigger=-0.173556, fake_ele_16=2.70818, fake_muon_16=5.56458, interference=-1.27182, l1prefiring=0.767001, lumi=1.27313, mu16_efficiency=-0.252547, mu16_trigger=-0.482151, non_prompt_stat_ele_16_bin_1=2.33945, non_prompt_stat_ele_16_bin_2=2.7298, non_prompt_stat_muon_16_bin_1=4.15676, non_prompt_stat_muon_16_bin_2=1.68446, others_stat_ele_16_bin_1=-0.909734, others_stat_ele_16_bin_2=1.90108, others_stat_ele_16_bin_3=0.473567, others_stat_muon_16_bin_1=1.66765, others_xs=0.20631, param=-8.43232, photon_id_16=2.44491, pileup=0.0369143, signal_pdf=-1.17082, signal_scale=0.49253
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.02 +/- 0.00626099
+Done in 4.99 min (cpu), 4.99 min (real)
+fM0, -18
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+
+ -- Hybrid New -- 
+CLsplusb = 0.002 +/- 0.001998
+Done in 3.49 min (cpu), 3.50 min (real)
+fM0, -21
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (834.968) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.79392, JES_16=6.8973, QCDZA_pdf=1.66456, QCDZA_scale=4.63711, QCD_stat_ele_16_bin_1=-0.534092, QCD_stat_ele_16_bin_2=1.1086, QCD_stat_ele_16_bin_3=-0.448578, QCD_stat_ele_16_bin_4=0.160911, QCD_stat_ele_16_bin_5=1.79607, QCD_stat_muon_16_bin_1=1.58387, QCD_stat_muon_16_bin_2=2.43479, QCD_stat_muon_16_bin_3=1.94277, QCD_stat_muon_16_bin_4=0.692913, QCD_stat_muon_16_bin_5=2.17246, VBS_stat_ele_16_bin_1=0.16105, VBS_stat_ele_16_bin_2=-0.389697, VBS_stat_ele_16_bin_3=0.886371, VBS_stat_ele_16_bin_4=0.0375197, VBS_stat_ele_16_bin_5=-0.00158018, VBS_stat_muon_16_bin_1=-0.989781, VBS_stat_muon_16_bin_2=0.922042, VBS_stat_muon_16_bin_3=0.273502, VBS_stat_muon_16_bin_4=0.234072, VBS_stat_muon_16_bin_5=0.000920681, ele16_efficiency=1.45472, ele16_trigger=-0.203756, fake_ele_16=1.95987, fake_muon_16=4.37214, interference=-0.97799, l1prefiring=0.850596, lumi=1.48772, mu16_efficiency=-0.209061, mu16_trigger=-0.269553, non_prompt_stat_ele_16_bin_1=1.75718, non_prompt_stat_ele_16_bin_2=2.45581, non_prompt_stat_muon_16_bin_1=2.62208, non_prompt_stat_muon_16_bin_2=1.23814, others_stat_ele_16_bin_1=-1.13452, others_stat_ele_16_bin_2=1.79388, others_stat_ele_16_bin_3=0.456415, others_stat_muon_16_bin_1=1.14377, others_xs=0.0222079, param=-17.2498, photon_id_16=2.64419, pileup=0.0449377, signal_pdf=0.15679, signal_scale=0.885654
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0 +/- 0
+Done in 4.64 min (cpu), 4.64 min (real)
+fM0, -24
+#################################
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> random number generator seed is 123456
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (285.606) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=-6.99561, JES_16=5.28954, QCDZA_pdf=3.23131, QCDZA_scale=6.95022, QCD_stat_ele_16_bin_1=-0.897787, QCD_stat_ele_16_bin_2=5.11243, QCD_stat_ele_16_bin_3=4.00061, QCD_stat_ele_16_bin_4=1.35044, QCD_stat_ele_16_bin_5=5.58807, QCD_stat_muon_16_bin_1=-3.2449, QCD_stat_muon_16_bin_2=2.59008, QCD_stat_muon_16_bin_3=6.95093, QCD_stat_muon_16_bin_4=5.67168, QCD_stat_muon_16_bin_5=6.55295, VBS_stat_ele_16_bin_1=-2.5274, VBS_stat_ele_16_bin_2=0.841672, VBS_stat_ele_16_bin_3=1.92452, VBS_stat_ele_16_bin_4=1.28085, VBS_stat_ele_16_bin_5=-6.75684, VBS_stat_muon_16_bin_1=-1.81113, VBS_stat_muon_16_bin_2=2.31863, VBS_stat_muon_16_bin_3=3.89801, VBS_stat_muon_16_bin_4=3.30022, VBS_stat_muon_16_bin_5=-6.99699, ele16_efficiency=3.27387, ele16_trigger=1.67652, fake_ele_16=5.90869, fake_muon_16=-4.62698, interference=4.03699, l1prefiring=5.7276, lumi=5.32075, mu16_efficiency=1.97333, mu16_trigger=6.87579, non_prompt_stat_ele_16_bin_1=-1.81465, non_prompt_stat_ele_16_bin_2=4.29628, non_prompt_stat_muon_16_bin_1=-1.26527, non_prompt_stat_muon_16_bin_2=3.36802, others_stat_ele_16_bin_1=-2.2697, others_stat_ele_16_bin_2=3.07936, others_stat_ele_16_bin_3=0.971744, others_stat_muon_16_bin_1=0.0570446, others_xs=-0.0402829, param=5.54887, photon_id_16=3.58691, pileup=0.612373, signal_pdf=4.58406, signal_scale=6.22002
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (285.606) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=6.543, JES_16=5.86381, QCDZA_pdf=1.6575, QCDZA_scale=3.03479, QCD_stat_ele_16_bin_1=-1.34781, QCD_stat_ele_16_bin_2=1.67715, QCD_stat_ele_16_bin_3=0.459137, QCD_stat_ele_16_bin_4=0.287999, QCD_stat_ele_16_bin_5=2.61302, QCD_stat_muon_16_bin_1=-0.907496, QCD_stat_muon_16_bin_2=1.41137, QCD_stat_muon_16_bin_3=3.19921, QCD_stat_muon_16_bin_4=1.86866, QCD_stat_muon_16_bin_5=3.92252, VBS_stat_ele_16_bin_1=-0.822725, VBS_stat_ele_16_bin_2=-0.193316, VBS_stat_ele_16_bin_3=1.07283, VBS_stat_ele_16_bin_4=0.341235, VBS_stat_ele_16_bin_5=6.27968, VBS_stat_muon_16_bin_1=-1.47196, VBS_stat_muon_16_bin_2=1.08192, VBS_stat_muon_16_bin_3=1.23768, VBS_stat_muon_16_bin_4=0.997304, VBS_stat_muon_16_bin_5=2.63183, ele16_efficiency=1.49951, ele16_trigger=-0.0849143, fake_ele_16=1.2889, fake_muon_16=5.4818, interference=0.212322, l1prefiring=1.77605, lumi=3.63833, mu16_efficiency=0.183873, mu16_trigger=1.58801, non_prompt_stat_ele_16_bin_1=0.320117, non_prompt_stat_ele_16_bin_2=2.5545, non_prompt_stat_muon_16_bin_1=0.303968, non_prompt_stat_muon_16_bin_2=1.4529, others_stat_ele_16_bin_1=-1.51967, others_stat_ele_16_bin_2=1.91744, others_stat_ele_16_bin_3=0.55608, others_stat_muon_16_bin_1=0.428964, others_xs=-0.141537, param=15.7144, photon_id_16=4.62324, pileup=0.135152, signal_pdf=3.94914, signal_scale=3.52456
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (312.132) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.81309, JES_16=6.44397, QCDZA_pdf=3.4538, QCDZA_scale=-0.933466, QCD_stat_ele_16_bin_1=3.05975, QCD_stat_ele_16_bin_2=3.99833, QCD_stat_ele_16_bin_3=0.666661, QCD_stat_ele_16_bin_4=0.995993, QCD_stat_ele_16_bin_5=3.34468, QCD_stat_muon_16_bin_1=6.28719, QCD_stat_muon_16_bin_2=6.32814, QCD_stat_muon_16_bin_3=5.53027, QCD_stat_muon_16_bin_4=2.28608, QCD_stat_muon_16_bin_5=5.48516, VBS_stat_ele_16_bin_1=1.44244, VBS_stat_ele_16_bin_2=0.287545, VBS_stat_ele_16_bin_3=1.13394, VBS_stat_ele_16_bin_4=0.180904, VBS_stat_ele_16_bin_5=2.28185, VBS_stat_muon_16_bin_1=0.62856, VBS_stat_muon_16_bin_2=1.8932, VBS_stat_muon_16_bin_3=0.588665, VBS_stat_muon_16_bin_4=0.647927, VBS_stat_muon_16_bin_5=4.59392, ele16_efficiency=3.50818, ele16_trigger=1.72072, fake_ele_16=6.98912, fake_muon_16=-3.17378, interference=0.267628, l1prefiring=3.61448, lumi=6.65652, mu16_efficiency=0.758001, mu16_trigger=3.46755, non_prompt_stat_ele_16_bin_1=3.67581, non_prompt_stat_ele_16_bin_2=3.93781, non_prompt_stat_muon_16_bin_1=6.78805, non_prompt_stat_muon_16_bin_2=2.94584, others_stat_ele_16_bin_1=-0.481349, others_stat_ele_16_bin_2=2.55335, others_stat_ele_16_bin_3=0.564224, others_stat_muon_16_bin_1=3.12848, others_xs=0.767445, param=22.2261, photon_id_16=6.99026, pileup=0.339633, signal_pdf=2.13071, signal_scale=4.22891
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (607.749) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.35243, JES_16=6.5412, QCDZA_pdf=0.701922, QCDZA_scale=3.44014, QCD_stat_ele_16_bin_1=2.60448, QCD_stat_ele_16_bin_2=-0.205659, QCD_stat_ele_16_bin_3=-0.00122646, QCD_stat_ele_16_bin_4=-1.09164, QCD_stat_ele_16_bin_5=0.999519, QCD_stat_muon_16_bin_1=2.3125, QCD_stat_muon_16_bin_2=1.02334, QCD_stat_muon_16_bin_3=-0.414767, QCD_stat_muon_16_bin_4=-0.466333, QCD_stat_muon_16_bin_5=1.02813, VBS_stat_ele_16_bin_1=-0.69123, VBS_stat_ele_16_bin_2=0.252203, VBS_stat_ele_16_bin_3=2.08133, VBS_stat_ele_16_bin_4=-0.601143, VBS_stat_ele_16_bin_5=0.483935, VBS_stat_muon_16_bin_1=0.341762, VBS_stat_muon_16_bin_2=0.214907, VBS_stat_muon_16_bin_3=0.0283094, VBS_stat_muon_16_bin_4=-0.554971, VBS_stat_muon_16_bin_5=-0.421932, ele16_efficiency=0.189737, ele16_trigger=-0.370968, fake_ele_16=1.45875, fake_muon_16=5.79668, interference=0.857131, l1prefiring=0.436155, lumi=-0.832252, mu16_efficiency=1.47924, mu16_trigger=-1.07989, non_prompt_stat_ele_16_bin_1=-0.193448, non_prompt_stat_ele_16_bin_2=0.61032, non_prompt_stat_muon_16_bin_1=-0.374353, non_prompt_stat_muon_16_bin_2=-0.10352, others_stat_ele_16_bin_1=0.231565, others_stat_ele_16_bin_2=0.581036, others_stat_ele_16_bin_3=0.605776, others_stat_muon_16_bin_1=-0.585204, others_xs=-0.34718, param=3.52162, photon_id_16=0.24837, pileup=-2.50138, signal_pdf=-0.0701359, signal_scale=1.00459
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (607.749) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.18197, JES_16=6.3167, QCDZA_pdf=0.674387, QCDZA_scale=3.25407, QCD_stat_ele_16_bin_1=2.52935, QCD_stat_ele_16_bin_2=-0.20562, QCD_stat_ele_16_bin_3=0.0019993, QCD_stat_ele_16_bin_4=-1.06573, QCD_stat_ele_16_bin_5=0.972475, QCD_stat_muon_16_bin_1=2.18594, QCD_stat_muon_16_bin_2=0.972878, QCD_stat_muon_16_bin_3=-0.398775, QCD_stat_muon_16_bin_4=-0.455785, QCD_stat_muon_16_bin_5=0.986019, VBS_stat_ele_16_bin_1=-0.679378, VBS_stat_ele_16_bin_2=0.246648, VBS_stat_ele_16_bin_3=2.03596, VBS_stat_ele_16_bin_4=-0.587999, VBS_stat_ele_16_bin_5=0.430943, VBS_stat_muon_16_bin_1=0.331909, VBS_stat_muon_16_bin_2=0.208246, VBS_stat_muon_16_bin_3=0.0260698, VBS_stat_muon_16_bin_4=-0.544297, VBS_stat_muon_16_bin_5=-0.489992, ele16_efficiency=0.173804, ele16_trigger=-0.372974, fake_ele_16=1.37155, fake_muon_16=5.59993, interference=0.830657, l1prefiring=0.407163, lumi=-0.861425, mu16_efficiency=1.44069, mu16_trigger=-1.08557, non_prompt_stat_ele_16_bin_1=-0.192371, non_prompt_stat_ele_16_bin_2=0.594862, non_prompt_stat_muon_16_bin_1=-0.362539, non_prompt_stat_muon_16_bin_2=-0.102743, others_stat_ele_16_bin_1=0.223567, others_stat_ele_16_bin_2=0.568132, others_stat_ele_16_bin_3=0.591435, others_stat_muon_16_bin_1=-0.571743, others_xs=-0.340026, param=1.66475, photon_id_16=0.183974, pileup=-2.44105, signal_pdf=-0.0884412, signal_scale=0.964236
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (718.431) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=2.32001, JES_16=6.65216, QCDZA_pdf=0.820031, QCDZA_scale=3.49507, QCD_stat_ele_16_bin_1=3.14475, QCD_stat_ele_16_bin_2=-0.448265, QCD_stat_ele_16_bin_3=-0.111578, QCD_stat_ele_16_bin_4=-1.4819, QCD_stat_ele_16_bin_5=1.32585, QCD_stat_muon_16_bin_1=2.47141, QCD_stat_muon_16_bin_2=1.07581, QCD_stat_muon_16_bin_3=-0.621326, QCD_stat_muon_16_bin_4=-0.66607, QCD_stat_muon_16_bin_5=1.3143, VBS_stat_ele_16_bin_1=-1.02638, VBS_stat_ele_16_bin_2=0.306755, VBS_stat_ele_16_bin_3=2.73082, VBS_stat_ele_16_bin_4=-0.815234, VBS_stat_ele_16_bin_5=0.688542, VBS_stat_muon_16_bin_1=0.362147, VBS_stat_muon_16_bin_2=0.215499, VBS_stat_muon_16_bin_3=0.0399226, VBS_stat_muon_16_bin_4=-0.765904, VBS_stat_muon_16_bin_5=-0.459156, ele16_efficiency=0.121661, ele16_trigger=-0.615596, fake_ele_16=1.35995, fake_muon_16=6.09203, interference=1.1106, l1prefiring=0.419651, lumi=-1.44683, mu16_efficiency=1.92736, mu16_trigger=-1.62846, non_prompt_stat_ele_16_bin_1=-0.372369, non_prompt_stat_ele_16_bin_2=0.795199, non_prompt_stat_muon_16_bin_1=-0.702283, non_prompt_stat_muon_16_bin_2=-0.235548, others_stat_ele_16_bin_1=0.224204, others_stat_ele_16_bin_2=0.756425, others_stat_ele_16_bin_3=0.815137, others_stat_muon_16_bin_1=-0.845705, others_xs=-0.505642, param=3.53504, photon_id_16=-0.128757, pileup=-3.23802, signal_pdf=-0.130009, signal_scale=1.19937
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0 +/- 0
+Done in 3.64 min (cpu), 3.64 min (real)
+fM0, -27
+#################################

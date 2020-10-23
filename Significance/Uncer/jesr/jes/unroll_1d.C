@@ -66,8 +66,8 @@ void unroll_name(TString filename,TString tag){
                 const int nbins=th1_ZA[i]->GetNbinsX()-2;
                 t_ZA[i]=new TH1D(Form("t_ZA%d",i),"",3,0,3);
                 for(int k=1;k<=3;k++){
-			   t_ZA[i]->SetBinContent(k,th1_ZA[i]->GetBinContent(3*k-2)+th1_ZA[i]->GetBinContent(3*k-2+1)+th1_ZA[i]->GetBinContent(3*k-2+2));
-			   t_ZA[i]->SetBinError(k,sqrt(pow(th1_ZA[i]->GetBinError(3*k-2),2)+pow(th1_ZA[i]->GetBinError(3*k-2+1),2)+pow(th1_ZA[i]->GetBinError(3*k-2+2),2)));
+			   t_ZA[i]->SetBinContent(k,th1_ZA[i]->GetBinContent(k)+th1_ZA[i]->GetBinContent(k+3)+th1_ZA[i]->GetBinContent(k+6));
+			   t_ZA[i]->SetBinError(k,sqrt(pow(th1_ZA[i]->GetBinError(k),2)+pow(th1_ZA[i]->GetBinError(k+3),2)+pow(th1_ZA[i]->GetBinError(k+6),2)));
 		}
 		t_ZA[i]->SetLineWidth(3);
 		t_ZA[i]->SetLineColor(i+11);
@@ -151,10 +151,10 @@ void unroll_name(TString filename,TString tag){
 }
 int unroll_1d(){
 
-	TString sample[2]={"ZA","outJEC_ZA-EWK"};
-	for(int i=0;i<2;i++){
-		unroll_name(sample[i],"16");
-		unroll_name(sample[i],"17");
+	TString sample[3]={"ZA_JESR18","ZA","outJEC_ZA-EWK"};
+	for(int i=0;i<1;i++){
+//		unroll_name(sample[i],"16");
+//		unroll_name(sample[i],"17");
 		unroll_name(sample[i],"18");
 	}
 	return 0;

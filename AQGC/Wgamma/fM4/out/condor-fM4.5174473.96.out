@@ -1,0 +1,622 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 1893052227
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (47.3528) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-5.88203, JER_muon=-6.95836, JES_ele=-4.0854, JES_muon=-6.6371, QCD_stat_ele=-5.73009, QCD_stat_muon=-3.14208, VBS_stat_ele=-4.69705, VBS_stat_muon=-6.59811, ele_efficiency=4.49078, ele_trigger=3.11426, fakephoton_ele=-0.863401, fakephoton_muon=6.47818, interference=-3.7107, lumi=-0.436494, mu_efficiency=-2.75699, mu_trigger=-3.77796, non_prompt_stat_ele=6.99455, non_prompt_stat_muon=6.52355, others_stat_ele=-6.61428, others_stat_muon=6.25636, others_xs=-1.08962, param=5.0125, pdf_ele=-4.39668, pdf_muon=-5.19084, photon_id=-5.2041, pileup=-2.95765, scale_ele=-6.7034, scale_muon=-6.35127
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (43.3466) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.96692, JER_muon=2.6761, JES_ele=6.57442, JES_muon=6.26657, QCD_stat_ele=-3.82565, QCD_stat_muon=4.31394, VBS_stat_ele=-1.24623, VBS_stat_muon=2.43936, ele_efficiency=1.87641, ele_trigger=-3.87225, fakephoton_ele=4.37647, fakephoton_muon=-4.77338, interference=5.71236, lumi=-4.91908, mu_efficiency=-2.19083, mu_trigger=0.956736, non_prompt_stat_ele=5.71027, non_prompt_stat_muon=4.68972, others_stat_ele=4.69436, others_stat_muon=0.8292, others_xs=-2.69355, param=3.52572, pdf_ele=-1.41419, pdf_muon=4.22786, photon_id=0.202083, pileup=-5.77916, scale_ele=-3.77142, scale_muon=6.78056
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (37.8578) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-1.06015, JER_muon=3.26323, JES_ele=4.5437, JES_muon=-0.448208, QCD_stat_ele=2.07153, QCD_stat_muon=5.01598, VBS_stat_ele=-0.722254, VBS_stat_muon=-2.88886, ele_efficiency=2.82662, ele_trigger=-0.399176, fakephoton_ele=6.18922, fakephoton_muon=-0.109357, interference=2.73574, lumi=6.9852, mu_efficiency=5.39429, mu_trigger=1.7547, non_prompt_stat_ele=3.61812, non_prompt_stat_muon=5.88145, others_stat_ele=3.23568, others_stat_muon=3.85963, others_xs=-3.33203, param=2.6925, pdf_ele=3.02047, pdf_muon=-3.85959, photon_id=5.94252, pileup=-0.0390415, scale_ele=2.14093, scale_muon=1.32804
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (37.8306) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.51955, JER_muon=-1.14633, JES_ele=-3.221, JES_muon=1.54246, QCD_stat_ele=-1.38596, QCD_stat_muon=3.46841, VBS_stat_ele=4.62419, VBS_stat_muon=-2.18467, ele_efficiency=1.85027, ele_trigger=0.470601, fakephoton_ele=5.16798, fakephoton_muon=-1.04166, interference=2.55683, lumi=2.13792, mu_efficiency=-1.20969, mu_trigger=-3.77573, non_prompt_stat_ele=4.93707, non_prompt_stat_muon=2.75932, others_stat_ele=-4.63343, others_stat_muon=0.834205, others_xs=5.73975, param=3.62431, pdf_ele=-5.39279, pdf_muon=3.99116, photon_id=4.47469, pileup=1.18823, scale_ele=-2.64467, scale_muon=6.98014
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-1.34357, JER_muon=6.92068, JES_ele=-6.99352, JES_muon=2.33286, QCD_stat_ele=3.97987, QCD_stat_muon=3.51227, VBS_stat_ele=4.31996, VBS_stat_muon=6.98344, ele_efficiency=6.63168, ele_trigger=6.88582, fakephoton_ele=1.76947, fakephoton_muon=6.53933, interference=6.77895, lumi=5.93685, mu_efficiency=1.22119, mu_trigger=5.28103, non_prompt_stat_ele=6.06232, non_prompt_stat_muon=3.17937, others_stat_ele=4.46955, others_stat_muon=2.49172, others_xs=6.39195, param=0.0819692, pdf_ele=1.92851, pdf_muon=-5.91899, photon_id=-3.51658, pileup=-2.4428, scale_ele=6.75478, scale_muon=6.45156
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.62657, JER_muon=3.32909, JES_ele=2.34519, JES_muon=4.8954, QCD_stat_ele=5.76979, QCD_stat_muon=4.83419, VBS_stat_ele=3.28126, VBS_stat_muon=4.48746, ele_efficiency=0.939528, ele_trigger=2.27235, fakephoton_ele=3.02167, fakephoton_muon=4.17949, interference=2.988, lumi=3.61462, mu_efficiency=1.02949, mu_trigger=3.99534, non_prompt_stat_ele=1.67467, non_prompt_stat_muon=6.98241, others_stat_ele=3.75115, others_stat_muon=5.06182, others_xs=4.24491, param=0.00735155, pdf_ele=3.37767, pdf_muon=5.94818, photon_id=6.8171, pileup=-0.249256, scale_ele=5.9976, scale_muon=3.58232
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.886171, JER_muon=3.43743, JES_ele=0.154992, JES_muon=3.04915, QCD_stat_ele=4.43249, QCD_stat_muon=6.9109, VBS_stat_ele=2.99874, VBS_stat_muon=4.05803, ele_efficiency=2.24658, ele_trigger=2.7403, fakephoton_ele=-0.468135, fakephoton_muon=3.56467, interference=2.97523, lumi=3.14103, mu_efficiency=0.686266, mu_trigger=2.92409, non_prompt_stat_ele=2.26609, non_prompt_stat_muon=6.57529, others_stat_ele=3.16466, others_stat_muon=3.39358, others_xs=3.57398, param=0.0474108, pdf_ele=2.45599, pdf_muon=2.78196, photon_id=4.75756, pileup=-2.22716, scale_ele=5.37285, scale_muon=6.8988
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.00956, JER_muon=3.20374, JES_ele=0.552106, JES_muon=3.12236, QCD_stat_ele=4.6452, QCD_stat_muon=6.93231, VBS_stat_ele=2.97943, VBS_stat_muon=3.86497, ele_efficiency=1.99196, ele_trigger=2.60142, fakephoton_ele=0.169064, fakephoton_muon=3.43598, interference=2.80728, lumi=3.0689, mu_efficiency=0.678091, mu_trigger=2.87247, non_prompt_stat_ele=2.08807, non_prompt_stat_muon=6.45297, others_stat_ele=3.20965, others_stat_muon=3.47435, others_xs=3.51387, param=0.0724409, pdf_ele=2.58395, pdf_muon=3.06921, photon_id=5.00875, pileup=-1.91774, scale_ele=5.40501, scale_muon=6.86929
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.21394, JER_muon=3.6249, JES_ele=0.82887, JES_muon=3.73909, QCD_stat_ele=5.38807, QCD_stat_muon=6.38274, VBS_stat_ele=3.28916, VBS_stat_muon=4.33639, ele_efficiency=2.12892, ele_trigger=2.92682, fakephoton_ele=0.391518, fakephoton_muon=3.91689, interference=3.1655, lumi=3.49366, mu_efficiency=0.826672, mu_trigger=3.4011, non_prompt_stat_ele=2.71559, non_prompt_stat_muon=6.85798, others_stat_ele=3.68134, others_stat_muon=4.01708, others_xs=4.0398, param=0.0150706, pdf_ele=3.04827, pdf_muon=3.74113, photon_id=5.72507, pileup=-1.95173, scale_ele=6.10333, scale_muon=6.1938
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.33866, JER_muon=3.78059, JES_ele=1.03445, JES_muon=4.03414, QCD_stat_ele=5.72754, QCD_stat_muon=5.95065, VBS_stat_ele=3.44911, VBS_stat_muon=4.53305, ele_efficiency=2.15332, ele_trigger=3.0574, fakephoton_ele=0.624483, fakephoton_muon=4.11437, interference=3.30972, lumi=3.68529, mu_efficiency=0.895761, mu_trigger=3.63673, non_prompt_stat_ele=2.95852, non_prompt_stat_muon=6.95072, others_stat_ele=3.9092, others_stat_muon=4.28466, others_xs=4.27063, param=0.014361, pdf_ele=3.29135, pdf_muon=4.09473, photon_id=6.05393, pileup=-1.92318, scale_ele=6.37034, scale_muon=5.64944
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.33272, JER_muon=3.7521, JES_ele=1.02398, JES_muon=3.98137, QCD_stat_ele=5.71485, QCD_stat_muon=6.0374, VBS_stat_ele=3.44166, VBS_stat_muon=4.49741, ele_efficiency=2.15338, ele_trigger=3.05282, fakephoton_ele=0.612618, fakephoton_muon=4.07873, interference=3.28624, lumi=3.66069, mu_efficiency=0.883157, mu_trigger=3.59417, non_prompt_stat_ele=2.95184, non_prompt_stat_muon=6.93736, others_stat_ele=3.89888, others_stat_muon=4.23674, others_xs=4.24099, param=0.0128807, pdf_ele=3.28095, pdf_muon=4.03281, photon_id=6.01353, pileup=-1.92692, scale_ele=6.3607, scale_muon=5.75732
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.35458, JER_muon=3.77318, JES_ele=1.05878, JES_muon=4.01847, QCD_stat_ele=5.7734, QCD_stat_muon=5.97688, VBS_stat_ele=3.47036, VBS_stat_muon=4.52297, ele_efficiency=2.15965, ele_trigger=3.07799, fakephoton_ele=0.650199, fakephoton_muon=4.10418, interference=3.30665, lumi=3.68948, mu_efficiency=0.892117, mu_trigger=3.62454, non_prompt_stat_ele=2.99961, non_prompt_stat_muon=6.94709, others_stat_ele=3.93983, others_stat_muon=4.27023, others_xs=4.27554, param=0.0116893, pdf_ele=3.32455, pdf_muon=4.07647, photon_id=6.05835, pileup=-1.92401, scale_ele=6.40598, scale_muon=5.68226
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.34404, JER_muon=3.74647, JES_ele=1.04199, JES_muon=3.97239, QCD_stat_ele=5.74582, QCD_stat_muon=6.05348, VBS_stat_ele=3.45612, VBS_stat_muon=4.49061, ele_efficiency=2.15654, ele_trigger=3.06572, fakephoton_ele=0.632593, fakephoton_muon=4.07153, interference=3.28402, lumi=3.66377, mu_efficiency=0.880931, mu_trigger=3.58664, non_prompt_stat_ele=2.97729, non_prompt_stat_muon=6.93446, others_stat_ele=3.91931, others_stat_muon=4.2288, others_xs=4.24447, param=0.0103655, pdf_ele=3.30362, pdf_muon=4.02282, photon_id=6.01813, pileup=-1.92656, scale_ele=6.38432, scale_muon=5.7752
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.42847, JER_muon=3.87783, JES_ele=1.17937, JES_muon=4.20383, QCD_stat_ele=5.96838, QCD_stat_muon=5.63501, VBS_stat_ele=3.55677, VBS_stat_muon=4.63715, ele_efficiency=2.18127, ele_trigger=3.16473, fakephoton_ele=0.780121, fakephoton_muon=4.23673, interference=3.39905, lumi=3.80902, mu_efficiency=0.937213, mu_trigger=3.77611, non_prompt_stat_ele=3.16635, non_prompt_stat_muon=6.98481, others_stat_ele=4.08258, others_stat_muon=4.43551, others_xs=4.42352, param=0.00030188, pdf_ele=3.47259, pdf_muon=4.29172, photon_id=6.24117, pileup=-1.91111, scale_ele=6.55195, scale_muon=5.27016
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.19421, JER_muon=3.52286, JES_ele=0.779811, JES_muon=3.52139, QCD_stat_ele=5.33105, QCD_stat_muon=6.61111, VBS_stat_ele=3.2705, VBS_stat_muon=4.19321, ele_efficiency=2.15839, ele_trigger=2.92814, fakephoton_ele=0.374835, fakephoton_muon=3.78971, interference=3.08744, lumi=3.41107, mu_efficiency=0.774459, mu_trigger=3.22632, non_prompt_stat_ele=2.63597, non_prompt_stat_muon=6.76673, others_stat_ele=3.66306, others_stat_muon=3.83714, others_xs=3.93337, param=0.00676408, pdf_ele=3.00972, pdf_muon=3.48903, photon_id=5.54947, pileup=-2.00381, scale_ele=6.05121, scale_muon=6.47001
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.2128, JER_muon=3.51723, JES_ele=0.841895, JES_muon=3.59002, QCD_stat_ele=5.38247, QCD_stat_muon=6.57323, VBS_stat_ele=3.25665, VBS_stat_muon=4.19422, ele_efficiency=2.11071, ele_trigger=2.90768, fakephoton_ele=0.416426, fakephoton_muon=3.79573, interference=3.07891, lumi=3.41658, mu_efficiency=0.789807, mu_trigger=3.27121, non_prompt_stat_ele=2.69744, non_prompt_stat_muon=6.77963, others_stat_ele=3.66611, others_stat_muon=3.88746, others_xs=3.95436, param=0.0260259, pdf_ele=3.03969, pdf_muon=3.56346, photon_id=5.61071, pileup=-1.94253, scale_ele=6.08969, scale_muon=6.41494
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.32727, JER_muon=3.7075, JES_ele=1.01898, JES_muon=3.91091, QCD_stat_ele=5.70889, QCD_stat_muon=6.15018, VBS_stat_ele=3.41687, VBS_stat_muon=4.4253, ele_efficiency=2.15281, ele_trigger=3.04878, fakephoton_ele=0.60873, fakephoton_muon=4.02798, interference=3.24816, lumi=3.62527, mu_efficiency=0.865535, mu_trigger=3.53431, non_prompt_stat_ele=2.94664, non_prompt_stat_muon=6.91554, others_stat_ele=3.89365, others_stat_muon=4.1759, others_xs=4.2053, param=0.0205703, pdf_ele=3.27212, pdf_muon=3.94497, photon_id=5.96033, pileup=-1.93072, scale_ele=6.35583, scale_muon=5.89167
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.2486, JER_muon=3.57572, JES_ele=0.894438, JES_muon=3.68218, QCD_stat_ele=5.48892, QCD_stat_muon=6.46287, VBS_stat_ele=3.31041, VBS_stat_muon=4.26422, ele_efficiency=2.12869, ele_trigger=2.95592, fakephoton_ele=0.476037, fakephoton_muon=3.86694, interference=3.13162, lumi=3.48129, mu_efficiency=0.811265, mu_trigger=3.34736, non_prompt_stat_ele=2.77459, non_prompt_stat_muon=6.82687, others_stat_ele=3.74084, others_stat_muon=3.97043, others_xs=4.03098, param=0.0183667, pdf_ele=3.11364, pdf_muon=3.67557, photon_id=5.71977, pileup=-1.94399, scale_ele=6.17836, scale_muon=6.27813
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.32733, JER_muon=3.70331, JES_ele=1.0196, JES_muon=3.90528, QCD_stat_ele=5.70918, QCD_stat_muon=6.16013, VBS_stat_ele=3.41578, VBS_stat_muon=4.41965, ele_efficiency=2.15218, ele_trigger=3.04826, fakephoton_ele=0.608983, fakephoton_muon=4.02287, interference=3.24491, lumi=3.6224, mu_efficiency=0.864159, mu_trigger=3.52948, non_prompt_stat_ele=2.94712, non_prompt_stat_muon=6.91327, others_stat_ele=3.893, others_stat_muon=4.17061, others_xs=4.20203, param=0.0175885, pdf_ele=3.27226, pdf_muon=3.93816, photon_id=5.95648, pileup=-1.93048, scale_ele=6.35611, scale_muon=5.90283
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.25012, JER_muon=3.57584, JES_ele=0.896829, JES_muon=3.68257, QCD_stat_ele=5.4933, QCD_stat_muon=6.46267, VBS_stat_ele=3.31247, VBS_stat_muon=4.26404, ele_efficiency=2.12925, ele_trigger=2.95782, fakephoton_ele=0.478468, fakephoton_muon=3.86695, interference=3.13217, lumi=3.48248, mu_efficiency=0.81133, mu_trigger=3.34764, non_prompt_stat_ele=2.77782, non_prompt_stat_muon=6.82686, others_stat_ele=3.74373, others_stat_muon=3.97049, others_xs=4.03222, param=0.0155872, pdf_ele=3.11683, pdf_muon=3.67649, photon_id=5.72189, pileup=-1.94395, scale_ele=6.18209, scale_muon=6.27746
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.23543, JER_muon=3.55196, JES_ele=0.871129, JES_muon=3.63572, QCD_stat_ele=5.44708, QCD_stat_muon=6.51851, VBS_stat_ele=3.29941, VBS_stat_muon=4.24033, ele_efficiency=2.12652, ele_trigger=2.94151, fakephoton_ele=0.450856, fakephoton_muon=3.8334, interference=3.11275, lumi=3.45703, mu_efficiency=0.800654, mu_trigger=3.31071, non_prompt_stat_ele=2.74168, non_prompt_stat_muon=6.80445, others_stat_ele=3.71456, others_stat_muon=3.92978, others_xs=3.99859, param=0.0297281, pdf_ele=3.08683, pdf_muon=3.62243, photon_id=5.67182, pileup=-1.94854, scale_ele=6.14493, scale_muon=6.34605
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.34994, JER_muon=3.76493, JES_ele=1.03008, JES_muon=3.95387, QCD_stat_ele=5.77182, QCD_stat_muon=6.04923, VBS_stat_ele=3.47299, VBS_stat_muon=4.48465, ele_efficiency=2.20125, ele_trigger=3.10819, fakephoton_ele=0.636211, fakephoton_muon=4.08655, interference=3.30306, lumi=3.68341, mu_efficiency=0.876212, mu_trigger=3.57727, non_prompt_stat_ele=2.97569, non_prompt_stat_muon=6.93687, others_stat_ele=3.96398, others_stat_muon=4.2246, others_xs=4.26608, param=0.0267304, pdf_ele=3.32346, pdf_muon=3.99732, photon_id=6.01703, pileup=-1.97322, scale_ele=6.40957, scale_muon=5.77113
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.990481, JER_muon=3.14233, JES_ele=0.488174, JES_muon=2.91613, QCD_stat_ele=4.67902, QCD_stat_muon=6.9857, VBS_stat_ele=2.94216, VBS_stat_muon=3.70691, ele_efficiency=2.05324, ele_trigger=2.65289, fakephoton_ele=0.0461553, fakephoton_muon=3.33389, interference=2.74825, lumi=3.00416, mu_efficiency=0.637293, mu_trigger=2.72914, non_prompt_stat_ele=2.20566, non_prompt_stat_muon=6.33923, others_stat_ele=3.23322, others_stat_muon=3.28518, others_xs=3.45164, param=0.02751, pdf_ele=2.58519, pdf_muon=2.76055, photon_id=4.79946, pileup=-1.98989, scale_ele=5.47271, scale_muon=6.96492
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.05549, JER_muon=3.25332, JES_ele=0.590889, JES_muon=3.11522, QCD_stat_ele=4.89483, QCD_stat_muon=6.92421, VBS_stat_ele=3.03331, VBS_stat_muon=3.84788, ele_efficiency=2.07185, ele_trigger=2.72986, fakephoton_ele=0.152672, fakephoton_muon=3.47071, interference=2.84602, lumi=3.12682, mu_efficiency=0.681306, mu_trigger=2.88817, non_prompt_stat_ele=2.3476, non_prompt_stat_muon=6.49051, others_stat_ele=3.36495, others_stat_muon=3.46422, others_xs=3.60255, param=0.0263266, pdf_ele=2.71944, pdf_muon=2.99719, photon_id=5.0511, pileup=-1.97691, scale_ele=5.66899, scale_muon=6.87281
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.12843, JER_muon=3.37576, JES_ele=0.707197, JES_muon=3.3353, QCD_stat_ele=5.13251, QCD_stat_muon=6.79672, VBS_stat_ele=3.13158, VBS_stat_muon=3.9994, ele_efficiency=2.09366, ele_trigger=2.8164, fakephoton_ele=0.276565, fakephoton_muon=3.62345, interference=2.9533, lumi=3.26159, mu_efficiency=0.730774, mu_trigger=3.0648, non_prompt_stat_ele=2.5125, non_prompt_stat_muon=6.63892, others_stat_ele=3.5106, others_stat_muon=3.66137, others_xs=3.76928, param=0.0253309, pdf_ele=2.87038, pdf_muon=3.25907, photon_id=5.31985, pileup=-1.96473, scale_ele=5.8779, scale_muon=6.70127
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.2131, JER_muon=3.5154, JES_ele=0.841965, JES_muon=3.58361, QCD_stat_ele=5.39235, QCD_stat_muon=6.57549, VBS_stat_ele=3.24566, VBS_stat_muon=4.17154, ele_efficiency=2.11879, ele_trigger=2.91627, fakephoton_ele=0.419597, fakephoton_muon=3.79623, interference=3.0764, lumi=3.41586, mu_efficiency=0.787705, mu_trigger=3.26531, non_prompt_stat_ele=2.70081, non_prompt_stat_muon=6.77872, others_stat_ele=3.6776, others_stat_muon=3.88382, others_xs=3.95838, param=0.0245547, pdf_ele=3.04358, pdf_muon=3.55341, photon_id=5.60835, pileup=-1.95014, scale_ele=6.09959, scale_muon=6.41719
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.23469, JER_muon=3.54961, JES_ele=0.876386, JES_muon=3.64425, QCD_stat_ele=5.45625, QCD_stat_muon=6.50848, VBS_stat_ele=3.27439, VBS_stat_muon=4.21313, ele_efficiency=2.12524, ele_trigger=2.9417, fakephoton_ele=0.45623, fakephoton_muon=3.83865, interference=3.10673, lumi=3.45405, mu_efficiency=0.801785, mu_trigger=3.31444, non_prompt_stat_ele=2.74874, non_prompt_stat_muon=6.80824, others_stat_ele=3.71976, others_stat_muon=3.93787, others_xs=4.00495, param=0.0232463, pdf_ele=3.08752, pdf_muon=3.62535, photon_id=5.67698, pileup=-1.94653, scale_ele=6.1527, scale_muon=6.33271
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.21342, JER_muon=3.51356, JES_ele=0.842552, JES_muon=3.58078, QCD_stat_ele=5.39358, QCD_stat_muon=6.57846, VBS_stat_ele=3.24573, VBS_stat_muon=4.16863, ele_efficiency=2.11893, ele_trigger=2.9167, fakephoton_ele=0.420227, fakephoton_muon=3.79424, interference=3.07507, lumi=3.41476, mu_efficiency=0.787005, mu_trigger=3.26292, non_prompt_stat_ele=2.70167, non_prompt_stat_muon=6.77728, others_stat_ele=3.67813, others_stat_muon=3.88082, others_xs=3.95694, param=0.0215897, pdf_ele=3.04434, pdf_muon=3.55055, photon_id=5.60692, pileup=-1.95028, scale_ele=6.1006, scale_muon=6.42076
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=5.06821, JER_muon=6.92092, JES_ele=6.31409, JES_muon=3.20894, QCD_stat_ele=-4.29535, QCD_stat_muon=6.73972, VBS_stat_ele=6.92734, VBS_stat_muon=5.60407, ele_efficiency=3.37843, ele_trigger=6.62306, fakephoton_ele=6.30604, fakephoton_muon=6.06758, interference=6.96391, lumi=6.79449, mu_efficiency=3.59501, mu_trigger=5.82044, non_prompt_stat_ele=6.62202, non_prompt_stat_muon=-6.7169, others_stat_ele=6.37825, others_stat_muon=3.86393, others_xs=5.27316, param=0.238692, pdf_ele=6.70021, pdf_muon=0.71128, photon_id=-6.57533, pileup=-1.18974, scale_ele=-6.21741, scale_muon=6.74937
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=5.29148, JER_muon=6.88208, JES_ele=6.55298, JES_muon=2.63303, QCD_stat_ele=-5.32728, QCD_stat_muon=6.95464, VBS_stat_ele=6.97366, VBS_stat_muon=5.34647, ele_efficiency=3.33607, ele_trigger=6.71322, fakephoton_ele=6.53099, fakephoton_muon=5.97523, interference=6.9844, lumi=6.67713, mu_efficiency=3.70898, mu_trigger=5.53647, non_prompt_stat_ele=6.30208, non_prompt_stat_muon=-6.54621, others_stat_ele=6.09295, others_stat_muon=3.28225, others_xs=4.84843, param=0.128955, pdf_ele=6.45683, pdf_muon=0.0499291, photon_id=-6.88244, pileup=-0.998372, scale_ele=-6.78875, scale_muon=6.21255
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=5.58223, JER_muon=6.63901, JES_ele=6.71107, JES_muon=1.56661, QCD_stat_ele=-6.51606, QCD_stat_muon=6.20212, VBS_stat_ele=6.99241, VBS_stat_muon=4.62159, ele_efficiency=3.80273, ele_trigger=6.91752, fakephoton_ele=6.74976, fakephoton_muon=5.13144, interference=6.99081, lumi=6.31911, mu_efficiency=3.88717, mu_trigger=4.92217, non_prompt_stat_ele=5.85784, non_prompt_stat_muon=-4.83344, others_stat_ele=5.29835, others_stat_muon=2.44152, others_xs=3.96649, param=0.13598, pdf_ele=5.96326, pdf_muon=-1.42465, photon_id=-6.9325, pileup=-1.32536, scale_ele=-6.9642, scale_muon=3.42331
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=5.71388, JER_muon=6.64364, JES_ele=6.89666, JES_muon=0.389595, QCD_stat_ele=-6.71133, QCD_stat_muon=5.8841, VBS_stat_ele=6.99764, VBS_stat_muon=4.21793, ele_efficiency=3.17061, ele_trigger=6.84214, fakephoton_ele=6.86789, fakephoton_muon=5.41645, interference=6.98972, lumi=6.20897, mu_efficiency=4.10682, mu_trigger=4.27893, non_prompt_stat_ele=5.31043, non_prompt_stat_muon=-5.1912, others_stat_ele=5.42729, others_stat_muon=1.1104, others_xs=3.48642, param=0.613231, pdf_ele=5.74893, pdf_muon=-2.44034, photon_id=-6.65771, pileup=-0.504589, scale_ele=-6.82421, scale_muon=1.83348
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=6.02624, JER_muon=5.80073, JES_ele=6.84377, JES_muon=0.0898563, QCD_stat_ele=-6.82951, QCD_stat_muon=-0.0653291, VBS_stat_ele=6.61295, VBS_stat_muon=3.14834, ele_efficiency=4.92342, ele_trigger=6.92865, fakephoton_ele=6.94954, fakephoton_muon=2.67156, interference=6.72069, lumi=5.3449, mu_efficiency=4.09697, mu_trigger=3.91758, non_prompt_stat_ele=5.12296, non_prompt_stat_muon=1.14514, others_stat_ele=3.01591, others_stat_muon=1.532, others_xs=2.27172, param=0.673369, pdf_ele=4.75093, pdf_muon=-3.55895, photon_id=-5.50658, pileup=-2.31182, scale_ele=-5.30253, scale_muon=-3.12398
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.9168, JER_muon=5.75573, JES_ele=6.4225, JES_muon=5.16671, QCD_stat_ele=3.92502, QCD_stat_muon=-6.97609, VBS_stat_ele=4.23508, VBS_stat_muon=7, ele_efficiency=-1.26895, ele_trigger=2.83985, fakephoton_ele=5.48925, fakephoton_muon=5.01711, interference=5.2093, lumi=6.51061, mu_efficiency=3.30926, mu_trigger=6.78916, non_prompt_stat_ele=6.90708, non_prompt_stat_muon=5.2436, others_stat_ele=5.69119, others_stat_muon=4.28085, others_xs=6.9183, param=1.48224, pdf_ele=6.77059, pdf_muon=5.16864, photon_id=-0.641862, pileup=2.611, scale_ele=0.788777, scale_muon=-3.43486
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.75667, JER_muon=-1.58229, JES_ele=6.6922, JES_muon=6.38138, QCD_stat_ele=2.93508, QCD_stat_muon=2.43437, VBS_stat_ele=-3.69153, VBS_stat_muon=4.27923, ele_efficiency=-6.93584, ele_trigger=-5.96498, fakephoton_ele=3.00664, fakephoton_muon=-6.62879, interference=-1.12261, lumi=1.42801, mu_efficiency=3.07095, mu_trigger=6.907, non_prompt_stat_ele=6.65904, non_prompt_stat_muon=-6.64555, others_stat_ele=-4.89346, others_stat_muon=4.54662, others_xs=5.05629, param=0.0108758, pdf_ele=2.55826, pdf_muon=6.97629, photon_id=6.97863, pileup=6.96494, scale_ele=5.39417, scale_muon=4.42506
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.92491, JER_muon=6.82007, JES_ele=5.45709, JES_muon=5.95896, QCD_stat_ele=1.89861, QCD_stat_muon=-4.05098, VBS_stat_ele=5.75557, VBS_stat_muon=6.81089, ele_efficiency=2.48752, ele_trigger=5.47346, fakephoton_ele=6.06313, fakephoton_muon=6.81887, interference=6.35806, lumi=6.91793, mu_efficiency=3.02694, mu_trigger=6.87988, non_prompt_stat_ele=6.52906, non_prompt_stat_muon=-0.813853, others_stat_ele=6.77794, others_stat_muon=5.26264, others_xs=6.73853, param=0.143286, pdf_ele=6.9418, pdf_muon=5.18484, photon_id=-1.68896, pileup=-1.11238, scale_ele=-1.532, scale_muon=0.491069
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=4.44197, JER_muon=6.82347, JES_ele=5.03659, JES_muon=6.71225, QCD_stat_ele=-0.310172, QCD_stat_muon=-1.92483, VBS_stat_ele=6.88707, VBS_stat_muon=7, ele_efficiency=3.68193, ele_trigger=6.44757, fakephoton_ele=3.72342, fakephoton_muon=6.44491, interference=6.4487, lumi=6.92986, mu_efficiency=2.43664, mu_trigger=6.97715, non_prompt_stat_ele=5.61505, non_prompt_stat_muon=-6.96404, others_stat_ele=6.45363, others_stat_muon=6.98759, others_xs=6.92443, param=0.152746, pdf_ele=6.99259, pdf_muon=5.68119, photon_id=-0.940804, pileup=-1.76222, scale_ele=-1.73558, scale_muon=-1.68246
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (574.196) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.74156, JER_muon=6.85494, JES_ele=5.51, JES_muon=5.58561, QCD_stat_ele=2.54043, QCD_stat_muon=-4.21808, VBS_stat_ele=5.21965, VBS_stat_muon=6.63033, ele_efficiency=2.20373, ele_trigger=5.14307, fakephoton_ele=6.45466, fakephoton_muon=6.44362, interference=6.38366, lumi=6.92826, mu_efficiency=3.21744, mu_trigger=6.72665, non_prompt_stat_ele=5.67923, non_prompt_stat_muon=1.81137, others_stat_ele=6.30987, others_stat_muon=3.93374, others_xs=6.63308, param=0.152986, pdf_ele=6.91127, pdf_muon=4.89491, photon_id=-2.03746, pileup=-0.989265, scale_ele=-1.37374, scale_muon=1.6675
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (948.856) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.00904, JER_muon=6.49643, JES_ele=4.65702, JES_muon=6.6666, QCD_stat_ele=5.42688, QCD_stat_muon=-6.99908, VBS_stat_ele=4.25474, VBS_stat_muon=6.95867, ele_efficiency=2.00279, ele_trigger=4.40157, fakephoton_ele=5.99628, fakephoton_muon=5.29153, interference=5.86371, lumi=6.57183, mu_efficiency=2.81385, mu_trigger=6.99762, non_prompt_stat_ele=6.34781, non_prompt_stat_muon=5.95714, others_stat_ele=5.11126, others_stat_muon=5.24045, others_xs=6.98722, param=0.278578, pdf_ele=6.42652, pdf_muon=6.4608, photon_id=1.84075, pileup=-1.15899, scale_ele=2.37853, scale_muon=-4.64733
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (948.856) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.70451, JER_muon=6.16753, JES_ele=3.91547, JES_muon=6.9121, QCD_stat_ele=3.92465, QCD_stat_muon=-6.94171, VBS_stat_ele=6.53395, VBS_stat_muon=6.55035, ele_efficiency=3.37106, ele_trigger=5.86129, fakephoton_ele=2.14158, fakephoton_muon=6.9279, interference=5.67689, lumi=6.37307, mu_efficiency=1.82224, mu_trigger=6.3274, non_prompt_stat_ele=3.81831, non_prompt_stat_muon=-5.26651, others_stat_ele=6.94256, others_stat_muon=6.04623, others_xs=6.8258, param=0.267297, pdf_ele=6.57344, pdf_muon=6.9685, photon_id=3.93657, pileup=-1.88197, scale_ele=3.00255, scale_muon=-6.9988
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (948.856) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.21724, JER_muon=6.61011, JES_ele=4.7972, JES_muon=6.54603, QCD_stat_ele=4.66337, QCD_stat_muon=-6.80965, VBS_stat_ele=4.65691, VBS_stat_muon=6.9335, ele_efficiency=2.18846, ele_trigger=4.72331, fakephoton_ele=5.90451, fakephoton_muon=5.79695, interference=6.01589, lumi=6.6821, mu_efficiency=2.85268, mu_trigger=6.98712, non_prompt_stat_ele=6.56158, non_prompt_stat_muon=4.77798, others_stat_ele=5.64637, others_stat_muon=5.26428, others_xs=6.95754, param=0.163817, pdf_ele=6.58529, pdf_muon=6.20574, photon_id=1.01812, pileup=-1.17443, scale_ele=1.55609, scale_muon=-3.46835
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.90279, JER_muon=6.3599, JES_ele=4.25474, JES_muon=6.91824, QCD_stat_ele=5.71742, QCD_stat_muon=-6.822, VBS_stat_ele=4.40924, VBS_stat_muon=6.99975, ele_efficiency=2.22563, ele_trigger=4.4956, fakephoton_ele=5.32936, fakephoton_muon=5.43315, interference=5.71412, lumi=6.41699, mu_efficiency=2.56323, mu_trigger=6.96062, non_prompt_stat_ele=6.94206, non_prompt_stat_muon=5.82156, others_stat_ele=5.31265, others_stat_muon=6.17079, others_xs=6.99317, param=0.144412, pdf_ele=6.25964, pdf_muon=6.77577, photon_id=3.07117, pileup=-1.33559, scale_ele=3.36864, scale_muon=-6.13565
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.48169, JER_muon=5.96525, JES_ele=3.78057, JES_muon=6.85713, QCD_stat_ele=4.87578, QCD_stat_muon=-6.94435, VBS_stat_ele=6.2545, VBS_stat_muon=6.42189, ele_efficiency=3.10516, ele_trigger=5.54619, fakephoton_ele=2.32734, fakephoton_muon=6.99851, interference=5.44847, lumi=6.18584, mu_efficiency=1.79201, mu_trigger=6.23005, non_prompt_stat_ele=4.32273, non_prompt_stat_muon=-3.86247, others_stat_ele=6.99971, others_stat_muon=6.08089, others_xs=6.72712, param=0.134274, pdf_ele=6.38487, pdf_muon=6.9993, photon_id=4.61561, pileup=-1.77667, scale_ele=3.85286, scale_muon=-6.8768
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.74589, JER_muon=6.01588, JES_ele=3.6792, JES_muon=6.97083, QCD_stat_ele=6.29779, QCD_stat_muon=-5.78745, VBS_stat_ele=4.6417, VBS_stat_muon=6.85248, ele_efficiency=2.40234, ele_trigger=4.50427, fakephoton_ele=4.24753, fakephoton_muon=5.69891, interference=5.37204, lumi=6.08027, mu_efficiency=2.16855, mu_trigger=6.65045, non_prompt_stat_ele=6.78454, non_prompt_stat_muon=5.35469, others_stat_ele=5.60402, others_stat_muon=6.96247, others_xs=6.82782, param=0.397121, pdf_ele=5.94279, pdf_muon=6.99897, photon_id=4.85419, pileup=-1.53005, scale_ele=4.79947, scale_muon=-6.96351
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.22718, JER_muon=5.92371, JES_ele=3.68437, JES_muon=6.87249, QCD_stat_ele=5.54107, QCD_stat_muon=-6.61911, VBS_stat_ele=5.81864, VBS_stat_muon=6.52519, ele_efficiency=2.88955, ele_trigger=5.21511, fakephoton_ele=2.86339, fakephoton_muon=6.88687, interference=5.37097, lumi=6.10641, mu_efficiency=1.87541, mu_trigger=6.31903, non_prompt_stat_ele=5.24252, non_prompt_stat_muon=-0.903989, others_stat_ele=6.84835, others_stat_muon=6.55952, others_xs=6.72719, param=0.408581, pdf_ele=6.21401, pdf_muon=6.99911, photon_id=4.89151, pileup=-1.73835, scale_ele=4.34629, scale_muon=-6.81516
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.74566, JER_muon=6.83979, JES_ele=5.1967, JES_muon=6.1168, QCD_stat_ele=2.30522, QCD_stat_muon=-4.48608, VBS_stat_ele=5.58673, VBS_stat_muon=6.80413, ele_efficiency=2.60921, ele_trigger=5.44488, fakephoton_ele=5.81552, fakephoton_muon=6.68575, interference=6.37106, lumi=6.89957, mu_efficiency=2.97617, mu_trigger=6.90967, non_prompt_stat_ele=6.79931, non_prompt_stat_muon=0.596629, others_stat_ele=6.61601, others_stat_muon=5.22571, others_xs=6.78811, param=0.211327, pdf_ele=6.88646, pdf_muon=5.32261, photon_id=-1.21886, pileup=-1.20168, scale_ele=-0.764317, scale_muon=0.131236
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=4.36901, JER_muon=6.5091, JES_ele=4.72732, JES_muon=6.97483, QCD_stat_ele=1.26184, QCD_stat_muon=-4.08275, VBS_stat_ele=6.9165, VBS_stat_muon=6.75707, ele_efficiency=3.60636, ele_trigger=6.34883, fakephoton_ele=2.72899, fakephoton_muon=5.96359, interference=6.08946, lumi=6.75329, mu_efficiency=2.08644, mu_trigger=6.73293, non_prompt_stat_ele=4.39002, non_prompt_stat_muon=-6.75164, others_stat_ele=6.10696, others_stat_muon=6.21536, others_xs=6.99687, param=0.199568, pdf_ele=6.93491, pdf_muon=6.47495, photon_id=1.16429, pileup=-1.85882, scale_ele=-0.0785229, scale_muon=-5.25692
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.52107, JER_muon=6.53127, JES_ele=4.32587, JES_muon=6.73449, QCD_stat_ele=5.99939, QCD_stat_muon=-6.54387, VBS_stat_ele=3.12655, VBS_stat_muon=6.87405, ele_efficiency=1.84118, ele_trigger=3.9344, fakephoton_ele=6.12374, fakephoton_muon=3.1236, interference=5.83721, lumi=6.48025, mu_efficiency=2.86149, mu_trigger=6.99439, non_prompt_stat_ele=6.0691, non_prompt_stat_muon=6.43627, others_stat_ele=3.16966, others_stat_muon=3.95539, others_xs=6.99405, param=0.174261, pdf_ele=6.13053, pdf_muon=6.59776, photon_id=2.5407, pileup=-1.07892, scale_ele=3.42167, scale_muon=-5.08366
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.82998, JER_muon=4.77194, JES_ele=2.56965, JES_muon=5.55735, QCD_stat_ele=6.8082, QCD_stat_muon=-2.39685, VBS_stat_ele=5.81493, VBS_stat_muon=4.86803, ele_efficiency=2.91859, ele_trigger=4.9016, fakephoton_ele=0.488269, fakephoton_muon=6.93825, interference=4.35354, lumi=5.08346, mu_efficiency=1.12736, mu_trigger=4.6328, non_prompt_stat_ele=1.73554, non_prompt_stat_muon=-1.48864, others_stat_ele=6.90631, others_stat_muon=3.41368, others_xs=5.61272, param=0.206062, pdf_ele=5.4008, pdf_muon=6.10635, photon_id=6.92616, pileup=-1.9843, scale_ele=6.54202, scale_muon=-0.589069
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.1192, JER_muon=5.28778, JES_ele=2.62569, JES_muon=6.33243, QCD_stat_ele=6.99831, QCD_stat_muon=-0.907235, VBS_stat_ele=3.95901, VBS_stat_muon=6.26283, ele_efficiency=2.32311, ele_trigger=3.92443, fakephoton_ele=3.01336, fakephoton_muon=4.78096, interference=4.63773, lumi=5.27207, mu_efficiency=1.67946, mu_trigger=5.79906, non_prompt_stat_ele=5.90639, non_prompt_stat_muon=6.86336, others_stat_ele=4.73466, others_stat_muon=6.78649, others_xs=6.17445, param=0.223294, pdf_ele=5.00262, pdf_muon=6.49885, photon_id=6.75986, pileup=-1.72841, scale_ele=6.64882, scale_muon=-3.40937
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.41638, JER_muon=5.01505, JES_ele=2.61436, JES_muon=6.02559, QCD_stat_ele=6.96768, QCD_stat_muon=-1.47493, VBS_stat_ele=4.80208, VBS_stat_muon=5.67865, ele_efficiency=2.5138, ele_trigger=4.30043, fakephoton_ele=1.9703, fakephoton_muon=6.06335, interference=4.45814, lumi=5.14213, mu_efficiency=1.43734, mu_trigger=5.31691, non_prompt_stat_ele=4.43555, non_prompt_stat_muon=4.41098, others_stat_ele=5.97329, others_stat_muon=5.73523, others_xs=5.90792, param=0.250601, pdf_ele=5.14446, pdf_muon=6.3356, photon_id=6.8567, pileup=-1.77381, scale_ele=6.64179, scale_muon=-2.09433
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.59249, JER_muon=5.61907, JES_ele=3.15342, JES_muon=6.68086, QCD_stat_ele=6.68532, QCD_stat_muon=-4.13639, VBS_stat_ele=4.73805, VBS_stat_muon=6.44304, ele_efficiency=2.51347, ele_trigger=4.46473, fakephoton_ele=3.12155, fakephoton_muon=5.89348, interference=4.99572, lumi=5.69362, mu_efficiency=1.81763, mu_trigger=6.13169, non_prompt_stat_ele=5.84304, non_prompt_stat_muon=4.93168, others_stat_ele=5.81545, others_stat_muon=6.80681, others_xs=6.49714, param=0.181013, pdf_ele=5.59775, pdf_muon=6.86495, photon_id=6.06252, pileup=-1.68093, scale_ele=5.83428, scale_muon=-5.63074
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.84626, JER_muon=5.63574, JES_ele=3.33068, JES_muon=6.71088, QCD_stat_ele=6.40644, QCD_stat_muon=-5.16571, VBS_stat_ele=5.22455, VBS_stat_muon=6.33922, ele_efficiency=2.63586, ele_trigger=4.747, fakephoton_ele=2.87257, fakephoton_muon=6.48616, interference=5.04698, lumi=5.78295, mu_efficiency=1.78412, mu_trigger=6.10537, non_prompt_stat_ele=5.44894, non_prompt_stat_muon=2.37003, others_stat_ele=6.40466, others_stat_muon=6.56424, others_xs=6.52566, param=0.180743, pdf_ele=5.8167, pdf_muon=6.91471, photon_id=5.81604, pileup=-1.68588, scale_ele=5.45048, scale_muon=-5.90811
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.85061, JER_muon=5.89903, JES_ele=3.53089, JES_muon=6.88871, QCD_stat_ele=6.19699, QCD_stat_muon=-5.77337, VBS_stat_ele=5.04361, VBS_stat_muon=6.66251, ele_efficiency=2.59966, ele_trigger=4.73931, fakephoton_ele=3.49037, fakephoton_muon=6.22754, interference=5.2831, lumi=5.99531, mu_efficiency=1.98315, mu_trigger=6.4305, non_prompt_stat_ele=6.13774, non_prompt_stat_muon=3.66583, others_stat_ele=6.15935, others_stat_muon=6.94503, others_xs=6.72604, param=0.183779, pdf_ele=5.94468, pdf_muon=6.99172, photon_id=5.22067, pileup=-1.63743, scale_ele=4.96937, scale_muon=-6.73909
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.12006, JER_muon=5.9128, JES_ele=3.72786, JES_muon=6.91088, QCD_stat_ele=5.75542, QCD_stat_muon=-6.48892, VBS_stat_ele=5.52274, VBS_stat_muon=6.57299, ele_efficiency=2.72131, ele_trigger=5.02107, fakephoton_ele=3.27312, fakephoton_muon=6.73588, interference=5.33089, lumi=6.07998, mu_efficiency=1.9526, mu_trigger=6.41367, non_prompt_stat_ele=5.81304, non_prompt_stat_muon=0.554081, others_stat_ele=6.6695, others_stat_muon=6.78242, others_xs=6.75099, param=0.183989, pdf_ele=6.15271, pdf_muon=6.99997, photon_id=4.85836, pileup=-1.63779, scale_ele=4.43406, scale_muon=-6.86827
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.12282, JER_muon=6.25874, JES_ele=3.98148, JES_muon=6.99995, QCD_stat_ele=5.31966, QCD_stat_muon=-6.88191, VBS_stat_ele=5.28588, VBS_stat_muon=6.90422, ele_efficiency=2.70571, ele_trigger=5.03392, fakephoton_ele=4.09075, fakephoton_muon=6.43098, interference=5.66107, lumi=6.3505, mu_efficiency=2.2341, mu_trigger=6.76228, non_prompt_stat_ele=6.58343, non_prompt_stat_muon=2.63727, others_stat_ele=6.38824, others_stat_muon=6.9756, others_xs=6.93621, param=0.166941, pdf_ele=6.30803, pdf_muon=6.92235, photon_id=3.76785, pileup=-1.60606, scale_ele=3.5779, scale_muon=-6.81471
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.27404, JER_muon=5.85018, JES_ele=3.87974, JES_muon=6.91535, QCD_stat_ele=5.4782, QCD_stat_muon=-6.71549, VBS_stat_ele=5.73517, VBS_stat_muon=6.44762, ele_efficiency=2.70188, ele_trigger=5.11998, fakephoton_ele=3.14731, fakephoton_muon=6.90905, interference=5.28243, lumi=6.07516, mu_efficiency=1.92074, mu_trigger=6.37483, non_prompt_stat_ele=5.61237, non_prompt_stat_muon=-1.39728, others_stat_ele=6.85255, others_stat_muon=6.58895, others_xs=6.73456, param=0.228705, pdf_ele=6.2513, pdf_muon=6.99913, photon_id=4.70017, pileup=-1.54016, scale_ele=4.15577, scale_muon=-6.87587
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.92295, JER_muon=6.40127, JES_ele=3.87353, JES_muon=6.99688, QCD_stat_ele=5.53955, QCD_stat_muon=-6.73368, VBS_stat_ele=4.87944, VBS_stat_muon=6.99019, ele_efficiency=2.7223, ele_trigger=4.91162, fakephoton_ele=4.46978, fakephoton_muon=5.7502, interference=5.79682, lumi=6.42183, mu_efficiency=2.34829, mu_trigger=6.85434, non_prompt_stat_ele=6.84906, non_prompt_stat_muon=5.37464, others_stat_ele=5.82082, others_stat_muon=6.67978, others_xs=6.97421, param=0.23649, pdf_ele=6.2363, pdf_muon=6.90914, photon_id=3.6922, pileup=-1.7087, scale_ele=3.6676, scale_muon=-6.62628
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.49538, JER_muon=5.3621, JES_ele=3.86985, JES_muon=6.71783, QCD_stat_ele=5.4862, QCD_stat_muon=-6.68021, VBS_stat_ele=6.18166, VBS_stat_muon=5.59753, ele_efficiency=2.68967, ele_trigger=5.23967, fakephoton_ele=2.17715, fakephoton_muon=6.92691, interference=4.86598, lumi=5.77874, mu_efficiency=1.62281, mu_trigger=5.8593, non_prompt_stat_ele=4.21055, non_prompt_stat_muon=-5.66377, others_stat_ele=6.99129, others_stat_muon=4.92977, others_xs=6.42048, param=0.214923, pdf_ele=6.24957, pdf_muon=6.97107, photon_id=5.3401, pileup=-1.45569, scale_ele=4.50553, scale_muon=-5.96043
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.92703, JER_muon=5.99896, JES_ele=2.69232, JES_muon=6.75356, QCD_stat_ele=6.96507, QCD_stat_muon=-1.7351, VBS_stat_ele=3.31829, VBS_stat_muon=6.93239, ele_efficiency=2.48497, ele_trigger=3.96669, fakephoton_ele=4.01341, fakephoton_muon=2.83786, interference=5.29833, lumi=5.82161, mu_efficiency=2.05306, mu_trigger=6.46352, non_prompt_stat_ele=6.75446, non_prompt_stat_muon=5.65212, others_stat_ele=3.31837, others_stat_muon=6.68576, others_xs=6.69623, param=0.203095, pdf_ele=5.15746, pdf_muon=6.83055, photon_id=6.22744, pileup=-1.89873, scale_ele=6.27139, scale_muon=-6.03657
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.37778, JER_muon=4.09885, JES_ele=2.28512, JES_muon=5.11577, QCD_stat_ele=6.98276, QCD_stat_muon=0.890526, VBS_stat_ele=4.96382, VBS_stat_muon=4.19129, ele_efficiency=2.38211, ele_trigger=4.11058, fakephoton_ele=0.844886, fakephoton_muon=6.55773, interference=3.67512, lumi=4.39891, mu_efficiency=1.03782, mu_trigger=4.22238, non_prompt_stat_ele=2.74271, non_prompt_stat_muon=1.86142, others_stat_ele=6.36489, others_stat_muon=3.2999, others_xs=5.01661, param=0.168614, pdf_ele=4.75377, pdf_muon=5.50174, photon_id=6.96875, pileup=-1.72517, scale_ele=6.96647, scale_muon=2.29568
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.55388, JER_muon=5.77861, JES_ele=3.11605, JES_muon=6.73515, QCD_stat_ele=6.74298, QCD_stat_muon=-5.44541, VBS_stat_ele=4.75435, VBS_stat_muon=6.54601, ele_efficiency=2.55195, ele_trigger=4.50433, fakephoton_ele=3.43497, fakephoton_muon=6.04132, interference=5.09995, lumi=5.7606, mu_efficiency=1.84902, mu_trigger=6.20865, non_prompt_stat_ele=6.22925, non_prompt_stat_muon=4.49041, others_stat_ele=5.81905, others_stat_muon=6.83372, others_xs=6.52772, param=0.19189, pdf_ele=5.57557, pdf_muon=6.92537, photon_id=5.91529, pileup=-1.69385, scale_ele=5.84899, scale_muon=-5.98769
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.91296, JER_muon=5.48332, JES_ele=3.32037, JES_muon=6.72364, QCD_stat_ele=6.30843, QCD_stat_muon=-4.01859, VBS_stat_ele=5.22152, VBS_stat_muon=6.12469, ele_efficiency=2.64276, ele_trigger=4.73905, fakephoton_ele=2.09155, fakephoton_muon=6.58712, interference=4.97483, lumi=5.74961, mu_efficiency=1.7785, mu_trigger=6.08501, non_prompt_stat_ele=4.21222, non_prompt_stat_muon=1.63251, others_stat_ele=6.52945, others_stat_muon=6.49497, others_xs=6.53686, param=0.223872, pdf_ele=5.81959, pdf_muon=6.89149, photon_id=5.8753, pileup=-1.71788, scale_ele=5.50087, scale_muon=-5.98543
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.88657, JER_muon=4.98869, JES_ele=2.17242, JES_muon=5.69574, QCD_stat_ele=6.89794, QCD_stat_muon=-0.261451, VBS_stat_ele=3.92525, VBS_stat_muon=5.855, ele_efficiency=2.33725, ele_trigger=3.80437, fakephoton_ele=2.82236, fakephoton_muon=4.75074, interference=4.29156, lumi=4.85046, mu_efficiency=1.39431, mu_trigger=5.15284, non_prompt_stat_ele=5.8657, non_prompt_stat_muon=6.91373, others_stat_ele=4.64952, others_stat_muon=6.14392, others_xs=5.64666, param=0.49565, pdf_ele=4.57253, pdf_muon=5.98417, photon_id=6.99668, pileup=-1.78529, scale_ele=6.94961, scale_muon=-0.171813
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.44698, JER_muon=6.00056, JES_ele=2.29178, JES_muon=6.15885, QCD_stat_ele=6.75854, QCD_stat_muon=-5.79371, VBS_stat_ele=3.14794, VBS_stat_muon=6.90862, ele_efficiency=2.32141, ele_trigger=3.72498, fakephoton_ele=5.82313, fakephoton_muon=2.53934, interference=4.95553, lumi=5.3481, mu_efficiency=1.71488, mu_trigger=5.90436, non_prompt_stat_ele=5.92299, non_prompt_stat_muon=4.93035, others_stat_ele=2.46852, others_stat_muon=7, others_xs=6.09871, param=0.264058, pdf_ele=4.60152, pdf_muon=6.57278, photon_id=6.80309, pileup=-1.75277, scale_ele=6.78631, scale_muon=-2.46737
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.37115, JER_muon=5.62787, JES_ele=2.8977, JES_muon=6.55893, QCD_stat_ele=6.96669, QCD_stat_muon=-5.43913, VBS_stat_ele=4.58055, VBS_stat_muon=6.33903, ele_efficiency=2.50864, ele_trigger=4.34722, fakephoton_ele=3.89515, fakephoton_muon=5.84961, interference=4.8826, lumi=5.54352, mu_efficiency=1.73739, mu_trigger=5.99142, non_prompt_stat_ele=6.70347, non_prompt_stat_muon=5.11828, others_stat_ele=5.68871, others_stat_muon=6.65077, others_xs=6.34498, param=0.364644, pdf_ele=5.32719, pdf_muon=6.81897, photon_id=6.32429, pileup=-1.71987, scale_ele=6.23943, scale_muon=-4.96778
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.83814, JER_muon=4.97663, JES_ele=3.07079, JES_muon=6.4709, QCD_stat_ele=6.22999, QCD_stat_muon=1.43162, VBS_stat_ele=5.01757, VBS_stat_muon=5.78364, ele_efficiency=2.46714, ele_trigger=4.47907, fakephoton_ele=-0.270468, fakephoton_muon=6.4337, interference=4.67489, lumi=5.4428, mu_efficiency=1.61647, mu_trigger=5.7167, non_prompt_stat_ele=-0.136851, non_prompt_stat_muon=2.54169, others_stat_ele=6.29181, others_stat_muon=6.21739, others_xs=6.27421, param=0.298554, pdf_ele=5.60059, pdf_muon=6.60785, photon_id=6.49753, pileup=-1.62424, scale_ele=6.14477, scale_muon=-4.48266
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.30036, JER_muon=5.11932, JES_ele=1.66535, JES_muon=5.10763, QCD_stat_ele=5.53181, QCD_stat_muon=-4.28319, VBS_stat_ele=3.3384, VBS_stat_muon=5.72963, ele_efficiency=2.38878, ele_trigger=3.52677, fakephoton_ele=5.57017, fakephoton_muon=3.59789, interference=4.03487, lumi=4.49367, mu_efficiency=1.25741, mu_trigger=4.79357, non_prompt_stat_ele=6.16094, non_prompt_stat_muon=6.55281, others_stat_ele=3.86967, others_stat_muon=5.88973, others_xs=5.24857, param=0.269794, pdf_ele=3.90213, pdf_muon=5.61142, photon_id=6.927, pileup=-1.99049, scale_ele=6.98963, scale_muon=2.37555
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.04971, JER_muon=5.11447, JES_ele=2.3715, JES_muon=6.01376, QCD_stat_ele=6.92911, QCD_stat_muon=-2.30593, VBS_stat_ele=4.19316, VBS_stat_muon=5.79949, ele_efficiency=2.40385, ele_trigger=3.98116, fakephoton_ele=3.25981, fakephoton_muon=5.43414, interference=4.40792, lumi=5.03094, mu_efficiency=1.48123, mu_trigger=5.39482, non_prompt_stat_ele=6.29066, non_prompt_stat_muon=6.11, others_stat_ele=5.29505, others_stat_muon=6.12233, others_xs=5.86398, param=0.221603, pdf_ele=4.76869, pdf_muon=6.313, photon_id=6.92098, pileup=-1.78375, scale_ele=6.84888, scale_muon=-1.87694
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.34361, JER_muon=4.69224, JES_ele=2.40101, JES_muon=5.85829, QCD_stat_ele=6.92011, QCD_stat_muon=2.87494, VBS_stat_ele=4.4623, VBS_stat_muon=5.48272, ele_efficiency=2.41494, ele_trigger=4.07154, fakephoton_ele=-0.0958706, fakephoton_muon=5.7254, interference=4.29615, lumi=4.95308, mu_efficiency=1.38849, mu_trigger=5.1461, non_prompt_stat_ele=0.656546, non_prompt_stat_muon=5.42961, others_stat_ele=5.5602, others_stat_muon=5.82764, others_xs=5.77026, param=0.260986, pdf_ele=4.96078, pdf_muon=6.00755, photon_id=6.97401, pileup=-1.77777, scale_ele=6.8475, scale_muon=-1.12757
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.76741, JER_muon=4.64635, JES_ele=1.8952, JES_muon=5.41438, QCD_stat_ele=6.6255, QCD_stat_muon=1.03463, VBS_stat_ele=3.82832, VBS_stat_muon=5.27885, ele_efficiency=2.32487, ele_trigger=3.65835, fakephoton_ele=2.6212, fakephoton_muon=5.02622, interference=4.00267, lumi=4.55711, mu_efficiency=1.26952, mu_trigger=4.81683, non_prompt_stat_ele=5.72036, non_prompt_stat_muon=6.69114, others_stat_ele=4.82847, others_stat_muon=5.54619, others_xs=5.35935, param=0.24827, pdf_ele=4.24917, pdf_muon=5.65148, photon_id=6.96706, pileup=-1.85319, scale_ele=6.99918, scale_muon=1.08783
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.56669, JER_muon=5.51372, JES_ele=2.99884, JES_muon=6.61004, QCD_stat_ele=6.76217, QCD_stat_muon=-4.09286, VBS_stat_ele=4.7555, VBS_stat_muon=6.2343, ele_efficiency=2.53222, ele_trigger=4.44777, fakephoton_ele=2.58321, fakephoton_muon=6.15519, interference=4.8932, lumi=5.58496, mu_efficiency=1.74108, mu_trigger=5.99967, non_prompt_stat_ele=5.18116, non_prompt_stat_muon=4.00629, others_stat_ele=5.95979, others_stat_muon=6.60074, others_xs=6.39004, param=0.250785, pdf_ele=5.47987, pdf_muon=6.82301, photon_id=6.24165, pileup=-1.70736, scale_ele=6.10516, scale_muon=-5.31519
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.39257, JER_muon=5.23623, JES_ele=2.80386, JES_muon=6.27611, QCD_stat_ele=6.96397, QCD_stat_muon=-2.1638, VBS_stat_ele=4.6024, VBS_stat_muon=5.99518, ele_efficiency=2.47572, ele_trigger=4.2904, fakephoton_ele=2.92486, fakephoton_muon=5.73294, interference=4.63641, lumi=5.33782, mu_efficiency=1.58259, mu_trigger=5.63942, non_prompt_stat_ele=5.75265, non_prompt_stat_muon=5.42353, others_stat_ele=5.7715, others_stat_muon=6.35203, others_xs=6.16982, param=0.48083, pdf_ele=5.25434, pdf_muon=6.52043, photon_id=6.69601, pileup=-1.73101, scale_ele=6.41572, scale_muon=-3.28154
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.6019, JER_muon=5.44246, JES_ele=3.06775, JES_muon=6.52946, QCD_stat_ele=6.72273, QCD_stat_muon=-3.65418, VBS_stat_ele=4.80164, VBS_stat_muon=6.16488, ele_efficiency=2.55199, ele_trigger=4.49783, fakephoton_ele=2.8162, fakephoton_muon=6.06566, interference=4.83476, lumi=5.55376, mu_efficiency=1.69685, mu_trigger=5.90597, non_prompt_stat_ele=5.47888, non_prompt_stat_muon=4.36606, others_stat_ele=6.01208, others_stat_muon=6.53204, others_xs=6.3623, param=0.568721, pdf_ele=5.54431, pdf_muon=6.7584, photon_id=6.31098, pileup=-1.72116, scale_ele=5.97249, scale_muon=-4.85844
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.91369, JER_muon=5.82076, JES_ele=3.5448, JES_muon=6.85771, QCD_stat_ele=6.12454, QCD_stat_muon=-5.85248, VBS_stat_ele=5.1475, VBS_stat_muon=6.51605, ele_efficiency=2.63584, ele_trigger=4.81109, fakephoton_ele=3.30896, fakephoton_muon=6.43792, interference=5.21036, lumi=5.94832, mu_efficiency=1.92194, mu_trigger=6.34462, non_prompt_stat_ele=5.92334, non_prompt_stat_muon=2.62156, others_stat_ele=6.36522, others_stat_muon=6.83709, others_xs=6.68396, param=0.283568, pdf_ele=5.96965, pdf_muon=6.98456, photon_id=5.29084, pileup=-1.64819, scale_ele=4.93202, scale_muon=-6.63507
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.22566, JER_muon=6.17181, JES_ele=4.00957, JES_muon=6.99725, QCD_stat_ele=5.18579, QCD_stat_muon=-6.95353, VBS_stat_ele=5.46842, VBS_stat_muon=6.7811, ele_efficiency=2.74132, ele_trigger=5.1295, fakephoton_ele=3.81608, fakephoton_muon=6.7297, interference=5.57509, lumi=6.30176, mu_efficiency=2.15467, mu_trigger=6.68829, non_prompt_stat_ele=6.32543, non_prompt_stat_muon=0.578179, others_stat_ele=6.65694, others_stat_muon=6.98958, others_xs=6.90555, param=0.295316, pdf_ele=6.33848, pdf_muon=6.9333, photon_id=3.83267, pileup=-1.59236, scale_ele=3.53666, scale_muon=-6.88661
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.53675, JER_muon=6.71361, JES_ele=4.46049, JES_muon=6.59806, QCD_stat_ele=3.97219, QCD_stat_muon=-4.56499, VBS_stat_ele=5.77642, VBS_stat_muon=6.99963, ele_efficiency=2.84571, ele_trigger=5.43315, fakephoton_ele=4.29219, fakephoton_muon=6.99892, interference=6.18911, lumi=6.75167, mu_efficiency=2.63943, mu_trigger=6.99962, non_prompt_stat_ele=6.63916, non_prompt_stat_muon=-3.66251, others_stat_ele=6.86414, others_stat_muon=6.72283, others_xs=6.98094, param=0.279708, pdf_ele=6.63448, pdf_muon=5.9094, photon_id=0.675765, pileup=-1.48481, scale_ele=1.88725, scale_muon=-2.29604
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.51036, JER_muon=6.62954, JES_ele=4.42376, JES_muon=6.75039, QCD_stat_ele=4.08743, QCD_stat_muon=-5.4571, VBS_stat_ele=5.75196, VBS_stat_muon=6.99453, ele_efficiency=2.83349, ele_trigger=5.40358, fakephoton_ele=4.2504, fakephoton_muon=6.98469, interference=6.08151, lumi=6.68713, mu_efficiency=2.54441, mu_trigger=6.98412, non_prompt_stat_ele=6.60708, non_prompt_stat_muon=-2.93241, others_stat_ele=6.85252, others_stat_muon=6.83704, others_xs=6.99664, param=0.277743, pdf_ele=6.61077, pdf_muon=6.18639, photon_id=1.22263, pileup=-1.5022, scale_ele=2.04487, scale_muon=-3.56545
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.45972, JER_muon=6.5445, JES_ele=4.3511, JES_muon=6.85585, QCD_stat_ele=4.29708, QCD_stat_muon=-6.12889, VBS_stat_ele=5.70199, VBS_stat_muon=6.97421, ele_efficiency=2.81679, ele_trigger=5.35555, fakephoton_ele=4.17531, fakephoton_muon=6.95579, interference=5.98059, lumi=6.61837, mu_efficiency=2.46004, mu_trigger=6.95129, non_prompt_stat_ele=6.56267, non_prompt_stat_muon=-2.20285, others_stat_ele=6.82293, others_stat_muon=6.91378, others_xs=6.99964, param=0.274877, pdf_ele=6.56701, pdf_muon=6.41675, photon_id=1.80082, pileup=-1.52106, scale_ele=2.32293, scale_muon=-4.62041
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.39404, JER_muon=6.45613, JES_ele=4.25646, JES_muon=6.92935, QCD_stat_ele=4.56237, QCD_stat_muon=-6.59716, VBS_stat_ele=5.63701, VBS_stat_muon=6.94112, ele_efficiency=2.79545, ele_trigger=5.29292, fakephoton_ele=4.07537, fakephoton_muon=6.9147, interference=5.87859, lumi=6.54218, mu_efficiency=2.37979, mu_trigger=6.90376, non_prompt_stat_ele=6.50042, non_prompt_stat_muon=-1.48656, others_stat_ele=6.78163, others_stat_muon=6.96429, others_xs=6.99069, param=0.27203, pdf_ele=6.50713, pdf_muon=6.60135, photon_id=2.3714, pileup=-1.54012, scale_ele=2.67589, scale_muon=-5.47265
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.31816, JER_muon=6.36441, JES_ele=4.14642, JES_muon=6.97553, QCD_stat_ele=4.85527, QCD_stat_muon=-6.88113, VBS_stat_ele=5.56109, VBS_stat_muon=6.89679, ele_efficiency=2.77095, ele_trigger=5.21984, fakephoton_ele=3.95809, fakephoton_muon=6.86287, interference=5.77515, lumi=6.459, mu_efficiency=2.30255, mu_trigger=6.84329, non_prompt_stat_ele=6.423, non_prompt_stat_muon=-0.784709, others_stat_ele=6.72945, others_stat_muon=6.99219, others_xs=6.9696, param=0.269203, pdf_ele=6.43371, pdf_muon=6.74622, photon_id=2.92528, pileup=-1.55918, scale_ele=3.07167, scale_muon=-6.12984
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.23539, JER_muon=6.2693, JES_ele=4.02551, JES_muon=6.99744, QCD_stat_ele=5.15601, QCD_stat_muon=-6.99606, VBS_stat_ele=5.47706, VBS_stat_muon=6.84229, ele_efficiency=2.74439, ele_trigger=5.13923, fakephoton_ele=3.82859, fakephoton_muon=6.80132, interference=5.67012, lumi=6.36934, mu_efficiency=2.22759, mu_trigger=6.7711, non_prompt_stat_ele=6.33247, non_prompt_stat_muon=-0.0988808, others_stat_ele=6.66708, others_stat_muon=6.99992, others_xs=6.93648, param=0.266402, pdf_ele=6.34863, pdf_muon=6.85574, photon_id=3.45604, pileup=-1.57817, scale_ele=3.48718, scale_muon=-6.59861
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.14409, JER_muon=6.16731, JES_ele=3.89081, JES_muon=6.99683, QCD_stat_ele=5.46332, QCD_stat_muon=-6.95078, VBS_stat_ele=5.38292, VBS_stat_muon=6.77584, ele_efficiency=2.71611, ele_trigger=5.0498, fakephoton_ele=3.68447, fakephoton_muon=6.72792, interference=5.55965, lumi=6.26997, mu_efficiency=2.15166, mu_trigger=6.68473, non_prompt_stat_ele=6.22591, non_prompt_stat_muon=0.594117, others_stat_ele=6.592, others_stat_muon=6.98853, others_xs=6.88975, param=0.285621, pdf_ele=6.24909, pdf_muon=6.93539, photon_id=3.97793, pileup=-1.59879, scale_ele=3.92336, scale_muon=-6.89272
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=3.05632, JER_muon=6.06706, JES_ele=3.76097, JES_muon=6.97611, QCD_stat_ele=5.73489, QCD_stat_muon=-6.76644, VBS_stat_ele=5.29119, VBS_stat_muon=6.70462, ele_efficiency=2.68661, ele_trigger=4.96116, fakephoton_ele=3.54361, fakephoton_muon=6.6503, interference=5.45329, lumi=6.17063, mu_efficiency=2.08153, mu_trigger=6.59326, non_prompt_stat_ele=6.11613, non_prompt_stat_muon=1.22645, others_stat_ele=6.51286, others_stat_muon=6.96083, others_xs=6.83432, param=0.261016, pdf_ele=6.14742, pdf_muon=6.98078, photon_id=4.4362, pileup=-1.61503, scale_ele=4.32272, scale_muon=-6.99814
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.86996, JER_muon=5.86464, JES_ele=3.47934, JES_muon=6.88209, QCD_stat_ele=6.21772, QCD_stat_muon=-6.05467, VBS_stat_ele=5.08371, VBS_stat_muon=6.53605, ele_efficiency=2.64049, ele_trigger=4.7811, fakephoton_ele=3.24974, fakephoton_muon=6.47662, interference=5.24087, lumi=5.9603, mu_efficiency=1.94595, mu_trigger=6.38655, non_prompt_stat_ele=5.87096, non_prompt_stat_muon=2.40538, others_stat_ele=6.33155, others_stat_muon=6.86402, others_xs=6.69666, param=0.325228, pdf_ele=5.91778, pdf_muon=6.99249, photon_id=5.24991, pileup=-1.66627, scale_ele=5.06997, scale_muon=-6.75325
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.69346, JER_muon=5.65086, JES_ele=3.21287, JES_muon=6.72941, QCD_stat_ele=6.57649, QCD_stat_muon=-4.97505, VBS_stat_ele=4.88824, VBS_stat_muon=6.34874, ele_efficiency=2.57937, ele_trigger=4.59412, fakephoton_ele=2.95836, fakephoton_muon=6.28017, interference=5.0253, lumi=5.73785, mu_efficiency=1.81754, mu_trigger=6.15421, non_prompt_stat_ele=5.60744, non_prompt_stat_muon=3.45205, others_stat_ele=6.13004, others_stat_muon=6.7159, others_xs=6.52422, param=0.255274, pdf_ele=5.67635, pdf_muon=6.91256, photon_id=5.89205, pileup=-1.69292, scale_ele=5.69107, scale_muon=-5.99429
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.54707, JER_muon=5.46611, JES_ele=2.98876, JES_muon=6.55988, QCD_stat_ele=6.79148, QCD_stat_muon=-3.85537, VBS_stat_ele=4.72424, VBS_stat_muon=6.17639, ele_efficiency=2.53067, ele_trigger=4.43753, fakephoton_ele=2.71471, fakephoton_muon=6.09816, interference=4.84368, lumi=5.54325, mu_efficiency=1.71255, mu_trigger=5.93972, non_prompt_stat_ele=5.37344, non_prompt_stat_muon=4.23866, others_stat_ele=5.94686, others_stat_muon=6.55711, others_xs=6.35669, param=0.301407, pdf_ele=5.46239, pdf_muon=6.78365, photon_id=6.31539, pileup=-1.71595, scale_ele=6.11854, scale_muon=-5.03655
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.40946, JER_muon=5.28575, JES_ele=2.77622, JES_muon=6.36747, QCD_stat_ele=6.92433, QCD_stat_muon=-2.67022, VBS_stat_ele=4.56567, VBS_stat_muon=5.99855, ele_efficiency=2.48633, ele_trigger=4.28891, fakephoton_ele=2.48453, fakephoton_muon=5.91294, interference=4.66933, lumi=5.35157, mu_efficiency=1.61483, mu_trigger=5.72116, non_prompt_stat_ele=5.14164, non_prompt_stat_muon=4.89849, others_stat_ele=5.7622, others_stat_muon=6.3799, others_xs=6.18007, param=0.298641, pdf_ele=5.25069, pdf_muon=6.61348, photon_id=6.62128, pileup=-1.73906, scale_ele=6.44446, scale_muon=-3.9224
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.27502, JER_muon=5.10491, JES_ele=2.56684, JES_muon=6.15123, QCD_stat_ele=6.9902, QCD_stat_muon=-1.43945, VBS_stat_ele=4.40697, VBS_stat_muon=5.81161, ele_efficiency=2.44512, ele_trigger=4.14327, fakephoton_ele=2.25953, fakephoton_muon=5.72024, interference=4.49684, lumi=5.1576, mu_efficiency=1.52047, mu_trigger=5.49377, non_prompt_stat_ele=4.90582, non_prompt_stat_muon=5.46142, others_stat_ele=5.57148, others_stat_muon=6.18353, others_xs=5.99177, param=0.295656, pdf_ele=5.03489, pdf_muon=6.40461, photon_id=6.83267, pileup=-1.76357, scale_ele=6.6902, scale_muon=-2.6923
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.1444, JER_muon=4.9239, JES_ele=2.36222, JES_muon=5.91556, QCD_stat_ele=6.99495, QCD_stat_muon=-0.209732, VBS_stat_ele=4.2502, VBS_stat_muon=5.61831, ele_efficiency=2.40533, ele_trigger=4.0001, fakephoton_ele=2.03991, fakephoton_muon=5.52175, interference=4.32644, lumi=4.96231, mu_efficiency=1.42949, mu_trigger=5.25986, non_prompt_stat_ele=4.66734, non_prompt_stat_muon=5.92878, others_stat_ele=5.37608, others_stat_muon=5.97105, others_xs=5.7937, param=0.292744, pdf_ele=4.8168, pdf_muon=6.16358, photon_id=6.95623, pileup=-1.78725, scale_ele=6.86082, scale_muon=-1.40783
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.01761, JER_muon=4.74334, JES_ele=2.16266, JES_muon=5.66407, QCD_stat_ele=6.94474, QCD_stat_muon=0.98021, VBS_stat_ele=4.09571, VBS_stat_muon=5.42016, ele_efficiency=2.36687, ele_trigger=3.85959, fakephoton_ele=1.82593, fakephoton_muon=5.31893, interference=4.15841, lumi=4.76658, mu_efficiency=1.34169, mu_trigger=5.02123, non_prompt_stat_ele=4.42761, non_prompt_stat_muon=6.30428, others_stat_ele=5.17738, others_stat_muon=5.74543, others_xs=5.58785, param=0.289901, pdf_ele=4.59762, pdf_muon=5.89585, photon_id=6.99974, pileup=-1.81004, scale_ele=6.96191, scale_muon=-0.122256
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.89461, JER_muon=4.56374, JES_ele=1.96827, JES_muon=5.39993, QCD_stat_ele=6.84568, QCD_stat_muon=2.09972, VBS_stat_ele=3.94376, VBS_stat_muon=5.21848, ele_efficiency=2.32968, ele_trigger=3.72189, fakephoton_ele=1.61773, fakephoton_muon=5.11306, interference=3.99296, lumi=4.57114, mu_efficiency=1.25694, mu_trigger=4.77943, non_prompt_stat_ele=4.1878, non_prompt_stat_muon=6.59271, others_stat_ele=4.97653, others_stat_muon=5.50925, others_xs=5.37599, param=0.287122, pdf_ele=4.37838, pdf_muon=5.60625, photon_id=6.97115, pileup=-1.83198, scale_ele=6.99947, scale_muon=1.12031
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.77531, JER_muon=4.38554, JES_ele=1.77911, JES_muon=5.1259, QCD_stat_ele=6.7036, QCD_stat_muon=3.12568, VBS_stat_ele=3.79451, VBS_stat_muon=5.01439, ele_efficiency=2.29373, ele_trigger=3.58707, fakephoton_ele=1.41538, fakephoton_muon=4.9052, interference=3.83028, lumi=4.3766, mu_efficiency=1.17506, mu_trigger=4.53577, non_prompt_stat_ele=3.94886, non_prompt_stat_muon=6.79962, others_stat_ele=4.77452, others_stat_muon=5.2648, others_xs=5.15962, param=0.284405, pdf_ele=4.15989, pdf_muon=5.29909, photon_id=6.8783, pileup=-1.85312, scale_ele=6.97956, scale_muon=2.28485
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.6596, JER_muon=4.20907, JES_ele=1.59515, JES_muon=4.8444, QCD_stat_ele=6.524, QCD_stat_muon=4.04167, VBS_stat_ele=3.64808, VBS_stat_muon=4.80883, ele_efficiency=2.25895, ele_trigger=3.45518, fakephoton_ele=1.21882, fakephoton_muon=4.69627, interference=3.67048, lumi=4.18347, mu_efficiency=1.09592, mu_trigger=4.29136, non_prompt_stat_ele=3.71157, non_prompt_stat_muon=6.931, others_stat_ele=4.57215, others_stat_muon=5.01402, others_xs=4.94004, param=0.281747, pdf_ele=3.94281, pdf_muon=4.97811, photon_id=6.72874, pileup=-1.8735, scale_ele=6.90816, scale_muon=3.34492
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.54737, JER_muon=4.0346, JES_ele=1.41632, JES_muon=4.55748, QCD_stat_ele=6.31197, QCD_stat_muon=4.83714, VBS_stat_ele=3.50451, VBS_stat_muon=4.60261, ele_efficiency=2.22529, ele_trigger=3.3262, fakephoton_ele=1.02799, fakephoton_muon=4.48704, interference=3.51363, lumi=3.99212, mu_efficiency=1.01936, mu_trigger=4.04712, non_prompt_stat_ele=3.47654, non_prompt_stat_muon=6.99303, others_stat_ele=4.3701, others_stat_muon=4.75861, others_xs=4.71835, param=0.279145, pdf_ele=3.72768, pdf_muon=4.6466, photon_id=6.52961, pileup=-1.89316, scale_ele=6.79098, scale_muon=4.28184
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.43846, JER_muon=3.86235, JES_ele=1.24251, JES_muon=4.26691, QCD_stat_ele=6.07215, QCD_stat_muon=5.50643, VBS_stat_ele=3.36382, VBS_stat_muon=4.39639, ele_efficiency=2.1927, ele_trigger=3.2001, fakephoton_ele=0.842738, fakephoton_muon=4.27814, interference=3.35976, lumi=3.80286, mu_efficiency=0.94526, mu_trigger=3.8038, non_prompt_stat_ele=3.24424, non_prompt_stat_muon=6.99192, others_stat_ele=4.16891, others_stat_muon=4.50001, others_xs=4.49548, param=0.276596, pdf_ele=3.51491, pdf_muon=4.30741, photon_id=6.28757, pileup=-1.91215, scale_ele=6.63341, scale_muon=5.08364
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.33273, JER_muon=3.69243, JES_ele=1.07356, JES_muon=3.97418, QCD_stat_ele=5.80873, QCD_stat_muon=6.04791, VBS_stat_ele=3.22599, VBS_stat_muon=4.19071, ele_efficiency=2.16111, ele_trigger=3.07681, fakephoton_ele=0.662906, fakephoton_muon=4.07007, interference=3.20886, lumi=3.61592, mu_efficiency=0.873467, mu_trigger=3.56203, non_prompt_stat_ele=3.01502, non_prompt_stat_muon=6.93371, others_stat_ele=3.969, others_stat_muon=4.23944, others_xs=4.27219, param=0.274096, pdf_ele=3.30479, pdf_muon=3.96294, photon_id=6.00873, pileup=-1.93051, scale_ele=6.44046, scale_muon=5.74405
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.23001, JER_muon=3.52495, JES_ele=0.909295, JES_muon=3.68053, QCD_stat_ele=5.52543, QCD_stat_muon=6.46311, VBS_stat_ele=3.09096, VBS_stat_muon=3.986, ele_efficiency=2.13046, ele_trigger=2.95625, fakephoton_ele=0.488293, fakephoton_muon=3.86324, interference=3.06089, lumi=3.43144, mu_efficiency=0.803849, mu_trigger=3.32227, non_prompt_stat_ele=2.78914, non_prompt_stat_muon=6.82424, others_stat_ele=3.7707, others_stat_muon=3.97789, others_xs=4.04911, param=0.271644, pdf_ele=3.09755, pdf_muon=3.61527, photon_id=5.69864, pileup=-1.94828, scale_ele=6.2167, scale_muon=6.26148
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.13015, JER_muon=3.35994, JES_ele=0.749524, JES_muon=3.38697, QCD_stat_ele=5.22557, QCD_stat_muon=6.756, VBS_stat_ele=2.95866, VBS_stat_muon=3.78258, ele_efficiency=2.1007, ele_trigger=2.83832, fakephoton_ele=0.318681, fakephoton_muon=3.65795, interference=2.91579, lumi=3.24952, mu_efficiency=0.73627, mu_trigger=3.08489, non_prompt_stat_ele=2.56676, non_prompt_stat_muon=6.66897, others_stat_ele=3.57425, others_stat_muon=3.7162, others_xs=3.82672, param=0.269237, pdf_ele=2.8933, pdf_muon=3.2661, photon_id=5.36231, pileup=-1.96549, scale_ele=5.96628, scale_muon=6.63798
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=1.03298, JER_muon=3.19739, JES_ele=0.594028, JES_muon=3.09433, QCD_stat_ele=4.91203, QCD_stat_muon=6.9323, VBS_stat_ele=2.82898, VBS_stat_muon=3.5807, ele_efficiency=2.07176, ele_trigger=2.72289, fakephoton_ele=0.15383, fakephoton_muon=3.45442, interference=2.77347, lumi=3.07018, mu_efficiency=0.670598, mu_trigger=2.85015, non_prompt_stat_ele=2.34795, non_prompt_stat_muon=6.47303, others_stat_ele=3.3798, others_stat_muon=3.45502, others_xs=3.60541, param=0.266873, pdf_ele=2.69213, pdf_muon=2.91687, photon_id=5.00417, pileup=-1.98219, scale_ele=5.69293, scale_muon=6.87844
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.938311, JER_muon=3.03726, JES_ele=0.442578, JES_muon=2.80323, QCD_stat_ele=4.58733, QCD_stat_muon=6.99898, VBS_stat_ele=2.70181, VBS_stat_muon=3.38052, ele_efficiency=2.0436, ele_trigger=2.60983, fakephoton_ele=-0.00651259, fakephoton_muon=3.25279, interference=2.63379, lumi=2.89342, mu_efficiency=0.606699, mu_trigger=2.61819, non_prompt_stat_ele=2.13272, non_prompt_stat_muon=6.2411, others_stat_ele=3.18745, others_stat_muon=3.19486, others_xs=3.38545, param=0.264548, pdf_ele=2.49401, pdf_muon=2.56871, photon_id=4.62814, pileup=-1.9984, scale_ele=5.39993, scale_muon=6.98977
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1115.24) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.84598, JER_muon=2.87945, JES_ele=0.29493, JES_muon=2.51417, QCD_stat_ele=4.2536, QCD_stat_muon=6.96375, VBS_stat_ele=2.57699, VBS_stat_muon=3.18211, ele_efficiency=2.01613, ele_trigger=2.499, fakephoton_ele=-0.162616, fakephoton_muon=3.05313, interference=2.49662, lumi=2.71916, mu_efficiency=0.54444, mu_trigger=2.38911, non_prompt_stat_ele=1.92102, non_prompt_stat_muon=5.97745, others_stat_ele=2.99721, others_stat_muon=2.9361, others_xs=3.16702, param=0.262262, pdf_ele=2.29891, pdf_muon=2.22254, photon_id=4.23764, pileup=-2.01418, scale_ele=5.09019, scale_muon=6.98031
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.037037 +/- 0.00920423
+Done in 16.98 min (cpu), 17.07 min (real)

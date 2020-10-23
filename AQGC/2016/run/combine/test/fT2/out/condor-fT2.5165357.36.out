@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 364958230
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (60.6098) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=0.985077, JES_16=5.50477, QCDZA_pdf=0.119125, QCDZA_scale=4.69637, QCD_stat_ele_16_bin_1=5.91739, QCD_stat_ele_16_bin_2=-6.0913, QCD_stat_ele_16_bin_3=3.77962, QCD_stat_ele_16_bin_4=-0.117689, QCD_stat_ele_16_bin_5=2.91551, QCD_stat_muon_16_bin_1=5.42826, QCD_stat_muon_16_bin_2=1.33261, QCD_stat_muon_16_bin_3=3.20575, QCD_stat_muon_16_bin_4=-4.85171, QCD_stat_muon_16_bin_5=4.44482, VBS_stat_ele_16_bin_1=-5.36042, VBS_stat_ele_16_bin_2=0.354079, VBS_stat_ele_16_bin_3=-0.619691, VBS_stat_ele_16_bin_4=-2.11309, VBS_stat_ele_16_bin_5=4.87771, VBS_stat_muon_16_bin_1=0.0434291, VBS_stat_muon_16_bin_2=0.789217, VBS_stat_muon_16_bin_3=4.11115, VBS_stat_muon_16_bin_4=-6.45382, VBS_stat_muon_16_bin_5=4.4603, ele16_efficiency=1.25852, ele16_trigger=-0.741914, fake_ele_16=3.13367, fake_muon_16=6.07216, interference=-2.81998, l1prefiring=5.32411, lumi=6.37733, mu16_efficiency=0.944864, mu16_trigger=1.6965, non_prompt_stat_ele_16_bin_1=-0.113361, non_prompt_stat_ele_16_bin_2=1.53387, non_prompt_stat_muon_16_bin_1=0.719506, non_prompt_stat_muon_16_bin_2=-0.402829, others_stat_ele_16_bin_1=3.21368, others_stat_ele_16_bin_2=2.04419, others_stat_ele_16_bin_3=3.34553, others_stat_muon_16_bin_1=-0.0802377, others_xs=1.86839, param=0.374372, photon_id_16=5.03617, pileup=-5.33871, signal_pdf=1.6259, signal_scale=4.69064
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.01 +/- 0.005
+Done in 5.87 min (cpu), 5.87 min (real)

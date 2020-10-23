@@ -45,7 +45,6 @@ public :
    Double_t        ele2_id_scale;
    Double_t        ele1_reco_scale;
    Double_t        ele2_reco_scale;
-   Double_t        photon_id_scale;
    Double_t        muon1_id_scale;
    Double_t        muon2_id_scale;
    Double_t        muon1_iso_scale;
@@ -53,6 +52,8 @@ public :
    Double_t        muon1_track_scale;
    Double_t        muon2_track_scale;
    Double_t        muon_hlt_scale;
+   Double_t photon_id_scale;
+   Double_t photon_veto_scale;
    Int_t           event;
    Int_t           nVtx;
    Double_t        theWeight;

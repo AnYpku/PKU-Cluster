@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed Sep  5 08:45:07 2018 by ROOT version 6.12/07
-// from TTree demo/demo
-// found on file: outSTs.root
+// Tue Oct 13 17:05:11 2020 by ROOT version 6.12/07
+// from TTree ZPKUCandidates/ZPKU Candidates
+// found on file: outZA17.root
 //////////////////////////////////////////////////////////
 
 #ifndef xx_h
@@ -12,46 +12,35 @@
 #include <TChain.h>
 #include <TFile.h>
 using namespace std;
-#include <iostream>
-#include "TObject.h"
-
 // Header file for the classes stored in the TTree if any.
-// Fixed size dimensions of array or collections stored in the TTree if any.
-//   static constexpr Int_t kMaxpassFilter_HBHE = 1;
-//   static constexpr Int_t kMaxpassFilter_HBHEIso = 1;
-//   static constexpr Int_t kMaxpassFilter_globalTightHalo = 1;
-//   static constexpr Int_t kMaxpassFilter_ECALDeadCell = 1;
-//   static constexpr Int_t kMaxpassFilter_badChargedHadron = 1;
-//   static constexpr Int_t kMaxpassFilter_MetbadMuon = 1;
-//   static constexpr Int_t kMaxpassFilter_duplicateMuon = 1;
 
 class xx {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
+// Fixed size dimensions of array or collections stored in the TTree if any.
+   static constexpr Int_t kMaxpassFilter_globalTightHalo = 1;
+   static constexpr Int_t kMaxpassFilter_badChargedHadron = 1;
+   static constexpr Int_t kMaxpassFilter_HBHE = 1;
+   static constexpr Int_t kMaxpassFilter_HBHEIso = 1;
+   static constexpr Int_t kMaxpassFilter_ECALDeadCell = 1;
+   static constexpr Int_t kMaxpassFilter_GoodVtx = 1;
+   static constexpr Int_t kMaxpassFilter_EEBadSc = 1;
+   static constexpr Int_t kMaxpassFilter_badMuon = 1;
+   static constexpr Int_t kMaxpassFilter_MetbadMuon = 1;
+   static constexpr Int_t kMaxpassFilter_duplicateMuon = 1;
 
    // Declaration of leaf types
-   Double_t        scalef;
-   Int_t           run_period;
-   Double_t        ele1_id_scale;
-   Double_t        ele2_id_scale;
-   Double_t        ele1_reco_scale;
-   Double_t        ele2_reco_scale;
-   Double_t        photon_id_scale;
-   Double_t        muon1_id_scale;
-   Double_t        muon2_id_scale;
-   Double_t        muon1_iso_scale;
-   Double_t        muon2_iso_scale;
-   Double_t        muon1_track_scale;
-   Double_t        muon2_track_scale;
-   Double_t        muon_hlt_scale;
    Int_t           event;
+   Int_t           run;
+   Int_t           ls;
    Int_t           nVtx;
    Double_t        theWeight;
    Double_t        nump;
    Double_t        numm;
    Double_t        npT;
+   Int_t           nBX;
    Int_t           lep;
    Double_t        ptVlep;
    Double_t        yVlep;
@@ -63,9 +52,18 @@ public :
    Double_t        Mla2_f;
    Double_t        Mva;
    Double_t        Mva_f;
+   Bool_t          looseMuon;
+   Bool_t          loosetightMuon;
+   Bool_t          tightMuon;
+   Bool_t          mediumEle;
+   Bool_t          looseEle;
+   Bool_t          fakeEle;
    Int_t           nlooseeles;
+   Int_t           ngoodeles;
+   Int_t           nfakeeles;
    Int_t           nloosemus;
    Int_t           ngoodmus;
+   Int_t           nloosetightmus;
    Double_t        genphoton_pt[6];
    Double_t        genphoton_eta[6];
    Double_t        genphoton_phi[6];
@@ -135,6 +133,15 @@ public :
    Double_t        ak4jet_e[6];
    Double_t        ak4jet_csv[6];
    Double_t        ak4jet_icsv[6];
+   Double_t        ak4jet_puIdLoose[6];
+   Double_t        ak4jet_puIdMedium[6];
+   Double_t        ak4jet_puIdTight[6];
+   Double_t        jet1puIdLoose;
+   Double_t        jet1puIdMedium;
+   Double_t        jet1puIdTight;
+   Double_t        jet2puIdLoose;
+   Double_t        jet2puIdMedium;
+   Double_t        jet2puIdTight;
    Double_t        jet1pt;
    Double_t        jet1pt_f;
    Double_t        jet1eta;
@@ -200,27 +207,20 @@ public :
    Int_t           HLT_Ele3;
    Int_t           HLT_Ele4;
    Int_t           HLT_Ele5;
-   Int_t           HLT_Ele6;
-   Int_t           HLT_Ele7;
    Int_t           HLT_Mu1;
    Int_t           HLT_Mu2;
    Int_t           HLT_Mu3;
    Int_t           HLT_Mu4;
    Int_t           HLT_Mu5;
    Int_t           HLT_Mu6;
-   Int_t           HLT_Mu7;
-   Int_t           HLT_Mu8;
-   Int_t           HLT_Mu9;
-   Int_t           HLT_Mu10;
-   Int_t           HLT_Mu11;
+   Bool_t          passFilter_globalTightHalo;
+   Bool_t          passFilter_badChargedHadron;
    Bool_t          passFilter_HBHE;
    Bool_t          passFilter_HBHEIso;
-   Bool_t          passFilter_globalTightHalo;
    Bool_t          passFilter_ECALDeadCell;
    Bool_t          passFilter_GoodVtx;
    Bool_t          passFilter_EEBadSc;
    Bool_t          passFilter_badMuon;
-   Bool_t          passFilter_badChargedHadron;
    Bool_t          passFilter_MetbadMuon;
    Bool_t          passFilter_duplicateMuon;
    Double_t        lumiWeight;
@@ -229,14 +229,12 @@ public :
    Double_t        prefWeight;
    Double_t        prefWeightUp;
    Double_t        prefWeightDown;
-
    Double_t        lep1_eta_station2;
    Double_t        lep1_phi_station2;
    Int_t           lep1_sign;
    Double_t        lep2_eta_station2;
    Double_t        lep2_phi_station2;
    Int_t           lep2_sign;
-   Double_t        l1_weight;
    Double_t        lhe_ele1_px;
    Double_t        lhe_ele1_py;
    Double_t        lhe_ele1_pz;
@@ -265,29 +263,29 @@ public :
    Double_t        lhe_photon_py;
    Double_t        lhe_photon_pz;
    Double_t        lhe_photon_e;
+   Double_t        scalef;
+   Double_t        ele1_id_scale;
+   Double_t        ele2_id_scale;
+   Double_t        ele1_reco_scale;
+   Double_t        ele2_reco_scale;
+   Double_t        photon_veto_scale;
+   Double_t        photon_id_scale;
+   Double_t        muon1_id_scale;
+   Double_t        muon2_id_scale;
+   Double_t        muon1_iso_scale;
+   Double_t        muon2_iso_scale;
+   Double_t        muon_hlt_scale;
 
    // List of branches
-   TBranch        *b_l1_weight;
-   TBranch        *b_scalef;   //!
-   TBranch        *b_run_period;   //!
-   TBranch        *b_ele1_id_scale;   //!
-   TBranch        *b_ele2_id_scale;   //!
-   TBranch        *b_ele1_reco_scale;   //!
-   TBranch        *b_ele2_reco_scale;   //!
-   TBranch        *b_photon_id_scale;   //!
-   TBranch        *b_muon1_id_scale;   //!
-   TBranch        *b_muon2_id_scale;   //!
-   TBranch        *b_muon1_iso_scale;   //!
-   TBranch        *b_muon2_iso_scale;   //!
-   TBranch        *b_muon1_track_scale;   //!
-   TBranch        *b_muon2_track_scale;   //!
-   TBranch        *b_muon_hlt_scale;   //!
    TBranch        *b_event;   //!
+   TBranch        *b_run;   //!
+   TBranch        *b_ls;   //!
    TBranch        *b_nVtx;   //!
    TBranch        *b_theWeight;   //!
    TBranch        *b_nump;   //!
    TBranch        *b_numm;   //!
    TBranch        *b_npT;   //!
+   TBranch        *b_nBX;   //!
    TBranch        *b_lep;   //!
    TBranch        *b_ptVlep;   //!
    TBranch        *b_yVlep;   //!
@@ -299,9 +297,18 @@ public :
    TBranch        *b_Mla2_f;   //!
    TBranch        *b_Mva;   //!
    TBranch        *b_Mva_f;   //!
+   TBranch        *b_looseMuon;   //!
+   TBranch        *b_loosetightMuon;   //!
+   TBranch        *b_tightMuon;   //!
+   TBranch        *b_mediumEle;   //!
+   TBranch        *b_looseEle;   //!
+   TBranch        *b_fakeEle;   //!
    TBranch        *b_nlooseeles;   //!
+   TBranch        *b_ngoodeles;   //!
+   TBranch        *b_nfakeeles;   //!
    TBranch        *b_nloosemus;   //!
    TBranch        *b_ngoodmus;   //!
+   TBranch        *b_nloosetightmus;   //!
    TBranch        *b_genphoton_pt;   //!
    TBranch        *b_genphoton_eta;   //!
    TBranch        *b_genphoton_phi;   //!
@@ -371,6 +378,15 @@ public :
    TBranch        *b_ak4jet_e;   //!
    TBranch        *b_ak4jet_csv;   //!
    TBranch        *b_ak4jet_icsv;   //!
+   TBranch        *b_ak4jet_puIdLoose;   //!
+   TBranch        *b_ak4jet_puIdMedium;   //!
+   TBranch        *b_ak4jet_puIdTight;   //!
+   TBranch        *b_jet1puIdLoose;   //!
+   TBranch        *b_jet1puIdMedium;   //!
+   TBranch        *b_jet1puIdTight;   //!
+   TBranch        *b_jet2puIdLoose;   //!
+   TBranch        *b_jet2puIdMedium;   //!
+   TBranch        *b_jet2puIdTight;   //!
    TBranch        *b_jet1pt;   //!
    TBranch        *b_jet1pt_f;   //!
    TBranch        *b_jet1eta;   //!
@@ -436,27 +452,20 @@ public :
    TBranch        *b_HLT_Ele3;   //!
    TBranch        *b_HLT_Ele4;   //!
    TBranch        *b_HLT_Ele5;   //!
-   TBranch        *b_HLT_Ele6;   //!
-   TBranch        *b_HLT_Ele7;   //!
    TBranch        *b_HLT_Mu1;   //!
    TBranch        *b_HLT_Mu2;   //!
    TBranch        *b_HLT_Mu3;   //!
    TBranch        *b_HLT_Mu4;   //!
    TBranch        *b_HLT_Mu5;   //!
    TBranch        *b_HLT_Mu6;   //!
-   TBranch        *b_HLT_Mu7;   //!
-   TBranch        *b_HLT_Mu8;   //!
-   TBranch        *b_HLT_Mu9;   //!
-   TBranch        *b_HLT_Mu10;   //!
-   TBranch        *b_HLT_Mu11;   //!
+   TBranch        *b_passFilter_globalTightHalo_;   //!
+   TBranch        *b_passFilter_badChargedHadron_;   //!
    TBranch        *b_passFilter_HBHE_;   //!
    TBranch        *b_passFilter_HBHEIso_;   //!
-   TBranch        *b_passFilter_globalTightHalo_;   //!
    TBranch        *b_passFilter_ECALDeadCell_;   //!
-   TBranch        *b_passFilter_GoodVtx;   //!
-   TBranch        *b_passFilter_EEBadSc;   //!
-   TBranch        *b_passFilter_badMuon;   //!
-   TBranch        *b_passFilter_badChargedHadron_;   //!
+   TBranch        *b_passFilter_GoodVtx_;   //!
+   TBranch        *b_passFilter_EEBadSc_;   //!
+   TBranch        *b_passFilter_badMuon_;   //!
    TBranch        *b_passFilter_MetbadMuon_;   //!
    TBranch        *b_passFilter_duplicateMuon_;   //!
    TBranch        *b_lumiWeight;   //!
@@ -499,27 +508,36 @@ public :
    TBranch        *b_lhe_photon_py;   //!
    TBranch        *b_lhe_photon_pz;   //!
    TBranch        *b_lhe_photon_e;   //!
-  
+   TBranch        *b_scalef;   //!
+   TBranch        *b_ele1_id_scale;   //!
+   TBranch        *b_ele2_id_scale;   //!
+   TBranch        *b_ele1_reco_scale;   //!
+   TBranch        *b_ele2_reco_scale;   //!
+   TBranch        *b_photon_id_scale;   //!
+   TBranch        *b_photon_veto_scale;   //!
+   TBranch        *b_muon1_id_scale;   //!
+   TBranch        *b_muon2_id_scale;   //!
+   TBranch        *b_muon1_iso_scale;   //!
+   TBranch        *b_muon2_iso_scale;   //!
+   TBranch        *b_muon_hlt_scale;   //!
 
-   TString m_dataset;
-
-   int cut0;
-   int cut1;
-   double weight[257];
    xx(TTree *tree=0,TString dataset="");
    virtual ~xx();
    virtual Int_t    Cut(Long64_t entry);
-   virtual void     endJob();
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop();
+   virtual void     Loop(TString name);
+   virtual void     endJob();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 
-   private:
-      TTree *newtree;
-      TFile *fout;
+   TString m_dataset;
+   int cut0;
+   int cut1;
+ private:
+     TTree *newtree;
+     TFile *fout;
 };
 
 #endif
@@ -530,17 +548,16 @@ xx::xx(TTree *tree,TString dataset) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("outSTs.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("outZA17.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("outSTs.root");
+         f = new TFile("outZA17.root");
       }
-      f->GetObject("demo",tree);
+      f->GetObject("ZPKUCandidates",tree);
 
    }
+   m_dataset=dataset;
+   Init(tree);
 
-  m_dataset=dataset;//add
- 
-  Init(tree);
 }
 
 xx::~xx()
@@ -583,31 +600,19 @@ void xx::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-
-   fout = new TFile(m_dataset, "RECREATE");
+   fout = new TFile("/eos/user/y/yian/2016cutla/"+m_dataset, "RECREATE");
    newtree = fChain->CloneTree(0);
-//   newtree->Branch("weight",&weight,"weight[257]/D");
 
-   fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
-   fChain->SetBranchAddress("run_period", &run_period, &b_run_period);
-   fChain->SetBranchAddress("ele1_id_scale", &ele1_id_scale, &b_ele1_id_scale);
-   fChain->SetBranchAddress("ele2_id_scale", &ele2_id_scale, &b_ele2_id_scale);
-   fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
-   fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
-   fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
-   fChain->SetBranchAddress("muon1_id_scale", &muon1_id_scale, &b_muon1_id_scale);
-   fChain->SetBranchAddress("muon2_id_scale", &muon2_id_scale, &b_muon2_id_scale);
-   fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
-   fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
-   fChain->SetBranchAddress("muon1_track_scale", &muon1_track_scale, &b_muon1_track_scale);
-   fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
-   fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
+
    fChain->SetBranchAddress("event", &event, &b_event);
+   fChain->SetBranchAddress("run", &run, &b_run);
+   fChain->SetBranchAddress("ls", &ls, &b_ls);
    fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
    fChain->SetBranchAddress("theWeight", &theWeight, &b_theWeight);
    fChain->SetBranchAddress("nump", &nump, &b_nump);
    fChain->SetBranchAddress("numm", &numm, &b_numm);
    fChain->SetBranchAddress("npT", &npT, &b_npT);
+   fChain->SetBranchAddress("nBX", &nBX, &b_nBX);
    fChain->SetBranchAddress("lep", &lep, &b_lep);
    fChain->SetBranchAddress("ptVlep", &ptVlep, &b_ptVlep);
    fChain->SetBranchAddress("yVlep", &yVlep, &b_yVlep);
@@ -619,9 +624,18 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("Mla2_f", &Mla2_f, &b_Mla2_f);
    fChain->SetBranchAddress("Mva", &Mva, &b_Mva);
    fChain->SetBranchAddress("Mva_f", &Mva_f, &b_Mva_f);
+   fChain->SetBranchAddress("looseMuon", &looseMuon, &b_looseMuon);
+   fChain->SetBranchAddress("loosetightMuon", &loosetightMuon, &b_loosetightMuon);
+   fChain->SetBranchAddress("tightMuon", &tightMuon, &b_tightMuon);
+   fChain->SetBranchAddress("mediumEle", &mediumEle, &b_mediumEle);
+   fChain->SetBranchAddress("looseEle", &looseEle, &b_looseEle);
+   fChain->SetBranchAddress("fakeEle", &fakeEle, &b_fakeEle);
    fChain->SetBranchAddress("nlooseeles", &nlooseeles, &b_nlooseeles);
+   fChain->SetBranchAddress("ngoodeles", &ngoodeles, &b_ngoodeles);
+   fChain->SetBranchAddress("nfakeeles", &nfakeeles, &b_nfakeeles);
    fChain->SetBranchAddress("nloosemus", &nloosemus, &b_nloosemus);
    fChain->SetBranchAddress("ngoodmus", &ngoodmus, &b_ngoodmus);
+   fChain->SetBranchAddress("nloosetightmus", &nloosetightmus, &b_nloosetightmus);
    fChain->SetBranchAddress("genphoton_pt", genphoton_pt, &b_genphoton_pt);
    fChain->SetBranchAddress("genphoton_eta", genphoton_eta, &b_genphoton_eta);
    fChain->SetBranchAddress("genphoton_phi", genphoton_phi, &b_genphoton_phi);
@@ -691,6 +705,15 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("ak4jet_e", ak4jet_e, &b_ak4jet_e);
    fChain->SetBranchAddress("ak4jet_csv", ak4jet_csv, &b_ak4jet_csv);
    fChain->SetBranchAddress("ak4jet_icsv", ak4jet_icsv, &b_ak4jet_icsv);
+   fChain->SetBranchAddress("ak4jet_puIdLoose", ak4jet_puIdLoose, &b_ak4jet_puIdLoose);
+   fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
+   fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
+   fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
+   fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
+   fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+   fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
+   fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
+   fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
    fChain->SetBranchAddress("jet1pt", &jet1pt, &b_jet1pt);
    fChain->SetBranchAddress("jet1pt_f", &jet1pt_f, &b_jet1pt_f);
    fChain->SetBranchAddress("jet1eta", &jet1eta, &b_jet1eta);
@@ -761,19 +784,20 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu3", &HLT_Mu3, &b_HLT_Mu3);
    fChain->SetBranchAddress("HLT_Mu4", &HLT_Mu4, &b_HLT_Mu4);
    fChain->SetBranchAddress("HLT_Mu5", &HLT_Mu5, &b_HLT_Mu5);
+   fChain->SetBranchAddress("HLT_Mu6", &HLT_Mu6, &b_HLT_Mu6);
+   fChain->SetBranchAddress("passFilter_globalTightHalo", &passFilter_globalTightHalo, &b_passFilter_globalTightHalo_);
+   fChain->SetBranchAddress("passFilter_badChargedHadron", &passFilter_badChargedHadron, &b_passFilter_badChargedHadron_);
    fChain->SetBranchAddress("passFilter_HBHE", &passFilter_HBHE, &b_passFilter_HBHE_);
    fChain->SetBranchAddress("passFilter_HBHEIso", &passFilter_HBHEIso, &b_passFilter_HBHEIso_);
-   fChain->SetBranchAddress("passFilter_globalTightHalo", &passFilter_globalTightHalo, &b_passFilter_globalTightHalo_);
    fChain->SetBranchAddress("passFilter_ECALDeadCell", &passFilter_ECALDeadCell, &b_passFilter_ECALDeadCell_);
-   fChain->SetBranchAddress("passFilter_GoodVtx", &passFilter_GoodVtx, &b_passFilter_GoodVtx);
-   fChain->SetBranchAddress("passFilter_EEBadSc", &passFilter_EEBadSc, &b_passFilter_EEBadSc);
-   fChain->SetBranchAddress("passFilter_badMuon", &passFilter_badMuon, &b_passFilter_badMuon);
-   fChain->SetBranchAddress("passFilter_badChargedHadron", &passFilter_badChargedHadron, &b_passFilter_badChargedHadron_);
+   fChain->SetBranchAddress("passFilter_GoodVtx", &passFilter_GoodVtx, &b_passFilter_GoodVtx_);
+   fChain->SetBranchAddress("passFilter_EEBadSc", &passFilter_EEBadSc, &b_passFilter_EEBadSc_);
+   fChain->SetBranchAddress("passFilter_badMuon", &passFilter_badMuon, &b_passFilter_badMuon_);
    fChain->SetBranchAddress("passFilter_MetbadMuon", &passFilter_MetbadMuon, &b_passFilter_MetbadMuon_);
    fChain->SetBranchAddress("passFilter_duplicateMuon", &passFilter_duplicateMuon, &b_passFilter_duplicateMuon_);
    fChain->SetBranchAddress("lumiWeight", &lumiWeight, &b_lumiWeight);
    fChain->SetBranchAddress("pileupWeight", &pileupWeight, &b_pileupWeight);
-//   fChain->SetBranchAddress("pweight", pweight, &b_pweight);
+   fChain->SetBranchAddress("pweight", pweight, &b_pweight);
    fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
    fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
    fChain->SetBranchAddress("prefWeightDown", &prefWeightDown, &b_prefWeightDown);
@@ -811,6 +835,18 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("lhe_photon_py", &lhe_photon_py, &b_lhe_photon_py);
    fChain->SetBranchAddress("lhe_photon_pz", &lhe_photon_pz, &b_lhe_photon_pz);
    fChain->SetBranchAddress("lhe_photon_e", &lhe_photon_e, &b_lhe_photon_e);
+   fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+   fChain->SetBranchAddress("ele1_id_scale", &ele1_id_scale, &b_ele1_id_scale);
+   fChain->SetBranchAddress("ele2_id_scale", &ele2_id_scale, &b_ele2_id_scale);
+   fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
+   fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
+   fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+   fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
+   fChain->SetBranchAddress("muon1_id_scale", &muon1_id_scale, &b_muon1_id_scale);
+   fChain->SetBranchAddress("muon2_id_scale", &muon2_id_scale, &b_muon2_id_scale);
+   fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
+   fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
+   fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
    Notify();
 }
 
@@ -838,11 +874,8 @@ void xx::endJob() {
      newtree->Write();
      fout->Write();
      fout->Close();
-     std::cout << "The total events are      : " << cut0 << std::endl;
-     std::cout << "The qualified events      : " << cut1 << std::endl;
      delete fout;
   }
-
 Int_t xx::Cut(Long64_t entry)
 {
 // This function may be called from Loop.

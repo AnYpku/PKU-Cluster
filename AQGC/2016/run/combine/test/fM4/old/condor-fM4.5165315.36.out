@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed -1945419940
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1102.44) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=5.58311, JES_16=6.61061, QCDZA_pdf=-1.41423, QCDZA_scale=1.83962, QCD_stat_ele_16_bin_1=6.6423, QCD_stat_ele_16_bin_2=4.32432, QCD_stat_ele_16_bin_3=1.00933, QCD_stat_ele_16_bin_4=2.45146, QCD_stat_ele_16_bin_5=3.58789, QCD_stat_muon_16_bin_1=-0.54859, QCD_stat_muon_16_bin_2=-0.194915, QCD_stat_muon_16_bin_3=2.35445, QCD_stat_muon_16_bin_4=0.601745, QCD_stat_muon_16_bin_5=1.83685, VBS_stat_ele_16_bin_1=2.26976, VBS_stat_ele_16_bin_2=0.803439, VBS_stat_ele_16_bin_3=-1.46176, VBS_stat_ele_16_bin_4=-1.16737, VBS_stat_ele_16_bin_5=2.23105, VBS_stat_muon_16_bin_1=3.03757, VBS_stat_muon_16_bin_2=-0.163912, VBS_stat_muon_16_bin_3=2.43987, VBS_stat_muon_16_bin_4=-1.12568, VBS_stat_muon_16_bin_5=0.539283, ele16_efficiency=4.0035, ele16_trigger=4.8225, fake_ele_16=6.51755, fake_muon_16=6.44218, interference=-1.35878, l1prefiring=-0.309282, lumi=2.7122, mu16_efficiency=0.428814, mu16_trigger=2.51578, non_prompt_stat_ele_16_bin_1=-0.453981, non_prompt_stat_ele_16_bin_2=-1.40316, non_prompt_stat_muon_16_bin_1=1.23739, non_prompt_stat_muon_16_bin_2=1.43763, others_stat_ele_16_bin_1=0.100686, others_stat_ele_16_bin_2=-1.7199, others_stat_ele_16_bin_3=2.47181, others_stat_muon_16_bin_1=1.8722, others_xs=-1.74932, param=0.225222, photon_id_16=4.07222, pileup=-1.46803, signal_pdf=1.11466, signal_scale=3.17665
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0 +/- 0
+Done in 8.99 min (cpu), 9.01 min (real)

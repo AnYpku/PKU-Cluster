@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed -1979291803
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (31.7598) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-3.11738, JER_muon=2.3473, JES_ele=1.24971, JES_muon=1.76783, QCD_stat_ele=-0.789584, QCD_stat_muon=-0.657909, VBS_stat_ele=3.16075, VBS_stat_muon=-0.655506, ele_efficiency=3.96136, ele_trigger=2.06866, fakephoton_ele=5.43149, fakephoton_muon=-1.56499, interference=-1.41119, lumi=0.853201, mu_efficiency=0.685757, mu_trigger=-1.7186, non_prompt_stat_ele=4.14754, non_prompt_stat_muon=0.805906, others_stat_ele=3.87865, others_stat_muon=0.254372, others_xs=-2.16133, param=2.42076, pdf_ele=-2.98343, pdf_muon=-4.24636, photon_id=-3.36596, pileup=0.474326, scale_ele=0.0089546, scale_muon=2.1182
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.370283 +/- 0.0282082
+Done in 16.72 min (cpu), 16.78 min (real)

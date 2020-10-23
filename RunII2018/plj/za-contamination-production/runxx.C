@@ -1,10 +1,7 @@
 #include "xx.C"
 #include <fstream>
 void runxx() {
-//gROOT->LoadMacro("xx.C");
-TString dir="/home/pku/anying/cms/file_in_cms/2018RunIIrootfiles/";
-//TString dir="/eos/uscms/store/user/qliphy/andy/2017/";
-//TString dir="/uscms_data/d3/qliphy/andy/CMSSW_9_4_9_cand2/small/cutla/";
+TString dir="/eos/user/y/yian/2018cutla/";
 
 ifstream infile("file");
 string buffer; 
@@ -17,28 +14,18 @@ while (k>0){
 	name = buffer;
 	if(name.Contains("out")==0) {k=-2; continue;}
 	TString inname="cutlep-"+name+".root";
-	TString outname= "cutlep-"+name+"_pljnew.root";
-	cout<<inname<<endl;
+	TString outname= "cutlep-"+name+"_plj.root";
+	cout<<dir<<inname<<endl;
 	cout<<outname<<endl;
 	TFile *file1;
 	TTree *tree1; 
-	if(name.Contains("out")) 
-	{
-		file1 =new TFile(dir+inname);
-		//tree1 = (TTree*) file1->Get("treeDumper/ZPKUCandidates");
-		tree1 = (TTree*) file1->Get("demo");
-	}
-/*	if(name.Contains("Ele")) 
-	{
-		file1 =new TFile(dir+inname);
-		TDirectory *dir1 = (TDirectory*)file1->Get("treeDumper");
-		tree1 = (TTree*) dir1->Get("ZPKUCandidates");
-	}*/
-xx m1(tree1,outname);
-cout<<outname<<endl;
-m1.Loop();
-m1.endJob();
- 
+	file1 =new TFile(dir+inname);
+	tree1 = (TTree*) file1->Get("ZPKUCandidates");
+	xx m1(tree1,outname);
+	cout<<outname<<endl;
+	m1.Loop();
+	m1.endJob();
+
 }
 }
 

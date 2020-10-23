@@ -13,9 +13,6 @@ def merge_bin(th1):
 	   th1.SetBinError(nbins-2,sqrt(th1.GetBinError(nbins-2)*th1.GetBinError(nbins-2)+th1.GetBinError(nbins-1)*th1.GetBinError(nbins-1)+th1.GetBinError(nbins)*th1.GetBinError(nbins)))
         else:
            th1.SetBinError(nbins-2,0);
-scale_QCD_band3=[1.162,1.199,1.258,1.081,1.165,1.164,1.117]
-scale_QCD_band2=[1.132,1.141,1.163,1.113,1.097,1.130,1.121]
-scale_QCD_band1=[1.028,1.056,1.091,1.032,1.065,1.033,1.004]
 
 print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
 fdir = '/afs/cern.ch/user/y/yian/work/PKU-Cluster/Significance/root/'
@@ -91,9 +88,9 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax 6   number of processes-1\n')
    if sys.argv[1].find("18") == -1:
-	f.write('kmax 24  number of nuisance parameters (sources of systematical uncertainties)\n')
+	f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')
    else:
-	f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
+	f.write('kmax 24  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -200,9 +197,9 @@ for i in range(1,nbins):
    f.write('Scale_EW\tlnN\t')
    f.write('%0.2f\t-\t-\t-\t-\t-\t-\n'%(arr['Sig_scale'][i-1]))
 #
-   f.write('QCDZA_scale1\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(scale_QCD_band1[i-1]))
-   f.write('QCDZA_scale2\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(scale_QCD_band2[i-1]))
-   f.write('QCDZA_scale3\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(scale_QCD_band3[i-1]))
+   f.write('QCDZA_Scale_band1\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['scale_band1'][i-1]))
+   f.write('QCDZA_Scale_band2\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['scale_band2'][i-1]))
+   f.write('QCDZA_Scale_band3\tlnN\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['scale_band3'][i-1]))
 #
 #
    f.write('interf\tlnN\t')

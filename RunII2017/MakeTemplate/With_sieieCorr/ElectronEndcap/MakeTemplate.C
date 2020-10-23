@@ -26,7 +26,7 @@ void MakeTemplate::Loop(TString name,TGraph*gr)
    if (fChain == 0) return;
    ResetVal();   
    histo();
-   TFile* ID_photon_file = TFile::Open("./2017_PhotonsMedium.root");
+   TFile* ID_photon_file = TFile::Open("./ele_SFs/2017_PhotonsMedium.root");
    TH2F* ID_photon=0;
    ID_photon_file->GetObject("EGamma_SF2D", ID_photon);
    TFile* fout = new TFile("./"+name+".root", "RECREATE");
@@ -46,7 +46,7 @@ void MakeTemplate::Loop(TString name,TGraph*gr)
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       if(jentry%1000000==0) cout<<jentry<<"; "<<nentries<<endl;
       // if (Cut(ientry) < 0) continue;
-      LEP = HLT_Ele1>0 && lep==11 && ptlep1 > 25. && ptlep2 > 25.&& abs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep >70. && massVlep < 110;// && drla>0.7;
+      LEP = (HLT_Ele1>0||HLT_Ele2>0) && lep==11 && ptlep1 > 25. && ptlep2 > 25.&& abs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep >70. && massVlep < 110;// && drla>0.7;
       for(Int_t j=0;j<6;j++){
           Photon_cut[j]= photon_pev[j]==1 /* photon_pevnew[j]==1*/ && photon_hoe[j]<0.0326 && photon_nhiso[j]<2.718 + 0.0117*photon_pt[j] + 0.000023*photon_pt[j]*photon_pt[j] && photon_phoiso[j]<3.867 + 0.0037*photon_pt[j]&&( fabs(photon_eta[j])<2.5&&fabs(photon_eta[j])>1.566 ) &&photon_pt[j]>20&&photon_pt[j]<400&&photon_drla[j]>0.7&&photon_drla[j]!=10&&photon_drla2[j]>0.7&&photon_drla2[j]!=10; 
 /*&&photon_sieie[j]<0.0102&&photon_sieie[j]>0.0052;*/
@@ -67,7 +67,10 @@ void MakeTemplate::Loop(TString name,TGraph*gr)
       for(Int_t k=0;k<num;k++){
          if(name.Contains("A")==1){
             photon_id_scale=get_photon_ID(photon_eta[position],photon_pt[position],ID_photon);
-            scalef=scalef*prefWeight*pileupWeight*photon_id_scale;
+	    if(fabs(photon_eta[position])<1.4442) photon_veto_scale=0.9862;
+	    if(fabs(photon_eta[position])<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
+            
+            scalef=scalef*prefWeight*pileupWeight*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
             double sieie=gr->Eval(photon_sieie[position]);
             if(photon_isprompt[position]==1 && photon_chiso[position]<1.051 && photon_pt[position]<highpt[k] && photon_pt[position]>lowpt[k])
                { h1[k]->Fill(sieie,scalef);m1[k]++;

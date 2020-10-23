@@ -11,11 +11,11 @@ using namespace std;
 TString dir = "./fractionfitResult_za/"; 
 ofstream file3( dir + "info_fit_fr.txt");
 ofstream file2( dir + "frac_number.txt");
-TFile* fdata = TFile::Open("../root/Data_template-Data.root");
-TFile* ftrue = TFile::Open("../root/True_template-ZA.root");
+TFile* fdata = TFile::Open("../root/Data_template-DMuon17.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA17.root");
 //TFile* ftrue = TFile::Open("../root/True_template-cutlep-outZA-EWK.root");
 //TFile* ftrue = TFile::Open("../root/True_template-cutlep-outTTA.root");
-TFile* ffake = TFile::Open("../root/Fake_template-Data.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DMuon17.root");
 Double_t fr,fr_Error;
 TString name;
 void fitf(float lowpt, float highpt){

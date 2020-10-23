@@ -166,18 +166,33 @@ for i in range(1,nbins):
 
    f.write('ZA_SigOut_Stat_bin%d_%s%s\tlnN\t'%(i,sys.argv[2],sys.argv[1]))
    f.write('-\t-\t-\t-\t-\t-\t-\t%0.2f\n'%(ZA_sig_out_binerror))
-
+   f.write('Stat group = VBS_Stat_bin%d_%s%s QCD_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1],i,sys.argv[2],sys.argv[1]))
+   if non_prompt_bincontent>1:
+      f.write('non_prompt_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
+   if TTA_bincontent>1:
+      f.write('TTA_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
+   if VV_bincontent>1:
+      f.write('VV_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
+   if ST_bincontent>1:
+      f.write('ST_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
+   if WA_bincontent>1:
+      f.write('WA_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
+   if ZA_sig_out_bincontent>1:
+      f.write('ZA_SigOut_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
+   f.write('\n')
    f.write('fake_%s%s\tlnN\t'%(sys.argv[2],sys.argv[1]))
    if non_prompt_bincontent==0:
        f.write('-\t-\t-\t-\t-\t-\t-\t-\n')
    else: 
         f.write('-\t-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['fake'+sys.argv[1]][i-1]))
+        f.write('fake group = fake_%s%s \n'%(sys.argv[2],sys.argv[1]))
 
    f.write('JES_%s\tlnN\t'%(sys.argv[1]))
    f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jes'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jes'+sys.argv[1]+'_ZA'][i-1],arr['jes'+sys.argv[1]+'_TTA'][i-1],arr['jes'+sys.argv[1]+'_VV'][i-1],arr['jes'+sys.argv[1]+'_ST'][i-1],1.0,arr['jes'+sys.argv[1]+'_ZA-EWKout'][i-1]))
 
    f.write('JER_%s\tlnN\t'%(sys.argv[1]))
    f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jer'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jer'+sys.argv[1]+'_ZA'][i-1],arr['jer'+sys.argv[1]+'_TTA'][i-1],arr['jer'+sys.argv[1]+'_VV'][i-1],arr['jer'+sys.argv[1]+'_ST'][i-1],1.0,arr['jer'+sys.argv[1]+'_ZA-EWKout'][i-1]))
+   f.write('JESR group = JES_%s JER_%s\n'%(sys.argv[1],sys.argv[1]))
 #
    f.write('pdf_EW\tlnN\t')
    f.write('-\t-\t-\t-\t-\t-\t-\t%0.3f\n'%(arr['SigOut_pdf'][i-1]))
@@ -199,11 +214,15 @@ for i in range(1,nbins):
 
    f.write('theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf\n')
 #
+   f.write('photon_id\tlnN\t')
+   f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
+#
    if sys.argv[2].find("ele") == -1: 
       f.write('mu_eff\tlnN\t')
       f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0]))
       f.write('mu_trigger_%s\tlnN\t'%(sys.argv[1]))
       f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0]))
+      f.write('muon group = mu_eff mu_trigger_%s\n'%(sys.argv[1]))
 #   
    else: 
       f.write('ele_reco\tlnN\t')
@@ -211,9 +230,7 @@ for i in range(1,nbins):
 #
       f.write('ele_ID\tlnN\t')
       f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0]))
-#
-   f.write('photon_id\tlnN\t')
-   f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
+      f.write('egamma group = ele_reco ele_ID photon_id\n')
 #
    f.write('pileup\tlnN\t')
    f.write('1.01\t1.01\t-\t1.01\t1.01\t1.01\t1.01\t1.01\n')
@@ -226,7 +243,9 @@ for i in range(1,nbins):
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1]))
-
+        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s l1pref\n'%(sys.argv[1]))
+   else:
+        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s \n'%(sys.argv[1]))
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]
    genbinerror[:]=[]

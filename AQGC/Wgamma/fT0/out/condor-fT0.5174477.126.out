@@ -1,0 +1,22 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed -678310947
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (40.963) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.298507, JER_muon=2.24299, JES_ele=5.45919, JES_muon=-5.26165, QCD_stat_ele=3.70827, QCD_stat_muon=6.85944, VBS_stat_ele=3.10672, VBS_stat_muon=-2.26174, ele_efficiency=-0.640368, ele_trigger=-1.54371, fakephoton_ele=2.46052, fakephoton_muon=2.44189, interference=2.35672, lumi=2.06803, mu_efficiency=2.93695, mu_trigger=-0.175072, non_prompt_stat_ele=5.33939, non_prompt_stat_muon=-3.61716, others_stat_ele=-0.91049, others_stat_muon=3.96045, others_xs=3.03176, param=0.547341, pdf_ele=-5.14175, pdf_muon=2.99221, photon_id=5.91224, pileup=-4.73251, scale_ele=2.82156, scale_muon=5.56061
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (39.5083) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-0.664696, JER_muon=-1.60319, JES_ele=1.72664, JES_muon=-5.44997, QCD_stat_ele=1.78907, QCD_stat_muon=5.9497, VBS_stat_ele=1.94103, VBS_stat_muon=-1.28266, ele_efficiency=2.82157, ele_trigger=1.64288, fakephoton_ele=6.54364, fakephoton_muon=2.44783, interference=-5.98664, lumi=4.20279, mu_efficiency=4.35159, mu_trigger=3.62696, non_prompt_stat_ele=3.83538, non_prompt_stat_muon=-0.0433844, others_stat_ele=-1.0268, others_stat_muon=6.88704, others_xs=0.166763, param=0.512005, pdf_ele=4.46183, pdf_muon=-2.69108, photon_id=1.97244, pileup=0.284008, scale_ele=6.12961, scale_muon=3.94363
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.0675676 +/- 0.0121513
+Done in 10.74 min (cpu), 10.81 min (real)

@@ -2,7 +2,7 @@
 
 ## Scale factor applied
 
-There are kinds of scale factors as a function of $$\eta$$ and$$p_{T}$$, including
+There are kinds of scale factors as a function of $\eta$ and $p_{T}$, including
 - electron/muon/photon ID scale factor
 - muon isolation scale factor
 - electron reconstrution scale factor

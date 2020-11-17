@@ -98,6 +98,7 @@ Take the fraction to signal process in SR as the uncertainty.
 Introdution
 
 #### Code preparation
+
 - Histograms preparation [code](https://github.com/AnYpku/PKU-Cluster/blob/master/Significance/Build_Hist.C)
 - data card [code](https://github.com/AnYpku/PKU-Cluster/tree/master/Significance/data_cards)
 - Combine from [HiggsCombieTools](http://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/)
@@ -106,20 +107,24 @@ Introdution
 
 Introdution
 
+At first, please save branch of gen variables. You should build gen variables same as what you did in the ntuple code in reconstruction level.
+
+Except the minor change of selection, when calculate signal strength, the optimization cuts not included, method of handling EW theoretical uncertainties and division of EW signal sample to in-fiducial(reco&&gen) and out-fiducial(reco&&!gen), the left is same as in calculating significance.
+
 #### Code preparation
 
 ### Unfolding
 
-Unfolding is the generic term used to describe this detector-level to particle-level correction for distributions. In general, this can account for limited acceptance, finite resolution, and inefficiencies of the detector, as well as bin migrations in the distribution between measured and corrected. Simulated EW samples from MC event generators are used to perform the unfolding. Distributions obtained from the generated events correspond to particle-level (will be referred to as gen). Then the events are passed through a detector simulation programme, mimicking the behaviour of the CMS detector as closely as possible, and the same distributions obtained using these events correspond to detector-level (will be referred to as reco). In the well-defined fiducial phase space, the events in reco and events in gen follow the equation:
+Unfolding is the generic term used to describe this detector-level to particle-level correction for distributions. In general, this can account for limited acceptance, finite resolution, and inefficiencies of the detector, as well as bin migrations in the distribution between measured and corrected. Simulated EW samples from MC event generators are used to perform the unfolding. Distributions obtained from the generated events correspond to particle-level (will be referred to as gen). Then the events are passed through a detector simulation programme, mimicking the behaviour of the CMS detector as closely as possible, and the same distributions obtained using these events correspond to detector-level (will be referred to as reco). 
 
-```latex
-
-\begin{eqnarray}
-y_{\textrm{reco}}=R_{ij}\cdot x_{\textrm{gen}}
-\end{eqnarray}
-
-```
+The unfolded differential cross section can be measured as a function of some variables.
 
 #### Code preparation
+
+At first, please save branch of gen variables. You should build gen variables same as what you did in the ntuple code in reconstruction level.
+
+- Histograms [Build_Hist](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/common)
+- data card [card](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/data_card)
+- Combine [HiggsCombine_Unfolding](http://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/part3/regularisation/)
 
  

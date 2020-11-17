@@ -9,20 +9,25 @@
 using namespace RooFit;
 using namespace std;
 TString dir = "./fractionfitResult_za/"; 
-ofstream file3( dir + "info_fit_fr2.txt");
+ofstream file3( dir + "info_fit_fr.txt");
 ofstream file2( dir + "frac_number.txt");
-TFile* fdata = TFile::Open("../root/Data_template2-outDEle.root");
-TFile* ftrue = TFile::Open("../root/True_template2-outZA.root");
-TFile* ffake = TFile::Open("../root/Fake_template2-outDEle.root");
-//TFile* ftrue = TFile::Open("../root/True_template-cutlep-outZA-EWK.root");
-//TFile* ftrue = TFile::Open("../root/True_template-cutlep-outTTA.root");
+TFile* fdata = TFile::Open("../root/Data_template2-DEle16.root");
+TFile* ftrue = TFile::Open("../root/True_template2-ZA16.root");
+TFile* ffake = TFile::Open("../root/Fake_template2-DEle16.root");
+//TFile* ftrue = TFile::Open("../root/True_template2-cutlep-outZA-EWK.root");
+//TFile* ftrue = TFile::Open("../root/True_template2-cutlep-outTTA.root");
 Double_t fr,fr_Error;
 TString name;
 void fitf(float lowpt, float highpt){
 //TString b="chiso5-12_";
         TString filename = ftrue->GetName();
         if(filename.Contains("EWK")) name = "EWK";
-        else name = "ZA2";
+        else{
+                TString fdata_name=fdata->GetName();
+                if(fdata_name.Contains("template2")) name = "ZA2";
+                else if(fdata_name.Contains("template1")) name = "ZA1";
+                else name = "ZA";
+        }
         TH1F* hdata = (TH1F*)fdata->Get(Form("h3_pt%0.f_%0.f",lowpt,highpt));
         TH1F* hfake = (TH1F*)ffake->Get(Form("h2_pt%0.f_%0.f",lowpt,highpt));
         TH1F* htrue = (TH1F*)ftrue->Get(Form("h1_pt%0.f_%0.f",lowpt,highpt));
@@ -123,7 +128,7 @@ void fitf(float lowpt, float highpt){
             
 //            fr = p0* (hfake->Integral(1,hfake->GetXaxis()->FindFixBin(0.03001)-1)/hfake->Integral())/(hdata->Integral(1,hdata->GetXaxis()->FindFixBin(0.03001)-1)/hdata->Integral());
 //            fr = p0* (hfake->Integral(1,hfake->FindFixBin(0.03001))/hfake->Integral())/(hdata->Integral(1,hdata->FindFixBin(0.03001))/hdata->Integral());
-            ofstream myfile(dir + Form("txt/fakerate_photon_pt%0.f_%0.f.txt",lowpt,highpt),ios::out);
+            ofstream myfile( dir + "txt/fakerate_"+name+ Form("_pt%0.f_%0.f.txt",lowpt,highpt),ios::out);
 	        ofstream file(dir + TString("TrueNumber_") + Form("pt%0.f-%0.f.txt", lowpt, highpt),ios::out);
 		ofstream myfile1(TString("./fractionfitResult_za/txt/fakerate_")+ name + Form("_pt%0.f_%0.f.txt", lowpt, highpt),ios::out);
 	        ofstream file1(dir + TString("FakeNumber_") + Form("pt%0.f-%0.f.txt", lowpt, highpt),ios::out);

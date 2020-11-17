@@ -2,11 +2,10 @@
 void run(TString cut1,TString tag,TString channel){
      Double_t Mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
-     TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";     
+     TString dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";     
      TFile*file;
-     if(tag.Contains("16"))file=new TFile(dir+"unfold_"+tag+"outZA-EWK.root");
-     else file=new TFile(dir+"unfold_"+tag+"outZA-EWK-pweight.root");
-     TTree*tree=(TTree*)file->Get("demo");     
+     file=new TFile(dir+"unfold_GenCutla-outZA-EWK"+tag+".root");
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
      Double_t Mjj,jet1eta,jet2eta;
@@ -86,8 +85,8 @@ int Uncer_batch_sig(){
 	const int kk=channels.size();
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
 		}
 		else{
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";

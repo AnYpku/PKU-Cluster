@@ -1,16 +1,16 @@
 #define pi 3.1415926
 void run(TString dir,TString name,TString cut1,TString tag,TString channel){
-     Double_t mjj_bins[2]={150, 400};
+     vector<double> mjj_bins={150,300,400,500};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
-     TString fname=tag+name;     
+     TString fname=name+tag;     
      TFile*file;
-     if(name.Contains("plj")) file=new TFile(dir+fname+"_"+channel+".root") ; 
+     if(name.Contains("plj")) file=new TFile(dir+fname+"_weight.root") ; 
      else file=new TFile(dir+fname+".root") ;
      cout<<tag<<name<<" "<<channel<<endl;
 //   TTree*tree=(TTree*)file->Get("demo");
      TTree*tree=(TTree*)file->Get("outtree");
      int lep;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double ptVlep, yVlep, phiVlep, massVlep;
@@ -38,6 +38,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
+     tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
      tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
      tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
@@ -46,15 +47,13 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
-     tree->SetBranchAddress("muon1_track_scale", &muon1_track_scale);
-     tree->SetBranchAddress("muon2_track_scale", &muon2_track_scale);
      TString th2name,th2name_out;
      if(name.Contains("EWK")) {
 	     th2name="hist_sig";
      }
      else  th2name="hist_bkg";
              
-     TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco;;yields",mjj_bins[0],mjj_bins[1]),1,0,1);
+     TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco;;yields",mjj_bins[0],mjj_bins[mjj_bins.size()-1]),mjj_bins.size()-1,&mjj_bins[0]);
      
      TString var2="Mjj";
      TString var1="fabs(jet1eta-jet2eta)";
@@ -87,11 +86,9 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 	     if(tag.Contains("18"))  prefWeight=1;
 	     actualWeight=scalef*pileupWeight*prefWeight*lumi;
 	     if(lep==11)       
-		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale;
+		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale;
 	     if(lep==13)       
-		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale;
-             if(tag.Contains("17")) 
-		     actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_id_scale/(muon1_track_scale*muon2_track_scale);
+		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale;
 	     if(name.Contains("plj")) actualWeight=scalef;
 		     if (  tformula1->EvalInstance() ){ 
 			     //cout<<name<<" "<<scalef<<" "<<pileupWeight<<" "
@@ -99,7 +96,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 			     //<<muon1_id_scale<<" "<<muon2_id_scale<<" "<<muon1_iso_scale<<" "<<muon2_iso_scale<<" "
 			     //<<photon_id_scale<<" "
 			     //<<prefWeight<<" "<<actualWeight<<endl;
-			     if(Mjj>150&&Mjj<400)hist->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
+			     if(Mjj>150&&Mjj<500)hist->Fill(Mjj,actualWeight);//0~1, 2.5~4.5 and 500~800
 
 		     }
      }
@@ -109,28 +106,30 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      fout->Close();
 }
 int Build_Hist(){
-	TString LEPmu = "drll>0.3 && lep==13 && (HLT_Mu1>0 || HLT_Mu2>0 || HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110";
-	TString LEPele = "lep==11  && (HLT_Ele1>0 || HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110";
-	TString photon = "photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )";
+	TString LEPmu = "(drll>0.3 && lep==13 && (HLT_Mu1>0 || HLT_Mu2>0 || HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110)";
+	TString LEPele = "(lep==11  && (HLT_Ele1>0 || HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
+	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ) )";
 	TString jet;
 	TString Pi=Form("%f",pi);
-	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
-	TString ControlRegion = "Mjj>150 && Mjj<400 && ZGmass>100";
+	TString dr = "( ( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5 )";
+	TString ControlRegion = "(Mjj>150 && Mjj<500 && ZGmass>100)";
 	vector<TString> tags={"16","17","18"};
-//	vector<TString> tags={"17"};
-	TString dir1="/afs/cern.ch/user/y/yian/work/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
+//	vector<TString> tags={"16"};
+	TString dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
         TString Reco;
-	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","WA","plj"};
+	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int k=0;k<tags.size();k++){
 		if(tags[k].Contains("17")==1){
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+//                       jet="(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )  ";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
 		Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		cout<<jet<<endl;
+//		if(tags[k].Contains("17")==0) continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
 				run(dir1,names[j],Reco,tags[k],channels[i]);

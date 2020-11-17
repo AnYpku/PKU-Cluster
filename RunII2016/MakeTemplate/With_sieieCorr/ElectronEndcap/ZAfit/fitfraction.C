@@ -9,20 +9,26 @@
 using namespace RooFit;
 using namespace std;
 TString dir = "./fractionfitResult_za/"; 
-ofstream file3( dir + "info_fit_fr2.txt");
+ofstream file3( dir + "info_fit_fr.txt");
 ofstream file2( dir + "frac_number.txt");
-TFile* fdata = TFile::Open("../root/Data_template2-outDEle.root");
-TFile* ftrue = TFile::Open("../root/True_template2-outZA.root");
-TFile* ffake = TFile::Open("../root/Fake_template2-outDEle.root");
-//TFile* ftrue = TFile::Open("../root/True_templa2e-cutlep-outZA-EWK.root");
-//TFile* ftrue = TFile::Open("../root/True_template-cutlep-outTTA.root");
+TFile* fdata = TFile::Open("../root/Data_template-DEle16.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DEle16.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA16.root");
+//TFile* ftrue = TFile::Open("../root/True_template-TTA16.root");
+//TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK16.root");
 Double_t fr,fr_Error;
 TString name;
 void fitf(float lowpt, float highpt){
 //TString b="chiso5-12_";
         TString filename = ftrue->GetName();
         if(filename.Contains("EWK")) name = "EWK";
-        else name = "ZA2";
+        else if(filename.Contains("TTA")) name = "TTA";
+        else{
+                TString fdata_name=fdata->GetName();
+                if(fdata_name.Contains("template2")) name = "ZA2";
+                else if(fdata_name.Contains("template1")) name = "ZA1";
+                else name = "ZA";
+        }
         TH1F* hdata = (TH1F*)fdata->Get(Form("h3_pt%0.f_%0.f",lowpt,highpt));
         TH1F* hfake = (TH1F*)ffake->Get(Form("h2_pt%0.f_%0.f",lowpt,highpt));
         TH1F* htrue = (TH1F*)ftrue->Get(Form("h1_pt%0.f_%0.f",lowpt,highpt));

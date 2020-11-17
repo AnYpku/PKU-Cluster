@@ -81,18 +81,16 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	}
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
-	if(tag.Contains("16"))
-		fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK.root");
-	else fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK-pweight.root");
-	Double_t mjj_bins[4]={500, 800, 1200, 2000};
-	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
+        fin=new TFile("/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_ZA-EWK"+tag+".root");
+	Double_t mjj_bins[2]={150,500};
+	Double_t detajj_bins[2]={0,2.5};
 	TString th1name[3];
 	for(int i=0;i<3;i++){
                    th1name[i]=Form("hist_%d",i);
-                   th1[i] = new TH1D(th1name[i],th1name[i],9,0,9);
+                   th1[i] = new TH1D(th1name[i],th1name[i],1,0,1);
 		   th1[i]->Sumw2();
 	}
-	TTree*tree=(TTree*)fin->Get("demo");
+	TTree*tree=(TTree*)fin->Get("outtree");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2,photone,photonphi;
 	double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
@@ -111,7 +109,6 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	tree->SetBranchAddress("jet2pt",&jet2pt);
 	tree->SetBranchAddress("jet1phi",&jet1phi);
 	tree->SetBranchAddress("jet2phi",&jet2phi);
-	tree->SetBranchAddress("deltaetajj",&deltaetajj);
 	tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
 	tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
 	tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
@@ -143,6 +140,9 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	TLorentzVector Zp4, photonp4, jet1p4, jet2p4;
 	double actualWeight,delta_phi,detajj;
 	for(int k=0;k<tree->GetEntries();k++){
+		muon_WeightUp=0;muon_WeightDn=0;muon_Weight=0;
+		ele_WeightUp=0,ele_WeightDn=0,ele_Weight=0;
+		photon_WeightUp=0,photon_WeightDn=0,photon_Weight=0;
 		tree->GetEntry(k);
 		detajj=fabs(jet1eta-jet2eta);
 		Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, massVlep);
@@ -217,7 +217,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 				count_muUp=count_muUp+muon_WeightUp;
 				count_muDn=count_muDn+muon_WeightDn;
 				for(int i=0;i<3;i++){
-					if(Mjj>=150&&Mjj<400)th1[i]->Fill(0.5,muon_weight[i]);//0~1, 2.5~4.5 and 500~800                
+					if(Mjj>=150&&Mjj<500)th1[i]->Fill(0.5,muon_weight[i]);//0~1, 2.5~4.5 and 500~800                
 				}
 			}
 			if(lep==11){
@@ -225,7 +225,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 				count_eleUp=count_eleUp+ele_WeightUp;
 				count_eleDn=count_eleDn+ele_WeightDn;
 				for(int i=0;i<3;i++){
-					if(Mjj>=150&&Mjj<400)th1[i]->Fill(0.5,ele_weight[i]);//0~1, 2.5~4.5 and 500~800                
+					if(Mjj>=150&&Mjj<500)th1[i]->Fill(0.5,ele_weight[i]);//0~1, 2.5~4.5 and 500~800                
 				}
 			}
 			if(photonet>0){
@@ -233,7 +233,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 				count_gammaUp=count_gammaUp+photon_WeightUp;
 				count_gammaDn=count_gammaDn+photon_WeightDn;
 				for(int i=0;i<3;i++){
-					if(Mjj>=150&&Mjj<400)th1[i]->Fill(0.5,photon_weight[i]);//0~1, 2.5~4.5 and 500~800                
+					if(Mjj>=150&&Mjj<500)th1[i]->Fill(0.5,photon_weight[i]);//0~1, 2.5~4.5 and 500~800                
 				}
 			}
 		}
@@ -260,12 +260,12 @@ int cal(){
 	TH1D*th2[3][3];//[particle][3]
 	for(int j=0;j<tag.size();j++){
 		if(tag[j].Contains("17")){
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else{   
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 		}
-		TString ControlRegion = "Mjj>150 && Mjj<400 && Mva>100";
+		TString ControlRegion = "Mjj>150 && Mjj<500 && ZGmass>100";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion; 
 		cout<<tag[j]<<" "<<jet<<endl;
 		for(int i=0;i<par.size();i++){

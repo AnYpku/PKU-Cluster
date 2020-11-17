@@ -41,7 +41,7 @@ void run(TString channel,TString tag){
 }
 int uncer_fakephoton(){
      vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};//,"Mva","Mjj"};
-     vector<TString> tag={"2016","2017","2018"};
+     vector<TString> tag={"16","17","18"};
      for(int i=0;i<channels.size();i++){
 	     for(int j=0;j<tag.size();j++){
 		     run(channels[i],tag[j]);

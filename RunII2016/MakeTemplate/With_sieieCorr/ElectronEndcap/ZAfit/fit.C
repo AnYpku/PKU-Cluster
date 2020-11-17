@@ -7,15 +7,17 @@
 using namespace RooFit;
 ofstream file3("info_fit.txt");
 TString name ;
-TFile* fdata = TFile::Open("../root/Data_template-outDEle.root");
-TFile* ffake = TFile::Open("../root/Fake_template-outDEle.root");
-//TFile* ftrue = TFile::Open("../root/True_template1-outZA.root");
-TFile* ftrue = TFile::Open("../root/True_template1-outZA-EWK.root");
+TFile* fdata = TFile::Open("../root/Data_template-DEle16.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DEle16.root");
+//TFile* ftrue = TFile::Open("../root/True_template-ZA16.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK16.root");
+//TFile* ftrue = TFile::Open("../root/True_template-TTA16.root");
 //TFile* ftrue = TFile::Open("/Users/andy/tmp/True_template-cutLEP-outZA.root");
 void fit(float lowpt, float highpt){
 //TString b="chiso5-12_";
         TString filename = ftrue->GetName();
         if(filename.Contains("EWK")) name = "EWK";
+        else if(filename.Contains("TTA")) name = "TTA";
         else name = "ZA";
 	TH1F* hdata_ = (TH1F*)fdata->Get(Form("h3_pt%0.f_%0.f",lowpt,highpt));
 	TH1F* hfake_ = (TH1F*)ffake->Get(Form("h2_pt%0.f_%0.f",lowpt,highpt));
@@ -24,12 +26,15 @@ void fit(float lowpt, float highpt){
         TH1F* hzaf_  = (TH1F*)ftrue->Get(Form("h4_pt%0.f_%0.f",lowpt,highpt));
 	hfake_->Add(hzaf_,-35.8);
 
-	Int_t nBins = 10;
+	Int_t nBins =10;
 	Int_t sieie_bin=4;
 	Double_t bins[11];
 	for (Int_t i=0;i<(nBins+1);i++){
 		bins[i] = 0.0072 + 0.005*i;
         }
+//        Int_t sieie_bin=1;
+//	Int_t nBins =2;
+//	Double_t bins[3]={0.0072,0.0272,0.0572};
 	TH1* hdata = hdata_->Rebin(nBins, "hdata", bins);
 	TH1* htrue = htrue_->Rebin(nBins, "htrue", bins);
 	TH1* hfake = hfake_->Rebin(nBins, "hfake_data", bins);

@@ -45,11 +45,7 @@ void findbin::Loop()
       LEP = lep==11 && (HLT_Ele1>0|| HLT_Ele2>0)  && ptlep1 > 25. && ptlep2 > 25.&& abs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep >70. && massVlep < 110;// && drla>0.7;
       for(Int_t j=0;j<6;j++){
 	      if(photon_pt[j]>400) photon_pt[j]=399;
-	      Photon_cut[j]= photon_pev[j]==1 && /*photon_pevnew[j]==1 &&*/ photon_hoe[j]<0.02197 && 
-		      photon_nhiso[j]<1.189 + 0.01512*photon_pt[j]+0.00002259*photon_pt[j]*photon_pt[j] && 
-		      photon_phoiso[j]<2.08 + 0.004017*photon_pt[j]&&
-		      fabs(photon_eta[j])<1.4442&&photon_pt[j]>20&&photon_pt[j]<400&&
-		      photon_drla[j]>0.7&&photon_drla[j]!=10&&photon_drla2[j]>0.7&&photon_drla2[j]!=10;
+	      Photon_cut[j]= photon_pev[j]==1 /* photon_pevnew[j]==1*/ && photon_hoe[j]<0.0326 && photon_nhiso[j]<2.718 + 0.0117*photon_pt[j] + 0.000023*photon_pt[j]*photon_pt[j] && photon_phoiso[j]<3.867 + 0.0037*photon_pt[j]&&( fabs(photon_eta[j])<2.5&&fabs(photon_eta[j])>1.566 ) &&photon_pt[j]>20&&photon_pt[j]<400&&photon_drla[j]>0.7&&photon_drla[j]!=10&&photon_drla2[j]>0.7&&photon_drla2[j]!=10;
           if(Photon_cut[j]&&LEP/*&&(jet_flag==true)*/){
                   vector_pt.push_back(photon_pt[j]);}
           else {vector_pt.push_back(0);}

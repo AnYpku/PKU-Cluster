@@ -525,7 +525,7 @@ void xx::Init(TTree *tree)
    fCurrent = -1;
    fChain->SetMakeClass(1);
 
-   fout = new TFile("/eos/user/y/yian/2018cutla/"+m_dataset, "RECREATE");
+   fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
 
    fChain->SetBranchAddress("nevent", &nevent, &b_nevent);

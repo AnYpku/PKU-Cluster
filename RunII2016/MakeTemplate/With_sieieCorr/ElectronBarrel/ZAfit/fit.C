@@ -6,11 +6,11 @@
 #include "RooAddPdf.h"
 using namespace RooFit;
 ofstream file3("info_fit.txt");
-TFile* fdata = TFile::Open("../root/Data_template-outDEle.root");
-TFile* ftrue = TFile::Open("../root/True_template-outZA.root");
-TFile* ffake = TFile::Open("../root/Fake_template-outDEle.root");
+TFile* fdata = TFile::Open("../root/Data_template-DEle16.root");
+//TFile* ftrue = TFile::Open("../root/True_template-ZA16.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DEle16.root");
 //TFile* ftrue = TFile::Open("../root/True_template-TTA.root");
-//TFile* ftrue = TFile::Open("../root/True_template-outZA-EWK.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK16.root");
 TString name;
 void fit(float lowpt, float highpt){
 //TString b="chiso5-12_";

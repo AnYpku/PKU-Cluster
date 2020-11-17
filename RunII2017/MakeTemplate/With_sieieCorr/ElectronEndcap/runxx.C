@@ -4,9 +4,8 @@
 using namespace std;
 
 void runxx() {
-//TString dir="../endcap/rootfiles/";
 TString dir="./rootfiles/";
-//TString dir = "/eos/user/y/yian/2017cutla/";
+//TString dir = "/home/pku/anying/cms/rootfiles/2017/";
 ifstream infile("file");
 string buffer;
 TString name;

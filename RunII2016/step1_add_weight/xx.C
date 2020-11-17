@@ -84,7 +84,7 @@ void xx::Loop()
 		if(m_dataset.Contains("DEle")){ scalef=1.0; run_period=1;}
 
 		if(m_dataset.Contains("WA")){ scalef=1000.*405.3/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		if(m_dataset.Contains("ZJets_FX")){ scalef=1000.*60772.22/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("DY")){ scalef=1000.*6077.22/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("TTJets")){ scalef=1000.*831.76/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA16")){ scalef=1000.*47.46/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("TTA")){ scalef=1000.*3.697/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
@@ -136,7 +136,7 @@ void xx::Loop()
                 JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
                 if( !( (LEPmu||LEPele)  )  )
-                        continue;
+                      continue;
 		ExTree->Fill();
 	}
 	f->Close();

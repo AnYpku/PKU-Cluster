@@ -7,7 +7,7 @@
 #include "TFile.h"
 #include "TCollection.h"
 #include "TKey.h"
-#include "EDBRHistoMaker.h"
+#include "EDBRHistoMaker_a.h"
 #include "EDBRHistoPlotter.h"
 #include "test.C"
 #include "CMSTDRStyle.h"

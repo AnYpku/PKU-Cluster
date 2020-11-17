@@ -1,14 +1,14 @@
-#include "ee.C"
+#include "xx.C"
 #include <iostream>
 #include <fstream>
 using namespace std;
 
 void runxx() {
-//TString dir = "/data/pku/home/anying/cms/CMSSW_8_0_26_patch2/analysis_code/MakeTemplate/ZAJetfakeohoton/pesudo/";
-//TString dir = "/data/pku/home/anying/cms/file_in_cms/files_weighted/";
-TString dir = "/eos/user/y/yian/2016legacy/ZA-EWK-JESR/";
+//gROOT->LoadMacro("xx.C");
+//TString dir="/data/pku/home/anying/cms/file_in_cms/files_weighted/";
+TString dir ="/home/pku/anying/cms/rootfiles/JESR/JESR_";
 ifstream infile("file");
-string buffer;
+string buffer; 
 TString infilename;
 
 int k=1;
@@ -16,24 +16,26 @@ int k=1;
 while (k>0){
 getline (infile, buffer) ;
 infilename = buffer;
-if(infilename.Contains(".root")==0) {k=-2; continue;}
-TString outname="out"+infilename;
+if(infilename.Contains("root")==0) {k=-2; continue;}
+infilename = /*"cutlep-"out"+*/infilename;
+TString outname="cutlep-out"+infilename;
 
-cout<<infilename<<endl;
-cout<<outname<<endl;
+cout<<dir<<infilename<<" -> "<<dir<<outname<<endl;
 
 TFile *file1 =new TFile(dir+infilename);
 TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");
 TTree *tree1 = (TTree*) dir1->Get("ZPKUCandidates");
-ee m1(tree1,outname);
-cout<<"OK"<<endl;
+//TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
+xx m1(tree1,outname);
+cout<<outname<<endl;
 m1.Loop();
 m1.endJob();
-
+ 
 }
 }
 
 int main(){
-    runxx();
-    return 1;
-  }
+	runxx();
+	return 1;
+}
+

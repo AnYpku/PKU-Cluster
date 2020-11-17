@@ -128,8 +128,8 @@ int Print_uncer_bkg(){
         vector<TString> tag={"16","17","18"};
 	for(int i=0;i<tag.size();i++){
 		run("qcd",tag[i],9);
-//		run("SigOut",tag[i],3);
-//		run("ewk",tag[i],3);
+		run("SigOut",tag[i],3);
+		run("ewk",tag[i],3);
 	}
 	return 0;
 }

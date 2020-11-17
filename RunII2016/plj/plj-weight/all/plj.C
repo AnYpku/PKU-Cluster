@@ -4,22 +4,18 @@
 #include <TStyle.h>
 #include <iostream>
 #include <TCanvas.h>
-#include "L1_weight.C"
 #include <fstream>
 using namespace std;
-void plj::Loop(TString name)
+void plj::Loop(TString flag)
 {
    if (fChain == 0) return;
 
    Long64_t nentries = fChain->GetEntriesFast();
-   double lep1_phi_station2_tmp = 0;
-   double lep2_phi_station2_tmp = 0;
-
    ifstream f1,f2,f3,f4;
-   f1.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2016legacy/fakephoton/elebarrel/step1/pljweight"+name+".txt");
-   f2.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2016legacy/fakephoton/eleendcap/step1/pljweight"+name+".txt");
-   f3.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2016legacy/fakephoton/mubarrel/step1/pljweight"+name+".txt");
-   f4.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Uncer/2016legacy/fakephoton/muendcap/step1/pljweight"+name+".txt");
+   f1.open("/home/pku/anying/cms/PKU-Cluster/FakePhoton/txt/pljweight"+flag+"_mubarrel16.txt");
+   f2.open("/home/pku/anying/cms/PKU-Cluster/FakePhoton/txt/pljweight"+flag+"_muendcap16.txt");
+   f3.open("/home/pku/anying/cms/PKU-Cluster/FakePhoton/txt/pljweight"+flag+"_elebarrel16.txt");
+   f4.open("/home/pku/anying/cms/PKU-Cluster/FakePhoton/txt/pljweight"+flag+"_eleendcap16.txt");
    Double_t scalef_f1[8];
    Double_t scalef_f2[8];
    Double_t scalef_f3[8];
@@ -46,7 +42,7 @@ void plj::Loop(TString name)
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       if(jentry%1000000==0) cout<<jentry<<", "<<nentries<<endl;
      
-      if(lep==11 && fabs(photoneta)<1.4442){
+      if(lep==13 && fabs(photoneta)<1.4442){
 	      if(photonet>20 &&  photonet<25)      {int i=0;scalef_tmp = scalef_f1[i];}
 	      if(photonet>25 &&  photonet<30)      {int i=1;scalef_tmp = scalef_f1[i];}
 	      if(photonet>30 &&  photonet<35)      {int i=2;scalef_tmp = scalef_f1[i];}
@@ -57,7 +53,7 @@ void plj::Loop(TString name)
 	      if(photonet>100)                     {int i=7;scalef_tmp = scalef_f1[i];}
       }
 
-      if(lep==11 && fabs(photoneta)>1.566 && fabs(photoneta)<2.5){
+      if(lep==13 && fabs(photoneta)>1.566 && fabs(photoneta)<2.5){
 	      if(photonet>20 &&  photonet<25)      {int i=0;scalef_tmp = scalef_f2[i];}
 	      if(photonet>25 &&  photonet<30)      {int i=1;scalef_tmp = scalef_f2[i];}
 	      if(photonet>30 &&  photonet<40)      {int i=2;scalef_tmp = scalef_f2[i];}
@@ -66,7 +62,7 @@ void plj::Loop(TString name)
 	      if(photonet>60/*&&  photonet<400*/)  {int i=5;scalef_tmp = scalef_f2[i];}
       }
       
-      if(lep==13 && fabs(photoneta)<1.4442){
+      if(lep==11 && fabs(photoneta)<1.4442){
 	      if(photonet>20 &&  photonet<25)      {int i=0;scalef_tmp = scalef_f3[i];}
 	      if(photonet>25 &&  photonet<30)      {int i=1;scalef_tmp = scalef_f3[i];}
 	      if(photonet>30 &&  photonet<35)      {int i=2;scalef_tmp = scalef_f3[i];}
@@ -77,7 +73,7 @@ void plj::Loop(TString name)
 	      if(photonet>100)                     {int i=7;scalef_tmp = scalef_f3[i];}
       }
 
-      if(lep==13 && fabs(photoneta)>1.566 && fabs(photoneta)<2.5){
+      if(lep==11 && fabs(photoneta)>1.566 && fabs(photoneta)<2.5){
 	      if(photonet>20 &&  photonet<25)      {int i=0;scalef_tmp = scalef_f4[i];}
 	      if(photonet>25 &&  photonet<30)      {int i=1;scalef_tmp = scalef_f4[i];}
 	      if(photonet>30 &&  photonet<40)      {int i=2;scalef_tmp = scalef_f4[i];}

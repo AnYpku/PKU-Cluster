@@ -1,8 +1,10 @@
 #define num 3
-void run(TFile* file,TString cut1,TString tag,TString channel){
+void run(TString cut1,TString tag,TString channel){
      Double_t Mjj_bins[2]={150, 400};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
-     TTree*tree=(TTree*)file->Get("demo");     
+     TString dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
+     TFile*file=new TFile(dir+"unfold_GenCutla-outZA-EWK"+tag+".root");
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
      Double_t Mjj,jet1eta,jet2eta;
@@ -70,16 +72,12 @@ int Uncer_batch_sig(){
 	TString dr = "drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
         vector<TString> tag={"16","17"};
 
-	TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";     
-	TFile*file1=new TFile(dir+"unfold_16outZA-EWK.root");
-	TFile*file2=new TFile(dir+"unfold_17outZA-EWK-pweight.root");
-
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	const int kk=channels.size();
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
 		}
 		else{
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
@@ -93,7 +91,7 @@ int Uncer_batch_sig(){
 		cout<<tag[i]<<" "<<jet<<endl;
 		cout<<GenJet<<endl;
 		for(int j=0;j<kk;j++){
-			run(file1,cut1,tag[i],channels[j]);
+			run(cut1,tag[i],channels[j]);
 		}
 	}
 	return 1;

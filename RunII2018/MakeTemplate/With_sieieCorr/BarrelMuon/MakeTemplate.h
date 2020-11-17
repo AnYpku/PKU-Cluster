@@ -46,6 +46,7 @@ public :
    Double_t        ele1_reco_scale;
    Double_t        ele2_reco_scale;
    Double_t        photon_id_scale;
+   Double_t        photon_veto_scale;
    Double_t        muon1_id_scale;
    Double_t        muon2_id_scale;
    Double_t        muon1_iso_scale;

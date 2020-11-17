@@ -6,16 +6,16 @@
 #include "RooAddPdf.h"
 using namespace RooFit;
 ofstream file3("info_fit.txt");
-TFile* fdata = TFile::Open("../root/Data_template2-DMuon.root");
-TFile* ftrue = TFile::Open("../root/True_template2-ZA.root");
-TFile* ffake = TFile::Open("../root/Fake_template2-DMuon.root");
-//TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK.root");
+TFile* fdata = TFile::Open("../root/Data_template-DMuon16.root");
+//TFile* ftrue = TFile::Open("../root/True_template-ZA16.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DMuon16.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK16.root");
 TString name;
 void fit(float lowpt, float highpt){
 //TString b="chiso5-12_";
         TString filename = ftrue->GetName();
         if(filename.Contains("EWK")) name = "EWK"; 
-        else name = "ZA2";
+        else name = "ZA";
 	TH1F* hdata_ = (TH1F*)fdata->Get(Form("h3_pt%0.f_%0.f",lowpt,highpt));
 	TH1F* hfake_ = (TH1F*)ffake->Get(Form("h2_pt%0.f_%0.f",lowpt,highpt));
 	TH1F* htrue_ = (TH1F*)ftrue->Get(Form("h1_pt%0.f_%0.f",lowpt,highpt));
@@ -183,8 +183,8 @@ void fit(float lowpt, float highpt){
         textFR->Draw();
 
     char buffer[256];
-	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
-//	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
+//	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
+	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
 	c1->Print(buffer);
 
 }

@@ -6,25 +6,26 @@ using namespace std;
 void runxx() {
 //gROOT->LoadMacro("xx.C");
 //TString dir="/data/pku/home/anying/cms/file_in_cms/files_weighted/";
-TString dir ="/eos/cms/store/user/yian/";
+TString dir ="/home/pku/anying/cms/rootfiles/JESR/JESR_";
 ifstream infile("file");
 string buffer; 
-TString name;
+TString infilename;
 
 int k=1;
 
 while (k>0){
 getline (infile, buffer) ;
-name = buffer;
-TString infilename = name;
-TString outname="cutla-out"+name;
+infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
+infilename = /*"cutlep-"out"+*/infilename;
+TString outname="cutla-out"+infilename;
 
-cout<<outname<<endl;
+cout<<dir<<infilename<<" -> "<<dir<<outname<<endl;
 
 TFile *file1 =new TFile(dir+infilename);
 TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");
 TTree *tree1 = (TTree*) dir1->Get("ZPKUCandidates");
+//TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 xx m1(tree1,outname);
 cout<<outname<<endl;
 m1.Loop();

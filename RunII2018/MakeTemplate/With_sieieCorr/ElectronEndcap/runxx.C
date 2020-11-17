@@ -5,7 +5,7 @@ using namespace std;
 
 void runxx() {
 TString dir="./rootfiles/";
-//TString dir = "/eos/user/y/yian/2018cutla/";
+//TString dir = "/home/pku/anying/cms/rootfiles/2018/";
 ifstream infile("file");
 string buffer;
 TString name;
@@ -23,7 +23,7 @@ TString filename= name+".root";
 cout<<name<<endl;
 
 TFile *file1 =new TFile(dir+filename);
-TTree *tree1 = (TTree*) file1->Get("demo");
+TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 MakeTemplate m1(tree1);
 cout<<filename<<endl;
 m1.Loop(name,gr);

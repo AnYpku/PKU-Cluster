@@ -19,7 +19,7 @@ using namespace std;
 void fX0_parameterization_elehist(int index){
 
 //	const TString InData_New = "./cutla-";
-	const TString InData_New = "/eos/user/y/yian/2016cutla/cutlaj-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/2016/cutlaj-";
 
 	// Specify event selection cuts:
 	// Create output ROOT file:
@@ -45,7 +45,7 @@ void fX0_parameterization_elehist(int index){
 	fout = new TFile("hist_ele_"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
-	f_file =  new TFile(InData_New+"outZA_aQGC.root");
+	f_file =  new TFile(InData_New+"outZA_aQGC16.root");
 	TTree* treef = (TTree*) f_file->Get("demo");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
@@ -65,13 +65,10 @@ void fX0_parameterization_elehist(int index){
         Double_t        muon2_id_scale;
         Double_t        muon1_iso_scale;
         Double_t        muon2_iso_scale;
-        Double_t        muon1_track_scale;
-        Double_t        muon2_track_scale;
-        Double_t        muon_hlt_scale;
         Double_t        lumiWeight;
         Double_t        scalef;
         Double_t        pileupWeight;
-        Double_t        photon_veto_scale=0.9938;
+        Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("Mva",&Mva);
 	treef->SetBranchAddress("HLT_Ele2",&HLT_Ele2);
@@ -101,9 +98,6 @@ void fX0_parameterization_elehist(int index){
         treef->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
         treef->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
         treef->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
-        treef->SetBranchAddress("muon1_track_scale", &muon1_track_scale);
-        treef->SetBranchAddress("muon2_track_scale", &muon2_track_scale);
-        treef->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
         treef->SetBranchAddress("ele1_id_scale", &ele1_id_scale);
         treef->SetBranchAddress("ele2_id_scale", &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
@@ -157,7 +151,7 @@ void fX0_parameterization_elehist(int index){
                         if(Mva>2e4) Mva=1999;
 			if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
 			if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
-			Double_t weight=lumiWeight * pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*prefWeight;
+			Double_t weight= pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*prefWeight;
 //                        cout<<"scalef"<<scalef<<"; weight"<<weight<<endl;
 //			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){

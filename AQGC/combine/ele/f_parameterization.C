@@ -119,22 +119,22 @@ void fX0_parameterization(int index){
 	// Ratio 
         double xxf[17];
 	std::ofstream ParamSetf ;
-	if(index==1) {ParamSetf.open("paramsets_fM0.txt");double xf[17] = {-150, -120, -80, -60, -50, -30, -20, -8, 0, 8, 20, 30, 50, 60, 80, 120, 150};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==2) {ParamSetf.open("paramsets_fM1.txt");double xf[17] = {-400, -300, -200, -150, -100, -80, -50, -20, 0, 20, 50, 80, 100, 150, 200, 300, 400};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==3) {ParamSetf.open("paramsets_fM2.txt");double xf[17] = {-100, -50, -40, -30, -20, -10, -5, -1, 0, 1, 5, 10, 20, 30, 40, 50, 100};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==4) {ParamSetf.open("paramsets_fM3.txt");double xf[17] = {-200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==5) {ParamSetf.open("paramsets_fM4.txt");double xf[17] = {-200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==6) {ParamSetf.open("paramsets_fM5.txt");double xf[17] = {-200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==7) {ParamSetf.open("paramsets_fM6.txt");double xf[17] = {-250, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 250};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==8) {ParamSetf.open("paramsets_fM7.txt");double xf[17] = {-200, -120, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 120, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==9) {ParamSetf.open("paramsets_fT0.txt");double xf[17] = {-20, -10, -6, -5, -3, -2, -1, -0.6, 0, 0.6, 1, 2, 3, 5, 6, 10, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==10) {ParamSetf.open("paramsets_fT1.txt");double xf[17] = {-20, -10, -6, -5, -3, -2, -1, -0.6, 0, 0.6, 1, 2, 3, 5, 6, 10, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==11) {ParamSetf.open("paramsets_fT2.txt");double xf[17] = {-40, -20, -15, -10, -8, -6, -4, -1, 0, 1, 4, 6, 8, 10, 15, 20, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==12) {ParamSetf.open("paramsets_fT5.txt");double xf[17] = {-40, -10, -8, -6, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 8, 10, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==13) {ParamSetf.open("paramsets_fT6.txt");double xf[17] = {-40, -10, -8, -6, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 8, 10, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==14) {ParamSetf.open("paramsets_fT7.txt");double xf[17] = {-40, -10, -8, -6, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 8, 10, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==15) {ParamSetf.open("paramsets_fT8.txt");double xf[17] = {-20, -8, -6, -4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 6, 8, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
-        if(index==16) {ParamSetf.open("paramsets_fT9.txt");double xf[17] = {-20, -8, -6, -4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 6, 8, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+	if(index==1) {ParamSetf.open("./txt/paramsets_fM0.txt");double xf[17] = {-150, -120, -80, -60, -50, -30, -20, -8, 0, 8, 20, 30, 50, 60, 80, 120, 150};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==2) {ParamSetf.open("./txt/paramsets_fM1.txt");double xf[17] = {-400, -300, -200, -150, -100, -80, -50, -20, 0, 20, 50, 80, 100, 150, 200, 300, 400};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==3) {ParamSetf.open("./txt/paramsets_fM2.txt");double xf[17] = {-100, -50, -40, -30, -20, -10, -5, -1, 0, 1, 5, 10, 20, 30, 40, 50, 100};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==4) {ParamSetf.open("./txt/paramsets_fM3.txt");double xf[17] = {-200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==5) {ParamSetf.open("./txt/paramsets_fM4.txt");double xf[17] = {-200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==6) {ParamSetf.open("./txt/paramsets_fM5.txt");double xf[17] = {-200, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==7) {ParamSetf.open("./txt/paramsets_fM6.txt");double xf[17] = {-250, -100, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 100, 250};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==8) {ParamSetf.open("./txt/paramsets_fM7.txt");double xf[17] = {-200, -120, -80, -60, -40, -20, -10, -5, 0, 5, 10, 20, 40, 60, 80, 120, 200};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==9) {ParamSetf.open("./txt/paramsets_fT0.txt");double xf[17] = {-20, -10, -6, -5, -3, -2, -1, -0.6, 0, 0.6, 1, 2, 3, 5, 6, 10, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==10) {ParamSetf.open("./txt/paramsets_fT1.txt");double xf[17] = {-20, -10, -6, -5, -3, -2, -1, -0.6, 0, 0.6, 1, 2, 3, 5, 6, 10, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==11) {ParamSetf.open("./txt/paramsets_fT2.txt");double xf[17] = {-40, -20, -15, -10, -8, -6, -4, -1, 0, 1, 4, 6, 8, 10, 15, 20, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==12) {ParamSetf.open("./txt/paramsets_fT5.txt");double xf[17] = {-40, -10, -8, -6, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 8, 10, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==13) {ParamSetf.open("./txt/paramsets_fT6.txt");double xf[17] = {-40, -10, -8, -6, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 8, 10, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==14) {ParamSetf.open("./txt/paramsets_fT7.txt");double xf[17] = {-40, -10, -8, -6, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 8, 10, 40};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==15) {ParamSetf.open("./txt/paramsets_fT8.txt");double xf[17] = {-20, -8, -6, -4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 6, 8, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
+        if(index==16) {ParamSetf.open("./txt/paramsets_fT9.txt");double xf[17] = {-20, -8, -6, -4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 6, 8, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
 	// Times 10^{-12} (GeV^{-4})
 
 	for(int abin=0;abin<num;abin++){
@@ -278,22 +278,22 @@ void fX0_parameterization(int index){
 		//leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
 		leg->Draw("SAME") ;
 		cout <<"x9"<<endl;
-		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+		if(index==1) c1->SaveAs(TString("./figs/fit_fM0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==2) c1->SaveAs(TString("./figs/fit_fM1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==3) c1->SaveAs(TString("./figs/fit_fM2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==4) c1->SaveAs(TString("./figs/fit_fM3")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==5) c1->SaveAs(TString("./figs/fit_fM4")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==6) c1->SaveAs(TString("./figs/fit_fM5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==7) c1->SaveAs(TString("./figs/fit_fM6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==8) c1->SaveAs(TString("./figs/fit_fM7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==9) c1->SaveAs(TString("./figs/fit_fT0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==10) c1->SaveAs(TString("./figs/fit_fT1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==11) c1->SaveAs(TString("./figs/fit_fT2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==12) c1->SaveAs(TString("./figs/fit_fT5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==13) c1->SaveAs(TString("./figs/fit_fT6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==14) c1->SaveAs(TString("./figs/fit_fT7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==15) c1->SaveAs(TString("./figs/fit_fT8")+Form("_ZGbin_%u",abin)+TString(".png")) ;
+                if(index==16) c1->SaveAs(TString("./figs/fit_fT9")+Form("_ZGbin_%u",abin)+TString(".png")) ;
 //		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".png")) ;
 
 		ParamSetf << par0 << " " << par1 << " " << endl;

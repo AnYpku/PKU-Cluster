@@ -24,7 +24,7 @@ void MakeTemplate::Loop(TString name,TGraph*gr)
 	Long64_t nbytes = 0, nb = 0;
 	double Mchiso = 6.4;
 	double chisomin = 4;
-	double chisomax = 9;//4~9
+	double chisomax = Mchiso;//4~9
 	int count=0,a=0;   
 	//   nentries = 100000;
 	TFile* ID_photon_file = TFile::Open("./ele_SFs/2017_PhotonsMedium.root");
@@ -108,16 +108,16 @@ void MakeTemplate::Loop(TString name,TGraph*gr)
 	} 
 
 	if(name.Contains("A")==1){
-		f1= new TFile("./root/True_template-"+name+".root","recreate");
+		f1= new TFile("./root/True_template1-"+name+".root","recreate");
 		for(Int_t i=0;i<num;i++){h1[i]->Write();h4[i]->Write();}
 		f1->Close();
 	}
 	if(name.Contains("D")==1){
-		f2= new TFile("./root/Fake_template-"+name+".root","recreate");
+		f2= new TFile("./root/Fake_template1-"+name+".root","recreate");
 		for(Int_t i=0;i<num;i++){h2[i]->Write();}
 		f2->Close();
 
-		f3 = new TFile("./root/Data_template-"+name+".root","recreate");
+		f3 = new TFile("./root/Data_template1-"+name+".root","recreate");
 		for(Int_t i=0;i<num;i++){h3[i]->Write();}
 		f3->Close();
 	}

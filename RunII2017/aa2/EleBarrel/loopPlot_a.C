@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	/// Path to wherever the files with the trees are. 
-	std::string pathToTrees = "/eos/user/y/yian/2017cutla/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
 //	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/cutlep/";
 	std::string outputDir = "./fig-output_a/";
 	
@@ -53,13 +53,13 @@ void loopPlot() {
 		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
 	}
 // set mc imformation
-		const int nMC = 6;
+		const int nMC = 5;
 		std::cout << "set data imformation, we have " << nMC << "mc file   "<< std::endl;
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
-		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17","WA17", 
-                                             "plj_weight","ZA17"};
-		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,1,lumiValue};
+		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17", 
+                                             "plj17_weight","ZA17"};
+		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,1,lumiValue};
 //        	double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
@@ -240,13 +240,12 @@ void loopPlot() {
 	////// {DYJetsToLL_HT-200to400,DYJetsToLL_HT-200to400,DYJetsToLL_HT-600toInf}
 	std::vector<int> fColorsMC;
 
-        fColorsMC.push_back(kGreen-4);
-        fColorsMC.push_back(kGreen-10);
-        fColorsMC.push_back(kBlue - 4);
-        fColorsMC.push_back(kBlue - 7);
-        fColorsMC.push_back(kOrange - 2);
-        fColorsMC.push_back(kRed - 7);
-	fColorsMC.push_back(2);
+        fColorsMC.push_back(kGreen+2);//ST
+        fColorsMC.push_back(kCyan);//TTA
+        fColorsMC.push_back(40);//VV
+        fColorsMC.push_back(kYellow-7);//plj
+        fColorsMC.push_back(kBlue-6);//ZA
+        fColorsMC.push_back(kRed-9);//EWK
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);

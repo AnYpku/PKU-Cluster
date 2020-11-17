@@ -25,14 +25,12 @@ void xx::Loop()
 		Long64_t ientry = LoadTree(jentry);
 		if (ientry < 0) break;
 		nb = fChain->GetEntry(jentry);
-		if(jentry%100000==0) cout<<" "<<HLT_Ele2<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<endl;
 		modify_photon_jets();
 		// if (Cut(ientry) < 0) continue;
 
-		if(m_dataset.Contains("plj")==1){ scalef=1.0; run_period=6;}
-
+		if(m_dataset.Contains("plj")==1 && m_dataset.Contains("ZA")==0){ scalef=1.0; run_period=6;}
+		if(jentry%100000==0) cout<<" "<<HLT_Ele2<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<" "<<scalef<<endl;
 		pileupWeight=1;
-                Set();
                 LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0||HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. ;
                 LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70.;
                 if(isprompt!=1)

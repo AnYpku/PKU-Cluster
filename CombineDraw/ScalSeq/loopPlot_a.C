@@ -21,8 +21,8 @@ void loopPlot() {
 
 	double lumiValue1 = 58.7;
 	double lumiValue2 = 41.52;
-	double lumiValue3 = 36;
-	double lumiValue = 136.22;
+	double lumiValue3 = 35.86;
+	double lumiValue = 136.1;
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?
@@ -36,63 +36,68 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	// Path to wherever the files with the trees are. 
-	vector<TString> pathToTrees = {"/eos/user/y/yian/2016cutla/","/eos/user/y/yian/2017cutla/","/eos/user/y/yian/2018cutla/"};
+	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/2016/","/home/pku/anying/cms/rootfiles/2017/","/home/pku/anying/cms/rootfiles/2018/"};
 	std::string outputDir = "./fig-output_a/";
 	RoccoR  rc;
         /// file for scale factors
 
 // Setup names of data files for trees.
-	const int nDATA = 2;
+	const int nDATA = 6;
 	std::cout << "set data imformation, we have " << nDATA << "data file"
 			<< std::endl;
-	std::string data[nDATA] = { "Muon","Ele"};
+	std::string data[nDATA] = { "Muon16","Ele16","Muon17","Ele17","Muon18","Ele18"};
 	std::vector < TString > fData;
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nDATA; ii++) {
+                        if(ii<2) j=0;else if(ii>1 && ii<4) j=1; else if(ii>3&&ii<6)j=2;
 			fData.push_back(pathToTrees[j] + "cutla-outD" + data[ii] + ".root");
 		}
 	}
 	const int kk=fData.size();
-	std::string dataLabels[kk] = { "Muon","Ele","Muon","Ele","Muon","Ele"};
+	std::string dataLabels[kk] = { "Muon16","Ele16","Muon17","Ele17","Muon18","Ele18"};
 	cout<<"Data size "<<fData.size()<<endl;
 	// set mc imformation
-	const int nMC = 9;//
+	const int nMC = 21;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-	std::string mc[nMC] ={"ST","TTA","VV","WA","plj_mubarrel","plj_elebarrel","plj_muendcap","plj_eleendcap","ZA"};
+	std::string mc[nMC] ={"ST16","TTA16","VV16","plj16_weight","plj16_weight_down","plj16_weight_up","ZA16",
+		              "ST17","TTA17","VV17","plj17_weight","plj17_weight_down","plj17_weight_up","ZA17",
+			      "ST18","TTA18","VV18","plj18_weight","plj18_weight_down","plj18_weight_up","ZA18" };
 	std::vector< TString > fMC;
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMC; ii++) {
+                        if(ii<7) j=0;else if(ii>6 && ii<14) j=1; else if(ii>13&&ii<21)j=2;
 			fMC.push_back(pathToTrees[j] +"cutla-out"+ mc[ii] + ".root");
 		}
 	}
 	const int nmc=fMC.size();
-	std::string mcLabels[nmc] ={"ST","TTA","VV","WA","plj_mubarrel","plj_elebarrel","plj_muendcap","plj_eleendcap","ZA",
-		"ST","TTA","VV","WA","plj_mubarrel","plj_elebarrel","plj_muendcap","plj_eleendcap","ZA",
-		"ST","TTA","VV","WA","plj_mubarrel","plj_elebarrel","plj_muendcap","plj_eleendcap","ZA"};
-	double kFactorsMC_array[nmc] ={1,1,1,1,1,1,1,1,1,
-		1,1,1,1,1,1,1,1,1,
-		1,1,1,1,1,1,1,1,1};
+	std::string mcLabels[nmc] ={"ST16","TTA16","VV16","plj16_weight","plj16_weight_down","plj16_weight_up","ZA16",
+		                    "ST17","TTA17","VV17","plj17_weight","plj17_weight_down","plj17_weight_up","ZA17",
+				    "ST18","TTA18","VV18","plj18_weight","plj18_weight_down","plj18_weight_up","ZA18"};
+	double kFactorsMC_array[nmc] ={1,1,1,1,1,1,1,
+		                       1,1,1,1,1,1,1,
+				       1,1,1,1,1,1,1};
 	cout<<"MC size "<<fMC.size()<<endl;
 	std::vector<double> kFactorsMC;
 	for (int index = 0; index < nmc; index++) {
 		kFactorsMC.push_back(kFactorsMC_array[index]);
 	}
 	// set mcsig information
-	const int nMCSig = 1;
+	const int nMCSig = 6;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 		<< std::endl;
-	std::string mcSig[nMCSig] = { "ZA-EWK"};
+	std::string mcSig[nMCSig] = { "ZA-EWK16","ZA-EWK_interf16","ZA-EWK17","ZA-EWK_interf17","ZA-EWK18","ZA-EWK_interf18"};
 	std::vector < TString > fMCSig;
-	for (int ii = 0; ii < nMCSig; ii++) {
-		for (int j = 0; j< pathToTrees.size(); j++) {
+	for (int j = 0; j< pathToTrees.size(); j++) {
+		for (int ii = 0; ii < nMCSig; ii++) {
+			if(ii==0||ii==1)j=0;else if(ii==2||ii==3)j=1;else if(ii==4||ii==5)j=2;
 			fMCSig.push_back(pathToTrees[j] + "cutla-out" + mcSig[ii] + ".root");
 		}
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
 	const int nmcsig=fMCSig.size();
-	std::string mcLabelsSig[nmcsig] = { "ZA-EWK","ZA-EWK","ZA-EWK"};
-	double kFactorsSig_array[nmcsig] = {1,1,1};
+	std::string mcLabelsSig[nmcsig] = { "ZA-EWK16","ZA-EWK_interf16","ZA-EWK17","ZA-EWK_interf17","ZA-EWK18","ZA-EWK_interf18"};
+	double kFactorsSig_array[nmcsig] = {1,1,1,1,1,1};
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nmcsig; index++) {
 		kFactorsMCSig.push_back(kFactorsSig_array[index]);
@@ -118,7 +123,7 @@ void loopPlot() {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-		//continue;
+		continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 
@@ -126,13 +131,13 @@ void loopPlot() {
 		if(fData.at(i).Contains("2016")) {tag="16";rc.init("RoccoR2016.txt"); }
 		if(fData.at(i).Contains("2017")) {tag="17";rc.init("RoccoR2017.txt"); }
 		if(fData.at(i).Contains("2018")) {tag="18";rc.init("RoccoR2018.txt"); }
-		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+tag+"%s.root", dataLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+tag+"%s.root", dataLabels[i].c_str());
+		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", dataLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_%s.root", dataLabels[i].c_str());
 		fHistosData.push_back(buffer);
 
 		std::cout << "retrieve "<<i+1<<"th data file" << std::endl;
 		TFile *fileData = TFile::Open(fData.at(i));
-		TTree *treeData = (TTree*) fileData->Get("demo");
+		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (redoHistograms) {
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeData, fileData,
@@ -150,7 +155,7 @@ void loopPlot() {
 
 	//loop over MC files and make histograms individually for each of them
 	for (int i = 0; i < fMC.size(); i++) {
-		//continue;
+//		continue;
 		std::cout << "\n-------\nRunning over " << mcLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;
@@ -158,8 +163,8 @@ void loopPlot() {
 		if(fMC.at(i).Contains("2016")) {tag="16";rc.init("RoccoR2016.txt"); }
 		if(fMC.at(i).Contains("2017")) {tag="17";rc.init("RoccoR2017.txt"); }
 		if(fMC.at(i).Contains("2018")) {tag="18";rc.init("RoccoR2018.txt"); }
-		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+tag+"%s.root",mcLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+tag+"%s.root",mcLabels[i].c_str());
+		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root",mcLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_%s.root",mcLabels[i].c_str());
 		fHistosMC.push_back(buffer);
 		std::cout << "test" << std::endl;
 
@@ -167,7 +172,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mc file" << std::endl;
 			TFile *fileMC = TFile::Open(fMC.at(i));
 			std::cout << "retrieve tree of mc file" << std::endl;
-			TTree *treeMC = (TTree*) fileMC->Get("demo");
+			TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMC, fileMC,
 					hisRatio, out_buffer, &rc);
 			maker->setUnitaryWeights(false);
@@ -182,7 +187,7 @@ void loopPlot() {
 
 	//loop over MC signal files and make histograms individually for each of them
 	for (int  i = 0; i < fMCSig.size(); i++) {
-		//continue;
+//		continue;
 		std::cout << "\n-------\nRunning over " << mcLabelsSig[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;
@@ -190,15 +195,15 @@ void loopPlot() {
 		if(fMCSig.at(i).Contains("2016")) {tag="16";rc.init("RoccoR2016.txt"); }
 		if(fMCSig.at(i).Contains("2017")) {tag="17";rc.init("RoccoR2017.txt"); }
 		if(fMCSig.at(i).Contains("2018")) {tag="18";rc.init("RoccoR2018.txt"); }
-		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+tag+"%s.root",mcLabelsSig[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+tag+"%s.root",mcLabelsSig[i].c_str());
+		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root",mcLabelsSig[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_%s.root",mcLabelsSig[i].c_str());
 		fHistosMCSig.push_back(buffer);
 
 		if (redoHistograms) {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i));
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("demo");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
 			std::cout<<"open MC sig file OK"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer,&rc);

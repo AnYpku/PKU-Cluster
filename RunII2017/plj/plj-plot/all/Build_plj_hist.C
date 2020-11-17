@@ -4,7 +4,7 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel,vector<double
      if(channel.Contains("Endcap")) vec_pt={20,25,30,40,50,60,400};   
      if(channel.Contains("Barrel")) vec_pt={20,25,30,35,40,50,60,100,400};   
      
-     TString dir1="/eos/user/y/yian/"+tag+"cutla/";
+     TString dir1="/home/pku/anying/cms/rootfiles/"+tag+"/";
      TString cut;
      if(channel.Contains("ElectronBarrel"))
              cut="lep==11&&fabs(photoneta)<1.4442";
@@ -83,9 +83,9 @@ int Build_plj_hist(){
                         TString fname="./pljweight_"+copy_channels[j]+"_"+tag[i]+".txt";
 			ofstream ftxt(fname);
                         for(int n=0;n<vec_pt.size()-1;n++){
-				f1.open(Form("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII"+tag[i]+"/MakeTemplate/With_sieieCorr/"+channels[j]+"/ZAfit/txt/fakerate_ZA_pt%0.f_%0.f.txt",vec_pt[n],vec_pt[n+1]));
-				if(!f1.is_open()) cout<<"can not open the file: "<<Form("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII"+tag[i]+"/MakeTemplate/With_sieieCorr/"+channels[j]+"/ZAfit/txt/fakerate_ZA_pt%0.f_%0.f.txt",vec_pt[n],vec_pt[n+1])<<endl;
-				else cout<<"open the file: "<<Form("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII"+tag[i]+"/MakeTemplate/With_sieieCorr/"+channels[j]+"/ZAfit/txt/fakerate_ZA_pt%0.f_%0.f.txt",vec_pt[n],vec_pt[n+1])<<endl;
+				f1.open(Form("/home/pku/anying/cms/PKU-Cluster/RunII"+tag[i]+"/MakeTemplate/With_sieieCorr/"+channels[j]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",vec_pt[n],vec_pt[n+1]));
+				if(!f1.is_open()) cout<<"can not open the file: "<<Form("/home/pku/anying/cms/PKU-Cluster/RunII"+tag[i]+"/MakeTemplate/With_sieieCorr/"+channels[j]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",vec_pt[n],vec_pt[n+1])<<endl;
+				else cout<<"open the file: "<<Form("/home/pku/anying/cms/PKU-Cluster/RunII"+tag[i]+"/MakeTemplate/With_sieieCorr/"+channels[j]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",vec_pt[n],vec_pt[n+1])<<endl;
 
 				f1>>fakerate[n];
 				cout<<vec_pt[n]<<"<pt<"<<vec_pt[n+1]<<endl;

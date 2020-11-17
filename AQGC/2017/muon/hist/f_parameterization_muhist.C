@@ -19,7 +19,7 @@ using namespace std;
 void fX0_parameterization_muhist(int index){
 
 //	const TString InData_New = "./cutla-";
-	const TString InData_New = "/eos/user/y/yian/2017cutla/cutla-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/2017/cutla-";
 
 	// Specify event selection cuts:
 	// Create output ROOT file:
@@ -45,8 +45,8 @@ void fX0_parameterization_muhist(int index){
 	fout = new TFile("hist_mu_"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
-	f_file =  new TFile(InData_New+"outZA-aQGC.root");
-	TTree* treef = (TTree*) f_file->Get("demo");
+	f_file =  new TFile(InData_New+"outZA_aQGC17.root");
+	TTree* treef = (TTree*) f_file->Get("ZPKUCandidates");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
 	Double_t        Mva,Mjj;  
@@ -65,13 +65,9 @@ void fX0_parameterization_muhist(int index){
         Double_t        muon2_id_scale;
         Double_t        muon1_iso_scale;
         Double_t        muon2_iso_scale;
-        Double_t        muon1_track_scale;
-        Double_t        muon2_track_scale;
-        Double_t        muon_hlt_scale;
-        Double_t        lumiWeight;
         Double_t        scalef;
         Double_t        pileupWeight;
-        Double_t        photon_veto_scale=0.9938;
+        Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("Mva",&Mva);
 	treef->SetBranchAddress("HLT_Ele2",&HLT_Ele2);
@@ -97,19 +93,16 @@ void fX0_parameterization_muhist(int index){
 	treef->SetBranchAddress("jet2pt",&jet2pt);
 	treef->SetBranchAddress("Mjj",&Mjj);
 	treef->SetBranchAddress("photon_id_scale", &photon_id_scale);
+	treef->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
         treef->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
         treef->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
         treef->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
         treef->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
-        treef->SetBranchAddress("muon1_track_scale", &muon1_track_scale);
-        treef->SetBranchAddress("muon2_track_scale", &muon2_track_scale);
-        treef->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
         treef->SetBranchAddress("ele1_id_scale", &ele1_id_scale);
         treef->SetBranchAddress("ele2_id_scale", &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
         treef->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
         treef->SetBranchAddress("scalef", &scalef);
-        treef->SetBranchAddress("lumiWeight", &lumiWeight);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
         treef->SetBranchAddress("prefWeight", &prefWeight);
 
@@ -153,9 +146,7 @@ void fX0_parameterization_muhist(int index){
 			if( !(lep == 13 && (HLT_Mu2 >0 || HLT_Mu1 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(  (abs(photoneta)<1.4442)  || (abs(photoneta)>1.566&&abs(photoneta)<2.5)  )   )  )
                         continue;
                         if(Mva>2e4) Mva=1999;
-			if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
-			if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
-			Double_t weight=lumiWeight * pileupWeight * scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon2_track_scale*muon_hlt_scale*photon_id_scale*photon_veto_scale*prefWeight;
+			Double_t weight=pileupWeight * scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*prefWeight;
 //                        cout<<"scalef"<<scalef<<"; weight"<<weight<<endl;
 //			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){

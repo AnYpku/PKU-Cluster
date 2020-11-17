@@ -1,19 +1,18 @@
 #define num 3
 #define pi 3.1415926
 void run(TString cut1,TString tag,TString channel){
-     Double_t Mjj_bins[2]={150, 400};
+     vector<double>mjj_bins={150,300,400,500};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
-     TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";     
-     TFile*file;
-     if(tag.Contains("16"))file=new TFile(dir+"unfold_"+tag+"outZA-EWK.root");
-     else file=new TFile(dir+"unfold_"+tag+"outZA-EWK-pweight.root");
-     TTree*tree=(TTree*)file->Get("demo");     
+     TString dir="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
+     TFile*file=new TFile(dir+"ZA-EWK"+tag+".root");
+     TTree*tree=(TTree*)file->Get("outtree");
      int lep;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,pileupWeight,prefWeight,prefWeightUp,prefWeightDown,muon1_track_scale,muon2_track_scale;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double ptVlep, yVlep, phiVlep, massVlep;
-     double Mjj,scalef,zepp;
+     double Mjj,scalef,zepp,actualWeight;
+     tree->SetBranchAddress("actualWeight",&actualWeight);
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mjj",&Mjj);
      tree->SetBranchAddress("zepp",&zepp);
@@ -59,12 +58,12 @@ void run(TString cut1,TString tag,TString channel){
      if(channel.Contains("muendcap"))
              cut="lep==13&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566";
      TTreeFormula *tformula=new TTreeFormula("formula", cut1+"&&("+cut+")", tree);
-     double actualWeight[num];
+     double Weight[num];
      TH1D*th1[num];
      TString th1name[num];
      for(Int_t i=0;i<num;i++){
 		     th1name[i]=Form("hist_%d",i);
-		     th1[i] = new TH1D(th1name[i],th1name[i],1,0,1);
+		     th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,&mjj_bins[0]);
 		     th1[i]->Sumw2(); 
      }      
      double delta_phi,detajj;
@@ -78,13 +77,14 @@ void run(TString cut1,TString tag,TString channel){
              jet2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
              delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
              if (delta_phi>pi) delta_phi=2*pi-delta_phi;
+             actualWeight=actualWeight/prefWeight;
 	     int p=0;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
-			     if(p==0)actualWeight[p]=scalef*prefWeight*pileupWeight;
-			     if(p==1)actualWeight[p]=scalef*prefWeightUp*pileupWeight;
-			     if(p==2)actualWeight[p]=scalef*prefWeightDown*pileupWeight;
-			     if(Mjj>=150&&Mjj<400)th1[p]->Fill(0.5,actualWeight[p]);//0~1, 2.5~4.5 and 500~800
+			     if(p==0)Weight[p]=actualWeight*prefWeight;
+			     if(p==1)Weight[p]=actualWeight*prefWeightUp;
+			     if(p==2)Weight[p]=actualWeight*prefWeightDown;
+			     if(Mjj>=150&&Mjj<500)th1[p]->Fill(Mjj,Weight[p]);//0~1, 2.5~4.5 and 500~800
 			     p++;
 		     }
 	     }
@@ -109,12 +109,13 @@ int Uncer_batch_sig(){
 	const int kk=channels.size();
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+//                      GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+                        jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50)   )  )";
 		}
 		else{
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 		}
-		TString ControlRegion = "Mjj>150 && Mjj<400 && Mva>100";
+		TString ControlRegion = "Mjj>150 && Mjj<500 && ZGmass>100";
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		cout<<tag[i]<<" "<<jet<<endl;
 		for(int j=0;j<kk;j++){

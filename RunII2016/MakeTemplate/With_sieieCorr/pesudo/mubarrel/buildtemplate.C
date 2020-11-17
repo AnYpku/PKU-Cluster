@@ -116,21 +116,6 @@ void select(TTree *tree,TH1D *h1[ptnumber],TH1D *h2[ptnumber][21],TH1D *h3[ptnum
  for(Int_t i=0;i<nentries;i++){
     tree->GetEntry(i);
     LEP = lep==13 && (HLT_Mu1>0 || HLT_Mu2>0 ||HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& abs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep >70. && massVlep < 110 && ngoodmus>1;
-    jet=0;
-    Int_t jetindexphoton12[2] = {-1,-1};
-    for(Int_t j=0;j<6;j++){
-	    double drtmp1=delta_R(ak4jet_eta[j], ak4jet_phi[j], photon_eta[j],photon_phi[j]);
-	    if(ak4jet_pt[j]>30 && fabs(ak4jet_eta[j])<4.7 && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1) {
-		    jetindexphoton12[0] = j;
-		    continue;
-	    }
-	    if(ak4jet_pt[j]>30 && fabs(ak4jet_eta[j])<4.7  && drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1) {
-		    jetindexphoton12[1] = j;
-		    continue;
-	    }
-    }
-    if(jetindexphoton12[0]>-1 && jetindexphoton12[1]>-1)  { jet_flag=true;}
-    else {jet_flag=false;}
     for(Int_t k=0;k<6;k++){if(photon_drla[k]==10) photon_drla[k]=0;if(photon_drla2[k]==10) photon_drla2[k]=0; }
     for(Int_t j=0;j<6;j++){
          Leading_photon[j]= photon_drla[j]>0.7 && photon_drla2[j]>0.7&&photon_drla[j]<9.&&photon_drla2[j]<9.;
@@ -140,9 +125,8 @@ void select(TTree *tree,TH1D *h1[ptnumber],TH1D *h2[ptnumber][21],TH1D *h3[ptnum
                          photon_phoiso[j]<2.08 + 0.004017*photon_pt[j]&&
                          fabs(photon_eta[j])<1.4442 &&
                          photon_pt[j]>20 &&photon_pt[j]<400;//electron Barrel
-	 JET[j] =  ak4jet_pt[j]>30 && fabs(ak4jet_eta[j])<4.7;
 
-	 if(LEP&&Leading_photon[j]&&medium_cut[j] /*&& (jet_flag==true)*/ ){
+	 if(LEP&&Leading_photon[j]&&medium_cut[j] ){
 		 /*cout<<"OK"<<endl;*/vector_pt.push_back(photon_pt[j]);}
 	 else {vector_pt.push_back(0);}
     }//fill the vector_pt
@@ -155,7 +139,6 @@ void select(TTree *tree,TH1D *h1[ptnumber],TH1D *h2[ptnumber][21],TH1D *h3[ptnum
     newtree->Fill();
     za = false;
     if(fabs(scalef)<0.004&&fabs(scalef)>0.003)  za=true;
-    if(fabs(scalef)<1.3 && fabs(scalef)>1) scalef=scalef*6077.22/60772.22;
     //   cout<<"the biggest pt"<<*biggest_pt<<endl;
     for(Int_t k=0;k<ptnumber;k++){
 	    if(photon_chiso[position]< chiso && *biggest_pt<highpt[k] && *biggest_pt>lowpt[k]) 
@@ -178,9 +161,6 @@ void select(TTree *tree,TH1D *h1[ptnumber],TH1D *h2[ptnumber][21],TH1D *h3[ptnum
 		    if(photon_sieie[position]< sieie) h_sieie[k]->Fill(photon_sieie[position],scalef);
 	    }//datamc
 	    for(Int_t j=0;j<21;j++){
-//		    if( ewk==false && isprompt==1) continue;
-//		    if( tta==false && isprompt==1) continue;
-//		    if( za==false &&  isprompt==1) continue;
 		    if(photon_chiso[position]>lowchiso[j]&&photon_chiso[position]<highchiso[j]&&*biggest_pt<highpt[k] && *biggest_pt>lowpt[k] && photon_isprompt[position]!=1 && (za ==false) && isprompt!=1) 
 		    { 
 			    h2[k][j]->Fill(photon_sieie[position],scalef);m2[k][j] +=scalef;
@@ -229,7 +209,6 @@ for(Int_t i=0;i<ptnumber;i++){
     h13[i]->Write();
     for(Int_t j=0;j<21;j++){
 	    h12[i][j]->Write();
-//       cout<<Form(" %0.f<pt<%0.f , %0.f<photon_chiso<%0.f",lowpt[i],highpt[i],lowchiso[j],highchiso[j])<<"the number  m2 is the number of fake photon in fake template = "<<m2[i][j]<<endl;
 	    cout<<Form(" %0.f<pt<%0.f , %0.f<photon_chiso<%0.f",lowpt[i],highpt[i],lowchiso[j],highchiso[j])<<"the FakeNumber is the number of fake photon medium sieie region = "<<FakeNumber[i]<<endl;
 	    ofstream myfile_fake(Form(dir + sieiecut+"mfakenumber_pt%0.f-%0.f_chiso%0.f-%0.f.txt",lowpt[i],highpt[i],lowchiso[j],highchiso[j]));
 	    myfile_fake<<lowpt[i]<<"\t"<<highpt[i]<<"\t"<<lowchiso[j]<<"\t"<<highchiso[j]<<"\t"<<FakeNumber[i]<<"\t"<<m2[i][j]<<endl;

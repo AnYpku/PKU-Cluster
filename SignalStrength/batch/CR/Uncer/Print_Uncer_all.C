@@ -21,7 +21,7 @@ int Print_Uncer_all(){
         vector<TString> filename;
         for(int i=0;i<channel.size();i++){
 		for(int j=0;j<tag.size();j++){
-			TString f_fake        ="./fakephoton/fake_uncer_"+channel[i]+"_20"+tag[j]+"CR.txt";
+			TString f_fake        ="./fakephoton/fake_uncer_"+channel[i]+"_"+tag[j]+"CR.txt";
 			TString f_interf        ="./interf/interf_uncer"+tag[j]+"CR.txt";
 			TString f_QCD_pdf     ="./pdf/uncer_qcd_"+tag[j]+"CR.txt";
                         TString f_QCD_scaleband   ="./scale/uncer_qcd_scaleband_"+tag[j]+"CR.txt";

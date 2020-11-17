@@ -6,10 +6,10 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TFile*file;  TTree*tree;
      if(sample.Contains("EWK")){
-	     file=new TFile(dir+"unfold_"+sample+".root");
+	     file=new TFile(dir+"unfold_"+tag+"JESR_"+sample+tag+".root");
              tree=(TTree*)file->Get("ZPKUCandidates");     
      }
-     else{   file=new TFile(dir+"JEC_cutla-out"+sample+".root");
+     else{   file=new TFile(dir+"JESR_cutla-out"+sample+tag+".root");
              tree=(TTree*)file->Get("ZPKUCandidates");     
      }
 
@@ -141,19 +141,19 @@ int Uncer_batch_bkg(){
 	TString cut1[3]; 
 	TString Reco[3]; 
 	TString dir1[3];
-	dir1[0]="/eos/user/y/yian/2016cutla/";     
-	dir1[1]="/eos/user/y/yian/2017cutla/";     
-	dir1[2]="/eos/user/y/yian/2018cutla/";     
-	TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/JEC/";     
+	dir1[0]="/home/pku/anying/cms/rootfiles/2016/";     
+	dir1[1]="/home/pku/anying/cms/rootfiles/2017/";     
+	dir1[2]="/home/pku/anying/cms/rootfiles/2018/";     
+        TString dir="/home/pku/anying/cms/rootfiles/JESR/";
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 //	vector<TString> sample={"WA"};
 	//	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
-			GenJet=" ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) )";       
-			JET_new="( (!(fabs(jet2eta_new)<3.14 && fabs(jet2eta_new)>2.65) && !(fabs(jet1eta_new)<3.14 && fabs(jet1eta_new)>2.65) &&  jet1pt_new<50 && jet2pt_new<50 && jet1pt_new>30 && jet2pt_new>30 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7) || (jet1pt_new>50 && jet2pt_new>50 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7) )";
-			JET_up="( (!(fabs(jet2eta_JEC_up)<3.14 && fabs(jet2eta_JEC_up)>2.65) && !(fabs(jet1eta_JEC_up)<3.14 && fabs(jet1eta_JEC_up)>2.65) &&  jet1pt_JEC_up<50 && jet2pt_JEC_up<50 && jet1pt_JEC_up>30 && jet2pt_JEC_up>30 && fabs(jet1eta_JEC_up)< 4.7 && fabs(jet2eta_JEC_up)<4.7) || (jet1pt_JEC_up>50 && jet2pt_JEC_up>50 && fabs(jet1eta_JEC_up)< 4.7 && fabs(jet2eta_JEC_up)<4.7) )";
-			JET_down="( (!(fabs(jet2eta_JEC_down)<3.14 && fabs(jet2eta_JEC_down)>2.65) && !(fabs(jet1eta_JEC_down)<3.14 && fabs(jet1eta_JEC_down)>2.65) &&  jet1pt_JEC_down<50 && jet2pt_JEC_down<50 && jet1pt_JEC_down>30 && jet2pt_JEC_down>30 && fabs(jet1eta_JEC_down)< 4.7 && fabs(jet2eta_JEC_down)<4.7) || (jet1pt_JEC_down>50 && jet2pt_JEC_down>50 && fabs(jet1eta_JEC_down)< 4.7 && fabs(jet2eta_JEC_down)<4.7) )";
+			GenJet="genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";       
+			JET_new="( (  ( (fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65&&jet1pt_new>30&&jet1pt_new<50&&jet1puIdTight_new==1) || (!(fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65) && fabs(jet1eta_new)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_new)<4.7&& jet1pt_new>50) ) && ( (fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65&&jet2pt_new>30&&jet2pt_new<50&&jet2puIdTight_new==1)||(!(fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65)&&fabs(jet2eta_new)<4.7&&jet2pt_new>30&&jet2pt_new<50) ||(fabs(jet2eta_new)<4.7 && jet2pt_new>50) ) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
+			JET_up="( (  ( (fabs(jet1eta_JEC_up)<3.14&&fabs(jet1eta_JEC_up)>2.65&&jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&jet1puIdTight_JEC_up==1) || (!(fabs(jet1eta_JEC_up)<3.14&&fabs(jet1eta_JEC_up)>2.65) && fabs(jet1eta_JEC_up)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JEC_up)<4.7&& jet1pt_JEC_up>50) ) && ( (fabs(jet2eta_JEC_up)<3.14&&fabs(jet2eta_JEC_up)>2.65&&jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&jet2puIdTight_JEC_up==1)||(!(fabs(jet2eta_JEC_up)<3.14&&fabs(jet2eta_JEC_up)>2.65)&&fabs(jet2eta_JEC_up)<4.7&&jet2pt_JEC_up>30&&jet2pt_JEC_up<50) ||(fabs(jet2eta_JEC_up)<4.7 && jet2pt_JEC_up>50) ) ) && Mjj_JEC_up > 500 && deltaeta_JEC_up>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
+			JET_down="( (  ( (fabs(jet1eta_JEC_down)<3.14&&fabs(jet1eta_JEC_down)>2.65&&jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&jet1puIdTight_JEC_down==1) || (!(fabs(jet1eta_JEC_down)<3.14&&fabs(jet1eta_JEC_down)>2.65) && fabs(jet1eta_JEC_down)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JEC_down)<4.7&& jet1pt_JEC_down>50) ) && ( (fabs(jet2eta_JEC_down)<3.14&&fabs(jet2eta_JEC_down)>2.65&&jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&jet2puIdTight_JEC_down==1)||(!(fabs(jet2eta_JEC_down)<3.14&&fabs(jet2eta_JEC_down)>2.65)&&fabs(jet2eta_JEC_down)<4.7&&jet2pt_JEC_down>30&&jet2pt_JEC_down<50) ||(fabs(jet2eta_JEC_down)<4.7 && jet2pt_JEC_down>50) ) ) && Mjj_JEC_down > 500 && deltaeta_JEC_down>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
 		}
 		else{
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
@@ -182,14 +182,14 @@ int Uncer_batch_bkg(){
 		for(int j=0;j<sample.size();j++){
 			cout<<sample[j]<<endl;
 			if(sample[j].Contains("EWK")){
-//				run(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
-//				run(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
-				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
-				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
+				run(dir,"ZA-EWK",cut,3,tags[i],0);
+				run(dir,"ZA-EWK",cut1,3,tags[i],1);
+//				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
+//				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
 			}
 			else{
-//				run(dir1[i],sample[j],Reco,3,tags[i],0);
-				run_1d(dir1[i],sample[j],Reco,3,tags[i],0);
+				run(dir,sample[j],Reco,3,tags[i],0);
+//				run_1d(dir1[i],sample[j],Reco,3,tags[i],0);
 			}
 		}
 	}

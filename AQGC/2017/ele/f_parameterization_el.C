@@ -18,7 +18,7 @@
 using namespace std;
 void fX0_parameterization_el(int index,vector<double>ZGbin){
 
-	const TString InData_New = "/eos/user/y/yian/2017cutla/cutla-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/2017/cutla-";
 
 	// Specify event selection cuts:
 	TString cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
@@ -45,8 +45,8 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 	fout = new TFile("signal_proc_el__"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
-	f_file =  new TFile(InData_New+"outZA-aQGC.root");
-	TTree* treef = (TTree*) f_file->Get("demo");
+	f_file =  new TFile(InData_New+"outZA_aQGC17.root");
+	TTree* treef = (TTree*) f_file->Get("ZPKUCandidates");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
 	Double_t        pweight[703];
@@ -63,7 +63,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
         Double_t        ele2_id_scale;
         Double_t        ele1_reco_scale;
         Double_t        ele2_reco_scale;
-        Double_t        photon_veto_scale=0.9862;
+        Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("pweight",pweight);
 	treef->SetBranchAddress("prefWeight",&prefWeight);
@@ -75,6 +75,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
         treef->SetBranchAddress("photoneta", &photoneta);
         treef->SetBranchAddress("photonet", &photonet);
         treef->SetBranchAddress("photon_id_scale", &photon_id_scale);
+        treef->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
         treef->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
         treef->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
@@ -119,8 +120,6 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 			if( ! formula->EvalInstance())
 				continue;
                         if(Mva>2e4) Mva=1999;
-                        if(fabs(photoneta)<1.4442) photon_veto_scale=0.9862;
-                        if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
 			Double_t weight=pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*prefWeight;
                         //cout<<pileupWeight <<" "<< scalef<<" "<<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "<<photon_id_scale<<" "<<photon_veto_scale<<" "<<prefWeight<<endl;
 			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<" weight "<<weight<<endl;
@@ -250,23 +249,23 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 		//leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
 		leg->Draw("SAME") ;
 		cout <<"x9"<<endl;
-		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-//		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".png")) ;
+		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+//		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".pdf")) ;
 
 		ParamSetf << par0 << " " << par1 << " " << endl;
 		cout <<"x10 "<<abin<<endl;
@@ -280,7 +279,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 
 void f_parameterization_el(){
         gSystem->Load("libTreePlayer.so");
-	vector<double> ZGbin = {150,400,600,800, 2e4};
+	vector<double> ZGbin = {150,400,600,800,1000, 2e4};
 	fX0_parameterization_el(1,ZGbin);
 	fX0_parameterization_el(2,ZGbin);
 	fX0_parameterization_el(3,ZGbin);

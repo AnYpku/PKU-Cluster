@@ -13,23 +13,10 @@ for(Int_t j=0;j<21;j++){
   }
  Double_t lowpt[num]= {20,25,30,40,50,60};
  Double_t highpt[num]={25,30,40,50,60,400};
-
-// Double_t lowpt[num]= {25,30,40,50,65,80,130};
-// Double_t highpt[num]={30,40,50,65,80,130,400};
-// Double_t lowpt[num]= {25,30,35,45,55,65,85,130};
-// Double_t highpt[num]={30,35,45,55,65,85,130,400};
+// fit(60,400);
  for(Int_t i=0;i<num;i++){
          fit(lowpt[i],highpt[i]);
   }
-//	fit(25,30);
-//	fit(30,35);
-//	fit(35,40);
-//	fit(40,45);
-//	fit(45,50);
-//	fit(50,60);
-//	fit(60,80);
-//	fit(80,120);
-//	fit(120,400);
 
 }
 

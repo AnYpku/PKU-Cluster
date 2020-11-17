@@ -5,12 +5,12 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TString dir1;
 //     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";
 //     else dir1="/eos/user/y/yian/"+tag+"cutla/";
-     dir1="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";
+     dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-";
      TFile*file;
      if(sample.Contains("EWK"))
-	     file=new TFile(dir1+"unfold_"+tag+"outZA-"+sample+".root");
-     else    file=new TFile(dir1+"unfold_"+tag+"outZA_"+sample+".root");
-     TTree*tree=(TTree*)file->Get("demo");     
+             file=new TFile(dir1+"outZA-"+sample+tag+".root");
+     else    file=new TFile(dir1+"ZA_"+sample+tag+".root");
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      map<TString, double> variables;
      double Mjj,jet1eta,jet2eta;
      Double_t scalef;
@@ -48,13 +48,13 @@ int Uncer_batch_bkg(){
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"EWK","interference"};
+	vector<TString> sample={"EWK","interf"};
 	const int kk=sample.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][sample]
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else{
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";

@@ -75,7 +75,7 @@ void findbin::Loop()
 	    for(Int_t i=0;i<h1[k]->GetNbinsX();i++){
 		    bin[k] = h1[k]->GetBinContent(i+1);
 		    sum[k] = sum[k] + bin[k];
-		    if(   abs(sum[k]- (h1[k]->GetSumOfWeights()/2) )<=1  )  
+		    if(   abs(sum[k]- (h1[k]->GetSumOfWeights()/2) )<=2  )  
 		    {
 			    cout<<lowpt[k]<<"~"<<highpt[k]<<"; the total:"<<h1[k]->GetSumOfWeights()<<"; the half:"<<h1[k]->GetSumOfWeights()/2<<"; sum of the first "<<i+1<<" bin:"<<sum[k]<<"; the chiso value in "<<i+1<<" bin = "<<h1[k]->GetBinCenter(i+1)+0.5*h1[k]->GetBinWidth(i+1)<<endl;
 			    file<<lowpt[k]<<"~"<<highpt[k]<<"\t\t"<<h1[k]->GetSumOfWeights()<<"\t"<<h1[k]->GetSumOfWeights()/2<<"\t"<<sum[k]<<"\t"<<h1[k]->GetBinCenter(i+1)+0.5*h1[k]->GetBinWidth(i+1)<<endl;

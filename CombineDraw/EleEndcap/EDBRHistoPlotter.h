@@ -438,8 +438,8 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 				(TH1D*) (filesMCSig.at(i)->Get(histoName.c_str())->Clone(
 						labelsSig.at(i).c_str()));
 		histo->SetDirectory(0);
-		histo->SetLineColor(2);
-		histo->SetFillColor(2);
+		histo->SetLineColor(kRed-7);
+		histo->SetFillColor(kRed-7);
 
 		histoOrig->SetDirectory(0);
 		histoOrig->SetLineColor(getLineColor(i));
@@ -538,31 +538,51 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
         leg1->SetTextSize(0.035);
 	leg1->SetMargin(0.4);
         leg2->SetTextSize(0.035);
+        ofstream ftxt("./yields.txt");
 	if (isDataPresent_){
-                double yieldsData = sumDATA->GetSumOfWeights();
+                double yieldsDataErr=0;
+//                double yieldsData = sumDATA->IntegralAndError(0,sumDATA->GetNbinsX(),yieldsDataErr);;
+                double yieldsData = sumDATA->IntegralAndError(0,sumDATA->GetNbinsX(),yieldsDataErr);
                 char yData[100];sprintf(yData,"%0.f",yieldsData);
+                char yDataErr[100];sprintf(yDataErr,"%0.f",yieldsDataErr);
                 TString samplesData = "Data";
-                TString LabelData = samplesData +" ["+ yData+"]";
+                TString LabelData = samplesData +" ["+ yData+"+/-"+yDataErr+"]";
+                ftxt<<samplesData.Data()<<" "<<yData<<"$pm$"<<yDataErr<<""<<endl;
 
-		leg2->AddEntry(sumDATA, LabelData, "ep");
+                leg2->AddEntry(sumDATA, LabelData, "ep");
+//                double yieldsMC=sumMC->GetSumOfWeights();
+                double yieldsMCerr;
+                double yieldsMC=sumMC->IntegralAndError(0,sumMC->GetNbinsX(),yieldsMCerr);
+                char yMC[100];sprintf(yMC,"%0.f",yieldsMC);
+                char yMCerr[100];sprintf(yMCerr,"%0.f",yieldsMCerr);
+                TString samplesMC = "All MC";
+                TString LabelMC = samplesMC +" ["+ yMC+ "+/-"+yMCerr+" ]";
+                ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
+                leg2->AddEntry(sumMC, LabelMC, "l");
+//
+
 	}
 //	for (size_t i = 0; i != histosMC.size(); ++i) {
 	for (size_t i = 0; i != histosMC.size(); ++i) {
 		TH1D* h1;
 		mcTotalLabels.push_back("ST");mcTotalLabels.push_back("TTA");mcTotalLabels.push_back("VV");
-		mcTotalLabels.push_back("WA");mcTotalLabels.push_back("plj");mcTotalLabels.push_back("ZA");
-                if(i<6){
+		mcTotalLabels.push_back("plj");mcTotalLabels.push_back("ZA");
+                if(i<5){
                 int j =3*i;
 			h1 =(TH1D*) histosMC.at(j)->Clone();
 			h1->Add(histosMC.at(j+1),1);
 			h1->Add(histosMC.at(j+2),1);
 		}
-		double yields = h1->GetSumOfWeights();
+                double yerr;
+		double yields=h1->IntegralAndError(0,histosMC.at(i)->GetNbinsX(),yerr);
+		yields = h1->GetSumOfWeights();
 		char y[100];sprintf(y,"%.2f",yields);
-                if(i<6) {
+                char ye[100];sprintf(ye,"%.2f",yerr);
+                if(i<5) {
 			TString samples = mcTotalLabels.at(i).c_str();
-			TString LabelMC = samples +" ["+ y+"]";
+			TString LabelMC = samples +" ["+ y+ "+/-"+ye+"]";
 			leg1->AddEntry(h1, LabelMC, "f");
+			ftxt<<samples<<" "<<y<< "$pm$"<<ye<<""<<endl;
 			cout<<LabelMC<<endl;
 		}
 		else continue;
@@ -580,13 +600,20 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		for (size_t i = 0; i != histosMCSig.size(); ++i) {
 			sprintf(rescalingLabel, " (x%g)", kFactorsSig_.at(i));
 			std::string rescalingStr(rescalingLabel);
+			TH1D* h1;
 			if (kFactorsSig_.at(i) != 2.0) {
 				if (i == 0){
-					double yieldsMCSig = histosMCSig.at(i)->GetSumOfWeights();
+					h1=(TH1D*)histosMCSig.at(i)->Clone();
+					h1->Add(histosMCSig.at(i+1),1);
+					h1->Add(histosMCSig.at(i+2),1);
+					double yieldsMCSigErr;
+					double yieldsMCSig= h1->IntegralAndError(0,h1->GetNbinsX(),yieldsMCSigErr);
+					yieldsMCSig = h1->GetSumOfWeights();
 					char ySig[100];sprintf(ySig,"%.2f",yieldsMCSig);
+					char ySigErr[100];sprintf(ySigErr,"%.2f",yieldsMCSigErr);
 					TString samplesMCSig = "EWK_ZA";
-					TString LabelSig = samplesMCSig +" ["+ ySig+"]";
-
+					TString LabelSig = samplesMCSig +" ["+ ySig + "+/-"+ySigErr +"]";
+					ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
 					leg2->AddEntry(histosMCSig.at(i), LabelSig, "lf");
 				}
 			} else

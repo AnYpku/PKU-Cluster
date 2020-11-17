@@ -1,13 +1,12 @@
 #define num 3
 #define pi 3.1415926
 TH1D* run( TString sample,TString tag,TString cut1,TString channel){
-     Double_t mjj_bins[2]={150, 400};
+     vector<Double_t> mjj_bins={150,300,400,500};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir1;
-     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";     
-     else dir1="/eos/user/y/yian/"+tag+"cutla/";
-     TFile*file=new TFile(dir1+"cutla-outplj_"+channel+sample+".root");
-     TTree*tree=(TTree*)file->Get("demo");     
+     dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
+     TFile*file=new TFile(dir1+"plj"+tag+"_weight"+sample+".root");
+     TTree*tree=(TTree*)file->Get("outtree");     
      map<TString, double> variables;
      int lep;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
@@ -46,8 +45,6 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel){
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
-     tree->SetBranchAddress("muon1_track_scale", &muon1_track_scale);
-     tree->SetBranchAddress("muon2_track_scale", &muon2_track_scale);
      TString cut;
      if(channel.Contains("elebarrel"))
              cut="lep==11&&fabs(photoneta)<1.4442";
@@ -62,7 +59,7 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel){
      TString th1name;
      th1name="hist"+sample;
      TH1D* th1;
-     th1 = new TH1D(th1name,th1name,1,0,1);
+     th1 = new TH1D(th1name,th1name,mjj_bins.size()-1,&mjj_bins[0]);
      th1->Sumw2(); 
      double actualWeight,delta_phi,detajj;
      TLorentzVector Zp4, photonp4, jet1p4, jet2p4;
@@ -77,7 +74,7 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel){
              if (delta_phi>pi) delta_phi=2*pi-delta_phi;
 	     detajj=fabs(jet1eta-jet2eta);
 		     if (  tformula->EvalInstance() ){
-			     if(Mjj>=150&&Mjj<400)th1->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
+			     if(Mjj>=150&&Mjj<500)th1->Fill(Mjj,scalef);//0~1, 2.5~4.5 and 500~800
 		     }
      }
      return th1;
@@ -89,15 +86,15 @@ int Uncer_batch_bkg(){
 	TString jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
-	TString ControlRegion = "Mjj>150 && Mjj<400 && Mva>100";
+	TString ControlRegion = "Mjj>150 && Mjj<500 && ZGmass>100";
 
-	vector<TString> tag={"2016","2017","2018"};
+	vector<TString> tag={"16","17","18"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	const int kk=channels.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][channels]
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
 		}
 		else{
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";

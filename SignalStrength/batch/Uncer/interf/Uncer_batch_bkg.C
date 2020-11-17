@@ -6,19 +6,34 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TString dir1;
 //     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";
 //     else dir1="/eos/user/y/yian/"+tag+"cutla/";
-     dir1="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";
+     dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-";
      TFile*file;
      if(sample.Contains("EWK"))
-	     file=new TFile(dir1+"unfold_"+tag+"outZA-"+sample+".root");
-     else    file=new TFile(dir1+"unfold_"+tag+"outZA_"+sample+".root");
-     TTree*tree=(TTree*)file->Get("demo");     
+	     file=new TFile(dir1+"outZA-"+sample+tag+".root");
+     else    file=new TFile(dir1+"ZA_"+sample+tag+".root");
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      map<TString, double> variables;
      double Mjj,jet1eta,jet2eta;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
      Double_t scalef;
+     int lep;
      tree->SetBranchAddress("scalef",&scalef);
+     tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mjj",&Mjj);
      tree->SetBranchAddress("jet1eta",&jet1eta);
      tree->SetBranchAddress("jet2eta",&jet2eta);
+     tree->SetBranchAddress("pileupWeight", &pileupWeight);
+     tree->SetBranchAddress("prefWeight", &prefWeight);
+     tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
+     tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
+     tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
+     tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
+     tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
+     tree->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+     tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
+     tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
+     tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
+     tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
 //     TH1D*th1[kk];
      TString th1name;
@@ -26,19 +41,26 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TH1D* th1;
      th1 = new TH1D(th1name,th1name,9,0,9);
      th1->Sumw2(); 
+     double actualWeight;
      for(int k=0;k<tree->GetEntries();k++){
              tree->GetEntry(k);
 	     double detajj=fabs(jet1eta-jet2eta);
+             if(tag.Contains("18"))  prefWeight=1;
+             actualWeight=scalef;
+//	     if(lep==11)
+//		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
+//	     if(lep==13)
+//		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
 	     if (  tformula->EvalInstance() ){
-		     if(Mjj>=500&&Mjj<800&&detajj>=2.5&&detajj<4.5)th1->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
-		     if(Mjj>=800&&Mjj<1200&&detajj>=2.5&&detajj<4.5)th1->Fill(1.5,scalef);//1~2 2.5~4.5 and 800~1200
-		     if(Mjj>=1200&&detajj>=2.5&&detajj<4.5)th1->Fill(2.5,scalef);//2~3 2.5~4.5 1200~2000
-		     if(Mjj>=500&&Mjj<800&&detajj>=4.5&&detajj<6)th1->Fill(3.5,scalef);//3~4 4.5~6 500~800 
-		     if(Mjj>=800&&Mjj<1200&&detajj>=4.5&&detajj<6)th1->Fill(4.5,scalef);//4~5 4.5~6 800~1200
-		     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1->Fill(5.5,scalef);//5~6 6~infi 500~800
-		     if(Mjj>=500&&Mjj<800&&detajj>=6)th1->Fill(6.5,scalef);//6~7 6~infi 800~1200
-		     if(Mjj>=800&&Mjj<1200&&detajj>=6)th1->Fill(7.5,scalef);//7~8 6~infi800~1200
-		     if(Mjj>=1200&&detajj>=6)th1->Fill(8.5,scalef);//8~9 6~infi 800~1200
+		     if(Mjj>=500&&Mjj<800&&detajj>=2.5&&detajj<4.5)th1->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
+		     if(Mjj>=800&&Mjj<1200&&detajj>=2.5&&detajj<4.5)th1->Fill(1.5,actualWeight);//1~2 2.5~4.5 and 800~1200
+		     if(Mjj>=1200&&detajj>=2.5&&detajj<4.5)th1->Fill(2.5,actualWeight);//2~3 2.5~4.5 1200~2000
+		     if(Mjj>=500&&Mjj<800&&detajj>=4.5&&detajj<6)th1->Fill(3.5,actualWeight);//3~4 4.5~6 500~800 
+		     if(Mjj>=800&&Mjj<1200&&detajj>=4.5&&detajj<6)th1->Fill(4.5,actualWeight);//4~5 4.5~6 800~1200
+		     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1->Fill(5.5,actualWeight);//5~6 6~infi 500~800
+		     if(Mjj>=500&&Mjj<800&&detajj>=6)th1->Fill(6.5,actualWeight);//6~7 6~infi 800~1200
+		     if(Mjj>=800&&Mjj<1200&&detajj>=6)th1->Fill(7.5,actualWeight);//7~8 6~infi800~1200
+		     if(Mjj>=1200&&detajj>=6)th1->Fill(8.5,actualWeight);//8~9 6~infi 800~1200
 	     }
      }
      return th1;
@@ -57,13 +79,13 @@ int Uncer_batch_bkg(){
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"EWK","interference"};
+	vector<TString> sample={"EWK","interf"};
 	const int kk=sample.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][sample]
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else{
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";

@@ -21,7 +21,7 @@ void loopPlot() {
 
 	//#####################EDIT THE OPTIONS##############################
 
-	double lumiValue = 35.862;
+	double lumiValue = 41.52;
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?
@@ -35,12 +35,11 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	/// Path to wherever the files with the trees are. 
-//	std::string pathToTrees = "/data/pku/home/anying/cms/file_in_cms/cutLEP/";
-//	std::string pathToTrees = "/eos/user/y/yian/2016cutla/";
-	std::string pathToTrees = "/eos/user/y/yian/2016legacy/";
+	//std::string pathToTrees = "../../small/cutla/";
+	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/cutlep/";
 	std::string outputDir = "./fig-output/";
 	
-	RoccoR  rc("RoccoR2016.txt");
+	RoccoR  rc("./RoccoR2017.txt");
         /// file for scale factors
 
 // Setup names of data files for trees.
@@ -50,21 +49,21 @@ void loopPlot() {
 	std::string dataLabels[nDATA] = { "Muon" };
 	std::vector < std::string > fData;
 	for (int ii = 0; ii < nDATA; ii++) {
-		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
+		fData.push_back(pathToTrees + "cutlep-outD" + dataLabels[ii] + ".root");
 	}
 // set mc imformation
-		const int nMC = 6;
+		const int nMC = 8;
 		std::cout << "set data imformation, we have " << nMC << "mc file"
 				<< std::endl;
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
-		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets","TTJets","ZA" };
-		std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA", 
-                                             "plj_mubarrel", "ZA" };
-		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,1,lumiValue};
-		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
+		std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
+		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
+		//std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA", 
+                //                             "DMuon_plj_weightb","ZA"};
+		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,1,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
-			fMC.push_back(pathToTrees +"cutla-out"+ mcLabels[ii] + ".root");
+			fMC.push_back(pathToTrees +"cutlep-out"+ mcLabels[ii] + ".root");
 		}
 		std::vector<double> kFactorsMC;
 		for (int index = 0; index < nMC; index++) {
@@ -79,7 +78,7 @@ void loopPlot() {
 	double kFactorsSig_array[nMCSig] = { 1 };
 	std::vector < std::string > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
-		fMCSig.push_back(pathToTrees + "cutla-out" + mcLabelsSig[ii] + ".root");
+		fMCSig.push_back(pathToTrees + "cutlep-out" + mcLabelsSig[ii] + ".root");
 	}
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nMCSig; index++) {
@@ -111,7 +110,7 @@ void loopPlot() {
 				<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; //fData.push_back(pathToTrees + dataLabels[ii] + ".root");
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", dataLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2016CR_%s.root", dataLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_%s.root", dataLabels[i].c_str());
 		fHistosData.push_back(buffer);
 
 		std::cout << "retrieve "<<i<<"th data file" << std::endl;
@@ -120,13 +119,13 @@ void loopPlot() {
 		//TTree *treeData = (TTree*) fileData->Get("demo");
 		TTree *treeData = (TTree*) fileData->Get("demo");
 //		std::cout<<"OK"<<std::endl;
-//		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
-//		TTree *treeMC = (TTree*) fileMC->Get("demo");
-//		std::cout << "retrieve ith mc file" << std::endl;
-		/*if (dopileupreweight) {
+		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
+		TTree *treeMC = (TTree*) fileMC->Get("demo");
+		std::cout << "retrieve ith mc file" << std::endl;
+		if (dopileupreweight) {
 			hisRatio = test(treeData, treeMC);
 			std::cout << "hisRatio" << std::endl;
-		}*/
+		}
 		if (redoHistograms) {
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeData, fileData,
 					hisRatio, out_buffer, &rc);
@@ -139,6 +138,8 @@ void loopPlot() {
 	}  //end loop on data files
 	printf("Loop over data done\n");
 
+
+
 	//loop over MC files and make histograms individually for each of them
 	for (int i = 0; i < nMC; i++) {
 		//continue;
@@ -146,7 +147,7 @@ void loopPlot() {
 				<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", mcLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2016CR_%s.root", mcLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_%s.root", mcLabels[i].c_str());
 		fHistosMC.push_back(buffer);
 		std::cout << "test" << std::endl;
 
@@ -168,8 +169,6 @@ void loopPlot() {
 
 	printf("Loop over MC done\n");
 
-
-
 	//loop over MC signal files and make histograms individually for each of them
 	for (int  i = 0; i < nMCSig; i++) {
 		//continue;
@@ -177,7 +176,7 @@ void loopPlot() {
 				<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", mcLabelsSig[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2016CR_%s.root", mcLabelsSig[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_%s.root", mcLabelsSig[i].c_str());
 		fHistosMCSig.push_back(buffer);
 
 		if (redoHistograms) {
@@ -198,6 +197,8 @@ void loopPlot() {
 	}  //end loop on MC files
 
 	printf("Loop over MC signal done\n");
+
+
 
 	/// ------------------------------------------------------------------
 	/// This second part is the loop over histograms to create stack plots
@@ -239,12 +240,14 @@ void loopPlot() {
 	////// {DYJetsToLL_HT-200to400,DYJetsToLL_HT-200to400,DYJetsToLL_HT-600toInf}
 	std::vector<int> fColorsMC;
 
-	fColorsMC.push_back(kGreen-4);
-	fColorsMC.push_back(kGreen-10);
-	fColorsMC.push_back(kBlue - 4);
-	fColorsMC.push_back(kBlue - 7);
-	fColorsMC.push_back(kOrange - 2);
-	fColorsMC.push_back(kRed - 7);
+	fColorsMC.push_back(kGreen);
+	fColorsMC.push_back(kCyan);
+	fColorsMC.push_back(kBlue - 6);
+	fColorsMC.push_back(kBlue + 2);
+	fColorsMC.push_back(kYellow);
+	fColorsMC.push_back(kMagenta);
+	fColorsMC.push_back(kMagenta + 3);
+	fColorsMC.push_back(kOrange + 7);
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);

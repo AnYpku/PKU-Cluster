@@ -111,6 +111,8 @@ class EDBRHistoMaker {
 		Double_t jet2phi;
 		Double_t jet1puIdTight;
 		Double_t jet2puIdTight;
+		Double_t jet1puIdLoose;
+		Double_t jet2puIdLoose;
 		Double_t Mjj;
 		Double_t ngoodmus;
 		Double_t zepp;//need to be modified for rochester
@@ -234,6 +236,8 @@ class EDBRHistoMaker {
 		TBranch *b_jet2e;
 		TBranch *b_jet1puIdTight;
 		TBranch *b_jet2puIdTight;
+		TBranch *b_jet1puIdLoose;
+		TBranch *b_jet2puIdLoose;
 		TBranch *b_Mjj;    //!
 		TBranch *b_ngoodmus;    //!
 		TBranch *b_zepp;
@@ -378,6 +382,8 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("jet2e", &jet2e, "jet2e/D");
 	treename->Branch("jet1puIdTight", &jet1puIdTight, "jet1puIdTight/D");
 	treename->Branch("jet2puIdTight", &jet2puIdTight, "jet2puIdTight/D");
+	treename->Branch("jet1puIdLoose", &jet1puIdLoose, "jet1puIdLoose/D");
+	treename->Branch("jet2puIdLoose", &jet2puIdLoose, "jet2puIdLoose/D");
 	treename->Branch("Mjj", &Mjj, "Mjj/D");
 	treename->Branch("zepp", &zepp, "zepp/D");
 	treename->Branch("deltaetajj", &deltaetajj, "deltaetajj/D");
@@ -491,6 +497,10 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("jet1e", &jet1e, &b_jet1e);
 	fChain->SetBranchAddress("jet2e", &jet2e, &b_jet2e);
 	fChain->SetBranchAddress("Mjj", &Mjj, &b_Mjj);
+	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+	fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
+	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
 	fChain->SetBranchAddress("ngoodmus", &ngoodmus,&b_ngoodmus);
 	fChain->SetBranchAddress("zepp", &zepp, &b_zepp);
 	fChain->SetBranchAddress("deltaetajj", &deltaetajj, &b_deltaetajj);
@@ -599,7 +609,7 @@ void EDBRHistoMaker::createAllHistos() {
 	nVars = hs.vars.size();
 
 	for (int i = 0; i != nVars; ++i) {
-		sprintf(buffer, "%s_endcap", hs.vars[i].c_str());
+		sprintf(buffer, "%s_mu", hs.vars[i].c_str());
 		//    sprintf(buffer,"%s_el",hs.vars[i].c_str());
 		sprintf(buffer2, "%s;%s;Number of events;", hs.vars[i].c_str(),
 				hs.vars[i].c_str());
@@ -744,9 +754,17 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 		l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
                 if(drla==10) drla=-10;
                 if(drla2==10) drla2=-10;
-		actualWeight=0.991;
 //data
-                if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&  (HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && ( ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && jet1puIdTight==1 && jet2puIdTight==1 ) || ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && jet1pt>50 && jet2pt>50 ) || ( !(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 ) ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && Mjj>150 && Mjj<400 && ZGmass>100 ) /*|| () */
+                Bool_t A=(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65 &&  jet1pt>30 && jet1pt<50 && jet1puIdTight==1);
+                Bool_t B=(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65 && jet2pt>30 && jet2pt<50 && jet2puIdTight==1);
+                Bool_t C=(!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50) ;
+                Bool_t D=(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt>30 && jet2pt<50);
+                Bool_t E=fabs(jet1eta)<4.7 && jet1pt>50;
+                Bool_t F=fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65 && jet2pt>30 && jet2pt<50 && jet2puIdTight==1.;
+                Bool_t G=!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt>30 && jet2pt<50.;
+                Bool_t H=fabs(jet1eta)<4.7&&jet1pt>50 ;
+                Bool_t I=fabs(jet2eta)<4.7 && jet2pt>50 ;
+                if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&  (HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && /*( ((A||C)&&(B||D)) || (E&&(F||G)) || (H&&I) )*/(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )/*(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )*/ && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && Mjj>150 && Mjj<400 && ZGmass>100 ) 
 		  ) {
 			//if(Mjj<400) 
 			sum = sum + actualWeight;
@@ -903,8 +921,17 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 		actualWeight = actualWeight*(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale);
                 if(filename.Contains("plj")) 
                      actualWeight = scalef;
+                Bool_t A=(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65 &&  jet1pt>30 && jet1pt<50 && jet1puIdTight==1);
+                Bool_t B=(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65 && jet2pt>30 && jet2pt<50 && jet2puIdTight==1);
+                Bool_t C=(!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50) ;
+                Bool_t D=(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt>30 && jet2pt<50);
+                Bool_t E=fabs(jet1eta)<4.7 && jet1pt>50;
+                Bool_t F=fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65 && jet2pt>30 && jet2pt<50 && jet2puIdTight==1.;
+                Bool_t G=!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt>30 && jet2pt<50.;
+                Bool_t H=fabs(jet1eta)<4.7&&jet1pt>50 ;
+                Bool_t I=fabs(jet2eta)<4.7 && jet2pt>50 ;
 // mc
-                if( drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 && ( HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && ( ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && jet1puIdTight==1 && jet2puIdTight==1 ) || ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && jet1pt>50 && jet2pt>50 ) || ( !(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 ) )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && Mjj>150 && Mjj<400 && ZGmass>100){
+                if( drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 && ( HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && /*( ((A||C)&&(B||D)) || (E&&(F||G)) || (H&&I) )*/(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )/*(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )*/ && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && Mjj>150 && Mjj<400 && ZGmass>100){
 			//if(Mjj<400)	
 			if(theWeight>0) npp++;
 			if(theWeight<0) nmm++;

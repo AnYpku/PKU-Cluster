@@ -7,7 +7,7 @@
 #include "TFile.h"
 #include "TCollection.h"
 #include "TKey.h"
-#include "EDBRHistoMaker.h"
+#include "EDBRHistoMaker_a.h"
 #include "EDBRHistoPlotter.h"
 #include "test.C"
 #include "CMSTDRStyle.h"
@@ -36,8 +36,8 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	//std::string pathToTrees = "./output-slimmed-rootfiles/root/";
-	std::string pathToTrees = "/eos/user/y/yian/2018cutla/";
-	std::string outputDir = "./fig-output_a/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2018/";
+	std::string outputDir = "./fig-output/";
 	
 	RoccoR  rc("./RoccoR2018.txt");
         /// file for scale factors
@@ -46,24 +46,19 @@ void loopPlot() {
 	const int nDATA = 1;
 	std::cout << "set data imformation, we have " << nDATA << "data file"
 			<< std::endl;
-	std::string dataLabels[nDATA] = { "Muon" };
+	std::string dataLabels[nDATA] = { "Muon18" };
 	std::vector < std::string > fData;
 	for (int ii = 0; ii < nDATA; ii++) {
 		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
 	}
 // set mc imformation
-		const int nMC = 6;
+		const int nMC = 5;
 		std::cout << "set data imformation, we have " << nMC << "mc file"
 				<< std::endl;
-		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
-		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
-		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
-		std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA",
-                                            "plj_muendcap","ZA"};
-		/*std::string mcLabels[nMC] = {"ZA"}; 
-		double kFactorsMC_array[nMC] = { lumiValue};*/
+		std::string mcLabels[nMC] = {"ST18", "TTA18", "VV18",
+                                            "plj18_weight","ZA18"};
 
-		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,1,lumiValue};
+		double kFactorsMC_array[nMC] = {lumiValue,lumiValue,lumiValue,1,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
 			fMC.push_back(pathToTrees +"cutla-out"+ mcLabels[ii] + ".root");
@@ -77,7 +72,7 @@ void loopPlot() {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 			<< std::endl;
-	std::string mcLabelsSig[nMCSig] = { "ZA-EWK" };
+	std::string mcLabelsSig[nMCSig] = { "ZA-EWK18" };
 	double kFactorsSig_array[nMCSig] = { 1 };
 	std::vector < std::string > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
@@ -116,22 +111,26 @@ void loopPlot() {
 		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2018CR_%s.root", dataLabels[i].c_str());
 		fHistosData.push_back(buffer);
 
-		std::cout << "retrieve "<<i+1<<"th data file" << std::endl;
+		std::cout << "retrieve "<<i<<"th data file" << std::endl;
 		TFile *fileData = TFile::Open(fData.at(i).c_str());
-		TTree *treeData = (TTree*) fileData->Get("demo");
-		//TFile *fileMC = TFile::Open(fMC.at(i).c_str());
-		//TTree *treeMC = (TTree*) fileMC->Get("demo");
+		std::cout << "retrieve tree of data file" << std::endl;
+		//TTree *treeData = (TTree*) fileData->Get("demo");
+		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
+		std::cout<<"OK"<<std::endl;
+		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
+		TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 		std::cout << "retrieve ith mc file" << std::endl;
-		/*if (dopileupreweight) {
+		if (dopileupreweight) {
 			hisRatio = test(treeData, treeMC);
 			std::cout << "hisRatio" << std::endl;
-		}*/
+		}
+		std::cout<<"OK"<<std::endl;
 		if (redoHistograms) {
+			std::cout<<"OK"<<std::endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeData, fileData,
 					hisRatio, out_buffer, &rc);
-//		EDBRHistoMaker* maker = new EDBRHistoMaker(treeData, fileData,
-//					hisRatio, out_buffer);
 			maker->setUnitaryWeights(true);
+			std::cout<<"OK"<<std::endl;
 			maker->Loop(buffer);
 			maker->endjob();
 			fileData->Close();
@@ -157,7 +156,13 @@ void loopPlot() {
 			std::cout << "retrieve ith mc file" << std::endl;
 			TFile *fileMC = TFile::Open(fMC.at(i).c_str());
 			std::cout << "retrieve tree of mc file" << std::endl;
-			TTree *treeMC = (TTree*) fileMC->Get("demo");
+			TTree *treeMC;
+			treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
+                        /*TString name = fMC.at(i);
+			if(name.Contains("pweight")==1)  
+				treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
+			else
+				treeMC = (TTree*) fileMC->Get("demo");*/
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMC, fileMC,
 					hisRatio, out_buffer, &rc);
 			maker->setUnitaryWeights(false);
@@ -185,7 +190,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i).c_str());
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("demo");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
                         std::cout<<"OK1"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer, &rc);
@@ -242,19 +247,17 @@ void loopPlot() {
 	////// {DYJetsToLL_HT-200to400,DYJetsToLL_HT-200to400,DYJetsToLL_HT-600toInf}
 	std::vector<int> fColorsMC;
 
-        fColorsMC.push_back(kGreen-4);
-        fColorsMC.push_back(kGreen-10);
-        fColorsMC.push_back(kBlue - 4);
-        fColorsMC.push_back(kBlue - 7);
-        fColorsMC.push_back(kOrange - 2);
-        fColorsMC.push_back(kRed - 7);
+        fColorsMC.push_back(kGreen+2);//ST
+        fColorsMC.push_back(kCyan);//TTA
+        fColorsMC.push_back(40);//VV
+        fColorsMC.push_back(kYellow-7);//plj
+        fColorsMC.push_back(kBlue-6);//ZA
+	fColorsMC.push_back(kRed-9);//EWK
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
-	fColorsMC.push_back(2);
-	fColorsMC.push_back(210);
 	std::vector<int> fColorsMCSig;
-	fColorsMCSig.push_back(kRed);
+	fColorsMCSig.push_back(kRed-7);
 	fColorsMCSig.push_back(kBlue + 3);
 
 	plotter->setFillColor(fColorsMC);

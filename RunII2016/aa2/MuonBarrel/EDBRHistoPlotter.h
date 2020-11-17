@@ -1,5 +1,4 @@
 #include <string>
-#include <fstream>
 #include <vector>
 #include <iostream>
 #include <sstream>
@@ -18,7 +17,7 @@
 #include "TMath.h"
 #include "TLatex.h" 
 #include "CMS_lumi.C"
-using namespace std;
+
 class EDBRHistoPlotter {
 public:
 
@@ -435,8 +434,8 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 				(TH1D*) (filesMCSig.at(i)->Get(histoName.c_str())->Clone(
 						labelsSig.at(i).c_str()));
 		histo->SetDirectory(0);
-		histo->SetLineColor(2);
-		histo->SetFillColor(2);
+		histo->SetLineColor(kRed-7);
+		histo->SetFillColor(kRed-7);
 
 		histoOrig->SetDirectory(0);
 		histoOrig->SetLineColor(getLineColor(i));
@@ -535,8 +534,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
         leg1->SetTextSize(0.035);
 	leg1->SetMargin(0.4);
         leg2->SetTextSize(0.035);
-//	fstream ftxt("./yields.txt", ios::app);
-	ofstream ftxt("./yields.txt");// ios::app);
+        ofstream ftxt("./yields.txt");
 	if (isDataPresent_){
                 double yieldsDataErr=0;
 //                double yieldsData = sumDATA->IntegralAndError(0,sumDATA->GetNbinsX(),yieldsDataErr);;
@@ -555,7 +553,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
                 char yMCerr[100];sprintf(yMCerr,"%.2f",yieldsMCerr);
                 TString samplesMC = "All MC";
                 TString LabelMC = samplesMC +" ["+ yMC+ "+/-"+yMCerr+"]";
-		ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
+                ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
 		leg2->AddEntry(sumMC, LabelMC, "l");
 //
 	}
@@ -569,7 +567,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
                 TString samples = labels.at(i).c_str();
                 TString LabelMC = samples +" ["+ y+ "+/-"+ye+"]";
 		leg1->AddEntry(histosMC.at(i), LabelMC, "f");
-		ftxt<<samples<<" "<<y<< "$pm$"<<ye<<""<<endl;
+                ftxt<<samples<<" "<<y<< "$pm$"<<ye<<""<<endl;
 		cout<<LabelMC<<endl;
 	}
 
@@ -587,7 +585,8 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 					char ySigErr[100];sprintf(ySigErr,"%.2f",yieldsMCSigErr);
 					TString samplesMCSig = "EWK_ZA";
 					TString LabelSig = samplesMCSig +" ["+ ySig + "+/-"+ySigErr +"]";
-					ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
+                                       ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
+
 					leg2->AddEntry(histosMCSig.at(i), LabelSig, "lf");
 				}
 			} else

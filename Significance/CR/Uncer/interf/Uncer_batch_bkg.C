@@ -1,25 +1,22 @@
 #define num 3
 #define pi 3.1415926
 TH1D* run( TString sample,TString tag,TString cut1){
-     Double_t Mjj_bins[2]={150, 400};
+     vector<Double_t> mjj_bins={150,300,400,500};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir1;
-//     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";
-//     else dir1="/eos/user/y/yian/"+tag+"cutla/";
-     dir1="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";
+     dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
      TFile*file;
-     if(sample.Contains("EWK"))
-	     file=new TFile(dir1+"unfold_"+tag+"outZA-"+sample+".root");
-     else    file=new TFile(dir1+"unfold_"+tag+"outZA_"+sample+".root");
-     TTree*tree=(TTree*)file->Get("demo");     
+     file=new TFile(dir1+"ZA-EWK"+sample+tag+".root");
+     TTree*tree=(TTree*)file->Get("outtree");
      map<TString, double> variables;
      int lep;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double ptVlep, yVlep, phiVlep, massVlep;
-     double Mjj,scalef,zepp;
+     double Mjj,scalef,zepp,actualWeight;
      tree->SetBranchAddress("lep",&lep);
+     tree->SetBranchAddress("actualWeight",&actualWeight);
      tree->SetBranchAddress("Mjj",&Mjj);
      tree->SetBranchAddress("zepp",&zepp);
      tree->SetBranchAddress("jet1eta",&jet1eta);
@@ -57,9 +54,9 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TString th1name;
      th1name="hist"+sample;
      TH1D* th1;
-     th1 = new TH1D(th1name,th1name,1,0,1);
+     th1 = new TH1D(th1name,th1name,mjj_bins.size()-1,&mjj_bins[0]);
      th1->Sumw2(); 
-     double actualWeight,delta_phi,detajj;
+     double delta_phi,detajj;
      TLorentzVector Zp4, photonp4, jet1p4, jet2p4;
      for(int k=0;k<tree->GetEntries();k++){
              tree->GetEntry(k);
@@ -71,7 +68,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
              delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
              if (delta_phi>pi) delta_phi=2*pi-delta_phi;
 	     if (  tformula->EvalInstance() /*&& (zepp<2.4 && delta_phi>1.9)*/ ){
-		     if(Mjj>=150&&Mjj<500)th1->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
+		     if(Mjj>=150&&Mjj<500)th1->Fill(Mjj,actualWeight);//0~1, 2.5~4.5 and 500~800
 	     }
      }
      return th1;
@@ -84,17 +81,17 @@ int Uncer_batch_bkg(){
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"EWK","interference"};
+	vector<TString> sample={"","_interf"};
 	const int kk=sample.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][sample]
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else{
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 		}
-		TString ControlRegion = "Mjj>150  && Mjj<400 && Mva>100";
+		TString ControlRegion = "Mjj>150  && Mjj<500 && ZGmass>100";
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		for(int j=0;j<kk;j++){
 			hist[i][j]=run(sample[j],tag[i],Reco);
@@ -104,7 +101,7 @@ int Uncer_batch_bkg(){
 	TFile*fout[3][kk];
 	for(int i=0;i<3;i++){
 		for(int j=0;j<kk;j++){
-			fout[i][j]= new TFile("hist_"+sample[j]+"_"+tag[i]+".root","recreate");
+			fout[i][j]= new TFile("hist"+sample[j]+"_"+tag[i]+".root","recreate");
 			cout<<hist[i][j]->GetBinContent(1)<<endl;
 			fout[i][j]->cd();
 			hist[i][j]->Write();

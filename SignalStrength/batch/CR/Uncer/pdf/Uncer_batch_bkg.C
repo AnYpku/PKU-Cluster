@@ -2,7 +2,7 @@
 #define pi 3.1415926
 void run( TFile*file,TString cut1,TString tag,bool turn){
 	TString name=file->GetName();
-	TTree*tree=(TTree*)file->Get("demo");     
+	TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 	Double_t scalef,pileupWeight,pweight[703],Mjj,jet1eta,jet2eta;
 	tree->SetBranchAddress("scalef",&scalef);
 	tree->SetBranchAddress("pileupWeight",&pileupWeight);
@@ -74,23 +74,23 @@ int Uncer_batch_bkg(){
         vector<TString> tag={"16","17","18"};
         
         TFile*file1[3];
-	TString dir1="/eos/user/y/yian/2016legacy/";     
-	TString dir2="/eos/user/y/yian/2017cutla/";     
-	TString dir3="/eos/user/y/yian/2018cutla/";     
-	file1[0]=new TFile(dir1+"cutla-outZA_pweight.root");
-	file1[1]=new TFile(dir2+"cutla-outZA-pweight.root");
-	file1[2]=new TFile(dir3+"cutla-outZA_pweight.root");
+        TString dir1="/home/pku/anying/cms/rootfiles/2016/";
+        TString dir2="/home/pku/anying/cms/rootfiles/2017/";
+        TString dir3="/home/pku/anying/cms/rootfiles/2018/";
+        file1[0]=new TFile(dir1+"cutla-outZA16.root");
+        file1[1]=new TFile(dir2+"cutla-outZA17.root");
+        file1[2]=new TFile(dir3+"cutla-outZA18.root");
 
-	TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";     
         TFile*file2[3];
-	file2[0]=new TFile(dir+"unfold_16outZA-EWK.root");
-	file2[1]=new TFile(dir+"unfold_17outZA-EWK-pweight.root");
-	file2[2]=new TFile(dir+"unfold_18outZA-EWK-pweight.root");
+        file2[0]=new TFile(dir1+"unfold_GenCutla-outZA-EWK16.root");
+        file2[1]=new TFile(dir2+"unfold_GenCutla-outZA-EWK17.root");
+        file2[2]=new TFile(dir3+"unfold_GenCutla-outZA-EWK18.root");
+
 
         for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
 		}
 		else{
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";

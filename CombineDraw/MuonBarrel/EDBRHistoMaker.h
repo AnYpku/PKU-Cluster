@@ -1,5 +1,4 @@
 #include "TGraphAsymmErrors.h"
-#include "L1_weight.C"
 #include <map>
 #include <vector>
 #include <string>
@@ -13,9 +12,8 @@
 #include "math.h"
 #include "TLorentzVector.h"
 #include "RoccoR.cc"
-#include "TRandom.h"
-//#include "get_rochester_scale.C"
 #define Pi 3.1415926
+#include "TRandom.h"
 using namespace std;
 /// The large arrays that were here are now GONE.
 /// Instead, we have this helper that holds the
@@ -49,6 +47,8 @@ class EDBRHistoMaker {
 
 		// Declaration of leaf types
 		Double_t scalef;
+                Double_t        prefWeight;
+                Double_t pweight[703];
 		Int_t nVtx;
 		Double_t theWeight;
 		Double_t lumiWeight;
@@ -58,10 +58,16 @@ class EDBRHistoMaker {
                 Int_t HLT_Ele3;
                 Int_t HLT_Ele4;
                 Int_t HLT_Ele5;
+                Int_t HLT_Ele6;
+                Int_t HLT_Ele7;
                 Int_t HLT_Mu2;
                 Int_t HLT_Mu1;
-                Int_t HLT_Mu5;
                 Int_t HLT_Mu6;
+                Int_t HLT_Mu7;
+                Int_t HLT_Mu8;
+                Int_t HLT_Mu9;
+                Int_t HLT_Mu10;
+                Int_t HLT_Mu3;
 		Double_t nump;
 		Double_t numm;
 		Double_t npT;
@@ -106,6 +112,8 @@ class EDBRHistoMaker {
 		Double_t jet1phi;
 		Double_t jet2phi;
 		Double_t Mjj;
+		Double_t jet1puIdTight;
+                Double_t jet2puIdTight;
 		Double_t zepp;//need to be modified for rochester
 		Double_t deltaetajj;
 		Double_t actualWeight;
@@ -119,6 +127,7 @@ class EDBRHistoMaker {
 		Double_t ele1_reco_scale;
 		Double_t ele2_reco_scale;
 		Double_t photon_id_scale;
+		Double_t photon_veto_scale;
 		// for rochester correction
 		Int_t lep1_sign;
 		Int_t lep2_sign;
@@ -138,17 +147,13 @@ class EDBRHistoMaker {
 		Double_t muon_hlt_scale;
 		Double_t ele_hlt_scale;
 		Double_t drll;
-		Double_t        lep1_eta_station2;
-		Double_t        lep1_phi_station2;
-		Double_t        lep2_eta_station2;
-		Double_t        lep2_phi_station2;
-
 		// List of branches
 		TBranch *b_ele1_id_scale;   //!
 		TBranch *b_ele2_id_scale;   //!
 		TBranch *b_ele1_reco_scale;   //!
 		TBranch *b_ele2_reco_scale;   //!
 		TBranch *b_photon_id_scale;   //!
+		TBranch *b_photon_veto_scale;   //!
 		TBranch *b_lep1_sign;   //!
 		TBranch *b_lep2_sign;   //!
 		TBranch *b_muon1_trackerLayers;   //!
@@ -163,6 +168,9 @@ class EDBRHistoMaker {
 		TBranch *b_muon2_track_scale;   //!
 		TBranch *b_muon_hlt_scale;   //!
 		TBranch *b_scalef;   //!
+                TBranch        *b_prefWeight;   //!
+		TBranch *b_actualWeight;   //!
+		TBranch *b_pweight;   //!
 		TBranch *b_nVtx;   //!
 		TBranch *b_theWeight;   //!
 		TBranch *b_lumiWeight;   //!
@@ -172,10 +180,16 @@ class EDBRHistoMaker {
 		TBranch *b_HLT_Ele3;   //!
 		TBranch *b_HLT_Ele4;   //!
 		TBranch *b_HLT_Ele5;   //!
+		TBranch *b_HLT_Ele6;   //!
+		TBranch *b_HLT_Ele7;   //!
 		TBranch *b_HLT_Mu2;   //!
 		TBranch *b_HLT_Mu1;   //!
-		TBranch *b_HLT_Mu5;   //!
 		TBranch *b_HLT_Mu6;   //!
+		TBranch *b_HLT_Mu7;   //!
+		TBranch *b_HLT_Mu8;   //!
+		TBranch *b_HLT_Mu9;   //!
+		TBranch *b_HLT_Mu10;   //!
+		TBranch *b_HLT_Mu3;   //!
 		TBranch *b_nump;   //!
 		TBranch *b_numm;   //!
 		TBranch *b_npT;   //!
@@ -220,14 +234,11 @@ class EDBRHistoMaker {
 		TBranch *b_jet1e;
 		TBranch *b_jet2e;
 		TBranch *b_Mjj;    //!
+                TBranch *b_jet1puIdTight;
+                TBranch *b_jet2puIdTight;
 		TBranch *b_zepp;
 		TBranch *b_deltaetajj;
 		TBranch *b_l1_weight;
-		TBranch        *b_lep1_eta_station2;   //!
-		TBranch        *b_lep1_phi_station2;   //!
-		TBranch        *b_lep2_eta_station2;   //!
-		TBranch        *b_lep2_phi_station2;   //!
-
 
 		// Basic functions directly from MakeClass
 		Int_t GetEntry(Long64_t entry);
@@ -272,14 +283,11 @@ class EDBRHistoMaker {
 		///lu
 		// fro rochester correction
 		RoccoR rc;
-		double get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1, double r2);
-
+                double get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1);
 
 		// The histograms
 		HistoFactory hs;
 		std::map<std::string, TH1D*> theHistograms;
-		TH2D *hmjmzz;
-		TH1D *hmzzNEW;
 };
 
 void EDBRHistoMaker::Init(TTree *tree) {
@@ -302,6 +310,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename = new TTree("outtree","outtree");
 	cout<<"begin make outfile tree"<<endl;
 	treename->Branch("scalef", &scalef, "scalef/D");
+	treename->Branch("prefWeight", &prefWeight,"prefWeight/D");
+	treename->Branch("actualWeight", &actualWeight, "actualWeight/D");
+//        treename->Branch("pweight", &pweight, "pweight[703]/D");
 	treename->Branch("nVtx", &nVtx, "nVtx/I");
 	treename->Branch("theWeight", &theWeight, "theWeight/D");
 	treename->Branch("lumiWeight", &lumiWeight, "lumiWeight/D");
@@ -309,21 +320,18 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("HLT_Ele1", &HLT_Ele1, "HLT_Ele1/I");
 	treename->Branch("HLT_Ele2", &HLT_Ele2, "HLT_Ele2/I");
 	treename->Branch("HLT_Ele3", &HLT_Ele3, "HLT_Ele3/I");
-	treename->Branch("HLT_Ele4", &HLT_Ele4, "HLT_Ele4/I");
-	treename->Branch("HLT_Ele5", &HLT_Ele5, "HLT_Ele5/I");
 	treename->Branch("HLT_Mu2", &HLT_Mu2, "HLT_Mu2/I");
 	treename->Branch("HLT_Mu1", &HLT_Mu1, "HLT_Mu1/I");
-	treename->Branch("HLT_Mu5", &HLT_Mu5, "HLT_Mu5/I");
-	treename->Branch("HLT_Mu6", &HLT_Mu6, "HLT_Mu6/I");
+	treename->Branch("HLT_Mu3", &HLT_Mu3, "HLT_Mu3/I");
 	treename->Branch("nump", &nump, "nump/D");
 	treename->Branch("numm", &numm, "numm/D");
 	treename->Branch("npT", &npT, "npT/D");
 	treename->Branch("lep", &lep, "lep/I");
-	treename->Branch("run_period", &run_period, "run_period/I");
 	treename->Branch("ptVlep", &ptVlep, "ptVlep/D");
 	treename->Branch("yVlep", &yVlep, "yVlep/D");
 	treename->Branch("phiVlep", &phiVlep, "phiVlep/D");
 	treename->Branch("massVlep", &massVlep, "massVlep/D");
+	treename->Branch("ZGmass", &ZGmass, "ZGmass/D");
 	treename->Branch("ptlep1", &ptlep1, "ptlep1/D");
 	treename->Branch("etalep1", &etalep1, "etalep1/D");
 	treename->Branch("philep1", &philep1, "philep1/D");
@@ -359,6 +367,8 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("jet2phi", &jet2phi, "jet2phi/D");
 	treename->Branch("jet2e", &jet2e, "jet2e/D");
 	treename->Branch("Mjj", &Mjj, "Mjj/D");
+        treename->Branch("jet1puIdTight", &jet1puIdTight, "jet1puIdTight/D");
+        treename->Branch("jet2puIdTight", &jet2puIdTight, "jet2puIdTight/D");
 	treename->Branch("zepp", &zepp, "zepp/D");
 	treename->Branch("deltaetajj", &deltaetajj, "deltaetajj/D");
 	treename->Branch("delta_phi", &delta_phi, "delta_phi/D");
@@ -370,22 +380,17 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("ele1_reco_scale", &ele1_reco_scale, "ele1_reco_scale/D");
 	treename->Branch("ele2_reco_scale", &ele2_reco_scale, "ele2_reco_scale/D");
 	treename->Branch("photon_id_scale", &photon_id_scale, "photon_id_scale/D");
+	treename->Branch("photon_veto_scale", &photon_veto_scale, "photon_veto_scale/D");
 	treename->Branch("lep1_sign", &lep1_sign, "lep1_sign/I");
 	treename->Branch("lep2_sign", &lep2_sign, "lep2_sign/I");
-	treename->Branch("muon1_trackerLayers", &muon1_trackerLayers, "muon1_trackerLayers/I");
-	treename->Branch("muon2_trackerLayers", &muon2_trackerLayers, "muon2_trackerLayers/I");
-	treename->Branch("matchedgenMu1_pt", &matchedgenMu1_pt, "matchedgenMu1_pt/D");
-	treename->Branch("matchedgenMu2_pt", &matchedgenMu2_pt, "matchedgenMu2_pt/D");
 	treename->Branch("muon1_id_scale", &muon1_id_scale, "muon1_id_scale/D");
 	treename->Branch("muon2_id_scale", &muon2_id_scale, "muon2_id_scale/D");
 	treename->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
 	treename->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D");
 	treename->Branch("muon1_track_scale", &muon1_track_scale, "muon1_track_scale/D");
 	treename->Branch("muon2_track_scale", &muon2_track_scale, "muon2_track_scale/D");
-	treename->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
-	treename->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
-	treename->Branch("muon1_rochester", &muon1_rochester, "muon1_rochester/D");
-	treename->Branch("muon2_rochester", &muon2_rochester, "muon2_rochester/D");
+//	treename->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
+//	treename->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
 	treename->Branch("drll", &drll, "drll/D");
 	cout<<"make outfile tree end"<<endl;
 
@@ -394,6 +399,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
         fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
         fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
         fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+        fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
         fChain->SetBranchAddress("lep1_sign", &lep1_sign, &b_lep1_sign);
         fChain->SetBranchAddress("lep2_sign", &lep2_sign, &b_lep2_sign);
         fChain->SetBranchAddress("muon1_trackerLayers", &muon1_trackerLayers, &b_muon1_trackerLayers);
@@ -408,6 +414,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
         fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
         fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
 	fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+        fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
+	fChain->SetBranchAddress("actualWeight", &actualWeight, &b_actualWeight);
+        fChain->SetBranchAddress("pweight", pweight, &b_pweight);
 	fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
 	fChain->SetBranchAddress("theWeight", &theWeight, &b_theWeight);
 	fChain->SetBranchAddress("lumiWeight", &lumiWeight, &b_lumiWeight);
@@ -415,12 +424,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("HLT_Ele1", &HLT_Ele1, &b_HLT_Ele1);
 	fChain->SetBranchAddress("HLT_Ele2", &HLT_Ele2, &b_HLT_Ele2);
 	fChain->SetBranchAddress("HLT_Ele3", &HLT_Ele3, &b_HLT_Ele3);
-	fChain->SetBranchAddress("HLT_Ele4", &HLT_Ele4, &b_HLT_Ele4);
-	fChain->SetBranchAddress("HLT_Ele5", &HLT_Ele5, &b_HLT_Ele5);
 	fChain->SetBranchAddress("HLT_Mu2", &HLT_Mu2, &b_HLT_Mu2);
 	fChain->SetBranchAddress("HLT_Mu1", &HLT_Mu1, &b_HLT_Mu1);
-	fChain->SetBranchAddress("HLT_Mu5", &HLT_Mu5, &b_HLT_Mu5);
-	fChain->SetBranchAddress("HLT_Mu6", &HLT_Mu6, &b_HLT_Mu6);
+	fChain->SetBranchAddress("HLT_Mu3", &HLT_Mu3, &b_HLT_Mu3);
 	fChain->SetBranchAddress("nump", &nump, &b_nump);
 	fChain->SetBranchAddress("numm", &numm, &b_numm);
 	fChain->SetBranchAddress("npT", &npT, &b_npT);
@@ -465,14 +471,11 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("jet1e", &jet1e, &b_jet1e);
 	fChain->SetBranchAddress("jet2e", &jet2e, &b_jet2e);
 	fChain->SetBranchAddress("Mjj", &Mjj, &b_Mjj);
+	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+        fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
 	fChain->SetBranchAddress("zepp", &zepp, &b_zepp);
 	fChain->SetBranchAddress("deltaetajj", &deltaetajj, &b_deltaetajj);
 	fChain->SetBranchAddress("l1_weight", &l1_weight, &b_l1_weight);
-	fChain->SetBranchAddress("lep1_eta_station2", &lep1_eta_station2, &b_lep1_eta_station2);
-	fChain->SetBranchAddress("lep1_phi_station2", &lep1_phi_station2, &b_lep1_phi_station2);
-	fChain->SetBranchAddress("lep2_eta_station2", &lep2_eta_station2, &b_lep2_eta_station2);
-	fChain->SetBranchAddress("lep2_phi_station2", &lep2_phi_station2, &b_lep2_phi_station2);
-
 
 }
 
@@ -490,18 +493,18 @@ EDBRHistoMaker::EDBRHistoMaker(TTree* tree, TFile* fileTMP, TH1F* hR1, std::stri
 	printAllHistos();
 }
 
-double EDBRHistoMaker::get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1, double r2){
-	int charge = int(charge_temp/fabs(charge_temp));
-	// data correction
-	if(isdata) return rc.kScaleDT(charge, pt, eta, phi, 0, 0);
+double EDBRHistoMaker::get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1){
+        int charge = int(charge_temp/fabs(charge_temp));
+        // data correction
+        if(isdata) return rc.kScaleDT(charge, pt, eta, phi, 0, 0);
 
-	// MC with genPt avalible
-	if((!isdata) && genPt>0&&fabs(genPt-pt)/pt<0.1)
-        return rc.kScaleFromGenMC(charge, pt, eta, phi, nl, genPt, r1, 0, 0);
+        // MC with genPt avalible
+        if((!isdata) && genPt>0&&fabs(genPt-pt)/pt<0.1)
+        return rc.kSpreadMC(charge, pt, eta, phi, genPt, 0, 0);
 
-	// MC without genPT avalible
-	if((!isdata) && !(genPt>0&&fabs(genPt-pt)/pt<0.1))
-        return rc.kScaleAndSmearMC(charge, pt, eta, phi, nl, r1, r2, 0, 0);
+        // MC without genPT avalible
+        if((!isdata) && !(genPt>0&&fabs(genPt-pt)/pt<0.1))
+        return rc.kSmearMC(charge, pt, eta, phi, nl, r1, 0, 0);
 }
 EDBRHistoMaker::~EDBRHistoMaker() {
 	if (!fChain)
@@ -542,7 +545,7 @@ void EDBRHistoMaker::createAllHistos() {
 	hs.setHisto("ptVlep", 15, 0, 450);
 	hs.setHisto("etaVlep", 12, -1.5, 1.5);
 	hs.setHisto("phiVlep", 16, -3.14, 3.14);
-	hs.setHisto("massVlep", 20, 70, 110);
+	hs.setHisto("massVlep", 10, 70, 110);
 	hs.setHisto("photonet", 8, 25, 105);
 	hs.setHisto("photoneta", 12, -1.5, 1.5);
 	hs.setHisto("photonphi", 16, -3.14, 3.14);
@@ -560,9 +563,9 @@ void EDBRHistoMaker::createAllHistos() {
 	hs.setHisto("jet1eta", 16, -4.7, 4.7);
 	hs.setHisto("jet2pt", 9, 30, 300);
 	hs.setHisto("jet2eta", 16, -4.7, 4.7);
-	hs.setHisto("Mjj", 5, 150, 400);
+	hs.setHisto("Mjj", 5, 500, 2000);
 	hs.setHisto("ZGmass", 8, 70, 400);
-	hs.setHisto("nVtx", 19, 0,76);
+	hs.setHisto("nVtx", 18, 0, 36);
 	hs.setHisto("zepp", 9, 0, 4.5);
 	hs.setHisto("delta_phi", 10, 0, 3.15);
 	hs.setHisto("detajj", 8, 0, 8);
@@ -580,7 +583,7 @@ void EDBRHistoMaker::createAllHistos() {
 				hs.maxBin[i]);
 		histogram->SetStats(kFALSE);
 		histogram->SetDirectory(0);
-		histogram->Sumw2();
+		//histogram->Sumw2();
 		theHistograms[hs.vars[i]] = histogram;
 	}
 
@@ -612,7 +615,7 @@ void EDBRHistoMaker::saveAllHistos(std::string outFileName) {
 /// and can also filter out events on an individual basis.
 ///----------------------------------------------------------------
 void EDBRHistoMaker::Loop(std::string outFileName) {
-
+        double sum=0;
 	if (fChain == 0)
 		return;
 	int numbe_out = 0;
@@ -624,9 +627,6 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 	std::cout << "numberofnp:" << npp << "  numberofnm:" << nmm << std::endl;
 	Long64_t nbytes = 0, nb = 0;
 	TLorentzVector Zp4, photonp4, jet1p4, jet2p4,lep1p4,lep2p4;
-        double lep1_phi_station2_tmp = 0;
-        double lep2_phi_station2_tmp = 0;
-	double sum=0;
 	for (Long64_t jentry = 0; jentry < nentries; jentry++) {
 	double r1=gRandom->Rndm(jentry);
 	double r2=gRandom->Rndm(jentry*2);
@@ -638,28 +638,30 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 		nb = fChain->GetEntry(jentry);
 		nbytes += nb;
 		//rochester correction
-		muon1_rochester=get_rochester_scale(true, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1, r2);
-		muon2_rochester=get_rochester_scale(true, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1, r2);
-		ptlep1*=muon1_rochester;
-		ptlep2*=muon2_rochester;
+                if(lep==13){
+                        muon1_rochester=get_rochester_scale(true, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1);
+                        muon2_rochester=get_rochester_scale(true, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1);
+                        ptlep1*=muon1_rochester;
+                        ptlep2*=muon2_rochester;
 
-		lep1p4.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.105666);
-		lep2p4.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.105666);
-		massVlep=(lep1p4+lep2p4).M();
-		yVlep=(lep1p4+lep2p4).Eta();
-		phiVlep=(lep1p4+lep2p4).Phi();
-		ptVlep=(lep1p4+lep2p4).Pt();
+                        lep1p4.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.105666);
+                        lep2p4.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.105666);
+                        massVlep=(lep1p4+lep2p4).M();
+                        yVlep=(lep1p4+lep2p4).Eta();
+                        phiVlep=(lep1p4+lep2p4).Phi();
+                        ptVlep=(lep1p4+lep2p4).Pt();
+                }
 		//rochester correction
 
-		//if (jentry % 1000000 == 0)
-			//std::cout << "Entry num " << jentry << std::endl;
+		if (jentry % 1000000 == 0)
+			std::cout << "Entry num " << jentry << std::endl;
 
 		if (theWeight > 0)
 			nn = 1;
 		else
 			nn = -1;
 
-		actualWeight = lumiWeight * pileupWeight * scalef;
+		actualWeight = 1;
 		detajj = fabs(jet1eta - jet2eta);
 		if (fabs(jet1phi-jet2phi)>Pi) drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*Pi-fabs(jet1phi-jet2phi))*(2*Pi-fabs(jet1phi-jet2phi)));
                 else drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)));
@@ -680,35 +682,16 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 				printf("Unitary weights set!\n");
 			actualWeight = 1;
 		}
-		int iswjets = 0;
-                int isnotwets = 0;
-                int iszjets = 0;
-                int isttjets = 0;
+		int iswjets = 1;
+                int isnotwets = 1;
+                int iszjets = 1;
+                int isttjets = 1;
 
                 TString filename = fileTMP_->GetName();
-                if (filename.Contains("WJets") && isprompt != 1) {
-                        iswjets = 1;
-                }
-                if (filename.Contains("ZJets") && isprompt != 1) {
-                        iszjets = 1;
-                }
-                if (filename.Contains("TTJets") && isprompt != 1) {
-                        isttjets = 1;
-                }
-                if (!(filename.Contains("WJets")) && !(filename.Contains("ZJets"))
-                                && !(filename.Contains("TTJets"))) {
-                        isnotwets = 1;
-                }
-                lep1_phi_station2_tmp = lep1_phi_station2;
-                lep2_phi_station2_tmp = lep2_phi_station2;
-                if(lep1_phi_station2<0) lep1_phi_station2_tmp = lep1_phi_station2+6.28319;
-                if(lep2_phi_station2<0) lep2_phi_station2_tmp = lep2_phi_station2+6.28319;
-		l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
-                if(drla==10) drla=-10;
-                if(drla2==10) drla2=-10;
-		if (drll>0.3 && (isnotwets > 0 || iswjets > 0 || iszjets > 0 || isttjets > 0)&&l1_weight==1&&lep == 13 &&/* (HLT_Mu1 > 0 || HLT_Mu2 > 0) &&*/  ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. /*&& drla2>0.7 && drla>0.7 && photonet > 20.&& fabs(photoneta) < 1.4442*/ /*&& jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && Mjj > 150 &&Mjj<400*/) {
-			//if(Mjj<400) 
-			sum = sum + actualWeight;
+                if(drla==10)  drla=-10;
+                if(drla2==10)  drla2=-10;
+		if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&(HLT_Mu1>0 ||HLT_Mu2>0 ) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) || ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) )  ) ||
+                      (drla>0.7 && drla2>0.7 && lep == 11 && (HLT_Ele1>0 || HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. && ( (fabs(photoneta) < 1.4442) || ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) )  )    ) {
 			numbe_out++;
 			treename->Fill();
 		}
@@ -737,7 +720,8 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 			(theHistograms["jet1eta"])->Fill(jet1eta, actualWeight);
 			(theHistograms["jet2pt"])->Fill(jet2pt, actualWeight);
 			(theHistograms["jet2eta"])->Fill(jet2eta, actualWeight);
-			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+//			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+			(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
 			(theHistograms["ZGmass"])->Fill(ZGmass, actualWeight);
 			(theHistograms["nVtx"])->Fill(nVtx, actualWeight);
 			(theHistograms["zepp"])->Fill(zepp, actualWeight);
@@ -745,14 +729,15 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 			(theHistograms["detajj"])->Fill(detajj, actualWeight);
 
 		}
-           //if(Mjj<400)	
+		sum =sum + actualWeight;
 	}     //end loop over entries
-	cout << "after cut: " << numbe_out << "*actualweight" << actualWeight
-		<< " result " << sum <<"; yields "<<sum*41.52<< endl;
+	cout << "after cut: " << numbe_out << " actualweight" << actualWeight
+		<< " yields " << sum << endl;
 	this->saveAllHistos(outFileName);
 }
 
 void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
+	double sum=0;
 
 	if (fChain == 0)
 		return;
@@ -766,9 +751,6 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 	Long64_t nbytes = 0, nb = 0;
 
 	TLorentzVector Zp4, photonp4, jet1p4, jet2p4, lep1p4, lep2p4;
-	double sum=0;
-        double lep1_phi_station2_tmp = 0;
-        double lep2_phi_station2_tmp = 0;
 
 	for (Long64_t jentry = 0; jentry < nentries; jentry++) {
 	double r1=gRandom->Rndm(jentry);
@@ -782,90 +764,71 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 		nbytes += nb;
 
 		//rochester correction
-		muon1_rochester=get_rochester_scale(false, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1, r2);
-		muon2_rochester=get_rochester_scale(false, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1, r2);
-		ptlep1*=muon1_rochester;
-		ptlep2*=muon2_rochester;
+		TString name=fileTMP_->GetName();
+		if(lep==13 && name.Contains("plj")==0){
+			muon1_rochester=get_rochester_scale(false, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1);
+			muon2_rochester=get_rochester_scale(false, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1);
 
-		lep1p4.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.105666);
-		lep2p4.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.105666);
-		massVlep=(lep1p4+lep2p4).M();
-		yVlep=(lep1p4+lep2p4).Eta();
-		phiVlep=(lep1p4+lep2p4).Phi();
-		ptVlep=(lep1p4+lep2p4).Pt();
+			ptlep1*=muon1_rochester;
+			ptlep2*=muon2_rochester;
+
+			lep1p4.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.105666);
+			lep2p4.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.105666);
+			massVlep=(lep1p4+lep2p4).M();
+			yVlep=(lep1p4+lep2p4).Eta();
+			phiVlep=(lep1p4+lep2p4).Phi();
+			ptVlep=(lep1p4+lep2p4).Pt();
+		}
 		//rochester correction
-		if (jentry % 100000 == 0)
-			std::cout << "Entry num " << jentry << std::endl;
-
 		if (theWeight > 0)
 			nn = 1;
 		else
 			nn = -1;
-//	        if(outFileName.find("ZJets") != std::string::npos){
-//                      scalef=0.07487*fabs(theWeight)/theWeight;
-//                }
-		actualWeight = lumiWeight * pileupWeight * scalef;
 		detajj = fabs(jet1eta - jet2eta);
 		if (fabs(jet1phi-jet2phi)>Pi) drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*Pi-fabs(jet1phi-jet2phi))*(2*Pi-fabs(jet1phi-jet2phi)));
-                else drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)));
+		else drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)));
 
 		if (fabs(philep1-philep2)>Pi) drll = sqrt((etalep1-etalep2)*(etalep1-etalep2)+(2*Pi-fabs(philep1-philep2))*(2*Pi-fabs(philep1-philep2)));
-                else drll = sqrt((etalep1-etalep2)*(etalep1-etalep2)+(fabs(philep1-philep2))*(fabs(philep1-philep2)));
+		else drll = sqrt((etalep1-etalep2)*(etalep1-etalep2)+(fabs(philep1-philep2))*(fabs(philep1-philep2)));
 
 		jet1p4.SetPtEtaPhiE(jet1pt, jet1eta, jet1phi, jet1e);
 		jet2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
 		Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, massVlep);
 		photonp4.SetPtEtaPhiE(photonet, photoneta, photonphi, photone);
 		delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
-		ZGmass=(Zp4+photonp4).M();
 		if (delta_phi>Pi) delta_phi=2*Pi-delta_phi;
+		ZGmass=(Zp4+photonp4).M();
 
 		if (setUnitaryWeights_) {
 			if (jentry == 0)
 				printf("Unitary weights set!\n");
 			actualWeight = 1;
 		}
-		int iswjets = 0;
-                int isnotwets = 0;
-                int iszjets = 0;
-                int isttjets = 0;
+		int iswjets = 1;
+		int isnotwets = 1;
+		int iszjets = 1;
+		int isttjets = 1;
 
-                TString filename = fileTMP_->GetName();
-                if (filename.Contains("WJets") && isprompt != 1) {
-                        iswjets = 1;
-                }
-                if (filename.Contains("ZJets") && isprompt != 1) {
-                        iszjets = 1;
-                }
-                if (filename.Contains("TTJets") && isprompt != 1) {
-                        isttjets = 1;
-                }
-                if (!(filename.Contains("WJets")) && !(filename.Contains("ZJets"))
-                                && !(filename.Contains("TTJets"))) {
-                        isnotwets = 1;
-                }
-                lep1_phi_station2_tmp = lep1_phi_station2;
-                lep2_phi_station2_tmp = lep2_phi_station2;
-                if(lep1_phi_station2<0) lep1_phi_station2_tmp = lep1_phi_station2+6.28319;
-                if(lep2_phi_station2<0) lep2_phi_station2_tmp = lep2_phi_station2+6.28319;
-                l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
-                if(drla==10) drla=-10;
-                if(drla2==10) drla2=-10;
-		if (drll>0.3 && (isnotwets > 0 || iswjets > 0 || iszjets > 0 || isttjets > 0)&&l1_weight==1&&lep == 13 &&/* (HLT_Mu1 > 0 || HLT_Mu2 > 0) &&*/ ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. /*&& drla2>0.7 && drla>0.7 && photonet > 20.&& fabs(photoneta) < 1.4442*//* && jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && Mjj > 150 &&Mjj<400*/) {
-			//if(Mjj<400)	
+		TString filename = fileTMP_->GetName();
+
+                if(filename.Contains("18")) prefWeight=1;
+		actualWeight = pileupWeight * scalef * prefWeight*photon_id_scale*photon_veto_scale;
+		if(lep==13)
+                        actualWeight = actualWeight *(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale);//mc
+                if(lep==11)
+                        actualWeight = actualWeight *(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale);//mc
+                if(filename.Contains("plj"))
+                     actualWeight = scalef;
+		if(drla==10) drla=-10;
+		if(drla2==10) drla2=-10;
+		if(  (drll>0.3 && drla>0.7 && drla2>0.7 && lep == 13 && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) || ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) )  ) ||
+				(drla>0.7 && drla2>0.7 && lep == 11 && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) || ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) )  )    ) {
 			numbe_out++;
 			treename->Fill();
 		}
 		else
 			continue;
-
-		actualWeight = actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon1_track_scale*muon2_track_scale*muon_hlt_scale;//*photon_id_scale;
-                if(filename.Contains("plj")) {
-                     actualWeight = scalef;
-                     //if(jentry%1000==0) cout<<"photonet = "<<photonet<<"; actualWeight = "<<actualWeight<<endl;
-                }
-		  sum = sum + actualWeight;
-
+		sum =sum + actualWeight;
 		if (isnotwets > 0 || iswjets > 0 || iszjets > 0 || isttjets > 0) {
 			(theHistograms["ptVlep"])->Fill(ptVlep, actualWeight);
 			(theHistograms["etaVlep"])->Fill(yVlep, actualWeight);
@@ -888,7 +851,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			(theHistograms["jet1eta"])->Fill(jet1eta, actualWeight);
 			(theHistograms["jet2pt"])->Fill(jet2pt, actualWeight);
 			(theHistograms["jet2eta"])->Fill(jet2eta, actualWeight);
-			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+			(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
 			(theHistograms["ZGmass"])->Fill(ZGmass, actualWeight);
 			(theHistograms["nVtx"])->Fill(nVtx, actualWeight);
 			(theHistograms["zepp"])->Fill(zepp, actualWeight);
@@ -896,9 +859,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			(theHistograms["detajj"])->Fill(detajj, actualWeight);
 
 		}
-          //if(Mjj<400) 
 	}
-	cout << "after cut: " << numbe_out << "; actualweight" << actualWeight
-		<< " result " << sum <<"; yields "<<sum*41.52<<endl;
+	cout << "after cut: " << numbe_out << " actualweight" << actualWeight
+		<< " yields " << sum <<endl;
 	this->saveAllHistos(outFileName);
 }

@@ -1,41 +1,40 @@
 imax 1   number of channels
-jmax 6   number of processes-1
-kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+jmax 5   number of processes-1
+kmax 23  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel1
-observation 608.46
+observation 780.30
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
-bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
-process	Sig	QCD	non_prompt	TTA	VV	ST	WA
-process	0	1	2	3	4	5	6
-rate	9.78	363.37	212.03	16.91	3.91	2.46	0.00
+bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
+process	Sig	QCD	non_prompt	TTA	VV	ST
+process	0	1	2	3	4	5
+rate	8.62	458.59	286.94	18.65	4.78	2.72
 ------------
-lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
-VBS_Stat_control_bin1_mubarrel17	lnN	1.04	-	-	-	-	-	-
-QCD_Stat_control_bin1_mubarrel17	lnN	-	1.02	-	-	-	-	-
-non_prompt_Stat_control_bin1_mubarrel17	lnN	-	-	1.04	-	-	-	-
-TTA_Stat_control_bin1_mubarrel17	lnN	-	-	-	1.10	-	-	-
-VV_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	1.27	-	-
-ST_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	1.28	-
-WA_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	-	1.00
-fake_mubarrel17	lnN	-	-	1.13	-	-	-	-
-JES_17	lnN	1.01	1.09	-	1.06	1.08	1.13	1.00
-JER_17	lnN	1.00	1.07	-	1.01	1.23	1.11	1.00
-pdf_EW	lnN	1.00	-	-	-	-	-	-
-pdf_QCD	lnN	-	1.01	-	-	-	-	-
-Scale_EW	lnN	1.01	-	-	-	-	-	-
-Scale_QCD	lnN	-	1.17	-	-	-	-	-
-Scale_QCD_extra	lnN	-	1.01/0.99	-	-	-	-	-
-interf	lnN	1.22	-	-	-	-	-	-
-mu_trigger17	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
-mu_eff	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
-photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
-pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	1.1	-	-	-
-VV_xs	lnN	-	-	-	-	1.1	-	-
-l1pref	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
+VBS_Stat_control_bin1_mubarrel17	lnN	1.04	-	-	-	-	-
+QCD_Stat_control_bin1_mubarrel17	lnN	-	1.02	-	-	-	-
+non_prompt_Stat_control_bin1_mubarrel17	lnN	-	-	1.04	-	-	-
+TTA_Stat_control_bin1_mubarrel17	lnN	-	-	-	1.09	-	-
+VV_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	1.25	-
+ST_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	1.26
+fake_mubarrel17	lnN	-	-	1.17	-	-	-
+JES_17	lnN	1.02	1.15	-	1.06	1.15	1.02
+JER_17	lnN	1.02	1.11	-	1.01	1.17	1.02
+pdf_EW	lnN	1.00	-	-	-	-	-
+pdf_QCD	lnN	-	1.01	-	-	-	-
+Scale_EW	lnN	1.00	-	-	-	-	-
+Scale_QCD	lnN	-	1.15	-	-	-	-
+Scale_QCD_extra	lnN	-	1.00/0.99	-	-	-	-
+interf	lnN	1.14	-	-	-	-	-
+mu_trigger17	lnN	1.02	1.02	-	1.02	1.02	1.02
+mu_eff	lnN	1.012	1.012	-	1.012	1.012	1.012
+photon_id	lnN	1.031	1.031	-	1.031	1.031	1.031
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	1.1	-	-
+VV_xs	lnN	-	-	-	-	1.1	-
+l1pref	lnN	1.01	1.01	-	1.01	1.01	1.01

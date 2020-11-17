@@ -1,5 +1,4 @@
 #define MakeTemplate_cxx
-#include "ele_channel_scale.C"
 #include "MakeTemplate.h"
 #include <TH2.h>
 #include <TLegend.h>
@@ -10,6 +9,7 @@
 #include <ostream>
 #include <fstream>
 #include <vector>
+#include "ele_channel_scale.C"
 #define Pi 3.1415926
 //#include <fiostream>
 using namespace std;
@@ -28,7 +28,7 @@ void MakeTemplate::Loop(TString name,TGraph* gr)
 	int count=0;
 	bool jet_flag;
 	double Mchiso = 7.77;
-	double chisomax=11,chisomin=5;//5~11
+	double chisomax=Mchiso,chisomin=5;//5~11
 	double actualWeight;
 	TFile* ID_photon_file = TFile::Open("./ele_SFs/2017_PhotonsMedium.root");
 	TH2F* ID_photon=0;
@@ -92,6 +92,8 @@ void MakeTemplate::Loop(TString name,TGraph* gr)
 		}
 		vector_pt.clear();
 	}
+	ID_photon_file->Close();
+	fout->cd();
 	ExTree->Write();
 	fout->Close();
 	cout<<"count = "<<count<<endl;
@@ -110,16 +112,16 @@ void MakeTemplate::Loop(TString name,TGraph* gr)
 	} 
 
 	if(name.Contains("A")==1){
-		f1= new TFile("./root/True_template-"+name+".root","recreate");
+		f1= new TFile("./root/True_template2-"+name+".root","recreate");
 		for(Int_t i=0;i<num;i++){h1[i]->Write();h4[i]->Write();/*hsieie[i]->Write();*/}
 		f1->Close();
 	}
 	if(name.Contains("D")==1){
-		f2= new TFile("./root/Fake_template-"+name+".root","recreate");
+		f2= new TFile("./root/Fake_template2-"+name+".root","recreate");
 		for(Int_t i=0;i<num;i++){h2[i]->Write();}
 		f2->Close();
 
-		f3 = new TFile("./root/Data_template-"+name+".root","recreate");
+		f3 = new TFile("./root/Data_template2-"+name+".root","recreate");
 		for(Int_t i=0;i<num;i++){h3[i]->Write();}
 		f3->Close();
 	}

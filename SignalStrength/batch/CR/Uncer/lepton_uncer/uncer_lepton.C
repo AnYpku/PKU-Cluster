@@ -1,6 +1,6 @@
 void run(TString particle,TString type,TString tag){
 //	ofstream f1("./"+var+"_"+particle+"_"+type+"_"+tag+".txt");
-	ofstream f2("./txt/"+particle+"_"+type+"_"+tag+"CR.txt");
+	ofstream f2("./"+particle+"_"+type+"_"+tag+"CR.txt");
         TFile* file;TH1D* h1;TH1D* h2;TH1D* h3;
 	if(type.Contains("trigger")==0){
 		file = new TFile("./"+particle+"_"+type+tag+"CR.root");

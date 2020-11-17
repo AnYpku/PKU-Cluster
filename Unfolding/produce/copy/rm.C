@@ -68,7 +68,7 @@ void rm::Loop(TString tag)
 	   file_gammaID=new TFile("./egamma_SFs/2018_PhotonsMedium.root ");
 	   ID_gamma=(TH2F*)file_ID->Get("EGamma_SF2D");
    }
-   TFile * input13 = new TFile ("/afs/cern.ch/user/y/yian/work/PKU-Cluster/RunII20"+tag+"/step1_add_weight/pu_calc/puweight.root");
+   TFile * input13 = new TFile ("/home/pku/anying/cms/PKU-Cluster/Unfolding/produce/copy/pu_"+tag+"/puweight.root");
    TH1* h13 = NULL;
    input13->GetObject("h2",h13);
 
@@ -101,10 +101,12 @@ void rm::Loop(TString tag)
 //		   continue;
 	   if(tag.Contains("16")){
 		   if(m_dataset.Contains("ZA")&&m_dataset.Contains("EWK")==0){ scalef=1000.*47.46/float(npp-nmm)*fabs(theWeight)/theWeight;} 
+		   if(m_dataset.Contains("ZA_interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight;}
 		   if(m_dataset.Contains("EWK")){ scalef=1000.*0.1097/float(npp-nmm)*fabs(theWeight)/theWeight;}
 	   }
 	   if(tag.Contains("17")||tag.Contains("18")){
 		   if(m_dataset.Contains("ZA")&&m_dataset.Contains("EWK")==0){ scalef=1000.*55.49/float(npp-nmm)*fabs(theWeight)/theWeight;}
+		   if(m_dataset.Contains("ZA_interf")){ scalef=1000.*0.012/float(npp-nmm)*fabs(theWeight)/theWeight;}
 		   if(m_dataset.Contains("EWK")){ scalef=1000.*0.1143/float(npp-nmm)*fabs(theWeight)/theWeight;}
 	   }
 	   if(lep==11){

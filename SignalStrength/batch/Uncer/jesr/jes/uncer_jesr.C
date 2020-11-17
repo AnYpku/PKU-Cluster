@@ -4,7 +4,7 @@ void run(TString sample,TString tag){
 	ofstream f1("./"+sample+"_jes_uncer"+tag+".txt");
 	TFile*file;
 	if(sample.Contains("EWK"))
-		file = new TFile("./root/hist_"+tag+"outJEC_"+sample+"_jes"+tag+".root");
+		file = new TFile("./root/hist_"+sample+"_jes"+tag+".root");
         else file=new TFile("./root/hist_"+sample+"_jes"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
@@ -23,7 +23,7 @@ void run(TString sample,TString tag){
 	h3->SetBinContent(kk-2,h3->GetBinContent(kk-2)+h3->GetBinContent(kk-1)+h3->GetBinContent(kk));
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
 	Double_t uncer[num];
-	cout<<"uncertainty ";
+	cout<<sample<<" "<<tag<<" uncertainty ";
 	f1<<"jes_"<<sample<<"=[";
 	ftxt<<"jes"<<tag<<"_"<<sample<<"=[";
 		 for(Int_t i=0;i<num;i++){
@@ -57,12 +57,12 @@ int uncer_jesr(){
      vector<TString> sample={"ZA","ZA-EWK","ZA-EWKout","TTA","VV","ST"};
      vector<TString> genvars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
      for(int j=0;j<sample.size();j++){
-//	     run(sample[j],"16");
-//	     run(sample[j],"17");
-//	     run(sample[j],"18");
-           run_1d(sample[j],"16");
-           run_1d(sample[j],"17");
-           run_1d(sample[j],"18");
+	     run(sample[j],"16");
+	     run(sample[j],"17");
+	     run(sample[j],"18");
+//           run_1d(sample[j],"16");
+//           run_1d(sample[j],"17");
+//           run_1d(sample[j],"18");
      }
      return 1;
 }

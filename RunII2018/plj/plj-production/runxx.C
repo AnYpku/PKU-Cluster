@@ -2,7 +2,7 @@
 #include <fstream>
 void runxx() {
 //gROOT->LoadMacro("xx.C");
-TString dir="/eos/user/y/yian/2018cutla/";
+TString dir="/home/pku/anying/cms/rootfiles/2018/";
 
 ifstream infile("file");
 string buffer; 

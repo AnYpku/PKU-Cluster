@@ -12,6 +12,7 @@
 #include "test.C"
 #include "CMSTDRStyle.h"
 #include "RoccoR.cc"
+#include "Scale_jet_with_fakerate.C"
 #include "TH2.h"
 void loopPlot() {
 	gErrorIgnoreLevel = kFatal; //suppresses all info messages
@@ -35,8 +36,7 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	//std::string pathToTrees = "./output-slimmed-rootfiles/root/";
-	std::string pathToTrees = "/eos/user/y/yian/2017cutla/";
-//	std::string pathToTrees = "/afs/cern.ch/user/y/yian/work/PKU-Cluster/CombineDraw/ScalSeq/rootfiles/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
 	std::string outputDir = "./fig-output_a/";
 	
 	RoccoR  rc("./RoccoR2017.txt");
@@ -46,24 +46,24 @@ void loopPlot() {
 	const int nDATA = 1;
 	std::cout << "set data imformation, we have " << nDATA << "data file"
 			<< std::endl;
-	std::string dataLabels[nDATA] = { "Muon" };
+	std::string dataLabels[nDATA] = { "Muon17" };
 	std::vector < std::string > fData;
 	for (int ii = 0; ii < nDATA; ii++) {
 		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
 	}
 // set mc imformation
-		const int nMC = 6;
+		const int nMC = 5;
 		std::cout << "set data imformation, we have " << nMC << "mc file"
 				<< std::endl;
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
-		std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA",
-                                            "plj_mubarrel","ZA"};
+		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17",
+                                            "plj17_weight","ZA17"};
 		/*std::string mcLabels[nMC] = {"ZA"}; 
 		double kFactorsMC_array[nMC] = { lumiValue};*/
 
-		double kFactorsMC_array[nMC] = {lumiValue, lumiValue,lumiValue,lumiValue,1,lumiValue};
+		double kFactorsMC_array[nMC] = {lumiValue, lumiValue,lumiValue,1,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
 			fMC.push_back(pathToTrees +"cutla-out"+ mcLabels[ii] + ".root");
@@ -77,7 +77,7 @@ void loopPlot() {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 			<< std::endl;
-	std::string mcLabelsSig[nMCSig] = { "ZA-EWK" };
+	std::string mcLabelsSig[nMCSig] = { "ZA-EWK17" };
 	double kFactorsSig_array[nMCSig] = { 1 };
 	std::vector < std::string > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
@@ -113,17 +113,17 @@ void loopPlot() {
 				<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; //fData.push_back(pathToTrees + dataLabels[ii] + ".root");
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", dataLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2017SR_%s.root", dataLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2017CR_%s.root", dataLabels[i].c_str());
 		fHistosData.push_back(buffer);
 
 		std::cout << "retrieve "<<i<<"th data file" << std::endl;
 		TFile *fileData = TFile::Open(fData.at(i).c_str());
 		std::cout << "retrieve tree of data file" << std::endl;
 		//TTree *treeData = (TTree*) fileData->Get("demo");
-		TTree *treeData = (TTree*) fileData->Get("demo");
+		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
 //		std::cout<<"OK"<<std::endl;
 		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
-		TTree *treeMC = (TTree*) fileMC->Get("demo");
+		TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (dopileupreweight) {
 			hisRatio = test(treeData, treeMC);
@@ -150,7 +150,7 @@ void loopPlot() {
 				<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", mcLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2017SR_%s.root", mcLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2017CR_%s.root", mcLabels[i].c_str());
 		fHistosMC.push_back(buffer);
 		std::cout << "test" << std::endl;
 
@@ -159,7 +159,7 @@ void loopPlot() {
 			TFile *fileMC = TFile::Open(fMC.at(i).c_str());
 			std::cout << "retrieve tree of mc file" << std::endl;
 			TTree *treeMC;
-			treeMC = (TTree*) fileMC->Get("demo");
+			treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
                         /*TString name = fMC.at(i);
 			if(name.Contains("pweight")==1)  
 				treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
@@ -185,14 +185,14 @@ void loopPlot() {
 				<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_%s.root", mcLabelsSig[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2017SR_%s.root", mcLabelsSig[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_2017CR_%s.root", mcLabelsSig[i].c_str());
 		fHistosMCSig.push_back(buffer);
 
 		if (redoHistograms) {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i).c_str());
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("demo");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
                         std::cout<<"OK1"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer, &rc);
@@ -249,14 +249,12 @@ void loopPlot() {
 	////// {DYJetsToLL_HT-200to400,DYJetsToLL_HT-200to400,DYJetsToLL_HT-600toInf}
 	std::vector<int> fColorsMC;
 
-        fColorsMC.push_back(kGreen-4);
-        fColorsMC.push_back(kGreen-10);
-        fColorsMC.push_back(kBlue - 4);
-        fColorsMC.push_back(kBlue - 7);
-        fColorsMC.push_back(kOrange - 2);
-        fColorsMC.push_back(kRed - 7);
-	fColorsMC.push_back(kMagenta + 3);
-	fColorsMC.push_back(kOrange + 7);
+        fColorsMC.push_back(kGreen+2);//ST
+        fColorsMC.push_back(kCyan);//TTA
+        fColorsMC.push_back(40);//VV
+        fColorsMC.push_back(kYellow-7);//plj
+        fColorsMC.push_back(kBlue-6);//ZA
+        fColorsMC.push_back(kRed-9);//EWK
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);

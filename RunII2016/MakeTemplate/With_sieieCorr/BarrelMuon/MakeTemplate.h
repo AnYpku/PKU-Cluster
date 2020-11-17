@@ -45,7 +45,6 @@ public :
    Double_t        ele2_id_scale;
    Double_t        ele1_reco_scale;
    Double_t        ele2_reco_scale;
-   Double_t        photon_id_scale;
    Double_t        muon1_id_scale;
    Double_t        muon2_id_scale;
    Double_t        muon1_iso_scale;
@@ -517,7 +516,8 @@ public :
 // Double_t highpt[num]={25,30,35,40,45,50,60,80,120,400};
   Double_t lowpt[num]= {20,25,30,35,40,50,60,100};
   Double_t highpt[num]={25,30,35,40,50,60,100,400};
-
+   Double_t photon_id_scale;
+   Double_t photon_veto_scale;
  Int_t    bin;  
  Double_t xlow; 
  Double_t xhigh;

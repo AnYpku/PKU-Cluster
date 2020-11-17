@@ -7,17 +7,17 @@
 using namespace RooFit;
 ofstream file3("info_fit.txt");
 TString name ;
-TFile* ffake = TFile::Open("../root/Fake_template2-outDEle.root");
-TFile* fdata = TFile::Open("../root/Data_template2-outDEle.root");
-TFile* ftrue = TFile::Open("../root/True_template2-outZA.root");
-//TFile* ftrue = TFile::Open("../root/True_template-outZA-EWK.root");
+TFile* ffake = TFile::Open("../root/Fake_template-DEle18.root");
+TFile* fdata = TFile::Open("../root/Data_template-DEle18.root");
+//TFile* ftrue = TFile::Open("../root/True_template-ZA18.root");
+TFile* ftrue = TFile::Open("../root/True_template-ZA-EWK18.root");
 //TFile* ftrue = TFile::Open("../root/True_template-outTTA.root");
 //TFile* ftrue = TFile::Open("../root/True_template-outTTA.root");
 void fit(float lowpt, float highpt){
 //TString b="chiso5-12_";
         TString filename = ftrue->GetName();
         if(filename.Contains("EWK")) name = "EWK";
-        else name = "ZA2";
+        else name = "ZA";
 	TH1F* hdata_ = (TH1F*)fdata->Get(Form("h3_pt%0.f_%0.f",lowpt,highpt));
 	TH1F* hfake_ = (TH1F*)ffake->Get(Form("h2_pt%0.f_%0.f",lowpt,highpt));
 	TH1F* htrue_ = (TH1F*)ftrue->Get(Form("h1_pt%0.f_%0.f",lowpt,highpt));

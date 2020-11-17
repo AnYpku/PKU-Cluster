@@ -80,9 +80,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	}
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
-	if(tag.Contains("16"))
-		fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK.root");
-	else fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK-pweight.root");
+	fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-outZA-EWK"+tag+".root");
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
 	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 	TString th1name[3];
@@ -91,7 +89,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
                    th1[i] = new TH1D(th1name[i],th1name[i],9,0,9);
 		   th1[i]->Sumw2();
 	}
-	TTree*tree=(TTree*)fin->Get("demo");
+	TTree*tree=(TTree*)fin->Get("ZPKUCandidates");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2;
 	double muon1_id_scale,muon2_id_scale,ele1_id_scale,ele2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale;
@@ -126,6 +124,9 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
         double muon_weight[3],ele_weight[3],photon_weight[3];
 	for(int k=0;k<tree->GetEntries();k++){
 		tree->GetEntry(k);
+                muon_WeightUp=0;muon_WeightDn=0;muon_Weight=0;
+                ele_WeightUp=0,ele_WeightDn=0,ele_Weight=0;
+                photon_WeightUp=0,photon_WeightDn=0,photon_Weight=0;
                 double detajj=fabs(jet1eta-jet2eta);
 		if(particle.Contains("muon")&&tag.Contains("16")&&lep==13){
 			muon1_ID_Uncer=sqrt( pow(get_muon_ID_sys16(etalep1,ptlep1,ID_muon_sys1,ID_muon_sys2),2)+ pow(get_muon_ID_stat16(etalep1,ptlep1,ID_muon_stat1,ID_muon_stat2),2)  );
@@ -266,8 +267,8 @@ int cal(){
 	TH1D*th2[3][3];//[particle][3]
 	for(int j=0;j<tag.size();j++){
 		if(tag[j].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
 		}
 		else{   
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";

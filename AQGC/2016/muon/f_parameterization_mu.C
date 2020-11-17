@@ -19,10 +19,10 @@ using namespace std;
 void fX0_parameterization_mu(int index){
 
 //	const TString InData_New = "./cutla-";
-	const TString InData_New = "/eos/user/y/yian/2016cutla/cutlaj-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/2016/cutlaj-";
 
 	// Specify event selection cuts:
-	TCut the_cut("(lep == 13 && (HLT_Mu2 >0 || HLT_Mu5 >0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))");
+	TCut the_cut("(lep == 13 && (HLT_Mu5 >0 || HLT_Mu2 >0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))");
 	// Create output ROOT file:
 
 	TFile * fout;
@@ -46,7 +46,8 @@ void fX0_parameterization_mu(int index){
 	fout = new TFile("signal_proc_mu_"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
-	f_file =  new TFile(InData_New+"outZA_aQGC.root");
+	f_file =  new TFile(InData_New+"outZA_aQGC16.root");
+//	TTree* treef = (TTree*) f_file->Get("ZPKUCandidates");
 	TTree* treef = (TTree*) f_file->Get("demo");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
@@ -65,13 +66,10 @@ void fX0_parameterization_mu(int index){
         Double_t        muon2_id_scale;
         Double_t        muon1_iso_scale;
         Double_t        muon2_iso_scale;
-        Double_t        muon1_track_scale;
-        Double_t        muon2_track_scale;
-        Double_t        muon_hlt_scale;
         Double_t        lumiWeight;
         Double_t        scalef;
         Double_t        pileupWeight;
-        Double_t        photon_veto_scale=0.9938;
+        Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("Mva",&Mva);
 	treef->SetBranchAddress("photoneta",&photoneta);
@@ -79,13 +77,11 @@ void fX0_parameterization_mu(int index){
 	treef->SetBranchAddress("jet1eta",&jet1eta);
 	treef->SetBranchAddress("jet2eta",&jet2eta);
 	treef->SetBranchAddress("photon_id_scale", &photon_id_scale);
+	treef->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
         treef->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
         treef->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
         treef->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
         treef->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
-        treef->SetBranchAddress("muon1_track_scale", &muon1_track_scale);
-        treef->SetBranchAddress("muon2_track_scale", &muon2_track_scale);
-        treef->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("lumiWeight", &lumiWeight);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
@@ -130,11 +126,11 @@ void fX0_parameterization_mu(int index){
 			treef->GetEntry(count);
                         if( ! formula->EvalInstance())
                                 continue;
-			if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
-			if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
-			Double_t weight=lumiWeight * pileupWeight * scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon1_track_scale*muon2_track_scale*muon_hlt_scale*photon_id_scale*photon_veto_scale*prefWeight;
+                        if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
+                        if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
+			Double_t weight= scalef*prefWeight*pileupWeight*photon_id_scale*photon_veto_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
                         if(Mva>2e4) Mva=1999;
-			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
+			if(count%2000==0)  cout<<"abin="<<abin<<" count="<<count<<";weight "<<weight<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
 				rf[0]+=pweight[iii]*weight;
                                 rf[1]+=pweight[iii+1]*weight;
@@ -263,23 +259,23 @@ void fX0_parameterization_mu(int index){
 		//leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
 		leg->Draw("SAME") ;
 		cout <<"x9"<<endl;
-		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-//		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".png")) ;
+		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+                if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+//		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".pdf")) ;
 
 		ParamSetf << par0 << " " << par1 << " " << endl;
 		cout <<"x10 "<<abin<<endl;

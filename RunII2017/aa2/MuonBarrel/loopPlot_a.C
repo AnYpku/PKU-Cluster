@@ -36,7 +36,7 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	//std::string pathToTrees = "./output-slimmed-rootfiles/root/";
-	std::string pathToTrees = "/eos/user/y/yian/2017cutla/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
 	std::string outputDir = "./fig-output_a/";
 	
 	RoccoR  rc("./RoccoR2017.txt");
@@ -59,7 +59,7 @@ void loopPlot() {
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
 		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17",
-                                            "plj_weight","ZA17"};
+                                            "plj17_weight","ZA17"};
 		/*std::string mcLabels[nMC] = {"ZA"}; 
 		double kFactorsMC_array[nMC] = { lumiValue};*/
 
@@ -251,12 +251,10 @@ void loopPlot() {
 
         fColorsMC.push_back(kGreen+2);//ST
         fColorsMC.push_back(kCyan);//TTA
-        fColorsMC.push_back(kGray);//VV
-        fColorsMC.push_back(kYellow);//plj
-//        fColorsMC.push_back(kBlue-9);//ZA
-        fColorsMC.push_back(9);//ZA
-	fColorsMC.push_back(kRed-7);//EWK
-	fColorsMC.push_back(2);
+        fColorsMC.push_back(40);//VV
+        fColorsMC.push_back(kYellow-7);//plj
+        fColorsMC.push_back(kBlue-6);//ZA
+        fColorsMC.push_back(kRed-7);//EWK
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
 	std::vector<int> fColorsMCSig;

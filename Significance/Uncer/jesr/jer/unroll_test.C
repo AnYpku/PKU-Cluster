@@ -11,19 +11,18 @@
 #define num 3
 using namespace std;
 TString name="_content";
-void cmsLumi(bool channel); 
-void cmsLumi(bool channel,TString tag) 
+void cmsLumi(TString tag) 
 {
         TLatex latex;
         latex.SetNDC();
-        latex.SetTextSize(0.04);
+        latex.SetTextSize(0.06);
         latex.SetLineWidth(2);
         int beamcomenergytev=13;
         latex.SetTextAlign(31); 
         latex.SetTextAlign(11);
-        latex.DrawLatex(0.18,0.82,"Preliminary");
+        latex.DrawLatex(0.18,0.81,"Preliminary");
         latex.DrawLatex(0.18,0.86,"CMS");
-        latex.SetTextSize(0.03);
+        latex.SetTextSize(0.06);
 	if(tag.Contains("16"))
 		latex.DrawLatex(0.76,0.92,Form("35.86 fb^{-1} (%d TeV)", (beamcomenergytev)));
 	if(tag.Contains("17"))
@@ -54,9 +53,7 @@ void unroll_name(TString filename,TString tag){
 	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
 
 	TFile* f_ZA;
-        if(filename.Contains("EWK"))
-		f_ZA=new TFile("./root/hist_"+tag+filename+"_jer"+tag+".root");
-        else    f_ZA=new TFile("./root/hist_"+filename+"_jer"+tag+".root");
+	f_ZA=new TFile("./root/hist_"+filename+"_jer"+tag+".root");
 	TH1D* th1_ZA[num];
 	TH1D* t_ZA[num];
 	TCanvas* cc[num];
@@ -95,30 +92,46 @@ void unroll_name(TString filename,TString tag){
 	fPads1->Draw();
 	fPads2->Draw();
 	fPads1->cd();
+        fPads2->SetGridy();
+        fPads1->SetGridx();
 	TLegend *l2 = new TLegend(0.7,0.7,0.9,0.9);
-	t_ZA[0]->SetLineWidth(1);
+	t_ZA[0]->SetLineWidth(2);
 	t_ZA[0]->SetLineColor(kRed);
 	t_ZA[0]->GetYaxis()->SetRangeUser(0,vec_ymax[0]+0.3*vec_ymax[0]);
 	t_ZA[0]->Draw("HIST");
 	t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-	t_ZA[0]->GetXaxis()->SetTitleSize(0.1);
 	t_ZA[0]->GetXaxis()->SetLabelSize(0.1);
-	t_ZA[0]->GetXaxis()->SetTitleSize(0.065);
+	t_ZA[0]->GetXaxis()->SetTitleSize(0.1);
 	t_ZA[0]->GetXaxis()->SetTitleFont(12);
 	l2->AddEntry(t_ZA[0],"mjj_new");
 	for(Int_t i=1;i<num;i++){
 		t_ZA[i]->SetLineColor(i+2);
-		t_ZA[i]->SetLineWidth(1);
-		t_ZA[i]->SetLineStyle(2);
+		t_ZA[i]->SetLineWidth(2);
+		t_ZA[i]->SetLineStyle(1);
 		for(Int_t j=1;j<=t_ZA[i]->GetNbinsX();j++){ t_ZA[i]->GetXaxis()->SetBinLabel(j,name[j-1]);}
 		t_ZA[i]->Draw("HIST,SAME");
 		if(i==0)         l2->AddEntry(t_ZA[i],"mjj_new");
-		else if(i==1)    l2->AddEntry(t_ZA[i],"mjj_JEC_up");
-		else if(i==2)    l2->AddEntry(t_ZA[i],"mjj_JEC_down");
+		else if(i==1)    l2->AddEntry(t_ZA[i],"mjj_JER_up");
+		else if(i==2)    l2->AddEntry(t_ZA[i],"mjj_JER_down");
 	}
+
+        TLatex latex;
+        latex.SetTextSize(0.06);
+        latex.SetLineWidth(2);
+        latex.DrawLatex(1.4,0.85*vec_ymax[0],"2.5<#Delta#eta_{jj}<4.5");
+        latex.DrawLatex(4.,0.85*vec_ymax[0],"4.5<#Delta#eta_{jj}<6");
+        latex.DrawLatex(6.1,0.85*vec_ymax[0],"#Delta#eta_{jj}>6");
+        TLine* vline1 = new TLine(t_ZA[0]->GetBinLowEdge(4),0,t_ZA[0]->GetBinLowEdge(4),vec_ymax[0]+0.3*vec_ymax[0]);
+        TLine* vline2 = new TLine(t_ZA[0]->GetBinLowEdge(7),0,t_ZA[0]->GetBinLowEdge(7),vec_ymax[0]+0.3*vec_ymax[0]);
+        vline1->SetLineStyle(2);
+        vline2->SetLineStyle(2);
+        vline1->SetLineWidth(2);
+        vline2->SetLineWidth(2);
+        vline1->Draw(); 
+        vline2->Draw(); 
+
+	cmsLumi(tag) ;
 	l2->Draw();
-	line->SetLineColor(2);
-	line->SetLineWidth(1);
 
 	fPads1->Update();
 	fPads2->cd();
@@ -134,12 +147,14 @@ void unroll_name(TString filename,TString tag){
 	nominal->SetFillStyle(3001);
 	nominal->SetFillColor(16);
 	nominal->GetYaxis()->SetRangeUser(h_down->GetMinimum()-0.05,h_up->GetMaximum()+0.05);
-	nominal->Draw();
+        if(tag.Contains("17")&&filename.Contains("EWK"))
+		nominal->GetYaxis()->SetRangeUser(0.75,1.3);
+	nominal->Draw("EP");
 	h_up->Draw("same hist ][");
 	h_down->Draw("same hist ][");
 	fPads2->Update();
-	c1->Print("./figs/hist-2d_"+filename+tag+".eps");
-	c1->Print("./figs/hist-2d_"+filename+tag+".pdf");
+	c1->Print("./figs/hist-2d_"+filename+tag+"_jer.eps");
+	c1->Print("./figs/hist-2d_"+filename+tag+"_jer.pdf");
 
 	THStack* hs = new THStack("hs", "");
 	TLegend *l1 = new TLegend(0.55,0.4,0.8,0.9);
@@ -158,7 +173,7 @@ void unroll_name(TString filename,TString tag){
 }
 int unroll_test(){
 
-	TString sample[2]={"ZA","outJEC_ZA-EWK"};
+	TString sample[2]={"ZA","ZA-EWK"};
 	for(int i=0;i<2;i++){
 		unroll_name(sample[i],"16");
 		unroll_name(sample[i],"17");

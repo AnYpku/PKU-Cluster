@@ -1,43 +1,47 @@
 imax 1   number of channels
-jmax 7   number of processes-1
-kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+jmax 6   number of processes-1
+kmax 24  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel1
-observation 579.42
+observation 1007.42
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
-bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
-process	Sig	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
-process	0	1	2	3	4	5	6	7
-rate	8.29	335.13	212.03	15.56	3.91	2.25	0.00	2.26
+bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
+process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
+process	0	1	2	3	4	5	6
+rate	12.88	580.38	379.01	22.35	6.77	3.41	2.63
 ------------
-lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020	1.020
-VBS_Stat_control_bin1_mubarrel17	lnN	1.04	-	-	-	-	-	-	-
-QCD_Stat_control_bin1_mubarrel17	lnN	-	1.02	-	-	-	-	-	-
-non_prompt_Stat_control_bin1_mubarrel17	lnN	-	-	1.04	-	-	-	-	-
-TTA_Stat_control_bin1_mubarrel17	lnN	-	-	-	1.10	-	-	-	-
-VV_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	1.26	-	-	-
-ST_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	1.28	-	-
-WA_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	-	-	1.09
-fake_mubarrel17	lnN	-	-	1.12	-	-	-	-	-
-JES_17	lnN	1.02	1.09	-	1.06	1.08	1.13	1.00	1.02
-JER_17	lnN	1.03	1.07	-	1.01	1.23	1.11	1.00	1.01
-pdf_EW	lnN	-	-	-	-	-	-	-	1.00
-pdf_QCD	lnN	-	1.01	-	-	-	-	-	-
-Scale_EW	lnN	-	-	-	-	-	-	-	1.01
-Scale_QCD	lnN	-	1.17	-	-	-	-	-	-
-Scale_QCD_extra	lnN	-	1.01/0.99	-	-	-	-	-	-
-interf	lnN	1.26	-	-	-	-	-	-	-
-theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
-mu_trigger_17	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
-mu_eff	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
-photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
-pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	1.1	-	-	-	-
-VV_xs	lnN	-	-	-	-	1.1	-	-	-
-l1pref	lnN	1.00	1.00	-	1.00	1.00	1.00	1.00	1.00
+lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
+VBS_Stat_control_bin1_mubarrel17	lnN	1.04	-	-	-	-	-	-
+QCD_Stat_control_bin1_mubarrel17	lnN	-	1.02	-	-	-	-	-
+non_prompt_Stat_control_bin1_mubarrel17	lnN	-	-	1.03	-	-	-	-
+TTA_Stat_control_bin1_mubarrel17	lnN	-	-	-	1.08	-	-	-
+VV_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	1.21	-	-
+ST_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	1.23	-
+ZA_SigOut_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	-	1.08
+fake_mubarrel17	lnN	-	-	1.17	-	-	-	-
+fake group = fake_mubarrel17 
+JES_17	lnN	1.03	1.16	-	1.06	1.15	1.02	1.04
+JER_17	lnN	1.05	1.12	-	1.02	1.19	1.02	1.03
+pdf_EW	lnN	-	-	-	-	-	-	1.001
+pdf_QCD	lnN	-	1.01	-	-	-	-	-
+Scale_EW	lnN	-	-	-	-	-	-	1.01
+Scale_QCD	lnN	-	1.15	-	-	-	-	-
+Scale_QCD_extra	lnN	-	1.00/0.99	-	-	-	-	-
+interf	lnN	1.18	-	-	-	-	-	-
+mu_trigger_17	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+mu_eff	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+muon group = mu_eff mu_trigger_17
+photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-
+VV_xs	lnN	-	-	-	-	1.1	-	-
+l1pref	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+Others group = pileup ttgamma_xs VV_xs lumi_17 l1pref 
+Stat group = VBS_Stat_control_bin1_mubarrel17 QCD_Stat_control_bin1_mubarrel17 non_prompt_Stat_control_bin1_mubarrel17 TTA_Stat_control_bin1_mubarrel17 VV_Stat_control_bin1_mubarrel17 ST_Stat_control_bin1_mubarrel17 ZA_SigOut_Stat_control_bin1_mubarrel17 
+JESR group = JES_17 JER_17
+theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf 

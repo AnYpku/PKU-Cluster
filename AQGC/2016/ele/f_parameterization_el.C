@@ -18,7 +18,7 @@
 using namespace std;
 void fX0_parameterization_el(int index){
 
-	const TString InData_New = "/eos/user/y/yian/2016cutla/cutlaj-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/2016/cutlaj-";
 
 	// Specify event selection cuts:
 	TString cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
@@ -45,8 +45,9 @@ void fX0_parameterization_el(int index){
 	fout = new TFile("signal_proc_el__"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
-	f_file =  new TFile(InData_New+"outZA_aQGC.root");
+	f_file =  new TFile(InData_New+"outZA_aQGC16.root");
 	TTree* treef = (TTree*) f_file->Get("demo");
+//	TTree* treef = (TTree*) f_file->Get("ZPKUCandidates");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
 	Double_t        pweight[703];
@@ -66,19 +67,18 @@ void fX0_parameterization_el(int index){
         Double_t        muon2_id_scale;
         Double_t        muon1_iso_scale;
         Double_t        muon2_iso_scale;
-        Double_t        muon1_track_scale;
-        Double_t        muon2_track_scale;
-        Double_t        muon_hlt_scale;
-        Double_t        photon_veto_scale=0.9938;
+        Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("pweight",pweight);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
+        treef->SetBranchAddress("prefWeight", &prefWeight);
         treef->SetBranchAddress("jet1eta", &jet1eta);
         treef->SetBranchAddress("jet2eta", &jet2eta);
         treef->SetBranchAddress("Mva", &Mva);
         treef->SetBranchAddress("photoneta", &photoneta);
         treef->SetBranchAddress("photon_id_scale", &photon_id_scale);
+        treef->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
         treef->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
         treef->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
@@ -92,7 +92,6 @@ void fX0_parameterization_el(int index){
 
         double xxf[17];
 	std::ofstream ParamSetf ;
-//	ParamSetf.open("paramsets_fT0_el.txt");
 	if(index==1) {ParamSetf.open("paramsets_fM0_el.txt");double xf[17] = {-150, -120, -80, -60, -50, -30, -20, -8, 0, 8, 20, 30, 50, 60, 80, 120, 150};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
         if(index==2) {ParamSetf.open("paramsets_fM1_el.txt");double xf[17] = {-400, -300, -200, -150, -100, -80, -50, -20, 0, 20, 50, 80, 100, 150, 200, 300, 400};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
         if(index==3) {ParamSetf.open("paramsets_fM2_el.txt");double xf[17] = {-100, -50, -40, -30, -20, -10, -5, -1, 0, 1, 5, 10, 20, 30, 40, 50, 100};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
@@ -110,7 +109,6 @@ void fX0_parameterization_el(int index){
         if(index==15) {ParamSetf.open("paramsets_fT8_el.txt");double xf[17] = {-20, -8, -6, -4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 6, 8, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
         if(index==16) {ParamSetf.open("paramsets_fT9_el.txt");double xf[17] = {-20, -8, -6, -4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4, 6, 8, 20};for(int i=0;i<17;i++){xxf[i]=xf[i];} }
 
-	// Times 10^{-12} (GeV^{-4})
 //	const double xf[17] = {-20, -10, -6, -5, -3, -2, -1, -0.6, 0, 0.6, 1, 2, 3, 5, 6, 10, 20};
 
 	TTreeFormula* formula= new TTreeFormula("f",cut,treef);
@@ -122,22 +120,22 @@ void fX0_parameterization_el(int index){
 			treef->GetEntry(count);
 			if( ! formula->EvalInstance())
 				continue;
-                        if(Mva>2e4) Mva=1999;
                         if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
                         if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
-			Double_t weight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
-			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
+			Double_t weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
+			if(count%4000==0)  cout<<"abin="<<abin<<" count="<<count<<";weight "<<weight<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
-				rf[0]+=pweight[iii]*weight;
-                                rf[1]+=pweight[iii+1]*weight;
-                                rf[2]+=pweight[iii+2]*weight;
-                                rf[3]+=pweight[iii+3]*weight;
-                                rf[4]+=pweight[iii+4]*weight;
-                                rf[5]+=pweight[iii+5]*weight;
-                                rf[6]+=pweight[iii+6]*weight;
-                                rf[7]+=pweight[iii+7]*weight;
-                                rf[8]+=pweight[446]*weight;//SM
-                                rf[9]+=pweight[iii+8]*weight;
+//				weight=1;
+				rf[0] +=pweight[iii]*weight;
+                                rf[1] +=pweight[iii+1]*weight;
+                                rf[2] +=pweight[iii+2]*weight;
+                                rf[3] +=pweight[iii+3]*weight;
+                                rf[4] +=pweight[iii+4]*weight;
+                                rf[5] +=pweight[iii+5]*weight;
+                                rf[6] +=pweight[iii+6]*weight;
+                                rf[7] +=pweight[iii+7]*weight;
+                                rf[8] +=pweight[446]*weight;//SM
+                                rf[9] +=pweight[iii+8]*weight;
                                 rf[10]+=pweight[iii+9]*weight;
                                 rf[11]+=pweight[iii+10]*weight;
                                 rf[12]+=pweight[iii+11]*weight;
@@ -145,7 +143,12 @@ void fX0_parameterization_el(int index){
                                 rf[14]+=pweight[iii+13]*weight;
                                 rf[15]+=pweight[iii+14]*weight;
                                 rf[16]+=pweight[iii+15]*weight;
-			} 
+			}else continue; 
+			for(int i=0;i<17;i++){
+//		if(rf[i]/rf[8]<0/*&&xxf[i]<0*/)	cout<<count<<" "<<name<<" "<<ZGbin[abin]<<" "<<ZGbin[abin+1]<<"; "<<i<<" "<<xxf[i]<<" "<<rf[i]<<" "<<rf[8]<<" "<<rf[i]/rf[8]<<" "<<weight<<endl;
+				if(rf[i]/rf[8]<500/*&&xxf[i]<0*/)
+					cout<<count<<" "<<name<<" "<<ZGbin[abin]<<" "<<ZGbin[abin+1]<<"; "<<i<<" "<<xxf[i]<<" "<<rf[i]<<" "<<rf[8]<<" "<<rf[i]/rf[8]<<" "<<weight<<endl;
+			}
 		}
 
 		double rsm = rf[8];
@@ -167,30 +170,33 @@ void fX0_parameterization_el(int index){
 		rf[15]=rf[15]/rsm;
 		rf[16]=rf[16]/rsm;
 
+		for(int i=0;i<17;i++){
+			cout<<name<<" "<<ZGbin[abin]<<" "<<ZGbin[abin+1]<<"; "<<xxf[i]<<" "<<rf[i]<<endl;
+		}
 		TGraph *gr = new TGraph(17,xxf,rf);
 		double low;
 		double high;
 		if(index==1) {low=-150;high=150;};
-	        if(index==2) {low=-400;high=400;};
-	        if(index==3) {low=-100;high=100;};
-	        if(index==4) {low=-200;high=200;};
-	        if(index==5) {low=-200;high=200;};
-	        if(index==6) {low=-200;high=200;};
-	        if(index==7) {low=-250;high=250;};
-	        if(index==8) {low=-200;high=200;};
-	        if(index==9) {low=-20;high=20;};
-	        if(index==10) {low=-20;high=20;};
-	        if(index==11) {low=-40;high=40;};
-	        if(index==12) {low=-40;high=40;};
-	        if(index==13) {low=-40;high=40;};
-	        if(index==14) {low=-40;high=40;};
-	        if(index==15) {low=-20;high=20;};
-	        if(index==16) {low=-20;high=20;};
+		if(index==2) {low=-400;high=400;};
+		if(index==3) {low=-100;high=100;};
+		if(index==4) {low=-200;high=200;};
+		if(index==5) {low=-200;high=200;};
+		if(index==6) {low=-200;high=200;};
+		if(index==7) {low=-250;high=250;};
+		if(index==8) {low=-200;high=200;};
+		if(index==9) {low=-20;high=20;};
+		if(index==10) {low=-20;high=20;};
+		if(index==11) {low=-40;high=40;};
+		if(index==12) {low=-40;high=40;};
+		if(index==13) {low=-40;high=40;};
+		if(index==14) {low=-40;high=40;};
+		if(index==15) {low=-20;high=20;};
+		if(index==16) {low=-20;high=20;};
 		TString tf1_name = TString("signal_proc_")+name+Form("_bin%u",abin+1);
 		TF1 *fitFunc = new TF1(tf1_name,"[0]*(x**2) + [1]*x + 1",low,high) ;
 
 		cout<<"OK"<<endl;
-//		fitFunc->SetParLimits(0,0.,1000) ;
+		//		fitFunc->SetParLimits(0,0.,1000) ;
 		cout<<"OK"<<endl;
 		fitFunc->SetLineColor(kBlue) ;
 		cout <<"x1"<<endl;
@@ -204,6 +210,7 @@ void fX0_parameterization_el(int index){
 		//r->Write() ;
 		fout->cd();
 		fitFunc->Write();
+		gr->Write(Form("bin%d",abin));
 		cout <<"x2"<<endl;
 
 		TCanvas *c1= new TCanvas("c1","fitFunc",500,500) ;
@@ -216,24 +223,24 @@ void fX0_parameterization_el(int index){
 		gr->GetYaxis()->SetTitleOffset(1.4) ;
 		char buffer2[256];
 		if(index==1) sprintf(buffer2, "fM0/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==2) sprintf(buffer2, "fM1/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==3) sprintf(buffer2, "fM2/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==4) sprintf(buffer2, "fM3/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==5) sprintf(buffer2, "fM4/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==6) sprintf(buffer2, "fM5/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==7) sprintf(buffer2, "fM6/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==8) sprintf(buffer2, "fM7/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==9) sprintf(buffer2, "fT0/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==10) sprintf(buffer2, "fT1/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==11) sprintf(buffer2, "fT2/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==12) sprintf(buffer2, "fT5/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==13) sprintf(buffer2, "fT6/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==14) sprintf(buffer2, "fT7/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==15) sprintf(buffer2, "fT8/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==16) sprintf(buffer2, "fT9/#Lambda^{4} (#times 10^{-12} GeV)");
-		
+		if(index==2) sprintf(buffer2, "fM1/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==3) sprintf(buffer2, "fM2/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==4) sprintf(buffer2, "fM3/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==5) sprintf(buffer2, "fM4/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==6) sprintf(buffer2, "fM5/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==7) sprintf(buffer2, "fM6/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==8) sprintf(buffer2, "fM7/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==9) sprintf(buffer2, "fT0/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==10) sprintf(buffer2, "fT1/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==11) sprintf(buffer2, "fT2/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==12) sprintf(buffer2, "fT5/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==13) sprintf(buffer2, "fT6/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==14) sprintf(buffer2, "fT7/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==15) sprintf(buffer2, "fT8/#Lambda^{4} (#times 10^{-12} GeV)");
+		if(index==16) sprintf(buffer2, "fT9/#Lambda^{4} (#times 10^{-12} GeV)");
+
 		gr->GetXaxis()->SetTitle(buffer2) ;
-//		gr->GetXaxis()->SetTitle("fT0/#Lambda^{4} (#times 10^{-12} GeV)") ;
+		//		gr->GetXaxis()->SetTitle("fT0/#Lambda^{4} (#times 10^{-12} GeV)") ;
 		gr->GetYaxis()->SetTitle("Ratio") ;
 		gr->SetMarkerStyle(4) ;
 		//gr->SetMarkerSize(0.7) ;
@@ -253,23 +260,23 @@ void fX0_parameterization_el(int index){
 		//leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
 		leg->Draw("SAME") ;
 		cout <<"x9"<<endl;
-		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-                if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".png")) ;
-//		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".png")) ;
+		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==2) c1->SaveAs(TString("fit_fM1")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==3) c1->SaveAs(TString("fit_fM2")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==4) c1->SaveAs(TString("fit_fM3")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==5) c1->SaveAs(TString("fit_fM4")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==6) c1->SaveAs(TString("fit_fM5")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==7) c1->SaveAs(TString("fit_fM6")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==8) c1->SaveAs(TString("fit_fM7")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==9) c1->SaveAs(TString("fit_fT0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==10) c1->SaveAs(TString("fit_fT1")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==11) c1->SaveAs(TString("fit_fT2")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==12) c1->SaveAs(TString("fit_fT5")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==13) c1->SaveAs(TString("fit_fT6")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==14) c1->SaveAs(TString("fit_fT7")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==15) c1->SaveAs(TString("fit_fT8")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		if(index==16) c1->SaveAs(TString("fit_fT9")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
+		//		c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",abin)+TString(".pdf")) ;
 
 		ParamSetf << par0 << " " << par1 << " " << endl;
 		cout <<"x10 "<<abin<<endl;
@@ -282,7 +289,7 @@ void fX0_parameterization_el(int index){
 
 
 void f_parameterization_el(){
-        gSystem->Load("libTreePlayer.so");
+	gSystem->Load("libTreePlayer.so");
 	fX0_parameterization_el(1);
 	fX0_parameterization_el(2);
 	fX0_parameterization_el(3);

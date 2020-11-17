@@ -621,7 +621,7 @@ void rm::Init(TTree *tree)
 	fCurrent = -1;
 	fChain->SetMakeClass(1);
 
-	fout = new TFile("/eos/user/y/yian/20"+tag+"cutla/unfold_"+m_dataset, "RECREATE");
+	fout = new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_"+m_dataset, "RECREATE");
 	ExTree = fChain->CloneTree(0);
 	ExTree->Branch("scalef",&scalef,"scalef/D");
 //	ExTree->Branch("lumi",&lumi,"lumi/D");

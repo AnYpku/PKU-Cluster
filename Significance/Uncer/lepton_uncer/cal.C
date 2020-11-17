@@ -81,9 +81,8 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	}
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
-	if(tag.Contains("16"))
-		fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK.root");
-	else fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK-pweight.root");
+	fin=new TFile("/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_ZA-EWK"+tag+".root");
+//	fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/outZA-EWK"+tag+".root");
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
 	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 	TString th1name[3];
@@ -92,15 +91,20 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
                    th1[i] = new TH1D(th1name[i],th1name[i],9,0,9);
 		   th1[i]->Sumw2();
 	}
-	TTree*tree=(TTree*)fin->Get("demo");
+//	TTree*tree=(TTree*)fin->Get("ZPKUCandidates");
+	TTree*tree=(TTree*)fin->Get("outtree");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2,photone,photonphi;
 	double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
 	double muon1_id_scale,muon2_id_scale,ele1_id_scale,ele2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale;
 	double ptVlep, yVlep, phiVlep, massVlep;
-        int lep;double Mjj,deltaetajj,zepp;
+        int lep;double Mjj,detajj,zepp;
+	double scalef,pileupWeight,prefWeight;
 	map<TString, double> variables;
         tree->SetBranchAddress("lep",&lep);
+        tree->SetBranchAddress("scalef",&scalef);
+        tree->SetBranchAddress("pileupWeight",&pileupWeight);
+        tree->SetBranchAddress("prefWeight",&prefWeight);
         tree->SetBranchAddress("Mjj",&Mjj);
 	tree->SetBranchAddress("zepp",&zepp);
         tree->SetBranchAddress("jet1eta",&jet1eta);
@@ -111,7 +115,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	tree->SetBranchAddress("jet2pt",&jet2pt);
 	tree->SetBranchAddress("jet1phi",&jet1phi);
 	tree->SetBranchAddress("jet2phi",&jet2phi);
-	tree->SetBranchAddress("deltaetajj",&deltaetajj);
+//	tree->SetBranchAddress("detajj",&detajj);
 	tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
 	tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
 	tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
@@ -141,9 +145,12 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	cout<<"begin the loop"<<endl;
 	double muon_weight[3],ele_weight[3],photon_weight[3];
 	TLorentzVector Zp4, photonp4, jet1p4, jet2p4;
-	double actualWeight,delta_phi,detajj;
+	double actualWeight,delta_phi;
 	for(int k=0;k<tree->GetEntries();k++){
 		tree->GetEntry(k);
+                muon_WeightUp=0;muon_WeightDn=0;muon_Weight=0;
+                ele_WeightUp=0,ele_WeightDn=0,ele_Weight=0;
+                photon_WeightUp=0,photon_WeightDn=0,photon_Weight=0;
 		detajj=fabs(jet1eta-jet2eta);
 		Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, massVlep);
 		photonp4.SetPtEtaPhiE(photonet, photoneta, photonphi, photone);
@@ -151,14 +158,16 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 		jet2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
 		delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
 		if (delta_phi>pi) delta_phi=2*pi-delta_phi; 
+		if(tag.Contains("18"))prefWeight=1;
+		double weight=scalef*pileupWeight*prefWeight;
 		if(particle.Contains("muon")&&tag.Contains("16")&&lep==13){
 			muon1_ID_Uncer=sqrt( pow(get_muon_ID_sys16(etalep1,ptlep1,ID_muon_sys1,ID_muon_sys2),2)+ pow(get_muon_ID_stat16(etalep1,ptlep1,ID_muon_stat1,ID_muon_stat2),2)  );
 			muon2_ID_Uncer=sqrt( pow(get_muon_ID_sys16(etalep2,ptlep2,ID_muon_sys1,ID_muon_sys2),2)+ pow(get_muon_ID_stat16(etalep2,ptlep2,ID_muon_stat1,ID_muon_stat2),2)  );
 			muon1_ISO_Uncer=sqrt(  pow(get_muon_iso_sys16(etalep1,ptlep1,ISO_muon_sys1,ISO_muon_sys2),2)+ pow(get_muon_iso_stat16(etalep1,ptlep1,ISO_muon_stat1,ISO_muon_stat2),2) );
 			muon2_ISO_Uncer=sqrt(  pow(get_muon_iso_sys16(etalep2,ptlep2,ISO_muon_sys1,ISO_muon_sys2),2)+ pow(get_muon_iso_stat16(etalep2,ptlep2,ISO_muon_stat1,ISO_muon_stat2),2) );
-			muon_WeightUp=(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer) ;
-			muon_WeightDn=(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer) ;
-			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
+			muon_WeightUp=(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*weight ;
+			muon_WeightDn=(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*weight ;
+			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*weight;
 			if(k%5000==0)
 				cout<<tag<<" get muon SFs"<<endl;
 		}
@@ -167,9 +176,9 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			muon2_ID_Uncer=sqrt( pow(get_muon_ID_sys(etalep2,ptlep2,ID_muon_sys),2)+ pow(get_muon_ID_stat(etalep2,ptlep2,ID_muon_stat1),2)  );
 			muon1_ISO_Uncer=sqrt(  pow(get_muon_iso_sys(etalep1,ptlep1,ISO_muon_sys),2)+ pow(get_muon_iso_stat(etalep1,ptlep1,ISO_muon_stat1),2) );
 			muon2_ISO_Uncer=sqrt(  pow(get_muon_iso_sys(etalep2,ptlep2,ISO_muon_sys),2)+ pow(get_muon_iso_stat(etalep2,ptlep2,ISO_muon_stat1),2) );
-			muon_WeightUp=(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer) ;
-			muon_WeightDn=(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer) ;
-			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
+			muon_WeightUp=(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*weight ;
+			muon_WeightDn=(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*weight ;
+			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*weight;
 			if(k%5000==0)
 				cout<<tag<<" get muon SFs"<<endl;
 		}
@@ -178,9 +187,9 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			muon2_ID_Uncer=sqrt( pow(get_muon_ID_stat(etalep2,ptlep2,ID_muon_stat1),2)  );
 			muon1_ISO_Uncer=sqrt( pow(get_muon_iso_stat(etalep1,ptlep1,ISO_muon_stat1),2) );
 			muon2_ISO_Uncer=sqrt( pow(get_muon_iso_stat(etalep2,ptlep2,ISO_muon_stat1),2) );
-			muon_WeightUp=(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer) ;
-			muon_WeightDn=(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer) ;
-			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
+			muon_WeightUp=(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*weight ;
+			muon_WeightDn=(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*weight ;
+			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*weight;
 			if(k%5000==0)
 				cout<<tag<<" get muon SFs "<<muon_Weight<<" "<<muon_WeightUp<<" "<<muon_WeightDn<<endl;
 		}
@@ -189,22 +198,22 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			ele2_ID_Uncer=get_ele_ID(etalep2,ptlep2,ID_ele);
 			ele1_Reco_Uncer=get_ele_Reco(etalep1,ptlep1,Reco_ele);
 			ele2_Reco_Uncer=get_ele_Reco(etalep2,ptlep2,Reco_ele);
-			ele_Weight=ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
+			ele_Weight=ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*weight;
 			if(type.Contains("reco")){
-				ele_WeightUp=(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale+ele1_Reco_Uncer)*(ele2_reco_scale+ele2_Reco_Uncer);
-				ele_WeightDn=(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale-ele1_Reco_Uncer)*(ele2_reco_scale-ele2_Reco_Uncer);
+				ele_WeightUp=(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale+ele1_Reco_Uncer)*(ele2_reco_scale+ele2_Reco_Uncer)*weight;
+				ele_WeightDn=(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale-ele1_Reco_Uncer)*(ele2_reco_scale-ele2_Reco_Uncer)*weight;
 			}
 			else{ 
-				ele_WeightUp=(ele1_id_scale+ele1_ID_Uncer)*(ele2_id_scale+ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale);
-				ele_WeightDn=(ele1_id_scale-ele1_ID_Uncer)*(ele2_id_scale-ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale);
+				ele_WeightUp=(ele1_id_scale+ele1_ID_Uncer)*(ele2_id_scale+ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*weight;
+				ele_WeightDn=(ele1_id_scale-ele1_ID_Uncer)*(ele2_id_scale-ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*weight;
 			}
 			if(k%5000==0)cout<<tag<<" get ele SFs "<<ele_Weight<<" "<<ele_WeightUp<<" "<<ele_WeightDn<<endl;
 		}
 		if(particle.Contains("photon")&&photonet>0){
 			photon_ID_Uncer=get_photon_ID(photoneta,photonet,ID_gamma);
-			photon_WeightUp=photon_id_scale+photon_ID_Uncer;
-			photon_WeightDn=photon_id_scale-photon_ID_Uncer;
-			photon_Weight=photon_id_scale;
+			photon_WeightUp=photon_id_scale+photon_ID_Uncer*weight;
+			photon_WeightDn=photon_id_scale-photon_ID_Uncer*weight;
+			photon_Weight=photon_id_scale*weight;
 			if(k%5000==0)cout<<tag<<" get photon SFs "<<photon_Weight<<" "<<photon_WeightUp<<" "<<photon_WeightDn<<endl;
 		}
 
@@ -284,21 +293,22 @@ int cal(){
 	TString LEPele = "lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110";
 	TString photon = "photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )";
 	TString jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
-	TString dr = "drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
+//	TString dr = "drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
+	TString dr = "drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
 	vector<TString> tag={"16","17","18"};
 	vector<TString> par={"ele","muon","photon"};
 	TH1D*th2[3][3];//[particle][3]
 	for(int j=0;j<tag.size();j++){
 		if(tag[j].Contains("17")){
-			GenJet = " ( (!(fabs(genjet2eta)<3.14 && fabs(genjet2eta)>2.65) && !(fabs(genjet1eta)<3.14 && fabs(genjet1eta)>2.65) &&  genjet1pt<50 && genjet2pt<50 && genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) || (genjet1pt>50 && genjet2pt>50 && fabs(genjet1eta)< 4.7 && fabs(genjet2eta)<4.7) ) ";
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else{   
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 		}
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
-		TString SignalRegion = "Mjj>500 && deltaetajj>2.5 && Mva>100";
+		TString SignalRegion = "Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && ZGmass>100";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion; 
 		TString cut1 ="(("+Reco+")&& ("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";

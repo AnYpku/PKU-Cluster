@@ -6,7 +6,7 @@ using namespace std;
 void runxx() {
 //gROOT->LoadMacro("xx.C");
 //TString dir = "./";
-TString dir = "/eos/user/y/yian/2018cutla/";
+TString dir = "/home/pku/anying/cms/rootfiles/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -20,7 +20,7 @@ if(infilename.Contains("out")==0) {k=-2; continue;}
 TString outname="cutla-"+infilename;//+".root";
 TString inname="cutlep-"+infilename;//+".root";
 
-cout<<dir<<outname<<"->"<<dir<<inname<<endl;
+cout<<dir<<inname<<"->"<<dir<<outname<<endl;
 
 TFile *file1 =new TFile(dir+inname);
 //TTree *tree1 = (TTree*) file1->Get("demo");

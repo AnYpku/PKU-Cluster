@@ -1,9 +1,9 @@
 void get_interf(TString tag){
 	ofstream f1("./interf_uncer"+tag+"CR.txt");
 	TFile* file1 = new TFile("./hist_EWK_"+tag+"CR.root");
-	TFile* file2 = new TFile("./hist_interference_"+tag+"CR.root");
+	TFile* file2 = new TFile("./hist_interf_"+tag+"CR.root");
 	TH1D* h1 = (TH1D*)file1->Get("histEWK");
-	TH1D* h2 = (TH1D*)file2->Get("histinterference");
+	TH1D* h2 = (TH1D*)file2->Get("histinterf");
         const int num=h1->GetNbinsX();
 	Double_t bincontent1[num],bincontent2[num];
 	Double_t uncer[num];

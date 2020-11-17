@@ -2,7 +2,7 @@
 #define pi 3.1415926
 void run( TFile*file,TString cut1,TString tag,bool turn){
 	TString name=file->GetName();
-	TTree*tree=(TTree*)file->Get("demo");     
+	TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 	Double_t scalef,pileupWeight,pweight[703],Mjj,zepp;
 	double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
 	double photonet,photoneta,photone,photonphi;
@@ -33,9 +33,10 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 	double actualWeight[num];
 	TH1D*th1[num];
 	TString th1name[num];
+	vector<Double_t> mjj_bins={150,300,400,500};
 	for(Int_t i=0;i<num;i++){
 		th1name[i]=Form("hist_%d",i);
-		th1[i] = new TH1D(th1name[i],th1name[i],1,0,1);
+		th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,&mjj_bins[0]);
 		th1[i]->Sumw2(); 
 	}
 	cout<<tag<<" "<<name<<endl;
@@ -62,7 +63,7 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 		if (  tformula->EvalInstance() /*&& (zepp<2.4 && delta_phi>1.9)*/ ){
 			for(Int_t i=init;i<(num+init);i++){
 				actualWeight[p]=scalef*pweight[i]*pileupWeight;
-				if(Mjj>=150&&Mjj<400)th1[p]->Fill(0.5,actualWeight[p]);//0~1, 2.5~4.5 and 500~800
+				if(Mjj>=150&&Mjj<500)th1[p]->Fill(Mjj,actualWeight[p]);//0~1, 2.5~4.5 and 500~800
 				p++;
 			}
 		}
@@ -90,26 +91,25 @@ int Uncer_batch_bkg(){
 	TString jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
-	TString ControlRegion = "Mjj>150 && Mjj<400 && Mva>100";
+	TString ControlRegion = "Mjj>150 && Mjj<500 && Mva>100";
 	vector<TString> tag={"16","17","18"};
 
 	TFile*file1[3];
-	TString dir1="/eos/user/y/yian/2016legacy/";     
-	TString dir2="/eos/user/y/yian/2017cutla/";     
-	TString dir3="/eos/user/y/yian/2018cutla/";     
-	file1[0]=new TFile(dir1+"cutla-outZA_pweight.root");
-	file1[1]=new TFile(dir2+"cutla-outZA-pweight.root");
-	file1[2]=new TFile(dir3+"cutla-outZA_pweight.root");
+        TString dir1="/home/pku/anying/cms/rootfiles/2016/";
+        TString dir2="/home/pku/anying/cms/rootfiles/2017/";
+        TString dir3="/home/pku/anying/cms/rootfiles/2018/";
+        file1[0]=new TFile(dir1+"cutla-outZA16.root");
+        file1[1]=new TFile(dir2+"cutla-outZA17.root");
+        file1[2]=new TFile(dir3+"cutla-outZA18.root");
 
 	TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";     
 	TFile*file2[3];
-	file2[0]=new TFile(dir+"unfold_16outZA-EWK.root");
-	file2[1]=new TFile(dir+"unfold_17outZA-EWK-pweight.root");
-	file2[2]=new TFile(dir+"unfold_18outZA-EWK-pweight.root");
-
+        file2[0]=new TFile(dir1+"cutla-outZA-EWK16.root");
+        file2[1]=new TFile(dir2+"cutla-outZA-EWK17.root");
+        file2[2]=new TFile(dir3+"cutla-outZA-EWK18.root");
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet=" ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14 && fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) ) ";
+			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else{
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";

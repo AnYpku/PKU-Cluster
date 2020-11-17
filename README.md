@@ -61,6 +61,7 @@ A very sample example listed above.
 #### Fake lepton
 
 ### Uncertainty calculation
+As it's still annoyed to repeate the same procedure in different years and channels. I recommend you define functions and call for them later to prepare histograms that you want in differents and channels one time. See an example here [Build_hist](https://github.com/AnYpku/PKU-Cluster/blob/master/Significance/Uncer/fakephoton/Uncer_batch_bkg.C). These histograms can be use to prepare data card for significance calculation and calculate uncertainties. 
 
 #### Scale and PDF uncertainties
 
@@ -97,6 +98,9 @@ Take the fraction to signal process in SR as the uncertainty.
 Introdution
 
 #### Code preparation
+- Histograms preparation [code](https://github.com/AnYpku/PKU-Cluster/blob/master/Significance/Build_Hist.C)
+- data card [code](https://github.com/AnYpku/PKU-Cluster/tree/master/Significance/data_cards)
+- Combine from [HiggsCombieTools](http://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/)
 
 ### Signal Strength
 
@@ -106,7 +110,15 @@ Introdution
 
 ### Unfolding
 
-Introdution
+Unfolding is the generic term used to describe this detector-level to particle-level correction for distributions. In general, this can account for limited acceptance, finite resolution, and inefficiencies of the detector, as well as bin migrations in the distribution between measured and corrected. Simulated EW samples from MC event generators are used to perform the unfolding. Distributions obtained from the generated events correspond to particle-level (will be referred to as gen). Then the events are passed through a detector simulation programme, mimicking the behaviour of the CMS detector as closely as possible, and the same distributions obtained using these events correspond to detector-level (will be referred to as reco). In the well-defined fiducial phase space, the events in reco and events in gen follow the equation:
+
+```latex
+
+\begin{eqnarray}
+y_{\textrm{reco}}=R_{ij}\cdot x_{\textrm{gen}}
+\end{eqnarray}
+
+```
 
 #### Code preparation
 

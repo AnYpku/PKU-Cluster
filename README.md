@@ -52,6 +52,62 @@ fin->Close();
 }
 
 ```
-A very sample example listed above.
+A very sample example listed above. 
+
+### Background estimation
+
+#### Fake photon
+
+#### Fake lepton
+
+### Uncertainty calculation
+
+#### Scale and PDF uncertainties
+
+As the renormalization(mu_R) and factorization(mu_F) are used to estimate pp collsion that included in the MC simulation, it is necessary to consider its uncertainty. In CMS MC simulation, we vary mu_R and mu_F by combination of (1,0.5,2). From the envelop, the largest variation comapred with the central one as uncertainty, except condition when mu_R and mu_F are 0.5 0r 2.0. 
+
+Besides the scale uncertainties, the uncertainty from PDF(parton distribution function) is also needed to consider. The way of handling PDF uncetainties is to calculate the standard deviation from hundreds of PDF weights.
+
+### Interference effect
+
+Make use of MadGraph syntax, the interference process can be produced by:
+
+```
+generate p p > lep+ lep- a j j QCDˆ2==2
+
+```
+
+Take the fraction to signal process in SR as the uncertainty.
+
+### Uncertainty from data-driven method
+
+### Jet energy correction uncertainties
+
+### Commom uncertaintis
+
+- particel ID and reconstruction
+- pileup
+- luminosity
+- cross section estimation
+- L1 prefiring in 2016 and 2017
+
+
+### Significance
+
+Introdution
+
+#### Code preparation
+
+### Signal Strength
+
+Introdution
+
+#### Code preparation
+
+### Unfolding
+
+Introdution
+
+#### Code preparation
 
  

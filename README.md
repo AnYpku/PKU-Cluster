@@ -32,7 +32,7 @@ We always use Z to ee events to measure the trigger efficiency. The MC samples a
 
 Beside these SFs, we need to normalized the MC to its corresponding cross section. There is a table can be refered to [XS_Table](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns). Or if there is a paper giving a more accurate cross section, it can also be used. Besides, the [GenXSAnalyzer](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HowToGenXSecAnalyzer) is often used. I provide some codes in my GitHub here [Add_weights](https://github.com/AnYpku/PKU-Cluster/tree/master/RunII2016/step1_add_weight). As some processes in different years may have little difference and SFs files are different, it is better to do separately. Actually, the code I show is not convenient to write. You may also have the idea that do `SetBranchAddress` many times very annoyed. I introduce a way called `TTreeFormula`. 
 
-In this step, we want to add extra branches that save different SFs and slimme the root files at the same time.
+In this step, we want to add extra branches that save different SFs and slim the root files at the same time.
 ```
 void add(){
 TFile*fin=new TFile("fin.root");
@@ -136,7 +136,7 @@ for line in f:
         arr[name]=arr_Temp
 print arr
 ```
-Then we can get special arraies with style like [string][double], which is convenient in the following usage.
+Then we can get special arrays with style like [string][double], which is convenient in the following usage.
 
 ### Significance
 

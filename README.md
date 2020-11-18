@@ -22,7 +22,7 @@ For muon SFs, please refer to [muonSFs](https://twiki.cern.ch/twiki/bin/view/CMS
 
 For photon SFs, please refer to [photonSFs](https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations#Fall17v2_AN1) and [photonSFs](https://twiki.cern.ch/twiki/bin/view/CMS/EgammaIDRecipesRun2#Electron_Veto_CSEV_or_pixel_seed)
 
-Almost scale factors are provided by corrsponding POG except the trigger efficiencies measurement. As the trigger scale factors vary with different working points and basic selection requirement. For example, in Zgamma measurement, we require the electron p_T>25 GeV, but in other analysis, they may require the electron p_T>30 GeV. There is an official tools provided by Egamma POG seen [TnpTools](https://github.com/lsoffi/egm_tnp_analysis/tree/egm_tnp_Prompt2018_102X_09062018/etc).
+Almost scale factors are provided by corrsponding POG except the trigger efficiencies measurement. As the trigger scale factors vary with different working points and basic selection requirement. For example, in Zgamma measurement, we require the electron p_T>25 GeV, but in other analysis, they may require the electron p_T>30 GeV. There is an official tools provided by Egamma POG seen [TnpTools](https://github.com/lsoffi/egm_tnp_analysis/tree/egm_tnp_Prompt2018_102X_09062018/etc). There are some approval HLT SFs (eleHLTSFs)(https://twiki.cern.ch/twiki/bin/view/CMS/EgHLTScaleFactorMeasurements).
 
 ### Trigger efficiency 
 

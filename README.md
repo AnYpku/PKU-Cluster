@@ -9,7 +9,7 @@ Find a region that contains few signal called control region. In this region, de
 There are kinds of scale factors as a function of $\eta$ and $p_{T}$ in most case, including
 - electron/muon/photon ID scale factor
 - muon isolation scale factor
-- electron reconstrution scale factor
+- electron reconstruction scale factor
 - photon veto scale factor
 - trigger scale factor
 - pileup reweighting
@@ -148,6 +148,8 @@ Introdution
 
 #### Optimization cuts
 
+We usually add optimization cuts to increase ratio of signal to background. These cuts are only applied in significance calculation not in the cross section measurement. A scan method is used to determine the value of optimization cuts.
+
 #### Code preparation
 
 - Histograms preparation [code](https://github.com/AnYpku/PKU-Cluster/blob/master/Significance/Build_Hist.C)
@@ -157,6 +159,8 @@ Introdution
 ### Signal Strength
 
 Introdution
+
+The signal strength is got by perfoming the fit as did in significane measurement. Pay attention to comment theory uncertainties related with signal process, only shape effect needs to be considered. 
 
 At first, please save branch of gen variables. You should build gen variables same as what you did in the ntuple code in reconstruction level. An example for VBS Zgamma seen [genparticles](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/produce).
 

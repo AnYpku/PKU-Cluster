@@ -1,3 +1,11 @@
+# MC preparation
+
+Signal process of MC sample preparation used in analysis stage.
+
+# Ntuple code set up
+
+Select final state that we interested in. Build framework to transfer MiniAod or NanoAod to tree files.
+
 # Analysis stage
 
 ## Control Region definition and selection determination
@@ -146,6 +154,8 @@ Then we can get special arrays with style like [string][double], which is conven
 
 Introdution
 
+A simultaneous fit was performed both in CR and SR.
+
 #### Optimization cuts
 
 We usually add optimization cuts to increase ratio of signal to background. These cuts are only applied in significance calculation not in the cross section measurement. A scan method is used to determine the value of optimization cuts.
@@ -178,7 +188,28 @@ The unfolded differential cross section can be measured as a function of some va
 
 #### Code preparation
 
-At first, please save branch of gen variables. You should build gen variables same as what you did in the ntuple code in reconstruction level.
+At first, please save branch of gen variables as done in signal stength measurement. As the unfolded differential cross section is a function of some variable. Different distribution histograms are needed to be prepared. And as the case in signal stength measurement, events in-fiducial(reco&&gen) and out-fiducia are still needed to be divided. What's more, uncertainties for different distribution of the unfolded variable are different, which means that you need to calculate these separately. List a simple example to define a function and then call for to produce a series of histograms one time.
+
+```
+void run(TString vec_branchname,TString cut,vector<double> bins){
+
+......
+map<TString, double> variables;
+tree->SetBranchAddress(vec_branchname, &variables[vec_branchname]);
+tree->SetBranchAddress("weight",&weight);
+TString th1name="name"
+TH1D* th1 = new TH1D(th1name,th1name,bins.size()-1,&bins[0]);
+TTreeFormula*tformula1=new TTreeFormula("formula1",cut,tree);
+for(int i=0;i<tree->GetEntries();i++){
+   tree->GetEntry(i);
+    
+    if (  !tformula1->EvalInstance() )
+         continue;
+    th1->Fill(variables[vec_branchname],weight);
+}
+}
+```
+Or use **tree->Draw("var>>h1","cut","goff")** directly. 
 
 - Histograms [Build_Hist](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/common)
 - data card [card](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/data_card)

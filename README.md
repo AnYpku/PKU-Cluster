@@ -30,15 +30,15 @@ For muon SFs, please refer to [muonSFs](https://twiki.cern.ch/twiki/bin/view/CMS
 
 For photon SFs, please refer to [photonSFs](https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations#Fall17v2_AN1) and [photonSFs](https://twiki.cern.ch/twiki/bin/view/CMS/EgammaIDRecipesRun2#Electron_Veto_CSEV_or_pixel_seed)
 
-Almost scale factors are provided by corrsponding POG except the trigger efficiencies measurement. As the trigger scale factors vary with different working points and basic selection requirement. For example, in Zgamma measurement, we require the electron p_T>25 GeV, but in other analysis, they may require the electron p_T>30 GeV. There is an official tools provided by Egamma POG seen [TnpTools](https://github.com/lsoffi/egm_tnp_analysis/tree/egm_tnp_Prompt2018_102X_09062018/etc). There are some approval HLT SFs [eleHLTSFs](https://twiki.cern.ch/twiki/bin/view/CMS/EgHLTScaleFactorMeasurements).
+Almost scale factors are provided by corrsponding POG except the trigger efficiencies measurement. As the trigger scale factors vary with different working points and basic selection requirement. For example, in Zgamma measurement, we require the electron p_T>25 GeV, but in other analysis, they may require the electron p_T>30 GeV. An official tool is provided by Egamma POG seen [TnpTools](https://github.com/lsoffi/egm_tnp_analysis/tree/egm_tnp_Prompt2018_102X_09062018/etc). Some approval HLT SFs [eleHLTSFs](https://twiki.cern.ch/twiki/bin/view/CMS/EgHLTScaleFactorMeasurements) are provided by Egamma HLT group, which you may exactly need.
 
 ### Trigger efficiency 
 
-We always use Z to ee events to measure the trigger efficiency. The MC samples are DYell processes with different generator in LO or NLO. These difference is used to estimate one soucrce of uncertainty called **alternative MC**. In the [TnpTools](https://github.com/lsoffi/egm_tnp_analysis/tree/egm_tnp_Prompt2018_102X_09062018/etc) page, it has a brief introduction, you can do step by step. I also attach some disscussion and introduction from my understanding [ref_Tnp](https://indico.cern.ch/event/903012/). 
+We always use Z to ee events to measure the trigger efficiency. The MC samples are DYell processes with different generator in LO or NLO. These difference is used to estimate one soucrce of uncertainty called **alternative MC**. In the [TnpTools](https://github.com/lsoffi/egm_tnp_analysis/tree/egm_tnp_Prompt2018_102X_09062018/etc) page, it has a brief introduction, you can do step by step. I also attach some disscussion and introduction from my understanding in [ref_Tnp](https://indico.cern.ch/event/903012/). 
 
 ### Add weights
 
-Beside these SFs, we need to normalized the MC to its corresponding cross section. There is a table can be refered to [XS_Table](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns). Or if there is a paper giving a more accurate cross section, it can also be used. Besides, the [GenXSAnalyzer](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HowToGenXSecAnalyzer) is often used. I provide some codes in my GitHub here [Add_weights](https://github.com/AnYpku/PKU-Cluster/tree/master/RunII2016/step1_add_weight). As some processes in different years may have little difference and SFs files are different, it is better to do separately. Actually, the code I show is not convenient to write. You may also have the idea that do `SetBranchAddress` many times very annoyed. I introduce a way called `TTreeFormula`. 
+Beside these SFs, we need to normalize the MC to its corresponding cross section, where unity of events normalized is cross section of one event. Therefore, when luminosity with unity fb-1 is multipled to events in MC normalized, the yields are got. A table recored cross section for popular process is provided officially that can be refered to [XS_Table](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns). Or if a paper published gave a more accurate cross section, it can also be used. Besides, the [GenXSAnalyzer](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HowToGenXSecAnalyzer) is often used. I provide some codes in my GitHub here [Add_weights](https://github.com/AnYpku/PKU-Cluster/tree/master/RunII2016/step1_add_weight) used to calculate normalized weights and add SFs. As some processes in different years may have little difference and SFs files are different, it is better to do separately. Actually, the code I show is not convenient to write. You may also have the idea that do `SetBranchAddress` many times very annoyed. I introduce a way called `TTreeFormula`. 
 
 In this step, we want to add extra branches that save different SFs and slim the root files at the same time.
 ```
@@ -77,7 +77,7 @@ A very simple example listed above.
 #### Fake lepton
 
 ### Uncertainty calculation
-As it's still annoyed to repeate the same procedure in different years and channels. I recommend you define functions and call for them later to prepare histograms that you want in differents and channels one time. See an example here [Build_hist](https://github.com/AnYpku/PKU-Cluster/blob/master/Significance/Uncer/fakephoton/Uncer_batch_bkg.C). These histograms can be use to prepare data card for significance calculation and calculate uncertainties. 
+As it's still annoyed to repeate the same procedure in different years and channels. I recommend you define functions and call for them later to produce histograms that you want in different years and channels one time. See an example here [Build_hist](https://github.com/AnYpku/PKU-Cluster/blob/master/Significance/Uncer/fakephoton/Uncer_batch_bkg.C). These histograms can be use to prepare data cards for significance measurement and calculate uncertainties. 
 
 ```
 .....
@@ -93,7 +93,7 @@ List a simple example to fill histograms not in a loop.
 
 #### Scale and PDF uncertainties
 
-As the renormalization(mu_R) and factorization(mu_F) are used to estimate pp collsion that included in the MC simulation, it is necessary to consider its uncertainty. In CMS MC simulation, we vary mu_R and mu_F by combination of (1,0.5,2). From the envelop, the largest variation comapred with the central one as uncertainty, except condition when mu_R and mu_F are 0.5 0r 2.0. 
+As the renormalization(mu_R) and factorization(mu_F) are used to estimate pp collsion that included in the MC simulation, it is necessary to consider its uncertainty. In CMS MC simulation, we vary mu_R and mu_F by combination of (1,0.5,2). From the envelop, the largest variation comapred with the central one as uncertainty, except condition when mu_R and mu_F are 0.5 or 2.0. 
 
 Besides the scale uncertainties, the uncertainty from PDF(parton distribution function) is also needed to consider. The way of handling PDF uncetainties is to calculate the standard deviation from hundreds of PDF weights.
 
@@ -209,7 +209,7 @@ for(int i=0;i<tree->GetEntries();i++){
 }
 }
 ```
-Or use **tree->Draw("var>>h1","cut","goff")** directly. 
+Or use `tree->Draw("var>>h1","cut*weight","goff")` directly. 
 
 - Histograms [Build_Hist](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/common)
 - data card [card](https://github.com/AnYpku/PKU-Cluster/tree/master/Unfolding/data_card)

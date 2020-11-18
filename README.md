@@ -4,7 +4,7 @@ Signal process of MC sample preparation used in analysis stage.
 
 # Ntuple code set up
 
-Select final state that we interested in. Build framework to transfer MiniAod or NanoAod to tree files.
+Select final state that we interested in. Build framework to transfer MiniAod or NanoAod to root tree files.
 
 # Analysis stage
 
@@ -38,7 +38,7 @@ We always use Z to ee events to measure the trigger efficiency. The MC samples a
 
 ### Add weights
 
-Beside these SFs, we need to normalize the MC to its corresponding cross section, where unity of events normalized is cross section of one event. Therefore, when luminosity with unity fb-1 is multipled to events in MC normalized, the yields are got. A table recored cross section for popular process is provided officially that can be refered to [XS_Table](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns). Or if a paper published gave a more accurate cross section, it can also be used. Besides, the [GenXSAnalyzer](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HowToGenXSecAnalyzer) is often used. I provide some codes in my GitHub here [Add_weights](https://github.com/AnYpku/PKU-Cluster/tree/master/RunII2016/step1_add_weight) used to calculate normalized weights and add SFs. As some processes in different years may have little difference and SFs files are different, it is better to do separately. Actually, the code I show is not convenient to write. You may also have the idea that do `SetBranchAddress` many times very annoyed. I introduce a way called `TTreeFormula`. 
+Beside these SFs, we need to normalize the MC to its corresponding cross section, where unity of events normalized is cross section of one event. Therefore, when luminosity with unity fb-1 is multipled to events in MC normalized, the yields are got. A table recorded cross section for popular process is provided officially that can be refered to [XS_Table](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns). Or if a paper published gave a more accurate cross section, it can also be used. Besides, the [GenXSAnalyzer](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HowToGenXSecAnalyzer) is often used. I provide some codes in my GitHub here [Add_weights](https://github.com/AnYpku/PKU-Cluster/tree/master/RunII2016/step1_add_weight) used to calculate normalized weights and add SFs. As some processes in different years may have little difference and SFs files are different, it is better to do separately. Actually, the code I show is not convenient to write. You may also have the idea that do `SetBranchAddress` many times very annoyed. I introduce a way called `TTreeFormula`. 
 
 In this step, we want to add extra branches that save different SFs and slim the root files at the same time.
 ```

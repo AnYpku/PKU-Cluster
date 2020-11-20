@@ -49,7 +49,7 @@ print '>>>>begin to read bin content to the txt file>>>>'
 
 nbins=th1_ZA_sig_out.GetNbinsX()+1
 for i in range(1,nbins):
-   f = open('./txt/%s_%s_control_bin.txt'%(sys.argv[2],sys.argv[1]),'w')
+   f = open('./txt/%s_%s_control_bin%i.txt'%(sys.argv[2],sys.argv[1],i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 6   number of processes-1\n')
    if sys.argv[1].find("18") == -1:
@@ -159,10 +159,10 @@ for i in range(1,nbins):
    f.write('-\t-\t-\t-\t-\t-\t%0.3f\n'%(arr['SigOut_pdf'][i-1]))
 #
    f.write('pdf_QCD\tlnN\t')
-   f.write('-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_pdf'][i-1]))
+   f.write('%0.3f\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['Sig_pdf'][i-1],arr['QCD_pdf'][i-1]))
 #
    f.write('Scale_EW\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t-\t%0.2f\n'%(arr['SigOut_scale'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\t%0.2f\n'%(arr['Sig_scale'][i-1],arr['SigOut_scale'][i-1]))
 #
    f.write('Scale_QCD\tlnN\t')
    f.write('-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale'][i-1]))

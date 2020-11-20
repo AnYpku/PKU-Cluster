@@ -32,11 +32,9 @@ void xx::Loop(TString name)
    if (fChain == 0) return;
 
    double lumi=41.52;
-   double ZGbin[6] = {150,400,600,800,1000,2000};
+   double ZGbin[6] = {150,400,600,800,1000,2e4};
    TH1D*h1=new TH1D(name,"ZGamma",5,ZGbin);
    TH1D*h2=new TH1D("h2","ZGamma",5,ZGbin);
-//   if(name.Contains("EWK")) h1->SetTitle("diboson"); 
-//   if(name.Contains("Muon")||name.Contains("Ele")) h1->SetTitle("data_obs"); 
    TFile*file =new TFile(name+"_hist.root","recreate");
    Long64_t nentries = fChain->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
@@ -50,7 +48,7 @@ void xx::Loop(TString name)
       detajj=fabs(jet1eta-jet2eta);
       if( !(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && /*( (!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && !(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) &&  jet1pt<50 && jet2pt<50 && jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) || (jet1pt>50 && jet2pt>50 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) )*/(jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) && Mjj>500. &&detajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)) ) )
             continue;
-      if(ZGmass>2000) ZGmass=1999;
+      if(ZGmass>2e4) ZGmass=1999;
       if(abs(photoneta)<1.4442) photon_veto_scale=0.9862;
       if((abs(photoneta)>1.566&&abs(photoneta)<2.5))
 	      photon_veto_scale=0.9638;

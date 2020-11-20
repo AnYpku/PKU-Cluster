@@ -1,7 +1,7 @@
 #define num 3
 #define pi 3.1415926
 TH1D* run( TString sample,TString tag,TString cut1,TString channel){
-     Double_t Mjj_bins[2]={150, 400};
+     vector<double> mjj_bins={150,300,400,500};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir1;
      dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/cutla-out";
@@ -28,13 +28,13 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel){
      TString th1name;
      th1name="hist"+sample;
      TH1D* th1;
-     th1 = new TH1D(th1name,th1name,1,0,1);
+     th1 = new TH1D(th1name,th1name,mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
      th1->Sumw2(); 
      for(int k=0;k<tree->GetEntries();k++){
              tree->GetEntry(k);
 	     double detajj=fabs(jet1eta-jet2eta);
 	     if (  tformula->EvalInstance() ){
-		     if(Mjj>=150&&Mjj<400)th1->Fill(0.5,scalef);//0~1, 2.5~4.5 and 500~800
+		     if(Mjj>=150&&Mjj<500)th1->Fill(Mjj,scalef);//0~1, 2.5~4.5 and 500~800
 	     }
      }
      return th1;
@@ -45,7 +45,7 @@ int Uncer_batch_bkg(){
 	TString GenPhoton = "genphotonet>20 && ( (fabs(genphotoneta)<2.5&&fabs(genphotoneta)>1.566) || (fabs(genphotoneta)<1.4442) )";
 	TString GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
 	TString GenDr = "gendrjj>0.5 && gendrla1>0.7 && gendrla2>0.7 && gendrj1a>0.5 && gendrj2a>0.5 && gendrj1l>0.5 && gendrj2l>0.5 && gendrj1l2>0.5 && gendrj2l2>0.5";
-	TString GenControlRegion = "genMjj >150 && genMjj<400 && genZGmass>100";
+	TString GenControlRegion = "genMjj >150 && genMjj<500 && genZGmass>100";
 
 	TString LEPmu = "lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110";
 	TString LEPele = "lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110";
@@ -53,7 +53,7 @@ int Uncer_batch_bkg(){
 	TString jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
-	TString ControlRegion = "Mjj>150 && Mjj<400 && fabs(jet1eta-jet2eta)>2.5 && Mva>100";
+	TString ControlRegion = "Mjj>150 && Mjj<500 && fabs(jet1eta-jet2eta)>2.5 && Mva>100";
 
 	vector<TString> tag={"16","17","18"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};

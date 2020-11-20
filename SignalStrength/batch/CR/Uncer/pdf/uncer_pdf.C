@@ -25,13 +25,15 @@ void run(TString sample, TString tag){
 	for(int k=0;k<kk;k++){
             double error=0;
 	    double diff=0,sum=0;
+	    double factor=1;
             for(int j=0;j<num;j++){
                double center=h1[0]->GetBinContent(k+1);
-               diff=h1[j]->GetBinContent(k+1)-center;
+	       if(sample.Contains("ewk")) factor=h1[0]->Integral()/h1[j]->Integral();
+               diff=factor*h1[j]->GetBinContent(k+1)-center;
 	       sum+=pow(diff,2);
 	    }
 	    if(h1[0]->GetBinContent(k+1)!=0)
-		    cout<<sample<<" "<<tag<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" "<<sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1)<<endl;
+		    cout<<sample<<" "<<tag<<" "<<factor<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" "<<sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1)<<endl;
 	    else
 		    cout<<sample<<" "<<tag<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" no data in bin"<<k+1<<endl;
             if(h1[0]->GetBinContent(k+1)!=0)

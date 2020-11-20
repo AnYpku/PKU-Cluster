@@ -39,8 +39,11 @@ void run(TString sample, TString tag,int num){
 		    if(name.Contains("qcd")){
 			    if(!(j==5||j==7)) vec_content.push_back(h1[j]->GetBinContent(k+1));
 		    }
-                    else if(name.Contains("qcd")==0&& num<4)
-			    vec_content.push_back(h1[j]->GetBinContent(k+1));
+                    else if(name.Contains("qcd")==0&& num<4){
+			    double factor=h1[0]->Integral()/h1[j]->Integral();
+			    cout<<tag<<" "<<name<<" "<<factor<<endl;
+			    vec_content.push_back(factor*h1[j]->GetBinContent(k+1));
+		    }
 	    }
 	    biggest = max_element(begin(vec_content),end(vec_content));
 	    smallest= min_element(begin(vec_content),end(vec_content));
@@ -50,7 +53,7 @@ void run(TString sample, TString tag,int num){
                             scale_band1[k]=fabs(vec_content[5]-vec_content[3])/2/h1[0]->GetBinContent(k+1);
                             scale_band2[k]=fabs(vec_content[2]-vec_content[1])/2/h1[0]->GetBinContent(k+1);
                             scale_band3[k]=fabs(vec_content[6]-vec_content[4])/2/h1[0]->GetBinContent(k+1);
-                            cout<<tag<<" "<<name<<" "<<scale_band1[k]<<" "<<scale_band2[k]<<" "<<scale_band3[k]<<endl;
+//                            cout<<tag<<" "<<name<<" "<<scale_band1[k]<<" "<<scale_band2[k]<<" "<<scale_band3[k]<<endl;
                     }
 	    }
 	    else{    error=0;

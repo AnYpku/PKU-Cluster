@@ -1,6 +1,6 @@
 #define pi 3.1415926
 void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString channel){
-     Double_t mjj_bins[2]={150, 400};
+     vector<double> mjj_bins={150,300,400,500};
      TFile*file;
      if(name.Contains("EWK"))
              file=new TFile(dir+name+tag+".root") ;
@@ -34,8 +34,8 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      }
      else  th2name="hist_bkg";
              
-     TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco && gen;;yields",mjj_bins[0],mjj_bins[1]),1,0,1);
-     TH1D* hist_out= new TH1D(th2name_out,name+Form("\t\t %0.f<Mjj<%0.f  reco && !gen;;yields",mjj_bins[0],mjj_bins[1]),1,0,1);
+     TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco && gen;;yields",mjj_bins[0],mjj_bins[mjj_bins.size()-1]),mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
+     TH1D* hist_out= new TH1D(th2name_out,name+Form("\t\t %0.f<Mjj<%0.f  reco && !gen;;yields",mjj_bins[0],mjj_bins[mjj_bins.size()-1]),mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
      
      TString var2="Mjj";
      TString var1="fabs(jet1eta-jet2eta)";
@@ -61,13 +61,13 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      }
      TString cut;
      if(channel.Contains("elebarrel"))
-	     cut="lep==11&&fabs(photoneta)<1.4442";
+	     cut="(lep==11&&fabs(photoneta)<1.4442)";
      if(channel.Contains("mubarrel"))
-	     cut="lep==13&&fabs(photoneta)<1.4442";
+	     cut="(lep==13&&fabs(photoneta)<1.4442)";
      if(channel.Contains("eleendcap"))
-	     cut="lep==11&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566";
+	     cut="(lep==11&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566)";
      if(channel.Contains("muendcap"))
-	     cut="lep==13&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566";
+	     cut="(lep==13&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566)";
      TTreeFormula *tformula1=new TTreeFormula("formula1", "("+cut1+"&&("+cut+"))", tree);
      TTreeFormula *tformula2=new TTreeFormula("formula1", "("+cut2+"&&("+cut+"))", tree);
      double actualWeight;
@@ -87,12 +87,12 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
 		     //    <<muon1_id_scale<<" "<<muon2_id_scale<<" "<<muon1_iso_scale<<" "<<muon2_iso_scale<<" "
 		     //    <<photon_id_scale<<" "
 		     //    <<prefWeight<<" "<<actualWeight<<endl;
-		     if(Mjj<400&&Mjj>=150)hist->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
+		     if(Mjj<500&&Mjj>=150)hist->Fill(Mjj,actualWeight);//0~1, 2.5~4.5 and 500~800
 
 	     }
 	     if(name.Contains("EWK")){
 		     if (  tformula2->EvalInstance() ){ 
-			     if(Mjj>=150&&Mjj<400)hist_out->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
+			     if(Mjj>=150&&Mjj<500)hist_out->Fill(Mjj,actualWeight);//0~1, 2.5~4.5 and 500~800
 		     }
 	     }
      }
@@ -132,7 +132,7 @@ int Build_Hist(){
 	TString GenPhoton = "genphotonet>20 && ( (fabs(genphotoneta)<2.5&&fabs(genphotoneta)>1.566) || (fabs(genphotoneta)<1.4442) )";
 	TString GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
 	TString GenDr = "gendrjj>0.5 && gendrla1>0.7 && gendrla2>0.7 && gendrj1a>0.5 && gendrj2a>0.5 && gendrj1l>0.5 && gendrj2l>0.5 && gendrj1l2>0.5 && gendrj2l2>0.5";
-	TString GenControlRegion = "genMjj <400 && genMjj>150 && genZGmass>100";
+	TString GenControlRegion = "genMjj <500 && genMjj>150 && genZGmass>100";
 
 	TString LEPmu = "lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110";
 	TString LEPele = "lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110";
@@ -140,7 +140,7 @@ int Build_Hist(){
 	TString jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 	TString Pi=Form("%f",pi);
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
-	TString ControlRegion = "Mjj>150 && Mjj<400 && Mva>100";
+	TString ControlRegion = "Mjj>150 && Mjj<500 && Mva>100";
 
         vector<TString> tags={"16","17","18"};
         TString dir1[3],dir[3];

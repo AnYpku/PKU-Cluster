@@ -183,13 +183,13 @@ for i in range(1,nbins):
    f.write('JESR group = JES_%s JER_%s\n'%(sys.argv[1],sys.argv[1]))
 #
    f.write('pdf_EW\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t-\t%0.3f\n'%(arr['SigOut_pdf'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\t%0.3f\n'%(arr['Sig_pdf'][i-1],arr['SigOut_pdf'][i-1]))
 #
    f.write('pdf_QCD\tlnN\t')
    f.write('-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_pdf'][i-1]))
 #
    f.write('Scale_EW\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t-\t%0.2f\n'%(arr['SigOut_scale'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\t%0.2f\n'%(arr['Sig_scale'][i-1],arr['SigOut_scale'][i-1]))
 #
    f.write('Scale_QCD\tlnN\t')
    f.write('-\t%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale'][i-1]))

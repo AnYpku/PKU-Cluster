@@ -32,12 +32,15 @@ void run(TString sample, TString tag,int num){
 	for(int k=0;k<kk;k++){
             double error=0,extra_up=0,extra_down=0;
 	    double diff=0,sum=0;
+	    double factor=1;
             for(int j=0;j<num;j++){
 		    if(name.Contains("qcd")){
 			    if(!(j==5||j==7)) vec_content.push_back(h1[j]->GetBinContent(k+1));
 		    }
                     else if(name.Contains("qcd")==0&& num<4)
-			    vec_content.push_back(h1[j]->GetBinContent(k+1));
+                            factor=h1[0]->Integral()/h1[j]->Integral();
+                            cout<<tag<<" "<<name<<" "<<factor<<endl;
+			    vec_content.push_back(factor*h1[j]->GetBinContent(k+1));
 	    }
 	    biggest = max_element(begin(vec_content),end(vec_content));
 	    smallest= min_element(begin(vec_content),end(vec_content));

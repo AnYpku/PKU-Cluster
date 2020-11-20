@@ -29,15 +29,15 @@ fake group = fake_mubarrel16
 JES_16	lnN	1.03	1.22	-	1.04	1.00	1.00	1.05
 JER_16	lnN	1.00	1.18	-	1.04	1.00	1.00	1.00
 JESR group = JES_16 JER_16
-pdf_EW	lnN	-	-	-	-	-	-	1.056
+pdf_EW	lnN	1.007	-	-	-	-	-	1.056
 pdf_QCD	lnN	-	1.03	-	-	-	-	-
-Scale_EW	lnN	-	-	-	-	-	-	1.10
+Scale_EW	lnN	1.025	-	-	-	-	-	1.05
 Scale_QCD	lnN	-	1.15	-	-	-	-	-
 Scale_QCD_extra	lnN	-	1.06/0.96	-	-	-	-	-
 interf	lnN	1.01	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
 photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-mu_eff	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+mu_eff	lnN	1.023	1.023	-	1.023	1.023	1.023	1.023
 mu_trigger_16	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
 muon group = mu_eff mu_trigger_16
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01

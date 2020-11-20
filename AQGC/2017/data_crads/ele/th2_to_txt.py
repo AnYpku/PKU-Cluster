@@ -6,34 +6,32 @@ print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
 
 f_sig = TFile.Open("ZA-EWK_hist.root")
 f_ZA = TFile.Open("ZA_hist.root")
-f_plj = TFile.Open("plj_weight_hist.root")
+f_plj = TFile.Open("plj_hist.root")
 f_others = TFile.Open("bkg_hist.root")
 
 th1_ZA_sig = f_sig.Get("ZA-EWK")
 th1_ZA = f_ZA.Get("ZA")
-th1_non_prompt = f_plj.Get("plj_weight")
+th1_non_prompt = f_plj.Get("plj")
 th1_others = f_others.Get("bkg")
 
 print '>>>>begin to read bin content to the txt file>>>>'
-jer_EWK=[1.005,1.007,1.02,1.02,1.04]
-jer_QCD=[1.26,1.08,1.27,1.18,1.41]
-jes_EWK=[1.02,1.04,1.03,1.05,1.09]
-jes_QCD=[1.36,1.25,1.43,1.17,1.81]
-fake=[1.27,1.27,0,1.27,0]
-pdf_QCD=[1.01,1.01,1.02,1.02,1.03]
-pdf_ewk=[1.01,1.01,1.02,1.02,1.03]
-scale_QCD=[1.11,1.09,1.19,1.24,1.05]
-scale_ewk=[1.07,1.09,1.10,1.12,1.14]
-QCDZA_scale_extra_down = [0.989,0.983,0.949,0.917,1.020];
-QCDZA_scale_extra_up = [1.02,1.024,1.062,1.105,0.986];
+jer_EWK=[1.003,1.012,1.038,1.010,1.062]
+jer_QCD=[1.253,1.086,1.213,1.293,1.836]
+jes_EWK=[1.029,1.048,1.027,1.043,1.046]
+jes_QCD=[1.332,1.233,1.446,1.100,1.801]
+fake=[1.393,1.389,1.000,1.400,1.000]
+pdf_QCD=[1.010,1.041,1.057,1.023,1.027]
+pdf_ewk=[1.009,1.002,1.003,1.029,1.004]
+scale_QCD=[1.121,1.108,1.089,1.214,1.189]
+scale_ewk=[1.078,1.091,1.108,1.122,1.142]
 for i in range(1,6):
    f = open('./txt/%s_bin_%d.txt'%('ele17', i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 3   number of processes-1\n')
-   f.write('kmax 20  number of nuisance parameters (sources of systematical uncertainties)\n')
+   f.write('kmax 19  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
-   f.write('bin mu%i\n'%(i))
+   f.write('bin ele%i\n'%(i))
    bin_content = th1_others.GetBinContent(i)+th1_non_prompt.GetBinContent(i)+th1_ZA.GetBinContent(i)+th1_ZA_sig.GetBinContent(i)
 # bincontent of each precess
    others_bincontent = th1_others.GetBinContent(i) if th1_others.GetBinContent(i)>0 else 0
@@ -64,12 +62,12 @@ for i in range(1,6):
    f.write('# the second process line must have a positive number for backgrounds, and 0 for signal\n')
    f.write('# then we list the independent sources of uncertainties, and give their effect (syst. error)\n')
    f.write('# on each process and bin\n')
-   f.write('bin\tmu%i\tmu%i\tmu%i\tmu%i\n'%(i,i,i,i))
+   f.write('bin\tele%i\tele%i\tele%i\tele%i\n'%(i,i,i,i))
    f.write('process\tsig\tQCD\tnon_prompt\tothers\n')
    f.write('process\t0\t1\t2\t3\n')
    f.write('rate\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(ZA_sig_bincontent,ZA_bincontent, non_prompt_bincontent, others_bincontent))
    f.write('------------\n')
-   f.write('lumi\tlnN\t1.025\t1.025\t-\t1.025\t#lumi\n')
+   f.write('lumi\tlnN\t1.02\t1.02\t-\t1.02\t#lumi\n')
    if non_prompt_bincontent==0:
        f.write('fake_%s_%s\tlnN\t-\t-\t-\t-\t#0. uncertainty on ele_17\n'%('ele','17'))
    else: 
@@ -82,16 +80,15 @@ for i in range(1,6):
    f.write('JER_%s\tlnN\t%0.2f\t%0.2f\t-\t%0.2f\n'%('17',jer_EWK[i-1],jer_QCD[i-1],jer_EWK[i-1]))
    f.write('QCDZA_pdf\tlnN\t-\t%0.2f\t-\t-\n'%(pdf_QCD[i-1]))
    f.write('QCDZA_scale\tlnN\t-\t%0.2f\t-\t-\n'%(scale_QCD[i-1]))
-   f.write('QCDZA_scale_extra\tlnN\t-\t%0.2f/%0.2f\t-\t-\n'%(QCDZA_scale_extra_down[i-1],QCDZA_scale_extra_up[i-1]))
    f.write('signal_pdf\tlnN\t%0.2f\t-\t-\t-\n'%(pdf_ewk[i-1]))
    f.write('signal_scale\tlnN\t%0.2f\t-\t-\t-\n'%(scale_ewk[i-1]))
-   f.write('ele17_trigger\tlnN\t1.02\t1.02\t-\t1.02\n')
-   f.write('ele17_efficiency\tlnN\t1.005\t1.005\t-\t1.005\n')
+   f.write('ele_ID\tlnN\t1.09\t1.09\t-\t1.09\n')
+   f.write('ele_reco\tlnN\t1.01\t1.01\t-\t1.01\n')
    f.write('pileup\tlnN\t1.001\t1.001\t-\t1.001\n')
-   f.write('photon_id_17\tlnN\t1.03\t1.03\t-\t1.03\n')
-   f.write('interference\tlnN\t1.01\t-\t-\t-\n')
+   f.write('photon_id\tlnN\t1.03\t1.03\t-\t1.03\n')
+   f.write('interference\tlnN\t1.03\t-\t-\t-\n')
    f.write('others_xs\tlnN\t-\t-\t-\t1.1\n')
-   f.write('l1prefiring\tlnN\t1.01\t1.01\t-\t1.01\n')
+   f.write('l1prefiring\tlnN\t1.04\t1.04\t-\t1.04\n')
 
    print 'bin ',i,' ',ZA_sig_binerror,' ',ZA_binerror,' ',non_prompt_binerror,' ',others_binerror
 

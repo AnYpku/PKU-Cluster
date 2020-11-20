@@ -1,6 +1,6 @@
 #define num 3
 void run(TString cut1,TString tag,TString channel){
-     Double_t Mjj_bins[2]={150, 400};
+     vector<double> mjj_bins={150,300,400,500};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
      TFile*file=new TFile(dir+"unfold_GenCutla-outZA-EWK"+tag+".root");
@@ -32,7 +32,7 @@ void run(TString cut1,TString tag,TString channel){
      TString th1name[num];
      for(Int_t i=0;i<num;i++){
 		     th1name[i]=Form("hist_%d",i);
-		     th1[i] = new TH1D(th1name[i],th1name[i],1,0,1);
+		     th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
 		     th1[i]->Sumw2(); 
      }      
      for(int k=0;k<tree->GetEntries();k++){
@@ -44,7 +44,7 @@ void run(TString cut1,TString tag,TString channel){
 			     if(p==0)actualWeight[p]=scalef*prefWeight*pileupWeight;
 			     if(p==1)actualWeight[p]=scalef*prefWeightUp*pileupWeight;
 			     if(p==2)actualWeight[p]=scalef*prefWeightDown*pileupWeight;
-			     if(Mjj>=150&&Mjj<400)th1[p]->Fill(0.5,actualWeight[p]);//0~1, 2.5~4.5 and 500~800
+			     if(Mjj>=150&&Mjj<500)th1[p]->Fill(Mjj,actualWeight[p]);//0~1, 2.5~4.5 and 500~800
 			     p++;
 		     }
 	     }
@@ -63,7 +63,7 @@ int Uncer_batch_sig(){
 	TString GenPhoton = "genphotonet>20 && ( (fabs(genphotoneta)<2.5&&fabs(genphotoneta)>1.566) || (fabs(genphotoneta)<1.4442) )";
 	TString GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
 	TString GenDr = "gendrjj>0.5 && gendrla1>0.7 && gendrla2>0.7 && gendrj1a>0.5 && gendrj2a>0.5 && gendrj1l>0.5 && gendrj2l>0.5 && gendrj1l2>0.5 && gendrj2l2>0.5";
-	TString GenControlRegion = "genMjj >150 && genMjj<400 && genZGmass>100";
+	TString GenControlRegion = "genMjj >150 && genMjj<500 && genZGmass>100";
 
 	TString LEPmu = "lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110";
 	TString LEPele = "lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110";
@@ -84,7 +84,7 @@ int Uncer_batch_sig(){
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 		}
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenControlRegion;
-		TString ControlRegion = "Mjj>150 && Mjj<400 && Mva>100";
+		TString ControlRegion = "Mjj>150 && Mjj<500 && Mva>100";
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";

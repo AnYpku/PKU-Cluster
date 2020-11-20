@@ -3,8 +3,8 @@ void run(TString sample,TString tag){
 	ofstream f1("./"+sample+"_jer_uncer"+tag+"CR.txt");
 	TFile*file;
 	if(sample.Contains("EWK"))
-		file = new TFile("./root/hist_"+sample+"_jer"+tag+"CR.root");
-        else file=new TFile("./root/hist_"+sample+"_jer"+tag+"CR.root");
+		file = new TFile("./hist_"+sample+"_jer"+tag+"CR.root");
+        else file=new TFile("./hist_"+sample+"_jer"+tag+"CR.root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");

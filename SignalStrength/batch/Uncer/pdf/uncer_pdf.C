@@ -28,9 +28,12 @@ void run(TString sample, TString tag){
 	for(int k=0;k<kk;k++){
             double error=0;
 	    double diff=0,sum=0;
+	    double factor=1;
             for(int j=0;j<num;j++){
+	       if(sample.Contains("ewk")) factor=h1[0]->Integral()/h1[j]->Integral();
                double center=h1[0]->GetBinContent(k+1);
-               diff=h1[j]->GetBinContent(k+1)-center;
+
+               diff=factor*h1[j]->GetBinContent(k+1)-center;
 	       sum+=pow(diff,2);
 	    }
 	    if(h1[0]->GetBinContent(k+1)!=0)

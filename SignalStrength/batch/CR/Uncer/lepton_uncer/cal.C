@@ -81,7 +81,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
         fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-outZA-EWK"+tag+".root");
-	Double_t mjj_bins[2]={150, 400};
+	Double_t mjj_bins[2]={150, 500};
 	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 	TString th1name[3];
 	for(int i=0;i<3;i++){

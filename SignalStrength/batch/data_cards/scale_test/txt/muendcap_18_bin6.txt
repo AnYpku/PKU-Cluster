@@ -1,46 +1,47 @@
 imax 1   number of channels
-jmax 7   number of processes-1
-kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+jmax 6   number of processes-1
+kmax 24  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap6
-observation 9.48
+observation 9.15
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
-bin	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6
-process	Sig	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
-process	0	1	2	3	4	5	6	7
-rate	3.44	3.78	2.06	0.00	0.00	0.00	0.00	0.19
+bin	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6	muendcap6
+process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
+process	0	1	2	3	4	5	6
+rate	3.39	3.19	2.43	0.00	0.00	0.00	0.14
 ------------
-lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015	1.015
-VBS_Stat_bin6_muendcap18	lnN	1.08	-	-	-	-	-	-	-
-QCD_Stat_bin6_muendcap18	lnN	-	1.39	-	-	-	-	-	-
-non_prompt_Stat_bin6_muendcap18	lnN	-	-	1.33	-	-	-	-	-
-TTA_Stat_bin6_muendcap18	lnN	-	-	-	1.00	-	-	-	-
-VV_Stat_bin6_muendcap18	lnN	-	-	-	-	1.00	-	-	-
-ST_Stat_bin6_muendcap18	lnN	-	-	-	-	-	1.00	-	-
-WA_Stat_bin6_muendcap18	lnN	-	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin6_muendcap18	lnN	-	-	-	-	-	-	-	1.35
+lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015
+VBS_Stat_bin6_muendcap18	lnN	1.08	-	-	-	-	-	-
+QCD_Stat_bin6_muendcap18	lnN	-	1.27	-	-	-	-	-
+non_prompt_Stat_bin6_muendcap18	lnN	-	-	1.30	-	-	-	-
+TTA_Stat_bin6_muendcap18	lnN	-	-	-	1.00	-	-	-
+VV_Stat_bin6_muendcap18	lnN	-	-	-	-	1.00	-	-
+ST_Stat_bin6_muendcap18	lnN	-	-	-	-	-	1.00	-
+ZA_SigOut_Stat_bin6_muendcap18	lnN	-	-	-	-	-	-	1.41
 Stat group = VBS_Stat_bin6_muendcap18 QCD_Stat_bin6_muendcap18 non_prompt_Stat_bin6_muendcap18 
-fake_muendcap18	lnN	-	-	1.27	-	-	-	-	-
-JES_18	lnN	1.11	1.38	-	1.27	1.00	1.00	1.00	1.12
-JER_18	lnN	1.01	1.14	-	1.01	1.00	1.00	1.00	1.01
+fake_muendcap18	lnN	-	-	1.26	-	-	-	-
+fake group = fake_muendcap18 
+JES_18	lnN	1.08	1.19	-	1.09	1.00	1.00	1.06
+JER_18	lnN	1.01	1.11	-	1.08	1.00	1.00	1.01
 JESR group = JES_18 JER_18
-pdf_EW	lnN	-	-	-	-	-	-	-	1.002
-pdf_QCD	lnN	-	1.03	-	-	-	-	-	-
-Scale_EW	lnN	-	-	-	-	-	-	-	1.10
-QCDZA_Scale_band1	lnN	-	1.04	-	-	-	-	-	-
-QCDZA_Scale_band2	lnN	-	1.13	-	-	-	-	-	-
-QCDZA_Scale_band3	lnN	-	1.17	-	-	-	-	-	-
-interf	lnN	1.02	-	-	-	-	-	-	-
-photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
-mu_eff	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
-mu_trigger_18	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02	1.02
+pdf_EW	lnN	-	-	-	-	-	-	1.003
+pdf_QCD	lnN	-	1.03	-	-	-	-	-
+Scale_EW	lnN	-	-	-	-	-	-	1.05
+Scale_QCD_band1	lnN	-	1.00	-	-	-	-	-
+Scale_QCD_band2	lnN	-	1.11	-	-	-	-	-
+Scale_QCD_band3	lnN	-	1.11	-	-	-	-	-
+interf	lnN	1.02	-	-	-	-	-	-
+theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD_band1 Scale_QCD_band2 Scale_QCD_band3 interf
+photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
+mu_eff	lnN	1.003	1.003	-	1.003	1.003	1.003	1.003
+mu_trigger_18	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
 muon group = mu_eff mu_trigger_18
-pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	1.1	-	-	-	-
-VV_xs	lnN	-	-	-	-	1.1	-	-	-
+pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	1.1	-	-	-
+VV_xs	lnN	-	-	-	-	1.1	-	-
 Others group = pileup ttgamma_xs VV_xs lumi_18 

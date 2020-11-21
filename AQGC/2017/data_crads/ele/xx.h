@@ -84,6 +84,8 @@ public :
    Double_t        jet2phi;
    Double_t        jet2e;
    Double_t        Mjj;
+   Double_t jet1puIdTight;
+   Double_t jet2puIdTight;
    Double_t        zepp;
    Double_t        deltaetajj;
    Double_t        delta_phi;
@@ -174,6 +176,8 @@ public :
    TBranch        *b_jet2phi;   //!
    TBranch        *b_jet2e;   //!
    TBranch        *b_Mjj;   //!
+   TBranch *b_jet1puIdTight;
+   TBranch *b_jet2puIdTight;
    TBranch        *b_zepp;   //!
    TBranch        *b_deltaetajj;   //!
    TBranch        *b_delta_phi;   //!
@@ -333,6 +337,8 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("jet2phi", &jet2phi, &b_jet2phi);
    fChain->SetBranchAddress("jet2e", &jet2e, &b_jet2e);
    fChain->SetBranchAddress("Mjj", &Mjj, &b_Mjj);
+   fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+   fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
    fChain->SetBranchAddress("zepp", &zepp, &b_zepp);
    fChain->SetBranchAddress("deltaetajj", &deltaetajj, &b_deltaetajj);
    fChain->SetBranchAddress("delta_phi", &delta_phi, &b_delta_phi);

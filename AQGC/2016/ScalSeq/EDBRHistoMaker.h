@@ -11,7 +11,8 @@
 #include "TChain.h"
 #include "math.h"
 #include "TLorentzVector.h"
-#include "RoccoR.C"
+#include "RoccoR.cc"
+#include "TRandom.h"
 //#include "get_rochester_scale.C"
 #define Pi 3.1415926
 using namespace std;
@@ -123,6 +124,7 @@ class EDBRHistoMaker {
 		Double_t ele1_reco_scale;
 		Double_t ele2_reco_scale;
 		Double_t photon_id_scale;
+		Double_t photon_veto_scale;
 		// for rochester correction
 		Int_t lep1_sign;
 		Int_t lep2_sign;
@@ -137,8 +139,6 @@ class EDBRHistoMaker {
 		Double_t muon2_id_scale;
 		Double_t muon1_iso_scale;
 		Double_t muon2_iso_scale;
-		Double_t muon1_track_scale;
-		Double_t muon2_track_scale;
 		Double_t muon_hlt_scale;
 		Double_t ele_hlt_scale;
 		Double_t drll;
@@ -148,6 +148,7 @@ class EDBRHistoMaker {
 		TBranch *b_ele1_reco_scale;   //!
 		TBranch *b_ele2_reco_scale;   //!
 		TBranch *b_photon_id_scale;   //!
+		TBranch *b_photon_veto_scale;   //!
 		TBranch *b_lep1_sign;   //!
 		TBranch *b_lep2_sign;   //!
 		TBranch *b_muon1_trackerLayers;   //!
@@ -158,8 +159,6 @@ class EDBRHistoMaker {
 		TBranch *b_muon2_id_scale;   //!
 		TBranch *b_muon1_iso_scale;   //!
 		TBranch *b_muon2_iso_scale;   //!
-		TBranch *b_muon1_track_scale;   //!
-		TBranch *b_muon2_track_scale;   //!
 		TBranch *b_muon_hlt_scale;   //!
 		TBranch *b_scalef;   //!
 		TBranch *b_pweight;   //!
@@ -272,7 +271,7 @@ class EDBRHistoMaker {
 		///lu
 		// fro rochester correction
 		RoccoR rc;
-		double get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1, double r2);
+		double get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1);
 
 
 		// The histograms
@@ -373,6 +372,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("ele1_reco_scale", &ele1_reco_scale, "ele1_reco_scale/D");
 	treename->Branch("ele2_reco_scale", &ele2_reco_scale, "ele2_reco_scale/D");
 	treename->Branch("photon_id_scale", &photon_id_scale, "photon_id_scale/D");
+	treename->Branch("photon_veto_scale", &photon_veto_scale, "photon_veto_scale/D");
 	treename->Branch("lep1_sign", &lep1_sign, "lep1_sign/I");
 	treename->Branch("lep2_sign", &lep2_sign, "lep2_sign/I");
 	treename->Branch("muon1_trackerLayers", &muon1_trackerLayers, "muon1_trackerLayers/I");
@@ -383,8 +383,6 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("muon2_id_scale", &muon2_id_scale, "muon2_id_scale/D");
 	treename->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
 	treename->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D");
-	treename->Branch("muon1_track_scale", &muon1_track_scale, "muon1_track_scale/D");
-	treename->Branch("muon2_track_scale", &muon2_track_scale, "muon2_track_scale/D");
 	treename->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
 	treename->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
 	treename->Branch("muon1_rochester", &muon1_rochester, "muon1_rochester/D");
@@ -397,6 +395,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
         fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
         fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
         fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+        fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
         fChain->SetBranchAddress("lep1_sign", &lep1_sign, &b_lep1_sign);
         fChain->SetBranchAddress("lep2_sign", &lep2_sign, &b_lep2_sign);
         fChain->SetBranchAddress("muon1_trackerLayers", &muon1_trackerLayers, &b_muon1_trackerLayers);
@@ -407,9 +406,6 @@ void EDBRHistoMaker::Init(TTree *tree) {
         fChain->SetBranchAddress("muon2_id_scale", &muon2_id_scale, &b_muon2_id_scale);
         fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
         fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
-        fChain->SetBranchAddress("muon1_track_scale", &muon1_track_scale, &b_muon1_track_scale);
-        fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
-        fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
 	fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
         fChain->SetBranchAddress("pweight", pweight, &b_pweight);
 	fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
@@ -493,18 +489,18 @@ EDBRHistoMaker::EDBRHistoMaker(TTree* tree, TFile* fileTMP, TH1F* hR1, std::stri
 	printAllHistos();
 }
 
-double EDBRHistoMaker::get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1, double r2){
+double EDBRHistoMaker::get_rochester_scale(bool isdata, double charge_temp, double pt, double eta, double phi, int nl, double genPt, double r1){
 	int charge = int(charge_temp/fabs(charge_temp));
 	// data correction
 	if(isdata) return rc.kScaleDT(charge, pt, eta, phi, 0, 0);
 
 	// MC with genPt avalible
 	if((!isdata) && genPt>0&&fabs(genPt-pt)/pt<0.1)
-        return rc.kScaleFromGenMC(charge, pt, eta, phi, nl, genPt, r1, 0, 0);
+        return rc.kSpreadMC(charge, pt, eta, phi, genPt, 0, 0);
 
 	// MC without genPT avalible
 	if((!isdata) && !(genPt>0&&fabs(genPt-pt)/pt<0.1))
-        return rc.kScaleAndSmearMC(charge, pt, eta, phi, nl, r1, r2, 0, 0);
+        return rc.kSmearMC(charge, pt, eta, phi, nl, r1, 0, 0);
 }
 EDBRHistoMaker::~EDBRHistoMaker() {
 	if (!fChain)
@@ -639,8 +635,8 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 		nbytes += nb;
 		//rochester correction
 		if(lep==13){
-			muon1_rochester=get_rochester_scale(true, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1, r2);
-			muon2_rochester=get_rochester_scale(true, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1, r2);
+			muon1_rochester=get_rochester_scale(true, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1);
+			muon2_rochester=get_rochester_scale(true, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1);
 			ptlep1*=muon1_rochester;
 			ptlep2*=muon2_rochester;
 
@@ -777,8 +773,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 
 		//rochester correction
 		if(lep==13){
-			muon1_rochester=get_rochester_scale(false, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1, r2);
-			muon2_rochester=get_rochester_scale(false, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1, r2);
+			muon1_rochester=get_rochester_scale(false, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1);
+			muon2_rochester=get_rochester_scale(false, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1);
 			ptlep1*=muon1_rochester;
 			ptlep2*=muon2_rochester;
 
@@ -795,7 +791,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			nn = 1;
 		else
 			nn = -1;
-		actualWeight = lumiWeight * pileupWeight * scalef * prefWeight;
+		actualWeight = pileupWeight * scalef * prefWeight*photon_id_scale*photon_veto_scale;
 		detajj = fabs(jet1eta - jet2eta);
 		if (fabs(jet1phi-jet2phi)>Pi) drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*Pi-fabs(jet1phi-jet2phi))*(2*Pi-fabs(jet1phi-jet2phi)));
                 else drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)));
@@ -836,8 +832,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
                         isnotwets = 1;
                 }
 		if(drla==10) drla=-10;	if(drla2==10) drla2=-10;
-		if(lep==13) actualWeight = actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon1_track_scale*muon2_track_scale*photon_id_scale;
-		if(lep==11) actualWeight = actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale;
+		if(lep==13) actualWeight = actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
+		if(lep==11) actualWeight = actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
                 if(filename.Contains("plj")) {
                      actualWeight = scalef;
                 }

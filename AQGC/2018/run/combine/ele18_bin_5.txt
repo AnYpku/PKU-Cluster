@@ -4,7 +4,7 @@ kmax 18  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin ele5
-observation 1.60
+observation 1.17
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,23 +13,23 @@ observation 1.60
 bin	ele5	ele5	ele5	ele5
 process	sig	QCD	non_prompt	others
 process	0	1	2	3
-rate	0.48	0.39	0.20	0.53
+rate	0.48	0.00	0.19	0.52
 ------------
-lumi	lnN	1.025	1.025	-	1.025	#lumi
-fake_ele_18	lnN	-	1.50	-	-	#0. uncertainty on ele_18
+lumi18	lnN	1.015	1.015	-	1.015	#lumi
+fake_ele_18	lnN	-	1.45	-	-	#0. uncertainty on ele_18
 VBS_stat_ele_18_bin_5	lnN	1.22	-	-	-
-QCD_stat_ele_18_bin_5	lnN	-	2.00	-	-
+QCD_stat_ele_18_bin_5	lnN	-	1.00	-	-
 non_prompt_stat_ele_18_bin_5	lnN	-	-	2.00	-
 others_stat_ele_18_bin_5	lnN	-	-	-	1.77
-JES_18	lnN	1.03	4.00	-	1.03
-JER_18	lnN	1.03	3.00	-	1.03
+JES_18	lnN	1.03	1.65	-	1.38
+JER_18	lnN	1.03	2.37	-	1.18
 QCDZA_pdf	lnN	-	1.03	-	-
-QCDZA_scale	lnN	-	1.39	-	-
-signal_pdf	lnN	1.03	-	-	-
+QCDZA_scale	lnN	-	1.57	-	-
+signal_pdf	lnN	1.01	-	-	-
 signal_scale	lnN	1.14	-	-	-
-ele18_trigger	lnN	1.02	1.02	-	1.02
-ele18_efficiency	lnN	1.02	1.02	-	1.02
-pileup	lnN	1.001	1.001	-	1.001
-photon_id_18	lnN	1.03	1.03	-	1.03
-interference	lnN	1.01	-	-	-
+ele_ID	lnN	1.08	1.08	-	1.08
+ele_reco	lnN	1.01	1.01	-	1.01
+pileup	lnN	1.01	1.01	-	1.01
+photon_id	lnN	1.03	1.03	-	1.03
+interference	lnN	1.000	-	-	-
 others_xs	lnN	-	-	-	1.1

@@ -33,6 +33,7 @@ public :
 
    // Declaration of leaf types
    Int_t           event;
+   Int_t           size;
    Int_t           run;
    Int_t           ls;
    Int_t           nVtx;
@@ -266,6 +267,7 @@ public :
 
    // List of branches
    TBranch        *b_event;   //!
+   TBranch        *b_size;   //!
    TBranch        *b_run;   //!
    TBranch        *b_ls;   //!
    TBranch        *b_nVtx;   //!
@@ -606,6 +608,7 @@ void xx::Init(TTree *tree)
 	// lep and photon scales
 
 	fChain->SetBranchAddress("event", &event, &b_event);
+	fChain->SetBranchAddress("size", &size, &b_size);
 	fChain->SetBranchAddress("run", &run, &b_run);
 	fChain->SetBranchAddress("ls", &ls, &b_ls);
 	fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);

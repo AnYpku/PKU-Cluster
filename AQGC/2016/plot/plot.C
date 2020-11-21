@@ -32,12 +32,10 @@ void cmsLumi(bool channel) //0 for el
 	latex.DrawLatex(0.76,0.96,Form("35.9 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 
-
-
 void aa(string a, double limit){
 //	setTDRStyle();
-	string mu_file="/afs/cern.ch/user/y/yian/work/PKU-Cluster/AQGC/2016/muon/paramsets_"+a+"_mu.txt";
-	string ele_file="/afs/cern.ch/user/y/yian/work/PKU-Cluster/AQGC/2016/ele/paramsets_"+a+"_el.txt";
+	string mu_file="/home/pku/anying/cms/PKU-Cluster/AQGC/2016/muon/paramsets_"+a+"_mu.txt";
+	string ele_file="/home/pku/anying/cms/PKU-Cluster/AQGC/2016/ele/paramsets_"+a+"_el.txt";
 	ifstream infile_mu;
 	ifstream infile_ele;
         infile_mu.open(mu_file.c_str());
@@ -70,10 +68,10 @@ void aa(string a, double limit){
 	}
 
 
-	TFile *file1 = new TFile("out_aqgc_mu.root","R"); 
-	TH1D* h1= (TH1D*)file1->Get("Muon16");
+	TFile *file1 = new TFile("out_aqgc_mu16.root","R"); 
+	TH1D* h1= (TH1D*)file1->Get("Muon");
 	h1->Sumw2();
-	TH1D* h2= (TH1D*)file1->Get("ZA_EWK");
+	TH1D* h2= (TH1D*)file1->Get("ZA-EWK");
 	h2->Sumw2();
 	TH1D* h3= (TH1D*)file1->Get("plj");
 	h3->Sumw2();
@@ -82,18 +80,16 @@ void aa(string a, double limit){
 	TH1D* h5= (TH1D*)file1->Get("ZA");
 	h5->Sumw2();
 	TH1D* h6= (TH1D*)h2->Clone();
-//	TH1D* h6= (TH1D*)file1->Get("ZA_EWK");
 	h6->Sumw2();
 
-	TFile *file2 = new TFile("out_aqgc_ele.root","R");
+	TFile *file2 = new TFile("out_aqgc_ele16.root","R");
         file2->cd("");
-        TH1D* h11= (TH1D*)file2->Get("Ele16");
-        TH1D* h21= (TH1D*)file2->Get("ZA_EWK");
+        TH1D* h11= (TH1D*)file2->Get("Ele");
+        TH1D* h21= (TH1D*)file2->Get("ZA-EWK");
         TH1D* h31= (TH1D*)file2->Get("plj");
         TH1D* h41= (TH1D*)file2->Get("bkg");
         TH1D* h51= (TH1D*)file2->Get("ZA");
 	TH1D* h61= (TH1D*)h21->Clone();
-//	TH1D* h61= (TH1D*)file2->Get("ZA_EWK");
         h11->Sumw2();
         h21->Sumw2();
         h31->Sumw2();
@@ -121,21 +117,21 @@ void aa(string a, double limit){
 	h1->SetMarkerSize(1.3);
 
 	h2->SetMarkerStyle(21);
-	h2->SetMarkerColor(kYellow);
-	h2->SetFillColor(kYellow);
-	h2->SetLineColor(kYellow);
+	h2->SetMarkerColor(kRed-7);
+	h2->SetFillColor(kRed-7);
+	h2->SetLineColor(kRed-7);
 
-	h3->SetFillColor(7);
-	h3->SetMarkerColor(7);
-	h3->SetLineColor(7);
+	h3->SetFillColor(kYellow);
+	h3->SetMarkerColor(kYellow);
+	h3->SetLineColor(kYellow);
 
-	h4->SetFillColor(kGreen+1);
-	h4->SetMarkerColor(kGreen+1);
-	h4->SetLineColor(kGreen+1);
+	h4->SetFillColor(kCyan);
+	h4->SetMarkerColor(kCyan);
+	h4->SetLineColor(kCyan);
 
-	h5->SetFillColor(6);
-	h5->SetMarkerColor(6);
-	h5->SetLineColor(6);
+	h5->SetFillColor(kBlue-7);
+	h5->SetMarkerColor(kBlue-7);
+	h5->SetLineColor(kBlue-7);
 
 	h6->SetLineWidth(2);
 	h6->SetLineColor(kRed);
@@ -147,37 +143,25 @@ void aa(string a, double limit){
 	Mstack->Add(h5);
 	Mstack->Add(h2);
 
-
-
-	gStyle->SetPadBorderMode(0);
 	gStyle->SetOptStat(0);
-	//      gStyle->SetPadGridX(1);
-	//      gStyle->SetPadGridY(1);
-	gStyle->SetPadTickX(1);
-	gStyle->SetPadTickY(1);
-	gStyle->SetPadTickX(1);
-	gStyle->SetPadTickY(1);
-	gStyle->SetAxisColor(1, "XYZ");
-	gStyle->SetStripDecimals(kTRUE);
-	gStyle->SetTickLength(0.03, "XYZ");
-	gStyle->SetNdivisions(510, "XYZ");
-
 	TCanvas *c01 = new TCanvas("c01","",800,600);
-	c01->SetLogy();
 	TPad* fPad1 = new TPad("pad1", "pad1", 0.00, 0.00, 0.99, 0.99);
-	fPad1->SetLogy();
+//	c01->SetLogy();
+//        c01->SetTicky();
         fPad1->Draw();
         fPad1->cd();
-	//c01->SetLogx();
+        fPad1->SetLogy();
+        fPad1->SetTicky();
+        fPad1->SetGridx();
 
 	Mstack->SetMaximum(float(4.0)*Mstack->GetMaximum());
 	Mstack->SetMinimum(0.1);
-	Mstack->Draw("bar HIST");
+	Mstack->Draw("HIST");
 	//     Mstack->Draw("EP same");
 	Mstack->GetXaxis()->SetTitle("m_{Z#gamma} [GeV] ");
 	Mstack->GetYaxis()->SetTitle("Events / bin");
 	Mstack->GetXaxis()->SetTitleSize(0.05);
-	Mstack->GetXaxis()->SetTitleOffset(1.05);
+	Mstack->GetXaxis()->SetTitleOffset(0.85);
 	Mstack->GetYaxis()->SetTitleSize(0.05);
 	Mstack->GetYaxis()->SetTitleOffset(1.05);
 	//Mstack->GetXaxis()->CenterTitle();
@@ -203,12 +187,12 @@ void aa(string a, double limit){
                 {yerror_u[i]=0.;yerror_d[i]=0.;}
         }
         TGraphAsymmErrors* gr = new TGraphAsymmErrors(5, x, y, xerror_l,xerror_r, yerror_d, yerror_u);
-//        gr->SetFillColor(1);
-        gr->SetFillStyle(3008);
+        gr->SetFillColor(1);
+        gr->SetFillStyle(3005);
         gr->Draw("SAME 2");
 
 	h6->Draw("hist same");  // aQGC
-//	h1->Draw("hist P0 same");  // 0 for Zero data
+//	h1->Draw("hist PE same");  // 0 for Zero data
 
 	const double alpha = 1 - 0.6827;
 	TGraphAsymmErrors * g = new TGraphAsymmErrors(h1);
@@ -228,6 +212,7 @@ void aa(string a, double limit){
 
 	TLegend *l1 = new TLegend(0.4,0.6,0.6,0.9);
 	TLegend *l2 = new TLegend(0.6,0.6,0.85,0.85);
+
 	//l1->SetBorderSize(2);
 	l1->SetFillColor(10);
 	l1->SetTextSize(0.04);
@@ -267,7 +252,6 @@ void aa(string a, double limit){
 	l2->Draw("same");
 
 //	cmsLumi(1);
-	CMS_lumi(fPad1, 4, 0, "35.9");	
 	char buffer1[256];
         sprintf(buffer1, "ZG_%s.png",a.c_str());
 	char buffer2[256];
@@ -277,6 +261,11 @@ void aa(string a, double limit){
 
 //	c01->SaveAs(buffer1);
 //	c01->SaveAs(buffer2);
+
+	CMS_lumi(fPad1, 4, 0, "35.9");	
+        fPad1->SetTicky();
+        fPad1->SetTickx();
+        fPad1->Update();
 	c01->SaveAs(buffer3);
 
 }

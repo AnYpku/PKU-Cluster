@@ -47,16 +47,16 @@ text2workspace.py -m 125 all.txt -o os_mll_${operator}.root -P HiggsAnalysis.Com
 
 combine os_mll_${operator}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100 --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n nominal -m 125
 
-combine os_mll_${operator}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit1_${operator} -m 125 --saveWorkspace
+#combine os_mll_${operator}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit1_${operator} -m 125 --saveWorkspace
 
-combine os_mll_${operator}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit2_${operator} -m 125 --saveWorkspace
+#combine os_mll_${operator}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit2_${operator} -m 125 --saveWorkspace
 
-combine  -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit1_${operator}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP1 --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n stat -m 125
+#combine  -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit1_${operator}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP1 --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n stat -m 125
 
-combine -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit2_${operator}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -m 125 -n MCstat 
+#combine -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit2_${operator}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -m 125 -n MCstat 
 
 mv higgsCombinenominal.MultiDimFit.mH125.root higgsCombinenominal.MultiDimFit.mH125.expected.${operator}.root
-mv higgsCombineMCstat.MultiDimFit.mH125.root higgsCombineMCstat.MultiDimFit.mH125.expected.${operator}.root
-mv higgsCombinestat.MultiDimFit.mH125.root higgsCombinestat.MultiDimFit.mH125.expected.${operator}.root
+#mv higgsCombineMCstat.MultiDimFit.mH125.root higgsCombineMCstat.MultiDimFit.mH125.expected.${operator}.root
+#mv higgsCombinestat.MultiDimFit.mH125.root higgsCombinestat.MultiDimFit.mH125.expected.${operator}.root
 
 done

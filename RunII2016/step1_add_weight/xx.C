@@ -18,8 +18,10 @@ void xx::Loop()
         bool LEPmu,LEPele,JET,PHOTON,SignalRegion;
         int cut0=0,cut1=0;
 
-	Long64_t npp = fChain->GetEntries("theWeight>0.");
-	Long64_t nmm = fChain->GetEntries("theWeight<0.");
+//	Long64_t npp = fChain->GetEntries("theWeight>0.");
+//	Long64_t nmm = fChain->GetEntries("theWeight<0.");
+	Long64_t npp=fChain->GetEntries("theWeight>0 && size>700");
+	Long64_t nmm=fChain->GetEntries("theWeight<0 && size>700");
 	std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
 	TFile * input13 = new TFile ("./pu_calc/puweight.root");
 	TH1* h13 = NULL;
@@ -98,7 +100,10 @@ void xx::Loop()
 		if(m_dataset.Contains("ZZ")){ scalef=1000.*16.523/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("EWK")){ scalef=1000.*0.1097/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		if(m_dataset.Contains("aQGC")){ scalef=1000.*1.411/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("aQGC")){ 
+			scalef=1000.*1.411/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;
+                        if(size<702) continue;
+		}
 
 		if(m_dataset.Contains("Mu")==0&&m_dataset.Contains("Ele")==0){	
 			pileupWeight=h13->GetBinContent(h13->GetXaxis()->FindBin(npT));
@@ -127,7 +132,7 @@ void xx::Loop()
 		}
 		//////  lep and photon scacles
 
-		if(jentry%100000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu1<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<"scalef "<<scalef<<" "<<jentry<<" "<<fChain->GetEntries()<<endl;
+		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu1<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<"scalef "<<scalef<<" "<<jentry<<" "<<fChain->GetEntries()<<endl;
 
                 LEPmu = lep==13 && (HLT_Mu2>0 || HLT_Mu1>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110;
                 LEPele = lep==11 && ( HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70.&&massVlep<110;
@@ -135,7 +140,7 @@ void xx::Loop()
                 PHOTON= photonet>20 && (abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5));
                 JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
-                if( !( (LEPmu||LEPele)  )  )
+                if( !( (LEPmu||LEPele) && PHOTON  )  )
                       continue;
 		ExTree->Fill();
 	}

@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 3   number of processes-1
-kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+kmax 21  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin ele2
-observation 18.82
+observation 19.32
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,30 +13,26 @@ observation 18.82
 bin	ele2	ele2	ele2	ele2
 process	sig	QCD	non_prompt	others
 process	0	1	2	3
-rate	5.25	12.29	0.64	0.64
+rate	5.61	12.46	0.77	0.48
 ------------
-lumi	lnN	1.025	1.025	-	1.025	#lumi
-fake_ele_RunII	lnN	-	1.36	-	-	#0. uncertainty on ele_RunII
+lumi16	lnN	1.006	1.006	-	1.006	#lumi
+lumi17	lnN	1.005	1.005	-	1.005	#lumi
+lumi18	lnN	1.004	1.004	-	1.004	#lumi
+fake_ele_RunII	lnN	-	1.43	-	-	#0. uncertainty on ele_RunII
 VBS_stat_ele_RunII_bin_2	lnN	1.06	-	-	-
-QCD_stat_ele_RunII_bin_2	lnN	-	1.20	-	-
-non_prompt_stat_ele_RunII_bin_2	lnN	-	-	1.52	-
-others_stat_ele_RunII_bin_2	lnN	-	-	-	1.44
-JES_RunII	lnN	1.03	1.27	-	1.03
-JER_RunII	lnN	1.01	1.09	-	1.01
-QCDZA_pdf	lnN	-	1.03	-	-
-QCDZA_scale	lnN	-	1.17	-	-
+QCD_stat_ele_RunII_bin_2	lnN	-	1.14	-	-
+non_prompt_stat_ele_RunII_bin_2	lnN	-	-	1.47	-
+others_stat_ele_RunII_bin_2	lnN	-	-	-	1.63
+JES_RunII	lnN	1.03	1.18	-	1.28
+JER_RunII	lnN	1.01	1.15	-	1.26
+QCDZA_pdf	lnN	-	1.04	-	-
+QCDZA_scale	lnN	-	1.14	-	-
 signal_pdf	lnN	1.01	-	-	-
-signal_scale	lnN	1.08	-	-	-
-ele16_trigger	lnN	1.02	1.02	-	1.02
-ele17_trigger	lnN	1.02	1.02	-	1.02
-ele18_trigger	lnN	1.02	1.02	-	1.02
-ele16_efficiency	lnN	1.023	1.023	-	1.023
-ele17_efficiency	lnN	1.023	1.023	-	1.023
-ele18_efficiency	lnN	1.023	1.023	-	1.023
-pileup	lnN	1.001	1.001	-	1.001
-photon_id_16	lnN	1.03	1.03	-	1.03
-photon_id_17	lnN	1.03	1.03	-	1.03
-photon_id_18	lnN	1.03	1.03	-	1.03
-interference	lnN	1.02	-	-	-
+signal_scale	lnN	1.09	-	-	-
+ele_ID	lnN	1.08	1.08	-	1.08
+ele_reco	lnN	1.01	1.01	-	1.01
+pileup	lnN	1.01	1.01	-	1.01
+photon_id	lnN	1.03	1.03	-	1.03
+interference	lnN	1.05	-	-	-
 others_xs	lnN	-	-	-	1.1
 l1prefiring	lnN	1.02	1.02	-	1.02

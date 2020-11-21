@@ -7,8 +7,8 @@ import re
 import ROOT
 from ROOT import *
 
-input_filename_e = '/afs/cern.ch/user/y/yian/work/PKU-Cluster/AQGC/2018/ele/paramsets_'+sys.argv[1]+'_el.txt'
-input_filename_m = '/afs/cern.ch/user/y/yian/work/PKU-Cluster/AQGC/2018/muon/paramsets_'+sys.argv[1]+'_mu.txt'
+input_filename_e = '/home/pku/anying/cms/PKU-Cluster/AQGC/2018/ele/paramsets_'+sys.argv[1]+'_el.txt'
+input_filename_m = '/home/pku/anying/cms/PKU-Cluster/AQGC/2018/muon/paramsets_'+sys.argv[1]+'_mu.txt'
 input_file_e = open(input_filename_e, "r")
 input_file_m = open(input_filename_m, "r")
 

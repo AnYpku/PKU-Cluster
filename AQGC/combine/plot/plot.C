@@ -64,7 +64,7 @@ void aa(string a, double limit){
 	{
 		infile_mu >>aa>>bb;
 		infile_ele >>cc>>dd;
-		cout<<aa<<" "<<bb<<" "<<cc<<" "<<dd<<endl; 
+//		cout<<aa<<" "<<bb<<" "<<cc<<" "<<dd<<endl; 
 		mu_a2[5-count]=aa;
 		mu_a1[5-count]=bb;
 		ele_a2[5-count]=cc;
@@ -113,7 +113,7 @@ void aa(string a, double limit){
 	h3->Add(h31);//plj
 	h4->Add(h41);//other bkg
 	h5->Add(h51);//QCD ZA
-
+        cout<<"data yields "<<h1->GetSumOfWeights()<<endl;
 	for(Int_t i=0;i<5;i++){
 		h6->SetBinContent(i+1,weight_mu[i]*h6->GetBinContent(i+1));
 		h61->SetBinContent(i+1,weight_ele[i]*h61->GetBinContent(i+1));
@@ -153,7 +153,11 @@ void aa(string a, double limit){
 	Mstack->Add(h3);
 	Mstack->Add(h5);
 	Mstack->Add(h2);
-
+        TH1D*hist=(TH1D*)h2->Clone();
+        hist->Add(h3);
+        hist->Add(h4);
+        hist->Add(h5);
+	cout<<"MC yields "<<hist->GetSum()<<endl;
 	gStyle->SetOptStat(0);
 	TCanvas *c01 = new TCanvas("c01","",800,600);
 	c01->SetLogy();
@@ -205,7 +209,7 @@ void aa(string a, double limit){
 	gr->Draw("SAME 2");
 
 	h6->Draw("hist same");  // aQGC
-	//	h1->Draw("hist P0 same");  // 0 for Zero data
+//		h1->Draw(" PE same");  // 0 for Zero data
 
 	const double alpha = 1 - 0.6827;
 	TGraphAsymmErrors * g = new TGraphAsymmErrors(h1);

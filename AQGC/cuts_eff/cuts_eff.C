@@ -16,14 +16,14 @@ void run(/*double medium_barrel,double medium_endcap,*/TString cut1,TString tag,
 	cout<<tag<<":"<<endl;
 	TString dir;
 	if(tag.Contains("16")==0)
-		dir="/eos/user/y/yian/"+tag+"cutla/";
-	else    dir="/eos/user/y/yian/"+tag+"legacy/";
+		dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
+	else    dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
 
-	TString filename = isEW? dir+"outZA-EWK.root": dir+"cutlep-outZA.root";
+	TString filename = isEW? dir+"outZA-EWK"+tag+".root": dir+"cutlep-outZA"+tag+".root";
 
         TFile*file=new TFile(filename);
 
-	TTree*tree=(TTree*)file->Get("demo");
+	TTree*tree=(TTree*)file->Get("ZPKUCandidates");
         double photon_pt[6],photon_eta[6];double photon_hoe[6],photon_sieie[6], photon_chiso[6],photon_nhiso[6],photon_phoiso[6]; bool photon_pev[6];
         double scalef,pileupWeight,prefWeight;
 	double jet1pt, jet2pt, jet1eta, jet2eta, Mjj; 
@@ -283,7 +283,7 @@ void run(/*double medium_barrel,double medium_endcap,*/TString cut1,TString tag,
 
 }
 int cuts_eff(){
-	TString LEPmu = "lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && (HLT_Mu1>0||HLT_Mu2>0 || HLT_Mu3>0)";// && (jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) && Mjj>500. && fabs(jet1eta-jet2eta)>2.5";
+	TString LEPmu = "lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && (HLT_Mu1>0||HLT_Mu2>0)";// && (jet1pt>30 && jet2pt>30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7) && Mjj>500. && fabs(jet1eta-jet2eta)>2.5";
 	TString LEPele = "lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110 && (HLT_Ele1 >0 || HLT_Ele2 >0) ";
 	TString LEP = "("+LEPmu+")||("+LEPele+")";
 //	TString LEP = "("+LEPele+")";
@@ -296,14 +296,14 @@ int cuts_eff(){
 	//}
 	
 	//QCD samples
-//	run(LEP,"2017", 30488043, 41.52, false);
-//	run(LEP,"2016", 20967964, 35.86, false);
-//	run(LEP,"2018", 13946364, 58.7, false);
+//	run(LEP,"17", 30343408, 41.52, false);
+//	run(LEP,"16", 20967546, 35.86, false);
+	run(LEP,"18", 33805459, 58.7, false);
 	
 	//EWK samples
-	run(LEP,"2017", 299973, 41.52, true);
-	run(LEP,"2018", 287399, 58.7, true);
-        run(LEP,"2016", 299991, 35.86, true);
+//	run(LEP,"17", 299973, 41.52, true);
+//	run(LEP,"18", 287399, 58.7, true);
+//      run(LEP,"16", 299991, 35.86, true);
 	
 	return 1;
 }

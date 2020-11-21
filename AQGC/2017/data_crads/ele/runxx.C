@@ -4,7 +4,7 @@
 using namespace std;
 
 void runxx(TString name) {
-	TString dir = "/home/pku/anying/cms/PKU-Cluster/AQGC/2017/ScalSeq/output-slimmed-rootfiles/";
+	TString dir = "/home/pku/anying/cms/PKU-Cluster/AQGC/2017/ScalSeq/output-slimmed-rootfiles/puID/";
 	TFile*file;
 	if(name.Contains("plj"))file=new TFile(dir+"optimal_aqgc_"+name+"17"+"_weight.root");
 	else file=new TFile(dir+"optimal_aqgc_"+name+"17.root");

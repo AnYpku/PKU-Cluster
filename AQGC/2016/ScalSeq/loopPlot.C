@@ -11,7 +11,7 @@
 #include "EDBRHistoPlotter.h"
 #include "test.C"
 #include "CMSTDRStyle.h"
-#include "RoccoR.C"
+#include "RoccoR.cc"
 #include "Scale_jet_with_fakerate.C"
 #include "TH2.h"
 void loopPlot() {
@@ -37,10 +37,10 @@ void loopPlot() {
 	/// Path to wherever the files with the trees are. 
 //	std::string pathToTrees = "/data/pku/home/anying/cms/file_in_cms/cutLEP/";
 //	std::string pathToTrees = "/eos/user/y/yian/2016legacy/";
-	std::string pathToTrees = "/eos/user/y/yian/2016cutla/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2016/";
 	std::string outputDir = "./fig-output/";
 	
-	RoccoR  rc("rcdata.2016.v3");
+	RoccoR  rc("./RoccoR2016.txt");
         /// file for scale factors
 
 // Setup names of data files for trees.
@@ -53,14 +53,14 @@ void loopPlot() {
 		fData.push_back(pathToTrees + "cutla-outD" + dataLabels[ii] + ".root");
 	}
 // set mc imformation
-		const int nMC = 6;
+		const int nMC = 5;
 		std::cout << "set data imformation, we have " << nMC << "mc file"
 				<< std::endl;
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets","TTJets","ZA" };
-		std::string mcLabels[nMC] = {"ST", "TTA", "VV","WA", 
-                                             "plj_weight", "ZA_legacy"};
-		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,1,lumiValue};
+		std::string mcLabels[nMC] = {"ST16", "TTA16", "VV16", 
+                                             "plj16_weight", "ZA16"};
+		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,1,lumiValue};
 		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
@@ -75,7 +75,7 @@ void loopPlot() {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 			<< std::endl;
-	std::string mcLabelsSig[nMCSig] = { "ZA-EWK"};
+	std::string mcLabelsSig[nMCSig] = { "ZA-EWK16"};
 	double kFactorsSig_array[nMCSig] = { 1 };
 	std::vector < std::string > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
@@ -117,11 +117,11 @@ void loopPlot() {
 		std::cout << "retrieve "<<i<<"th data file" << std::endl;
 		TFile *fileData = TFile::Open(fData.at(i).c_str());
 		std::cout << "retrieve tree of data file" << std::endl;
-		TTree *treeData = (TTree*) fileData->Get("demo");
+		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
 //		std::cout<<"OK"<<std::endl;
 		TFile *fileMC = TFile::Open(fMC.at(i).c_str());
 		TTree *treeMC;
-		treeMC = (TTree*) fileMC->Get("demo");
+		treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (dopileupreweight) {
 			hisRatio = test(treeData, treeMC);
@@ -155,13 +155,13 @@ void loopPlot() {
 			TFile *fileMC = TFile::Open(fMC.at(i).c_str());
 			std::cout << "retrieve tree of mc file" << std::endl;
 			TTree *treeMC; 
-//			treeMC= (TTree*) fileMC->Get("demo");
+//			treeMC= (TTree*) fileMC->Get("ZPKUCandidates");
 			TString name = fMC.at(i);
 			cout<<name<<endl;
 			if(name.Contains("pweight")==1)  
 				treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 			else
-				treeMC = (TTree*) fileMC->Get("demo");
+				treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMC, fileMC,
 					hisRatio, out_buffer, &rc);
 			maker->setUnitaryWeights(false);
@@ -191,7 +191,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i).c_str());
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("demo");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
                         std::cout<<"OK1"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer, &rc);

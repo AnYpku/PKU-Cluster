@@ -8,7 +8,9 @@ using namespace std;
 
 TH1D* hist_1d(TString filename){
 
-	TString file = "./optimal_aqgc_"+filename+".root";
+	TString file;
+	if(filename.Contains("plj")==0) file= "./optimal_aqgc_"+filename+"18.root";
+	else file= "./optimal_aqgc_"+filename+"18_weight.root";
 	TFile* f1 = TFile::Open(file);
 
 	TTree* t = (TTree*)f1->Get("outtree");
@@ -23,13 +25,14 @@ TH1D* hist_1d(TString filename){
 	t->SetBranchAddress("ZGmass", &ZGmass);
 	t->SetBranchAddress("detajj", &detajj);
 	t->SetBranchAddress("actualWeight", &actualWeight);
-        const double lumi=41.52;
+        const double lumi=58.7;
 	Double_t mva_bins[6]={150,400,600,800,1000,2000};
 	TH1D* th2 = new TH1D(filename,"th2",5,mva_bins);
 	th2->Sumw2();
 	for(Int_t i=0; i<t->GetEntries();i++)
 	{
 		t->GetEntry(i);
+                if(ZGmass>2000) ZGmass=1999;
                 if(filename.Contains("plj")==0 && filename.Contains("Muon")==0&&filename.Contains("Ele")==0)
 			actualWeight = actualWeight*lumi;
 		if(lep==13)
@@ -40,12 +43,11 @@ TH1D* hist_1d(TString filename){
 }
 
 int d_hist_mu(){
-	TFile* f1=new TFile("out_aqgc_mu.root","RECREATE");
+	TFile* f1=new TFile("out_aqgc_mu18.root","RECREATE");
 
 	TH1D* h1= hist_1d("bkg");
 	TH1D* h2= hist_1d("ZA");
 	TH1D* h3= hist_1d("plj");
-//	TH1D* h4= hist_1d("ZA_aQGC");
 	TH1D* h5= hist_1d("ZA-EWK");
 	TH1D* h6= hist_1d("Muon");
 	TH1D* h7= hist_1d("Ele");
@@ -58,5 +60,5 @@ int d_hist_mu(){
 	h6->Write();
 	h7->Write();
 	f1->Close();
-return 1;
+	return 0;
 }

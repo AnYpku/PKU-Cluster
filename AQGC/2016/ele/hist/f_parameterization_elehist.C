@@ -19,7 +19,7 @@ using namespace std;
 void fX0_parameterization_elehist(int index){
 
 //	const TString InData_New = "./cutla-";
-	const TString InData_New = "/home/pku/anying/cms/rootfiles/2016/cutlaj-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/2016/cutla-";
 
 	// Specify event selection cuts:
 	// Create output ROOT file:
@@ -45,8 +45,9 @@ void fX0_parameterization_elehist(int index){
 	fout = new TFile("hist_ele_"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
-	f_file =  new TFile(InData_New+"outZA_aQGC16.root");
-	TTree* treef = (TTree*) f_file->Get("demo");
+	f_file =  new TFile(InData_New+"outZA_aQGC16_new.root");
+	TTree* treef = (TTree*) f_file->Get("ZPKUCandidates");
+//	TTree* treef = (TTree*) f_file->Get("demo");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
 	Double_t        Mva,Mjj;  
@@ -57,6 +58,7 @@ void fX0_parameterization_elehist(int index){
 	Double_t	jet1eta,jet1pt,etalep1,ptlep1;
 	Double_t	jet2eta,jet2pt,etalep2,ptlep2;
 	Double_t        photon_id_scale;
+	Double_t        photon_veto_scale;
         Double_t        ele1_id_scale;
         Double_t        ele2_id_scale;
         Double_t        ele1_reco_scale;
@@ -68,7 +70,6 @@ void fX0_parameterization_elehist(int index){
         Double_t        lumiWeight;
         Double_t        scalef;
         Double_t        pileupWeight;
-        Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("Mva",&Mva);
 	treef->SetBranchAddress("HLT_Ele2",&HLT_Ele2);
@@ -94,6 +95,7 @@ void fX0_parameterization_elehist(int index){
 	treef->SetBranchAddress("jet2pt",&jet2pt);
 	treef->SetBranchAddress("Mjj",&Mjj);
 	treef->SetBranchAddress("photon_id_scale", &photon_id_scale);
+	treef->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
         treef->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
         treef->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
         treef->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
@@ -149,8 +151,6 @@ void fX0_parameterization_elehist(int index){
 			if( !(lep == 11 && (HLT_Ele2 >0 || HLT_Ele1 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(  (abs(photoneta)<1.4442)  || (abs(photoneta)>1.566&&abs(photoneta)<2.5)  )   )  )
                         continue;
                         if(Mva>2e4) Mva=1999;
-			if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
-			if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
 			Double_t weight= pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*prefWeight;
 //                        cout<<"scalef"<<scalef<<"; weight"<<weight<<endl;
 //			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;

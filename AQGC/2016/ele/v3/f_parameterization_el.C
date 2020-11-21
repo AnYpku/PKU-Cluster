@@ -18,7 +18,7 @@
 using namespace std;
 void fX0_parameterization_el(int index){
 
-	const TString InData_New = "/home/pku/anying/cms/rootfiles/2016/cutla-";
+	const TString InData_New = "/home/pku/anying/cms/rootfiles/cutla-";
 
 	// Specify event selection cuts:
 	TString cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
@@ -120,8 +120,6 @@ void fX0_parameterization_el(int index){
 			treef->GetEntry(count);
 			if( ! formula->EvalInstance())
 				continue;
-                        if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
-                        if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
 			Double_t weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
 			if(count%4000==0)  cout<<"abin="<<abin<<" count="<<count<<";weight "<<weight<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
@@ -144,9 +142,9 @@ void fX0_parameterization_el(int index){
                                 rf[15]+=pweight[iii+14]*weight;
                                 rf[16]+=pweight[iii+15]*weight;
 			}else continue; 
-			for(int i=0;i<17;i++){
+			for(int i=0;i<1;i++){
 //		if(rf[i]/rf[8]<0/*&&xxf[i]<0*/)	cout<<count<<" "<<name<<" "<<ZGbin[abin]<<" "<<ZGbin[abin+1]<<"; "<<i<<" "<<xxf[i]<<" "<<rf[i]<<" "<<rf[8]<<" "<<rf[i]/rf[8]<<" "<<weight<<endl;
-				if(rf[i]/rf[8]<500/*&&xxf[i]<0*/)
+				if(rf[i]/rf[8]>500/*&&xxf[i]<0*/)
 					cout<<count<<" "<<name<<" "<<ZGbin[abin]<<" "<<ZGbin[abin+1]<<"; "<<i<<" "<<xxf[i]<<" "<<rf[i]<<" "<<rf[8]<<" "<<rf[i]/rf[8]<<" "<<weight<<endl;
 			}
 		}

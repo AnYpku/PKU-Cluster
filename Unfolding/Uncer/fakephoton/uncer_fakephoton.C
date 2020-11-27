@@ -26,7 +26,7 @@ void run(TString var,TString tag){
 		f1<<"fake17=[";
         if(tag.Contains("18"))
 		f1<<"fake18=[";
-	cout<<"uncertainty ";
+	cout<<tag<<" "<<var<<" uncertainty ";
 		 for(Int_t i=0;i<num;i++){
 			 bincontent_new[i] = h1->GetBinContent(i+1);
 			 bincontent_up[i] = h2->GetBinContent(i+1);
@@ -41,8 +41,8 @@ void run(TString var,TString tag){
 		 cout<<endl;
 }
 int uncer_fakephoton(){
-     vector<TString> recovars={"ptlep1","photonet","jet1pt"};//,"Mva","Mjj"};
-     vector<TString> tag={"2016","2017","2018"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};//,"Mva","Mjj"};
+     vector<TString> tag={"16","17","18"};
      for(int i=0;i<recovars.size();i++){
 	     for(int j=0;j<tag.size();j++){
 		     run(recovars[i],tag[j]);

@@ -119,7 +119,7 @@ int Print_uncer_bkg(){
      bins.push_back(jetptBins);
      bins.push_back(MvaBins);
      bins.push_back(MjjBins);
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<recovars.size();i++){
 	     run(recovars[i],"qcd","16",9);
 	     run(recovars[i],"qcd","17",9);

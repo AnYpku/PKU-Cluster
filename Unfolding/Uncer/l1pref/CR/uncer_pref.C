@@ -36,7 +36,7 @@ void run(TString var,TString tag){
 		 cout<<endl;
 }
 int uncer_pref(){
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<recovars.size();i++){
 	run(recovars[i],"16");
 	run(recovars[i],"17");

@@ -2,7 +2,7 @@ import re
 from math import sqrt
 import numpy as np
 import sys
-f=open('/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_'+sys.argv[1]+"_"+sys.argv[2]+'.txt')
+f=open('/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_'+sys.argv[1]+"_"+sys.argv[2]+'.txt')
 fout = open('./result_%s_%s.txt'%(sys.argv[1],sys.argv[2]),'w')
 f1=open('../r_'+sys.argv[1]+"_"+sys.argv[2]+'.txt')
 f2=open('./r_sys_%s_%s.txt' %(sys.argv[1],sys.argv[2]),'w')

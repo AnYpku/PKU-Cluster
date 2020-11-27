@@ -80,9 +80,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 	}
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
-	if(tag.Contains("16"))
-		fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK.root");
-	else fin=new TFile("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/unfold_"+tag+"outZA-EWK-pweight.root");
+	fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-outZA-EWK"+tag+".root");
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
 	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 	TString th1name[3];
@@ -91,7 +89,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
                    th1[i] = new TH1D(th1name[i],th1name[i],bins.size()-1,&bins[0]);
 		   th1[i]->Sumw2();
 	}
-	TTree*tree=(TTree*)fin->Get("demo");
+	TTree*tree=(TTree*)fin->Get("ZPKUCandidates");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2;
 	double muon1_id_scale,muon2_id_scale,ele1_id_scale,ele2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale;
@@ -125,6 +123,9 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
         cout<<"begin the loop"<<endl;
 	for(int k=0;k<tree->GetEntries();k++){
 		tree->GetEntry(k);
+                muon_WeightUp=0;muon_WeightDn=0;muon_Weight=0;
+                ele_WeightUp=0,ele_WeightDn=0,ele_Weight=0;
+                photon_WeightUp=0,photon_WeightDn=0,photon_Weight=0;
 		if(particle.Contains("muon")&&tag.Contains("16")&&lep==13){
 			muon1_ID_Uncer=sqrt( pow(get_muon_ID_sys16(etalep1,ptlep1,ID_muon_sys1,ID_muon_sys2),2)+ pow(get_muon_ID_stat16(etalep1,ptlep1,ID_muon_stat1,ID_muon_stat2),2)  );
 			muon2_ID_Uncer=sqrt( pow(get_muon_ID_sys16(etalep2,ptlep2,ID_muon_sys1,ID_muon_sys2),2)+ pow(get_muon_ID_stat16(etalep2,ptlep2,ID_muon_stat1,ID_muon_stat2),2)  );
@@ -213,7 +214,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 	cout<<particle<<" "<<count_mu<<" "<<count_muUp<<" "<<count_muDn<<endl;
 	cout<<particle<<" "<<count_ele<<" "<<count_eleUp<<" "<<count_eleDn<<endl;
 	cout<<particle<<" "<<count_gamma<<" "<<count_gammaUp<<" "<<count_gammaDn<<endl;
-	TFile*fout=new TFile("./"+vars+particle+"_"+type+"_2d_"+tag+".root","recreate");
+	TFile*fout=new TFile("./"+vars+particle+"_"+type+tag+".root","recreate");
 	fout->cd();
 	for(int i=0;i<3;i++){
             th1[i]->Write();
@@ -233,7 +234,6 @@ int cal(){
 	TString jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 	TString dr = "drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
 	TString SignalRegion = "Mjj>500 && deltaetajj>2.5 && Mva>100";
-	TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion; 
 	vector<vector<double>> bins;
 	vector<double> ptlepBins={20,80,120,200,400};
 	vector<double> photonEtBins={20,80,120,200,400};
@@ -241,32 +241,32 @@ int cal(){
 	bins.push_back(ptlepBins);
 	bins.push_back(photonEtBins);
 	bins.push_back(jetptBins);
-	vector<TString> recovars={"ptlep1","photonet","jet1pt"};//,"Mva","Mjj"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt"};//,"Mva","Mjj";
 	vector<TString> par={"ele","muon","photon"};
 	TH1D*th2[3][3];//particle 3
-	for(int i=0;i<par.size();i++){
-		//		cal(par[i],"16");
-		//		cal(par[i],"17");
-		for(int j=0;j<recovars.size();j++){
-			if(par[i].Contains("muon")){ 
-				cal(par[i],"16",Reco,th2[i],"all",recovars[j],bins[j]);
-				cal(par[i],"17",Reco,th2[i],"all",recovars[j],bins[j]);
-				cal(par[i],"18",Reco,th2[i],"all",recovars[j],bins[j]);
-			}
-			if(par[i].Contains("photon")){ 
-				cal(par[i],"16",Reco,th2[i],"ID",recovars[j],bins[j]);
-				cal(par[i],"17",Reco,th2[i],"ID",recovars[j],bins[j]);
-				cal(par[i],"18",Reco,th2[i],"ID",recovars[j],bins[j]);
-			}
-			if(par[i].Contains("ele")){ 
-				cal(par[i],"16",Reco,th2[i],"ID",recovars[j],bins[j]);
-				cal(par[i],"17",Reco,th2[i],"ID",recovars[j],bins[j]);
-				cal(par[i],"18",Reco,th2[i],"ID",recovars[j],bins[j]);
-				cal(par[i],"16",Reco,th2[i],"reco",recovars[j],bins[j]);
-				cal(par[i],"17",Reco,th2[i],"reco",recovars[j],bins[j]);
-				cal(par[i],"18",Reco,th2[i],"reco",recovars[j],bins[j]);
+        vector<TString> tag={"16","18","17"};
+	for(int k=0;k<tag.size();k++){
+                if(tag[k].Contains("17")){
+                        jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+                }
+                else{
+                        jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
+                }
+		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion; 
+		for(int i=0;i<par.size();i++){
+			for(int j=0;j<recovars.size();j++){
+				if(par[i].Contains("muon")){ 
+					cal(par[i],tag[k],Reco,th2[i],"all",recovars[j],bins[j]);
+				}
+				if(par[i].Contains("photon")){ 
+					cal(par[i],tag[k],Reco,th2[i],"ID",recovars[j],bins[j]);
+				}
+				if(par[i].Contains("ele")){ 
+					cal(par[i],tag[k],Reco,th2[i],"ID",recovars[j],bins[j]);
+					cal(par[i],tag[k],Reco,th2[i],"reco",recovars[j],bins[j]);
+				}
 			}
 		}
 	}
-return 1;
+	return 1;
 }

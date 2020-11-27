@@ -2,7 +2,7 @@
 void run(TString var,TString sample, TString tag){
 	ofstream ftxt("./"+var+"_uncer_"+sample+"_"+tag+".txt");//,ios::app);
 	ofstream ff("./"+var+"_uncer_"+tag+".txt",ios::app);
-	TFile*file=new TFile("./bkg_root/unfold_"+var+"_"+sample+"_pdf"+tag+".root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+sample+"_pdf"+tag+".root");
         TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -38,11 +38,12 @@ void run(TString var,TString sample, TString tag){
                                 ftxt<<"QCD_pdf=[";
                                 ff<<"QCD_pdf=[";
                     }
-                    if(k<kk-1)ftxt<<fixed<<setprecision(3)<<1+error<<",";
-                    ff<<error<<",";
+                    if(k<kk-1){ftxt<<fixed<<setprecision(3)<<1+error<<",";
+			    ff<<fixed<<setprecision(3)<<1+error<<",";
+		    }
                     if(k==kk-1){
 			    ftxt<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
-			    ff<<"]"<<endl;
+			    ff<<setprecision(3)<<1+error<<"]"<<endl;
 		    }
             }
             else{
@@ -50,11 +51,12 @@ void run(TString var,TString sample, TString tag){
                                 ftxt<<"SigOut_pdf=[";
                                 ff<<"SigOut_pdf=[";
                     }
-                    if(k<kk-1) ftxt<<fixed<<setprecision(3)<<1+error<<",";
-                    ff<<error<<",";
+                    if(k<kk-1){ ftxt<<fixed<<setprecision(3)<<1+error<<",";
+			    ff<<fixed<<setprecision(3)<<1+error<<",";
+		    }
                     if(k==kk-1) {
 			    ftxt<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
-			    ff<<"]"<<endl;
+			    ff<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
 		    }
             }
 	}
@@ -91,9 +93,8 @@ int Print_uncer_bkg(){
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
-     bins.push_back(MvaBins);
      bins.push_back(MjjBins);
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<recovars.size();i++){
 	     run(recovars[i],"qcd","16");
 	     run(recovars[i],"Sigout","16");

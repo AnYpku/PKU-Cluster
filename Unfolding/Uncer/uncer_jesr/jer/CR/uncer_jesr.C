@@ -3,7 +3,7 @@ void run(TString var,TString sample,TString tag){
 	ofstream f1("./"+var+"_"+sample+"_jer_uncer"+tag+"CR.txt");
 	TFile*file;
 	if(sample.Contains("EWK"))
-		file = new TFile("./root/unfold_"+tag+"outJEC_ZA-EWK_"+var+"_jer"+tag+".root");
+		file = new TFile("./root/unfold_"+tag+"JESR_ZA-EWK"+tag+"_"+var+"_jer"+tag+".root");
         else file=new TFile("./root/unfold_"+sample+"_"+var+"_jer"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get(var+"_0");
 	TH1D* h2 = (TH1D*)file->Get(var+"_1");
@@ -47,7 +47,7 @@ void run(TString var,TString sample,TString tag){
 }
 int uncer_jesr(){
      vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-     vector<TString> genvars={"ptlep1","photonet","jet1pt"};//,"Mva","Mjj"};
+     vector<TString> genvars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<genvars.size();i++){
         for(int j=0;j<sample.size();j++){
 		run(genvars[i],sample[j],"16");

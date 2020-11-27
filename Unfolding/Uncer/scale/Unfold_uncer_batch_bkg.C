@@ -3,7 +3,7 @@
 void run(TFile*file, vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1,TString tag,int num){
      const int kk = vec_branchname.size();
      TString name=file->GetName();
-     TTree*tree=(TTree*)file->Get("demo");     
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      map<TString, double> variables;
      for(int i=0;i<vec_branchname.size();i++){
@@ -104,9 +104,6 @@ int Unfold_uncer_batch_bkg(){
      TString Pi=Form("%f",pi);
      TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
      TString SignalRegion = "Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && Mva>100";
-     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
-     TString cut1 ="("+Reco+")";
-     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
      vector<vector<double>> bins;
      vector<double> ptlepBins={20,80,120,200,400};
      vector<double> photonEtBins={20,80,120,200,400};
@@ -122,23 +119,25 @@ int Unfold_uncer_batch_bkg(){
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genZGmass","genMjj"};
      vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
 //     for(int i=0;i<bins.size();i++){
-     TString dir16="/eos/user/y/yian/2016legacy/";     
-     TFile*file16=new TFile(dir16+"cutla-outZA_pweight.root");
-     TString dir17="/eos/user/y/yian/2017cutla/";     
-     TFile*file17=new TFile(dir17+"cutla-outZA-pweight.root");
-     TString dir18="/eos/user/y/yian/2018cutla/";     
-     TFile*file18=new TFile(dir18+"cutla-outZA_pweight.root");
+     TString dir[3];TFile* f2[3];
+     TFile* f1[3];
+     vector<TString> tag={"16","17","18"};
+     for(int i=0;i<3;i++){
+	     if(tag[i].Contains("17")){
+		     jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+	     }
+	     else{
+		     jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
+	     }
+	     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
+	     TString cut1 ="("+Reco+")";
+	     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
+	     dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
+	     f1[i]=new TFile(dir[i]+"unfold_GenCutla-outZA-EWK"+tag[i]+".root");
+	     f2[i]=new TFile(dir[i]+"cutla-outZA"+tag[i]+".root");
+	     run(f2[i], recovars, bins,cut1,tag[i],9);
 
-     TString dir1="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";
-     TFile*file1=new TFile(dir1+"unfold_16outZA-EWK.root");
-     TFile*file2=new TFile(dir1+"unfold_17outZA-EWK-pweight.root");
-     TFile*file3=new TFile(dir1+"unfold_18outZA-EWK-pweight.root");
-     run(file16, recovars, bins,cut1,"16",9);
-     run(file17, recovars, bins,cut1,"17",9);
-     run(file18, recovars, bins,cut1,"18",9);
-
-     run(file1, recovars, bins,cut2,"16",3);
-     run(file2, recovars, bins,cut2,"17",3);
-     run(file3, recovars, bins,cut2,"18",3);
+	     run(f1[i], recovars, bins,cut2,tag[i],3);
+     }
      return 1;
 }

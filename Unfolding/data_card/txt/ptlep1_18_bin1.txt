@@ -1,45 +1,44 @@
 imax 1   number of channels
-jmax 10   number of processes-1
-kmax 28  number of nuisance parameters (sources of systematical uncertainties)
+jmax 9   number of processes-1
+kmax 27  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin recobin1
-observation 571.88
+observation 562.71
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
-bin	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1
-process	genbin1	genbin2	genbin3	genbin4	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
-process	-4	-3	-2	-1	0	1	2	3	4	5	6
-rate	53.88	1.03	0.00	0.00	242.60	255.65	7.80	3.37	0.64	0.00	6.91
+bin	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1	recobin1
+process	genbin1	genbin2	genbin3	genbin4	QCD	non_prompt	TTA	VV	ST	Sig_out
+process	-4	-3	-2	-1	0	1	2	3	4	5
+rate	53.88	1.03	0.00	0.00	249.59	240.83	7.80	3.30	0.64	5.65
 ------------
-lumi_18	lnN	1.015	1.015	1.015	1.015	1.015	-	1.015	1.015	1.015	1.015	1.015
-genbin1_Stat_recobin1_18	lnN	1.02	-	-	-	-	-	-	-	-	-	-
-genbin2_Stat_recobin1_18	lnN	-	1.15	-	-	-	-	-	-	-	-	-
-genbin3_Stat_recobin1_18	lnN	-	-	1.00	-	-	-	-	-	-	-	-
-genbin4_Stat_recobin1_18	lnN	-	-	-	1.00	-	-	-	-	-	-	-
-QCD_Stat_recobin1_18	lnN	-	-	-	-	1.05	-	-	-	-	-	-
-non_prompt_Stat_recobin1_18	lnN	-	-	-	-	-	1.03	-	-	-	-	-
-TTA_Stat_recobin1_18	lnN	-	-	-	-	-	-	1.21	-	-	-	-
-VV_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	1.33	-	-	-
-ST_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	-	1.58	-	-
-WA_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	-	-	-	1.06
-fake_18	lnN	-	-	-	-	-	1.15	-	-	-	-	-
-JES_18	lnN	-	-	-	-	1.54	-	1.24	1.48	1.70	1.07	1.07
-JER_18	lnN	-	-	-	-	1.18	-	1.02	1.19	1.17	1.00	1.00
-pdf_EW	lnN	1.00	1.00	1.00	1.00	-	-	-	-	-	-	1.00
-pdf_QCD	lnN	-	-	-	-	1.01	-	-	-	-	-	-
-Scale_EW	lnN	1.06	1.06	1.00	1.00	-	-	-	-	-	-	1.04
-Scale_QCD	lnN	-	-	-	-	1.13	-	-	-	-	-	-
-Scale_QCD_extra	lnN	-	-	-	-	0.99/1.00	-	-	-	-	-	-
-mu_trigger_18	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
-mu_eff	lnN	-	-	-	-	1.00	-	1.00	1.00	1.00	1.00	1.00
-ele_reco	lnN	-	-	-	-	1.003	-	1.003	1.003	1.003	1.003	1.003
-ele_ID	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03	1.03
-photon_id	lnN	-	-	-	-	1.02	-	1.02	1.02	1.02	1.02	1.02
-pileup	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-	-
-VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-	-
+lumi_18	lnN	1.015	1.015	1.015	1.015	1.015	-	1.015	1.015	1.015	1.015
+genbin1_Stat_recobin1_18	lnN	1.02	-	-	-	-	-	-	-	-	-
+genbin2_Stat_recobin1_18	lnN	-	1.15	-	-	-	-	-	-	-	-
+genbin3_Stat_recobin1_18	lnN	-	-	1.00	-	-	-	-	-	-	-
+genbin4_Stat_recobin1_18	lnN	-	-	-	1.00	-	-	-	-	-	-
+QCD_Stat_recobin1_18	lnN	-	-	-	-	1.03	-	-	-	-	-
+non_prompt_Stat_recobin1_18	lnN	-	-	-	-	-	1.04	-	-	-	-
+TTA_Stat_recobin1_18	lnN	-	-	-	-	-	-	1.21	-	-	-
+VV_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	1.33	-	-
+ST_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	-	1.58	-
+ZA_SigOut_Stat_recobin1_18	lnN	-	-	-	-	-	-	-	-	-	1.06
+fake_18	lnN	-	-	-	-	-	1.16	-	-	-	-
+JES_18	lnN	-	-	-	-	1.28	-	1.07	1.02	1.32	1.03
+JER_18	lnN	-	-	-	-	1.22	-	1.06	1.26	1.26	1.00
+pdf_EW	lnN	1.00	1.00	1.00	1.00	-	-	-	-	-	1.00
+pdf_QCD	lnN	-	-	-	-	1.01	-	-	-	-	-
+Scale_EW	lnN	1.06	1.06	1.00	1.00	-	-	-	-	-	1.04
+Scale_QCD	lnN	-	-	-	-	1.12	-	-	-	-	-
+Scale_QCD_extra	lnN	-	-	-	-	1.00/0.99	-	-	-	-	-
+mu_trigger_18	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01
+mu_eff	lnN	-	-	-	-	1.00	-	1.00	1.00	1.00	1.00
+ele_reco	lnN	-	-	-	-	1.003	-	1.003	1.003	1.003	1.003
+ele_ID	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03
+photon_id	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03
+pileup	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-
+VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-

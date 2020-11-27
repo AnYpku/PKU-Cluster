@@ -15,6 +15,10 @@ combineCards.py jet1pt_17_*bin*.txt >& jet1pt_17.txt
 combineCards.py jet1pt_18_*bin*.txt >& jet1pt_18.txt
 combineCards.py jet1pt_16.txt jet1pt_17.txt jet1pt_18.txt >& jet1pt_full.txt
 
+combineCards.py Mjj_16_*bin*.txt >& Mjj_16.txt
+combineCards.py Mjj_17_*bin*.txt >& Mjj_17.txt
+combineCards.py Mjj_18_*bin*.txt >& Mjj_18.txt
+combineCards.py Mjj_16.txt Mjj_17.txt Mjj_18.txt >& Mjj_full.txt
 #########ptlep1
 text2workspace.py -m 125 -o ptlep1_16.root ptlep1_16.txt -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO map='.*genbin1.*:r_Bin1[1,-2,4]' --PO map='.*genbin2.*:r_Bin2[1,-2,4]' --PO map='.*genbin3.*:r_Bin3[1,-2,4]' --PO map='.*genbin4.*:r_Bin4[1,-2,4]' 
 combine ptlep1_16.root -M MultiDimFit --algo singles -t -1 --setParameters r_Bin1=1,r_Bin2=1,r_Bin3=1,r_Bin4=1 -m 125 --saveFitResult  > tmp_ptlep1_16.txt 
@@ -78,3 +82,22 @@ combine jet1pt_full.root -M MultiDimFit --algo singles -t -1 --setParameters r_B
 sed -n -e '/68/p' tmp_jet1pt_full.txt > result_jet1pt_full.txt
 mv multidimfit.root multidimfit_jet1pt_full.root
 
+text2workspace.py -m 125 -o Mjj_16.root Mjj_16.txt -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO map='.*genbin1.*:r_Bin1[1,-2,4]' --PO map='.*genbin2.*:r_Bin2[1,-2,4]' --PO map='.*genbin3.*:r_Bin3[1,-2,4]' --PO map='.*genbin4.*:r_Bin4[1,-2,4]' --PO map='.*genbin5.*:r_Bin5[1,-2,4]' --PO map='.*genbin6.*:r_Bin6[1,-2,4]' --PO map='.*genbin7.*:r_Bin7[1,-2,4]'
+combine Mjj_16.root -M MultiDimFit --algo singles -t -1 --setParameters r_Bin1=1,r_Bin2=1,r_Bin3=1,r_Bin4=1,r_Bin5=1,r_Bin6=1,r_Bin7=1 -m 125 --saveFitResult  > tmp_Mjj_16.txt 
+sed -n -e '/68/p'  tmp_Mjj_16.txt > result_Mjj_16.txt
+mv multidimfit.root multidimfit_Mjj_16.root
+
+text2workspace.py -m 125 -o Mjj_17.root Mjj_17.txt -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO map='.*genbin1.*:r_Bin1[1,-2,4]' --PO map='.*genbin2.*:r_Bin2[1,-2,4]' --PO map='.*genbin3.*:r_Bin3[1,-2,4]' --PO map='.*genbin4.*:r_Bin4[1,-2,4]' --PO map='.*genbin5.*:r_Bin5[1,-2,4]' --PO map='.*genbin6.*:r_Bin6[1,-2,4]' --PO map='.*genbin7.*:r_Bin7[1,-2,4]'
+combine Mjj_17.root -M MultiDimFit --algo singles -t -1 --setParameters r_Bin1=1,r_Bin2=1,r_Bin3=1,r_Bin4=1,r_Bin5=1,r_Bin6=1,r_Bin7=1 -m 125 --saveFitResult  > tmp_Mjj_17.txt 
+sed -n -e '/68/p'  tmp_Mjj_17.txt > result_Mjj_17.txt
+mv multidimfit.root multidimfit_Mjj_17.root
+
+text2workspace.py -m 125 -o Mjj_18.root Mjj_18.txt -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO map='.*genbin1.*:r_Bin1[1,-2,4]' --PO map='.*genbin2.*:r_Bin2[1,-2,4]' --PO map='.*genbin3.*:r_Bin3[1,-2,4]' --PO map='.*genbin4.*:r_Bin4[1,-2,4]' --PO map='.*genbin5.*:r_Bin5[1,-2,4]' --PO map='.*genbin6.*:r_Bin6[1,-2,4]' --PO map='.*genbin7.*:r_Bin7[1,-2,4]'
+combine Mjj_18.root -M MultiDimFit --algo singles -t -1 --setParameters r_Bin1=1,r_Bin2=1,r_Bin3=1,r_Bin4=1,r_Bin5=1,r_Bin6=1,r_Bin7=1 -m 125 --saveFitResult  > tmp_Mjj_18.txt 
+sed -n -e '/68/p'  tmp_Mjj_18.txt > result_Mjj_18.txt
+mv multidimfit.root multidimfit_Mjj_18.root
+
+text2workspace.py -m 125 -o Mjj_full.root Mjj_full.txt -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO map='.*genbin1.*:r_Bin1[1,-2,4]' --PO map='.*genbin2.*:r_Bin2[1,-2,4]' --PO map='.*genbin3.*:r_Bin3[1,-2,4]' --PO map='.*genbin4.*:r_Bin4[1,-2,4]' --PO map='.*genbin5.*:r_Bin5[1,-2,4]' --PO map='.*genbin6.*:r_Bin6[1,-2,4]' --PO map='.*genbin7.*:r_Bin7[1,-2,4]'
+combine Mjj_full.root -M MultiDimFit --algo singles -t -1 --setParameters r_Bin1=1,r_Bin2=1,r_Bin3=1,r_Bin4=1,r_Bin5=1,r_Bin6=1,r_Bin7=1 -m 125 --saveFitResult  > tmp_Mjj_full.txt 
+sed -n -e '/68/p'  tmp_Mjj_full.txt > result_Mjj_full.txt
+mv multidimfit.root multidimfit_Mjj_full.root

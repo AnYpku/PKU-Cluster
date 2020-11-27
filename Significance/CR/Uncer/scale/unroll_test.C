@@ -173,7 +173,7 @@ void unroll_name(TString sample,TString tag,int num){
         for(int i=1;i<m;i++){h_up[i]->Draw("same hist");}
         fPads2->Update();
 	c1->SaveAs("./figs/hist_scale_"+sample+tag+".eps");
-	c1->SaveAs("./figs/hist_scale_"+sample+tag+".pdf");
+	c1->SaveAs("./figs/hist_scale_"+sample+tag+"CR.pdf");
 
         vec_ymax.clear();
 	fout->cd();

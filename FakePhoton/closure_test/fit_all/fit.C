@@ -11,12 +11,12 @@
 
 
 using namespace RooFit;
-TString dir =  "../all/roofit/txt/";
-TString dir1 = "../all/root/";
-TString dir2 = "../all/roofit/eps/";
+TString dir =  "../roofit/txt/";
+TString dir1 = "../root/";
+TString dir2 = "../roofit/eps/";
 void fit(float lowpt, float highpt, float lowchiso, float highchiso,TString tag,TString channel){
 
-ofstream file3("../all/roofit/info_roofit_"+channel+tag+".txt",ios::app);
+ofstream file3("../roofit/info_roofit_"+channel+tag+".txt",ios::app);
 TFile* fdata = TFile::Open(dir1 + "histo_Pdata"+tag+"_"+channel+".root");
 //TFile* ftrue = TFile::Open(dir1 + "ZA.root");
 
@@ -202,7 +202,7 @@ TFile* fdata = TFile::Open(dir1 + "histo_Pdata"+tag+"_"+channel+".root");
         textFR->Draw();
 
     char buffer[256];
-	sprintf(buffer, channel+tag+"_pt%0.f-%0.f_chiso%0.f-%0.f",lowpt,highpt,lowchiso,highchiso);
+	sprintf(buffer, channel+tag+"_pt%0.f-%0.f_chiso%0.f-%0.f.pdf",lowpt,highpt,lowchiso,highchiso);
 	c1->Print(dir2 + buffer);
     fdata->Close();
 //    ftrue->Close();

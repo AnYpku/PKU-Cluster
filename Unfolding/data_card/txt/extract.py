@@ -1,7 +1,7 @@
 import re
 import numpy as np
 import sys
-f=open('/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/data_card/txt/result_'+sys.argv[1]+"_"+sys.argv[2]+'.txt')
+f=open('/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/result_'+sys.argv[1]+"_"+sys.argv[2]+'.txt')
 fout = open('./r_%s_%s.txt'%(sys.argv[1],sys.argv[2]),'w')
 arr={}
 for line in f:

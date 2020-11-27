@@ -7,7 +7,7 @@ void run(TString var,TString sample, TString tag,int num){
 		f_down.open("./"+var+"_uncer_QCD_extra_down_"+tag+".txt");//,ios::app);
 	}
 	ofstream ff("./"+var+"_uncer_"+tag+".txt",ios::app);
-	TFile*file=new TFile("./bkg_root/unfold_"+var+"_"+sample+"_scale"+tag+".root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+sample+"_scale"+tag+".root");
 	TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -62,14 +62,14 @@ void run(TString var,TString sample, TString tag,int num){
 			    f_up<<fixed<<setprecision(3)<<extra_up<<",";
 			    cout<<extra_down<<endl;
 			    f_down<<fixed<<setprecision(3)<<extra_down<<",";
+			    ff<<fixed<<setprecision(3)<<1+error<<",";
 		    }
-		    ff<<error<<",";
 		    if(k==kk-1){
 			    ftxt<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
 			    f_up<<fixed<<setprecision(3)<<extra_up<<"]"<<endl;
 			    cout<<"file open ? "<<f_down.is_open()<<endl;
 			    f_down<<fixed<<setprecision(3)<<extra_down<<"]"<<endl;
-			    ff<<"]"<<endl;
+			    ff<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
 		    }
 	    }
             else{
@@ -77,11 +77,12 @@ void run(TString var,TString sample, TString tag,int num){
 			        ftxt<<"SigOut_scale=[";
 			        ff<<"SigOut_scale=[";
 		    }
-		    if(k<kk-1)ftxt<<fixed<<setprecision(3)<<1+error<<",";
-		    ff<<error<<",";
+		    if(k<kk-1){ftxt<<fixed<<setprecision(3)<<1+error<<",";
+			    ff<<fixed<<setprecision(3)<<1+error<<",";
+		    }
 		    if(k==kk-1){
 			    ftxt<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
-			    ff<<"]"<<endl;
+			    ff<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
 		    }
 	    } 
             vec_content.clear();
@@ -119,9 +120,8 @@ int Print_uncer_bkg(){
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
-     bins.push_back(MvaBins);
      bins.push_back(MjjBins);
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<recovars.size();i++){
 	     run(recovars[i],"qcd","16",9);
 	     run(recovars[i],"qcd","17",9);
@@ -129,6 +129,7 @@ int Print_uncer_bkg(){
 	     run(recovars[i],"SigOut","16",3);
 	     run(recovars[i],"SigOut","17",3);
 	     run(recovars[i],"SigOut","18",3);
+	     cout<<recovars[i]<<endl;
      }
      return 0;
 }

@@ -3,7 +3,7 @@ void run(TString var,int i,TString tag){
 	ofstream ftxt(Form("./txt/"+var+"_recobin%i_uncer"+tag+".txt",i));//,ios::app);
 	TString index=Form("recobin%i",i);
 //        ftxt<<index<<" "<<endl;
-	TFile*file=new TFile("./sig_root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root");
 	double lumi;
 	if(tag.Contains("16"))
 		lumi=35.86;
@@ -12,7 +12,7 @@ void run(TString var,int i,TString tag){
 	else if(tag.Contains("18"))
 		lumi=58.7;
         TH1D*h1[num];
-        cout<<"./sig_root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root"<<endl;
+        cout<<"./root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root"<<endl;
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_pdf%i_recobin%i",j,i));
 		h1[j]->Scale(lumi);
@@ -29,7 +29,9 @@ void run(TString var,int i,TString tag){
                diff=h1[j]->GetBinContent(k+1)-center;
 	       sum+=pow(diff,2);
 	    }
-            cout<<var<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" "<<sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1)<<endl;
+	    if(sum!=0)
+		    cout<<var<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" "<<sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1)<<endl;
+	    else cout<<"no events"<<endl;
 	    if(h1[0]->GetBinContent(k+1)!=0) 
 		    error=sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1);
 	    else    error=0;
@@ -37,8 +39,7 @@ void run(TString var,int i,TString tag){
             ftxt<<error<<endl;
 	}
 }
-void open(TString var,vector<double> genbins,TString tag){
-        const int kk=genbins.size();
+void open(TString var,vector<double> genbins,TString tag,int kk){
 	double uncer[kk-1][kk-1];
 	ofstream fout("./"+var+"_uncer"+tag+".txt");
 	for(int k=0;k<kk-1;k++){
@@ -69,18 +70,17 @@ int Print_uncer_sig(){
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
-     bins.push_back(MvaBins);
      bins.push_back(MjjBins);
-     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genZGmass","genMjj"};
-     for(int i=0;i<genvars.size();i++){
-             for(int j=1;j<bins[i].size();j++){//open the jth recobin root file of the ith gen variables
-		     run(genvars[i],j,"16");
-		     run(genvars[i],j,"17");
-		     run(genvars[i],j,"18");
+     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+     vector<TString> tag={"16","17","18"};
+     for(int k=0;k<tag.size();k++){
+	     for(int i=0;i<genvars.size();i++){
+		     for(int j=1;j<bins[i].size();j++){//open the jth recobin root file of the ith gen variables
+			     run(genvars[i],j,tag[k]);
+		     }
+		     if(genvars[i].Contains("Mjj")==0)open(genvars[i],bins[i],tag[k],bins[i].size());
+		     else open(genvars[i],bins[i],tag[k],8);
 	     }
-	     open(genvars[i],bins[i],"16");
-	     open(genvars[i],bins[i],"17");
-	     open(genvars[i],bins[i],"18");
      }
      return 0;
 }

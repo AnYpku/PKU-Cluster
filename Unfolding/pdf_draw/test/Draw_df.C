@@ -18,7 +18,7 @@ void run(TString var, TString recovar,TString title,TString tag){
           xs16=0;xs17=0;xs18=114.3;
 	}
         if(num16==0&&num17==0&&num18==0)cout<<"error, exit!"<<endl;
-	TFile*file1=new TFile("unfold_"+var+"_ewk_pdf"+tag+".root");
+	TFile*file1=new TFile("../unfold_"+var+"_ewk_pdf"+tag+".root");
         TFile*file11=new TFile("../../scale_draw/"+var+"_unfold_ewk_scale"+tag+".root");
 	TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
         TH1D*h11[3];TH1D*h22[3];TH1D*h33[3];
@@ -39,17 +39,11 @@ void run(TString var, TString recovar,TString title,TString tag){
 	double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
         ifstream f_in;
-        if(var.Contains("Mjj")==0)
-           f_in.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt");  
-	else
-           f_in.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/SignalStrength/batch/data_cards/combine/breakdown/r_full"+tag+"_test.txt");  
+	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt");  
         ifstream f_sys;
-	if(var.Contains("Mjj")==0)
-		f_sys.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
-	else
-           f_sys.open("/afs/cern.ch/user/y/yian/work/PKU-Cluster/SignalStrength/batch/data_cards/combine/breakdown/r_sys_full"+tag+"_test.txt");  
-        if(!f_in.is_open())cout<<"can not open the file "<<"/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt"<<endl;
-        if(!f_sys.is_open())cout<<"/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
+	f_sys.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
+        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt"<<endl;
+        if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 	for(int i=0;i<hist_clone->GetNbinsX();i++){
                 f_in>>Err_down[i]>>Err_up[i];
                 f_sys>>Err_sysDown[i]>>Err_sysUp[i];
@@ -162,7 +156,7 @@ void run(TString var, TString recovar,TString title,TString tag){
 	}
         h1[0]->GetYaxis()->SetLabelSize(0.07);
         h1[0]->SetMarkerSize(0);
-	h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*6);
+	h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*35);
 	h1[0]->Draw("E2");
 	hist_clone->SetMarkerStyle(20);
 	hist_clone->SetMarkerColor(1);
@@ -298,10 +292,12 @@ void run(TString var, TString recovar,TString title,TString tag){
 }
 int Draw_df(){
 	gStyle->SetOptStat(0);
-	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}","m_{Z#gamma}"};
-	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
-
+//	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}","m_{Z#gamma}"};
+	vector<TString> title={"M_{jj}"};
+//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+//	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+        vector<TString> genvars={"genMjj"};
+	vector<TString> recovars={"Mjj"};
 //        run("genMjj","Mjj","M_{jj}","16");
 	for(int i=0;i<genvars.size();i++){
 		run(genvars[i],recovars[i],title[i],"16");

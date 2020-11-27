@@ -8,7 +8,7 @@
 using namespace RooFit;
 using namespace std;
 TString dir = "./fractionfitResult_za/txt/"; 
-TString dir1 = "../../root/";
+TString dir1 = "../root/";
 TString dir2 = "./fractionfitResult_za/eps/"; 
 TString dir3 = "./fractionfitResult_za/"; 
 TString dir4 = "./fractionfitResult_za/closure/"; 
@@ -16,6 +16,7 @@ Double_t fr,fr_Error;
 ofstream file2;
 ofstream file3;
 ofstream file4;
+ofstream file5;
 void fitf(float lowpt, float highpt, float lowchiso, float highchiso,TString tag,TString channel){
 //TString b="chiso5-12_";
 
@@ -140,6 +141,7 @@ void fitf(float lowpt, float highpt, float lowchiso, float highchiso,TString tag
 	    file3<<Form("%0.f<pt<%0.f",lowpt,highpt)<<"\t\t"<<Form("%0.f<chiso<%0.f",lowchiso,highchiso)<<"\t"<<fixed<<setprecision(2)<<fr<<"\t"<<fixed<<setprecision(2)<<fr_Error<<endl;
 	    file2<<Form("%0.f<pt<%0.f ",lowpt,highpt)<<"\t\t"<<Form("%0.f<chiso<%0.f",lowchiso,highchiso)<<"\t"<<fixed<<setprecision(2)<< mcFake<<"\t"<<fake_window_fit<<"\t"<<fake_window_fitErr<<"\t"<< fabs(fake_window_fit-mcFake)/fake_window_fitErr<<"\t"<<mcFake_Err<<endl;
             file4<<lowchiso<<"\t"<<highchiso<<"\t"<<fabs(fake_window_fit-mcFake)/fake_window_fitErr<<"\t"<<fabs(fake_window_fit-mcFake)/-mcFake<<endl;
+	    file5<<lowchiso<<"\t"<<highchiso<<"\t"<<fake_window_fit<<"\t"<<fake_window_fitErr<<"\t"<<mcFake<<endl;
             myfile.close();
 	    char c[200],c2[200],c3[200];
 	    sprintf(c,"%f",chi2ToNdf);
@@ -218,6 +220,7 @@ int fitfraction(){
 			int ptnumber=lowpt.size();
 			for(Int_t j=0;j<ptnumber;j++){
                                 file4.open(dir4+channel[jk]+tag[ik]+Form("closure_test_pt%0.f_%0.f.txt",lowpt[j],highpt[j]));
+                                file5.open(dir4+channel[jk]+tag[ik]+Form("closure_number_pt%0.f_%0.f.txt",lowpt[j],highpt[j]));
 				for(Int_t i=0;i<21/*21*/;i++){
 					run_fitf(j,i,tag[ik],channel[jk],lowpt,highpt);
 
@@ -225,6 +228,7 @@ int fitfraction(){
 				file2<<"####################################################"<<endl;
 				file3<<"####################################################"<<endl;
 				file4.close();
+				file5.close();
 			}
                         file2.close();
                         file3.close();

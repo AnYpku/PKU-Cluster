@@ -1,7 +1,7 @@
 #define num 103
 void run(TString var,TString sample, TString tag){
 	ofstream ftxt("./"+var+"_uncer_"+sample+"_"+tag+".txt");//,ios::app);
-	TFile*file=new TFile("./bkg_root/unfold_"+var+"_"+sample+"_pdf16.root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+sample+"_pdf16.root");
 	TString name=file->GetName();
         TH1D*h1[num];TH1D*h2[num];;TH1D*h3[num];
         TFile*file2;TFile*file3;
@@ -10,8 +10,8 @@ void run(TString var,TString sample, TString tag){
 		h1[j]->Scale(35.86);
 	}
         if(sample.Contains("Sig")){
-		file2=new TFile("./bkg_root/unfold_"+var+"_"+sample+"_pdf17.root");
-		file3=new TFile("./bkg_root/unfold_"+var+"_"+sample+"_pdf18.root");
+		file2=new TFile("./root/unfold_"+var+"_"+sample+"_pdf17.root");
+		file3=new TFile("./root/unfold_"+var+"_"+sample+"_pdf18.root");
 		for(int j=0;j<num;j++){
 			h2[j]=(TH1D*)file2->Get(Form(var+"_%i",j));
 			h2[j]->Scale(41.52);
@@ -86,9 +86,8 @@ int Print_uncer_bkgAll(){
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
-     bins.push_back(MvaBins);
      bins.push_back(MjjBins);
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj","Mjj"};
      for(int i=0;i<recovars.size();i++){
 	     run(recovars[i],"qcd","All");
 	     run(recovars[i],"Sigout","All");

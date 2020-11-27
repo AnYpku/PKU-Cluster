@@ -3,10 +3,9 @@
 TH1D* run( TString sample,TString tag,TString vec_branchname,vector<double> bins,TString cut1){
      const int kk = bins.size();
      TString dir1;
-     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";     
-     else dir1="/eos/user/y/yian/"+tag+"cutla/";
-     TFile*file=new TFile(dir1+"cutla-outplj_weight"+sample+".root");
-     TTree*tree=(TTree*)file->Get("demo");     
+     dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/";
+     TFile*file=new TFile(dir1+"cutla-outplj"+tag+"_weight"+sample+".root");
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      map<TString, double> variables;
      tree->SetBranchStatus(vec_branchname,1);
      tree->SetBranchAddress(vec_branchname, &variables[vec_branchname]);
@@ -43,9 +42,6 @@ int Unfold_uncer_batch_bkg(){
      TString Pi=Form("%f",pi);
      TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
      TString SignalRegion = "Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && Mva>100";
-     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
-     TString cut1 ="("+Reco+")";
-     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
      vector<vector<double>> bins;
      vector<double> ptlepBins={20,80,120,200,400};
      vector<double> photonEtBins={20,80,120,200,400};
@@ -60,22 +56,29 @@ int Unfold_uncer_batch_bkg(){
 
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
      vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-     vector<TString> tag={"2016","2017","2018"};
+     vector<TString> tag={"16","17","18"};
      const int kk=genvars.size();
      TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][vars]
      for(int j=0;j<kk;j++){
 	     for(int i=0;i<tag.size();i++){
+		     if(tag[i].Contains("17")){
+			     jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+		     }
+		     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+		     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
+		     TString cut1 ="("+Reco+")";
+		     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 		     hist[i][j]=run("",tag[i],recovars[j], bins[j],cut1);
 		     hist_up[i][j]=run("_up",tag[i],recovars[j], bins[j],cut1);
 		     hist_down[i][j]=run("_down",tag[i],recovars[j], bins[j],cut1);
 	     }
      }
-//     cout<<hist[0][0]->GetBinContent(1);
+     //     cout<<hist[0][0]->GetBinContent(1);
      TFile*fout[3][kk];
      for(int j=0;j<kk;j++){
 	     for(int i=0;i<3;i++){
 		     fout[i][j]= new TFile("unfold_"+recovars[j]+"_plj"+tag[i]+".root","recreate");
-                     cout<<hist[i][j]->GetBinContent(1)<<endl;
+		     cout<<hist[i][j]->GetBinContent(1)<<endl;
 		     fout[i][j]->cd();
 		     hist[i][j]->Write();
 		     hist_up[i][j]->Write();
@@ -83,14 +86,14 @@ int Unfold_uncer_batch_bkg(){
 		     fout[i][j]->Close();
 	     }//fout[year][vars]
      }
-/*     for(int j=0;j<kk;j++){
-	     for(int i=0;i<3;i++){
-		     fout[i][j]->cd();
-		     hist[i][j]->Write();
-		     hist_up[i][j]->Write();
-		     hist_down[i][j]->Write();
-		     fout[i][j]->Close();
-	     }
-     }*/
+     /*     for(int j=0;j<kk;j++){
+	    for(int i=0;i<3;i++){
+	    fout[i][j]->cd();
+	    hist[i][j]->Write();
+	    hist_up[i][j]->Write();
+	    hist_down[i][j]->Write();
+	    fout[i][j]->Close();
+	    }
+	    }*/
      return 1;
 }

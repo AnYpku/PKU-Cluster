@@ -1,46 +1,45 @@
 imax 1   number of channels
-jmax 10   number of processes-1
-kmax 29  number of nuisance parameters (sources of systematical uncertainties)
+jmax 9   number of processes-1
+kmax 28  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin recobin3
-observation 206.68
+observation 248.54
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
-bin	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3
-process	genbin1	genbin2	genbin3	genbin4	QCD	non_prompt	TTA	VV	ST	WA	Sig_out
-process	-4	-3	-2	-1	0	1	2	3	4	5	6
-rate	0.00	0.13	3.61	0.08	155.18	38.81	1.52	6.35	0.19	0.00	0.83
+bin	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3	recobin3
+process	genbin1	genbin2	genbin3	genbin4	QCD	non_prompt	TTA	VV	ST	Sig_out
+process	-4	-3	-2	-1	0	1	2	3	4	5
+rate	0.00	0.14	5.27	0.12	181.56	49.47	1.02	9.89	0.19	0.88
 ------------
-lumi_16	lnN	1.022	1.022	1.022	1.022	1.022	-	1.022	1.022	1.022	1.022	1.022
-genbin1_Stat_control_recobin3_16	lnN	1.00	-	-	-	-	-	-	-	-	-	-
-genbin2_Stat_control_recobin3_16	lnN	-	1.32	-	-	-	-	-	-	-	-	-
-genbin3_Stat_control_recobin3_16	lnN	-	-	1.06	-	-	-	-	-	-	-	-
-genbin4_Stat_control_recobin3_16	lnN	-	-	-	1.41	-	-	-	-	-	-	-
-QCD_Stat_control_recobin3_16	lnN	-	-	-	-	1.04	-	-	-	-	-	-
-non_prompt_Stat_control_recobin3_16	lnN	-	-	-	-	-	1.08	-	-	-	-	-
-TTA_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	1.48	-	-	-	-
-VV_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	1.43	-	-	-
-ST_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	-	2.00	-	-
-WA_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	-	-	-	1.13
-fake_16	lnN	-	-	-	-	-	1.18	-	-	-	-	-
-JES_16	lnN	-	-	-	-	1.03	-	1.10	1.21	1.00	1.00	1.00
-JER_16	lnN	-	-	-	-	1.01	-	1.00	1.21	1.00	1.01	1.01
-pdf_EW	lnN	1.00	1.05	1.03	1.05	-	-	-	-	-	-	1.05
-pdf_QCD	lnN	-	-	-	-	1.01	-	-	-	-	-	-
-Scale_EW	lnN	1.00	1.02	1.02	1.04	-	-	-	-	-	-	1.04
-Scale_QCD	lnN	-	-	-	-	1.09	-	-	-	-	-	-
-Scale_QCD_extra	lnN	-	-	-	-	1.01/0.99	-	-	-	-	-	-
-mu_trigger_16	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
-mu_eff	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
-ele_reco	lnN	-	-	-	-	1.005	-	1.005	1.005	1.005	1.005	1.005
-ele_ID	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03	1.03
-photon_id	lnN	-	-	-	-	1.02	-	1.02	1.02	1.02	1.02	1.02
-pileup	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-	-
-VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-	-
-l1pref	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01	1.01
+lumi_16	lnN	1.022	1.022	1.022	1.022	1.022	-	1.022	1.022	1.022	1.022
+genbin1_Stat_control_recobin3_16	lnN	1.00	-	-	-	-	-	-	-	-	-
+genbin2_Stat_control_recobin3_16	lnN	-	1.30	-	-	-	-	-	-	-	-
+genbin3_Stat_control_recobin3_16	lnN	-	-	1.05	-	-	-	-	-	-	-
+genbin4_Stat_control_recobin3_16	lnN	-	-	-	1.33	-	-	-	-	-	-
+QCD_Stat_control_recobin3_16	lnN	-	-	-	-	1.04	-	-	-	-	-
+non_prompt_Stat_control_recobin3_16	lnN	-	-	-	-	-	1.08	-	-	-	-
+TTA_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	1.74	-	-	-
+VV_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	1.47	-	-
+ST_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	-	2.00	-
+ZA_SigOut_Stat_control_recobin3_16	lnN	-	-	-	-	-	-	-	-	-	1.12
+fake_16	lnN	-	-	-	-	-	1.22	-	-	-	-
+JES_16	lnN	-	-	-	-	1.02	-	1.25	1.12	1.00	1.01
+JER_16	lnN	-	-	-	-	1.03	-	1.06	1.00	1.00	1.00
+pdf_EW	lnN	1.00	1.05	1.03	1.04	-	-	-	-	-	1.06
+pdf_QCD	lnN	-	-	-	-	1.01	-	-	-	-	-
+Scale_EW	lnN	1.00	1.02	1.02	1.03	-	-	-	-	-	1.05
+Scale_QCD	lnN	-	-	-	-	1.10	-	-	-	-	-
+Scale_QCD_extra	lnN	-	-	-	-	1.01/0.99	-	-	-	-	-
+mu_trigger_16	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01
+mu_eff	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01
+ele_reco	lnN	-	-	-	-	1.005	-	1.005	1.005	1.005	1.005
+ele_ID	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03
+photon_id	lnN	-	-	-	-	1.03	-	1.03	1.03	1.03	1.03
+pileup	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01
+ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-
+VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-
+l1pref	lnN	-	-	-	-	1.01	-	1.01	1.01	1.01	1.01

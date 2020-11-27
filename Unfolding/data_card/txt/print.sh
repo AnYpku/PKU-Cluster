@@ -1,8 +1,9 @@
 #!/bin/bash
+#ptlep1
+#photonet
+#jet1pt
 vars="\
-ptlep1
-photonet
-jet1pt
+Mjj
 "
 years="\
 16

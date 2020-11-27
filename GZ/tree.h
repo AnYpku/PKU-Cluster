@@ -23,6 +23,7 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
    // Declaration of leaf types
+   double weight;
    UInt_t          run;
    UInt_t          luminosityBlock;
    ULong64_t       event;
@@ -1613,6 +1614,7 @@ public :
 
    // List of branches
    TBranch        *b_run;   //!
+   TBranch        *b_weight;   //!
    TBranch        *b_luminosityBlock;   //!
    TBranch        *b_event;   //!
    TBranch        *b_HTXS_Higgs_pt;   //!
@@ -3294,7 +3296,8 @@ void tree::Init(TTree *tree)
 
    fout = new TFile(m_dataset, "RECREATE");
    ExTree=fChain->CloneTree(0);
-
+   ExTree->Branch("weight",&weight,"weight/D");
+//   fChain->SetBranchAddress("weight", &weight, &b_weight);
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
    fChain->SetBranchAddress("event", &event, &b_event);

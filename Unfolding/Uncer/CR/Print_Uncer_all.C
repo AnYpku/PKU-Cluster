@@ -16,29 +16,29 @@ void run(TString var,TString genvar,TString tag,TString filename){
         f1.close();
 }
 int Print_Uncer_all(){
-	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
-	vector<TString> recovars={"ptlep1","photonet","jet1pt"};//,"Mva","Mjj"};
+	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
         vector<TString> tag={"16","17","18"};
         vector<TString> filename;
         for(int i=0;i<recovars.size();i++){
 		for(int j=0;j<tag.size();j++){
-			TString f_fake        ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/fakephoton/CR/"+recovars[i]+"_fake_uncer20"+tag[j]+"CR.txt";
-			TString f_QCD_pdf     ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/pdf/CR/"+recovars[i]+"_uncer_qcd_16CR.txt";
-			TString f_Sigout_pdf  ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/pdf/CR/"+recovars[i]+"_uncer_Sigout_"+tag[j]+"CR.txt";
-			TString f_Sig_pdf     ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/pdf/CR/"+genvars[i]+"_uncer"+tag[j]+"CR.txt";
-			TString f_QCD_scale   ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_qcd_"+tag[j]+"CR.txt";
-			TString f_QCD_scale_extra_up  ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_QCD_extra_up_"+tag[j]+"CR.txt";
-			TString f_QCD_scale_extra_down  ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_QCD_extra_down_"+tag[j]+"CR.txt";
-			TString f_Sigout_scale="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_SigOut_"+tag[j]+"CR.txt";
-			TString f_Sig_scale   ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/scale/CR/"+genvars[i]+"_uncer"+tag[j]+"CR.txt";
-			TString f_jes         ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jes/CR/"+recovars[i]+"_jes_uncer"+tag[j]+"CR.txt";
-			TString f_jer         ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jer/CR/"+recovars[i]+"_jer_uncer"+tag[j]+"CR.txt";
-			TString f_l1pref      ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/l1pref/CR/"+recovars[i]+"_l1pref"+tag[j]+"_uncerCR.txt";
-			TString f_ele_ID ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_ele_ID_"+tag[j]+".txt";
-			TString f_ele_reco ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_ele_reco_"+tag[j]+".txt";
-			TString f_mu_eff ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_all_"+tag[j]+".txt";
-			TString f_mu_trigger ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_trigger_"+tag[j]+".txt";
-			TString f_photon_ID ="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_photon_ID_"+tag[j]+".txt";
+			TString f_fake        ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/fakephoton/CR/"+recovars[i]+"_fake_uncer"+tag[j]+"CR.txt";
+			TString f_QCD_pdf     ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pdf/CR/"+recovars[i]+"_uncer_qcd_16CR.txt";
+			TString f_Sigout_pdf  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pdf/CR/"+recovars[i]+"_uncer_Sigout_"+tag[j]+"CR.txt";
+			TString f_Sig_pdf     ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pdf/CR/"+genvars[i]+"_uncer"+tag[j]+"CR.txt";
+			TString f_QCD_scale   ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_qcd_"+tag[j]+"CR.txt";
+			TString f_QCD_scale_extra_up  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_QCD_extra_up_"+tag[j]+"CR.txt";
+			TString f_QCD_scale_extra_down  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_QCD_extra_down_"+tag[j]+"CR.txt";
+			TString f_Sigout_scale="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/CR/"+recovars[i]+"_uncer_SigOut_"+tag[j]+"CR.txt";
+			TString f_Sig_scale   ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/CR/"+genvars[i]+"_uncer"+tag[j]+"CR.txt";
+			TString f_jes         ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jes/CR/"+recovars[i]+"_jes_uncer"+tag[j]+"CR.txt";
+			TString f_jer         ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jer/CR/"+recovars[i]+"_jer_uncer"+tag[j]+"CR.txt";
+			TString f_l1pref      ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/l1pref/CR/"+recovars[i]+"_l1pref"+tag[j]+"_uncerCR.txt";
+			TString f_ele_ID ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_ele_ID_"+tag[j]+".txt";
+			TString f_ele_reco ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_ele_reco_"+tag[j]+".txt";
+			TString f_mu_eff ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_all_"+tag[j]+".txt";
+			TString f_mu_trigger ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_trigger_"+tag[j]+".txt";
+			TString f_photon_ID ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_photon_ID_"+tag[j]+".txt";
 			run(recovars[i],genvars[i],tag[j],f_fake);
 			run(recovars[i],genvars[i],tag[j],f_QCD_pdf);
 			run(recovars[i],genvars[i],tag[j],f_Sigout_pdf);

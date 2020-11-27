@@ -3,7 +3,7 @@
 void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1,TString tag){
      const int kk = vec_branchname.size();
      TString name=file->GetName();
-     TTree*tree=(TTree*)file->Get("demo");     
+     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      map<TString, double> variables;
      for(int i=0;i<vec_branchname.size();i++){
@@ -92,28 +92,29 @@ int Unfold_uncer_batch_bkg(){
      vector<double> jetptBins={30,150,250,350,800};
      vector<double> MvaBins={100,150,1000};
      vector<double> MjjBins={150,200,300,400};
-//     bins.push_back(ptlepBins);
-//     bins.push_back(photonEtBins);
-//     bins.push_back(jetptBins);
-//     bins.push_back(MvaBins);
+     bins.push_back(ptlepBins);
+     bins.push_back(photonEtBins);
+     bins.push_back(jetptBins);
      bins.push_back(MjjBins);
 
-     TString dir1="/eos/user/y/yian/2016legacy/";     
-     TFile*file1=new TFile(dir1+"cutla-outZA_pweight.root");
-     TString dir2="/eos/user/y/yian/2017cutla/";     
-     TFile*file2=new TFile(dir2+"cutla-outZA-pweight.root");
-     TString dir3="/eos/user/y/yian/2018cutla/";     
-     TFile*file3=new TFile(dir3+"cutla-outZA_pweight.root");
+     TString dir1="/home/pku/anying/cms/rootfiles/2016/";     
+     TString dir2="/home/pku/anying/cms/rootfiles/2017/";     
+     TString dir3="/home/pku/anying/cms/rootfiles/2018/";     
+     TFile*file1=new TFile(dir1+"cutla-outZA16.root");
+     TFile*file2=new TFile(dir2+"cutla-outZA17.root");
+     TFile*file3=new TFile(dir3+"cutla-outZA18.root");
 
-     TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";     
-     TFile*file4=new TFile(dir+"unfold_16outZA-EWK.root");
-     TFile*file5=new TFile(dir+"unfold_17outZA-EWK-pweight.root");
-     TFile*file6=new TFile(dir+"unfold_18outZA-EWK-pweight.root");
+     TString dir4="/home/pku/anying/cms/rootfiles/2016/";     
+     TString dir5="/home/pku/anying/cms/rootfiles/2017/";     
+     TString dir6="/home/pku/anying/cms/rootfiles/2018/";     
+     TFile*file4=new TFile(dir4+"unfold_GenCutla-outZA-EWK16.root");
+     TFile*file5=new TFile(dir5+"unfold_GenCutla-outZA-EWK17.root");
+     TFile*file6=new TFile(dir6+"unfold_GenCutla-outZA-EWK18.root");
 
-//     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genZGmass","genMjj"};
-//     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
-     vector<TString> genvars={"genMjj"};
-     vector<TString> recovars={"Mjj"};
+     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+//     vector<TString> genvars={"genMjj"};
+//     vector<TString> recovars={"Mjj"};
 //     for(int i=0;i<bins.size();i++){
 	     run(file1,recovars, bins,cut1,"16");
 	     run(file2,recovars, bins,cut1,"17");

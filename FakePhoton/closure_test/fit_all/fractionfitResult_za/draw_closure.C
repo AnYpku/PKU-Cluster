@@ -23,6 +23,8 @@ void run(double lowpt,double highpt,TString tag,TString channel){
      gStyle->SetOptStat(0);
      h2->SetMarkerSize(1.5);
      h2->Draw("colztext");
+     h2->GetXaxis()->SetTitle("low chiso");
+     h2->GetYaxis()->SetTitle("high chiso");
      c1->Print("./closure/"+channel+tag+Form("pt%0.f_%0.f.pdf",lowpt,highpt));
 }
 int draw_closure(){ 

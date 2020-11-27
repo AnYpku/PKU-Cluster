@@ -41,8 +41,8 @@ void run(TString var,TString tag){
 		 cout<<endl;
 }
 int uncer_fakephoton(){
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
-     vector<TString> tag={"2016","2017","2018"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+     vector<TString> tag={"16","17","18"};
      for(int i=0;i<recovars.size();i++){
 	     for(int j=0;j<tag.size();j++){
 		     run(recovars[i],tag[j]);

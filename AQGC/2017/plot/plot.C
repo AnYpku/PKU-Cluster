@@ -192,7 +192,7 @@ void aa(string a, double limit){
         gr->Draw("SAME 2");
 
 	h6->Draw("hist same");  // aQGC
-	h1->Draw("hist PE same");  // 0 for Zero data
+//	h1->Draw("hist PE same");  // 0 for Zero data
 
 	const double alpha = 1 - 0.6827;
 	TGraphAsymmErrors * g = new TGraphAsymmErrors(h1);

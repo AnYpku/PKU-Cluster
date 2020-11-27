@@ -2,9 +2,7 @@ void run(TString var,TString sample,TString tag){
         fstream ftxt("./"+var+"_jes_uncer"+tag+".txt", ios::app );
 	ofstream f1("./"+var+"_"+sample+"_jes_uncer"+tag+".txt");
 	TFile*file;
-	if(sample.Contains("EWK"))
-		file = new TFile("./root/unfold_"+tag+"outJEC_ZA-EWK_"+var+"_jes"+tag+".root");
-        else file=new TFile("./root/unfold_"+sample+"_"+var+"_jes"+tag+".root");
+	file=new TFile("./root/unfold_"+sample+"_"+var+"_jes"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get(var+"_0");
 	TH1D* h2 = (TH1D*)file->Get(var+"_1");
 	TH1D* h3 = (TH1D*)file->Get(var+"_2");
@@ -23,7 +21,7 @@ void run(TString var,TString sample,TString tag){
 	}//add over flow
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
 	Double_t uncer[num];
-	cout<<"uncertainty ";
+	cout<<tag<<" "<<sample<<" "<<var<<" uncertainty ";
 	f1<<"jes_"<<sample<<"=[";
 	ftxt<<"jes"<<tag<<"_"<<sample<<"=[";
 		 for(Int_t i=0;i<num;i++){
@@ -46,7 +44,7 @@ void run(TString var,TString sample,TString tag){
 }
 int uncer_jesr(){
      vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-     vector<TString> genvars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+     vector<TString> genvars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<genvars.size();i++){
         for(int j=0;j<sample.size();j++){
 		run(genvars[i],sample[j],"16");

@@ -42,7 +42,10 @@ void run(TString sample, TString tag,int num){
                     else if(name.Contains("qcd")==0&& num<4){
 			    double factor=h1[0]->Integral()/h1[j]->Integral();
 			    cout<<tag<<" "<<name<<" "<<factor<<endl;
-			    vec_content.push_back(factor*h1[j]->GetBinContent(k+1));
+			    if(name.Contains("ewk"))
+				    vec_content.push_back(factor*h1[j]->GetBinContent(k+1));
+			    else
+				    vec_content.push_back(h1[j]->GetBinContent(k+1));
 		    }
 	    }
 	    biggest = max_element(begin(vec_content),end(vec_content));

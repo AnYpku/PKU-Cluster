@@ -277,7 +277,7 @@ void aa(string a, double limit){
 	char buffer3[256];
 	sprintf(buffer3, "ZG_%s.pdf",a.c_str());
 //	cmsLumi(1);
-	CMS_lumi(fPad1, 4, 0, "136.1");	
+	CMS_lumi(fPad1, 4, 0., "136.1");	
 
 	fPad1->Update();
 	c01->SaveAs(buffer3);

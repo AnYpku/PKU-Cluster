@@ -561,7 +561,7 @@ void EDBRHistoMaker::createAllHistos() {
 	hs.setHisto("phiVlep", 16, -3.14, 3.14);
 	hs.setHisto("massVlep", 18, 70, 110);
 	hs.setHisto("photonet", 8, 20, 105);
-	hs.setHisto("photoneta", 12, -1.5, 1.5);
+	hs.setHisto("photoneta", 12, 1.566, 2.5);
 	hs.setHisto("photonphi", 16, -3.14, 3.14);
 	hs.setHisto("photonsieie", 10, 0, 0.01022);
 	hs.setHisto("photonnhiso", 10, 0, 3);
@@ -577,7 +577,7 @@ void EDBRHistoMaker::createAllHistos() {
 	hs.setHisto("jet1eta", 16, -4.7, 4.7);
 	hs.setHisto("jet2pt", 9, 30, 300);
 	hs.setHisto("jet2eta", 16, -4.7, 4.7);
-	hs.setHisto("Mjj", 5, 150, 400);
+	hs.setHisto("Mjj", 8, 500, 2000);
 	hs.setHisto("ZGmass", 8, 70, 400);
 	hs.setHisto("nVtx", 19, 0,76);
 	hs.setHisto("zepp", 9, 0, 4.5);
@@ -734,9 +734,10 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
                 Bool_t G=!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt>30 && jet2pt<50.;
                 Bool_t H=fabs(jet1eta)<4.7&&jet1pt>50 ;
                 Bool_t I=fabs(jet2eta)<4.7 && jet2pt>50 ;
-                actualWeight=0.991;
+//                actualWeight=0.991//;
+                actualWeight=0;
 //data
-		if ( lep == 11 &&  (HLT_Ele1>0 || HLT_Ele2 > 0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20.&& ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) && /*( ((A||C)&&(B||D)) || (E&&(F||G)) || (H&&I) )*/(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )/*(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )*/  && drla>0.7&&drla<10&&drla2>0.7&&drla2<10 && Mjj > 150&&Mjj<400&&ZGmass>100  ) {
+		if ( lep == 11 &&  (HLT_Ele1>0 || HLT_Ele2 > 0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20.&& ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) && /*( ((A||C)&&(B||D)) || (E&&(F||G)) || (H&&I) )*/(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )/*(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )*/  && drla>0.7&&drla<10&&drla2>0.7&&drla2<10 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 /*&& Mjj > 150&&Mjj<400&&ZGmass>100*/ ) {
 			//if(Mjj<400)
 			numbe_out++;
 			//cout<<"L1 = "<<L1<<endl;
@@ -891,7 +892,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
                 Bool_t H=fabs(jet1eta)<4.7&&jet1pt>50 ;
                 Bool_t I=fabs(jet2eta)<4.7 && jet2pt>50 ;
 //mc
-		if (lep == 11 &&  (HLT_Ele1>0 || HLT_Ele2 > 0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20.&& ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )  && /*( ((A||C)&&(B||D)) || (E&&(F||G)) || (H&&I) )*/(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )/*(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )*/  && drla>0.7 && drla<10 && drla2>0.7 && drla2<10 &&  Mjj > 150 && Mjj<400 && ZGmass>100  ) {
+		if (lep == 11 &&  (HLT_Ele1>0 || HLT_Ele2 > 0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20.&& ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )  && /*( ((A||C)&&(B||D)) || (E&&(F||G)) || (H&&I) )*/(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )/*(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )*/  && drla>0.7 && drla<10 && drla2>0.7 && drla2<10 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 /*&& Mjj > 150 && Mjj<400 && ZGmass>100*/) {
 			//if(Mjj<400) 
 			numbe_out++;
 			treename->Fill();
@@ -923,7 +924,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			(theHistograms["jet1eta"])->Fill(jet1eta, actualWeight);
 			(theHistograms["jet2pt"])->Fill(jet2pt, actualWeight);
 			(theHistograms["jet2eta"])->Fill(jet2eta, actualWeight);
-			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+			(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
 			(theHistograms["ZGmass"])->Fill(ZGmass, actualWeight);
 			(theHistograms["nVtx"])->Fill(nVtx, actualWeight);
 			(theHistograms["zepp"])->Fill(zepp, actualWeight);

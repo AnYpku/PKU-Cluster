@@ -14,6 +14,7 @@ void runxx(TString dir,TString outname){
 	m1.endJob();
 }
 int main(){
+//	TString dir="./rootfiles/";
 	TString dir="/home/pku/guanz/wwaroot/final/lep/";
 	TString name="WWA.root";
         runxx(dir,name);

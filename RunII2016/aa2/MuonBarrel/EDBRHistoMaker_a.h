@@ -64,7 +64,7 @@ class EDBRHistoMaker {
                 Int_t HLT_Ele5;
                 Int_t HLT_Mu2;
                 Int_t HLT_Mu1;
-                Int_t HLT_Mu5;
+                Int_t HLT_Mu3;
                 Int_t HLT_Mu6;
 		Double_t nump;
 		Double_t numm;
@@ -187,7 +187,7 @@ class EDBRHistoMaker {
 		TBranch *b_HLT_Ele5;   //!
 		TBranch *b_HLT_Mu2;   //!
 		TBranch *b_HLT_Mu1;   //!
-		TBranch *b_HLT_Mu5;   //!
+		TBranch *b_HLT_Mu3;   //!
 		TBranch *b_HLT_Mu6;   //!
 		TBranch *b_nump;   //!
 		TBranch *b_numm;   //!
@@ -331,7 +331,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("HLT_Ele5", &HLT_Ele5, "HLT_Ele5/I");
 	treename->Branch("HLT_Mu2", &HLT_Mu2, "HLT_Mu2/I");
 	treename->Branch("HLT_Mu1", &HLT_Mu1, "HLT_Mu1/I");
-	treename->Branch("HLT_Mu5", &HLT_Mu5, "HLT_Mu5/I");
+	treename->Branch("HLT_Mu3", &HLT_Mu3, "HLT_Mu3/I");
 	treename->Branch("HLT_Mu6", &HLT_Mu6, "HLT_Mu6/I");
 	treename->Branch("nump", &nump, "nump/D");
 	treename->Branch("numm", &numm, "numm/D");
@@ -445,7 +445,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("HLT_Ele5", &HLT_Ele5, &b_HLT_Ele5);
 	fChain->SetBranchAddress("HLT_Mu2", &HLT_Mu2, &b_HLT_Mu2);
 	fChain->SetBranchAddress("HLT_Mu1", &HLT_Mu1, &b_HLT_Mu1);
-	fChain->SetBranchAddress("HLT_Mu5", &HLT_Mu5, &b_HLT_Mu5);
+	fChain->SetBranchAddress("HLT_Mu3", &HLT_Mu3, &b_HLT_Mu3);
 	fChain->SetBranchAddress("HLT_Mu6", &HLT_Mu6, &b_HLT_Mu6);
 	fChain->SetBranchAddress("nump", &nump, &b_nump);
 	fChain->SetBranchAddress("numm", &numm, &b_numm);
@@ -587,7 +587,7 @@ void EDBRHistoMaker::createAllHistos() {
 	hs.setHisto("jet1eta", 16, -4.7, 4.7);
 	hs.setHisto("jet2pt", 9, 30, 300);
 	hs.setHisto("jet2eta", 16, -4.7, 4.7);
-	hs.setHisto("Mjj", 5, 150, 400);
+	hs.setHisto("Mjj", 8, 500, 2000);
 	hs.setHisto("ZGmass", 8, 70, 400);
 	hs.setHisto("nVtx", 19, 0,76);
 	hs.setHisto("zepp", 9, 0, 4.5);
@@ -743,9 +743,9 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 		l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
                 if(drla==10) drla=-10;
                 if(drla2==10) drla2=-10;
-//		actualWeight=0.991;
+		actualWeight=0;
 //data
-                if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&  (HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && (  fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && Mjj>150 && Mjj<400 && ZGmass>100 ) 
+                if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&  (HLT_Mu1 > 0||HLT_Mu2>0 || HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && (  fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 /*&& Mjj>150 && Mjj<400*/) 
 		  ) {
 			//if(Mjj<400) 
 			sum = sum + actualWeight;
@@ -777,7 +777,7 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 			(theHistograms["jet1eta"])->Fill(jet1eta, actualWeight);
 			(theHistograms["jet2pt"])->Fill(jet2pt, actualWeight);
 			(theHistograms["jet2eta"])->Fill(jet2eta, actualWeight);
-			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+			(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
 			(theHistograms["ZGmass"])->Fill(ZGmass, actualWeight);
 			(theHistograms["nVtx"])->Fill(nVtx, actualWeight);
 			(theHistograms["zepp"])->Fill(zepp, actualWeight);
@@ -902,7 +902,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
                 if(filename.Contains("plj")) 
                      actualWeight = scalef;
 // mc
-                if( drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 && ( HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && (fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && Mjj>150 && Mjj<400 && ZGmass>100){
+                if( drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 && ( HLT_Mu1 > 0||HLT_Mu2>0||HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && (fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5/* && delta_phi>1.9 && zepp<2.4 *//*&& Mjj>150 && Mjj<400 && ZGmass>100*/){
 			//if(Mjj<400)	
 			if(theWeight>0) npp++;
 			if(theWeight<0) nmm++;
@@ -936,7 +936,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			(theHistograms["jet1eta"])->Fill(jet1eta, actualWeight);
 			(theHistograms["jet2pt"])->Fill(jet2pt, actualWeight);
 			(theHistograms["jet2eta"])->Fill(jet2eta, actualWeight);
-			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+			(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
 			(theHistograms["ZGmass"])->Fill(ZGmass, actualWeight);
 			(theHistograms["nVtx"])->Fill(nVtx, actualWeight);
 			(theHistograms["zepp"])->Fill(zepp, actualWeight);

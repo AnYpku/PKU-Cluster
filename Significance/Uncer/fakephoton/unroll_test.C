@@ -102,7 +102,7 @@ void unroll_name(TString channel,TString tag){
 	t_ZA[0]->GetYaxis()->SetRangeUser(0,vec_ymax[0]+0.3*vec_ymax[0]);
 	t_ZA[0]->Draw("HIST");
 	t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-	t_ZA[0]->GetXaxis()->SetLabelSize(0.1);
+	t_ZA[0]->GetXaxis()->SetLabelSize(0.105);
 	t_ZA[0]->GetYaxis()->SetLabelSize(0.07);
 	t_ZA[0]->GetXaxis()->SetTitleSize(0.1);
 	t_ZA[0]->GetXaxis()->SetTitleFont(12);
@@ -114,12 +114,12 @@ void unroll_name(TString channel,TString tag){
 		for(Int_t j=1;j<=t_ZA[i]->GetNbinsX();j++){ t_ZA[i]->GetXaxis()->SetBinLabel(j,name[j-1]);}
 		t_ZA[i]->Draw("HIST,SAME");
 		if(i==0)         l2->AddEntry(t_ZA[i],"center");
-		else if(i==1)    l2->AddEntry(t_ZA[i],"centerup");
-		else if(i==2)    l2->AddEntry(t_ZA[i],"centerdown");
+		else if(i==1)    l2->AddEntry(t_ZA[i],"up");
+		else if(i==2)    l2->AddEntry(t_ZA[i],"down");
 	}
 
         TLatex latex;
-        latex.SetTextSize(0.06);
+        latex.SetTextSize(0.08);
         latex.SetLineWidth(2);
         latex.DrawLatex(1.4,0.85*vec_ymax[0],"2.5<#Delta#eta_{jj}<4.5");
         latex.DrawLatex(4.,0.85*vec_ymax[0],"4.5<#Delta#eta_{jj}<6");

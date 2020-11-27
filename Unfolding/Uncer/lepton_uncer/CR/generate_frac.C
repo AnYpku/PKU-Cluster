@@ -2,9 +2,8 @@
 void run(TString dir,TString tag,TString cut, TString cut1,TString cut2){
 	ofstream f("./lepton_uncer"+tag+".txt");
         TFile*file;
-	if(tag.Contains("16"))file=new TFile(dir+"unfold_"+tag+"outZA-EWK.root");
-	else file=new TFile(dir+"unfold_"+tag+"outZA-EWK-pweight.root");
-        TTree*tree=(TTree*)file->Get("demo");
+	file=new TFile(dir+"unfold_GenCutla-outZA-EWK"+tag+".root");
+        TTree*tree=(TTree*)file->Get("ZPKUCandidates");
         int total=tree->GetEntries(cut);cout<<"total events with reco cuts "<<total<<endl;
         int n_mu =tree->GetEntries(cut1);cout<<"total events with reco cuts in muon channel "<<n_mu<<endl; 
         int n_ele =tree->GetEntries(cut2);cout<<"total events with reco cuts in ele channel "<<n_ele<<endl; 
@@ -30,9 +29,10 @@ int generate_frac(){
 	TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 	TString Reco_mu= "("+LEPmu+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 	TString Reco_ele= "("+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
-	TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/";
-	run(dir,"16",Reco,Reco_mu,Reco_ele);
-	run(dir,"17",Reco,Reco_mu,Reco_ele);
-	run(dir,"18",Reco,Reco_mu,Reco_ele);
+        vector<TString>tag={"16","17","18"};
+	for(int i=0;i<tag.size();i++){
+		TString dir="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
+		run(dir,tag[i],Reco,Reco_mu,Reco_ele);
+	}
 	return 0;
 }

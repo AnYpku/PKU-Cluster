@@ -3,8 +3,8 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
-#include "../ele_channel_scale.C"
-#include "../muon_channel_scale.C"
+#include "ele_channel_scale.C"
+#include "muon_channel_scale.C"
 #include <TRandom.h>
 #include <iostream>
 //#include "get_rochester_scale.C"
@@ -31,31 +31,42 @@ void xx::Loop()
 
 	// for lep and photon scales
 	// muon ID
-	TFile * f_BF= TFile::Open("../SF/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ID.root");
+	TFile * f_BF= TFile::Open("./SF/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ID.root");
 	TH2D* ID_BF=0;
 	f_BF->GetObject("NUM_TightID_DEN_TrackerMuons_pt_abseta", ID_BF);
         cout<<"open the muon ID file: EfficienciesStudies_2018_rootfiles_RunABCD_SF_ID.root"<<endl;
 
 	// muon iso
-	TFile * f_iso_BF= TFile::Open("../SF/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ISO.root");
+	TFile * f_iso_BF= TFile::Open("./SF/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ISO.root");
 	TH2D* iso_BF=0;
 	f_iso_BF->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta", iso_BF);
         cout<<"open the muon ISO file: EfficienciesStudies_2018_rootfiles_RunABCD_SF_ISO.root"<<endl;
+	//muon hlt
+	TFile*f_hltmu=new TFile("./SF/muon_HLT_SF.root");
+        TH2D*HLT_mu=(TH2D*)f_hltmu->Get("h2");
+	cout<<"open the muon hlt file: muon_HLT_SF.root"<<endl;
 
 	// ele id
-	TFile * f= TFile::Open("../SF/2018_ElectronMedium.root");
+	TFile * f= TFile::Open("./SF/2018_ElectronMedium.root");
 	TH2F* ID=0;
 	f->GetObject("EGamma_SF2D", ID);
         cout<<"open the ele ID file: 2018_ElectronMedium.root"<<endl;
 
 	//ele reco
-	TFile* Reco_egamma= TFile::Open("../SF/egammaEffi.txt_EGM2D_updatedAll.root");
+	TFile* Reco_egamma= TFile::Open("./SF/egammaEffi.txt_EGM2D_updatedAll.root");
 	TH2F* Reco=0;
 	Reco_egamma->GetObject("EGamma_SF2D", Reco);
         cout<<"open the ele RECO file: egammaEffi.txt_EGM2D_updatedAll.root"<<endl;
 
+	//ele hlt
+	TFile*f_ele1=new TFile("./SF/egammaEffi.txt_EGM2D_leg1.root");
+	TFile*f_ele2=new TFile("./SF/egammaEffi.txt_EGM2D_leg2.root");
+	TH2F*HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+	TH2F*HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+	TH2F*HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+	TH2F*HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
 	//photon id
-	TFile* ID_photon_file = TFile::Open("../SF/2018_PhotonsMedium.root");
+	TFile* ID_photon_file = TFile::Open("./SF/2018_PhotonsMedium.root");
 	TH2F* ID_photon=0;
 	ID_photon_file->GetObject("EGamma_SF2D", ID_photon);
 	cout<<"open the photon ID file: 2018_PhotonsMedium.root"<<endl;
@@ -74,13 +85,13 @@ void xx::Loop()
 		muon1_iso_scale=-1;
 		muon2_iso_scale=-1;
 		muon_hlt_scale=1;
+		ele_hlt_scale=1;
 		photon_id_scale=-1;
 
 		Long64_t ientry = LoadTree(jentry);
 		if (ientry < 0) break;
 		nb = fChain->GetEntry(jentry);   nbytes += nb;
 		// if (Cut(ientry) < 0) continue;
-		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<endl;
 
 		if(m_dataset.Contains("Mu")){ scalef=1.0; run_period=1;}
 		if(m_dataset.Contains("Ele")) { scalef=1.0; run_period=5;}
@@ -102,7 +113,9 @@ void xx::Loop()
 		if(m_dataset.Contains("outWZ")){ scalef=1000.*27.6/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("outZZ")){ scalef=1000.*12.14/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA_aQGC")){ scalef=1000.*1.073/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-                if(m_dataset.Contains("interf")){ scalef=1000.*0.012/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("interf")){ scalef=1000.*0.012/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+
+		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<scalef<<" "<<nentries<<endl;
 
 		if(m_dataset.Contains("Mu")==0 && m_dataset.Contains("Ele")==0){	
 			pileupWeight=h13->GetBinContent(h13->GetXaxis()->FindBin(npT));
@@ -115,12 +128,14 @@ void xx::Loop()
 			ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID);
 			ele1_reco_scale=get_ele_Reco(etalep1, ptlep1,Reco);
 			ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco);
+			ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
 		}
 		if(lep==13){
 			muon1_id_scale=get_muon_ID(etalep1,ptlep1,ID_BF);
 			muon2_id_scale=get_muon_ID(etalep2,ptlep2,ID_BF);
 			muon1_iso_scale=get_muon_iso(etalep1,ptlep1,iso_BF);
 			muon2_iso_scale=get_muon_iso(etalep2,ptlep2,iso_BF);
+			muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 		}
 		if(photonet>0) {
 			photon_id_scale=get_photon_ID(photoneta,photonet,ID_photon);
@@ -138,14 +153,15 @@ void xx::Loop()
 		//  lep and photon scacles
 		LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 ;
 		LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
+		//		SignalRegion= deltaetajj>2.5 && zepp<1.8&&Mjj>500;
 		PHOTON= photonet>20 && ( (fabs(photoneta)<1.4442) || (fabs(photoneta)>1.566 && fabs(photoneta)<2.5) ) ;
 		JET=jet1pt> 10 && jet2pt > 10 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
-                cut0++;
-		if( !( (LEPmu||LEPele) && PHOTON) )
+		cut0++;
+		if( ! (LEPmu||LEPele) )
 			continue;
-                if( !(PHOTON) )
+		if( !(PHOTON) )
 			continue;
-                cut1++;
+		cut1++;
 		ExTree->Fill();
 	}
 	f->Close();
@@ -154,5 +170,6 @@ void xx::Loop()
 	f_BF->Close();
 	f_iso_BF->Close();
 	input13->Close();
-        cout<<"before cut: "<<cut0<<"; after cut: "<<cut1<<endl;
+	f_hltmu->Close();
+	cout<<"before cut: "<<cut0<<"; after cut: "<<cut1<<endl;
 }

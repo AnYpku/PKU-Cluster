@@ -509,8 +509,9 @@ public :
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     endJob();
-   virtual void     genparticles();
+   virtual void     SetValue();
    virtual void     ResetValue();
+   virtual void     genparticles();
    Bool_t LEPmu,LEPele,genmuon[6],genele[6],genjet[6],genphoton[6];
    Bool_t photon,jet,dr,SignalRegion;
    Bool_t GenLEPmu,GenLEPele,GenPhoton,GenJet,GenDr,GenSignalRegion;
@@ -557,6 +558,10 @@ public :
      double    ele2_reco_scale;
      double    photon_id_scale;
      double    photon_veto_scale;
+     double ele_hlt_scale;
+     double puIdweight_L;
+     double puIdweight_M;
+     double puIdweight_T;
 };
 
 #endif
@@ -624,7 +629,6 @@ void rm::Init(TTree *tree)
 	fout = new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_"+m_dataset, "RECREATE");
 	ExTree = fChain->CloneTree(0);
 	ExTree->Branch("scalef",&scalef,"scalef/D");
-//	ExTree->Branch("lumi",&lumi,"lumi/D");
 	ExTree->Branch("nentries",&nentries,"nentries/I");
 	// lep and photon scales
 	ExTree->Branch("ele1_id_scale", &ele1_id_scale, "ele1_id_scale/D");
@@ -638,6 +642,10 @@ void rm::Init(TTree *tree)
 	ExTree->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
 	ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D"); 
 	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
+	ExTree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
+	ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
+	ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
+	ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
 	// lep and photon scales
 	ExTree->Branch("genyVlep",     &genyVlep,     "genyVlep/D");
 	ExTree->Branch("genphiVlep",   &genphiVlep,   "genphiVlep/D");

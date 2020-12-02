@@ -12,6 +12,19 @@ void xx::Loop(TString name)
 {
    if (fChain == 0) return;
 
+   TFile*f_hltmu=new TFile("./muon_HLT_SF.root");
+   TH2D*HLT_mu=(TH2D*)f_hltmu->Get("h2");
+   cout<<"open the muon hlt file: muon_HLT_SF.root"<<endl;
+
+   //ele hlt
+   TFile*f_ele1=new TFile("./egammaEffi.txt_EGM2D_leg1.root");
+   TFile*f_ele2=new TFile("./egammaEffi.txt_EGM2D_leg2.root");
+   TH2F*HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+   TH2F*HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+   TH2F*HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+   TH2F*HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
+   cout<<"open the ele hlt file"<<endl;
+
    Long64_t nentries = fChain->GetEntriesFast();
    int cut0=0, cut1=0;
    bool LEPele,LEPmu,JET,PHOTON,SignalRegion,DR;
@@ -26,6 +39,13 @@ void xx::Loop(TString name)
        
       if(name.Contains("Mu")) scalef=1;
       if(name.Contains("Ele"))  scalef=1;
+
+      ele_hlt_scale=1;
+      muon_hlt_scale=1;
+      if(lep==11)
+              ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
+      if(lep==13)
+              muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 
       if(drla==10) drla=-1; if(drla2==10) drla2=-1; if(drj1a==10) drj1a=-1;if(drj2a==10) drj2a=-1;
 

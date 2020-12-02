@@ -41,6 +41,10 @@ void xx::Loop()
 	TH2D* iso_BF=0;
 	f_iso_BF->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta", iso_BF);
         cout<<"open the muon ISO file: EfficienciesStudies_2018_rootfiles_RunABCD_SF_ISO.root"<<endl;
+	//muon hlt
+	TFile*f_hltmu=new TFile("./SF/muon_HLT_SF.root");
+        TH2D*HLT_mu=(TH2D*)f_hltmu->Get("h2");
+	cout<<"open the muon hlt file: muon_HLT_SF.root"<<endl;
 
 	// ele id
 	TFile * f= TFile::Open("./SF/2018_ElectronMedium.root");
@@ -53,6 +57,11 @@ void xx::Loop()
 	TH2F* Reco=0;
 	Reco_egamma->GetObject("EGamma_SF2D", Reco);
         cout<<"open the ele RECO file: egammaEffi.txt_EGM2D_updatedAll.root"<<endl;
+
+	//ele hlt
+	TFile*f_hltele=new TFile("./SF/eleHLT18_SF.root");
+        TH2D*HLT_ele=(TH2D*)f_hltele->Get("SF");
+	cout<<"open the ele hlt file: eleHLT18_SF.root"<<endl;
 
 	//photon id
 	TFile* ID_photon_file = TFile::Open("./SF/2018_PhotonsMedium.root");
@@ -74,13 +83,13 @@ void xx::Loop()
 		muon1_iso_scale=-1;
 		muon2_iso_scale=-1;
 		muon_hlt_scale=1;
+		ele_hlt_scale=1;
 		photon_id_scale=-1;
 
 		Long64_t ientry = LoadTree(jentry);
 		if (ientry < 0) break;
 		nb = fChain->GetEntry(jentry);   nbytes += nb;
 		// if (Cut(ientry) < 0) continue;
-		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<endl;
 
 		if(m_dataset.Contains("Mu")){ scalef=1.0; run_period=1;}
 		if(m_dataset.Contains("Ele")) { scalef=1.0; run_period=5;}
@@ -101,9 +110,10 @@ void xx::Loop()
 		if(m_dataset.Contains("outWW")){ scalef=1000.*75.8/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("outWZ")){ scalef=1000.*27.6/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("outZZ")){ scalef=1000.*12.14/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		if(m_dataset.Contains("ZA_aQGC")){ scalef=1000.*1.073/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("aQGC")){ scalef=1000.*1.073/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
                 if(m_dataset.Contains("interf")){ scalef=1000.*0.012/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 
+		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<" "<<scalef<<endl;
 		if(m_dataset.Contains("Mu")==0 && m_dataset.Contains("Ele")==0){	
 			pileupWeight=h13->GetBinContent(h13->GetXaxis()->FindBin(npT));
 			// cout<<pileupWeight<<endl;
@@ -115,12 +125,14 @@ void xx::Loop()
 			ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID);
 			ele1_reco_scale=get_ele_Reco(etalep1, ptlep1,Reco);
 			ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco);
+			ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,HLT_ele);
 		}
 		if(lep==13){
 			muon1_id_scale=get_muon_ID(etalep1,ptlep1,ID_BF);
 			muon2_id_scale=get_muon_ID(etalep2,ptlep2,ID_BF);
 			muon1_iso_scale=get_muon_iso(etalep1,ptlep1,iso_BF);
 			muon2_iso_scale=get_muon_iso(etalep2,ptlep2,iso_BF);
+			muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 		}
 		if(photonet>0) {
 			photon_id_scale=get_photon_ID(photoneta,photonet,ID_photon);
@@ -144,8 +156,8 @@ void xx::Loop()
                 cut0++;
 		if( ! (LEPmu||LEPele) )
 			continue;
-                if( !(PHOTON) )
-			continue;
+//                if( !(PHOTON) )
+//			continue;
                 cut1++;
 		ExTree->Fill();
 	}
@@ -155,5 +167,7 @@ void xx::Loop()
 	f_BF->Close();
 	f_iso_BF->Close();
 	input13->Close();
+	f_hltmu->Close();
+	f_hltele->Close();
         cout<<"before cut: "<<cut0<<"; after cut: "<<cut1<<endl;
 }

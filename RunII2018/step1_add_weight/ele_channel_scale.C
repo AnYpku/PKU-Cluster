@@ -23,3 +23,11 @@ double get_photon_ID(double photoneta, double photonet, TH2F* ID_photon){
 
 	return photon_ID_scale;
 }
+double get_eleHLT_SF(double etalep, double ptlep, TH2D* HLT){
+	double ptlep_tmp = ptlep;
+	if(ptlep>500) ptlep_tmp=499.;
+	double lep_HLT_scale=-1;
+	lep_HLT_scale=HLT->GetBinContent(HLT->FindBin(etalep,ptlep_tmp));
+
+	return lep_HLT_scale;
+}

@@ -19,7 +19,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double ptVlep, yVlep, phiVlep, massVlep;
      double photonet,photoneta,photone,photonphi;
      double zepp_new,zepp_JEC_up,zepp_JEC_down;
-     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight;
+     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight,puIdweight_T;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
      double actualWeight;int lep;
      tree->SetBranchAddress("lep",&lep);
@@ -74,6 +74,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("photone",&photone);
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
+     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
      map<TString, double> variables;
      tree->SetBranchAddress(var+"_new", &variables[var+"_new"]);
      tree->SetBranchAddress(var+"_JEC_up", &variables[var+"_JEC_up"]);
@@ -169,9 +170,9 @@ int Uncer_batch_bkg(){
 	vector<TString> sample={"ZA","ZA-EWK"};//,"TTA","VV","ST";
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
-			JET_new="( (  ( (fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65&&jet1pt_new>30&&jet1pt_new<50&&jet1puIdTight_new==1) || (!(fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65) && fabs(jet1eta_new)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_new)<4.7&& jet1pt_new>50) ) && ( (fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65&&jet2pt_new>30&&jet2pt_new<50&&jet2puIdTight_new==1)||(!(fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65)&&fabs(jet2eta_new)<4.7&&jet2pt_new>30&&jet2pt_new<50) ||(fabs(jet2eta_new)<4.7 && jet2pt_new>50) ) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
-			JET_up="( (  ( (fabs(jet1eta_JEC_up)<3.14&&fabs(jet1eta_JEC_up)>2.65&&jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&jet1puIdTight_JEC_up==1) || (!(fabs(jet1eta_JEC_up)<3.14&&fabs(jet1eta_JEC_up)>2.65) && fabs(jet1eta_JEC_up)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JEC_up)<4.7&& jet1pt_JEC_up>50) ) && ( (fabs(jet2eta_JEC_up)<3.14&&fabs(jet2eta_JEC_up)>2.65&&jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&jet2puIdTight_JEC_up==1)||(!(fabs(jet2eta_JEC_up)<3.14&&fabs(jet2eta_JEC_up)>2.65)&&fabs(jet2eta_JEC_up)<4.7&&jet2pt_JEC_up>30&&jet2pt_JEC_up<50) ||(fabs(jet2eta_JEC_up)<4.7 && jet2pt_JEC_up>50) ) ) && Mjj_JEC_up > 500 && deltaeta_JEC_up>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
-			JET_down="( (  ( (fabs(jet1eta_JEC_down)<3.14&&fabs(jet1eta_JEC_down)>2.65&&jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&jet1puIdTight_JEC_down==1) || (!(fabs(jet1eta_JEC_down)<3.14&&fabs(jet1eta_JEC_down)>2.65) && fabs(jet1eta_JEC_down)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JEC_down)<4.7&& jet1pt_JEC_down>50) ) && ( (fabs(jet2eta_JEC_down)<3.14&&fabs(jet2eta_JEC_down)>2.65&&jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&jet2puIdTight_JEC_down==1)||(!(fabs(jet2eta_JEC_down)<3.14&&fabs(jet2eta_JEC_down)>2.65)&&fabs(jet2eta_JEC_down)<4.7&&jet2pt_JEC_down>30&&jet2pt_JEC_down<50) ||(fabs(jet2eta_JEC_down)<4.7 && jet2pt_JEC_down>50) ) ) && Mjj_JEC_down > 500 && deltaeta_JEC_down>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
+			JET_new="( ( ((jet1pt_new>50&&fabs(jet1eta_new)<4.7)||(jet1pt_new>30&&jet1pt_new<50&&fabs(jet1eta_new)<4.7&&jet1puIdTight_new==1)) && ((jet2pt_new>50&&fabs(jet2eta_new)<4.7)||(jet2pt_new>30&&jet2pt_new<50&&fabs(jet2eta_new)<4.7&&jet2puIdTight_new==1)) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
+			JET_up="( ( ((jet1pt_JEC_up>50&&fabs(jet1eta_JEC_up)<4.7)||(jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&fabs(jet1eta_JEC_up)<4.7&&jet1puIdTight_JEC_up==1)) && ((jet2pt_JEC_up>50&&fabs(jet2eta_JEC_up)<4.7)||(jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&fabs(jet2eta_JEC_up)<4.7&&jet2puIdTight_JEC_up==1)) ) && Mjj_JEC_up > 500 && deltaeta_JEC_up>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
+			JET_down="( ( ((jet1pt_JEC_down>50&&fabs(jet1eta_JEC_down)<4.7)||(jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&fabs(jet1eta_JEC_down)<4.7&&jet1puIdTight_JEC_down==1)) && ((jet2pt_JEC_down>50&&fabs(jet2eta_JEC_down)<4.7)||(jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&fabs(jet2eta_JEC_down)<4.7&&jet2puIdTight_JEC_down==1)) ) && Mjj_JEC_down > 500 && deltaeta_JEC_down>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
 		}
 		else{
 			JET_new ="jet1pt_new> 30 && jet2pt_new > 30 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7 && Mjj_new > 500 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 && deltaeta_new >2.5";

@@ -22,6 +22,12 @@ void rm::Loop(TString tag)
    TFile*file_ISO_sys1;TH2D*ISO_muon_sys1;
    TFile*file_ISO_sys2;TH2D*ISO_muon_sys2;
    TFile*file_reco; TH2F*Reco_ele;
+   TFile*f_ele1; TFile*f_hltmu; TH2D*HLT_mu;TH2F*HLT_MC1;TH2F*HLT_MC2;
+   TFile*f_ele2; TH2F*HLT_SF1;TH2F*HLT_SF2;
+   TFile*fPUeff;TH2F*h2_eff_mc2017_L;TH2F*h2_eff_mc2017_M;TH2F*h2_eff_mc2017_T;
+   TFile*fPUsf;TH2F*h2_mistag_mc2017_L;TH2F*h2_mistag_mc2017_M;TH2F*h2_mistag_mc2017_T;
+   TH2F*h2_eff_sf2017_L;TH2F*h2_eff_sf2017_M;TH2F*h2_eff_sf2017_T;
+   TH2F*h2_mistag_sf2017_L;TH2F*h2_mistag_sf2017_M;TH2F*h2_mistag_sf2017_T;
    if(tag.Contains("16")){
 	   file_ID_sys1=new TFile("./muon_SFs/EfficienciesStudies_2016_legacy_rereco_rootfiles_RunBCDEF_SF_ID.root");
 	   file_ID_sys2=new TFile("./muon_SFs/EfficienciesStudies_2016_legacy_rereco_rootfiles_RunGH_SF_ID.root");
@@ -39,6 +45,16 @@ void rm::Loop(TString tag)
 
 	   file_gammaID=new TFile("./egamma_SFs/Fall17V2_2016_Medium_photons.root");
 	   ID_gamma=(TH2F*)file_ID->Get("EGamma_SF2D");
+
+	   f_hltmu=new TFile("./muon_SFs/muon_HLT_SF16.root");
+	   HLT_mu=(TH2D*)f_hltmu->Get("h2");
+
+	   f_ele1=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2016/small/egammaEffi.txt_EGM2D_leg1.root");
+	   f_ele2=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2016/small/egammaEffi.txt_EGM2D_leg2.root");
+	   HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+	   HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+	   HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+	   HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
    }
    if(tag.Contains("17")){
 	   file_ID_sys1=new TFile("./muon_SFs/RunBCDEF_SF_ID_syst.root");
@@ -53,6 +69,31 @@ void rm::Loop(TString tag)
 
 	   file_gammaID=new TFile("./egamma_SFs/2017_PhotonsMedium.root ");
 	   ID_gamma=(TH2F*)file_ID->Get("EGamma_SF2D");
+
+	   f_hltmu=new TFile("./muon_SFs/muon_HLT_SF17.root");
+	   HLT_mu=(TH2D*)f_hltmu->Get("h2");
+
+           f_ele1=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/small/egammaEffi.txt_EGM2D_leg1.root");
+           f_ele2=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/small/egammaEffi.txt_EGM2D_leg2.root");
+           HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+           HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+           HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+           HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
+
+	   fPUeff=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/effcyPUID_81Xtraining.root");
+	   fPUsf=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/scalefactorsPUID_81Xtraining.root");
+	   h2_eff_mc2017_L=(TH2F*)fPUeff->Get("h2_eff_mc2017_L");
+	   h2_eff_mc2017_M=(TH2F*)fPUeff->Get("h2_eff_mc2017_M");
+	   h2_eff_mc2017_T=(TH2F*)fPUeff->Get("h2_eff_mc2017_T");
+	   h2_mistag_mc2017_L=(TH2F*)fPUeff->Get("h2_mistag_mc2017_L");
+	   h2_mistag_mc2017_M=(TH2F*)fPUeff->Get("h2_mistag_mc2017_M");
+	   h2_mistag_mc2017_T=(TH2F*)fPUeff->Get("h2_mistag_mc2017_T");
+	   h2_eff_sf2017_L=(TH2F*)fPUsf->Get("h2_eff_sf2017_L");
+	   h2_eff_sf2017_M=(TH2F*)fPUsf->Get("h2_eff_sf2017_M");
+	   h2_eff_sf2017_T=(TH2F*)fPUsf->Get("h2_eff_sf2017_T");
+	   h2_mistag_sf2017_L=(TH2F*)fPUsf->Get("h2_mistag_sf2017_L");
+	   h2_mistag_sf2017_M=(TH2F*)fPUsf->Get("h2_mistag_sf2017_M");
+	   h2_mistag_sf2017_T=(TH2F*)fPUsf->Get("h2_mistag_sf2017_T");
    }
    if(tag.Contains("18")){
 	   file_ID_sys1=new TFile("./muon_SFs/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ID.root");
@@ -67,6 +108,16 @@ void rm::Loop(TString tag)
 
 	   file_gammaID=new TFile("./egamma_SFs/2018_PhotonsMedium.root ");
 	   ID_gamma=(TH2F*)file_ID->Get("EGamma_SF2D");
+
+	   f_hltmu=new TFile("./muon_SFs/muon_HLT_SF18.root");
+	   HLT_mu=(TH2D*)f_hltmu->Get("h2");
+
+	   f_ele1=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2018/small/egammaEffi.txt_EGM2D_leg1.root");
+	   f_ele2=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2018/small/egammaEffi.txt_EGM2D_leg2.root");
+	   HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+	   HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+	   HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+	   HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
    }
    TFile * input13 = new TFile ("/home/pku/anying/cms/PKU-Cluster/Unfolding/produce/copy/pu_"+tag+"/puweight.root");
    TH1* h13 = NULL;
@@ -83,6 +134,7 @@ void rm::Loop(TString tag)
 	   nb = fChain->GetEntry(jentry);   nbytes += nb;
 	   // if (Cut(ientry) < 0) continue;
 	   if(jentry%50000==0)      cout<<jentry<<" "<<nentries<<endl;
+	   SetValue();
 	   ResetValue();
 	   genparticles();
 
@@ -93,12 +145,12 @@ void rm::Loop(TString tag)
 		   continue;
 	   if( !(GenPhoton) )
 		   continue;
-           cut1++;
+	   cut1++;
 	   LEPmu = lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110;
 	   LEPele = lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
 	   photon = photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) );
-//	   if( !( (LEPmu)||(LEPele) ) )
-//		   continue;
+	   if( !( (LEPmu)||(LEPele) ) )
+		   continue;
 	   if(tag.Contains("16")){
 		   if(m_dataset.Contains("ZA")&&m_dataset.Contains("EWK")==0){ scalef=1000.*47.46/float(npp-nmm)*fabs(theWeight)/theWeight;} 
 		   if(m_dataset.Contains("ZA_interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight;}
@@ -114,14 +166,15 @@ void rm::Loop(TString tag)
 		   ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID_ele);
 		   ele1_reco_scale=get_ele_Reco(etalep1, ptlep1,Reco_ele);
 		   ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco_ele);
+		   ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
 	   }
-	   if(lep==13){
+	   else if(lep==13){
 		   if(tag.Contains("16")){
 			   muon1_id_scale=get_muon_ID_sys16(etalep1,ptlep1,ID_muon_sys1,ID_muon_sys2);
 			   muon2_id_scale=get_muon_ID_sys16(etalep2,ptlep2,ID_muon_sys1,ID_muon_sys2);
 			   muon1_iso_scale=get_muon_iso_sys16(etalep1,ptlep1,ISO_muon_sys1,ISO_muon_sys2);
 			   muon2_iso_scale=get_muon_iso_sys16(etalep2,ptlep2,ISO_muon_sys1,ISO_muon_sys2);
-			   //muon_hlt_scale=muon_HLT_scale(etalep1,etalep2,di_lep_trigger);
+			   muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 			   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
 			   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
 		   }
@@ -130,10 +183,16 @@ void rm::Loop(TString tag)
 			   muon2_id_scale=get_muon_ID_sys(etalep2,ptlep2,ID_muon_sys1);
 			   muon1_iso_scale=get_muon_iso_sys(etalep1,ptlep1,ISO_muon_sys1);
 			   muon2_iso_scale=get_muon_iso_sys(etalep2,ptlep2,ISO_muon_sys1);
+			   muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 			   //muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,di_lep_trigger);
 			   if(tag.Contains("17")){
 				   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9862;
 				   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
+				   if(jet1pt>30 && jet2pt>30){
+					   puIdweight_L=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
+					   puIdweight_M=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
+					   puIdweight_T=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+				   }
 			   }
 			   if(tag.Contains("18")){
 				   if(fabs(photoneta)<1.4442){
@@ -158,4 +217,21 @@ void rm::Loop(TString tag)
    }
    eff=cut1/nentries;
    cout<<cut1<<" "<<nentries<<";  "<<eff<<endl;
+}
+void rm::SetValue(){
+	ele1_id_scale=-1;
+	ele2_id_scale=-1;
+	ele1_reco_scale=-1;
+	ele2_reco_scale=-1;
+	muon1_id_scale=-1;
+	muon2_id_scale=-1;
+	muon1_iso_scale=-1;
+	muon2_iso_scale=-1;
+	photon_id_scale=-1;
+	photon_veto_scale=-1;
+	ele_hlt_scale=-1;
+	muon_hlt_scale=-1;
+	puIdweight_T=1;
+	puIdweight_M=1;
+	puIdweight_L=1;
 }

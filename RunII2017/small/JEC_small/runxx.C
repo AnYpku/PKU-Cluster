@@ -5,7 +5,7 @@ using namespace std;
 
 void runxx() {
 //gROOT->LoadMacro("xx.C");
-TString dir ="/eos/user/y/yian/2017cutla/HLT_debug/";
+TString dir ="/home/pku/anying/cms/rootfiles/JESR/nohlt/";
 //TString dir = "../";
 //TString dir = "../plj/plj-production/";
 //TString dir = "/uscms_data/d3/qliphy/andy/CMSSW_9_4_9_cand2/plj/plj-production/";
@@ -19,8 +19,8 @@ while (k>0){
 getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
-TString outname="JEC_cutla-out"+ infilename;
-TString inname= "JEC_cutla-out"+infilename;
+TString outname=/*"JEC_cutla-out"+*/ infilename;
+TString inname= /*"JEC_cutla-out"+*/infilename;
 
 cout<<inname<<endl;
 

@@ -511,7 +511,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 	gr->SetFillStyle(3008);
 	gr->Draw("SAME 2");
 
-	double maximumMC = 1.6 * sumMC->GetMaximum();
+	double maximumMC = 2.1 * sumMC->GetMaximum();
 	double maximumDATA = -100;
 	if (isDataPresent_)
 		maximumDATA = 1.15 * sumDATA->GetMaximum();
@@ -534,11 +534,13 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 	// histosMCSig.at(0)->Draw("SAME HIST");
 
 	// For the legend, we have to tokenize the name "histos_XXX.root"
-	TLegend* leg1 = new TLegend(0.45, 0.55, 0.94, 0.9);
+	TLegend* leg1 = new TLegend(0.57, 0.55, 0.94, 0.9);
 	TLegend* leg2 = new TLegend(0.2, 0.7, 0.5, 0.9);
+	TLegend* leg3 = new TLegend(0.2, 0.63, 0.5, 0.7);
         leg1->SetTextSize(0.035);
 	leg1->SetMargin(0.4);
         leg2->SetTextSize(0.035);
+        leg3->SetTextSize(0.035);
         ofstream ftxt("./yields.txt");
 	if (isDataPresent_){
                 double yieldsDataErr=0;
@@ -585,7 +587,10 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 				samples="non-prompt #gamma";
 			else    samples= mcTotalLabels.at(i).c_str();
 			TString LabelMC = samples +" ["+ y+ "#pm"+ye+"]";
-			leg1->AddEntry(h1, LabelMC, "f");
+			if(mcTotalLabels.at(i).find("plj")==string::npos)
+				leg1->AddEntry(h1, LabelMC, "f");
+			else
+				leg3->AddEntry(h1, LabelMC, "f");
 			ftxt<<samples<<" "<<y<< "$pm$"<<ye<<""<<endl;
 			cout<<LabelMC<<endl;
 		}
@@ -630,6 +635,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 	leg1->Draw();
 	leg2->SetFillColor(kWhite);
 	leg2->Draw("same");
+	leg3->Draw("same");
 	// Nice labels
 	// TMathText* l = makeCMSPreliminaryTop(13, 0.50, 0.935);
 	//  TMathText* l = makeCMSLumi(13,551.7,0.6,0.935);

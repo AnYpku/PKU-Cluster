@@ -20,8 +20,8 @@ void xx::Loop()
 
 //	Long64_t npp = fChain->GetEntries("theWeight>0.");
 //	Long64_t nmm = fChain->GetEntries("theWeight<0.");
-	Long64_t npp=fChain->GetEntries("theWeight>0 && size>700");
-	Long64_t nmm=fChain->GetEntries("theWeight<0 && size>700");
+	Long64_t npp=fChain->GetEntries("theWeight>0");
+	Long64_t nmm=fChain->GetEntries("theWeight<0");
 	std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
 	TFile * input13 = new TFile ("./pu_calc/puweight.root");
 	TH1* h13 = NULL;
@@ -102,7 +102,7 @@ void xx::Loop()
 		if(m_dataset.Contains("interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("aQGC")){ 
 			scalef=1000.*1.411/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;
-                        if(size<702) continue;
+//                        if(size<702) continue;
 		}
 
 		if(m_dataset.Contains("Mu")==0&&m_dataset.Contains("Ele")==0){	
@@ -140,7 +140,7 @@ void xx::Loop()
                 PHOTON= photonet>20 && (abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5));
                 JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
-                if( !( (LEPmu||LEPele) && PHOTON  )  )
+                if( !( (LEPmu||LEPele)/* && PHOTON*/  )  )
                       continue;
 		ExTree->Fill();
 	}

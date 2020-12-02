@@ -538,6 +538,7 @@ public :
  private:
      TTree *newtree;
      TFile *fout;
+     double ele_hlt_scale;
 };
 
 #endif
@@ -600,9 +601,9 @@ void xx::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/data/pku/home/anying/cms/rootfiles/2016/"+m_dataset, "RECREATE");
+   fout = new TFile("/data/pku/home/anying/cms/rootfiles/2016/hlt/"+m_dataset, "RECREATE");
    newtree = fChain->CloneTree(0);
-
+   newtree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
 
    fChain->SetBranchAddress("event", &event, &b_event);
    fChain->SetBranchAddress("run", &run, &b_run);

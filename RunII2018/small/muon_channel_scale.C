@@ -25,17 +25,17 @@ double get_muon_track_scale(double etalep, TH1F* track_SF){
 	return track_scale;
 }
 
-double muon_HLT_scale(double ptlep1, double ptlep2, TH2D* di_lep_trigger){
+double muon_HLT_scale(double ptlep1, double ptlep2,double etalep1,double etalep2, TH2D* di_lep_trigger){
 	double hlt_scale=-1;
        if(ptlep1 > ptlep2){
                if(ptlep1>200) ptlep1=199;
                if(ptlep2>200) ptlep1=198;
-	       hlt_scale=di_lep_trigger->GetBinContent(di_lep_trigger->FindBin(fabs(ptlep1),fabs(ptlep2)));
+	       hlt_scale=di_lep_trigger->GetBinContent(di_lep_trigger->FindBin(fabs(etalep1),fabs(etalep2)));
        }
        if(ptlep2 > ptlep1){
                if(ptlep1>200) ptlep1=198;
                if(ptlep2>200) ptlep1=199;
-	       hlt_scale=di_lep_trigger->GetBinContent(di_lep_trigger->FindBin(fabs(ptlep2),fabs(ptlep1)));
+	       hlt_scale=di_lep_trigger->GetBinContent(di_lep_trigger->FindBin(fabs(etalep2),fabs(etalep1)));
        }
 
 	return hlt_scale;

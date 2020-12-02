@@ -536,7 +536,11 @@ public :
  private:
      TTree *newtree;
      TFile *fout;
+     double ele_hlt_scale;
      double photon_veto_scale;
+     double puIdweight_L;
+     double puIdweight_M;
+     double puIdweight_T;
 };
 
 #endif
@@ -599,9 +603,13 @@ void xx::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/eos/user/y/yian/2017cutla/"+m_dataset, "RECREATE");
+   fout = new TFile("/home/pku/anying/cms/rootfiles/2017/"+m_dataset, "RECREATE");
    newtree = fChain->CloneTree(0);
+   newtree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
    newtree->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/D");
+   newtree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
+   newtree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
+   newtree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
 
 
    fChain->SetBranchAddress("event", &event, &b_event);

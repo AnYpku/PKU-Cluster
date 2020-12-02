@@ -8,7 +8,7 @@ void runxx() {
 //TString dir = "/home/pku/anying/cms/RunII2016/analysis_code/step1_add_weight/";
 //TString dir = "/home/pku/anying/cms/file_in_cms/files_weighted/";
 //TString dir = "/eos/user/y/yian/2016cutla/";
-TString dir = "/eos/user/y/yian/2016legacy/";
+TString dir = "/home/pku/anying/cms/rootfiles/JESR/nohlt/";
 ifstream infile("file");
 string buffer;
 TString infilename;
@@ -19,8 +19,8 @@ while (k>0){
 getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains(".root")==0) {k=-2; continue;}
-TString outname="JEC_cutla-out"+infilename;
-infilename = "outJEC_"+ infilename;
+TString outname=/*"JEC_cutla-out"+*/infilename;
+infilename =/*"outJEC_"+*/infilename;
 
 cout<<infilename<<endl;
 cout<<outname<<endl;
@@ -29,7 +29,7 @@ TFile *file1 =new TFile(dir+infilename);
 TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 //TTree *tree1 = (TTree*) file1->Get("demo");
 xx m1(tree1,outname);
-m1.Loop();
+m1.Loop(outname);
 m1.endJob();
 
 }

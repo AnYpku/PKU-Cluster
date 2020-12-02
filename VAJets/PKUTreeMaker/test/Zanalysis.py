@@ -14,7 +14,6 @@ process.load("RecoTracker.CkfPattern.CkfTrackCandidates_cff")
 process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_condDBv2_cff')
 from Configuration.AlCa.GlobalTag import GlobalTag
 if runOnMC:
-#   process.GlobalTag.globaltag = '94X_mc2017_realistic_v17'
    process.GlobalTag.globaltag = '102X_mc2017_realistic_v8'
 elif not(runOnMC):
    process.GlobalTag.globaltag = '94X_dataRun2_v11'
@@ -182,14 +181,14 @@ process.treeDumper = cms.EDAnalyzer("ZPKUTreeMaker",
                                     t1muSrc = cms.InputTag("slimmedMuons"),       
                                     electrons = cms.InputTag("slimmedElectrons"),
                                     photonSrc = cms.InputTag("slimmedPhotons"),
-                                    fakeelectronSrc = cms.InputTag("fakeElectrons"),
-                                    looseelectronSrc = cms.InputTag("vetoElectrons"),
                                     conversions = cms.InputTag("reducedEgamma","reducedConversions",reducedConversionsName),
                                     beamSpot = cms.InputTag("offlineBeamSpot","","RECO"),
-                                    loosemuonSrc = cms.InputTag("looseMuons"),
-                                    loosetightmuonSrc = cms.InputTag("loosetightMuons"),
-				    goodmuonSrc = cms.InputTag("goodMuons"),# station2 retrieve, 2017/3/26
 				    goodeleSrc = cms.InputTag("goodElectrons"),# retreive electron sigma_ieie for shape correction
+                                    looseelectronSrc = cms.InputTag("vetoElectrons"),
+                                    fakeelectronSrc = cms.InputTag("fakeElectrons"),
+                                    loosetightmuonSrc = cms.InputTag("loosetightMuons"),
+                                    loosemuonSrc = cms.InputTag("looseMuons"),
+				    goodmuonSrc = cms.InputTag("goodMuons"),# station2 retrieve, 2017/3/26
                                     hltToken    = cms.InputTag("TriggerResults","","HLT"),
 
                                     elPaths1     = cms.vstring("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v*"),#B-F

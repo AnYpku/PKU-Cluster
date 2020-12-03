@@ -66,10 +66,12 @@ process.goodAK4Jets = cms.EDFilter("PFJetIDSelectionFunctorFilter",
 process.cleanJets = cms.Sequence(process.NJetsSequence)
 #--- define the pileup id -------------------------------
 process.load("RecoJets.JetProducers.PileupJetID_cfi")
+from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x
 process.pileupJetId.jets = cms.InputTag("cleanAK4Jets")
 process.pileupJetId.inputIsCorrected = True
 process.pileupJetId.applyJec = False
 process.pileupJetId.vertexes = cms.InputTag("offlineSlimmedPrimaryVertices") 
+process.pileupJetId.algos = cms.VPSet(_chsalgos_94x)
 
 #from RecoJets.JetProducers.PileupJetID_cfi import _chsalgos_94x, _chsalgos_102x
 #process.load("RecoJets.JetProducers.PileupJetID_cfi")
@@ -240,7 +242,7 @@ process.source = cms.Source("PoolSource",
 process.maxEvents.input = 500
 
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 50
+process.MessageLogger.cerr.FwkReport.reportEvery = 1
 process.MessageLogger.cerr.FwkReport.limit = 99999999
 
 process.TFileService = cms.Service("TFileService",

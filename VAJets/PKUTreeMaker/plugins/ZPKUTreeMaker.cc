@@ -675,7 +675,7 @@ ZPKUTreeMaker::ZPKUTreeMaker(const edm::ParameterSet& iConfig)//:
 	outTree_->Branch("passFilter_duplicateMuon",&passFilter_duplicateMuon_,"passFilter_duplicateMuon_/O");
 	outTree_->Branch("lumiWeight"      ,&lumiWeight     ,"lumiWeight/D"     );
 	outTree_->Branch("pileupWeight"    ,&pileupWeight   ,"pileupWeight/D"   );
-	outTree_->Branch("pweight"         ,pweight         ,"pweight[703]/D"   );
+//	outTree_->Branch("pweight"         ,pweight         ,"pweight[703]/D"   );
         //L1 prefiring
         outTree_->Branch("prefWeight"   ,&_prefiringweight,"prefWeight/D"  );
         outTree_->Branch("prefWeightUp" ,&_prefiringweightup,"prefWeightUp/D"  );
@@ -1637,12 +1637,34 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 		jet2icsv =(*ak4jets)[jetindexphoton12[1]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
 		int idflag1 = (*pileupJetIdFlag)[ak4jets->refAt(jetindexphoton12[0])];
 		int idflag2 = (*pileupJetIdFlag)[ak4jets->refAt(jetindexphoton12[1])];
+                float mva1= (*pileupJetIdDiscriminant)[ak4jets->refAt(jetindexphoton12[0])];
+                float mva2= (*pileupJetIdDiscriminant)[ak4jets->refAt(jetindexphoton12[1])];
 		jet1puIdLoose  =  (PileupJetIdentifier::passJetId(idflag1, PileupJetIdentifier::kLoose));
 		jet1puIdMedium =  (PileupJetIdentifier::passJetId(idflag1, PileupJetIdentifier::kMedium));
 		jet1puIdTight  =  (PileupJetIdentifier::passJetId(idflag1, PileupJetIdentifier::kTight));
 		jet2puIdLoose  =  (PileupJetIdentifier::passJetId(idflag2, PileupJetIdentifier::kLoose));
 		jet2puIdMedium =  (PileupJetIdentifier::passJetId(idflag2, PileupJetIdentifier::kMedium));
 		jet2puIdTight  =  (PileupJetIdentifier::passJetId(idflag2, PileupJetIdentifier::kTight));
+		if(jet1pt<50 ||jet2pt<50){
+			if(jet1pt<50){	
+				std::cout<<"jet1 pt "<<jet1pt<<" jet1 eta "<<jet1eta<<" PU JetID MVA "<<mva1<<std::endl;
+				if( PileupJetIdentifier::passJetId( idflag1, PileupJetIdentifier::kLoose ))
+					std::cout<<"jet1 pass loose wp "<<std::endl;
+				if( PileupJetIdentifier::passJetId( idflag1, PileupJetIdentifier::kMedium ))
+					std::cout<<"jet1 pass medium wp "<<std::endl;
+				if( PileupJetIdentifier::passJetId( idflag1, PileupJetIdentifier::kTight ))
+					std::cout<<"jet1 pass tight wp "<<std::endl;
+			}
+			if(jet2pt<50){	
+				std::cout<<"jet2 pt "<<jet2pt<<" jet2 eta "<<jet2eta<<" PU JetID MVA "<<mva2<<std::endl;
+				if( PileupJetIdentifier::passJetId( idflag2, PileupJetIdentifier::kLoose ))
+					std::cout<<"jet2 pass loose wp "<<std::endl;
+				if( PileupJetIdentifier::passJetId( idflag2, PileupJetIdentifier::kMedium ))
+					std::cout<<"jet2 pass medium wp "<<std::endl;
+				if( PileupJetIdentifier::passJetId( idflag2, PileupJetIdentifier::kTight ))
+					std::cout<<"jet2 pass tight wp "<<std::endl;
+			}
+		}
 
 		drj1a=deltaR(jet1eta,jet1phi,photoneta,photonphi);
 		drj2a=deltaR(jet2eta,jet2phi,photoneta,photonphi);
@@ -1668,47 +1690,47 @@ ZPKUTreeMaker::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 	}
 
 
-	if(jetindexphoton12_f[0]>-1 && jetindexphoton12_f[1]>-1) {
-		jet1pt_f=jets[jetindexphoton12_f[0]]->Pt();
-		jet1eta_f=jets[jetindexphoton12_f[0]]->Eta();
-		jet1phi_f=jets[jetindexphoton12_f[0]]->Phi();
-		jet1e_f=jets[jetindexphoton12_f[0]]->E();
-		jet2pt_f=jets[jetindexphoton12_f[1]]->Pt();
-		jet2eta_f=jets[jetindexphoton12_f[1]]->Eta();
-		jet2phi_f=jets[jetindexphoton12_f[1]]->Phi();
-		jet2e_f=jets[jetindexphoton12_f[1]]->E();
-		jet1csv_f =(*ak4jets)[jetindexphoton12_f[0]].bDiscriminator("pfCombinedSecondaryVertexV2BJetTags");
-		jet2csv_f =(*ak4jets)[jetindexphoton12_f[1]].bDiscriminator("pfCombinedSecondaryVertexV2BJetTags");
-		jet1icsv_f =(*ak4jets)[jetindexphoton12_f[0]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
-		jet2icsv_f =(*ak4jets)[jetindexphoton12_f[1]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
-		drj1a_f=deltaR(jet1eta_f,jet1phi_f,photoneta_f,photonphi_f);
-		drj2a_f=deltaR(jet2eta_f,jet2phi_f,photoneta_f,photonphi_f);
-		drj1l_f=deltaR(jet1eta_f,jet1phi_f,etalep1,philep1);
-		drj2l_f=deltaR(jet2eta_f,jet2phi_f,etalep1,philep1);
-		drj1l2_f=deltaR(jet1eta_f,jet1phi_f,etalep2,philep2);
-		drj2l2_f=deltaR(jet2eta_f,jet2phi_f,etalep2,philep2);
-		TLorentzVector j1p4_f;
-		j1p4_f.SetPtEtaPhiE(jet1pt_f, jet1eta_f, jet1phi_f, jet1e_f);
-		TLorentzVector j2p4_f;
-		j2p4_f.SetPtEtaPhiE(jet2pt_f, jet2eta_f, jet2phi_f, jet2e_f);
-		TLorentzVector photonp42_f;
-		photonp42_f.SetPtEtaPhiE(photonet_f, photoneta_f, photonphi_f, photone_f);
-		TLorentzVector vp4_f;
-		vp4_f.SetPtEtaPhiE(leptonicV.pt(), leptonicV.eta(), leptonicV.phi(), leptonicV.energy());
-		j1metPhi_f=fabs(jet1phi_f-MET_phi);
-		if(j1metPhi_f>Pi) {j1metPhi_f=2.0*Pi-j1metPhi_f;}
-		j2metPhi_f=fabs(jet2phi_f-MET_phi);
-		if(j2metPhi_f>Pi) {j2metPhi_f=2.0*Pi-j2metPhi_f;}
-		Mjj_f=(j1p4_f + j2p4_f).M();
-		deltaetajj_f = fabs(jet1eta_f - jet2eta_f);
-		zepp_f = fabs((vp4_f+photonp42_f).Rapidity() - (j1p4_f.Rapidity() + j2p4_f.Rapidity())/ 2.0);
+if(jetindexphoton12_f[0]>-1 && jetindexphoton12_f[1]>-1) {
+	jet1pt_f=jets[jetindexphoton12_f[0]]->Pt();
+	jet1eta_f=jets[jetindexphoton12_f[0]]->Eta();
+	jet1phi_f=jets[jetindexphoton12_f[0]]->Phi();
+	jet1e_f=jets[jetindexphoton12_f[0]]->E();
+	jet2pt_f=jets[jetindexphoton12_f[1]]->Pt();
+	jet2eta_f=jets[jetindexphoton12_f[1]]->Eta();
+	jet2phi_f=jets[jetindexphoton12_f[1]]->Phi();
+	jet2e_f=jets[jetindexphoton12_f[1]]->E();
+	jet1csv_f =(*ak4jets)[jetindexphoton12_f[0]].bDiscriminator("pfCombinedSecondaryVertexV2BJetTags");
+	jet2csv_f =(*ak4jets)[jetindexphoton12_f[1]].bDiscriminator("pfCombinedSecondaryVertexV2BJetTags");
+	jet1icsv_f =(*ak4jets)[jetindexphoton12_f[0]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
+	jet2icsv_f =(*ak4jets)[jetindexphoton12_f[1]].bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
+	drj1a_f=deltaR(jet1eta_f,jet1phi_f,photoneta_f,photonphi_f);
+	drj2a_f=deltaR(jet2eta_f,jet2phi_f,photoneta_f,photonphi_f);
+	drj1l_f=deltaR(jet1eta_f,jet1phi_f,etalep1,philep1);
+	drj2l_f=deltaR(jet2eta_f,jet2phi_f,etalep1,philep1);
+	drj1l2_f=deltaR(jet1eta_f,jet1phi_f,etalep2,philep2);
+	drj2l2_f=deltaR(jet2eta_f,jet2phi_f,etalep2,philep2);
+	TLorentzVector j1p4_f;
+	j1p4_f.SetPtEtaPhiE(jet1pt_f, jet1eta_f, jet1phi_f, jet1e_f);
+	TLorentzVector j2p4_f;
+	j2p4_f.SetPtEtaPhiE(jet2pt_f, jet2eta_f, jet2phi_f, jet2e_f);
+	TLorentzVector photonp42_f;
+	photonp42_f.SetPtEtaPhiE(photonet_f, photoneta_f, photonphi_f, photone_f);
+	TLorentzVector vp4_f;
+	vp4_f.SetPtEtaPhiE(leptonicV.pt(), leptonicV.eta(), leptonicV.phi(), leptonicV.energy());
+	j1metPhi_f=fabs(jet1phi_f-MET_phi);
+	if(j1metPhi_f>Pi) {j1metPhi_f=2.0*Pi-j1metPhi_f;}
+	j2metPhi_f=fabs(jet2phi_f-MET_phi);
+	if(j2metPhi_f>Pi) {j2metPhi_f=2.0*Pi-j2metPhi_f;}
+	Mjj_f=(j1p4_f + j2p4_f).M();
+	deltaetajj_f = fabs(jet1eta_f - jet2eta_f);
+	zepp_f = fabs((vp4_f+photonp42_f).Rapidity() - (j1p4_f.Rapidity() + j2p4_f.Rapidity())/ 2.0);
 
-	}
+}
 
-	outTree_->Fill();
+outTree_->Fill();
 //	std::cout<<"fill the outTree"<<std::endl;
-	delete jecAK4_;
-	jecAK4_=0;
+delete jecAK4_;
+jecAK4_=0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -1725,7 +1747,7 @@ double ZPKUTreeMaker::getDR(double eta1, double phi1, double eta2, double phi2)
 
 void ZPKUTreeMaker::setDummyValues() {
 	// muon station2 retrieve, L1 issue, Meng 2017/3/26
-//	std::cout << "begin setDummyValues()..." << std::endl;
+	//	std::cout << "begin setDummyValues()..." << std::endl;
 	lep1_sign = -1e2;
 	lep2_sign = -1e2;
 	ele1_sigmaieie = -99.;
@@ -1922,9 +1944,9 @@ void ZPKUTreeMaker::setDummyValues() {
 	Mjj=-1e1;   Mjj_f=-1e1;
 	deltaetajj=-1e1;   deltaetajj_f=-1e1;
 	zepp=-1e1;   zepp_f=-1e1;
-        _prefiringweight=-10;
-        _prefiringweightup=-10;
-        _prefiringweightdown=-10;	
+	_prefiringweight=-10;
+	_prefiringweightup=-10;
+	_prefiringweightdown=-10;	
 
 	HLT_Ele1=-99;
 	HLT_Ele2=-99;
@@ -1942,8 +1964,8 @@ void ZPKUTreeMaker::setDummyValues() {
 	//HLT_Mu7=-99;
 	//HLT_Mu8=-99;
 	//HLT_Mu9=-99;
-        //HLT_Mu10=-99;
-        //HLT_Mu11=-99;
+	//HLT_Mu10=-99;
+	//HLT_Mu11=-99;
 
 
 	passFilter_HBHE_                  = false;
@@ -1957,25 +1979,25 @@ void ZPKUTreeMaker::setDummyValues() {
 	// Meng
 	passFilter_MetbadMuon_	       = false;
 	passFilter_duplicateMuon_ 	       = false;
-//	std::cout << "end setDummyValues()..." << std::endl;
+	//	std::cout << "end setDummyValues()..." << std::endl;
 }
 
 // ------------ method called once each job just before starting event loop  ------------
 	void 
 ZPKUTreeMaker::beginJob()
 {
-//	std::cout << "ZPKUTreeMaker beginJob()..." << std::endl;
+	//	std::cout << "ZPKUTreeMaker beginJob()..." << std::endl;
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void ZPKUTreeMaker::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
 {
-//	std::cout << "ZPKUTreeMaker beginRun()..." << std::endl;
+	//	std::cout << "ZPKUTreeMaker beginRun()..." << std::endl;
 
 	elPaths1.clear();
 	elPaths2.clear();
 	elPaths3.clear();
-        elPaths4.clear();
+	elPaths4.clear();
 	elPaths5.clear();
 	muPaths1.clear();
 	muPaths2.clear();
@@ -2004,26 +2026,26 @@ void ZPKUTreeMaker::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup
 		}
 	}
 	for (size_t i = 0; i < elPaths3_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths3_[i] );
-                while ( !foundPaths.empty() ){
-                        elPaths3.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }
+		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths3_[i] );
+		while ( !foundPaths.empty() ){
+			elPaths3.push_back( foundPaths.back() );
+			foundPaths.pop_back();
+		}
+	}
 	for (size_t i = 0; i < elPaths4_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths4_[i] );
-                while ( !foundPaths.empty() ){
-                        elPaths4.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }
+		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths4_[i] );
+		while ( !foundPaths.empty() ){
+			elPaths4.push_back( foundPaths.back() );
+			foundPaths.pop_back();
+		}
+	}
 	for (size_t i = 0; i < elPaths5_.size(); i++) {
-                std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths5_[i] );
-                while ( !foundPaths.empty() ){
-                        elPaths5.push_back( foundPaths.back() );
-                        foundPaths.pop_back();
-                }
-        }
+		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), elPaths5_[i] );
+		while ( !foundPaths.empty() ){
+			elPaths5.push_back( foundPaths.back() );
+			foundPaths.pop_back();
+		}
+	}
 	for (size_t i = 0; i < muPaths1_.size(); i++) {
 		std::vector<std::string> foundPaths = hltConfig.matched( hltConfig.triggerNames(), muPaths1_[i] );
 		while ( !foundPaths.empty() ){

@@ -14,6 +14,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
+     double muon_hlt_scale,ele_hlt_scale;
      double ptVlep, yVlep, phiVlep, massVlep;
      double Mjj,scalef,zepp,delta_phi;
      tree->SetBranchAddress("lep",&lep);
@@ -49,6 +50,8 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      TString th2name,th2name_out;
      if(name.Contains("EWK")) {
 	     th2name="hist_sig";
@@ -88,9 +91,9 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 	     if(tag.Contains("18"))  prefWeight=1;
 	     actualWeight=scalef*pileupWeight*prefWeight*lumi;
 		     if(lep==11)       
-			     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale;
+			     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
 		     if(lep==13)       
-			     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale;
+			     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
 	     if(name.Contains("plj")) actualWeight=scalef;
 	     if (  tformula1->EvalInstance() ){ 
 		     //cout<<name<<" "<<scalef<<" "<<pileupWeight<<" "

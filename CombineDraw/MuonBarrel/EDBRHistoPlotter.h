@@ -658,7 +658,10 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		TVectorD nsigma_y(sumDATA->GetNbinsX());
 		TVectorD nsigma_ex(sumDATA->GetNbinsX());
 		TVectorD nsigma_ey(sumDATA->GetNbinsX());
-
+                TH1D*nominal=(TH1D*)sumMC->Clone("nominal");
+		TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
+		for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
+		nominal->Divide(nomNoErr);
 		for (int ibin = 0; ibin != sumDATA->GetNbinsX(); ++ibin) {
 
 			double Data = sumDATA->GetBinContent(ibin + 1);
@@ -704,6 +707,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 			nsigmaGraph->SetMarkerStyle(20);
 			nsigmaGraph->SetMarkerSize(0.6);
 			nsigmaGraph->Draw("ape");
+			nominal->Draw("E 2 same");
 		}
 
 		fPads2->Update();

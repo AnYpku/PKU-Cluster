@@ -63,7 +63,14 @@ void run(TString sample,TString tag,TString Reco){
 		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale;
 //             if(i%1000==0) cout<<"actualWeight "<<actualWeight<<endl;
 	     if (  tformula->EvalInstance() &&sample.Contains("EWK")==0 ){//reco && !gen
-		     hist_bkg->Fill(Mjj,deltaetajj,actualWeight);//0~1, 2.5~4.5 and 500~800
+                     if(Mjj<2000&deltaetajj<6.5)
+                             hist_bkg->Fill(Mjj,deltaetajj,actualWeight);
+                     else if(Mjj>2000&&deltaetajj<6.5)
+                             hist_bkg->Fill(1999,deltaetajj,actualWeight);
+                     else if(Mjj<2000 &&deltaetajj>6.5)
+                             hist_bkg->Fill(Mjj,6.1,actualWeight);
+                     else
+                             hist_bkg->Fill(1999,6.1,actualWeight);
 	     }
      }
      double eff=count/nentries;
@@ -95,14 +102,15 @@ int Build_Unfold2DHist_bkg(){
 	TString dr = "(( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 	TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
 	vector<TString> tag={"16","17","18"};
-//	vector<TString> sample={"ZA","plj","TTA","VV","ST"};
-	vector<TString> sample={"DMuon","DEle"};
+	vector<TString> sample={"ZA","plj","TTA","VV","ST"};
+//	vector<TString> sample={"DMuon","DEle"};
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
+		if(tag[i].Contains("17")) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			run(sample[j],tag[i],Reco);

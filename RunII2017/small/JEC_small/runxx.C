@@ -5,7 +5,7 @@ using namespace std;
 
 void runxx() {
 //gROOT->LoadMacro("xx.C");
-TString dir ="/home/pku/anying/cms/rootfiles/JESR/nohlt/";
+TString dir ="/home/pku/anying/cms/rootfiles/JESR/nopuId/";
 //TString dir = "../";
 //TString dir = "../plj/plj-production/";
 //TString dir = "/uscms_data/d3/qliphy/andy/CMSSW_9_4_9_cand2/plj/plj-production/";

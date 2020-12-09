@@ -49,9 +49,12 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
      TFile*f1=new TFile("./root/hist_EWK"+tag+"_"+var1+".root","recreate");
      for(Int_t i=0;i<nbins;i++){
              th1[i]->SetBinContent(nbins,th1[i]->GetBinContent(nbins)+th1[i]->GetBinContent(nbins+1));
-     }//add overflow bin
+	     th1[i]->SetBinError(nbins,sqrt(pow(th1[i]->GetBinError(nbins),2)+pow(th1[i]->GetBinError(nbins+1),2)));
+     }//add overflow bin and error
      th2->SetBinContent(nbins,th2->GetBinContent(nbins)+th2->GetBinContent(nbins+1));//add overflowbin
+     th2->SetBinError(nbins,sqrt(pow(th2->GetBinError(nbins),2)+pow(th2->GetBinError(nbins+1),2)));//error
      h1->SetBinContent(nbins,h1->GetBinContent(nbins)+h1->GetBinContent(nbins+1));//add overflowbin
+     h1->SetBinError(nbins,sqrt(pow(h1->GetBinError(nbins),2)+pow(h1->GetBinError(nbins+1),2)));//error
      fout->cd();
      for(Int_t i=0;i<nbins;i++){
 	     th1[i]->Write();

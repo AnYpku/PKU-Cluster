@@ -2,21 +2,21 @@
 #ptlep1_16.root
 #ptlep1_17.root 
 #ptlep1_18.root
-#ptlep1_full.root
 #photonet_16.root
 #photonet_17.root
 #photonet_18.root
-#photonet_full.root
 #jet1pt_16.root
 #jet1pt_17.root
 #jet1pt_18.root
-#jet1pt_full.root
 files="\
-Mjj_16.root
-Mjj_17.root
-Mjj_18.root
-Mjj_full.root
+ptlep1_full.root
+photonet_full.root
+jet1pt_full.root
 "
+#Mjj_16.root
+#Mjj_17.root
+#Mjj_18.root
+#Mjj_full.root
 for rootfile in $files
 do
     filename=`echo $rootfile | awk -F. '{print $1}'`

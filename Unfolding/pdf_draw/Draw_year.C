@@ -281,11 +281,9 @@ void run(TString var, TString recovar,TString title,TString tag){
 }
 int Draw_year(){
 	gStyle->SetOptStat(0);
-	vector<TString> title={/*"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}",*/"M_{jj}"/*,"m_{Z#gamma}"*/};
-//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
-//	vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-        vector<TString> genvars={"genMjj"};
-         vector<TString> recovars={"Mjj"};
+	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}"/*,"m_{Z#gamma}"*/};
+	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
 //        run("genlep1pt","ptlep1",title[0],"16");
 	for(int i=0;i<genvars.size();i++){
 		run(genvars[i],recovars[i],title[i],"16");

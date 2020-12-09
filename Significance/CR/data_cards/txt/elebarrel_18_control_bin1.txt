@@ -4,7 +4,7 @@ kmax 22  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel1
-observation 724.09
+observation 704.23
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,10 +13,10 @@ observation 724.09
 bin	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	8.15	466.67	229.23	12.51	5.14	2.38
+rate	8.36	452.41	224.04	12.12	5.01	2.29
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015
-VBS_Stat_control_bin1_elebarrel18	lnN	1.05	-	-	-	-	-
+VBS_Stat_control_bin1_elebarrel18	lnN	1.03	-	-	-	-	-
 QCD_Stat_control_bin1_elebarrel18	lnN	-	1.02	-	-	-	-
 non_prompt_Stat_control_bin1_elebarrel18	lnN	-	-	1.04	-	-	-
 TTA_Stat_control_bin1_elebarrel18	lnN	-	-	-	1.18	-	-

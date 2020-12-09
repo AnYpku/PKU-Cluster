@@ -20,7 +20,7 @@ void run(TFile*file,TString var1, TString sample, vector<double> bins,TString cu
 	     else
 		     index=Form("%i",15*i);
              if(var1.Contains("Mjj")==0) tree->Draw(var1+">>"+th1name[p],cut1+"*pweight["+index+"]","goff");
-             else tree->Draw("gendetajj:genMjj>>"+th1name[p],cut1+"*scalef*pweight["+index+"]","goff");
+             else tree->Draw("gendetajj:genMjj>>"+th1name[p],cut1+"*pweight["+index+"]","goff");
 	     p++;
      }
      TFile*fout=new TFile(var1+"_unfold_"+sample+"_scale"+tag+".root","recreate");

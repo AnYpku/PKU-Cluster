@@ -16,6 +16,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double zepp_new,zepp_JEC_up,zepp_JEC_down;
      double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
+     double muon_hlt_scale,ele_hlt_scale;
      double actualWeight;int lep;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("scalef",&scalef);
@@ -59,6 +60,8 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("ptVlep",&ptVlep);
      tree->SetBranchAddress("yVlep",&yVlep);
      tree->SetBranchAddress("phiVlep",&phiVlep);
@@ -105,9 +108,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if(tag.Contains("18"))  prefWeight=1;
              actualWeight=scalef*pileupWeight*prefWeight;
                      if(lep==11)
-                             actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale;
+                             actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
                      if(lep==13)
-                             actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale;
+                             actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
              if(k%20000==0)cout<<"actualWeight "<<actualWeight<<endl;
 	     if (  tformula1->EvalInstance() && (delta_phi_new>1.9 && zepp_new<2.4) ){
 		     if(Mjj_new>=500 &&Mjj_new<800&&detajj_new>=2.5&&detajj_new<4.5)
@@ -196,8 +199,8 @@ int Uncer_batch_bkg(){
 	TString JET_down;
 	TString JET_up;
 
-//        vector<TString> tags={"16","17","18"};
-        vector<TString> tags={"17"};
+        vector<TString> tags={"16","17","18"};
+//        vector<TString> tags={"17"};
 	TString cut[3];  
 	TString cut1[3]; 
 	TString Reco[3]; 
@@ -223,6 +226,7 @@ int Uncer_batch_bkg(){
 		TString Reco_down= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+JET_down;
 
 		Reco[0]=Reco_new;Reco[1]=Reco_up;Reco[2]=Reco_down; 
+		if(tags[i].Contains("17")==1) continue;
                 cout<<tags[i]<<" "<<dir1[i]<<endl;
 		cout<<Reco[0]<<endl;
 		cout<<Reco[1]<<endl;

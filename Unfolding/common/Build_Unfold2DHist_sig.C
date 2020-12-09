@@ -1,7 +1,7 @@
 void run(TString sample,TString tag, TString cut1,TString cut2,TString cut3,TString Reco){
      TString dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
      TFile*file;
-     if(sample.Contains("EWK"))file=new TFile(dir+"unfold_GenCutla-outZA-EWK"+tag+".root");
+     if(sample.Contains("EWK"))file=new TFile(dir+"unfold_GenCutla-ZA-EWK"+tag+".root");
      else if(sample.Contains("plj"))file=new TFile(dir+"cutla-outplj"+tag+"_weight.root");
      else file=new TFile(dir+"cutla-out"+sample+tag+".root");
      const int nbins=9; 
@@ -11,9 +11,9 @@ void run(TString sample,TString tag, TString cut1,TString cut2,TString cut3,TStr
      if(tag.Contains("17"))lumi=41.52;cout<<lumi<<endl;
      if(tag.Contains("18"))lumi=58.7;cout<<lumi<<endl;
 
-     TTreeFormula *tformula3=new TTreeFormula("formula3", cut3, tree); 
      TTreeFormula *tformula1=new TTreeFormula("formula1", cut1, tree); 
      TTreeFormula *tformula2=new TTreeFormula("formula2", cut2, tree); 
+     TTreeFormula *tformula3=new TTreeFormula("formula3", cut3, tree); 
      TTreeFormula *tformula=new TTreeFormula("formula",Reco, tree); 
 
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
@@ -70,19 +70,78 @@ void run(TString sample,TString tag, TString cut1,TString cut2,TString cut3,TStr
 	     if (  tformula3->EvalInstance()&&sample.Contains("EWK") ) 
 		     count++;
 	     if (  tformula1->EvalInstance()&&sample.Contains("EWK") ) {//reco && gen
-		     h1->Fill(genMjj,gendetajj,actualWeight);
+                     if(Mjj<2000&deltaetajj<6.5)
+                             h1->Fill(Mjj,deltaetajj,actualWeight);
+                     else if(Mjj>2000&&deltaetajj<6.5)
+                             h1->Fill(1999,deltaetajj,actualWeight);
+                     else if(Mjj<2000 &&deltaetajj>6.5)
+                             h1->Fill(Mjj,6.1,actualWeight);
+                     else
+                             h1->Fill(1999,6.1,actualWeight);
 		     for(int iy=0;iy<3;iy++){
-				     for(int ix=0;ix<3;ix++){
-					     if(Mjj>mjj_bins[ix]&&Mjj<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-						     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);//0~1, 2.5~4.5 and 500~800
+			     for(int ix=0;ix<3;ix++){
+				     if(genMjj<2000 && gendetajj<6.5){
+					     if(ix<2&&iy<2&&Mjj>mjj_bins[ix]&&Mjj<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+					     if(ix==2&&iy<2&&Mjj>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+					     if(ix<2&&iy==2&&Mjj>mjj_bins[ix]&& Mjj<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
+						     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+                                             if(ix==2&&iy==2 && Mjj>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
+                                                     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
 				     }
+				     else if(genMjj>2000 && gendetajj<6.5){
+					     if(ix<2&&iy<2&&Mjj>mjj_bins[ix]&&Mjj<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(1999,gendetajj,actualWeight);
+					     if(ix==2&&iy<2&&Mjj>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(1999,gendetajj,actualWeight);
+					     if(ix<2&&iy==2&&Mjj>mjj_bins[ix]&& Mjj<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
+						     th1[ix+(iy)*3]->Fill(1999,gendetajj,actualWeight);
+                                             if(ix==2&&iy==2 && Mjj>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
+                                                     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+				     }
+				     else if(genMjj<2000 && gendetajj>6.5){
+					     if(ix<2&&iy<2&&Mjj>mjj_bins[ix]&&Mjj<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(genMjj,6.1,actualWeight);
+					     if(ix==2&&iy<2&&Mjj>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(genMjj,6.1,actualWeight);
+					     if(ix<2&&iy==2&&Mjj>mjj_bins[ix]&& Mjj<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
+						     th1[ix+(iy)*3]->Fill(genMjj,6.1,actualWeight);
+                                             if(ix==2&&iy==2 && Mjj>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
+                                                     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+				     }
+				     else{
+					     if(ix<2&&iy<2&&Mjj>mjj_bins[ix]&&Mjj<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(1999,6.1,actualWeight);
+					     if(ix==2&&iy<2&&Mjj>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+						     th1[ix+(iy)*3]->Fill(1999,6.1,actualWeight);
+					     if(ix<2&&iy==2&&Mjj>mjj_bins[ix]&& Mjj<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
+						     th1[ix+(iy)*3]->Fill(1999,6.1,actualWeight);
+                                             if(ix==2&&iy==2 && Mjj>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
+                                                     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+				     }
+			     }
 		     }
 	     }
 	     if (  tformula2->EvalInstance()&&sample.Contains("EWK") ){//reco && !gen
-		     th2->Fill(Mjj,deltaetajj,actualWeight);//0~1, 2.5~4.5 and 500~800
+		     if(Mjj<2000&deltaetajj<6.5)     
+			     th2->Fill(Mjj,deltaetajj,actualWeight);
+		     else if(Mjj>2000&&deltaetajj<6.5)
+			     th2->Fill(1999,deltaetajj,actualWeight);
+		     else if(Mjj<2000 &&deltaetajj>6.5)
+			     th2->Fill(Mjj,6.1,actualWeight);
+		     else                            
+			     th2->Fill(1999,6.1,actualWeight);
 	     }
-	     if (  tformula->EvalInstance() &&sample.Contains("EWK")==0 ){//reco && !gen
-		     hist_bkg->Fill(Mjj,deltaetajj,actualWeight);//0~1, 2.5~4.5 and 500~800
+	     if (  tformula->EvalInstance() &&sample.Contains("EWK")==0 ){//reco
+		     if(Mjj<2000&deltaetajj<6.5)
+			     hist_bkg->Fill(Mjj,deltaetajj,actualWeight);
+		     else if(Mjj>2000&&deltaetajj<6.5)
+			     hist_bkg->Fill(1999,deltaetajj,actualWeight);
+		     else if(Mjj<2000 &&deltaetajj>6.5)
+			     hist_bkg->Fill(Mjj,6.1,actualWeight);
+		     else
+			     hist_bkg->Fill(1999,6.1,actualWeight);
 	     }
      }
      double eff=count/nentries;
@@ -122,7 +181,7 @@ int Build_Unfold2DHist_sig(){
 	vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tag.size();i++){
-                if(tag[i].Contains("17")){
+		if(tag[i].Contains("17")){
 			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
 		}
 		else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
@@ -131,6 +190,7 @@ int Build_Unfold2DHist_sig(){
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 		TString cut3 =Gen; 
+		if(tag[i].Contains("17")) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			run(sample[j],tag[i],cut1,cut2,cut3,Reco);

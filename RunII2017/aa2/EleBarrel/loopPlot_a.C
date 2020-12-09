@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	/// Path to wherever the files with the trees are. 
-	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/test/";
 //	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/cutlep/";
 	std::string outputDir = "./fig-output_a/";
 	

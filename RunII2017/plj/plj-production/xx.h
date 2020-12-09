@@ -263,6 +263,22 @@ public :
    Double_t        lhe_photon_py;
    Double_t        lhe_photon_pz;
    Double_t        lhe_photon_e;
+   Double_t        scalef;
+   Double_t        ele1_id_scale;
+   Double_t        ele2_id_scale;
+   Double_t        ele1_reco_scale;
+   Double_t        ele2_reco_scale;
+   Double_t        photon_id_scale;
+   Double_t        photon_veto_scale;
+   Double_t        muon1_id_scale;
+   Double_t        muon2_id_scale;
+   Double_t        muon1_iso_scale;
+   Double_t        muon2_iso_scale;
+   Double_t        ele_hlt_scale;
+   Double_t        muon_hlt_scale;
+   Double_t        puIdweight_L;
+   Double_t        puIdweight_M;
+   Double_t        puIdweight_T;
 
    // List of branches
    TBranch        *b_event;   //!
@@ -496,6 +512,23 @@ public :
    TBranch        *b_lhe_photon_py;   //!
    TBranch        *b_lhe_photon_pz;   //!
    TBranch        *b_lhe_photon_e;   //!
+   TBranch        *b_scalef;   //!
+   TBranch        *b_ele1_id_scale;   //!
+   TBranch        *b_ele2_id_scale;   //!
+   TBranch        *b_ele1_reco_scale;   //!
+   TBranch        *b_ele2_reco_scale;   //!
+   TBranch        *b_photon_id_scale;   //!
+   TBranch        *b_photon_veto_scale;   //!
+   TBranch        *b_muon1_id_scale;   //!
+   TBranch        *b_muon2_id_scale;   //!
+   TBranch        *b_muon1_iso_scale;   //!
+   TBranch        *b_muon2_iso_scale;   //!
+   TBranch        *b_muon_hlt_scale;   //!
+   TBranch        *b_ele_hlt_scale;   //!
+   TBranch        *b_puIdweight_L;   //!
+   TBranch        *b_puIdweight_M;   //!
+   TBranch        *b_puIdweight_T;   //!
+
    TString m_dataset;
    xx(TTree *tree=0, TString dataset="");
    virtual ~xx();
@@ -511,21 +544,10 @@ public :
    virtual void     modify_photon_jets();
 
 
- private:
-     TTree *ExTree;
-     TFile *fout;
-     double scalef;
-     double run_period;
-     double    muon1_id_scale;
-     double    muon2_id_scale;
-     double    muon1_iso_scale;
-     double    muon2_iso_scale;
-     double    muon_hlt_scale;
-     double    ele1_id_scale;
-     double    ele2_id_scale;
-     double    ele1_reco_scale;
-     double    ele2_reco_scale;
-     double    photon_id_scale;
+private:
+   TTree *ExTree;
+   TFile *fout;
+   double run_period;
 };
 
 #endif
@@ -589,21 +611,24 @@ void xx::Init(TTree *tree)
 	fCurrent = -1;
 	fChain->SetMakeClass(1);
 
-	fout = new TFile("/eos/user/y/yian/2017cutla/"+m_dataset, "RECREATE");
+	fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
 	ExTree = fChain->CloneTree(0);
-	ExTree->Branch("scalef",&scalef,"scalef/D");
-	// lep and photon scales
-	ExTree->Branch("ele1_id_scale", &ele1_id_scale, "ele1_id_scale/D");
-	ExTree->Branch("ele2_id_scale", &ele2_id_scale, "ele2_id_scale/D");
-	ExTree->Branch("ele1_reco_scale", &ele1_reco_scale, "ele1_reco_scale/D");
-	ExTree->Branch("ele2_reco_scale", &ele2_reco_scale, "ele2_reco_scale/D");
-	ExTree->Branch("photon_id_scale", &photon_id_scale, "photon_id_scale/D");
-	ExTree->Branch("muon1_id_scale", &muon1_id_scale, "muon1_id_scale/D");
-	ExTree->Branch("muon2_id_scale", &muon2_id_scale, "muon2_id_scale/D");
-	ExTree->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
-	ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D"); 
-	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
-	// lep and photon scales
+	ExTree->Branch("puIdweight_L",&puIdweight_L);
+	ExTree->Branch("puIdweight_M",&puIdweight_M);
+	ExTree->Branch("puIdweight_T",&puIdweight_T);
+	ExTree->Branch("scalef", &scalef );
+	ExTree->Branch("ele1_id_scale", &ele1_id_scale);
+	ExTree->Branch("ele2_id_scale", &ele2_id_scale);
+	ExTree->Branch("ele1_reco_scale", &ele1_reco_scale);
+	ExTree->Branch("ele2_reco_scale", &ele2_reco_scale);
+	ExTree->Branch("photon_id_scale", &photon_id_scale);
+	ExTree->Branch("muon1_id_scale", &muon1_id_scale);
+	ExTree->Branch("muon2_id_scale", &muon2_id_scale);
+	ExTree->Branch("muon1_iso_scale", &muon1_iso_scale);
+	ExTree->Branch("muon2_iso_scale", &muon2_iso_scale);
+	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale);
+	ExTree->Branch("ele_hlt_scale",&ele_hlt_scale);
+	ExTree->Branch("photon_veto_scale",&photon_veto_scale);
 
 	fChain->SetBranchAddress("event", &event, &b_event);
 	fChain->SetBranchAddress("run", &run, &b_run);
@@ -798,7 +823,6 @@ void xx::Init(TTree *tree)
 	fChain->SetBranchAddress("passFilter_duplicateMuon", &passFilter_duplicateMuon, &b_passFilter_duplicateMuon_);
 	fChain->SetBranchAddress("lumiWeight", &lumiWeight, &b_lumiWeight);
 	fChain->SetBranchAddress("pileupWeight", &pileupWeight, &b_pileupWeight);
-//	fChain->SetBranchAddress("pweight", pweight, &b_pweight);
 	fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
 	fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
 	fChain->SetBranchAddress("prefWeightDown", &prefWeightDown, &b_prefWeightDown);

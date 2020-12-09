@@ -4,7 +4,7 @@ kmax 22  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap1
-observation 533.79
+observation 534.40
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,13 +13,13 @@ observation 533.79
 bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	4.53	279.04	239.22	4.62	5.57	0.81
+rate	4.80	272.05	247.04	4.33	5.40	0.78
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015
-VBS_Stat_control_bin1_muendcap18	lnN	1.07	-	-	-	-	-
+VBS_Stat_control_bin1_muendcap18	lnN	1.04	-	-	-	-	-
 QCD_Stat_control_bin1_muendcap18	lnN	-	1.03	-	-	-	-
 non_prompt_Stat_control_bin1_muendcap18	lnN	-	-	1.03	-	-	-
-TTA_Stat_control_bin1_muendcap18	lnN	-	-	-	1.30	-	-
+TTA_Stat_control_bin1_muendcap18	lnN	-	-	-	1.31	-	-
 VV_Stat_control_bin1_muendcap18	lnN	-	-	-	-	1.28	-
 ST_Stat_control_bin1_muendcap18	lnN	-	-	-	-	-	1.54
 fake_muendcap18	lnN	-	-	1.28	-	-	-
@@ -31,7 +31,7 @@ Scale_EW	lnN	1.00	-	-	-	-	-
 Scale_QCD	lnN	-	1.13	-	-	-	-
 Scale_QCD_extra	lnN	-	1.00/1.00	-	-	-	-
 interf	lnN	1.18	-	-	-	-	-
-mu_trigger18	lnN	1.02	1.02	-	1.02	1.02	1.02
+mu_trigger	lnN	1.01	1.01	-	1.01	1.01	1.01
 mu_eff	lnN	1.003	1.003	-	1.003	1.003	1.003
 photon_id	lnN	1.028	1.028	-	1.028	1.028	1.028
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01

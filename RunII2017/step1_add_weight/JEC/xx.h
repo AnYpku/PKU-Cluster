@@ -675,12 +675,17 @@ public :
      double    muon1_iso_scale;
      double    muon2_iso_scale;
      double    muon_hlt_scale;
+     double    ele_hlt_scale;
      double    ele1_id_scale;
      double    ele2_id_scale;
      double    ele1_reco_scale;
      double    ele2_reco_scale;
      double    photon_id_scale;
      double    photon_veto_scale;
+     double puIdweight_L,puIdweight_M,puIdweight_T;
+     double puIdweight_L_new,puIdweight_M_new,puIdweight_T_new;
+     double puIdweight_L_JEC_up,puIdweight_M_JEC_up,puIdweight_T_JEC_up;
+     double puIdweight_L_JEC_down,puIdweight_M_JEC_down,puIdweight_T_JEC_down;
 };
 
 #endif
@@ -743,7 +748,7 @@ void xx::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/home/pku/anying/cms/rootfiles/JESR/JESR_"+m_dataset, "RECREATE");
+   fout = new TFile("/home/pku/anying/cms/rootfiles/JESR_"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
    ExTree->Branch("scalef",&scalef,"scalef/D");
    // lep and photon scales
@@ -758,6 +763,22 @@ void xx::Init(TTree *tree)
    ExTree->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
    ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D");
    ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
+   ExTree->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
+   ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
+   ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
+   ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
+
+   ExTree->Branch("puIdweight_L_new",&puIdweight_L_new,"puIdweight_L_new/D");
+   ExTree->Branch("puIdweight_M_new",&puIdweight_M_new,"puIdweight_M_new/D");
+   ExTree->Branch("puIdweight_T_new",&puIdweight_T_new,"puIdweight_T_new/D");
+
+   ExTree->Branch("puIdweight_L_JEC_up",&puIdweight_L_JEC_up,"puIdweight_L_JEC_up/D");
+   ExTree->Branch("puIdweight_M_JEC_up",&puIdweight_M_JEC_up,"puIdweight_M_JEC_up/D");
+   ExTree->Branch("puIdweight_T_JEC_up",&puIdweight_T_JEC_up,"puIdweight_T_JEC_up/D");
+
+   ExTree->Branch("puIdweight_L_JEC_down",&puIdweight_L_JEC_down,"puIdweight_L_JEC_down/D");
+   ExTree->Branch("puIdweight_M_JEC_down",&puIdweight_M_JEC_down,"puIdweight_M_JEC_down/D");
+   ExTree->Branch("puIdweight_T_JEC_down",&puIdweight_T_JEC_down,"puIdweight_T_JEC_down/D");
    // lep and photon scales
 
    fChain->SetBranchAddress("event", &event, &b_event);

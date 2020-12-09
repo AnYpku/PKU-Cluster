@@ -34,14 +34,16 @@ int unroll_2d(){
         TH2D*hist2_out;
         TH1D*hist_out;
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={/*"ZA-EWK","ZA","plj","TTA","VV","ST"*/"DMuon","DEle"};
+	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
+//	vector<TString> sample={"DMuon","DEle"};
 	for(int i=0;i<tag.size();i++){
+                if(tag[i].Contains("17")) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			TFile*file=new TFile("hist_"+sample[j]+"_2d"+tag[i]+".root");
 			TFile*fout;
 			if(sample[j].Contains("EWK")){
-				fout=new TFile("hist_"+sample[j]+"_genMjj"+tag[i]+".root","recreate");
+				fout=new TFile("../root/hist_"+sample[j]+"_genMjj"+tag[i]+".root","recreate");
 				th2_7=merge_hist(file,"hist2d_6","hist2d_7","hist2d_8");
 				hist_7=unroll_hist(th2_7,"genMjj_6");
                                 hist2_out=(TH2D*)file->Get("hist_2d"+tag[i]);
@@ -52,7 +54,7 @@ int unroll_2d(){
 				}
 			}
 			else{
-				fout=new TFile("hist_"+sample[j]+"_Mjj"+tag[i]+".root","recreate");
+				fout=new TFile("../root/hist_"+sample[j]+"_Mjj"+tag[i]+".root","recreate");
 				h2=(TH2D*)file->Get("hist_2d"+tag[i]);
 				h1=unroll_hist(h2,"hist_Mjj");
 				fout->cd();

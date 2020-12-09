@@ -4,7 +4,7 @@ kmax 23  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap1
-observation 275.21
+observation 270.10
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,7 +13,7 @@ observation 275.21
 bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	2.52	145.13	114.21	4.04	9.12	0.19
+rate	2.44	140.47	114.21	3.90	8.89	0.19
 ------------
 lumi_16	lnN	1.022	1.022	-	1.022	1.022	1.022
 VBS_Stat_control_bin1_muendcap16	lnN	1.07	-	-	-	-	-
@@ -31,7 +31,7 @@ Scale_EW	lnN	1.01	-	-	-	-	-
 Scale_QCD	lnN	-	1.12	-	-	-	-
 Scale_QCD_extra	lnN	-	0.99/1.00	-	-	-	-
 interf	lnN	1.26	-	-	-	-	-
-mu_trigger16	lnN	1.02	1.02	-	1.02	1.02	1.02
+mu_trigger	lnN	1.01	1.01	-	1.01	1.01	1.01
 mu_eff	lnN	1.022	1.022	-	1.022	1.022	1.022
 photon_id	lnN	1.024	1.024	-	1.024	1.024	1.024
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01

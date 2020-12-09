@@ -149,8 +149,8 @@ void rm::Loop(TString tag)
 	   LEPmu = lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110;
 	   LEPele = lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
 	   photon = photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) );
-	   //	   if( !( (LEPmu)||(LEPele) ) )
-	   //		   continue;
+	   if( !( (LEPmu)||(LEPele) ) )
+		   continue;
 	   if(tag.Contains("16")){
 		   if(m_dataset.Contains("ZA")&&m_dataset.Contains("EWK")==0){ scalef=1000.*47.46/float(npp-nmm)*fabs(theWeight)/theWeight;} 
 		   if(m_dataset.Contains("ZA_interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight;}
@@ -168,15 +168,13 @@ void rm::Loop(TString tag)
 		   ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco_ele);
 		   ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
 	   }
-	   if(lep==13){
+	   else if(lep==13){
 		   if(tag.Contains("16")){
 			   muon1_id_scale=get_muon_ID_sys16(etalep1,ptlep1,ID_muon_sys1,ID_muon_sys2);
 			   muon2_id_scale=get_muon_ID_sys16(etalep2,ptlep2,ID_muon_sys1,ID_muon_sys2);
 			   muon1_iso_scale=get_muon_iso_sys16(etalep1,ptlep1,ISO_muon_sys1,ISO_muon_sys2);
 			   muon2_iso_scale=get_muon_iso_sys16(etalep2,ptlep2,ISO_muon_sys1,ISO_muon_sys2);
 			   muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
-			   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
-			   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
 		   }
 		   else if(tag.Contains("17")||tag.Contains("18")){
 			   muon1_id_scale=get_muon_ID_sys(etalep1,ptlep1,ID_muon_sys1);
@@ -184,33 +182,54 @@ void rm::Loop(TString tag)
 			   muon1_iso_scale=get_muon_iso_sys(etalep1,ptlep1,ISO_muon_sys1);
 			   muon2_iso_scale=get_muon_iso_sys(etalep2,ptlep2,ISO_muon_sys1);
 			   muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
-			   //muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,di_lep_trigger);
-			   if(tag.Contains("17")){
-				   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9862;
-				   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
-				   puIdweight_L=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
-				   puIdweight_M=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
-				   puIdweight_T=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
-			   }
-			   if(tag.Contains("18")){
-				   if(fabs(photoneta)<1.4442){
-					   if(photonet<30) photon_veto_scale=0.9869;
-					   else if(photonet>30 && photonet<60) photon_veto_scale=0.9908;
-					   else photon_veto_scale=1.0084;
-				   }
-				   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566){
-					   if(photonet<30) photon_veto_scale=0.9535;
-					   else if(photonet>30 && photonet<60) photon_veto_scale=0.9646;
-					   else photon_veto_scale=1.0218;
-				   }
-			   }
 		   }
 		   else break;
 	   }
+	   if(tag.Contains("16")){
+		   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9938;
+		   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9875;
+	   }
+	   else if(tag.Contains("17")||tag.Contains("18")){
+		   if(tag.Contains("17")){
+			   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9862;
+			   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
+			   if(jet1pt>30 && jet2pt>30){
+				   puIdweight_L=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
+				   puIdweight_M=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
+				   puIdweight_T=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+
+				   puIdweight_L_new=get_PUID_SF(jet1eta_new ,jet1pt_new ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta_new ,jet2pt_new ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
+				   puIdweight_M_new=get_PUID_SF(jet1eta_new ,jet1pt_new ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta_new ,jet2pt_new ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
+				   puIdweight_T_new=get_PUID_SF(jet1eta_new ,jet1pt_new ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta_new ,jet2pt_new ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+
+				   puIdweight_L_JEC_up=get_PUID_SF(jet1eta_JEC_up ,jet1pt_JEC_up ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta_JEC_up ,jet2pt_JEC_up ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
+				   puIdweight_M_JEC_up=get_PUID_SF(jet1eta_JEC_up ,jet1pt_JEC_up ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta_JEC_up ,jet2pt_JEC_up ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
+				   puIdweight_T_JEC_up=get_PUID_SF(jet1eta_JEC_up ,jet1pt_JEC_up ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta_JEC_up ,jet2pt_JEC_up ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+
+				   puIdweight_L_JEC_down=get_PUID_SF(jet1eta_JEC_down ,jet1pt_JEC_down ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta_JEC_down ,jet2pt_JEC_down ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
+				   puIdweight_M_JEC_down=get_PUID_SF(jet1eta_JEC_down ,jet1pt_JEC_down ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta_JEC_down ,jet2pt_JEC_down ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
+				   puIdweight_T_JEC_down=get_PUID_SF(jet1eta_JEC_down ,jet1pt_JEC_down ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta_JEC_down ,jet2pt_JEC_down ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+			   }
+		   }
+		   if(tag.Contains("18")){
+			   if(fabs(photoneta)<1.4442){
+				   if(photonet<30) photon_veto_scale=0.9869;
+				   else if(photonet>30 && photonet<60) photon_veto_scale=0.9908;
+				   else photon_veto_scale=1.0084;
+			   }
+			   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566){
+				   if(photonet<30) photon_veto_scale=0.9535;
+				   else if(photonet>30 && photonet<60) photon_veto_scale=0.9646;
+				   else photon_veto_scale=1.0218;
+			   }
+		   }
+	   }
+	   else break;
 
 	   if(photonet>0){
 		   photon_id_scale=get_photon_ID(photoneta,photonet,ID_gamma);
 	   }
+	   pileupWeight=h13->GetBinContent(h13->GetXaxis()->FindBin(npT));
 	   ExTree->Fill();
    }
    eff=cut1/nentries;
@@ -232,4 +251,13 @@ void rm::SetValue(){
 	puIdweight_T=1;
 	puIdweight_M=1;
 	puIdweight_L=1;
+	puIdweight_T_new=1;
+	puIdweight_M_new=1;
+	puIdweight_L_new=1;
+	puIdweight_T_JEC_up=1;
+	puIdweight_M_JEC_up=1;
+	puIdweight_L_JEC_up=1;
+	puIdweight_T_JEC_down=1;
+	puIdweight_M_JEC_down=1;
+	puIdweight_L_JEC_down=1;
 }

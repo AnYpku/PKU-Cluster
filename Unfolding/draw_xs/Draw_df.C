@@ -1,7 +1,7 @@
 #include "CMS_lumi.C"
 #define num 103
 #define n_scale 3
-void cmsLumi(bool channel,TString tag);
+void cmsLumi(bool channel,TString tag,double max);
 void run(TString var, TString recovar,TString title,TString tag){
         double xs16=0,xs17=0,xs18=0;//cross section [fb] for 2016/2017/2018 EW sample 
         int num16=0,num17=0,num18=0;//the number of events for 2016/2017/2018 EW process
@@ -107,6 +107,7 @@ void run(TString var, TString recovar,TString title,TString tag){
 	fPads2->SetBottomMargin(0.3);
 	fPads2->Draw();
 	fPads1->Draw();
+
         fPads1->SetTicky();
         fPads1->SetTickx();
         fPads1->SetGridx();
@@ -154,6 +155,8 @@ void run(TString var, TString recovar,TString title,TString tag){
         h1[0]->GetYaxis()->SetLabelSize(0.07);
         h1[0]->SetMarkerSize(0);
 	h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*35);
+        const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+        for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}
 	h1[0]->Draw("E2");
 	hist_clone->SetMarkerStyle(20);
 	hist_clone->SetMarkerColor(1);
@@ -161,7 +164,7 @@ void run(TString var, TString recovar,TString title,TString tag){
 //	hist_clone->Draw("PE same");
         cout<<"Uncertainty of data "<<hist_clone->GetBinError(1)<<endl;
 
-	TLegend*l1=new TLegend(0.45,0.5,0.88,0.88);
+	TLegend*l1=new TLegend(0.4,0.5,0.8,0.88);
 	TLegend*l2=new TLegend(0.2,0.5,0.5,0.88);
 	l1->AddEntry(h1[0],"EW Z#gamma MadGraph");
 	l1->AddEntry(gr,"Expected result (stat.#oplus syst.)");
@@ -185,18 +188,19 @@ void run(TString var, TString recovar,TString title,TString tag){
         gr_sys->SetFillColor(0);
         gr_sys->SetMarkerSize(0);
         gr_sys->Draw("P SAME");
-	l1->Draw();
 //	l2->Draw();
 
 	double max=h1[0]->GetMaximum();
-        TLatex latex;
-        latex.SetTextSize(0.08);
-        latex.SetLineWidth(2);
-        latex.DrawLatex(1.1,10*max,"2.5<#Delta#eta_{jj}<4.5");
-        latex.DrawLatex(4.2,10*max,"4.5<#Delta#eta_{jj}<6");
-        latex.DrawLatex(6.1,10*max,"#Delta#eta_{jj}>6");
-
-//	cmsLumi(0,tag);
+        TLine* vline1 = new TLine(h1[0]->GetBinLowEdge(4),0,h1[0]->GetBinLowEdge(4),max*1.);
+        TLine* vline2 = new TLine(h1[0]->GetBinLowEdge(7),0,h1[0]->GetBinLowEdge(7),max*1.);
+        vline1->SetLineStyle(2);
+        vline2->SetLineStyle(2);
+        vline1->SetLineWidth(2);
+        vline2->SetLineWidth(2);
+        vline1->Draw();
+        vline2->Draw();
+	l1->Draw();
+	cmsLumi(0,tag,max);
 	string lumi;
 	if(tag.Contains("16"))  lumi="35.86";
 	if(tag.Contains("17"))  lumi="41.52";
@@ -308,7 +312,7 @@ int Draw_df(){
 	return 0;
 
 }
-void cmsLumi(bool channel,TString tag)
+void cmsLumi(bool channel,TString tag,double max)
 {
 	TLatex latex;
 	latex.SetNDC();
@@ -319,10 +323,15 @@ void cmsLumi(bool channel,TString tag)
 	latex.SetTextAlign(31);
 	latex.SetTextAlign(11);
 	latex.SetTextSize(0.08);
-	latex.DrawLatex(0.1,0.92,"CMS");
-	latex.DrawLatex(0.22,0.92,"Preliminary");
+//	latex.DrawLatex(0.1,0.92,"CMS");
+//	latex.DrawLatex(0.22,0.92,"Preliminary");
 	latex.SetTextSize(0.05);
-	if(tag.Contains("16"))latex.DrawLatex(0.76,0.92,Form("35.86 fb^{-1} (%d TeV)", (beamcomenergytev)));
-	else if(tag.Contains("17"))latex.DrawLatex(0.76,0.92,Form("41.52 fb^{-1} (%d TeV)", (beamcomenergytev)));
-	else if(tag.Contains("18"))latex.DrawLatex(0.76,0.92,Form("58.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
+//	if(tag.Contains("16"))latex.DrawLatex(0.76,0.92,Form("35.86 fb^{-1} (%d TeV)", (beamcomenergytev)));
+//	else if(tag.Contains("17"))latex.DrawLatex(0.76,0.92,Form("41.52 fb^{-1} (%d TeV)", (beamcomenergytev)));
+//	else if(tag.Contains("18"))latex.DrawLatex(0.76,0.92,Form("58.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
+        latex.SetTextSize(0.065);
+        latex.SetLineWidth(2);
+        latex.DrawLatex(0.17,0.51,"2.5<#Delta#eta_{jj}<4.5");
+        latex.DrawLatex(0.5,0.46,"4.5<#Delta#eta_{jj}<6");
+        latex.DrawLatex(0.8,0.48,"#Delta#eta_{jj}>6");
 }

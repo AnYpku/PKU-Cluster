@@ -42,7 +42,7 @@ void run(vector<double> lowpt,vector<double> highpt,TString tag,TString channels
 	}
 }
 int Uncer_tot(){
-        vector<TString> tag={"16","17","18"};
+        vector<TString> tag={"17"};
         vector<TString> channel={"BarrelMuon","EndcapMuon","ElectronBarrel","ElectronEndcap"};
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
         vector<double> lowpt;vector<double> highpt;

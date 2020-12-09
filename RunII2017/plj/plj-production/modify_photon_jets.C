@@ -106,23 +106,28 @@ void xx::modify_photon_jets()
 	Mva=(photonp4+wp4).M();
 
         Int_t jetindexphoton12[2] = {-1,-1};
-        for(Int_t i=0; i<6; i++)
-        {
-                if(iphoton>-1){
-                        double drtmp1=delta_R(ak4jet_eta[i], ak4jet_phi[i], photoneta,photonphi);
-                        if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1) {
-                                jetindexphoton12[0] = i;
-                                continue;
-                        }
-                        if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1) {
-                                jetindexphoton12[1] = i;
-                                continue;
-                        }
-                }
-        }
-	
+	for(Int_t i=0; i<6; i++){
+		if(iphoton>-1){
+			double drtmp1=delta_R(ak4jet_eta[i], ak4jet_phi[i], photoneta,photonphi);
+			if(ak4jet_pt[i]>0 /*&& ak4jet_puIdTight[i]==1*/ && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1){
+				jetindexphoton12[0] = i;
+				continue;
+			}
+			if(ak4jet_pt[i]>0 /*&& ak4jet_puIdTight[i]==1*/ && drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1){
+				jetindexphoton12[1] = i;
+				continue;
+			}
+		}
+	}
+
 	if(jetindexphoton12[0]>-1 && jetindexphoton12[1]>-1) 
 	{
+                jet1puIdTight=ak4jet_puIdTight[jetindexphoton12[0]];
+                jet2puIdTight=ak4jet_puIdTight[jetindexphoton12[1]];
+                jet1puIdMedium=ak4jet_puIdMedium[jetindexphoton12[0]];
+                jet2puIdMedium=ak4jet_puIdMedium[jetindexphoton12[1]];
+                jet1puIdLoose=ak4jet_puIdLoose[jetindexphoton12[0]];
+                jet2puIdLoose=ak4jet_puIdLoose[jetindexphoton12[1]];
 		jet1pt=ak4jet_pt[jetindexphoton12[0]];
 		jet1eta=ak4jet_eta[jetindexphoton12[0]];
 		jet1phi=ak4jet_phi[jetindexphoton12[0]];

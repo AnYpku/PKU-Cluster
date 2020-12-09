@@ -275,6 +275,10 @@ public :
    Double_t        muon1_iso_scale;
    Double_t        muon2_iso_scale;
    Double_t        muon_hlt_scale;
+   Double_t        ele_hlt_scale;
+   Double_t        puIdweight_L;
+   Double_t        puIdweight_M;
+   Double_t        puIdweight_T;
 
    // List of branches
    TBranch        *b_event;   //!
@@ -520,6 +524,11 @@ public :
    TBranch        *b_muon1_iso_scale;   //!
    TBranch        *b_muon2_iso_scale;   //!
    TBranch        *b_muon_hlt_scale;   //!
+   TBranch        *b_ele_hlt_scale;   //!
+   TBranch        *b_puIdweight_L;   //!
+   TBranch        *b_puIdweight_M;   //!
+   TBranch        *b_puIdweight_T;   //!
+
 
    plj(TTree *tree=0,TString dataset="");
    virtual ~plj();
@@ -848,6 +857,10 @@ void plj::Init(TTree *tree)
    fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
    fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
    fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
+   fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
+   fChain->SetBranchAddress("puIdweight_L", &puIdweight_L, &b_puIdweight_L);
+   fChain->SetBranchAddress("puIdweight_M", &puIdweight_M, &b_puIdweight_M);
+   fChain->SetBranchAddress("puIdweight_T", &puIdweight_T, &b_puIdweight_T);
    Notify();
 }
 

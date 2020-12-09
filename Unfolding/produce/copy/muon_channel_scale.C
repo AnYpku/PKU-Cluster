@@ -4,7 +4,7 @@ double get_muon_ID_sys(double etalep, double ptlep, TH2D* ID_BF){
 	double ptlep_tmp=ptlep;
 	if(ptlep>110) ptlep_tmp=110.;
 	double lep_ID_scale=-1;
-	lep_ID_scale=ID_BF->GetBinError(ID_BF->FindBin(fabs(ptlep_tmp),fabs(etalep)));
+	lep_ID_scale=ID_BF->GetBinContent(ID_BF->FindBin(fabs(ptlep_tmp),fabs(etalep)));
 	
 	return lep_ID_scale;
 }
@@ -12,7 +12,7 @@ double get_muon_ID_stat(double etalep, double ptlep, TH2D* ID_BF){
 	double ptlep_tmp=ptlep;
 	if(ptlep>110) ptlep_tmp=110.;
 	double lep_ID_scale=-1;
-	lep_ID_scale=ID_BF->GetBinError(ID_BF->FindBin(fabs(ptlep_tmp),fabs(etalep)));
+	lep_ID_scale=ID_BF->GetBinContent(ID_BF->FindBin(fabs(ptlep_tmp),fabs(etalep)));
 	
 	return lep_ID_scale;
 }
@@ -21,7 +21,7 @@ double get_muon_iso_sys(double etalep, double ptlep, TH2D* iso_BF){
 	double ptlep_tmp=ptlep;
         if(ptlep>110) ptlep_tmp=110.;
         double lep_iso_scale=-1;
-	lep_iso_scale=iso_BF->GetBinError(iso_BF->FindBin(ptlep_tmp,fabs(etalep)));
+	lep_iso_scale=iso_BF->GetBinContent(iso_BF->FindBin(ptlep_tmp,fabs(etalep)));
 	
         return lep_iso_scale;
 }
@@ -29,7 +29,7 @@ double get_muon_iso_stat(double etalep, double ptlep, TH2D* iso_BF){
 	double ptlep_tmp=ptlep;
         if(ptlep>110) ptlep_tmp=110.;
         double lep_iso_scale=-1;
-	lep_iso_scale=iso_BF->GetBinError(iso_BF->FindBin(ptlep_tmp,fabs(etalep)));
+	lep_iso_scale=iso_BF->GetBinContent(iso_BF->FindBin(ptlep_tmp,fabs(etalep)));
 	
         return lep_iso_scale;
 }

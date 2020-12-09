@@ -1,16 +1,16 @@
 #!/bin/bash
-#ptlep1
-#photonet
-#jet1pt
 vars="\
-Mjj
+ptlep1
+photonet
+jet1pt
 "
+#Mjj
 years="\
-16
-17
-18
 full
 "
+#16
+#17
+#18
 for year in $years
 do
   for var in $vars

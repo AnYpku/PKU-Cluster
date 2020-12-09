@@ -309,19 +309,6 @@ public :
    Double_t        prefWeightDown;
    Double_t        l1_weight;
    Int_t           run_period;
-   Double_t        scalef;
-   Double_t        ele1_id_scale;
-   Double_t        ele2_id_scale;
-   Double_t        ele1_reco_scale;
-   Double_t        ele2_reco_scale;
-   Double_t        photon_id_scale;
-   Double_t        muon1_id_scale;
-   Double_t        muon2_id_scale;
-   Double_t        muon1_iso_scale;
-   Double_t        muon2_iso_scale;
-   Double_t        muon1_track_scale;
-   Double_t        muon2_track_scale;
-   Double_t        muon_hlt_scale;
    Int_t           muon1_trackerLayers;
    Double_t        matchedgenMu1_pt;
    Int_t           muon2_trackerLayers;
@@ -604,19 +591,6 @@ public :
    TBranch        *b_prefWeightDown;   //!
    TBranch        *b_l1_weight;   //!
    TBranch        *b_run_period;   //!
-   TBranch        *b_scalef;   //!
-   TBranch        *b_ele1_id_scale;   //!
-   TBranch        *b_ele2_id_scale;   //!
-   TBranch        *b_ele1_reco_scale;   //!
-   TBranch        *b_ele2_reco_scale;   //!
-   TBranch        *b_photon_id_scale;   //!
-   TBranch        *b_muon1_id_scale;   //!
-   TBranch        *b_muon2_id_scale;   //!
-   TBranch        *b_muon1_iso_scale;   //!
-   TBranch        *b_muon2_iso_scale;   //!
-   TBranch        *b_muon1_track_scale;   //!
-   TBranch        *b_muon2_track_scale;   //!
-   TBranch        *b_muon_hlt_scale;   //!
    TBranch        *b_muon1_trackerLayers;   //!
    TBranch        *b_matchedgenMu1_pt;   //!
    TBranch        *b_muon2_trackerLayers;   //!
@@ -633,6 +607,7 @@ public :
    virtual void     Show(Long64_t entry = -1);
    virtual void     genparticles();
    virtual void     ResetValue();
+   virtual void     SetValue();
 
    const double lumi = 35.86;
    Bool_t LEPmu,LEPele,genmuon[6],genele[6],genjet[6],genphoton[6];
@@ -666,6 +641,24 @@ public :
  private:
      TTree *ExTree;
      TFile *fout;
+     int nentries;
+     double scalef;
+     double eff;
+     double    muon1_id_scale;
+     double    muon2_id_scale;
+     double    muon1_iso_scale;
+     double    muon2_iso_scale;
+     double    muon_hlt_scale;
+     double    ele1_id_scale;
+     double    ele2_id_scale;
+     double    ele1_reco_scale;
+     double    ele2_reco_scale;
+     double    photon_id_scale;
+     double    photon_veto_scale;
+     double ele_hlt_scale;
+     double puIdweight_L,puIdweight_L_new,puIdweight_L_JEC_up,puIdweight_L_JEC_down;
+     double puIdweight_M,puIdweight_M_new,puIdweight_M_JEC_up,puIdweight_M_JEC_down;
+     double puIdweight_T,puIdweight_T_new,puIdweight_T_JEC_up,puIdweight_T_JEC_down;
 
 };
 
@@ -732,6 +725,32 @@ void rm::Init(TTree *tree)
    fout = new TFile(m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
    ExTree->Branch("scalef",     &scalef,     "scalef/D");
+   ExTree->Branch("nentries",&nentries,"nentries/I");
+   // lep and photon scales
+   ExTree->Branch("ele1_id_scale", &ele1_id_scale, "ele1_id_scale/D");
+   ExTree->Branch("ele2_id_scale", &ele2_id_scale, "ele2_id_scale/D");
+   ExTree->Branch("ele1_reco_scale", &ele1_reco_scale, "ele1_reco_scale/D");
+   ExTree->Branch("ele2_reco_scale", &ele2_reco_scale, "ele2_reco_scale/D");
+   ExTree->Branch("photon_id_scale", &photon_id_scale, "photon_id_scale/D");
+   ExTree->Branch("photon_veto_scale", &photon_veto_scale, "photon_veto_scale/D");
+   ExTree->Branch("muon1_id_scale", &muon1_id_scale, "muon1_id_scale/D");
+   ExTree->Branch("muon2_id_scale", &muon2_id_scale, "muon2_id_scale/D");
+   ExTree->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
+   ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D");
+   ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
+   ExTree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
+   ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
+   ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
+   ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
+   ExTree->Branch("puIdweight_L_new",&puIdweight_L_new,"puIdweight_L_new/D");
+   ExTree->Branch("puIdweight_M_new",&puIdweight_M_new,"puIdweight_M_new/D");
+   ExTree->Branch("puIdweight_T_new",&puIdweight_T_new,"puIdweight_T_new/D");
+   ExTree->Branch("puIdweight_L_JEC_up",&puIdweight_L_JEC_up,"puIdweight_L_JEC_up/D");
+   ExTree->Branch("puIdweight_M_JEC_up",&puIdweight_M_JEC_up,"puIdweight_M_JEC_up/D");
+   ExTree->Branch("puIdweight_T_JEC_up",&puIdweight_T_JEC_up,"puIdweight_T_JEC_up/D");
+   ExTree->Branch("puIdweight_L_JEC_down",&puIdweight_L_JEC_down,"puIdweight_L_JEC_down/D");
+   ExTree->Branch("puIdweight_M_JEC_down",&puIdweight_M_JEC_down,"puIdweight_M_JEC_down/D");
+   ExTree->Branch("puIdweight_T_JEC_down",&puIdweight_T_JEC_down,"puIdweight_T_JEC_down/D");
    ExTree->Branch("genyVlep",     &genyVlep,     "genyVlep/D");
    ExTree->Branch("genphiVlep",   &genphiVlep,   "genphiVlep/D");
    ExTree->Branch("genptVlep",    &genptVlep,    "genptVlep/D");
@@ -1070,26 +1089,13 @@ void rm::Init(TTree *tree)
    fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
    fChain->SetBranchAddress("prefWeightDown", &prefWeightDown, &b_prefWeightDown);
    fChain->SetBranchAddress("run_period", &run_period, &b_run_period);
-//   fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
-   fChain->SetBranchAddress("ele1_id_scale", &ele1_id_scale, &b_ele1_id_scale);
-   fChain->SetBranchAddress("ele2_id_scale", &ele2_id_scale, &b_ele2_id_scale);
-   fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
-   fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
-   fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
-   fChain->SetBranchAddress("muon1_id_scale", &muon1_id_scale, &b_muon1_id_scale);
-   fChain->SetBranchAddress("muon2_id_scale", &muon2_id_scale, &b_muon2_id_scale);
-   fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
-   fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
-   fChain->SetBranchAddress("muon1_track_scale", &muon1_track_scale, &b_muon1_track_scale);
-   fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
-   fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
    fChain->SetBranchAddress("muon1_trackerLayers", &muon1_trackerLayers, &b_muon1_trackerLayers);
    fChain->SetBranchAddress("matchedgenMu1_pt", &matchedgenMu1_pt, &b_matchedgenMu1_pt);
    fChain->SetBranchAddress("muon2_trackerLayers", &muon2_trackerLayers, &b_muon2_trackerLayers);
    fChain->SetBranchAddress("matchedgenMu2_pt", &matchedgenMu2_pt, &b_matchedgenMu2_pt);
-   
+
    Notify();
- 
+
 }
 
 Bool_t rm::Notify()
@@ -1111,12 +1117,12 @@ void rm::Show(Long64_t entry)
 	fChain->Show(entry);
 }
 void rm::endJob() {
-     fout->cd();
-     ExTree->Write();
-     fout->Write();
-     fout->Close();
-     delete fout;
-  }
+	fout->cd();
+	ExTree->Write();
+	fout->Write();
+	fout->Close();
+	delete fout;
+}
 Int_t rm::Cut(Long64_t entry)
 {
 	// This function may be called from Loop.

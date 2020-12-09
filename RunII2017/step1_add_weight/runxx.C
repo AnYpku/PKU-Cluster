@@ -6,7 +6,7 @@ using namespace std;
 void runxx() {
 //gROOT->LoadMacro("xx.C");
 //TString dir="/data/pku/home/anying/cms/file_in_cms/files_weighted/";
-TString dir ="/home/pku/anying/cms/rootfiles/2017/";
+TString dir ="/home/pku/anying/cms/rootfiles/2017/raw/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -17,6 +17,7 @@ while (k>0){
 getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
+if(infilename.Contains("end")==1) {k=-2; break;}
 infilename = /*"cutlep-"out"+*/infilename;
 TString outname="cutlep-out"+infilename;
 

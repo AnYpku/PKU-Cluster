@@ -633,6 +633,17 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		TVectorD nsigma_ex(sumDATA->GetNbinsX());
 		TVectorD nsigma_ey(sumDATA->GetNbinsX());
 
+                TH1D*nominal=(TH1D*)sumMC->Clone("nominal");
+                TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
+		nominal->SetMarkerSize(0);
+		nominal->SetFillColor(kRed);
+		nominal->SetLineColor(1);
+		nominal->SetFillStyle(3004);
+                for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
+                nominal->Divide(nomNoErr);
+		nominal->SetTitle("");
+		nominal->Draw("E2");
+
 		for (int ibin = 0; ibin != sumDATA->GetNbinsX(); ++ibin) {
 
 			double Data = sumDATA->GetBinContent(ibin + 1);
@@ -660,24 +671,23 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		if (nsigma_x.GetNoElements() != 0) {
 			TGraph *nsigmaGraph = new TGraphErrors(nsigma_x, nsigma_y,nsigma_ex,nsigma_ey);
 			nsigmaGraph->SetTitle("");
-			nsigmaGraph->GetYaxis()->SetRangeUser(thisYmin, thisYmax);
-			//nsigmaGraph->GetYaxis()->SetTitle("(Data-Bkg)/#sigma");
-			nsigmaGraph->GetYaxis()->SetTitle("(Data/Bkg)");
-			nsigmaGraph->GetYaxis()->CenterTitle();
-			nsigmaGraph->GetYaxis()->SetTitleOffset(0.43);
-			nsigmaGraph->GetYaxis()->SetTitleSize(0.1);
-			nsigmaGraph->GetYaxis()->SetLabelSize(0.06);
-			nsigmaGraph->GetXaxis()->SetTitle(histoName.c_str());
-			nsigmaGraph->GetXaxis()->SetTitleSize(0.1);
-			nsigmaGraph->GetXaxis()->SetLimits(sumMC->GetXaxis()->GetXmin(),
+			nominal->GetYaxis()->SetRangeUser(thisYmin, thisYmax);
+			nominal->GetYaxis()->SetTitle("(Data/Bkg)");
+			nominal->GetYaxis()->CenterTitle();
+			nominal->GetYaxis()->SetTitleOffset(0.43);
+			nominal->GetYaxis()->SetTitleSize(0.1);
+			nominal->GetYaxis()->SetLabelSize(0.06);
+			nominal->GetXaxis()->SetTitle(histoName.c_str());
+			nominal->GetXaxis()->SetTitleSize(0.1);
+			nominal->GetXaxis()->SetLimits(sumMC->GetXaxis()->GetXmin(),
 					sumMC->GetXaxis()->GetXmax());
-			nsigmaGraph->GetXaxis()->SetRangeUser(sumMC->GetXaxis()->GetXmin(),
+			nominal->GetXaxis()->SetRangeUser(sumMC->GetXaxis()->GetXmin(),
 					sumMC->GetXaxis()->GetXmax());
-			nsigmaGraph->GetXaxis()->SetTitleOffset(0.9);
-			nsigmaGraph->GetXaxis()->SetLabelSize(0.08);
+			nominal->GetXaxis()->SetTitleOffset(0.9);
+			nominal->GetXaxis()->SetLabelSize(0.08);
 			nsigmaGraph->SetMarkerStyle(20);
 			nsigmaGraph->SetMarkerSize(0.6);
-			nsigmaGraph->Draw("ape");
+			nsigmaGraph->Draw("same p");
 		}
 
 		fPads2->Update();

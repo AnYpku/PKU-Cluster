@@ -1,0 +1,63 @@
+000 (887726.000.000) 12/08 16:43:55 Job submitted from host: <202.38.140.107:9618?addrs=202.38.140.107-9618&noUDP&sock=4406_b001>
+...
+001 (887726.000.000) 12/08 16:44:11 Job executing on host: <192.168.1.4:9618?addrs=192.168.1.4-9618&noUDP&sock=4505_f2a6_3>
+...
+006 (887726.000.000) 12/08 16:44:20 Image size of job updated: 348412
+	271  -  MemoryUsage of job (MB)
+	277132  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 16:49:21 Image size of job updated: 799676
+	712  -  MemoryUsage of job (MB)
+	728208  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 16:54:21 Image size of job updated: 800372
+	712  -  MemoryUsage of job (MB)
+	728904  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 16:59:21 Image size of job updated: 808876
+	721  -  MemoryUsage of job (MB)
+	737408  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 17:14:22 Image size of job updated: 1485620
+	1382  -  MemoryUsage of job (MB)
+	1415060  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 17:19:23 Image size of job updated: 1649108
+	1543  -  MemoryUsage of job (MB)
+	1579680  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 17:24:23 Image size of job updated: 1649236
+	1543  -  MemoryUsage of job (MB)
+	1579808  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 17:29:23 Image size of job updated: 1649632
+	1544  -  MemoryUsage of job (MB)
+	1580204  -  ResidentSetSize of job (KB)
+...
+006 (887726.000.000) 12/08 17:54:27 Image size of job updated: 1649632
+	1550  -  MemoryUsage of job (MB)
+	1586192  -  ResidentSetSize of job (KB)
+...
+012 (887726.000.000) 12/08 18:24:07 Job was held.
+	The job attribute OnExitHold expression '(ExitBySignal == true) || (ExitCode != 0)' evaluated to TRUE
+	Code 3 Subcode 0
+...
+013 (887726.000.000) 12/08 18:34:31 Job was released.
+	The job attribute PeriodicRelease expression '(NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 600)' evaluated to TRUE
+...
+001 (887726.000.000) 12/08 18:34:36 Job executing on host: <192.168.1.4:9618?addrs=192.168.1.4-9618&noUDP&sock=4505_f2a6_3>
+...
+004 (887726.000.000) 12/08 18:38:21 Job was evicted.
+	(0) Job was not checkpointed.
+		Usr 0 00:03:29, Sys 0 00:00:09  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	324  -  Run Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :        0        1         1 
+	   Disk (KB)            :       51       75    709739 
+	   Memory (MB)          :     1709     1709      1792 
+...
+009 (887726.000.000) 12/08 18:38:21 Job was aborted by the user.
+	via condor_rm (by user anying)
+...

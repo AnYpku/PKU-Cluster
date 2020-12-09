@@ -128,9 +128,9 @@ int Uncer_batch_bkg(){
         file1[2]=new TFile(dir3+"cutla-outZA18.root");
 
         TFile*file2[3];
-        file2[0]=new TFile(dir1+"unfold_GenCutla-outZA-EWK16.root");
-        file2[1]=new TFile(dir2+"unfold_GenCutla-outZA-EWK17.root");
-        file2[2]=new TFile(dir3+"unfold_GenCutla-outZA-EWK18.root");
+        file2[0]=new TFile(dir1+"unfold_GenCutla-ZA-EWK16.root");
+        file2[1]=new TFile(dir2+"unfold_GenCutla-ZA-EWK17.root");
+        file2[2]=new TFile(dir3+"unfold_GenCutla-ZA-EWK18.root");
 
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){

@@ -16,8 +16,8 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel,vector<double
              cut="lep==13&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566";
 
      TString actualWeight;
-     if(channel.Contains("Ele")) actualWeight="*scalef*prefWeight*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale";
-     if(channel.Contains("Mu")) actualWeight="*scalef*prefWeight*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale";
+     if(channel.Contains("Ele")) actualWeight="*scalef*prefWeight*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale";
+     if(channel.Contains("Mu")) actualWeight="*scalef*prefWeight*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale";
      if(sample.Contains("ZA")==0) actualWeight="*1";
      TFile*file=new TFile(dir1+"cutla-out"+sample+".root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     

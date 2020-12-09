@@ -14,11 +14,11 @@ m1.endJob();
 }
 
 int main(){
-	TString dir16="/home/pku/anying/cms/rootfiles/JESR/";
+	TString dir16="/home/pku/anying/cms/rootfiles/JESR/raw/";
 	TString name16="JESR_ZA-EWK16.root";
-	TString dir17="/home/pku/anying/cms/rootfiles/JESR/";
+	TString dir17="/home/pku/anying/cms/rootfiles/JESR/raw/";
 	TString name17="JESR_ZA-EWK17.root";
-	TString dir18="/home/pku/anying/cms/rootfiles/JESR/";
+	TString dir18="/home/pku/anying/cms/rootfiles/JESR/raw/";
 	TString name18="JESR_ZA-EWK18.root";
 	runxx(dir16,name16,"16");
 	runxx(dir17,name17,"17");

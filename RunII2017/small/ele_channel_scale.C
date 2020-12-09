@@ -35,11 +35,17 @@ double get_eleHLT_SF(double etalep1, double ptlep1,double etalep2,double ptlep2,
 
         return lep_HLT_scale;
 }
-double get_PUID_SF(double jeteta,double jetpt,TH2F*eff,TH2F*misrate,TH2F*effSF,TH2F*misrateSF){
-       double PUweight=1;
-       if(jetpt<50){
-               double PMC=eff->GetBinContent(eff->FindBin(jetpt,jeteta))*(1-misrate->GetBinContent(misrate->FindBin(jetpt,jeteta))); 
-	       double PData= effSF->GetBinContent(effSF->FindBin(jetpt,jeteta))*eff->GetBinContent(eff->FindBin(jetpt,jeteta))*(1-misrateSF->GetBinContent(misrateSF->FindBin(jetpt,jeteta))*misrate->GetBinContent(misrate->FindBin(jetpt,jeteta)) );
+double get_PUID_SF(double jet1eta,double jet1pt,TH2F*eff,TH2F*SFeff,TH2F*mis,TH2F*SFmis,int flag){
+       double PUweight;
+       int bin1=eff->FindBin(jet1pt,jet1eta);
+       if(jet1pt<50 && flag==1){
+	       double PMC=eff->GetBinContent(bin1);
+	       double PData=SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1);
+	       PUweight=PData/PMC;
+       }
+       else if(jet1pt<50 && flag==0){
+	       double PMC=mis->GetBinContent(bin1);
+	       double PData=SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1);
 	       PUweight=PData/PMC;
        }
        else PUweight=1;

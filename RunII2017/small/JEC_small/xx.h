@@ -352,6 +352,7 @@ public :
    Double_t        muon1_iso_scale;
    Double_t        muon2_iso_scale;
    Double_t        muon_hlt_scale;
+   Double_t ele_hlt_scale;
 
    // List of branches
    TBranch        *b_event;   //!
@@ -674,6 +675,19 @@ public :
    TBranch        *b_muon1_iso_scale;   //!
    TBranch        *b_muon2_iso_scale;   //!
    TBranch        *b_muon_hlt_scale;   //!
+   TBranch        *b_ele_hlt_scale;   //!
+   TBranch        *b_puIdweight_L;   //!
+   TBranch        *b_puIdweight_M;   //!
+   TBranch        *b_puIdweight_T;   //!
+   TBranch        *b_puIdweight_L_new;   //!
+   TBranch        *b_puIdweight_M_new;   //!
+   TBranch        *b_puIdweight_T_new;   //!
+   TBranch        *b_puIdweight_L_JEC_up;   //!
+   TBranch        *b_puIdweight_M_JEC_up;   //!
+   TBranch        *b_puIdweight_T_JEC_up;   //!
+   TBranch        *b_puIdweight_L_JEC_down;   //!
+   TBranch        *b_puIdweight_M_JEC_down;   //!
+   TBranch        *b_puIdweight_T_JEC_down;   //!
 
    xx(TTree *tree=0,TString dataset="");
    virtual ~xx();
@@ -692,7 +706,6 @@ public :
  private:
      TTree *newtree;
      TFile *fout;
-     double ele_hlt_scale;
      double puIdweight_L,puIdweight_M,puIdweight_T;
      double puIdweight_L_new,puIdweight_M_new,puIdweight_T_new;
      double puIdweight_L_JEC_up,puIdweight_M_JEC_up,puIdweight_T_JEC_up;
@@ -758,24 +771,24 @@ void xx::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/home/pku/anying/cms/rootfiles/JESR/hlt/"+m_dataset, "RECREATE");
+   fout = new TFile("/home/pku/anying/cms/rootfiles/JESR/"+m_dataset, "RECREATE");
    newtree = fChain->CloneTree(0);
-   newtree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
-   newtree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
-   newtree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
-   newtree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
 
-   newtree->Branch("puIdweight_L_new",&puIdweight_L_new,"puIdweight_L_new/D");
-   newtree->Branch("puIdweight_M_new",&puIdweight_M_new,"puIdweight_M_new/D");
-   newtree->Branch("puIdweight_T_new",&puIdweight_T_new,"puIdweight_T_new/D");
+   fChain->SetBranchAddress("puIdweight_L",&puIdweight_L,&b_puIdweight_L);
+   fChain->SetBranchAddress("puIdweight_M",&puIdweight_M,&b_puIdweight_M);
+   fChain->SetBranchAddress("puIdweight_T",&puIdweight_T,&b_puIdweight_T);
 
-   newtree->Branch("puIdweight_L_JEC_up",&puIdweight_L_JEC_up,"puIdweight_L_JEC_up/D");
-   newtree->Branch("puIdweight_M_JEC_up",&puIdweight_M_JEC_up,"puIdweight_M_JEC_up/D");
-   newtree->Branch("puIdweight_T_JEC_up",&puIdweight_T_JEC_up,"puIdweight_T_JEC_up/D");
+   fChain->SetBranchAddress("puIdweight_L_new",&puIdweight_L_new,&b_puIdweight_L_new);
+   fChain->SetBranchAddress("puIdweight_M_new",&puIdweight_M_new,&b_puIdweight_M_new);
+   fChain->SetBranchAddress("puIdweight_T_new",&puIdweight_T_new,&b_puIdweight_T_new);
 
-   newtree->Branch("puIdweight_L_JEC_down",&puIdweight_L_JEC_down,"puIdweight_L_JEC_down/D");
-   newtree->Branch("puIdweight_M_JEC_down",&puIdweight_M_JEC_down,"puIdweight_M_JEC_down/D");
-   newtree->Branch("puIdweight_T_JEC_down",&puIdweight_T_JEC_down,"puIdweight_T_JEC_down/D");
+   fChain->SetBranchAddress("puIdweight_L_JEC_up",&puIdweight_L_JEC_up,&b_puIdweight_L_JEC_up);
+   fChain->SetBranchAddress("puIdweight_M_JEC_up",&puIdweight_M_JEC_up,&b_puIdweight_M_JEC_up);
+   fChain->SetBranchAddress("puIdweight_T_JEC_up",&puIdweight_T_JEC_up,&b_puIdweight_T_JEC_up);
+
+   fChain->SetBranchAddress("puIdweight_L_JEC_down",&puIdweight_L_JEC_down,&b_puIdweight_L_JEC_down);
+   fChain->SetBranchAddress("puIdweight_M_JEC_down",&puIdweight_M_JEC_down,&b_puIdweight_M_JEC_down);
+   fChain->SetBranchAddress("puIdweight_T_JEC_down",&puIdweight_T_JEC_down,&b_puIdweight_T_JEC_down);
 
    fChain->SetBranchAddress("event", &event, &b_event);
    fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
@@ -1097,6 +1110,7 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
    fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
    fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
+   fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
    Notify();
 }
 

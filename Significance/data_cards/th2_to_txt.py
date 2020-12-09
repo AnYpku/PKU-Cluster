@@ -207,7 +207,7 @@ for i in range(1,nbins):
    f.write('%0.2f\t-\t-\t-\t-\t-\n'%(arr['interf'+sys.argv[1]][i-1]))
    
    if sys.argv[2].find("ele") == -1:
-        f.write('mu_trigger%s\tlnN\t'%(sys.argv[1]))
+        f.write('mu_trigger\tlnN\t')
 #        f.write('mu_trigger\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0]))
         f.write('mu_eff\tlnN\t')

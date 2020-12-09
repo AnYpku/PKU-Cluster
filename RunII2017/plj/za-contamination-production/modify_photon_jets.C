@@ -110,11 +110,11 @@ void xx::modify_photon_jets()
         {
                 if(iphoton>-1){
                         double drtmp1=delta_R(ak4jet_eta[i], ak4jet_phi[i], photoneta,photonphi);
-                        if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1) {
+                        if(ak4jet_pt[i]>0 && ak4jet_puIdTight[i]==1 && drtmp1>0.5 && jetindexphoton12[0]==-1&&jetindexphoton12[1]==-1) {
                                 jetindexphoton12[0] = i;
                                 continue;
                         }
-                        if(ak4jet_pt[i]>0 && drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1) {
+                        if(ak4jet_pt[i]>0 && ak4jet_puIdTight[i]==1&& drtmp1>0.5 && jetindexphoton12[0]!=-1&&jetindexphoton12[1]==-1) {
                                 jetindexphoton12[1] = i;
                                 continue;
                         }

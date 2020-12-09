@@ -34,6 +34,7 @@ void run(TString dir,TString sample,TString var1, vector<double> bins,TString cu
 	     tree->Draw(var1+">>"+th2name,cut1+"*scalef*"+lumi,"goff");
 
      th2->SetBinContent(nbins,th2->GetBinContent(nbins)+th2->GetBinContent(nbins+1));//add overflowbin
+     th2->SetBinError(nbins,sqrt(pow(th2->GetBinError(nbins),2)+pow(th2->GetBinError(nbins+1),2)));
      TFile*fout=new TFile("./root/hist_"+sample+"_"+var1+tag+".root","recreate");
      th2->Write();
      fout->Close();

@@ -39,6 +39,7 @@ public :
    Double_t        ele1_reco_scale;
    Double_t        ele2_reco_scale;
    Double_t        photon_id_scale;
+   Double_t        photon_veto_scale;
    Double_t        muon1_id_scale;
    Double_t        muon2_id_scale;
    Double_t        muon1_iso_scale;
@@ -46,6 +47,7 @@ public :
    Double_t        muon1_track_scale;
    Double_t        muon2_track_scale;
    Double_t        muon_hlt_scale;
+   Double_t        ele_hlt_scale;
    Int_t           event;
    Int_t           nVtx;
    Double_t        theWeight;
@@ -261,7 +263,9 @@ public :
    Double_t        lhe_photon_py;
    Double_t        lhe_photon_pz;
    Double_t        lhe_photon_e;
-   Double_t        l1_weight;
+   Double_t        puIdweight_L;
+   Double_t        puIdweight_M;
+   Double_t        puIdweight_T;
 
    // List of branches
    TBranch        *b_scalef;   //!
@@ -271,6 +275,7 @@ public :
    TBranch        *b_ele1_reco_scale;   //!
    TBranch        *b_ele2_reco_scale;   //!
    TBranch        *b_photon_id_scale;   //!
+   TBranch        *b_photon_veto_scale;   //!
    TBranch        *b_muon1_id_scale;   //!
    TBranch        *b_muon2_id_scale;   //!
    TBranch        *b_muon1_iso_scale;   //!
@@ -278,6 +283,7 @@ public :
    TBranch        *b_muon1_track_scale;   //!
    TBranch        *b_muon2_track_scale;   //!
    TBranch        *b_muon_hlt_scale;   //!
+   TBranch        *b_ele_hlt_scale;   //!
    TBranch        *b_event;   //!
    TBranch        *b_nVtx;   //!
    TBranch        *b_theWeight;   //!
@@ -492,7 +498,9 @@ public :
    TBranch        *b_lhe_photon_py;   //!
    TBranch        *b_lhe_photon_pz;   //!
    TBranch        *b_lhe_photon_e;   //!
-   TBranch        *b_l1_weight;   //!
+   TBranch        *b_puIdweight_L;   //!
+   TBranch        *b_puIdweight_M;   //!
+   TBranch        *b_puIdweight_T;   //!
 
    TString m_dataset;
 
@@ -577,6 +585,9 @@ void plj::Init(TTree *tree)
    fout = new TFile(m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
    
+   fChain->SetBranchAddress("puIdweight_L",&puIdweight_L,&b_puIdweight_L);
+   fChain->SetBranchAddress("puIdweight_M",&puIdweight_M,&b_puIdweight_M);
+   fChain->SetBranchAddress("puIdweight_T",&puIdweight_T,&b_puIdweight_T);
    fChain->SetBranchAddress("scalef",&scalef,&b_scalef);
    fChain->SetBranchAddress("run_period", &run_period, &b_run_period);
    fChain->SetBranchAddress("ele1_id_scale", &ele1_id_scale, &b_ele1_id_scale);
@@ -584,13 +595,13 @@ void plj::Init(TTree *tree)
    fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
    fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
    fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+   fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
    fChain->SetBranchAddress("muon1_id_scale", &muon1_id_scale, &b_muon1_id_scale);
    fChain->SetBranchAddress("muon2_id_scale", &muon2_id_scale, &b_muon2_id_scale);
    fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
    fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
-   fChain->SetBranchAddress("muon1_track_scale", &muon1_track_scale, &b_muon1_track_scale);
-   fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
    fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
+   fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
    fChain->SetBranchAddress("event", &event, &b_event);
    fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
    fChain->SetBranchAddress("theWeight", &theWeight, &b_theWeight);
@@ -651,7 +662,7 @@ void plj::Init(TTree *tree)
    fChain->SetBranchAddress("passEleVetonew", &passEleVetonew, &b_passEleVetonew);
    fChain->SetBranchAddress("passPixelSeedVeto", &passPixelSeedVeto, &b_passPixelSeedVeto);
    fChain->SetBranchAddress("photonet", &photonet, &b_photonet);
-//====================
+   //====================
    fChain->SetBranchAddress("photonet", &photonet, &b_photonet);
    fChain->SetBranchAddress("photonet_f", &photonet_f, &b_photonet_f);
    fChain->SetBranchAddress("photoneta", &photoneta, &b_photoneta);
@@ -799,40 +810,39 @@ void plj::Init(TTree *tree)
    fChain->SetBranchAddress("lhe_photon_py", &lhe_photon_py, &b_lhe_photon_py);
    fChain->SetBranchAddress("lhe_photon_pz", &lhe_photon_pz, &b_lhe_photon_pz);
    fChain->SetBranchAddress("lhe_photon_e", &lhe_photon_e, &b_lhe_photon_e);
-   fChain->SetBranchAddress("l1_weight", &l1_weight, &b_l1_weight);
    Notify();
 }
 
 Bool_t plj::Notify()
 {
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
+	// The Notify() function is called when a new file is opened. This
+	// can be either for a new TTree in a TChain or when when a new TTree
+	// is started when using PROOF. It is normally not necessary to make changes
+	// to the generated code, but the routine can be extended by the
+	// user if needed. The return value is currently not used.
 
-   return kTRUE;
+	return kTRUE;
 }
 
 void plj::Show(Long64_t entry)
 {
-// Print contents of entry.
-// If entry is not specified, print current entry
-   if (!fChain) return;
-   fChain->Show(entry);
+	// Print contents of entry.
+	// If entry is not specified, print current entry
+	if (!fChain) return;
+	fChain->Show(entry);
 }
 void plj::endJob() {
-     fout->cd();
-     ExTree->Write();
-     fout->Close();
-     delete fout;
-  }
+	fout->cd();
+	ExTree->Write();
+	fout->Close();
+	delete fout;
+}
 
 Int_t plj::Cut(Long64_t entry)
 {
-// This function may be called from Loop.
-// returns  1 if entry is accepted.
-// returns -1 otherwise.
-   return 1;
+	// This function may be called from Loop.
+	// returns  1 if entry is accepted.
+	// returns -1 otherwise.
+	return 1;
 }
 #endif // #ifdef plj_cxx

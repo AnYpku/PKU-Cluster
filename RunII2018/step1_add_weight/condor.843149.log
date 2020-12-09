@@ -286,3 +286,6 @@
 013 (843149.000.000) 11/30 12:45:24 Job was released.
 	The job attribute PeriodicRelease expression '(NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 600)' evaluated to TRUE
 ...
+009 (843149.000.000) 12/05 14:19:21 Job was aborted by the user.
+	via condor_rm (by user condor)
+...

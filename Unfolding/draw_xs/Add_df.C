@@ -5,12 +5,12 @@ void cmsLumi(bool channel);
 void run(TString var, TString recovar, TString title,TString tag){
         double xs16=109.7,xs17=114.3,xs18=114.3;//cross section [fb] for 2016/2017/2018 EW sample 
         int num16=299991,num17=299973,num18=287399;//the number of events for 2016/2017/2018 EW process
-	TFile*file1=new TFile("../unfold_"+var+"_ewk_pdf16.root");
-	TFile*file2=new TFile("../unfold_"+var+"_ewk_pdf17.root");
-	TFile*file3=new TFile("../unfold_"+var+"_ewk_pdf18.root");
-        TFile*file11=new TFile("../../scale_draw/"+var+"_unfold_ewk_scale16.root");
-        TFile*file22=new TFile("../../scale_draw/"+var+"_unfold_ewk_scale17.root");
-        TFile*file33=new TFile("../../scale_draw/"+var+"_unfold_ewk_scale18.root");
+	TFile*file1=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf16.root");
+	TFile*file2=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf17.root");
+	TFile*file3=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf18.root");
+        TFile*file11=new TFile("../scale_draw/"+var+"_unfold_ewk_scale16.root");
+        TFile*file22=new TFile("../scale_draw/"+var+"_unfold_ewk_scale17.root");
+        TFile*file33=new TFile("../scale_draw/"+var+"_unfold_ewk_scale18.root");
 	TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
         TH1D*h11[3];TH1D*h22[3];TH1D*h33[3];
         for(int i=0;i<num;i++){
@@ -148,8 +148,10 @@ void run(TString var, TString recovar, TString title,TString tag){
                 h1[0]->SetBinError(j,sqrt(err2Up)/h1[0]->GetBinWidth(j));
 	}
         h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*35);
-        h1[0]->GetYaxis()->SetLabelSize(0.07);
+        h1[0]->GetYaxis()->SetLabelSize(0.05);
         h1[0]->SetMarkerSize(0);
+	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+//        for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}
 	h1[0]->Draw("E2");
 	hist_clone->SetMarkerStyle(20);
 	hist_clone->SetMarkerColor(1);
@@ -171,13 +173,32 @@ void run(TString var, TString recovar, TString title,TString tag){
         gr->SetLineColor(1);
         gr->Draw("P SAME");
         gr_sys->SetLineColor(2);
+        gr_sys->SetFillColor(0);
         gr_sys->SetLineWidth(4);
         gr_sys->SetLineStyle(2);
         gr_sys->SetMarkerSize(0);
         gr_sys->SetMarkerSize(0);
         gr_sys->Draw("P SAME");
+
+        double max=h1[0]->GetMaximum();
+        TLine* vline1 = new TLine(h1[0]->GetBinLowEdge(4),0,h1[0]->GetBinLowEdge(4),max*1.);
+        TLine* vline2 = new TLine(h1[0]->GetBinLowEdge(7),0,h1[0]->GetBinLowEdge(7),max*1.);
+        vline1->SetLineStyle(2);
+        vline2->SetLineStyle(2);
+        vline1->SetLineWidth(2);
+        vline2->SetLineWidth(2);
+//        vline1->Draw();
+//        vline2->Draw();
 	l1->Draw();
-	cmsLumi(0);
+
+        TLatex latex;
+        latex.SetTextSize(0.065);
+        latex.SetLineWidth(2);
+//        latex.DrawLatex(1.4,0.2,"2.5<#Delta#eta_{jj}<4.5");
+//        latex.DrawLatex(4.2,0.13,"4.5<#Delta#eta_{jj}<6");
+//        latex.DrawLatex(6.1,0.48,"#Delta#eta_{jj}>6");
+//	cmsLumi(0);
+        CMS_lumi(fPads1, 4,0, "137.1");
 	fPads1->Update();
 	fPads2->cd();
 //        fPads2->SetGridy();
@@ -258,12 +279,12 @@ void run(TString var, TString recovar, TString title,TString tag){
 }
 int Add_df(){
 	gStyle->SetOptStat(0);
-//	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}","m_{Z#gamma}"};
-//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
- //      vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-        vector<TString> genvars={"genMjj"};
-        vector<TString> recovars={"Mjj"};
-        vector<TString> title={"M_{jj}"};
+	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}"};
+     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
+      vector<TString> recovars={"ptlep1","photonet","jet1pt"};
+//        vector<TString> genvars={"genMjj"};
+//        vector<TString> recovars={"Mjj"};
+//        vector<TString> title={"M_{jj}"};
 	for(int i=0;i<genvars.size();i++){
 		run(genvars[i],recovars[i],title[i],"full");
 	}

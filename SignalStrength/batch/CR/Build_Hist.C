@@ -9,6 +9,7 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      cout<<tag<<" "<<name<<" "<<channel<<endl;
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      int lep;double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight;
+     double ele_hlt_scale,muon_hlt_scale;
      double Mjj,jet1eta,jet2eta,scalef;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mjj",&Mjj);
@@ -27,6 +28,8 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      TString th2name,th2name_out;
      if(name.Contains("EWK")) {
 	     th2name="hist_sig";
@@ -77,9 +80,9 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
              if(tag.Contains("18"))  prefWeight=1;
              actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale;
 	     if(lep==11)       
-		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale;
+		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*ele_hlt_scale;
 	     if(lep==13)       
-		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale;
+		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*muon_hlt_scale;
              if(name.Contains("plj")) actualWeight=scalef;
 	     if (  tformula1->EvalInstance() ){ 
 		     //cout<<name<<" "<<scalef<<" "<<pileupWeight<<" "
@@ -148,9 +151,9 @@ int Build_Hist(){
         dir1[1]="/home/pku/anying/cms/rootfiles/2017/cutla-out";
         dir1[2]="/home/pku/anying/cms/rootfiles/2018/cutla-out";
 
-        dir[0]="/home/pku/anying/cms/rootfiles/2016/unfold_GenCutla-out";
-        dir[1]="/home/pku/anying/cms/rootfiles/2017/unfold_GenCutla-out";
-        dir[2]="/home/pku/anying/cms/rootfiles/2018/unfold_GenCutla-out";
+        dir[0]="/home/pku/anying/cms/rootfiles/2016/unfold_GenCutla-";
+        dir[1]="/home/pku/anying/cms/rootfiles/2017/unfold_GenCutla-";
+        dir[2]="/home/pku/anying/cms/rootfiles/2018/unfold_GenCutla-";
 
 	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
@@ -164,6 +167,7 @@ int Build_Hist(){
 			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
 			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
 		}
+		if(tags[k].Contains("17")) continue;
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenControlRegion;
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";

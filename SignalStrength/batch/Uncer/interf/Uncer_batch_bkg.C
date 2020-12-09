@@ -9,12 +9,12 @@ TH1D* run( TString sample,TString tag,TString cut1){
      dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-";
      TFile*file;
      if(sample.Contains("EWK"))
-	     file=new TFile(dir1+"outZA-"+sample+tag+".root");
+	     file=new TFile(dir1+"ZA-"+sample+tag+".root");
      else    file=new TFile(dir1+"ZA_"+sample+tag+".root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      map<TString, double> variables;
      double Mjj,jet1eta,jet2eta;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale;
      Double_t scalef;
      int lep;
      tree->SetBranchAddress("scalef",&scalef);
@@ -34,6 +34,8 @@ TH1D* run( TString sample,TString tag,TString cut1){
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
 //     TH1D*th1[kk];
      TString th1name;
@@ -46,11 +48,11 @@ TH1D* run( TString sample,TString tag,TString cut1){
              tree->GetEntry(k);
 	     double detajj=fabs(jet1eta-jet2eta);
              if(tag.Contains("18"))  prefWeight=1;
-             actualWeight=scalef;
-//	     if(lep==11)
-//		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
-//	     if(lep==13)
-//		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
+             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale;
+	     if(lep==11)
+		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
+	     if(lep==13)
+		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
 	     if (  tformula->EvalInstance() ){
 		     if(Mjj>=500&&Mjj<800&&detajj>=2.5&&detajj<4.5)th1->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
 		     if(Mjj>=800&&Mjj<1200&&detajj>=2.5&&detajj<4.5)th1->Fill(1.5,actualWeight);//1~2 2.5~4.5 and 800~1200

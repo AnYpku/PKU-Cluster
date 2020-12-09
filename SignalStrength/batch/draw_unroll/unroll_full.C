@@ -16,8 +16,8 @@ void cmsLumi(bool channel)
         latex.SetNDC();
         latex.SetTextSize(0.04);
         latex.SetLineWidth(2);
-        float lumiel=136.1;
-        float lumimu=136.1;
+        float lumiel=137.1;
+        float lumimu=137.1;
         int beamcomenergytev=13;
         latex.SetTextAlign(31); 
         latex.SetTextAlign(11);
@@ -25,7 +25,7 @@ void cmsLumi(bool channel)
         latex.DrawLatex(0.18,0.82,"Preliminary");
         latex.DrawLatex(0.18,0.86,"CMS");
         latex.SetTextSize(0.06);
-        latex.DrawLatex(0.76,0.92,Form("136.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
+        latex.DrawLatex(0.76,0.92,Form("137.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 TH1D* unroll(TH1D* h1,TString hname){
 	int nbins=h1->GetNbinsX();
@@ -46,7 +46,7 @@ void unroll_run(TString channel){
 	TFile* fout = new TFile("aa_"+channel+".root","RECREATE");
 	std::ostringstream strs;
 	std::string lumivalue = strs.str();
-	Double_t lumi=136.1;
+	Double_t lumi=137.1;
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
         Double_t detajj_bins[4]={2.5,4.5,6,6.5};
 

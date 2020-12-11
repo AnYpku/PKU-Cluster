@@ -127,8 +127,8 @@ int Build_Hist(){
 	TString dr = "( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5";
 	TString SignalRegion = "Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && ZGmass>100";
 	TString opt="zepp<2.4 && delta_phi>1.9";
-//	vector<TString> tags={"16","17","18"};
-	vector<TString> tags={"16"};
+	vector<TString> tags={"16","17","18"};
+//	vector<TString> tags={"16"};
 	TString dir1;
 	dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
 	TString Reco;
@@ -136,7 +136,7 @@ int Build_Hist(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int k=0;k<tags.size();k++){
 		if(tags[k].Contains("17")==1){
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 //			jet="(  ( (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65)&&fabs(jet1eta)<4.7&&jet1pt<50&&jet1pt>30) || (jet1pt>50&&fabs(jet1eta)< 4.7) )   &&   ( (!(fabs(jet2eta)<3.14 && fabs(jet2eta)>2.65) && fabs(jet2eta)<4.7 && jet2pt<50 && jet2pt>30) || (jet2pt>50&&fabs(jet2eta)< 4.7) )   )  ";
 		}
 		else{
@@ -144,7 +144,7 @@ int Build_Hist(){
 		}
 		Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+"&&"+opt;
 		cout<<tags[k]<<" "<<jet<<endl;
-//		if(tags[k].Contains("17")==0) continue;
+		if(tags[k].Contains("17")==0) continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
 				run(dir1,names[j],Reco,tags[k],channels[i]);

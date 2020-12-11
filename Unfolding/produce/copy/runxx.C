@@ -20,7 +20,7 @@ int main(){
 //	TString name16="ZA_interf16.root";
 //	TString name16="ZA-EWK16.root";
 	TString dir17="/home/pku/anying/cms/rootfiles/2017/raw/";
-	TString name17="ZA17.root";
+	TString name17="ZA-EWK17.root";
 //	TString name17="ZA_interf17.root";
 //	TString name17="ZA-EWK17.root";
 	TString dir18="/home/pku/anying/cms/rootfiles/2018/";

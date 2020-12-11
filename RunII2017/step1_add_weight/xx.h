@@ -142,6 +142,8 @@ public :
    Double_t        jet2puIdLoose;
    Double_t        jet2puIdMedium;
    Double_t        jet2puIdTight;
+   Int_t           realjet1;
+   Int_t           realjet2;
    Double_t        jet1pt;
    Double_t        jet1pt_f;
    Double_t        jet1eta;
@@ -375,6 +377,8 @@ public :
    TBranch        *b_jet2puIdLoose;   //!
    TBranch        *b_jet2puIdMedium;   //!
    TBranch        *b_jet2puIdTight;   //!
+   TBranch        *b_realjet1;   //!
+   TBranch        *b_realjet2;   //!
    TBranch        *b_jet1pt;   //!
    TBranch        *b_jet1pt_f;   //!
    TBranch        *b_jet1eta;   //!
@@ -723,6 +727,8 @@ void xx::Init(TTree *tree)
 	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
 	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
 	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+	fChain->SetBranchAddress("realjet1", &realjet1, &b_realjet1);
+	fChain->SetBranchAddress("realjet2", &realjet2, &b_realjet2);
 	fChain->SetBranchAddress("jet1pt", &jet1pt, &b_jet1pt);
 	fChain->SetBranchAddress("jet1pt_f", &jet1pt_f, &b_jet1pt_f);
 	fChain->SetBranchAddress("jet1eta", &jet1eta, &b_jet1eta);

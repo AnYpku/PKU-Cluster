@@ -4,7 +4,7 @@ kmax 24  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap4
-observation 12.21
+observation 15.75
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,25 +13,25 @@ observation 12.21
 bin	eleendcap4	eleendcap4	eleendcap4	eleendcap4	eleendcap4	eleendcap4	eleendcap4
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	0.32	5.30	6.44	0.00	0.12	0.00	0.03
+rate	0.32	5.69	9.55	0.04	0.11	0.00	0.03
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
-VBS_Stat_bin4_eleendcap17	lnN	1.21	-	-	-	-	-	-
-QCD_Stat_bin4_eleendcap17	lnN	-	1.20	-	-	-	-	-
-non_prompt_Stat_bin4_eleendcap17	lnN	-	-	1.19	-	-	-	-
-TTA_Stat_bin4_eleendcap17	lnN	-	-	-	1.00	-	-	-
+VBS_Stat_bin4_eleendcap17	lnN	1.13	-	-	-	-	-	-
+QCD_Stat_bin4_eleendcap17	lnN	-	1.21	-	-	-	-	-
+non_prompt_Stat_bin4_eleendcap17	lnN	-	-	1.16	-	-	-	-
+TTA_Stat_bin4_eleendcap17	lnN	-	-	-	2.00	-	-	-
 VV_Stat_bin4_eleendcap17	lnN	-	-	-	-	1.80	-	-
 ST_Stat_bin4_eleendcap17	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin4_eleendcap17	lnN	-	-	-	-	-	-	1.71
-Stat group = VBS_Stat_bin4_eleendcap17 QCD_Stat_bin4_eleendcap17 non_prompt_Stat_bin4_eleendcap17 
+ZA_SigOut_Stat_bin4_eleendcap17	lnN	-	-	-	-	-	-	1.45
+Stat group = VBS_Stat_bin4_eleendcap17 QCD_Stat_bin4_eleendcap17 non_prompt_Stat_bin4_eleendcap17 VV_Stat_bin4_eleendcap17 ZA_SigOut_Stat_bin4_eleendcap17 
 fake_eleendcap17	lnN	-	-	1.25	-	-	-	-
 fake group = fake_eleendcap17 
-JES_17	lnN	1.14	1.52	-	1.17	1.39	1.33	1.16
-JER_17	lnN	1.14	1.43	-	1.27	1.24	1.22	1.16
+JES_17	lnN	1.08	1.27	-	1.30	1.32	1.28	1.09
+JER_17	lnN	1.07	1.15	-	1.32	1.22	1.06	1.09
 JESR group = JES_17 JER_17
 pdf_EW	lnN	1.003	-	-	-	-	-	1.002
 pdf_QCD	lnN	-	1.01	-	-	-	-	-
-Scale_EW	lnN	1.041	-	-	-	-	-	1.03
+Scale_EW	lnN	1.041	-	-	-	-	-	1.02
 Scale_QCD	lnN	-	1.10	-	-	-	-	-
 Scale_QCD_extra	lnN	-	1.00/0.99	-	-	-	-	-
 interf	lnN	1.02	-	-	-	-	-	-

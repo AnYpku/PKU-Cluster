@@ -1,11 +1,10 @@
 #define xx_cxx
-#include "xx.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <iostream>
 #include "ele_channel_scale.C"
-#define Pi 3.141592653589793
+#include "modify_photon_jets.C"
 
 using namespace std;
 void xx::Loop(TString name)
@@ -52,41 +51,26 @@ void xx::Loop(TString name)
 	   if(m_dataset.Contains("ZA")&&m_dataset.Contains("plj")){
 		   if(isprompt!=1 ) continue;
 	   }
-	   double DR1=1e4,DR2=1e4;
-	   int ip1=-1,ip2=-1;
-	   for(int i=0;i<6;i++){
-		   double DR1_tmp=delta_R(jet1eta,jet1phi,genjet_eta[i],genjet_phi[i]);
-		   if(DR1_tmp<DR1){
-			   DR1=DR1_tmp;
-                           ip1=i;
-		   }
-	   }
-	   for(int i=0;i<6;i++){
-		   double DR2_tmp=delta_R(jet2eta,jet2phi,genjet_eta[i],genjet_phi[i]);
-		   if(DR2_tmp<DR2){
-			   ip2=i ;
-			   if(ip1==ip2) continue;
-			   DR2=DR2_tmp;
-		   }
+//	   modify_photon_jets();
+           puIdweight_T=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);          
+           puIdweight_M=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium);
+           puIdweight_L=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet2puIdLoose);
+             
+           puIdweight_T_effUp=get_puIdweight_effUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight_effUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);          
+           puIdweight_M_effUp=get_puIdweight_effUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight_effUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium);
+           puIdweight_L_effUp=get_puIdweight_effUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight_effUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet2puIdLoose);
 
-	   }
-	   cout<<"DR1 "<<DR1<<"DR2 "<<DR2<<endl;
-           if(jet1pt<50 && DR1<0.4){ 
-		   realjet1=1;
-	   }
-	   else if(jet1pt<50 && DR1>0.4){ realjet1=0;
-	   }
-	   else if(jet1pt>50) realjet1=1;
-           if(jet2pt<50 && DR2<0.4) realjet2=1;
-	   else if(jet2pt<50 && DR2>0.4){ 
-		   realjet2=0;
-	   }
-	   else if(jet2pt>50) realjet2=1;
+           puIdweight_T_effDn=get_puIdweight_effDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight_effDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);          
+           puIdweight_M_effDn=get_puIdweight_effDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight_effDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium);
+           puIdweight_L_effDn=get_puIdweight_effDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight_effDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdLoose);
 
-           puIdweight_T=get_PUID_SF(jet1eta,jet1pt,jet2eta,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,realjet1,realjet2,jet1puIdTight,jet2puIdTight);
-           puIdweight_L=get_PUID_SF(jet1eta,jet1pt,jet2eta,jet2pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,realjet1,realjet2,jet1puIdLoose,jet2puIdLoose);
-           puIdweight_M=get_PUID_SF(jet1eta,jet1pt,jet2eta,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,realjet1,realjet2,jet1puIdMedium,jet2puIdMedium);
+           puIdweight_T_misUp=get_puIdweight_misUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight_misUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);          
+           puIdweight_M_misUp=get_puIdweight_misUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight_misUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium);
+           puIdweight_L_misUp=get_puIdweight_misUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight_misUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdLoose);
 
+           puIdweight_T_misDn=get_puIdweight_misDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight_misDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);          
+           puIdweight_M_misDn=get_puIdweight_misDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight_misDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium);
+           puIdweight_L_misDn=get_puIdweight_misDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight_misDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdLoose);
 	   cut1++;//how many events passing the selection 
 	   newtree->Fill(); 
 
@@ -95,8 +79,218 @@ void xx::Loop(TString name)
 }
 Double_t xx::delta_R(Double_t eta1, Double_t phi1, Double_t eta2, Double_t phi2)
 {       
-        Double_t dp = phi1-phi2;
-        if(std::fabs(dp) > Pi) dp = 2*Pi - std::fabs(dp);
-        Double_t dr = std::sqrt((eta1-eta2)*(eta1-eta2)+dp*dp);
-        return dr;
+	Double_t dp = phi1-phi2;
+	if(std::fabs(dp) > Pi) dp = 2*Pi - std::fabs(dp);
+	Double_t dr = std::sqrt((eta1-eta2)*(eta1-eta2)+dp*dp);
+	return dr;
+}
+Double_t xx::get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId){
+	double DR1=1e4,DR2=1e4;
+	int ip1=-1,ip2=-1;
+	double MCweight=1,Dataweight=1,puIdweight=1;
+	for(int i=0;i<6;i++){
+		double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+		if(DR1_tmp<DR1){
+			DR1=DR1_tmp;
+			ip1=i;
+		}
+	}
+	if(DR1<0.4 && ak4jet_pt<50){
+		int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin);
+		}
+		else{
+			MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin));
+		}
+	}
+	else if(DR1>0.4 && ak4jet_pt<50){
+		int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin);
+		}
+		else{
+			MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin));
+		}
+	}
+	else{
+		MCweight=1;
+		Dataweight=1;
+	}
+	if(MCweight!=0) puIdweight=Dataweight/MCweight;
+	else puIdweight=1;
+
+	return puIdweight;
+}
+Double_t xx::get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId){
+	double DR1=1e4,DR2=1e4;
+	int ip1=-1,ip2=-1;
+	double MCweight=1,Dataweight=1,puIdweight=1;
+	for(int i=0;i<6;i++){
+		double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+		if(DR1_tmp<DR1){
+			DR1=DR1_tmp;
+			ip1=i;
+		}
+	}
+	if(DR1<0.4 && ak4jet_pt<50){
+		int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)+h2_eff_sf2017->GetBinError(bin));
+		}
+		else{
+			MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)+h2_eff_sf2017->GetBinError(bin)));
+		}
+	}
+	else if(DR1>0.4 && ak4jet_pt<50){
+		int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin);
+		}
+		else{
+			MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin));
+		}
+	}
+	else{
+		MCweight=1;
+		Dataweight=1;
+	}
+	if(MCweight!=0) puIdweight=Dataweight/MCweight;
+	else puIdweight=1;
+
+	return puIdweight;
+}
+Double_t xx::get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId){
+	double DR1=1e4,DR2=1e4;
+	int ip1=-1,ip2=-1;
+	double MCweight=1,Dataweight=1,puIdweight=1;
+	for(int i=0;i<6;i++){
+		double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+		if(DR1_tmp<DR1){
+			DR1=DR1_tmp;
+			ip1=i;
+		}
+	}
+	if(DR1<0.4 && ak4jet_pt<50){
+		int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)-h2_eff_sf2017->GetBinError(bin));
+		}
+		else{
+			MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)-h2_eff_sf2017->GetBinError(bin)));
+		}
+	}
+	else if(DR1>0.4 && ak4jet_pt<50){
+		int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin);
+		}
+		else{
+			MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin));
+		}
+	}
+	else{
+		MCweight=1;
+		Dataweight=1;
+	}
+	if(MCweight!=0) puIdweight=Dataweight/MCweight;
+	else puIdweight=1;
+
+	return puIdweight;
+}
+Double_t xx::get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId){
+	double DR1=1e4,DR2=1e4;
+	int ip1=-1,ip2=-1;
+	double MCweight=1,Dataweight=1,puIdweight=1;
+	for(int i=0;i<6;i++){
+		double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+		if(DR1_tmp<DR1){
+			DR1=DR1_tmp;
+			ip1=i;
+		}
+	}
+	if(DR1<0.4 && ak4jet_pt<50){
+		int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin);
+		}
+		else{
+			MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin));
+		}
+	}
+	else if(DR1>0.4 && ak4jet_pt<50){
+		int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)+h2_mistag_sf2017->GetBinError(bin));
+		}
+		else{
+			MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)+h2_mistag_sf2017->GetBinError(bin)) );
+		}
+	}
+	else{
+		MCweight=1;
+		Dataweight=1;
+	}
+	if(MCweight!=0) puIdweight=Dataweight/MCweight;
+	else puIdweight=1;
+
+	return puIdweight;
+}
+Double_t xx::get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId){
+	double DR1=1e4,DR2=1e4;
+	int ip1=-1,ip2=-1;
+	double MCweight=1,Dataweight=1,puIdweight=1;
+	for(int i=0;i<6;i++){
+		double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+		if(DR1_tmp<DR1){
+			DR1=DR1_tmp;
+			ip1=i;
+		}
+	}
+	if(DR1<0.4 && ak4jet_pt<50){
+		int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin);
+		}
+		else{
+			MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin));
+		}
+	}
+	else if(DR1>0.4 && ak4jet_pt<50){
+		int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+		if(ak4jet_puId==1){
+			MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+			Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)-h2_mistag_sf2017->GetBinError(bin));
+		}
+		else{
+			MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+			Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)-h2_mistag_sf2017->GetBinError(bin)) );
+		}
+	}
+	else{
+		MCweight=1;
+		Dataweight=1;
+	}
+	if(MCweight!=0) puIdweight=Dataweight/MCweight;
+	else puIdweight=1;
+
+	return puIdweight;
 }

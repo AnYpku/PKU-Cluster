@@ -149,12 +149,13 @@ void unroll_run(TString channel,TString tag,TString var,TString title){
 	c1->SaveAs("./figs/aa_"+channel+"_"+var+"_"+tag+".pdf");
 }
 int unroll_full(){
-       vector<TString> tags={"16","17","18"};
+//       vector<TString> tags={"16","17","18"};
+       vector<TString> tags={"17"};
        vector<TString> channels={"ZA","ZA-EWK"};
        vector<TString> vars={"jet1pt","jet2pt","Mjj","jet1eta","jet2eta","deltaeta"};
        vector<TString>  title={"jet1pt","jet2pt","Mjj","jet1eta","jet2eta","#Delta#eta_{jj}"};
        for(int i=0;i<channels.size();i++){
-	       for(int j=1;j<tags.size()-1;j++){
+	       for(int j=0;j<tags.size();j++){
 		       for(int k=0;k<vars.size();k++){
 			       unroll_run(channels[i],tags[j],vars[k],title[k]);
 		       }

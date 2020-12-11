@@ -1,6 +1,5 @@
 //gSystem->Load("/home/pku/anying/cms/Unfolding/RooUnfold/libRooUnfold.so");
 #define rm_cxx
-#include "genparticles.C"
 #include <TH2.h>
 #include <TH2F.h>
 #include <TH2D.h>
@@ -8,6 +7,7 @@
 #include <TCanvas.h>
 #include "TLegend.h"
 #include <iostream>
+#include "genparticles.C"
 #include "../muon16_channel_scale.C"
 #include "../muon_channel_scale.C"
 #include "../ele_channel_scale.C"
@@ -80,8 +80,8 @@ void rm::Loop(TString tag)
            HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
            HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
 
-	   fPUeff=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/effcyPUID_81Xtraining.root");
-	   fPUsf=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/scalefactorsPUID_81Xtraining.root");
+	   fPUeff=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/PUIDMaps.root ");
+	   fPUsf=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/PUIDMaps.root ");
 	   h2_eff_mc2017_L=(TH2F*)fPUeff->Get("h2_eff_mc2017_L");
 	   h2_eff_mc2017_M=(TH2F*)fPUeff->Get("h2_eff_mc2017_M");
 	   h2_eff_mc2017_T=(TH2F*)fPUeff->Get("h2_eff_mc2017_T");
@@ -142,15 +142,15 @@ void rm::Loop(TString tag)
 	   GenLEPele = genlep==11 && genlep1pt>25 && genlep2pt>25 && fabs(genlep1eta)<2.5 && fabs(genlep2eta)<2.5;
 	   GenPhoton = genphotonet>20 && ( (fabs(genphotoneta)<2.5&&fabs(genphotoneta)>1.566) || (fabs(genphotoneta)<1.4442) );
 	   if( !( ((GenLEPmu)||(GenLEPele)) )  )
-		   continue;
+//		   continue;
 	   if( !(GenPhoton) )
-		   continue;
+//		   continue;
 	   cut1++;
 	   LEPmu = lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110;
 	   LEPele = lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
 	   photon = photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) );
 	   if( !( (LEPmu)||(LEPele) ) )
-		   continue;
+//		   continue;
 	   if(tag.Contains("16")){
 		   if(m_dataset.Contains("ZA")&&m_dataset.Contains("EWK")==0){ scalef=1000.*47.46/float(npp-nmm)*fabs(theWeight)/theWeight;} 
 		   if(m_dataset.Contains("ZA_interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight;}
@@ -193,23 +193,31 @@ void rm::Loop(TString tag)
 		   if(tag.Contains("17")){
 			   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9862;
 			   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
-			   if(jet1pt>30 && jet2pt>30){
-				   puIdweight_L=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
-				   puIdweight_M=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
-				   puIdweight_T=get_PUID_SF(jet1eta,jet1pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta,jet2pt,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
 
-				   puIdweight_L_new=get_PUID_SF(jet1eta_new ,jet1pt_new ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta_new ,jet2pt_new ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
-				   puIdweight_M_new=get_PUID_SF(jet1eta_new ,jet1pt_new ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta_new ,jet2pt_new ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
-				   puIdweight_T_new=get_PUID_SF(jet1eta_new ,jet1pt_new ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta_new ,jet2pt_new ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+			   puIdweight_T=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_old,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,ak4jet_puIdTight);
+			   puIdweight_M=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_old,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,ak4jet_puIdMedium);
+			   puIdweight_L=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_old,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,ak4jet_puIdLoose);
 
-				   puIdweight_L_JEC_up=get_PUID_SF(jet1eta_JEC_up ,jet1pt_JEC_up ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta_JEC_up ,jet2pt_JEC_up ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
-				   puIdweight_M_JEC_up=get_PUID_SF(jet1eta_JEC_up ,jet1pt_JEC_up ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta_JEC_up ,jet2pt_JEC_up ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
-				   puIdweight_T_JEC_up=get_PUID_SF(jet1eta_JEC_up ,jet1pt_JEC_up ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta_JEC_up ,jet2pt_JEC_up ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
+			   puIdweight_T_new=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_new,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,ak4jet_puIdTight);
+			   puIdweight_M_new=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_new,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,ak4jet_puIdMedium);
+			   puIdweight_L_new=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_new,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,ak4jet_puIdLoose);
 
-				   puIdweight_L_JEC_down=get_PUID_SF(jet1eta_JEC_down ,jet1pt_JEC_down ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L)*get_PUID_SF(jet2eta_JEC_down ,jet2pt_JEC_down ,h2_eff_mc2017_L,h2_mistag_mc2017_L,h2_eff_sf2017_L,h2_mistag_sf2017_L);
-				   puIdweight_M_JEC_down=get_PUID_SF(jet1eta_JEC_down ,jet1pt_JEC_down ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M)*get_PUID_SF(jet2eta_JEC_down ,jet2pt_JEC_down ,h2_eff_mc2017_M,h2_mistag_mc2017_M,h2_eff_sf2017_M,h2_mistag_sf2017_M);
-				   puIdweight_T_JEC_down=get_PUID_SF(jet1eta_JEC_down ,jet1pt_JEC_down ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T)*get_PUID_SF(jet2eta_JEC_down ,jet2pt_JEC_down ,h2_eff_mc2017_T,h2_mistag_mc2017_T,h2_eff_sf2017_T,h2_mistag_sf2017_T);
-			   }
+			   puIdweight_T_JEC_up=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JEC_up,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,ak4jet_puIdTight);
+			   puIdweight_M_JEC_up=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JEC_up,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,ak4jet_puIdMedium);
+			   puIdweight_L_JEC_up=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JEC_up,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,ak4jet_puIdLoose);
+
+			   puIdweight_T_JEC_down=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JEC_down,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,ak4jet_puIdTight);
+			   puIdweight_M_JEC_down=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JEC_down,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,ak4jet_puIdMedium);
+			   puIdweight_L_JEC_down=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JEC_down,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,ak4jet_puIdLoose);
+
+			   puIdweight_T_JER_up=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JER_up,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,ak4jet_puIdTight);
+			   puIdweight_M_JER_up=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JER_up,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,ak4jet_puIdMedium);
+			   puIdweight_L_JER_up=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JER_up,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,ak4jet_puIdLoose);
+
+			   puIdweight_T_JER_down=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JER_down,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,ak4jet_puIdTight);
+			   puIdweight_M_JER_down=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JER_down,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,ak4jet_puIdMedium);
+			   puIdweight_L_JER_down=get_puIdweight(ak4jet_eta,ak4jet_phi,genjet_eta,genjet_phi,ak4jet_pt_JER_down,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,ak4jet_puIdLoose);
+
 		   }
 		   if(tag.Contains("18")){
 			   if(fabs(photoneta)<1.4442){
@@ -260,4 +268,54 @@ void rm::SetValue(){
 	puIdweight_T_JEC_down=1;
 	puIdweight_M_JEC_down=1;
 	puIdweight_L_JEC_down=1;
+	puIdweight_T_JER_up=1;
+	puIdweight_M_JER_up=1;
+	puIdweight_L_JER_up=1;
+	puIdweight_T_JER_down=1;
+	puIdweight_M_JER_down=1;
+	puIdweight_L_JER_down=1;
+}
+Double_t rm::get_puIdweight(double ak4jet_eta[6],double ak4jet_phi[6],double genjet_eta[6],double genjet_phi[6],double ak4jet_pt[6],TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId[6]){
+	double DR1=1e4,DR2=1e4;
+	int ip1=-1,ip2=-1;
+	double MCweight=1,Dataweight=1,puIdweight=1;
+	for(int j=0;j<6;j++){
+		for(int i=0;i<6;i++){
+			double DR1_tmp=delta_R(ak4jet_eta[j],ak4jet_phi[j],genjet_eta[i],genjet_phi[i]);
+			if(DR1_tmp<DR1){
+				DR1=DR1_tmp;
+				ip1=i;
+			}
+		}
+		if(DR1<0.4 && ak4jet_pt[j]<50){
+			int bin=h2_eff_mc2017->FindBin(ak4jet_pt[j],ak4jet_eta[j]);
+			if(ak4jet_puId[j]==1){
+				MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+				Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin);
+			}
+			else{
+				MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+				Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin));
+			}
+		}
+		else if(DR1>0.4 && ak4jet_pt[j]<50){
+			int bin=h2_mistag_mc2017->FindBin(ak4jet_pt[j],ak4jet_eta[j]);
+			if(ak4jet_puId[j]==1){
+				MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+				Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin);
+			}
+			else{
+				MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+				Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin));
+			}
+		}
+		else{
+			MCweight=1;
+			Dataweight=1;
+		}
+	}
+	if(MCweight!=0) puIdweight=Dataweight/MCweight;
+	else puIdweight=1;
+
+	return puIdweight;
 }

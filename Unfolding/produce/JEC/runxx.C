@@ -20,9 +20,9 @@ int main(){
 	TString name17="outJEC_ZA-EWK.root";
 	TString dir18="/eos/user/y/yian/2018cutla/";
 	TString name18="outJEC_ZA-EWK.root";
-//	runxx(dir16,name16,"16");
-	runxx(dir17,name17,"17");
-	runxx(dir18,name18,"18");
+	runxx(dir16,name16,"16");
+//	runxx(dir17,name17,"17");
+//	runxx(dir18,name18,"18");
 	return 1;
 }
 

@@ -536,6 +536,17 @@ public :
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString name);
+
+   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+
+   virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+
+   virtual Double_t get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+
+   virtual Double_t get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+
+   virtual Double_t get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+   virtual void     modify_photon_jets();
    virtual void     endJob();
    virtual Bool_t   Notify();
    virtual Double_t delta_R(Double_t eta1, Double_t phi1, Double_t eta2, Double_t phi2);
@@ -547,6 +558,10 @@ public :
 private:
    TTree *newtree;
    TFile *fout;
+   double puIdweight_T_effUp,puIdweight_M_effUp,puIdweight_L_effUp;
+   double puIdweight_T_effDn,puIdweight_M_effDn,puIdweight_L_effDn;
+   double puIdweight_T_misUp,puIdweight_M_misUp,puIdweight_L_misUp;
+   double puIdweight_T_misDn,puIdweight_M_misDn,puIdweight_L_misDn;
    int realjet1;
    int realjet2;
 };
@@ -615,6 +630,22 @@ void xx::Init(TTree *tree)
 	newtree = fChain->CloneTree(0);
         newtree->Branch("realjet1",&realjet1);
         newtree->Branch("realjet2",&realjet2);
+        newtree->Branch("puIdweight_T_effUp",&puIdweight_T_effUp);
+        newtree->Branch("puIdweight_L_effUp",&puIdweight_L_effUp);
+        newtree->Branch("puIdweight_M_effUp",&puIdweight_M_effUp);
+
+        newtree->Branch("puIdweight_T_effDn",&puIdweight_T_effDn);
+        newtree->Branch("puIdweight_L_effDn",&puIdweight_L_effDn);
+        newtree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn);
+
+        newtree->Branch("puIdweight_T_misUp",&puIdweight_T_misUp);
+        newtree->Branch("puIdweight_L_misUp",&puIdweight_L_misUp);
+        newtree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp);
+
+        newtree->Branch("puIdweight_T_misDn",&puIdweight_T_misDn);
+        newtree->Branch("puIdweight_L_misDn",&puIdweight_L_misDn);
+        newtree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn);
+
 	fChain->SetBranchAddress("puIdweight_L",&puIdweight_L,&b_puIdweight_L);
 	fChain->SetBranchAddress("puIdweight_M",&puIdweight_M,&b_puIdweight_M);
 	fChain->SetBranchAddress("puIdweight_T",&puIdweight_T,&b_puIdweight_T);

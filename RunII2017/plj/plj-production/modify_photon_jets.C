@@ -30,6 +30,12 @@ void xx::modify_photon_jets()
     Mla=-99;
     Mla2=-99;
     Mva=-99;
+    jet1puIdTight=-10;
+    jet2puIdTight=-10;
+    jet1puIdMedium=-10;
+    jet2puIdMedium=-10;
+    jet1puIdLoose=-10;
+    jet2puIdLoose=-10;
 	jet1pt=-99;
 	jet1eta=-99;
 	jet1phi=-99;

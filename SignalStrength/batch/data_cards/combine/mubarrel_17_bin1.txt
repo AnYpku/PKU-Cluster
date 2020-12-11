@@ -4,7 +4,7 @@ kmax 24  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel1
-observation 67.31
+observation 64.98
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,32 +13,32 @@ observation 67.31
 bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	8.31	31.87	23.66	1.86	0.00	0.45	1.15
+rate	8.40	30.04	23.03	1.78	0.00	0.44	1.30
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
-VBS_Stat_bin1_mubarrel17	lnN	1.04	-	-	-	-	-	-
+VBS_Stat_bin1_mubarrel17	lnN	1.03	-	-	-	-	-	-
 QCD_Stat_bin1_mubarrel17	lnN	-	1.08	-	-	-	-	-
 non_prompt_Stat_bin1_mubarrel17	lnN	-	-	1.13	-	-	-	-
 TTA_Stat_bin1_mubarrel17	lnN	-	-	-	1.26	-	-	-
 VV_Stat_bin1_mubarrel17	lnN	-	-	-	-	1.00	-	-
 ST_Stat_bin1_mubarrel17	lnN	-	-	-	-	-	1.71	-
-ZA_SigOut_Stat_bin1_mubarrel17	lnN	-	-	-	-	-	-	1.12
-Stat group = VBS_Stat_bin1_mubarrel17 QCD_Stat_bin1_mubarrel17 non_prompt_Stat_bin1_mubarrel17 TTA_Stat_bin1_mubarrel17 ZA_SigOut_Stat_bin1_mubarrel17 
+ZA_SigOut_Stat_bin1_mubarrel17	lnN	-	-	-	-	-	-	1.07
+Stat group = VBS_Stat_bin1_mubarrel17 QCD_Stat_bin1_mubarrel17 non_prompt_Stat_bin1_mubarrel17 TTA_Stat_bin1_mubarrel17 ST_Stat_bin1_mubarrel17 ZA_SigOut_Stat_bin1_mubarrel17 
 fake_mubarrel17	lnN	-	-	1.17	-	-	-	-
 fake group = fake_mubarrel17 
-JES_17	lnN	1.04	1.25	-	1.17	1.39	1.33	1.02
-JER_17	lnN	1.04	1.21	-	1.27	1.24	1.22	1.04
+JES_17	lnN	1.02	1.19	-	1.30	1.32	1.28	1.02
+JER_17	lnN	1.02	1.13	-	1.32	1.22	1.06	1.03
 JESR group = JES_17 JER_17
 pdf_EW	lnN	1.002	-	-	-	-	-	1.002
 pdf_QCD	lnN	-	1.01	-	-	-	-	-
-Scale_EW	lnN	1.040	-	-	-	-	-	1.03
+Scale_EW	lnN	1.040	-	-	-	-	-	1.02
 Scale_QCD	lnN	-	1.16	-	-	-	-	-
 Scale_QCD_extra	lnN	-	1.03/0.97	-	-	-	-	-
 interf	lnN	1.04	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
 photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-mu_eff	lnN	1.012	1.012	-	1.012	1.012	1.012	1.012
-mu_trigger_17	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+mu_eff	lnN	1.014	1.014	-	1.014	1.014	1.014	1.014
+mu_trigger	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
 muon group = mu_eff mu_trigger_17
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-	-

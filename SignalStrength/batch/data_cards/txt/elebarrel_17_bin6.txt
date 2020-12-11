@@ -4,7 +4,7 @@ kmax 24  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel6
-observation 5.91
+observation 5.71
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,25 +13,25 @@ observation 5.91
 bin	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	3.70	1.05	1.03	0.00	0.00	0.00	0.14
+rate	3.58	0.96	1.03	0.00	0.00	0.00	0.14
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
-VBS_Stat_bin6_elebarrel17	lnN	1.06	-	-	-	-	-	-
-QCD_Stat_bin6_elebarrel17	lnN	-	1.36	-	-	-	-	-
+VBS_Stat_bin6_elebarrel17	lnN	1.04	-	-	-	-	-	-
+QCD_Stat_bin6_elebarrel17	lnN	-	1.35	-	-	-	-	-
 non_prompt_Stat_bin6_elebarrel17	lnN	-	-	1.60	-	-	-	-
 TTA_Stat_bin6_elebarrel17	lnN	-	-	-	1.00	-	-	-
 VV_Stat_bin6_elebarrel17	lnN	-	-	-	-	1.00	-	-
 ST_Stat_bin6_elebarrel17	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin6_elebarrel17	lnN	-	-	-	-	-	-	1.32
-Stat group = VBS_Stat_bin6_elebarrel17 QCD_Stat_bin6_elebarrel17 non_prompt_Stat_bin6_elebarrel17 
+ZA_SigOut_Stat_bin6_elebarrel17	lnN	-	-	-	-	-	-	1.20
+Stat group = VBS_Stat_bin6_elebarrel17 QCD_Stat_bin6_elebarrel17 non_prompt_Stat_bin6_elebarrel17 ZA_SigOut_Stat_bin6_elebarrel17 
 fake_elebarrel17	lnN	-	-	1.18	-	-	-	-
 fake group = fake_elebarrel17 
-JES_17	lnN	1.11	1.44	-	1.00	1.39	1.00	1.08
-JER_17	lnN	1.03	1.36	-	1.00	1.24	1.00	1.02
+JES_17	lnN	1.07	1.38	-	1.00	1.32	1.00	1.08
+JER_17	lnN	1.01	1.29	-	1.00	1.22	1.00	1.02
 JESR group = JES_17 JER_17
 pdf_EW	lnN	1.001	-	-	-	-	-	1.002
 pdf_QCD	lnN	-	1.03	-	-	-	-	-
-Scale_EW	lnN	1.027	-	-	-	-	-	1.05
+Scale_EW	lnN	1.025	-	-	-	-	-	1.09
 Scale_QCD	lnN	-	1.11	-	-	-	-	-
 Scale_QCD_extra	lnN	-	0.96/1.04	-	-	-	-	-
 interf	lnN	1.01	-	-	-	-	-	-

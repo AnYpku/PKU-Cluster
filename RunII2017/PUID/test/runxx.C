@@ -4,7 +4,7 @@
 using namespace std;
 
 void runxx() {
-TString dir ="/home/pku/anying/cms/rootfiles/2017/";
+TString dir ="/home/pku/anying/cms/rootfiles/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -16,7 +16,7 @@ getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("out")==0) {k=-2; continue;}
 TString outname="cutla-"+ infilename;
-TString inname= "cutla-"+infilename;
+TString inname= "cutlep-"+infilename;
 
 cout<<dir<<inname<<"->"<<dir<<outname<<endl;
 

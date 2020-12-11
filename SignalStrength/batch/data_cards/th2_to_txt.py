@@ -157,15 +157,15 @@ for i in range(1,nbins):
    f.write('ZA_SigOut_Stat_bin%d_%s%s\tlnN\t'%(i,sys.argv[2],sys.argv[1]))
    f.write('-\t-\t-\t-\t-\t-\t%0.2f\n'%(ZA_sig_out_binerror))
    f.write('Stat group = VBS_Stat_bin%d_%s%s QCD_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1],i,sys.argv[2],sys.argv[1]))
-   if non_prompt_bincontent>1:
+   if non_prompt_bincontent>0:
       f.write('non_prompt_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if TTA_bincontent>1:
+   if TTA_bincontent>0.1:
       f.write('TTA_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if VV_bincontent>1:
+   if VV_bincontent>0:
       f.write('VV_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if ST_bincontent>1:
+   if ST_bincontent>0:
       f.write('ST_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if ZA_sig_out_bincontent>1:
+   if ZA_sig_out_bincontent>0:
       f.write('ZA_SigOut_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
    f.write('\n')
    f.write('fake_%s%s\tlnN\t'%(sys.argv[2],sys.argv[1]))

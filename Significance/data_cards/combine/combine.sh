@@ -2,22 +2,22 @@
 #cd /afs/cern.ch/user/y/yian/work/PKU-Cluster/HiggsCombineTools/CMSSW_8_1_0/src
 #cmsenv
 #cd -
-rm *.txt
-rm *.root
-cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*16* .
-cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*16* .
+#rm *.txt
+#rm *.root
+#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*16* .
+#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*16* .
 cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*17* .
 cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*17* .
-cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*18* .
-cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*18* .
+#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*18* .
+#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*18* .
 combineCards.py mu*16*.txt ele*16*.txt >& full16_test.txt
 combineCards.py mu*17*.txt ele*17*.txt >& full17_test.txt
 combineCards.py mu*18*.txt ele*18*.txt >& full18_test.txt
 combineCards.py full16_test.txt full17_test.txt full18_test.txt >& full_RunII.txt
 files="\
 full16_test.root
-full17_test.root
 full18_test.root
+full17_test.root
 full_RunII.root
 "
 for rootfile in $files

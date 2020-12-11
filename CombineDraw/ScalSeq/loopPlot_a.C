@@ -123,7 +123,7 @@ void loopPlot() {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-		continue;
+//		continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 

@@ -116,6 +116,9 @@ public :
    Double_t        ak4jet_e_JER_down[6];
    Double_t        ak4jet_csv[6];
    Double_t        ak4jet_icsv[6];
+   Double_t        ak4jet_puIdLoose[6];
+   Double_t        ak4jet_puIdMedium[6];
+   Double_t        ak4jet_puIdTight[6];
    Double_t        jet1puIdTight;
    Float_t         jet1puIdTight_new;
    Double_t        jet1puIdTight_JEC_up;
@@ -398,6 +401,9 @@ public :
    TBranch        *b_ak4jet_e_JER_down;   //!
    TBranch        *b_ak4jet_csv;   //!
    TBranch        *b_ak4jet_icsv;   //!
+   TBranch        *b_ak4jet_puIdLoose;   //!
+   TBranch        *b_ak4jet_puIdMedium;   //!
+   TBranch        *b_ak4jet_puIdTight;   //!
    TBranch        *b_jet1puIdTight;   //!
    TBranch        *b_jet1puIdTight_newD;   //!
    TBranch        *b_jet1puIdTight_JEC_up;   //!
@@ -608,6 +614,7 @@ public :
    virtual void     genparticles();
    virtual void     ResetValue();
    virtual void     SetValue();
+   virtual Double_t get_puIdweight(double ak4jet_eta[6],double ak4jet_phi[6],double genjet_eta[6],double genjet_phi[6],double ak4jet_pt[6],TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId[6]);
 
    const double lumi = 35.86;
    Bool_t LEPmu,LEPele,genmuon[6],genele[6],genjet[6],genphoton[6];
@@ -659,6 +666,8 @@ public :
      double puIdweight_L,puIdweight_L_new,puIdweight_L_JEC_up,puIdweight_L_JEC_down;
      double puIdweight_M,puIdweight_M_new,puIdweight_M_JEC_up,puIdweight_M_JEC_down;
      double puIdweight_T,puIdweight_T_new,puIdweight_T_JEC_up,puIdweight_T_JEC_down;
+     double puIdweight_L_JER_up,puIdweight_M_JER_up,puIdweight_T_JER_up;
+     double puIdweight_L_JER_down,puIdweight_M_JER_down,puIdweight_T_JER_down;
 
 };
 
@@ -751,6 +760,15 @@ void rm::Init(TTree *tree)
    ExTree->Branch("puIdweight_L_JEC_down",&puIdweight_L_JEC_down,"puIdweight_L_JEC_down/D");
    ExTree->Branch("puIdweight_M_JEC_down",&puIdweight_M_JEC_down,"puIdweight_M_JEC_down/D");
    ExTree->Branch("puIdweight_T_JEC_down",&puIdweight_T_JEC_down,"puIdweight_T_JEC_down/D");
+
+   ExTree->Branch("puIdweight_L_JER_up",&puIdweight_L_JER_up,"puIdweight_L_JER_up/D");
+   ExTree->Branch("puIdweight_M_JER_up",&puIdweight_M_JER_up,"puIdweight_M_JER_up/D");
+   ExTree->Branch("puIdweight_T_JER_up",&puIdweight_T_JER_up,"puIdweight_T_JER_up/D");
+
+   ExTree->Branch("puIdweight_L_JER_down",&puIdweight_L_JER_down,"puIdweight_L_JER_down/D");
+   ExTree->Branch("puIdweight_M_JER_down",&puIdweight_M_JER_down,"puIdweight_M_JER_down/D");
+   ExTree->Branch("puIdweight_T_JER_down",&puIdweight_T_JER_down,"puIdweight_T_JER_down/D");
+
    ExTree->Branch("genyVlep",     &genyVlep,     "genyVlep/D");
    ExTree->Branch("genphiVlep",   &genphiVlep,   "genphiVlep/D");
    ExTree->Branch("genptVlep",    &genptVlep,    "genptVlep/D");
@@ -897,6 +915,9 @@ void rm::Init(TTree *tree)
    fChain->SetBranchAddress("ak4jet_e_JER_down", ak4jet_e_JER_down, &b_ak4jet_e_JER_down);
    fChain->SetBranchAddress("ak4jet_csv", ak4jet_csv, &b_ak4jet_csv);
    fChain->SetBranchAddress("ak4jet_icsv", ak4jet_icsv, &b_ak4jet_icsv);
+   fChain->SetBranchAddress("ak4jet_puIdLoose", ak4jet_puIdLoose, &b_ak4jet_puIdLoose);
+   fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
+   fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
    fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
    fChain->SetBranchAddress("jet1puIdTight_new", &jet1puIdTight_new, &b_jet1puIdTight_newD);
    fChain->SetBranchAddress("jet1puIdTight_JEC_up", &jet1puIdTight_JEC_up, &b_jet1puIdTight_JEC_up);

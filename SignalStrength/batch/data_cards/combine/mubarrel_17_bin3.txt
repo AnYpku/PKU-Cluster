@@ -4,7 +4,7 @@ kmax 24  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel3
-observation 8.57
+observation 8.49
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,32 +13,32 @@ observation 8.57
 bin	mubarrel3	mubarrel3	mubarrel3	mubarrel3	mubarrel3	mubarrel3	mubarrel3
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	4.07	1.62	2.65	0.10	0.00	0.00	0.13
+rate	4.11	1.54	2.65	0.10	0.00	0.00	0.09
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
-VBS_Stat_bin3_mubarrel17	lnN	1.06	-	-	-	-	-	-
+VBS_Stat_bin3_mubarrel17	lnN	1.04	-	-	-	-	-	-
 QCD_Stat_bin3_mubarrel17	lnN	-	1.28	-	-	-	-	-
 non_prompt_Stat_bin3_mubarrel17	lnN	-	-	1.37	-	-	-	-
 TTA_Stat_bin3_mubarrel17	lnN	-	-	-	1.98	-	-	-
 VV_Stat_bin3_mubarrel17	lnN	-	-	-	-	1.00	-	-
 ST_Stat_bin3_mubarrel17	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin3_mubarrel17	lnN	-	-	-	-	-	-	1.32
-Stat group = VBS_Stat_bin3_mubarrel17 QCD_Stat_bin3_mubarrel17 non_prompt_Stat_bin3_mubarrel17 
+ZA_SigOut_Stat_bin3_mubarrel17	lnN	-	-	-	-	-	-	1.24
+Stat group = VBS_Stat_bin3_mubarrel17 QCD_Stat_bin3_mubarrel17 non_prompt_Stat_bin3_mubarrel17 ZA_SigOut_Stat_bin3_mubarrel17 
 fake_mubarrel17	lnN	-	-	1.16	-	-	-	-
 fake group = fake_mubarrel17 
-JES_17	lnN	1.08	1.23	-	1.17	1.39	1.00	1.05
-JER_17	lnN	1.03	1.27	-	1.27	1.24	1.00	1.02
+JES_17	lnN	1.07	1.24	-	1.30	1.32	1.00	1.05
+JER_17	lnN	1.02	1.24	-	1.32	1.22	1.00	1.02
 JESR group = JES_17 JER_17
 pdf_EW	lnN	1.002	-	-	-	-	-	1.007
 pdf_QCD	lnN	-	1.02	-	-	-	-	-
-Scale_EW	lnN	1.015	-	-	-	-	-	1.05
+Scale_EW	lnN	1.015	-	-	-	-	-	1.09
 Scale_QCD	lnN	-	1.19	-	-	-	-	-
 Scale_QCD_extra	lnN	-	1.11/0.91	-	-	-	-	-
-interf	lnN	1.05	-	-	-	-	-	-
+interf	lnN	1.06	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
 photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-mu_eff	lnN	1.012	1.012	-	1.012	1.012	1.012	1.012
-mu_trigger_17	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
+mu_eff	lnN	1.014	1.014	-	1.014	1.014	1.014	1.014
+mu_trigger	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
 muon group = mu_eff mu_trigger_17
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-	-

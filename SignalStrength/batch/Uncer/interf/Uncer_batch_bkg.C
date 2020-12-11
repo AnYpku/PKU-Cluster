@@ -14,7 +14,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      map<TString, double> variables;
      double Mjj,jet1eta,jet2eta;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
      Double_t scalef;
      int lep;
      tree->SetBranchAddress("scalef",&scalef);
@@ -36,6 +36,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
 //     TH1D*th1[kk];
      TString th1name;
@@ -48,7 +49,8 @@ TH1D* run( TString sample,TString tag,TString cut1){
              tree->GetEntry(k);
 	     double detajj=fabs(jet1eta-jet2eta);
              if(tag.Contains("18"))  prefWeight=1;
-             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale;
+	     if(tag.Contains("17")==0) puIdweight_M=1;
+             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 	     if(lep==11)
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)

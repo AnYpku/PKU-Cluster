@@ -174,7 +174,7 @@ int Uncer_batch_bkg(){
 	//	vector<TString> sample={"WA"};
 	//	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
-		if(tags[i].Contains("17")){
+		if(tags[i].Contains("19")){
 			GenJet="genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";       
 			JET_new="( (  ( (fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65&&jet1pt_new>30&&jet1pt_new<50&&jet1puIdTight_new==1) || (!(fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65) && fabs(jet1eta_new)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_new)<4.7&& jet1pt_new>50) ) && ( (fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65&&jet2pt_new>30&&jet2pt_new<50&&jet2puIdTight_new==1)||(!(fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65)&&fabs(jet2eta_new)<4.7&&jet2pt_new>30&&jet2pt_new<50) ||(fabs(jet2eta_new)<4.7 && jet2pt_new>50) ) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
 			JET_up="( (  ( (fabs(jet1eta_JER_up)<3.14&&fabs(jet1eta_JER_up)>2.65&&jet1pt_JER_up>30&&jet1pt_JER_up<50&&jet1puIdTight_JER_up==1) || (!(fabs(jet1eta_JER_up)<3.14&&fabs(jet1eta_JER_up)>2.65) && fabs(jet1eta_JER_up)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JER_up)<4.7&& jet1pt_JER_up>50) ) && ( (fabs(jet2eta_JER_up)<3.14&&fabs(jet2eta_JER_up)>2.65&&jet2pt_JER_up>30&&jet2pt_JER_up<50&&jet2puIdTight_JER_up==1)||(!(fabs(jet2eta_JER_up)<3.14&&fabs(jet2eta_JER_up)>2.65)&&fabs(jet2eta_JER_up)<4.7&&jet2pt_JER_up>30&&jet2pt_JER_up<50) ||(fabs(jet2eta_JER_up)<4.7 && jet2pt_JER_up>50) ) ) && Mjj_JER_up > 500 && deltaeta_JER_up>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_up > 0.5 && drj2a_JER_up > 0.5  && ("+drjj_JER_up+")&& drj1l_JER_up > 0.5 && drj2l_JER_up > 0.5 && drj1l2_JER_up > 0.5 && drj2l2_JER_up > 0.5 )";
@@ -201,7 +201,7 @@ int Uncer_batch_bkg(){
 		cut[0]=cut11; cut[1]=cut12; cut[2]=cut13;//reco && gen
 		cut1[0]=cut21;cut1[1]=cut22;cut1[2]=cut23;//reco && !gen
 		Reco[0]=Reco_new;Reco[1]=Reco_up;Reco[2]=Reco_down; 
-		if(tags[i].Contains("17")) continue;
+		if(tags[i].Contains("17")==0) continue;
 		cout<<tags[i]<<" "<<JET_new<<endl;
 		cout<<tags[i]<<" "<<JET_up<<endl;
 		cout<<tags[i]<<" "<<JET_down<<endl;

@@ -21,6 +21,12 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
      double muon_hlt_scale,ele_hlt_scale;
      double actualWeight;int lep;
+     double puIdweight_M_new,puIdweight_M_JEC_up,puIdweight_M_JEC_down,puIdweight_M_JER_up,puIdweight_M_JER_down;
+     tree->SetBranchAddress("puIdweight_M_new",&puIdweight_M_new);
+     tree->SetBranchAddress("puIdweight_M_JEC_up",&puIdweight_M_JEC_up);
+     tree->SetBranchAddress("puIdweight_M_JEC_down",&puIdweight_M_JEC_down);
+     tree->SetBranchAddress("puIdweight_M_JER_up",&puIdweight_M_JER_up);
+     tree->SetBranchAddress("puIdweight_M_JER_down",&puIdweight_M_JER_down);
      tree->SetBranchAddress("scalef",&scalef);
      tree->SetBranchAddress("Mjj_new",&Mjj_new);
      tree->SetBranchAddress("Mjj_JEC_up",&Mjj_JEC_up);
@@ -69,6 +75,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
 		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
 
 	     if (  tformula1->EvalInstance() ){
+//		     if(tag.Contains("17"))actualWeight=actualWeight*puIdweight_M_new;
 		     if(Mjj_new>=500 &&Mjj_new<800&&detajj_new>=2.5&&detajj_new<4.5)
 			     th1[0]->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
 		     if(Mjj_new>=800 &&Mjj_new<1200&&detajj_new>=2.5&&detajj_new<4.5)
@@ -89,6 +96,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
 			     th1[0]->Fill(8.5,actualWeight);//8~9 6~infi 800~1200
 	     }
 	     if (  tformula2->EvalInstance() ){
+//		     if(tag.Contains("17"))actualWeight=actualWeight*puIdweight_M_JEC_up;
 		     if(Mjj_JEC_up>=500 &&Mjj_JEC_up<800&&detajj_JEC_up>=2.5&&detajj_JEC_up<4.5)
 			     th1[1]->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
 		     if(Mjj_JEC_up>=800 &&Mjj_JEC_up<1200&&detajj_JEC_up>=2.5&&detajj_JEC_up<4.5)
@@ -110,6 +118,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
 
 	     }
 	     if (  tformula3->EvalInstance() ){
+//		     if(tag.Contains("17"))actualWeight=actualWeight*puIdweight_M_JEC_down;
 		     if(Mjj_JEC_down>=500 &&Mjj_JEC_down<800&&detajj_JEC_down>=2.5&&detajj_JEC_down<4.5)
 			     th1[2]->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
 		     if(Mjj_JEC_down>=800 &&Mjj_JEC_down<1200&&detajj_JEC_down>=2.5&&detajj_JEC_down<4.5)
@@ -171,14 +180,13 @@ int Uncer_batch_bkg(){
 	dir1[2]="/home/pku/anying/cms/rootfiles/2018/";     
 	TString dir="/home/pku/anying/cms/rootfiles/JESR/";
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-	//	vector<TString> sample={"WA"};
-	//	vector<TString> sample={"ZA-EWK"};
+//	vector<TString> sample={"ZA"};
 	for(int i=0;i<tags.size();i++){
-		if(tags[i].Contains("17")){
-			GenJet="genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";       
-			JET_new="( (  ( (fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65&&jet1pt_new>30&&jet1pt_new<50&&jet1puIdTight_new==1) || (!(fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65) && fabs(jet1eta_new)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_new)<4.7&& jet1pt_new>50) ) && ( (fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65&&jet2pt_new>30&&jet2pt_new<50&&jet2puIdTight_new==1)||(!(fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65)&&fabs(jet2eta_new)<4.7&&jet2pt_new>30&&jet2pt_new<50) ||(fabs(jet2eta_new)<4.7 && jet2pt_new>50) ) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
-			JET_up="( (  ( (fabs(jet1eta_JEC_up)<3.14&&fabs(jet1eta_JEC_up)>2.65&&jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&jet1puIdTight_JEC_up==1) || (!(fabs(jet1eta_JEC_up)<3.14&&fabs(jet1eta_JEC_up)>2.65) && fabs(jet1eta_JEC_up)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JEC_up)<4.7&& jet1pt_JEC_up>50) ) && ( (fabs(jet2eta_JEC_up)<3.14&&fabs(jet2eta_JEC_up)>2.65&&jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&jet2puIdTight_JEC_up==1)||(!(fabs(jet2eta_JEC_up)<3.14&&fabs(jet2eta_JEC_up)>2.65)&&fabs(jet2eta_JEC_up)<4.7&&jet2pt_JEC_up>30&&jet2pt_JEC_up<50) ||(fabs(jet2eta_JEC_up)<4.7 && jet2pt_JEC_up>50) ) ) && Mjj_JEC_up > 500 && deltaeta_JEC_up>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
-			JET_down="( (  ( (fabs(jet1eta_JEC_down)<3.14&&fabs(jet1eta_JEC_down)>2.65&&jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&jet1puIdTight_JEC_down==1) || (!(fabs(jet1eta_JEC_down)<3.14&&fabs(jet1eta_JEC_down)>2.65) && fabs(jet1eta_JEC_down)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JEC_down)<4.7&& jet1pt_JEC_down>50) ) && ( (fabs(jet2eta_JEC_down)<3.14&&fabs(jet2eta_JEC_down)>2.65&&jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&jet2puIdTight_JEC_down==1)||(!(fabs(jet2eta_JEC_down)<3.14&&fabs(jet2eta_JEC_down)>2.65)&&fabs(jet2eta_JEC_down)<4.7&&jet2pt_JEC_down>30&&jet2pt_JEC_down<50) ||(fabs(jet2eta_JEC_down)<4.7 && jet2pt_JEC_down>50) ) ) && Mjj_JEC_down > 500 && deltaeta_JEC_down>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
+		if(tags[i].Contains("18")){
+			GenJet="(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";       
+			JET_new="( ( ((jet1pt_new>50&&fabs(jet1eta_new)<4.7)||(jet1pt_new>30&&jet1pt_new<50&&fabs(jet1eta_new)<4.7&&jet1puIdMedium_new==1)) && ((jet2pt_new>50&&fabs(jet2eta_new)<4.7)||(jet2pt_new>30&&jet2pt_new<50&&fabs(jet2eta_new)<4.7&&jet2puIdMedium_new==1)) ) && Mjj_new > 500 && deltaeta_new >2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
+			JET_up="( ( ((jet1pt_JEC_up>50&&fabs(jet1eta_JEC_up)<4.7)||(jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&fabs(jet1eta_JEC_up)<4.7&&jet1puIdMedium_JEC_up==1)) && ((jet2pt_JEC_up>50&&fabs(jet2eta_JEC_up)<4.7)||(jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&fabs(jet2eta_JEC_up)<4.7&&jet2puIdMedium_JEC_up==1)) ) && Mjj_JEC_up > 500 && deltaeta_JEC_up>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
+			JET_down="( ( ((jet1pt_JEC_down>50&&fabs(jet1eta_JEC_down)<4.7)||(jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&fabs(jet1eta_JEC_down)<4.7&&jet1puIdMedium_JEC_down==1)) && ((jet2pt_JEC_down>50&&fabs(jet2eta_JEC_down)<4.7)||(jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&fabs(jet2eta_JEC_down)<4.7&&jet2puIdMedium_JEC_down==1)) ) && Mjj_JEC_down > 500 && deltaeta_JEC_down>2.5 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
 		}
 		else{
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
@@ -201,7 +209,7 @@ int Uncer_batch_bkg(){
 		cut[0]=cut11; cut[1]=cut12; cut[2]=cut13;//reco && gen
 		cut1[0]=cut21;cut1[1]=cut22;cut1[2]=cut23;//reco && !gen
 		Reco[0]=Reco_new;Reco[1]=Reco_up;Reco[2]=Reco_down; 
-		if(tags[i].Contains("17")) continue;
+		if(tags[i].Contains("17")==0) continue;
 		cout<<tags[i]<<" "<<JET_new<<endl;
 		cout<<tags[i]<<" "<<JET_up<<endl;
 		cout<<tags[i]<<" "<<JET_down<<endl;
@@ -210,12 +218,12 @@ int Uncer_batch_bkg(){
 			if(sample[j].Contains("EWK")){
 				run(dir,"ZA-EWK",cut,3,tags[i],0);
 				run(dir,"ZA-EWK",cut1,3,tags[i],1);
-				//				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
-				//				run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
+				//run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut,3,tags[i],0);
+				//run_1d(dir,tags[i]+"outJEC_ZA-EWK",cut1,3,tags[i],1);
 			}
 			else{
 				run(dir,sample[j],Reco,3,tags[i],0);
-				//				run_1d(dir1[i],sample[j],Reco,3,tags[i],0);
+				//run_1d(dir1[i],sample[j],Reco,3,tags[i],0);
 			}
 		}
 	}

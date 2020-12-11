@@ -81,6 +81,7 @@ void rm::genparticles(){
 		genlep1pt  = lep1p4.Pt();              
 		genlep1eta = lep1p4.Eta(); 
 		genlep1phi = lep1p4.Phi(); 
+                gen_pid[0]=11;
 	}
    //ele2_index
         vector_ele[ele1_index] = 0;
@@ -99,10 +100,11 @@ void rm::genparticles(){
 		genlep2pt  = lep2p4.Pt();              
 		genlep2eta = lep2p4.Eta(); 
 		genlep2phi = lep2p4.Phi(); 
+                gen_pid[1]=11;
 	}
         if(genlep1pt>0 && genlep2pt>0 && fabs(gen_pid[0])==13 && fabs(gen_pid[1])==13)
 		genlep =13;
-        if(genlep1pt>0 && genlep2pt>0 && fabs(gen_pid[0])!=13 && fabs(gen_pid[1])!=13)
+        if(genlep1pt>0 && genlep2pt>0 && fabs(gen_pid[0])==11 && fabs(gen_pid[1])==11)
 		genlep=11;
 //        cout<<genlep<<" "<<genlep1pt<<" "<<genlep1eta<<" "<<genlep2pt<<" "<<genlep2eta<<endl; 
 	genyVlep  =(lep1p4+lep2p4).Eta();

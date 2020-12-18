@@ -16,8 +16,8 @@ void cmsLumi(bool channel)
         latex.SetNDC();
         latex.SetTextSize(0.04);
         latex.SetLineWidth(2);
-        float lumiel=136.1;
-        float lumimu=136.1;
+        float lumiel=137.1;
+        float lumimu=137.1;
         int beamcomenergytev=13;
         latex.SetTextAlign(31); 
         latex.SetTextAlign(11);
@@ -25,7 +25,7 @@ void cmsLumi(bool channel)
         latex.DrawLatex(0.18,0.82,"Preliminary");
         latex.DrawLatex(0.18,0.86,"CMS");
         latex.SetTextSize(0.06);
-        latex.DrawLatex(0.76,0.92,Form("136.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
+        latex.DrawLatex(0.76,0.92,Form("137.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 TH1D* unroll(TH1D* h1,TString hname){
 	int nbins=h1->GetNbinsX();
@@ -46,7 +46,7 @@ void unroll_run(TString channel){
 	TFile* fout = new TFile("aa_"+channel+".root","RECREATE");
 	std::ostringstream strs;
 	std::string lumivalue = strs.str();
-	Double_t lumi=136.1;
+	Double_t lumi=137.1;
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
         Double_t detajj_bins[4]={2.5,4.5,6,6.5};
 
@@ -67,7 +67,7 @@ void unroll_run(TString channel){
 	th2_ZA->SetMarkerColor(kBlue-6);
 	th2_ZA->SetLineColor(kBlue-6);
 //	th2_ZA->Scale(lumi*ZA_scale);
-	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+	const char *name[7]={"0.5~0.8","8~1.2","1.2~2","0.5~0.8","8~1.2","1.2~2","0.5~2"};
 
 	TFile* f_ZA_sig=TFile::Open("../root/hist_ZA-EWK_16"+channel+".root");
 	TFile* f_ZA_sig17=TFile::Open("../root/hist_ZA-EWK_17"+channel+".root");
@@ -198,34 +198,39 @@ void unroll_run(TString channel){
         TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.3);
         fPads1->SetBottomMargin(0);
         fPads2->SetTopMargin(0);
-        fPads2->SetBottomMargin(0.3);
+        fPads2->SetBottomMargin(0.5);
         fPads1->Draw();
         fPads2->Draw();
         fPads1->cd();
         fPads1->SetGridx();
         fPads2->SetGridy();
-	CMS_lumi(fPads1, 4, 0, lumivalue);
         double max=hs->GetMaximum();
         hs->SetMaximum(max*1.5);
 	hs->Draw("HIST");
         htot->SetFillColor(1);
-        htot->SetLineColor(1);
+        htot->SetLineColor(0);
         htot->SetMarkerSize(0);
-        htot->SetFillStyle(3008);
+        htot->SetFillStyle(3005);
         htot->Draw("E2 same");
 	hs->GetYaxis()->SetTitleOffset(0.8);
 	hs->GetYaxis()->SetTitle("Events /bin");
-	TLegend* leg = new TLegend(0.62, 0.45, 0.85, 0.9);
+	TLegend* leg = new TLegend(0.62, 0.6, 0.85, 0.9);
+	TLegend* leg1 = new TLegend(0.4, 0.6, 0.62, 0.9);
+	TLegend* leg2 = new TLegend(0.2, 0.8, 0.39, 0.9);
 	leg->SetTextSize(0.04);
-        leg->SetMargin(0.4);
-	leg->AddEntry(th2_ZA_sig,Form("EWK[%.2f]",th2_ZA_sig->GetSum()) );
-	leg->AddEntry(th2_ZA, Form("ZA [%.2f]",th2_ZA->GetSum()));
-//	leg->AddEntry(th2_ZA, Form("ZA [%.2f]",th2_ZA->Integral(0,9)));
-	leg->AddEntry(th2_plj, Form("non-prompt [%.2f]",th2_plj->GetSum() ));
-	leg->AddEntry(th2_VV, Form("VV [%.2f]", th2_VV->GetSum() ) );
-	leg->AddEntry(th2_TTA, Form("TTA [%.2f]",th2_TTA->GetSum()) );
-	leg->AddEntry(th2_ST, Form("ST  [%.2f]",th2_ST->GetSum() ) );
+        leg1->SetFillColor(kWhite);
+	leg1->SetTextSize(0.04);
+	leg2->SetTextSize(0.04);
+	leg->AddEntry(th2_ZA_sig,Form("EWK[%.1f] ",th2_ZA_sig->GetSum()) );
+	leg->AddEntry(th2_ZA, Form("Z#gamma [%.1f] ",th2_ZA->GetSum()));
+	leg->AddEntry(th2_plj, Form("non-prompt [%.1f] ",th2_plj->GetSum() ),"f");
+	leg1->AddEntry(th2_VV, Form("VV  [%.1f] ", th2_VV->GetSum() ) );
+	leg1->AddEntry(th2_TTA, Form("TT#gamma [%.1f] ",th2_TTA->GetSum()) );
+	leg1->AddEntry(th2_ST, Form("ST  [%.1f] ",th2_ST->GetSum() ) );
+        leg2->AddEntry(htot," MC stat");
 	leg->Draw();
+	leg1->Draw();
+	leg2->Draw();
 ////
         TLatex latex;
         latex.SetTextSize(0.06);
@@ -241,8 +246,9 @@ void unroll_run(TString channel){
         vline2->SetLineWidth(2);
         vline1->Draw();
         vline2->Draw();
-//	
-	cmsLumi(0);
+
+	CMS_lumi(fPads1, 4, 0, "137.1");
+//	cmsLumi(0);
         fPads1->Update();
         fPads2->cd();
         TH1D*nominal=(TH1D*)htot->Clone("nominal");
@@ -251,12 +257,17 @@ void unroll_run(TString channel){
         TH1D*h_up=(TH1D*)htot->Clone();
         h_up->Divide(nominal);
         nominal->Divide(nomNoErr);
-        nominal->GetYaxis()->SetRangeUser(0,2);
+        nominal->GetYaxis()->SetRangeUser(0.5,1.8);
         nominal->SetLineColor(2);
-        nominal->SetTitle(";m_{jj} [TeV];;");
-        nominal->GetYaxis()->SetLabelSize(0.1);
-        nominal->GetXaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetTitleSize(0.1);
+        nominal->SetTitle(";m_{jj} [TeV];Data/MC;");
+	nominal->GetYaxis()->SetTitleOffset(0.3);
+	nominal->GetYaxis()->SetTitleSize(0.15);
+	nominal->GetYaxis()->SetNdivisions(404);
+	nominal->GetYaxis()->SetLabelSize(0.15);
+	nominal->GetXaxis()->SetLabelSize(0.23);
+        nominal->GetXaxis()->SetLabelOffset(0.032);
+	nominal->GetXaxis()->SetTitleSize(0.2);
+        nominal->GetXaxis()->SetTitleOffset(1.1);
         nominal->Draw("E2");
         h_up->SetMarkerStyle(20);
         h_up->SetMarkerColor(1);

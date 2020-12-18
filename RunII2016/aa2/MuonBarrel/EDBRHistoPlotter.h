@@ -116,7 +116,7 @@ public:
 	void cleanupMCSig();
 	void cleanupDATA();
 	void makeLabels();
-	void makeStackPlots(std::string histoName);
+	void makeStackPlots(std::string histoName,TString histTitle);
 	void setOutDir(std::string outDirNew);
 
 	/// set debug mode
@@ -251,7 +251,7 @@ void EDBRHistoPlotter::setOutDir(std::string outDirNew) {
 	gSystem->mkdir(buffer, true);
 }
 
-void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
+void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle) {
 
 	cleanupMC();
 	cleanupMCSig();
@@ -279,7 +279,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		fPads2->SetLineColor(0);
 		fPads1->SetBottomMargin(0);
 		fPads2->SetTopMargin(0);
-		fPads2->SetBottomMargin(0.3);
+		fPads2->SetBottomMargin(0.5);
 
 		//fPads3->SetFillColor(0);
 		//fPads3->SetLineColor(0);
@@ -407,10 +407,11 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		hs->Add(histosMC.at(i));
 	}
 
-	sumMC->SetFillStyle(0);
-//  sumMC->SetLineColor(kBlack);
-//  sumMC->SetLineColor(0);
-	sumMC->SetLineWidth(2);
+        sumMC->SetFillStyle(3005);
+        sumMC->SetFillColor(1);
+        sumMC->SetMarkerSize(0);
+        sumMC->SetLineColor(0);
+        sumMC->SetLineWidth(2);
 
 	if (scaleToData_ && isDataPresent_) {
 		std::cout << "===> Residual DATA/MC Scale Factor is: "
@@ -503,7 +504,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 	}
 	TGraphAsymmErrors* gr = new TGraphAsymmErrors(binsize, x, y, xerror_l,xerror_r, yerror_d, yerror_u); 
 	gr->SetFillColor(1);
-	gr->SetFillStyle(3008);
+	gr->SetFillStyle(3005);
 	gr->Draw("SAME 2");
 
 	double maximumMC = 2.0 * sumMC->GetMaximum();
@@ -529,11 +530,10 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 	// histosMCSig.at(0)->Draw("SAME HIST");
 
 	// For the legend, we have to tokenize the name "histos_XXX.root"
-        TLegend* leg1 = new TLegend(0.57, 0.55, 0.94, 0.9);
-        TLegend* leg2 = new TLegend(0.2, 0.7, 0.5, 0.9);
-        TLegend* leg3 = new TLegend(0.2, 0.63, 0.5, 0.7);
+        TLegend* leg1 = new TLegend(0.6, 0.62, 0.94, 0.9);
+        TLegend* leg2 = new TLegend(0.2, 0.7, 0.57, 0.9);
+        TLegend* leg3 = new TLegend(0.2, 0.63,0.57, 0.7);
         leg1->SetTextSize(0.035);
-        leg1->SetMargin(0.4);
         leg2->SetTextSize(0.035);
         leg3->SetTextSize(0.035);
         ofstream ftxt("./yields.txt");
@@ -556,7 +556,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
                 TString samplesMC = "All MC";
                 TString LabelMC = samplesMC +" ["+ yMC+ "+/-"+yMCerr+"]";
                 ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
-		leg2->AddEntry(sumMC, LabelMC, "l");
+		leg2->AddEntry(sumMC, LabelMC);
 //
 	}
 	for (size_t i = 0; i != histosMC.size(); ++i) {
@@ -569,6 +569,10 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
                 TString samples;
 		if(labels.at(i).find("plj")!=string::npos)
 			samples="non-prompt #gamma";
+		else if(labels.at(i).find("TTA")!=string::npos)
+			samples="TT#gamma";
+		else if(labels.at(i).find("ZA")!=string::npos)
+			samples="Z#gamma";
 		else  samples = labels.at(i).c_str();
                 TString LabelMC = samples +" ["+ y+ "+/-"+ye+"]";
                 
@@ -626,7 +630,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		fPads2->SetGridy();
 
 		double thisYmin = 0.5;
-		double thisYmax = 1.5;
+		double thisYmax = 1.6;
 
 		TVectorD nsigma_x(sumDATA->GetNbinsX());
 		TVectorD nsigma_y(sumDATA->GetNbinsX());
@@ -636,13 +640,13 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
                 TH1D*nominal=(TH1D*)sumMC->Clone("nominal");
                 TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
 		nominal->SetMarkerSize(0);
-		nominal->SetFillColor(kRed);
+		nominal->SetFillColor(1);
 		nominal->SetLineColor(1);
 		nominal->SetFillStyle(3004);
+                nominal->SetTitle("");
                 for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
                 nominal->Divide(nomNoErr);
 		nominal->Draw("E2");
-                cout<<"statistics error "<<nominal->GetBinError(1)<<endl;
 
 		for (int ibin = 0; ibin != sumDATA->GetNbinsX(); ++ibin) {
 
@@ -670,21 +674,21 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 
 		if (nsigma_x.GetNoElements() != 0) {
 			TGraph *nsigmaGraph = new TGraphErrors(nsigma_x, nsigma_y,nsigma_ex,nsigma_ey);
-			nsigmaGraph->SetTitle("");
 			nominal->GetYaxis()->SetRangeUser(thisYmin, thisYmax);
-			nominal->GetYaxis()->SetTitle("(Data/Bkg)");
+			nominal->GetYaxis()->SetNdivisions(404);
+			nominal->GetYaxis()->SetTitle("Data/MC");
 			nominal->GetYaxis()->CenterTitle();
-			nominal->GetYaxis()->SetTitleOffset(0.43);
-			nominal->GetYaxis()->SetTitleSize(0.1);
-			nominal->GetYaxis()->SetLabelSize(0.06);
-			nominal->GetXaxis()->SetTitle(histoName.c_str());
-			nominal->GetXaxis()->SetTitleSize(0.1);
+			nominal->GetYaxis()->SetTitleOffset(0.33);
+			nominal->GetYaxis()->SetTitleSize(0.14);
+			nominal->GetYaxis()->SetLabelSize(0.15);
+			nominal->GetXaxis()->SetTitle(histTitle+" [GeV]");
+			nominal->GetXaxis()->SetLabelSize(0.15);
+			nominal->GetXaxis()->SetTitleSize(0.18);
+			nominal->GetXaxis()->SetTitleOffset(0.9);
 			nominal->GetXaxis()->SetLimits(sumMC->GetXaxis()->GetXmin(),
 					sumMC->GetXaxis()->GetXmax());
 			nominal->GetXaxis()->SetRangeUser(sumMC->GetXaxis()->GetXmin(),
 					sumMC->GetXaxis()->GetXmax());
-			nominal->GetXaxis()->SetTitleOffset(0.9);
-			nominal->GetXaxis()->SetLabelSize(0.08);
 			nsigmaGraph->SetMarkerStyle(20);
 			nsigmaGraph->SetMarkerSize(0.6);
 			nsigmaGraph->Draw("same p");

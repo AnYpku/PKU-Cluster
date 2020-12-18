@@ -21,7 +21,7 @@ void fX0_parameterization_mu(int index){
 	const TString InData_New = "/home/pku/anying/cms/rootfiles/2017/cutla-";
 
 	// Specify event selection cuts:
-	TCut the_cut("(lep == 13 && (HLT_Mu1>0 || HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus <3 && massVlep > 70. && massVlep < 110. && jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))");
+	TCut the_cut("(lep == 13 && (HLT_Mu1>0 || HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus <3 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))");
 	// Create output ROOT file:
 
 	TFile * fout;
@@ -55,6 +55,7 @@ void fX0_parameterization_mu(int index){
 	Double_t        photonet;  
 	Double_t        pweight[703];
 	Double_t        prefWeight;
+	Double_t        puIdweight_M;
 	Double_t	jet1eta;
 	Double_t	jet2eta;
 	Double_t        photon_id_scale;
@@ -62,6 +63,7 @@ void fX0_parameterization_mu(int index){
         Double_t        muon2_id_scale;
         Double_t        muon1_iso_scale;
         Double_t        muon2_iso_scale;
+        Double_t        muon_hlt_scale;
         Double_t        scalef;
         Double_t        pileupWeight;
         Double_t        photon_veto_scale;
@@ -78,9 +80,11 @@ void fX0_parameterization_mu(int index){
         treef->SetBranchAddress("muon2_id_scale", &muon2_id_scale);
         treef->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
         treef->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+        treef->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
         treef->SetBranchAddress("prefWeight", &prefWeight);
+        treef->SetBranchAddress("puIdweight_M", &puIdweight_M);
 
 	// Do parameterization
 	//double ZGbin[6] = {150,250,350,400,600,2e4};
@@ -121,7 +125,7 @@ void fX0_parameterization_mu(int index){
                         if( ! formula->EvalInstance())
                                 continue;
                         if(Mva>2e4) Mva=1999;
-			Double_t weight= pileupWeight * photon_id_scale*photon_veto_scale*prefWeight*scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale;
+			Double_t weight= pileupWeight * photon_id_scale*photon_veto_scale*prefWeight*scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*puIdweight_M;
 			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<"; weight"<<weight<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
 				rf[0]+=pweight[iii]*weight;

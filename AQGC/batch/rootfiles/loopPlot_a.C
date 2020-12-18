@@ -19,10 +19,10 @@ void loopPlot() {
 
 	//#####################EDIT THE OPTIONS##############################
 
-	double lumiValue1 = 58.7;
+	double lumiValue1 = 59.7;
 	double lumiValue2 = 41.52;
 	double lumiValue3 = 35.86;
-	double lumiValue = 136.1;
+	double lumiValue = 137.1;
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?

@@ -1,12 +1,3 @@
-#include <string>
-#include <vector>
-#include <iostream>
-#include <sstream>
-#include "TLine.h"
-#include "TString.h"
-#include "TObjString.h"
-#include "TLatex.h"
-using namespace std;
 //----------https://github.com/smaruyam/usercode/blob/master/TriggerDataAna/TriggerDataAna/test/drawEff.cc
 void CMS_lumi(TPad* pad, int iPeriod, int iPosX, string lumi) {
 	TString cmsText = "CMS";
@@ -97,7 +88,7 @@ void CMS_lumi(TPad* pad, int iPeriod, int iPosX, string lumi) {
 	} else if (iPeriod == 12) {
 		lumiText += "8 TeV";
 	}
-	std::cout << lumiText << std::endl;
+	std::cout << lumiText << endl;
 	TLatex latex;
 	latex.SetNDC();
 	latex.SetTextAngle(0);

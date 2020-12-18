@@ -12,8 +12,8 @@ f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[2]+sys.argv[3]+'.root')
 f_TTA = TFile.Open(fdir+'hist_TTA_'+sys.argv[2]+sys.argv[3]+'.root')
 f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[2]+sys.argv[3]+'.root')
 f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[2]+sys.argv[3]+'.root')
-f_Ele = TFile.Open(fdir+'hist_DEle_'+sys.argv[2]+sys.argv[3]+'.root')
-f_Muon = TFile.Open(fdir+'hist_DMuon_'+sys.argv[2]+sys.argv[3]+'.root')
+#f_Ele = TFile.Open(fdir+'hist_DEle_'+sys.argv[2]+sys.argv[3]+'.root')
+#f_Muon = TFile.Open(fdir+'hist_DMuon_'+sys.argv[2]+sys.argv[3]+'.root')
 
 th1_ZA_sig_out=f_EW.Get('hist_'+sys.argv[2])
 th1_ZA=f_ZA.Get('hist_'+sys.argv[2])
@@ -21,8 +21,9 @@ th1_non_prompt=f_plj.Get('hist_'+sys.argv[2])
 th1_TTA=f_TTA.Get('hist_'+sys.argv[2])
 th1_VV=f_VV.Get('hist_'+sys.argv[2])
 th1_ST=f_ST.Get('hist_'+sys.argv[2])
-th1_DEle=f_Ele.Get('hist_'+sys.argv[2])
-th1_DMuon=f_Muon.Get('hist_'+sys.argv[2])
+#th1_DEle=f_Ele.Get('hist_'+sys.argv[2])
+#th1_DMuon=f_Muon.Get('hist_'+sys.argv[2])
+
 # the bkg histo and signal histo have already contain the overflow bin in the last bin when creat the histograms 
 genbincontent=[]
 genbinerror=[]
@@ -237,10 +238,10 @@ for i in range(1,nbins):
          f.write('-\t')
    f.write('%0.2f/%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale_up'][i-1],arr['QCD_scale_down'][i-1]))
 #
-   f.write('mu_trigger_%s\tlnN\t'%(sys.argv[3]))
+   f.write('mu_trigger\tlnN\t')
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon'+sys.argv[3]+'_trigger'][0],arr['muon'+sys.argv[3]+'_trigger'][0],arr['muon'+sys.argv[3]+'_trigger'][0],arr['muon'+sys.argv[3]+'_trigger'][0],arr['muon'+sys.argv[3]+'_trigger'][0]))
+   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0]))
 #
    f.write('mu_eff\tlnN\t')
    for j in range(1,nbins):

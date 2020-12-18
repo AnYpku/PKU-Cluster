@@ -71,7 +71,7 @@ void unroll_run(TString channel){
 	th2_ZA->SetMarkerColor(kBlue-6);
 	th2_ZA->SetLineColor(kBlue-6);
 //	th2_ZA->Scale(lumi*ZA_scale);
-	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
 
 	TFile* f_ZA_sig=TFile::Open("../root/hist_ZA-EWK_16"+channel+".root");
 	TFile* f_ZA_sig17=TFile::Open("../root/hist_ZA-EWK_17"+channel+".root");
@@ -84,9 +84,9 @@ void unroll_run(TString channel){
 	th2_ZA_sig16->Add(th2_ZA16,1);
         TH1D* th2_ZA_sig= unroll(th2_ZA_sig16,"t_ZA_sig");
 
-	th2_ZA_sig->SetFillColor(kRed-7);
-	th2_ZA_sig->SetMarkerColor(kRed-7);
-        th2_ZA_sig->SetLineColor(kRed-7);
+	th2_ZA_sig->SetFillColor(kBlue-6);
+	th2_ZA_sig->SetMarkerColor(kBlue-6);
+        th2_ZA_sig->SetLineColor(kBlue-6);
 //	th2_ZA_sig->Scale(lumi);
 	th2_ZA_sig->SetMarkerStyle(21);
 
@@ -98,9 +98,9 @@ void unroll_run(TString channel){
         th2_ZA_sigout16->Add(th2_ZA16out,1);
         TH1D* th2_ZA_sigout= unroll(th2_ZA_sigout16,"t_ZA_sigout");
         cout<<"EWK out yields "<<th2_ZA_sigout->GetBinContent(1)<<" "<<th2_ZA_sigout->GetBinContent(2)<<" "<<th2_ZA_sigout->GetBinContent(3)<<endl;
-	th2_ZA_sigout->SetFillColor(kMagenta);
-	th2_ZA_sigout->SetMarkerColor(kMagenta);
-	th2_ZA_sigout->SetLineColor(kMagenta);
+	th2_ZA_sigout->SetFillColor(kRed-7);
+	th2_ZA_sigout->SetMarkerColor(kRed-7);
+	th2_ZA_sigout->SetLineColor(kRed-7);
 //	th2_ZA_sigout->Scale(lumi);
 	th2_ZA_sigout->SetMarkerStyle(21);
 
@@ -200,7 +200,7 @@ void unroll_run(TString channel){
 	TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.3);
 	fPads1->SetBottomMargin(0);
 	fPads2->SetTopMargin(0);
-	fPads2->SetBottomMargin(0.3);
+	fPads2->SetBottomMargin(0.5);
 	fPads1->Draw();
 	fPads2->Draw();
 	fPads1->cd();
@@ -213,7 +213,7 @@ void unroll_run(TString channel){
 	htot->SetFillColor(1);
 	htot->SetLineColor(1);
 	htot->SetMarkerSize(0);
-	htot->SetFillStyle(3008);
+	htot->SetFillStyle(3005);
 	htot->Draw("E2 same");
 	hs->GetYaxis()->SetTitleOffset(0.8);
 	hs->GetYaxis()->SetTitle("Events /bin");
@@ -248,7 +248,8 @@ void unroll_run(TString channel){
 	vline1->Draw();
 	vline2->Draw();
 	//	
-	cmsLumi(0);
+//	cmsLumi(0);
+        CMS_lumi(fPads1, 4, 0, "137.1");
 	fPads1->Update();
 	fPads2->cd();
 	TH1D*nominal=(TH1D*)htot->Clone("nominal");
@@ -259,10 +260,14 @@ void unroll_run(TString channel){
 	nominal->Divide(nomNoErr);
 	nominal->GetYaxis()->SetRangeUser(0,2);
 	nominal->SetLineColor(2);
-	nominal->SetTitle(";m_{jj} [TeV];;");
-	nominal->GetYaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetTitleSize(0.1);
+        nominal->SetTitle(";m_{jj} [GeV];Data/MC;");
+        nominal->GetYaxis()->SetTitleOffset(0.23);
+        nominal->GetYaxis()->SetNdivisions(404);
+        nominal->GetYaxis()->SetTitleSize(0.2);
+        nominal->GetYaxis()->SetLabelSize(0.15);
+        nominal->GetXaxis()->SetLabelSize(0.2);
+        nominal->GetXaxis()->SetTitleSize(0.2);
+        nominal->GetXaxis()->SetTitleOffset(1.1);
 	nominal->Draw("E2");
 	h_up->SetMarkerStyle(20);
 	h_up->SetMarkerColor(1);
@@ -275,7 +280,7 @@ void unroll_run(TString channel){
 	hs->Write();
 	fout->Close();
 
-	c1->SaveAs("aa_"+channel+".pdf");
+	c1->SaveAs("aa_QCD_"+channel+".pdf");
 }
 int unroll_full(){
 	vector<TString> tags={"16","17","18"};

@@ -114,8 +114,9 @@ class EDBRHistoMaker {
 		Double_t jet1phi;
 		Double_t jet2phi;
 		Double_t Mjj;
-		Double_t jet1puIdTight;
-                Double_t jet2puIdTight;
+		Double_t jet1puIdMedium;
+                Double_t jet2puIdMedium;
+                Double_t puIdweight_M;
 		Double_t zepp;//need to be modified for rochester
 		Double_t deltaetajj;
 		Double_t actualWeight;
@@ -169,6 +170,7 @@ class EDBRHistoMaker {
 		TBranch *b_muon1_track_scale;   //!
 		TBranch *b_muon2_track_scale;   //!
 		TBranch *b_muon_hlt_scale;   //!
+		TBranch *b_ele_hlt_scale;   //!
 		TBranch *b_scalef;   //!
                 TBranch        *b_prefWeight;   //!
                 TBranch        *b_prefWeightUp;   //!
@@ -238,8 +240,9 @@ class EDBRHistoMaker {
 		TBranch *b_jet1e;
 		TBranch *b_jet2e;
 		TBranch *b_Mjj;    //!
-                TBranch *b_jet1puIdTight;
-                TBranch *b_jet2puIdTight;
+                TBranch *b_jet1puIdMedium;
+                TBranch *b_jet2puIdMedium;
+                TBranch *b_puIdweight_M;
 		TBranch *b_zepp;
 		TBranch *b_deltaetajj;
 		TBranch *b_l1_weight;
@@ -372,8 +375,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("jet2phi", &jet2phi, "jet2phi/D");
 	treename->Branch("jet2e", &jet2e, "jet2e/D");
 	treename->Branch("Mjj", &Mjj, "Mjj/D");
-        treename->Branch("jet1puIdTight", &jet1puIdTight, "jet1puIdTight/D");
-        treename->Branch("jet2puIdTight", &jet2puIdTight, "jet2puIdTight/D");
+        treename->Branch("jet1puIdMedium", &jet1puIdMedium, "jet1puIdMedium/D");
+        treename->Branch("jet2puIdMedium", &jet2puIdMedium, "jet2puIdMedium/D");
+        treename->Branch("puIdweight_M", &puIdweight_M, "puIdweight_M/D");
 	treename->Branch("zepp", &zepp, "zepp/D");
 	treename->Branch("detajj", &detajj, "detajj/D");
 	treename->Branch("delta_phi", &delta_phi, "delta_phi/D");
@@ -391,8 +395,8 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("muon2_id_scale", &muon2_id_scale, "muon2_id_scale/D");
 	treename->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
 	treename->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D");
-//	treename->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
-//	treename->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
+	treename->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
+	treename->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
 	treename->Branch("drll", &drll, "drll/D");
 	cout<<"make outfile tree end"<<endl;
 
@@ -415,6 +419,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
         fChain->SetBranchAddress("muon1_track_scale", &muon1_track_scale, &b_muon1_track_scale);
         fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
         fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
+        fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
 	fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
         fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
         fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
@@ -475,8 +480,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("jet1e", &jet1e, &b_jet1e);
 	fChain->SetBranchAddress("jet2e", &jet2e, &b_jet2e);
 	fChain->SetBranchAddress("Mjj", &Mjj, &b_Mjj);
-	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
-        fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
+        fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
+        fChain->SetBranchAddress("puIdweight_M", &puIdweight_M, &b_puIdweight_M);
 	fChain->SetBranchAddress("zepp", &zepp, &b_zepp);
 	fChain->SetBranchAddress("deltaetajj", &deltaetajj, &b_deltaetajj);
 	fChain->SetBranchAddress("l1_weight", &l1_weight, &b_l1_weight);
@@ -817,11 +823,12 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 		TString filename = fileTMP_->GetName();
 
                 if(filename.Contains("18")) prefWeight=1;
+                if(filename.Contains("17")==0) puIdweight_M=1;
 		actualWeight = pileupWeight * scalef * prefWeight*photon_id_scale*photon_veto_scale;
 		if(lep==13)
-                        actualWeight = actualWeight *(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale);//mc
+                        actualWeight = actualWeight *(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale)*muon_hlt_scale*puIdweight_M;//mc
                 if(lep==11)
-                        actualWeight = actualWeight *(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale);//mc
+                        actualWeight = actualWeight *(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale)*ele_hlt_scale*puIdweight_M;//mc
                 if(filename.Contains("plj"))
                      actualWeight = scalef;
 		if(drla==10) drla=-10;

@@ -14,7 +14,7 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
      TString lumi;
      if(tag.Contains("16"))lumi=Form("%f",35.86);cout<<lumi<<endl;
      if(tag.Contains("17"))lumi=Form("%f",41.52);cout<<lumi<<endl;
-     if(tag.Contains("18"))lumi=Form("%f",58.7);cout<<lumi<<endl;
+     if(tag.Contains("18"))lumi=Form("%f",59.7);cout<<lumi<<endl;
      TString cut;
      if(channel.Contains("elebarrel"))
              cut="(lep==11&&fabs(photoneta)<1.4442)";
@@ -41,9 +41,16 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
      int p=0;
      cut1="(("+cut1+")&&("+cut+"))"; 
      cut2="(("+cut2+")&&("+cut+"))"; // select ele/muon channel and photon barrel/endcap
-     tree->Draw(var1+":"+var2+">>"+h2name,cut1+"*scalef*"+lumi,"goff");//draw response matrix
-     tree->Draw(var2+">>"+th2name,cut2+"*scalef*"+lumi,"goff");//draw recostructed var under reco&&!gen
-     tree->Draw(var1+">>"+h1name,cut1+"*scalef*"+lumi,"goff");//draw var in gen-level under reco&&gen
+     TString weight;
+     if(tag.Contains("16"))
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*"+lumi;
+     else if(tag.Contains("17"))
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*puIdweight_M*"+lumi;
+     else if(tag.Contains("18"))
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*"+lumi;
+     tree->Draw(var1+":"+var2+">>"+h2name,cut1+weight,"goff");//draw response matrix
+     tree->Draw(var2+">>"+th2name,cut2+weight,"goff");//draw recostructed var under reco&&!gen
+     tree->Draw(var1+">>"+h1name,cut1+weight,"goff");//draw var in gen-level under reco&&gen
      for(Int_t i=0;i<nbins;i++){
              TString low=Form("%f",bins[i]);
              TString high=Form("%f",bins[i+1]);
@@ -51,18 +58,21 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
 //	     actualWeight[p]=scalef*pweight[i]*pileupWeight;
              TString index=Form("%i",i);
              if(i<nbins-1)
-		     tree->Draw(var1+">>"+th1name[p],"("+cut1+"&&("+var2+">"+low+"&&"+var2+"<"+high+"))*scalef*"+lumi,"goff");//draw var in gen under selection reco && gen in every reco bin
+		     tree->Draw(var1+">>"+th1name[p],"("+cut1+"&&("+var2+">"+low+"&&"+var2+"<"+high+"))"+weight,"goff");//draw var in gen under selection reco && gen in every reco bin
              else if(i==nbins-1)
-		     tree->Draw(var1+">>"+th1name[p],"("+cut1+"&&("+var2+">"+low+"))*scalef*"+lumi,"goff");//draw var in gen under selection reco && gen in every reco bin
+		     tree->Draw(var1+">>"+th1name[p],"("+cut1+"&&("+var2+">"+low+"))"+weight,"goff");//draw var in gen under selection reco && gen in every reco bin
 	     p++;
      }
      TFile*fout=new TFile("./root/hist_ZA-EWK_"+var1+"_"+tag+channel+".root","recreate");
      TFile*f1=new TFile("./root/hist_EWK"+tag+channel+"_"+var1+".root","recreate");
      for(Int_t i=0;i<nbins;i++){
              th1[i]->SetBinContent(nbins,th1[i]->GetBinContent(nbins)+th1[i]->GetBinContent(nbins+1));
+             th1[i]->SetBinError(nbins,sqrt(pow(th1[i]->GetBinError(nbins),2)+pow(th1[i]->GetBinError(nbins+1),2)));
      }//add overflow bin
      th2->SetBinContent(nbins,th2->GetBinContent(nbins)+th2->GetBinContent(nbins+1));//add overflowbin
+     th2->SetBinError(nbins,sqrt(pow(th2->GetBinError(nbins),2)+pow(th2->GetBinError(nbins+1),2)));//error
      h1->SetBinContent(nbins,h1->GetBinContent(nbins)+h1->GetBinContent(nbins+1));//add overflowbin
+     h1->SetBinError(nbins,sqrt(pow(h1->GetBinError(nbins),2)+pow(h1->GetBinError(nbins+1),2)));//error
      fout->cd();
      for(Int_t i=0;i<nbins;i++){
 	     th1[i]->Write();
@@ -106,13 +116,11 @@ int Build_UnfoldHist_sig(){
 
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
      vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-//     vector<TString> genvars={"genZGmass","genMjj"};
-//     vector<TString> recovars={"Mva","Mjj"};
      vector<TString> tag={"16","17","18"};
      vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"}; 
      for(int i=0;i<tag.size();i++){
 	     if(tag[i].Contains("17")){
-		     jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 	     }
 	     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	     TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";

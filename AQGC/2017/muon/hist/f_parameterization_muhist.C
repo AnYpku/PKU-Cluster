@@ -51,9 +51,11 @@ void fX0_parameterization_muhist(int index){
 	cout<<"Nentry="<<numberOfEntries<<endl;
 	Double_t        Mva,Mjj;  
         Int_t HLT_Mu1,HLT_Mu2,HLT_Mu3,HLT_Mu5,HLT_Ele1,HLT_Ele2,lep,nlooseeles,nloosemus;
+	Double_t jet1puIdMedium,jet2puIdMedium;
 	Double_t        photoneta,photonet,massVlep;  
 	Double_t        pweight[703];
 	Double_t        prefWeight;
+	Double_t        puIdweight_M;
 	Double_t	jet1eta,jet1pt,etalep1,ptlep1;
 	Double_t	jet2eta,jet2pt,etalep2,ptlep2;
 	Double_t        photon_id_scale;
@@ -65,6 +67,7 @@ void fX0_parameterization_muhist(int index){
         Double_t        muon2_id_scale;
         Double_t        muon1_iso_scale;
         Double_t        muon2_iso_scale;
+        Double_t        muon_hlt_scale;
         Double_t        scalef;
         Double_t        pileupWeight;
         Double_t        photon_veto_scale;
@@ -102,9 +105,11 @@ void fX0_parameterization_muhist(int index){
         treef->SetBranchAddress("ele2_id_scale", &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
         treef->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+        treef->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
         treef->SetBranchAddress("prefWeight", &prefWeight);
+        treef->SetBranchAddress("puIdweight_M", &puIdweight_M);
 
 	// Do parameterization
 	//double ZGbin[6] = {150,250,350,400,600,2e4};
@@ -143,10 +148,10 @@ void fX0_parameterization_muhist(int index){
 		for(int count=0; count < numberOfEntries; count++){
 			treef->GetEntry(count);
                         double deltaetajj = fabs(jet1eta-jet2eta);
-			if( !(lep == 13 && (HLT_Mu2 >0 || HLT_Mu1 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(  (abs(photoneta)<1.4442)  || (abs(photoneta)>1.566&&abs(photoneta)<2.5)  )   )  )
+			if( !(lep == 13 && (HLT_Mu2 >0 || HLT_Mu1 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(  (abs(photoneta)<1.4442)  || (abs(photoneta)>1.566&&abs(photoneta)<2.5)  )   )  )
                         continue;
                         if(Mva>2e4) Mva=1999;
-			Double_t weight=pileupWeight * scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*prefWeight;
+			Double_t weight=pileupWeight * scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*prefWeight*muon_hlt_scale*puIdweight_M;
 //                        cout<<"scalef"<<scalef<<"; weight"<<weight<<endl;
 //			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){

@@ -90,7 +90,7 @@ void unroll_name(TString sample,TString tag,int num){
 	TLegend *l2 = new TLegend(0.7,0.5,0.9,0.9);
 	fPads1->SetBottomMargin(0);
         fPads2->SetTopMargin(0);
-        fPads2->SetBottomMargin(0.3);
+        fPads2->SetBottomMargin(0.5);
         fPads1->Draw();
         fPads2->Draw();
         fPads1->cd();
@@ -101,13 +101,6 @@ void unroll_name(TString sample,TString tag,int num){
 	t_ZA[0]->SetLineColor(2);
 	t_ZA[0]->GetYaxis()->SetRangeUser(0,t_ZA[0]->GetMaximum()*2);
 	t_ZA[0]->Draw("HIST");
-        t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-        t_ZA[0]->GetXaxis()->SetLabelSize(0.1);
-        t_ZA[0]->GetYaxis()->SetLabelSize(0.07);
-        t_ZA[0]->GetXaxis()->SetTitleFont(12);
-	t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-	t_ZA[0]->GetXaxis()->SetTitleSize(0.1);
-	t_ZA[0]->GetXaxis()->SetTitleFont(12);
 	l2->AddEntry(t_ZA[0]," central scale ");
 	cout<<"Draw comparison"<<endl;
 	for(Int_t i=1;i<p;i++){
@@ -136,7 +129,12 @@ void unroll_name(TString sample,TString tag,int num){
         vline1->Draw();
         vline2->Draw();
 
-	cmsLumi(tag);
+//	cmsLumi(tag);
+        string lumivalue;
+        if(tag.Contains("16")) lumivalue="35.86";
+        if(tag.Contains("17")) lumivalue="41.52";
+        if(tag.Contains("18")) lumivalue="59.7";
+        CMS_lumi(fPads1, 4, 0, lumivalue);
 	l2->SetTextSize(0.05);
 	l2->Draw();
         fPads1->Update();
@@ -148,7 +146,12 @@ void unroll_name(TString sample,TString tag,int num){
         nominal->SetFillStyle(3001);
         nominal->SetFillColor(16);
 	nominal->SetMarkerStyle(20);
-	nominal->GetYaxis()->SetLabelSize(0.1);
+        nominal->GetYaxis()->SetLabelSize(0.15);
+        nominal->GetYaxis()->SetNdivisions(404);
+        nominal->GetXaxis()->SetTitle("mjj [GeV]");
+        nominal->GetXaxis()->SetLabelSize(0.15);
+        nominal->GetXaxis()->SetTitleFont(12);
+        nominal->GetXaxis()->SetTitleSize(0.2);
         TH1D*h_up[num];
 	int m=1;
 	cout<<"hist0 "<<nominal->GetBinContent(1)<<endl;

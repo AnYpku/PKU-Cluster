@@ -24,14 +24,21 @@ void run(TString dir,TString sample,TString var1, vector<double> bins,TString cu
      if(tag.Contains("17"))
 	     lumi=Form("%f",41.52);cout<<lumi<<endl;
      if(tag.Contains("18"))
-	     lumi=Form("%f",58.7);cout<<lumi<<endl;
+	     lumi=Form("%f",59.7);cout<<lumi<<endl;
      TString th2name;
      th2name="hist_"+var1;
      TH1D*th2 = new TH1D(th2name,"reco && gen",nbins,&bins[0]);
+     TString weight;
+     if(tag.Contains("16"))
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*"+lumi;
+     else if(tag.Contains("17"))
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*puIdweight_M*"+lumi;
+     else if(tag.Contains("18"))
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*"+lumi;
      if(sample.Contains("plj"))
 	     tree->Draw(var1+">>"+th2name,cut1+"*scalef","goff");
      else
-	     tree->Draw(var1+">>"+th2name,cut1+"*scalef*"+lumi,"goff");
+	     tree->Draw(var1+">>"+th2name,cut1+weight,"goff");
 
      th2->SetBinContent(nbins,th2->GetBinContent(nbins)+th2->GetBinContent(nbins+1));//add overflowbin
      th2->SetBinError(nbins,sqrt(pow(th2->GetBinError(nbins),2)+pow(th2->GetBinError(nbins+1),2)));
@@ -68,7 +75,7 @@ int Build_UnfoldHist_bkg(){
      vector<TString> tag={"16","17","18"};
      for(int k=0;k<tag.size();k++){
 	     if(tag[k].Contains("17")){
-		     jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 	     }
 	     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;

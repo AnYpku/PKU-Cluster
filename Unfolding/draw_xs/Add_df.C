@@ -5,6 +5,7 @@ void cmsLumi(bool channel);
 void run(TString var, TString recovar, TString title,TString tag){
         double xs16=109.7,xs17=114.3,xs18=114.3;//cross section [fb] for 2016/2017/2018 EW sample 
         int num16=299991,num17=299973,num18=287399;//the number of events for 2016/2017/2018 EW process
+	num16=884668;num17=799717;num18=879399;
 	TFile*file1=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf16.root");
 	TFile*file2=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf17.root");
 	TFile*file3=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf18.root");
@@ -34,9 +35,9 @@ void run(TString var, TString recovar, TString title,TString tag){
         double xbin[kk],ybin[kk],xerror_up[kk],xerror_down[kk],yerror_up[kk],yerror_down[kk];
         double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
-        ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt");
+        ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt");
         ifstream f_sys("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");
-        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt"<<endl;
+        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt"<<endl;
         if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 
 	for(int i=0;i<hist_clone->GetNbinsX();i++){
@@ -101,10 +102,10 @@ void run(TString var, TString recovar, TString title,TString tag){
 	TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.4);
 	fPads1->SetBottomMargin(0);
 	fPads2->SetTopMargin(0);
-	fPads2->SetBottomMargin(0.3);
+	fPads2->SetBottomMargin(0.5);
 	fPads2->Draw();
 	fPads1->Draw();
-	CMS_lumi(fPads1, 4, 0, "136.1");
+	CMS_lumi(fPads1, 4, 0, "137.1");
 	fPads1->cd();
         fPads1->SetTicky();
         fPads1->SetTickx();
@@ -223,15 +224,17 @@ void run(TString var, TString recovar, TString title,TString tag){
 	nominal->GetYaxis()->SetRangeUser(-0.5,2);
 	nominal->SetTitle("");
 	nominal->GetXaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetTitleSize(0.15);
-        nominal->GetXaxis()->SetTitleOffset(0.8);
-        nominal->GetXaxis()->SetTitleFont(32);
-	nominal->GetXaxis()->SetTitle(title);
-	nominal->GetYaxis()->SetTitle("Ratio to MadGraph");
-        nominal->GetYaxis()->SetTitleFont(32);
-	nominal->GetYaxis()->SetTitleOffset(0.45);
-	nominal->GetYaxis()->SetTitleSize(0.08);
-	nominal->GetYaxis()->SetLabelSize(0.07);
+        nominal->GetXaxis()->SetLabelOffset(0.03);
+	nominal->GetXaxis()->SetTitleSize(0.18);
+        nominal->GetXaxis()->SetTitleOffset(1.2);
+        nominal->GetXaxis()->SetTitleFont(22);
+	nominal->GetXaxis()->SetTitle(title+" [GeV]");
+	nominal->GetYaxis()->SetTitle("Ratio to MG");
+//        nominal->GetYaxis()->SetTitleFont(32);
+        nominal->GetYaxis()->SetNdivisions(404);
+	nominal->GetYaxis()->SetTitleOffset(0.4);
+	nominal->GetYaxis()->SetTitleSize(0.1);
+	nominal->GetYaxis()->SetLabelSize(0.1);
 	TLine*line=new TLine(nominal->GetXaxis()->GetXmin(),1,nominal->GetXaxis()->GetXmax(),1);
         TLine*line1=new TLine(nominal->GetXaxis()->GetXmin(),1.5,nominal->GetXaxis()->GetXmax(),1.5);
         TLine*line2=new TLine(nominal->GetXaxis()->GetXmin(),0.5,nominal->GetXaxis()->GetXmax(),0.5);
@@ -279,7 +282,7 @@ void run(TString var, TString recovar, TString title,TString tag){
 }
 int Add_df(){
 	gStyle->SetOptStat(0);
-	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}"};
+	vector<TString> title={"p_{T}^{l_{1}}","p_{T}^{#gamma}","p_{T}^{j_{1}}"};
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
       vector<TString> recovars={"ptlep1","photonet","jet1pt"};
 //        vector<TString> genvars={"genMjj"};
@@ -297,13 +300,13 @@ void cmsLumi(bool channel)
 	latex.SetNDC();
 	latex.SetTextSize(0.05);
 	latex.SetLineWidth(2);
-	float lumiel=136.1;
-	float lumimu=136.1;
+	float lumiel=137.1;
+	float lumimu=137.1;
 	int beamcomenergytev=13;
 	latex.SetTextAlign(31);
 	latex.SetTextAlign(11);
 	latex.DrawLatex(0.18,0.82,"Preliminary");
 	latex.DrawLatex(0.18,0.86,"CMS");
 	latex.SetTextSize(0.045);
-	latex.DrawLatex(0.76,0.92,Form("136.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
+	latex.DrawLatex(0.76,0.92,Form("137.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }

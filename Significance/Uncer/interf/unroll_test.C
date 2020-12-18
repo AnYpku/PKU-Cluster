@@ -47,10 +47,9 @@ void unroll_name(TString tag){
 	TFile* fout = new TFile("aa_interf"+tag+".root","RECREATE");
 	Double_t ZA_scale= 1;
 	std::ostringstream strs;
-	std::string lumivalue = strs.str();
 	Double_t mjj_bins[4]={500, 800, 1200,2000};
 	Double_t detajj_bins[4]={2.5,4.5,6,6.5};
-	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
 
 	TFile* f_ZA1;TFile* f_ZA2;
 	f_ZA1=new TFile("./hist_"+tag+".root");
@@ -90,7 +89,7 @@ void unroll_name(TString tag){
 	TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.4);
 	fPads1->SetBottomMargin(0);
 	fPads2->SetTopMargin(0);
-	fPads2->SetBottomMargin(0.3);
+	fPads2->SetBottomMargin(0.5);
 	fPads1->Draw();
 	fPads2->Draw();
 	fPads1->cd();
@@ -102,11 +101,6 @@ void unroll_name(TString tag){
 	t_ZA[0]->SetLineColor(kRed);
 	t_ZA[0]->GetYaxis()->SetRangeUser(0,vec_ymax[0]+0.3*vec_ymax[0]);
 	t_ZA[0]->Draw("HIST");
-	t_ZA[0]->GetXaxis()->SetLabelSize(0.1);
-	t_ZA[0]->GetYaxis()->SetLabelSize(0.07);
-	t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-	t_ZA[0]->GetXaxis()->SetTitleSize(0.1);
-	t_ZA[0]->GetXaxis()->SetTitleFont(12);
 	l2->AddEntry(t_ZA[0],"EWK ");
 	for(Int_t i=1;i<num;i++){
 		t_ZA[i]->SetLineColor(i+3);
@@ -133,7 +127,12 @@ void unroll_name(TString tag){
         vline1->Draw(); 
         vline2->Draw(); 
 
-	cmsLumi(tag) ;
+//	cmsLumi(tag) ;
+        string lumivalue;
+        if(tag.Contains("16")) lumivalue="35.86";
+        if(tag.Contains("17")) lumivalue="41.52";
+        if(tag.Contains("18")) lumivalue="59.7";
+        CMS_lumi(fPads1, 4, 0, lumivalue);
 	l2->Draw();
 
 	fPads1->Update();
@@ -143,26 +142,24 @@ void unroll_name(TString tag){
 	TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
 	for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
 	TH1D*h_up=(TH1D*)t_ZA[1]->Clone();
-//	TH1D*h_down=(TH1D*)t_ZA[2]->Clone();
 	h_up->Divide(nominal);
-//	h_down->Divide(nominal);
 	nominal->Divide(nomNoErr);
 	nominal->SetFillStyle(3001);
 	nominal->SetFillColor(16);
-	h_up->GetYaxis()->SetLabelSize(0.1);
-	h_up->GetXaxis()->SetLabelSize(0.1);
+
+	h_up->GetYaxis()->SetLabelSize(0.12);
         h_up->GetYaxis()->SetTitle("ratio");
         h_up->GetYaxis()->SetTitleSize(0.16);
-        h_up->GetYaxis()->SetTitleOffset(0.3);
+        h_up->GetYaxis()->SetTitleOffset(0.4);
         h_up->GetYaxis()->SetTitleFont(12);
-        h_up->GetXaxis()->SetTitle("mjj(GeV)");
-        h_up->GetXaxis()->SetTitleSize(0.1);
-        h_up->GetXaxis()->SetTitleFont(12);
+        h_up->GetYaxis()->SetNdivisions(404);
         h_up->SetLineColor(1);
         h_up->SetMarkerStyle(20);
-//	nominal->GetXaxis()->SetTitleSize(0.3);
-	nominal->GetYaxis()->SetRangeUser(h_up->GetMinimum()-0.05,h_up->GetMaximum()+0.05);
-//	nominal->Draw("EP");
+        h_up->GetXaxis()->SetTitle("mjj [GeV]");
+        h_up->GetXaxis()->SetLabelSize(0.14);
+        h_up->GetXaxis()->SetTitleFont(12);
+        h_up->GetXaxis()->SetTitleSize(0.2);
+	h_up->GetYaxis()->SetRangeUser(h_up->GetMinimum()-0.05,h_up->GetMaximum()+0.05);
 	h_up->Draw(" P E");
 //	h_down->Draw("same hist ][");
 	fPads2->Update();

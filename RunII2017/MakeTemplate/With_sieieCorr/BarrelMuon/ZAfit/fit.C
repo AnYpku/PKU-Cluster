@@ -25,14 +25,19 @@ void fit(float lowpt, float highpt){
 
 	hfake_->Add(hzaf_,-41.52);
 
-	Int_t nBins = 9;//9
-	Int_t sieie_bin=3;//3
-	Double_t bins[10];
-//	Double_t bins[10]={0.004,0.006,0.008,0.01015,0.012,0.014,0.016,0.018,0.02,0.022};
-	for (Int_t i=0;i<(nBins+1);i++){
-		bins[i] = 0.00515 + 0.0025*2/3*i;
-	}
+	//Int_t nBins = 9;//9
+	//Int_t sieie_bin=3;//3
+	//Double_t bins[10];
+	//for (Int_t i=0;i<(nBins+1);i++){
+	//	bins[i] = 0.00515 + 0.0025*2/3*i;
+	//}
 
+	Int_t nBins = 18;//9
+	Int_t sieie_bin=6;//3
+	Double_t bins[19];
+	for (Int_t i=0;i<(nBins+1);i++){
+		bins[i] = 0.00515 + 0.0025*2/3/2*i;
+	}
 	TH1* hdata = hdata_->Rebin(nBins, "hdata", bins);
 	TH1* htrue = htrue_->Rebin(nBins, "htrue", bins);
 	TH1* hfake = hfake_->Rebin(nBins, "hfake_data", bins);
@@ -98,7 +103,7 @@ void fit(float lowpt, float highpt){
 	leg->SetFillColor(10);
 	leg->SetTextSize(0.05);
 	leg->AddEntry(hdata, "Fit result", "L");
-	leg->AddEntry(htrue, "Ture photons", "L");
+	leg->AddEntry(htrue, "True photons", "L");
 	leg->AddEntry(hfake, "Fake photons", "L");
 	leg->Draw("same");
 
@@ -184,8 +189,8 @@ void fit(float lowpt, float highpt){
         textFR->Draw();
 
     char buffer[256];
-//	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
-	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
+	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
+//	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
 	c1->Print(buffer);
 
 }

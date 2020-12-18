@@ -123,52 +123,58 @@ f_txt.write(output_file_name)
 f_txt.write('%0.3f\t,\t%0.3f'%(param_95_neg,param_95_pos))
 f_txt.write("\n")
 graph.GetXaxis().SetTitle(x_axis_label)
+graph.GetXaxis().SetTitleSize(0.08)
+#graph.GetXaxis().SetTitleOffset(1.1)
+graph.GetXaxis().SetLabelSize(0.05)
 graph.GetYaxis().SetTitle("2#DeltaNLL")
 graph.SetLineColor(kBlue)
+#graph.SetLineStyle(1)
+#graph.SetLineWidth(2)
 graph.SetMarkerColor(kBlue)
-#graph.Draw("AP")
+graph.SetMarkerStyle(7)
+graph.Draw("AP")
 
 if (len(sys.argv) == 8):
     graph_2.SetLineColor(kGreen+2)
     graph_2.SetMarkerColor(kGreen+2)
-#    graph_2.Draw("P")
+    graph_2.Draw("P")
+gPad.SetBottomMargin(0.2)
+gPad.Update()
 
-#gPad.Update()
+l95_neg = TLine(param_95_neg,gPad.GetUymin(),param_95_neg,deltaNLL_95);
+l95_neg.SetLineColor(kBlack)
+l95_neg.SetLineWidth(3)
+l95_neg.Draw();
 
-#l95_neg = TLine(param_95_neg,gPad.GetUymin(),param_95_neg,deltaNLL_95);
-#l95_neg.SetLineColor(kBlack)
-#l95_neg.SetLineWidth(3)
-#l95_neg.Draw();
+l95_pos = TLine(param_95_pos,gPad.GetUymin(),param_95_pos,deltaNLL_95);
+l95_pos.SetLineColor(kBlack)
+l95_pos.SetLineWidth(3)
+l95_pos.Draw();
 
-#l95_pos = TLine(param_95_pos,gPad.GetUymin(),param_95_pos,deltaNLL_95);
-#l95_pos.SetLineColor(kBlack)
-#l95_pos.SetLineWidth(3)
-#l95_pos.Draw();
+print gPad.GetX1()
+print gPad.GetX2()
 
-#print gPad.GetX1()
-#print gPad.GetX2()
-
-#horline = TLine(gPad.GetUxmin(),deltaNLL_95,gPad.GetUxmax(),deltaNLL_95);
-#horline.SetLineColor(kBlack)
-#horline.SetLineStyle(7)
-#horline.SetLineWidth(3)
-#horline.Draw();
+horline = TLine(gPad.GetUxmin(),deltaNLL_95,gPad.GetUxmax(),deltaNLL_95);
+horline.SetLineColor(kBlack)
+horline.SetLineStyle(7)
+horline.SetLineWidth(3)
+horline.Draw();
 
 leg=TLegend(0.3,0.6,0.70,0.8)
 
 leg.AddEntry(graph,label,"l")
 if (len(sys.argv) == 8):
     leg.AddEntry(graph_2,label_2,"l")
-#leg.AddEntry(l95_neg,limit_label,"l")
+leg.AddEntry(l95_neg,limit_label,"l")
 leg.SetTextSize(0.03)
 leg.SetFillColor(0)
 
-#leg.Draw()
+leg.Draw()
 
-#c1.Update()
+c1.Update()
 
-#c1.SaveAs(output_file_name)
-#c1.SaveAs('./deltaNLL.'+output_file_name+'.expected.png')
+c1.SaveAs(output_file_name)
+c1.SaveAs('./deltaNLL.'+output_file_name+'.expected.pdf')
 
-#raw_input()
+raw_input()
 

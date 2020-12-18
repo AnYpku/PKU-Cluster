@@ -29,7 +29,7 @@ void cmsLumi(bool channel) //0 for el
 	//latex.SetTextAlign(11); // align left
 	latex.DrawLatex(0.16,0.88,"CMS");
 	latex.SetTextSize(0.04);
-	latex.DrawLatex(0.76,0.96,Form("58.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
+	latex.DrawLatex(0.76,0.96,Form("59.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 
 void aa(string a, double limit){
@@ -262,7 +262,7 @@ void aa(string a, double limit){
 //	c01->SaveAs(buffer1);
 //	c01->SaveAs(buffer2);
 
-	CMS_lumi(fPad1, 4, 0, "58.7");	
+	CMS_lumi(fPad1, 4, 0, "59.7");	
         fPad1->SetTicky();
         fPad1->SetTickx();
         fPad1->Update();

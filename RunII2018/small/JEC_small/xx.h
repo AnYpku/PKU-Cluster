@@ -33,7 +33,6 @@ public :
    // Declaration of leaf types
    Double_t        scalef;
    Int_t           run_period;
-   Double_t        l1_weight;
    Int_t           event;
    Int_t           nVtx;
    Double_t        theWeight;
@@ -301,14 +300,14 @@ public :
    Double_t    ele2_id_scale;
    Double_t    ele1_reco_scale;
    Double_t    ele2_reco_scale;
+   Double_t    ele_hlt_scale;
    Double_t    photon_id_scale;
+   Double_t    photon_veto_scale;
 
    Double_t    muon1_id_scale;
    Double_t    muon2_id_scale;
    Double_t    muon1_iso_scale;
    Double_t    muon2_iso_scale;
-   Double_t    muon1_track_scale;
-   Double_t    muon2_track_scale;
    Double_t    muon_hlt_scale;
 
    Double_t        prefWeight;
@@ -323,20 +322,19 @@ public :
 
    // List of branches
    TBranch        *b_event;   //!
-   TBranch        *b_l1_weight;
    TBranch        *b_scalef;   //!
    TBranch        *b_run_period;   //!
    TBranch        *b_ele1_id_scale;   //!
    TBranch        *b_ele2_id_scale;   //!
    TBranch        *b_ele1_reco_scale;   //!
    TBranch        *b_ele2_reco_scale;   //!
+   TBranch        *b_ele_hlt_scale;   //!
    TBranch        *b_photon_id_scale;   //!
+   TBranch        *b_photon_veto_scale;   //!
    TBranch        *b_muon1_id_scale;   //!
    TBranch        *b_muon2_id_scale;   //!
    TBranch        *b_muon1_iso_scale;   //!
    TBranch        *b_muon2_iso_scale;   //!
-   TBranch        *b_muon1_track_scale;   //!
-   TBranch        *b_muon2_track_scale;   //!
    TBranch        *b_muon_hlt_scale;   //!
    TBranch        *b_nVtx;   //!
    TBranch        *b_theWeight;   //!
@@ -710,14 +708,13 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale, &b_ele1_reco_scale);
    fChain->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale, &b_ele2_reco_scale);
    fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+   fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
    fChain->SetBranchAddress("muon1_id_scale", &muon1_id_scale, &b_muon1_id_scale);
    fChain->SetBranchAddress("muon2_id_scale", &muon2_id_scale, &b_muon2_id_scale);
    fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
    fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
-   fChain->SetBranchAddress("muon1_track_scale", &muon1_track_scale, &b_muon1_track_scale);
-   fChain->SetBranchAddress("muon2_track_scale", &muon2_track_scale, &b_muon2_track_scale);
+   fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
    fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
-   fChain->SetBranchAddress("l1_weight", &l1_weight, &b_l1_weight);
    fChain->SetBranchAddress("event", &event, &b_event);
    fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
    fChain->SetBranchAddress("theWeight", &theWeight, &b_theWeight);

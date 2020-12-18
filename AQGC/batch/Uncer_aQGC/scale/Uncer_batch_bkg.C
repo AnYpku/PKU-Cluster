@@ -3,11 +3,17 @@
 void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      TString name=file->GetName();
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
-     Double_t scalef,pileupWeight,pweight[703],Mjj,zepp;
+     Double_t scalef,pileupWeight,pweight[703],Mjj,zepp,puIdweight_M,prefWeight;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double ptVlep, yVlep, phiVlep, massVlep,Mva;
+     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,ele_hlt_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,muon_hlt_scale;
+     double photon_id_scale,photon_veto_scale;
+     int lep;
+     double actualWeight;
      tree->SetBranchAddress("scalef",&scalef);
+     tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mva",&Mva);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
      tree->SetBranchAddress("pweight",pweight);
@@ -28,8 +34,23 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      tree->SetBranchAddress("yVlep",&yVlep);
      tree->SetBranchAddress("phiVlep",&phiVlep);
      tree->SetBranchAddress("massVlep",&massVlep);
+     tree->SetBranchAddress("puIdweight_M",&puIdweight_M);
+     tree->SetBranchAddress("prefWeight",&prefWeight);
+     tree->SetBranchAddress("ele1_id_scale",&ele1_id_scale);
+     tree->SetBranchAddress("ele2_id_scale",&ele2_id_scale);
+     tree->SetBranchAddress("ele1_reco_scale",&ele1_reco_scale);
+     tree->SetBranchAddress("ele2_reco_scale",&ele2_reco_scale);
+     tree->SetBranchAddress("muon1_id_scale",&muon1_id_scale);
+     tree->SetBranchAddress("muon2_id_scale",&muon2_id_scale);
+     tree->SetBranchAddress("muon1_iso_scale",&muon1_iso_scale);
+     tree->SetBranchAddress("muon2_iso_scale",&muon2_iso_scale);
+     tree->SetBranchAddress("ele_hlt_scale",&ele_hlt_scale);
+     tree->SetBranchAddress("muon_hlt_scale",&muon_hlt_scale);
+     tree->SetBranchAddress("photon_id_scale",&photon_id_scale);
+     tree->SetBranchAddress("photon_veto_scale",&photon_veto_scale);
+
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
-     double actualWeight[num];
+     double Weight[num];
      TH1D*th1[num];
      TString th1name[num];
      vector<double> ZGbin={150,400,600,800,1000,2e4};
@@ -57,31 +78,39 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     jet1p4.SetPtEtaPhiE(jet1pt, jet1eta, jet1phi, jet1e);
 	     jet2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
 	     delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
+	     if(tag.Contains("18"))prefWeight=1;
+	     if(tag.Contains("17")==0)puIdweight_M=1;
+	     actualWeight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+	     if(lep==11)
+		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
+	     if(lep==13)
+		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
+
 	     if (delta_phi>pi) delta_phi=2*pi-delta_phi;
 	     int p=0;
 	     if (  tformula->EvalInstance() && (zepp<2.4 && delta_phi>1.9) ){
 		     for(Int_t i=first;i<(num+first);i++){
 			     if(name.Contains("EWK")==0 && tag.Contains("16")){
 				     if( flag && (i==109 || i==111) ) continue;
-				     if(p==0) actualWeight[p]=scalef*pweight[i]*pileupWeight;
-				     else actualWeight[p]=scalef*pweight[i]*pileupWeight*2;
-				     if(k%1000==0)cout<<p<<" "<<actualWeight[p]<<endl;
-				     th1[p]->Fill(Mva,actualWeight[p]);
+				     if(p==0) Weight[p]=actualWeight*pweight[i];
+				     else Weight[p]=actualWeight*pweight[i]*2;
+				     if(k%1000==0)cout<<p<<" "<<Weight[p]<<endl;
+				     th1[p]->Fill(Mva,Weight[p]);
 			     }
 			     else if(name.Contains("EWK")==0 && tag.Contains("16")==0){
 				     if( flag && (i==5 || i==7) ) continue;
-				     actualWeight[p]=scalef*pweight[i]*pileupWeight;
-				     cout<<p<<" "<<actualWeight[p]<<endl;
-				     th1[p]->Fill(Mva,actualWeight[p]);
+				     Weight[p]=actualWeight*pweight[i];
+				     cout<<p<<" "<<Weight[p]<<endl;
+				     th1[p]->Fill(Mva,Weight[p]);
 			     }
 			     else if(name.Contains("EWK")){
 				     int k;
 				     if(tag.Contains("16")==0)
 					     k=15*i;
 				     else k=i;
-				     actualWeight[p]=scalef*pweight[k]*pileupWeight;
-				     cout<<p<<" "<<actualWeight[p]<<endl;
-				     th1[p]->Fill(Mva,actualWeight[p]);
+				     Weight[p]=actualWeight*pweight[k];
+				     cout<<p<<" "<<Weight[p]<<endl;
+				     th1[p]->Fill(Mva,Weight[p]);
 			     }
 			     p++;
 		     }
@@ -130,10 +159,10 @@ int Uncer_batch_bkg(){
 
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{
-			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
+			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
 		TString Reco= "((("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
 		cout<<tag[i]<<" "<<jet<<endl;

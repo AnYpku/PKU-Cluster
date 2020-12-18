@@ -35,13 +35,13 @@ void fX0_parameterization_el(int index){
 	if(index==7) name="fM6";
 	if(index==8) name="fM7";
 	if(index==9) name="fT0";
-	if(index==10) name="fT1";
-	if(index==11) name="fT2";
-	if(index==12) name="fT5";
-	if(index==13) name="fT6";
-	if(index==14) name="fT7";
-	if(index==15) name="fT8";
-	if(index==16) name="fT9";
+	if(index==10)name="fT1";
+	if(index==11)name="fT2";
+	if(index==12)name="fT5";
+	if(index==13)name="fT6";
+	if(index==14)name="fT7";
+	if(index==15)name="fT8";
+	if(index==16)name="fT9";
 	fout = new TFile("signal_proc_el__"+name+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
@@ -62,6 +62,7 @@ void fX0_parameterization_el(int index){
         Double_t        ele2_id_scale;
         Double_t        ele1_reco_scale;
         Double_t        ele2_reco_scale;
+        Double_t        ele_hlt_scale;
         Double_t        lumiWeight;
         Double_t        scalef;
         Double_t        pileupWeight;
@@ -79,10 +80,10 @@ void fX0_parameterization_el(int index){
         treef->SetBranchAddress("ele2_id_scale", &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
         treef->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+        treef->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("lumiWeight", &lumiWeight);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
-        treef->SetBranchAddress("prefWeight", &prefWeight);
 
 	// Do parameterization
 	//double ZGbin[6] = {150,250,350,400,600,2e4};
@@ -123,7 +124,7 @@ void fX0_parameterization_el(int index){
                         if( ! formula->EvalInstance())
                                 continue;
                         if(Mva>2e4) Mva=1999;
-			Double_t weight=pileupWeight*scalef*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale;
+			Double_t weight=pileupWeight*scalef*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
 				rf[0]+=pweight[iii]*weight;
@@ -177,13 +178,13 @@ void fX0_parameterization_el(int index){
 	        if(index==7) {low=-250;high=250;};
 	        if(index==8) {low=-200;high=200;};
 	        if(index==9) {low=-20;high=20;};
-	        if(index==10) {low=-20;high=20;};
-	        if(index==11) {low=-40;high=40;};
-	        if(index==12) {low=-40;high=40;};
-	        if(index==13) {low=-40;high=40;};
-	        if(index==14) {low=-40;high=40;};
-	        if(index==15) {low=-20;high=20;};
-	        if(index==16) {low=-20;high=20;};
+	        if(index==10){low=-20;high=20;};
+	        if(index==11){low=-40;high=40;};
+	        if(index==12){low=-40;high=40;};
+	        if(index==13){low=-40;high=40;};
+	        if(index==14){low=-40;high=40;};
+	        if(index==15){low=-20;high=20;};
+	        if(index==16){low=-20;high=20;};
 		TString tf1_name = TString("signal_proc_")+name+Form("_bin%u",abin+1);
 		TF1 *fitFunc = new TF1(tf1_name,"[0]*(x**2) + [1]*x + 1",low,high) ;
 
@@ -222,13 +223,13 @@ void fX0_parameterization_el(int index){
 	        if(index==7) sprintf(buffer2, "fM6/#Lambda^{4} (#times 10^{-12} GeV)");
 	        if(index==8) sprintf(buffer2, "fM7/#Lambda^{4} (#times 10^{-12} GeV)");
 	        if(index==9) sprintf(buffer2, "fT0/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==10) sprintf(buffer2, "fT1/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==11) sprintf(buffer2, "fT2/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==12) sprintf(buffer2, "fT5/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==13) sprintf(buffer2, "fT6/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==14) sprintf(buffer2, "fT7/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==15) sprintf(buffer2, "fT8/#Lambda^{4} (#times 10^{-12} GeV)");
-	        if(index==16) sprintf(buffer2, "fT9/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==10)sprintf(buffer2, "fT1/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==11)sprintf(buffer2, "fT2/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==12)sprintf(buffer2, "fT5/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==13)sprintf(buffer2, "fT6/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==14)sprintf(buffer2, "fT7/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==15)sprintf(buffer2, "fT8/#Lambda^{4} (#times 10^{-12} GeV)");
+	        if(index==16)sprintf(buffer2, "fT9/#Lambda^{4} (#times 10^{-12} GeV)");
 		
 		gr->GetXaxis()->SetTitle(buffer2) ;
 //		gr->GetXaxis()->SetTitle("fT0/#Lambda^{4} (#times 10^{-12} GeV)") ;
@@ -248,7 +249,7 @@ void fX0_parameterization_el(int index){
 		leg->AddEntry(gr,Form("p0 = %f ",par0),"") ;
 		leg->AddEntry(gr,Form("p1 = %f ",par1),"") ;
 		cout <<"x8"<<endl;
-		//leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
+	      //leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
 		leg->Draw("SAME") ;
 		cout <<"x9"<<endl;
 		if(index==1) c1->SaveAs(TString("fit_fM0")+Form("_ZGbin_%u",abin)+TString(".pdf")) ;
@@ -277,7 +278,6 @@ void fX0_parameterization_el(int index){
 	ParamSetf.close();
 
 }
-
 
 void f_parameterization_el(){
         gSystem->Load("libTreePlayer.so");

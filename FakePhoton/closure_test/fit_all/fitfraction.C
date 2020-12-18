@@ -174,7 +174,7 @@ void fitf(float lowpt, float highpt, float lowchiso, float highchiso,TString tag
 	    leg->SetFillColor(10);
             leg->SetTextSize(0.05);
 	    leg->AddEntry(hdata, "Fit result", "L");
-	    leg->AddEntry(mcp1, "Ture photons", "L");
+	    leg->AddEntry(mcp1, "True photons", "L");
 	    leg->AddEntry(mcp0, "Fake photons", "L");
 	    leg->AddEntry(hist, "mc truth of fake #gamma", "L");
 	    leg->AddEntry(hmc, "mc truth of true #gamma", "L");

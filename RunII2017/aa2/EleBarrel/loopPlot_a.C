@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	/// Path to wherever the files with the trees are. 
-	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/test/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
 //	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/cutlep/";
 	std::string outputDir = "./fig-output_a/";
 	
@@ -58,7 +58,7 @@ void loopPlot() {
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17", 
-                                             "plj17_weight","ZA17"};
+                                             "plj17_weight_down","ZA17"};
 		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,1,lumiValue};
 //        	double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
 		std::vector< std::string > fMC;
@@ -90,6 +90,7 @@ void loopPlot() {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
+        std::vector < TString > histName={"p_{T}^{Z}","#eta_{Z}","#phi_{Z}","m_{Z}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","#sigma_{i#etai#eta}","#gamma_{nhiso}","#gamma_{chiso}","#gamma_{phoiso}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","p_{T}^{j1}","#eta_{j1}","p_{T}^{j2}","#eta_{j2}","m_{jj}","m_{Z#gamma}","nVtx","zepp","#Delta#phi","#Delta#eta_{jj}"};
 
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
@@ -259,7 +260,7 @@ void loopPlot() {
 
 	int numOfHistos = listOfHistos.size();
 	for (int i = 0; i != numOfHistos; ++i)
-		plotter->makeStackPlots(listOfHistos.at(i));
+		plotter->makeStackPlots(listOfHistos.at(i),histName[i]);
 	printf("Plotting done\n");
 	delete plotter;
 }

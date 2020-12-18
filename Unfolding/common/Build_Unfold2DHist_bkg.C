@@ -10,11 +10,11 @@ void run(TString sample,TString tag,TString Reco){
      double lumi;
      if(tag.Contains("16"))lumi=35.86;cout<<lumi<<endl;
      if(tag.Contains("17"))lumi=41.52;cout<<lumi<<endl;
-     if(tag.Contains("18"))lumi=58.7;cout<<lumi<<endl;
+     if(tag.Contains("18"))lumi=59.7;cout<<lumi<<endl;
 
      TTreeFormula *tformula=new TTreeFormula("formula",Reco, tree); 
 
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,ele_hlt_scale,muon_hlt_scale,puIdweight_M;
      double Mjj,deltaetajj,scalef;
      int lep;
      tree->SetBranchAddress("lep",&lep);
@@ -23,16 +23,19 @@ void run(TString sample,TString tag,TString Reco){
      tree->SetBranchAddress("scalef", &scalef);
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
      tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
      tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
      tree->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      Double_t mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 
@@ -56,11 +59,12 @@ void run(TString sample,TString tag,TString Reco){
 	     tree->GetEntry(i);
              if(Mjj>2000) Mjj=1999; if(deltaetajj>6.5) deltaetajj=6.1;
 	     if(tag.Contains("18"))  prefWeight=1;
-	     actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale;
+	     if(tag.Contains("17")==0)  puIdweight_M=1;
+	     actualWeight=scalef*pileupWeight*prefWeight*photon_id_scale*lumi*photon_veto_scale*puIdweight_M;
 	     if(lep==11)
-		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale;
+		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
-		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale;
+		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
 //             if(i%1000==0) cout<<"actualWeight "<<actualWeight<<endl;
 	     if (  tformula->EvalInstance() &&sample.Contains("EWK")==0 ){//reco && !gen
                      if(Mjj<2000&deltaetajj<6.5)
@@ -106,11 +110,11 @@ int Build_Unfold2DHist_bkg(){
 //	vector<TString> sample={"DMuon","DEle"};
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
-		if(tag[i].Contains("17")) continue;
+//		if(tag[i].Contains("17")==0) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			run(sample[j],tag[i],Reco);

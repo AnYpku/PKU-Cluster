@@ -15,12 +15,8 @@ void run(TString particle,TString type,TString tag){
 	bincontent_up=h2->GetSum();
 	bincontent_down=h3->GetSum();
 	cout<<h1->GetSum()<<endl;
-	if(type.Contains("trigger")==0){
-		uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
-	}
-	else uncer=0.02;
+	uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
 	cout<<bincontent_new<<" "<< bincontent_up<<" "<< bincontent_down<<endl;
-	//                 f1<<1+uncer<<"]"<<endl;
 	f2<<particle<<"_"<<type<<"=["<<fixed<<setprecision(2)<<1+uncer<<"]"<<endl;
 	cout<<uncer<<endl;
 	cout<<endl;
@@ -31,6 +27,7 @@ int uncer_lepton(){
 	for(int i=0;i<par.size();i++){
 		if(par[i].Contains("muon")){
 			run_combine(par[i],"all");
+			run_combine(par[i],"trigger");
 		}
 		if(par[i].Contains("photon")){
 			run_combine(par[i],"ID");
@@ -42,6 +39,7 @@ int uncer_lepton(){
 		for(int j=0;j<tag.size();j++){
 			if(par[i].Contains("muon")){
 				run(par[i],"all",tag[j]);
+				run(par[i],"trigger",tag[j]);
 			}
 			if(par[i].Contains("photon")){
 				run(par[i],"ID",tag[j]);
@@ -81,12 +79,8 @@ void run_combine(TString particle,TString type){
 	bincontent_up=h2->GetSum();
 	bincontent_down=h3->GetSum();
 	cout<<h1->GetSum()<<endl;
-	if(type.Contains("trigger")==0){
-		uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
-	}
-	else uncer=0.02;
+	uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
 	cout<<bincontent_new<<" "<< bincontent_up<<" "<< bincontent_down<<endl;
-	//                 f1<<1+uncer<<"]"<<endl;
 	f2<<particle<<"_"<<type<<"=["<<fixed<<setprecision(2)<<1+uncer<<"]"<<endl;
 	cout<<uncer<<endl;
 	cout<<endl;

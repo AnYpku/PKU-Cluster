@@ -63,7 +63,7 @@ void loopPlot() {
 		/*std::string mcLabels[nMC] = {"ZA"}; 
 		double kFactorsMC_array[nMC] = { lumiValue};*/
 
-		double kFactorsMC_array[nMC] = {lumiValue,lumiValue,lumiValue,1,lumiValue};
+		double kFactorsMC_array[nMC] = {lumiValue, lumiValue,lumiValue,1,lumiValue};
 		std::vector< std::string > fMC;
 		for (int ii = 0; ii < nMC; ii++) {
 			fMC.push_back(pathToTrees +"cutla-out"+ mcLabels[ii] + ".root");
@@ -93,6 +93,8 @@ void loopPlot() {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
+
+        std::vector < TString > histName={"p_{T}^{Z}","#eta_{Z}","#phi_{Z}","m_{Z}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","#sigma_{i#etai#eta}","#gamma_{nhiso}","#gamma_{chiso}","#gamma_{phoiso}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","p_{T}^{j1}","#eta_{j1}","p_{T}^{j2}","#eta_{j2}","m_{jj}","m_{Z#gamma}","nVtx","zepp","#Delta#phi","#Delta#eta_{jj}"};
 
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
@@ -223,7 +225,7 @@ void loopPlot() {
 		std::cout << "Opening " << buffer << std::endl;
 		TFile* oneFile = TFile::Open(buffer);
 		TIter next(oneFile->GetListOfKeys());
-		TKey *key;
+		TKey *key;int index=0;
 		while ((key = (TKey*) next())) {
 			TClass *cl = gROOT->GetClass(key->GetClassName());
 			if (!cl->InheritsFrom("TH1"))
@@ -231,7 +233,11 @@ void loopPlot() {
 			TH1 *hTMP = (TH1*) key->ReadObj();
 			std::string hName = hTMP->GetName();
 			printf("Histogram found: %s\n", hName.c_str());
+			cout<<histName[index]<<endl;
+			cout<<hName.c_str()<<endl;
+//			listOfHistos.push_back(histName[index]);
 			listOfHistos.push_back(hName);
+			index++;
 		}      //end while loop
 		oneFile->Close();
 	}      //end if fmc size >0
@@ -254,11 +260,14 @@ void loopPlot() {
         fColorsMC.push_back(40);//VV
         fColorsMC.push_back(kYellow-7);//plj
         fColorsMC.push_back(kBlue-6);//ZA
-        fColorsMC.push_back(kRed-7);//EWK
+        fColorsMC.push_back(kRed-9);//EWK
 	fColorsMC.push_back(2);
 	fColorsMC.push_back(2);
+	fColorsMC.push_back(2);
+	fColorsMC.push_back(2);
+	fColorsMC.push_back(210);
 	std::vector<int> fColorsMCSig;
-	fColorsMCSig.push_back(kRed-7);
+	fColorsMCSig.push_back(kRed);
 	fColorsMCSig.push_back(kBlue + 3);
 
 	plotter->setFillColor(fColorsMC);
@@ -266,7 +275,7 @@ void loopPlot() {
 
 	int numOfHistos = listOfHistos.size();
 	for (int i = 0; i != numOfHistos; ++i)
-		plotter->makeStackPlots(listOfHistos.at(i));
+		plotter->makeStackPlots(listOfHistos.at(i),histName[i]);
 	printf("Plotting done\n");
 	delete plotter;
 }

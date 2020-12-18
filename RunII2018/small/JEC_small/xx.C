@@ -24,7 +24,11 @@ void xx::Loop(TString name)
    TH2F*HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
    TH2F*HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
    cout<<"open the ele hlt file"<<endl;
-
+   //photon id
+   TFile* ID_photon_file = TFile::Open("./SF/2018_PhotonsMedium.root");
+   TH2F* ID_photon=0;
+   ID_photon_file->GetObject("EGamma_SF2D", ID_photon);
+   cout<<"open the photon ID file: 2018_PhotonsMedium.root"<<endl;
    Long64_t nentries = fChain->GetEntriesFast();
    int cut0=0, cut1=0;
    bool LEPele,LEPmu,JET,PHOTON,SignalRegion,DR;
@@ -48,10 +52,13 @@ void xx::Loop(TString name)
               muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 
       if(drla==10) drla=-1; if(drla2==10) drla2=-1; if(drj1a==10) drj1a=-1;if(drj2a==10) drj2a=-1;
+      if(photonet>0){
+	      photon_id_scale=get_photon_ID(photoneta,photonet,ID_photon);
+      }
 
       LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
       LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 ;
-//      SignalRegion= Mjj>500 && deltaetajj>2.5;// && zepp<1.8;
+      //      SignalRegion= Mjj>500 && deltaetajj>2.5;// && zepp<1.8;
       PHOTON= photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) );
       JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7;
       DR =drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5;

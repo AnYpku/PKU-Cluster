@@ -6,7 +6,7 @@ vector<double> bin_Mjj={500,800,1200,2000};
 vector<double> bin_j1eta={-4.7,-3.7,-2.7,-1.7,0,1.7,2.7,3.7,4.7};
 vector<double> bin_j2eta={-4.7,-3.7,-2.7,-1.7,0,1.7,2.7,3.7,4.7};
 vector<double> bin_deta={2.5,4.5,6,6.5};
-vector<vector<double>> bins={bin_j1pt,bin_j2pt,bin_Mjj/*,bin_j1eta,bin_j2eta,bin_deta*/};
+vector<vector<double>> bins={/*bin_j1pt,bin_j2pt,bin_Mjj,*/bin_j1eta,bin_j2eta,bin_deta};
 void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool turn,TString var,vector<double>bins){
      TFile*file;  TTree*tree;
      file=new TFile(dir+"JESR_cutla-out"+sample+tag+".root");
@@ -19,8 +19,8 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double ptVlep, yVlep, phiVlep, massVlep;
      double photonet,photoneta,photone,photonphi;
      double zepp_new,zepp_JEC_up,zepp_JEC_down;
-     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight,puIdweight_T;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
+     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight,puIdweight_M;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele_hlt_scale,muon_hlt_scale;
      double actualWeight;int lep;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("scalef",&scalef);
@@ -64,6 +64,8 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("ptVlep",&ptVlep);
      tree->SetBranchAddress("yVlep",&yVlep);
      tree->SetBranchAddress("phiVlep",&phiVlep);
@@ -74,7 +76,6 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("photone",&photone);
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
-     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
      map<TString, double> variables;
      tree->SetBranchAddress(var+"_new", &variables[var+"_new"]);
      tree->SetBranchAddress(var+"_JEC_up", &variables[var+"_JEC_up"]);
@@ -114,9 +115,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if(tag.Contains("18"))  prefWeight=1;
              actualWeight=scalef*pileupWeight*prefWeight;
                      if(lep==11)
-                             actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale;
+                             actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
                      if(lep==13)
-                             actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale;
+                             actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
              if(k%20000==0)cout<<"actualWeight "<<actualWeight<<endl;
              if(variables[var+"_new"]>bins[bins.size()-1]) variables[var+"_new"]=bins[bins.size()-2]+1;
              if(variables[var+"_JEC_up"]>bins[bins.size()-1]) variables[var+"_JEC_up"]=bins[bins.size()-2]+1;
@@ -187,8 +188,8 @@ int Uncer_batch_bkg(){
                 cout<<tags[i]<<" "<<dir1[i]<<endl;
 //		cout<<Reco[0]<<endl;
 //		cout<<Reco[1]<<endl;
-		if(tags[i].Contains("17")==0) continue;
-		vector<TString> vars={"jet1pt","jet2pt","Mjj"/*,"jet1eta","jet2eta","deltaeta"*/};
+//		if(tags[i].Contains("17")==0) continue;
+		vector<TString> vars={/*"jet1pt","jet2pt","Mjj",*/"jet1eta","jet2eta","deltaeta"};
 		for(int k=0;k<vars.size();k++){
 			cout<<vars[k]<<" ";
 			for(int j=0;j<sample.size();j++){

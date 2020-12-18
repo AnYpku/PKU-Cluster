@@ -169,7 +169,7 @@ void fitf(float lowpt, float highpt){
 	    leg->SetFillColor(10);
             leg->SetTextSize(0.05);
 	    leg->AddEntry(result, "Fit result", "L");
-	    leg->AddEntry(mcp1, "Ture photons", "L");
+	    leg->AddEntry(mcp1, "True photons", "L");
 	    leg->AddEntry(mcp0, "Fake photons", "L");
 	    leg->Draw("same");
 

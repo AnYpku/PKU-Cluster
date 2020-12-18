@@ -33,11 +33,14 @@ int unroll_2d(){
 	TH2D*th2_7;TH1D*hist_7;
         TH2D*hist2_out;
         TH1D*hist_out;
+	TH2D*h2Gen;
+	TH1D*h1Gen;
 	vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
+//	vector<TString> sample={"ZA-EWK"};
 //	vector<TString> sample={"DMuon","DEle"};
 	for(int i=0;i<tag.size();i++){
-                if(tag[i].Contains("17")) continue;
+//                if(tag[i].Contains("17")==0) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			TFile*file=new TFile("hist_"+sample[j]+"_2d"+tag[i]+".root");
@@ -47,6 +50,8 @@ int unroll_2d(){
 				th2_7=merge_hist(file,"hist2d_6","hist2d_7","hist2d_8");
 				hist_7=unroll_hist(th2_7,"genMjj_6");
                                 hist2_out=(TH2D*)file->Get("hist_2d"+tag[i]);
+                                h2Gen=(TH2D*)file->Get("histGen_genMjj");
+				h1Gen = unroll_hist(h2Gen,"histGen_genMjj"); 
 				for(int k=0;k<6;k++){
 					th2[k]=(TH2D*)file->Get(Form("hist2d_%i",k));
 					hist[k]=unroll_hist(th2[k],Form("genMjj_%i",k));
@@ -62,6 +67,7 @@ int unroll_2d(){
 			}
 			if(sample[j].Contains("EWK")){
 				fout->cd(); 
+				h1Gen->Write();
 				hist_out->Write();
 				for(int k=0;k<6;k++){
 					hist[k]->Write();

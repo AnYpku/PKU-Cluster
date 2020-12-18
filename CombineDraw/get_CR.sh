@@ -1,0 +1,25 @@
+#!/bin/bash
+channel=("MuonBarrel" "MuonEndcap" "EleBarrel" "EleEndcap")
+year=("16" "17" "18")
+
+for (( j = 0 ; j < ${#channel[@]} ; j++ ))
+do
+   for (( i = 0 ; i < ${#year[@]} ; i++ ))
+   do
+   echo "${year[$i]}, ${channel[$j]}" 
+     cd /home/pku/anying/cms/PKU-Cluster/RunII20${year[$i]}/aa2/${channel[$j]}
+     rm EDBRHistoPlotter.h
+     cp /data/pku/home/anying/cms/PKU-Cluster/CombineDraw/EDBRHistoPlotter.h ./ 
+     g++ -o execute_name_a `root-config --cflags --glibs` loopPlot_a.C
+     ./execute_name_a
+
+#     cd /home/pku/anying/cms/PKU-Cluster/RunII20${year[$i]}/aa2/SR/${channel[$j]}
+#     rm loopPlot_a.C
+#     cp ../../${channel[$j]}/loopPlot_a.C ./
+#     rm EDBRHistoPlotter.h
+#     cp /data/pku/home/anying/cms/PKU-Cluster/CombineDraw/EDBRHistoPlotter.h ./ 
+#     g++ -o execute_name_a `root-config --cflags --glibs` loopPlot_a.C
+#     ./execute_name_a
+   done
+done
+

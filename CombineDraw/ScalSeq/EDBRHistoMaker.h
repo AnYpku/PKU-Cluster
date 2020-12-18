@@ -834,6 +834,10 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 		TString filename = fileTMP_->GetName();
 
                 if(filename.Contains("18")) prefWeight=1;
+                if(filename.Contains("17")==0){
+			puIdweight_M=1;
+			puIdweight_T=1;
+		}
 		actualWeight = pileupWeight * scalef * prefWeight*photon_id_scale*photon_veto_scale;
 		if(lep==13)
                         actualWeight = actualWeight *(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale);//mc

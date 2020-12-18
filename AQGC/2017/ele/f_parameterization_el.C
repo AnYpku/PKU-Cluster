@@ -21,7 +21,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 	const TString InData_New = "/home/pku/anying/cms/rootfiles/2017/cutla-";
 
 	// Specify event selection cuts:
-	TString cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+	TString cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) ) && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 	// Create output ROOT file:
 
 	TFile * fout;
@@ -51,6 +51,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 	cout<<"Nentry="<<numberOfEntries<<endl;
 	Double_t        pweight[703];
 	Double_t        prefWeight;
+	Double_t        puIdweight_M;
         Double_t        scalef;
         Double_t        pileupWeight;
         Double_t        jet1eta;
@@ -63,10 +64,12 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
         Double_t        ele2_id_scale;
         Double_t        ele1_reco_scale;
         Double_t        ele2_reco_scale;
+        Double_t        ele_hlt_scale;
         Double_t        photon_veto_scale;
 
 	treef->SetBranchAddress("pweight",pweight);
 	treef->SetBranchAddress("prefWeight",&prefWeight);
+	treef->SetBranchAddress("puIdweight_M",&puIdweight_M);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
         treef->SetBranchAddress("jet1eta", &jet1eta);
@@ -80,6 +83,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
         treef->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
         treef->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+        treef->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
 
 	//double ZGbin[6] = {150,250,350,400,600,2e4};
 //	double ZGbin[6] = {150,400,600,800, 1000, 2e4};
@@ -120,9 +124,11 @@ void fX0_parameterization_el(int index,vector<double>ZGbin){
 			if( ! formula->EvalInstance())
 				continue;
                         if(Mva>2e4) Mva=1999;
-			Double_t weight=pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*prefWeight;
-                        //cout<<pileupWeight <<" "<< scalef<<" "<<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "<<photon_id_scale<<" "<<photon_veto_scale<<" "<<prefWeight<<endl;
-			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<" weight "<<weight<<endl;
+			Double_t weight=pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*prefWeight*puIdweight_M*ele_hlt_scale;
+			if(count%100==0){
+				cout<<pileupWeight <<" "<< scalef<<" "<<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "<<photon_id_scale<<" "<<photon_veto_scale<<" "<<prefWeight<<" "<<puIdweight_M<<" "<<ele_hlt_scale<<endl;
+				cout<<"abin="<<abin<<" count="<<count<<" weight "<<weight<<endl;
+			}
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
 				rf[0]+=pweight[iii]*weight;
                                 rf[1]+=pweight[iii+1]*weight;

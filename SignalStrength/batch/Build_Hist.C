@@ -11,7 +11,7 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      cout<<tag<<" "<<name<<" "<<channel<<endl;
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      int lep;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
      double Mjj,jet1eta,jet2eta,scalef;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mjj",&Mjj);
@@ -124,31 +124,7 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
 		     }
 	     }
      }
-     //     if(name.Contains("EWK")){
-     //	     tree->Draw(var1+":"+var2+">>"+th2name,"("+cut1+"&&("+cut+"))*"+weight+"*"+lumi,"goff");
-     //	     tree->Draw(var1+":"+var2+">>"+th2name_out,"("+cut2+"&&("+cut+"))*"+weight+"*"+lumi,"goff");
-     //     }
-     //     else if(name.Contains("plj")){
-     //	     tree->Draw(var1+":"+var2+">>"+th2name,"("+cut1+"&&("+cut+"))*scalef*"+lumi,"goff");
-     //     }
-     //     else{
-     //	     tree->Draw(var1+":"+var2+">>"+th2name,"("+cut1+"&&("+cut+"))*"+weight+"*"+lumi,"goff");
-     //     }
      TFile*fout=new TFile("./root/hist_"+name+"_"+tag+channel+".root","recreate");
-     /*     int binx=hist->GetNbinsX();
-	    int biny=hist->GetNbinsY();
-	    for(int i=1;i<binx+1;i++){
-	    hist->SetBinContent(i,biny,hist->GetBinContent(i,biny)+hist->GetBinContent(i,biny+1));
-	    if(name.Contains("EWK"))
-	    hist_out->SetBinContent(i,biny,hist_out->GetBinContent(i,biny)+hist_out->GetBinContent(i,biny+1));
-	    }
-	    for(int j=1;j<biny+1;j++){
-	    hist->SetBinContent(binx,j,hist->GetBinContent(binx,j)+hist->GetBinContent(binx+1,j));
-	    if(name.Contains("EWK"))
-	    hist_out->SetBinContent(binx,j,hist_out->GetBinContent(binx,j)+hist_out->GetBinContent(binx+1,j));
-	    }
-	    hist->SetBinContent(binx,biny,hist->GetBinContent(binx,biny)+hist->GetBinContent(binx+1,biny+1));
-     //add overflow bin*/
      hist->Write();
      if(name.Contains("EWK"))
 	     hist_out->Write();
@@ -197,7 +173,7 @@ int Build_Hist(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-                if(tags[k].Contains("17")==0)continue;
+//                if(tags[k].Contains("17")==0)continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
 				if(names[j].Contains("EWK")){

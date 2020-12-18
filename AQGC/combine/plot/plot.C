@@ -168,6 +168,7 @@ void aa(string a, double limit){
 	fPad1->SetLogy();
         fPad1->SetTicky();
 	fPad1->SetGridx();
+	fPad1->SetBottomMargin(0.2);
 	//c01->SetLogx();
 
 
@@ -177,8 +178,10 @@ void aa(string a, double limit){
 	//     Mstack->Draw("EP same");
 	Mstack->GetXaxis()->SetTitle("m_{Z#gamma} [GeV] ");
 	Mstack->GetYaxis()->SetTitle("Events / bin");
-	Mstack->GetXaxis()->SetTitleSize(0.05);
-	Mstack->GetXaxis()->SetTitleOffset(1.05);
+	Mstack->GetXaxis()->SetLabelSize(0.05);
+	Mstack->GetXaxis()->SetLabelOffset(0.03);
+	Mstack->GetXaxis()->SetTitleSize(0.08);
+//	Mstack->GetXaxis()->SetTitleOffset(1.2);
 	Mstack->GetYaxis()->SetTitleSize(0.05);
 	Mstack->GetYaxis()->SetTitleOffset(1.0);
 	//Mstack->GetXaxis()->CenterTitle();
@@ -227,8 +230,8 @@ void aa(string a, double limit){
 
 
 
-	TLegend *l1 = new TLegend(0.4,0.6,0.6,0.88);
-	TLegend *l2 = new TLegend(0.6,0.6,0.85,0.85);
+	TLegend *l1 = new TLegend(0.4,0.7,0.6,0.88);
+	TLegend *l2 = new TLegend(0.6,0.7,0.85,0.85);
 	//l1->SetBorderSize(2);
 	l1->SetTextSize(0.04);
 	l1->SetFillColor(0);
@@ -277,7 +280,7 @@ void aa(string a, double limit){
 	char buffer3[256];
 	sprintf(buffer3, "ZG_%s.pdf",a.c_str());
 //	cmsLumi(1);
-	CMS_lumi(fPad1, 4, 0., "136.1");	
+	CMS_lumi(fPad1, 4, 0., "137.1");	
 
 	fPad1->Update();
 	c01->SaveAs(buffer3);

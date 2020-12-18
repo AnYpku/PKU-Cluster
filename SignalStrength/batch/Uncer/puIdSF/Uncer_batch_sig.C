@@ -2,7 +2,7 @@
 void run(TString cut1,TString sample,TString channel,TString type){
      Double_t Mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
-     TString dir="/home/pku/anying/cms/rootfiles/test/";     
+     TString dir="/home/pku/anying/cms/rootfiles/2017/";     
      TFile*file;
 //     if(sample.Contains("EWK"))
 //	     file=new TFile(dir+"unfold_GenCutla-"+sample+"17.root");
@@ -119,6 +119,7 @@ int Uncer_batch_sig(){
 
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	const int kk=channels.size();
 	TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
 	TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";

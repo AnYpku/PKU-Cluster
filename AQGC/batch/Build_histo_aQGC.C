@@ -13,7 +13,7 @@ void run(TString channel, TString tag, TString sample,TString cut,vector<double>
 	TString lumi;
 	if(tag.Contains("16"))lumi=Form("%f",35.86);
 	if(tag.Contains("17"))lumi=Form("%f",41.52);
-	if(tag.Contains("18"))lumi=Form("%f",58.7);
+	if(tag.Contains("18"))lumi=Form("%f",59.7);
         if(sample.Contains("plj")) lumi=Form("%f",1.0);
 	cout<<sample<<" "<<channel<<" "<<tag<<" "<< lumi;
 	tree->Draw("ZGmass>>"+hname,cut+"*actualWeight*"+lumi,"goff");
@@ -39,7 +39,7 @@ int Build_histo_aQGC(){
 	TString Reco;
 	for(int k=0;k<tag.size();k++){
 		if(tag[k].Contains("17")==1){
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";

@@ -697,7 +697,7 @@ public :
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString name);
 //   virtual void     modify_photon_jets();
-   virtual Double_t get_puIdweight(double ak4jet_eta[6],double ak4jet_phi[6],double genjet_eta[6],double genjet_phi[6],double ak4jet_pt[6],TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId[6]);
+   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
    virtual Double_t delta_R(Double_t eta1, Double_t phi1, Double_t eta2, Double_t phi2);
    virtual void     endJob();
    virtual Bool_t   Notify();

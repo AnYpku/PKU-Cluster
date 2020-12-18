@@ -24,12 +24,17 @@ void fit(float lowpt, float highpt){
 
 	hfake_->Add(hzaf_,-35.9);
 
-	Int_t nBins = 9;//18
-	Int_t sieie_bin=3;//6
-	Double_t bins[10];
-//	Double_t bins[10]={0.004,0.006,0.008,0.01015,0.012,0.014,0.016,0.018,0.02,0.022};
+//	Int_t nBins = 9;//18
+//	Int_t sieie_bin=3;//6
+//	Double_t bins[10];
+//	for (Int_t i=0;i<(nBins+1);i++){
+//		bins[i] = 0.00515 + 0.0025*2/3*i;
+//	}
+	Int_t nBins = 18;//18
+	Int_t sieie_bin=6;//6
+	Double_t bins[19];
 	for (Int_t i=0;i<(nBins+1);i++){
-		bins[i] = 0.00515 + 0.0025*2/3*i;
+		bins[i] = 0.00515 + 0.0025*2/3*i/2;
 	}
 
 	TH1* hdata = hdata_->Rebin(nBins, "hdata", bins);
@@ -183,8 +188,8 @@ void fit(float lowpt, float highpt){
         textFR->Draw();
 
     char buffer[256];
-//	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
-	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
+	sprintf(buffer, "./eps/18bins/pt%0.f-%0.f.pdf",lowpt,highpt);
+//	sprintf(buffer, "./eps/pt%0.f-%0.f.pdf",lowpt,highpt);
 	c1->Print(buffer);
 
 }

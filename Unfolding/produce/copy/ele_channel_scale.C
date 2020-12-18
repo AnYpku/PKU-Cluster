@@ -18,6 +18,7 @@ double get_ele_Reco(double etalep, double ptlep, TH2F* Reco){
 
 double get_photon_ID(double photoneta, double photonet, TH2F* ID_photon){
 	double photon_ID_scale=-1;
+	if(photonet>500) photonet=499;
 	photon_ID_scale=ID_photon->GetBinContent(ID_photon->FindBin(photoneta,photonet));
 
 	return photon_ID_scale;
@@ -26,12 +27,14 @@ double get_eleHLT_SF(double etalep1, double ptlep1,double etalep2,double ptlep2,
         if(ptlep1>500) ptlep1=499.;
         if(ptlep2>500) ptlep2=499.;
 
-        double lep_HLT_scale=-1;
+        double lep_HLT_scale=1;
         double lep_HLT_scale_MC=MC1->GetBinContent(MC1->FindBin(etalep1,ptlep1))*MC2->GetBinContent(MC2->FindBin(etalep2,ptlep2))+MC1->GetBinContent(MC1->FindBin(etalep2,ptlep2))*MC2->GetBinContent(MC2->FindBin(etalep1,ptlep1))-MC1->GetBinContent(MC1->FindBin(etalep1,ptlep1))*MC1->GetBinContent(MC1->FindBin(etalep2,ptlep2));
 
 	double lep_HLT_scale_Data=MC1->GetBinContent(MC1->FindBin(etalep1,ptlep1))*SF1->GetBinContent(SF1->FindBin(etalep1,ptlep1))*MC2->GetBinContent(MC2->FindBin(etalep2,ptlep2))*SF2->GetBinContent(SF2->FindBin(etalep2,ptlep2))+MC1->GetBinContent(MC1->FindBin(etalep2,ptlep2))*SF1->GetBinContent(SF1->FindBin(etalep2,ptlep2))*MC2->GetBinContent(MC2->FindBin(etalep1,ptlep1))*SF2->GetBinContent(SF2->FindBin(etalep1,ptlep1))-MC1->GetBinContent(MC1->FindBin(etalep1,ptlep1))*SF1->GetBinContent(SF1->FindBin(etalep1,ptlep1))*MC1->GetBinContent(MC1->FindBin(etalep2,ptlep2))*SF1->GetBinContent(SF1->FindBin(etalep2,ptlep2));
 
-        lep_HLT_scale=lep_HLT_scale_Data/lep_HLT_scale_MC;
+        if(ptlep1>25 && fabs(etalep1)<2.5 && ptlep2>25 && fabs(etalep2)<2.5)
+		lep_HLT_scale=lep_HLT_scale_Data/lep_HLT_scale_MC;
+	else    lep_HLT_scale=1;
 
         return lep_HLT_scale;
 }

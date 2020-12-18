@@ -54,6 +54,7 @@ void fX0_parameterization_elehist(int index){
 	Double_t        photoneta,photonet,massVlep;  
 	Double_t        pweight[703];
 	Double_t        prefWeight;
+	Double_t        ele_hlt_scale;
 	Double_t	jet1eta,jet1pt,etalep1,ptlep1;
 	Double_t	jet2eta,jet2pt,etalep2,ptlep2;
 	Double_t        photon_id_scale;
@@ -102,6 +103,7 @@ void fX0_parameterization_elehist(int index){
         treef->SetBranchAddress("ele2_id_scale", &ele2_id_scale);
         treef->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
         treef->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+        treef->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
         treef->SetBranchAddress("scalef", &scalef);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
 
@@ -146,7 +148,7 @@ void fX0_parameterization_elehist(int index){
 			if( !(lep == 11 && (HLT_Ele2 >0 || HLT_Ele1 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(  (abs(photoneta)<1.4442)  || (abs(photoneta)>1.566&&abs(photoneta)<2.5)  )   )  )
                         continue;
 			if(Mva>2e4) Mva=1999;
-			Double_t weight=pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale;
+			Double_t weight=pileupWeight * scalef*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
 //                        cout<<"scalef"<<scalef<<"; weight"<<weight<<endl;
 //			if(count%100==0)  cout<<"abin="<<abin<<" count="<<count<<endl;
 			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){

@@ -8,6 +8,7 @@
 #include "THStack.h"
 #include "CMSTDRStyle.h"
 #include "CMS_lumi.C"
+
 using namespace std;
 void cmsLumi(TString tag); 
 TH1D* unroll(TH2D* th2_in,Double_t* xbin, Double_t* ybin,  Int_t xbins_in, Int_t ybins_in,char *hname);
@@ -28,7 +29,7 @@ void cmsLumi(TString tag)
         if(tag.Contains("17"))
                 latex.DrawLatex(0.76,0.92,Form("41.52 fb^{-1} (%d TeV)", (beamcomenergytev)));
         if(tag.Contains("18"))
-                latex.DrawLatex(0.76,0.92,Form("58.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
+                latex.DrawLatex(0.76,0.92,Form("59.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 
 void unroll_name(TString sample,TString tag,int num){
@@ -44,7 +45,7 @@ void unroll_name(TString sample,TString tag,int num){
 	gStyle->SetNdivisions(510, "XYZ");
 
 	TFile* fout = new TFile("aa_"+sample+"_"+tag+".root","RECREATE");
-	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
 
 	TFile* file=TFile::Open("./hist_"+sample+"_scale"+tag+".root");
 	TH1D* t_ZA[num];TH1D* th1_ZA[num];
@@ -90,7 +91,7 @@ void unroll_name(TString sample,TString tag,int num){
 	TLegend *l2 = new TLegend(0.7,0.5,0.9,0.9);
 	fPads1->SetBottomMargin(0);
         fPads2->SetTopMargin(0);
-        fPads2->SetBottomMargin(0.3);
+        fPads2->SetBottomMargin(0.5);
         fPads1->Draw();
         fPads2->Draw();
         fPads1->cd();
@@ -101,14 +102,7 @@ void unroll_name(TString sample,TString tag,int num){
 	t_ZA[0]->SetLineColor(2);
 	t_ZA[0]->GetYaxis()->SetRangeUser(0,t_ZA[0]->GetMaximum()*2);
 	t_ZA[0]->Draw("HIST");
-        t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-        t_ZA[0]->GetXaxis()->SetLabelSize(0.1);
-        t_ZA[0]->GetYaxis()->SetLabelSize(0.07);
-        t_ZA[0]->GetXaxis()->SetTitleSize(0.1);
-        t_ZA[0]->GetXaxis()->SetTitleFont(12);
-	t_ZA[0]->GetXaxis()->SetTitle("mjj(GeV)");
-	t_ZA[0]->GetXaxis()->SetTitleSize(0.065);
-	t_ZA[0]->GetXaxis()->SetTitleFont(12);
+        t_ZA[0]->GetYaxis()->SetLabelSize(0.1);
 	l2->AddEntry(t_ZA[0]," central scale ");
 	cout<<"Draw comparison"<<endl;
 	for(Int_t i=1;i<p;i++){
@@ -137,7 +131,12 @@ void unroll_name(TString sample,TString tag,int num){
         vline1->Draw();
         vline2->Draw();
 
-	cmsLumi(tag);
+//	cmsLumi(tag);
+	string lumivalue;
+	if(tag.Contains("16")) lumivalue="35.86";
+	if(tag.Contains("17")) lumivalue="41.52";
+	if(tag.Contains("18")) lumivalue="59.7";
+	CMS_lumi(fPads1, 4, 0, lumivalue);
 	l2->SetTextSize(0.05);
 	l2->Draw();
         fPads1->Update();
@@ -149,7 +148,13 @@ void unroll_name(TString sample,TString tag,int num){
         nominal->SetFillStyle(3001);
         nominal->SetFillColor(16);
 	nominal->SetMarkerStyle(20);
-	nominal->GetYaxis()->SetLabelSize(0.1);
+	nominal->GetYaxis()->SetLabelSize(0.15);
+        nominal->GetYaxis()->SetNdivisions(404);
+        nominal->GetXaxis()->SetTitle("mjj [GeV]");
+        nominal->GetXaxis()->SetLabelSize(0.15);
+	nominal->GetXaxis()->SetLabelOffset(0.03);
+        nominal->GetXaxis()->SetTitleFont(12);
+	nominal->GetXaxis()->SetTitleSize(0.2);
         TH1D*h_up[num];
 	int m=1;
 	cout<<"hist0 "<<nominal->GetBinContent(1)<<endl;

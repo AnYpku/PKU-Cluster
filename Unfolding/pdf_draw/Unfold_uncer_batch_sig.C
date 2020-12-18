@@ -45,8 +45,15 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
 			     for(int j=0;j<kk;j++){
 				     if(vec_branchname[j].Contains("Mjj")==0)
 					     th1[p][j]->Fill(variables[vec_branchname[j]],actualWeight[p]);
-				     else
-					     th2[p][j]->Fill(variables[vec_branchname[j]],gendetajj,actualWeight[p]);
+				     else{
+					     if(variables[vec_branchname[j]]<2000&&gendetajj<6.5)
+						     th2[p][j]->Fill(variables[vec_branchname[j]],gendetajj,actualWeight[p]);
+					     else if(variables[vec_branchname[j]]>2000&&gendetajj<6.5)
+						     th2[p][j]->Fill(1999,gendetajj,actualWeight[p]);
+					     else if(variables[vec_branchname[j]]<2000&&gendetajj>6.5)
+						     th2[p][j]->Fill(variables[vec_branchname[j]],6.1,actualWeight[p]);
+					     else th2[p][j]->Fill(1999,6.1,actualWeight[p]);
+				     }
 			     }
 			     p++;
 		     }

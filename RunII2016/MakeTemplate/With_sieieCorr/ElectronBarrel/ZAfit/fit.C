@@ -98,7 +98,7 @@ void fit(float lowpt, float highpt){
 	leg->SetFillColor(10);
 	leg->SetTextSize(0.05);
 	leg->AddEntry(hdata, "Fit result", "L");
-	leg->AddEntry(htrue, "Ture photons", "L");
+	leg->AddEntry(htrue, "True photons", "L");
 	leg->AddEntry(hfake, "Fake photons", "L");
 	leg->Draw("same");
 

@@ -8,14 +8,17 @@ void run(TString var, TString recovar,TString title,TString tag){
         if(tag.Contains("16")){
           num16=299991;num17=0;num18=0;
           xs16=109.7;xs17=0;xs18=0;
+	  num16=884668;
 	}
         if(tag.Contains("17")){
           num16=0;num17=299973;num18=0;
           xs16=0;xs17=114.3,xs18=0;
+	  num17=799717;
 	}
         if(tag.Contains("18")){
           num16=0;num17=0;num18=287399;
           xs16=0;xs17=0;xs18=114.3;
+	  num18=879399;
 	}
         if(num16==0&&num17==0&&num18==0)cout<<"error, exit!"<<endl;
 	TFile*file1=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf"+tag+".root");
@@ -39,10 +42,10 @@ void run(TString var, TString recovar,TString title,TString tag){
 	double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
         ifstream f_in;
-	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt");  
+	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt");  
         ifstream f_sys;
 	f_sys.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
-        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt"<<endl;
+        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt"<<endl;
         if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 	for(int i=0;i<hist_clone->GetNbinsX();i++){
                 f_in>>Err_down[i]>>Err_up[i];
@@ -104,7 +107,7 @@ void run(TString var, TString recovar,TString title,TString tag){
 	TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.3);
 	fPads1->SetBottomMargin(0);
 	fPads2->SetTopMargin(0);
-	fPads2->SetBottomMargin(0.3);
+	fPads2->SetBottomMargin(0.5);
 	fPads2->Draw();
 	fPads1->Draw();
 
@@ -117,7 +120,7 @@ void run(TString var, TString recovar,TString title,TString tag){
         if(var.Contains("Mjj")==0)
 		h1[0]->GetYaxis()->SetTitle("d#sigma/dp_{T} [fb/GeV]");
 	else 
-		h1[0]->GetYaxis()->SetTitle("d#sigma/dm [fb/GeV]");
+		h1[0]->GetYaxis()->SetTitle("#sigma_{fid} [fb]");
 	h1[0]->GetYaxis()->SetTitleOffset(0.45);
 	h1[0]->GetYaxis()->SetTitleSize(0.10);
 //        cout<<"minimum "<<h1[0]->GetMinimum()<<endl; 
@@ -152,11 +155,11 @@ void run(TString var, TString recovar,TString title,TString tag){
                 h1[0]->SetBinContent(j,h1[0]->GetBinContent(j)/h1[0]->GetBinWidth(j));
                 h1[0]->SetBinError(j,sqrt(err2Up)/h1[0]->GetBinWidth(j));
 	}
-        h1[0]->GetYaxis()->SetLabelSize(0.07);
+        h1[0]->GetYaxis()->SetLabelSize(0.05);
         h1[0]->SetMarkerSize(0);
 	h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*35);
         const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
-        for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}
+        if(var.Contains("Mjj")==1) {for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}}
 	h1[0]->Draw("E2");
 	hist_clone->SetMarkerStyle(20);
 	hist_clone->SetMarkerColor(1);
@@ -197,14 +200,16 @@ void run(TString var, TString recovar,TString title,TString tag){
         vline2->SetLineStyle(2);
         vline1->SetLineWidth(2);
         vline2->SetLineWidth(2);
-        vline1->Draw();
-        vline2->Draw();
+	if(var.Contains("Mjj")){
+		cmsLumi(0,tag,max);
+		vline1->Draw();
+		vline2->Draw();
+	}
 	l1->Draw();
-	cmsLumi(0,tag,max);
 	string lumi;
 	if(tag.Contains("16"))  lumi="35.86";
 	if(tag.Contains("17"))  lumi="41.52";
-	if(tag.Contains("18"))  lumi="58.7";
+	if(tag.Contains("18"))  lumi="59.7";
         CMS_lumi(fPads1, 4,0, lumi);
 	fPads1->Update();
 	fPads2->cd();
@@ -227,16 +232,17 @@ void run(TString var, TString recovar,TString title,TString tag){
 	nominal->SetLineColor(kRed-7);
 	const int m=upper->GetNbinsX();
 	nominal->SetTitle("");
-	nominal->GetXaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetTitleSize(0.15);
-	nominal->GetXaxis()->SetTitleOffset(0.8);
-	nominal->GetXaxis()->SetTitleFont(32);
-	nominal->GetXaxis()->SetTitle(title);
-	nominal->GetYaxis()->SetTitle("Ratio to MadGraph");
-	nominal->GetYaxis()->SetTitleOffset(0.45);
-	nominal->GetYaxis()->SetTitleFont(32);
-	nominal->GetYaxis()->SetTitleSize(0.08);
-	nominal->GetYaxis()->SetLabelSize(0.07);
+        nominal->GetXaxis()->SetLabelSize(0.1);
+        nominal->GetXaxis()->SetLabelOffset(0.03);
+        nominal->GetXaxis()->SetTitleSize(0.18);
+        nominal->GetXaxis()->SetTitleOffset(1.2);
+        nominal->GetXaxis()->SetTitleFont(22);
+        nominal->GetXaxis()->SetTitle(title+" [GeV]");
+        nominal->GetYaxis()->SetTitle("Ratio to MG");
+        nominal->GetYaxis()->SetNdivisions(404);
+        nominal->GetYaxis()->SetTitleOffset(0.4);
+        nominal->GetYaxis()->SetTitleSize(0.1);
+        nominal->GetYaxis()->SetLabelSize(0.1);
 	TLine*line=new TLine(nominal->GetXaxis()->GetXmin(),1,nominal->GetXaxis()->GetXmax(),1);
 	TLine*line1=new TLine(nominal->GetXaxis()->GetXmin(),1.5,nominal->GetXaxis()->GetXmax(),1.5);
 	TLine*line2=new TLine(nominal->GetXaxis()->GetXmin(),0.5,nominal->GetXaxis()->GetXmax(),0.5);
@@ -297,12 +303,12 @@ void run(TString var, TString recovar,TString title,TString tag){
 }
 int Draw_df(){
 	gStyle->SetOptStat(0);
-//	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}","m_{Z#gamma}"};
-	vector<TString> title={"M_{jj}"};
-//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-//	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
-        vector<TString> genvars={"genMjj"};
-	vector<TString> recovars={"Mjj"};
+	vector<TString> title={"p_{T}^{l_{1}}","p_{T}^{#gamma}","p_{T}^{j_{1}}"};
+	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt"};
+//	vector<TString> title={"M_{jj}"};
+//        vector<TString> genvars={"genMjj"};
+//	vector<TString> recovars={"Mjj"};
 //        run("genMjj","Mjj","M_{jj}","16");
 	for(int i=0;i<genvars.size();i++){
 		run(genvars[i],recovars[i],title[i],"16");
@@ -317,8 +323,8 @@ void cmsLumi(bool channel,TString tag,double max)
 	TLatex latex;
 	latex.SetNDC();
 	latex.SetLineWidth(2);
-	float lumiel=136.1;
-	float lumimu=136.1;
+	float lumiel=137.1;
+	float lumimu=137.1;
 	int beamcomenergytev=13;
 	latex.SetTextAlign(31);
 	latex.SetTextAlign(11);

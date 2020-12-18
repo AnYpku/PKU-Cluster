@@ -116,7 +116,7 @@ TFile* fdata = TFile::Open(dir1 + "histo_Pdata"+tag+"_"+channel+".root");
 	leg->SetTextSize(0.05);
 	leg->SetFillColor(10);
 	leg->AddEntry(hdata, "Fit result", "L");
-	leg->AddEntry(htrue, "Ture photons", "L");
+	leg->AddEntry(htrue, "True photons", "L");
 	leg->AddEntry(hfake, "Fake photons", "L");
 	leg->AddEntry(hist, "mc truth of fake #gamma", "L");
 	leg->AddEntry(hist1, "mc truth of true #gamma", "L");

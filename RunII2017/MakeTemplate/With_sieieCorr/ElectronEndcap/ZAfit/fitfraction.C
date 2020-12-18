@@ -168,7 +168,7 @@ void fitf(float lowpt, float highpt){
 	    TLegend *leg = new TLegend(0.7, 0.8, 0.88, 0.88, NULL, "brNDC");
 	    leg->SetFillColor(10);
 	    leg->AddEntry(hdata, "Fit result", "L");
-	    leg->AddEntry(mcp1, "Ture photons", "L");
+	    leg->AddEntry(mcp1, "True photons", "L");
 	    leg->AddEntry(mcp0, "Fake photons", "L");
 	    leg->Draw("same");
 

@@ -38,7 +38,7 @@ int unroll_2d(){
 	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")) continue;
+//		if(tag[i].Contains("17")==0) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			for(int ik=0;ik<channels.size();ik++){

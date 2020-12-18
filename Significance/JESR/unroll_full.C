@@ -19,7 +19,7 @@ void cmsLumi(bool channel,TString tag)
         float lumi;
         if(tag.Contains("16")) lumi=35.9;
         if(tag.Contains("17")) lumi=41.5;
-        if(tag.Contains("18")) lumi=58.7;
+        if(tag.Contains("18")) lumi=59.7;
         int beamcomenergytev=13;
         latex.SetTextAlign(31); 
         latex.SetTextAlign(11);
@@ -80,7 +80,7 @@ void unroll_run(TString channel,TString tag,TString var,TString title){
         TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.3);
         fPads1->SetBottomMargin(0);
         fPads2->SetTopMargin(0);
-        fPads2->SetBottomMargin(0.3);
+        fPads2->SetBottomMargin(0.5);
         fPads1->Draw();
         fPads2->Draw();
         fPads1->SetGridx();
@@ -104,7 +104,12 @@ void unroll_run(TString channel,TString tag,TString var,TString title){
 	leg->SetTextSize(0.07);
 	leg->Draw();
 	
-	cmsLumi(0,tag);
+//	cmsLumi(0,tag);
+        string lumivalue;
+        if(tag.Contains("16")) lumivalue="35.86";
+        if(tag.Contains("17")) lumivalue="41.52";
+        if(tag.Contains("18")) lumivalue="59.7";
+        CMS_lumi(fPads1, 4, 0, lumivalue);
         fPads1->Update();
         fPads2->cd();
         TH1D*nominal=(TH1D*)th2_ZA1->Clone("nominal");
@@ -129,9 +134,11 @@ void unroll_run(TString channel,TString tag,TString var,TString title){
         cout<<ymin<<" "<<ymax<<endl;
         nominal->SetLineColor(2);
         nominal->SetTitle(";"+title+";;");
-        nominal->GetYaxis()->SetLabelSize(0.1);
-        nominal->GetXaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetTitleSize(0.1);
+        nominal->GetYaxis()->SetLabelSize(0.15);
+        nominal->GetYaxis()->SetNdivisions(404);
+        nominal->GetXaxis()->SetLabelSize(0.15);
+        nominal->GetXaxis()->SetTitleFont(12);
+        nominal->GetXaxis()->SetTitleSize(0.2);
         nominal->Draw("EP");
         nominal->SetMarkerStyle(20);
 //        h_up->SetMarkerStyle(20);
@@ -149,11 +156,11 @@ void unroll_run(TString channel,TString tag,TString var,TString title){
 	c1->SaveAs("./figs/aa_"+channel+"_"+var+"_"+tag+".pdf");
 }
 int unroll_full(){
-//       vector<TString> tags={"16","17","18"};
-       vector<TString> tags={"17"};
+       vector<TString> tags={"16","17","18"};
+//       vector<TString> tags={"17"};
        vector<TString> channels={"ZA","ZA-EWK"};
        vector<TString> vars={"jet1pt","jet2pt","Mjj","jet1eta","jet2eta","deltaeta"};
-       vector<TString>  title={"jet1pt","jet2pt","Mjj","jet1eta","jet2eta","#Delta#eta_{jj}"};
+       vector<TString>  title={"p_{T}^{j1} [GeV]","p_{T}^{j2} [GeV]","m_{jj} [GeV]","#eta_{j1}","#eta_{j2}","#Delta#eta_{jj}"};
        for(int i=0;i<channels.size();i++){
 	       for(int j=0;j<tags.size();j++){
 		       for(int k=0;k<vars.size();k++){

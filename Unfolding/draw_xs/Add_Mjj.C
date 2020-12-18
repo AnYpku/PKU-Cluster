@@ -4,7 +4,7 @@
 void cmsLumi(bool channel);
 void run(TString var, TString recovar, TString title,TString tag){
         double xs16=109.7,xs17=114.3,xs18=114.3;//cross section [fb] for 2016/2017/2018 EW sample 
-        int num16=299991,num17=299973,num18=287399;//the number of events for 2016/2017/2018 EW process
+        int num16=884668,num17=799717,num18=879399;//the number of events for 2016/2017/2018 EW process
 	TFile*file1=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf16.root");
 	TFile*file2=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf17.root");
 	TFile*file3=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf18.root");
@@ -29,14 +29,19 @@ void run(TString var, TString recovar, TString title,TString tag){
 	}
         const int kk=h1[0]->GetNbinsX();
 	TH1D*hist_clone=(TH1D*)h1[0]->Clone();
+        double BinWidth[7];
+        double binwidth[7]={300,400,800,300,400,800,1500};
+        for(int i=0;i<kk;i++){
+                BinWidth[i]=binwidth[i];
+        }
         hist_clone->SetBinContent(kk,hist_clone->GetBinContent(kk)+hist_clone->GetBinContent(kk+1));
         hist_clone->SetBinError(kk,sqrt(pow(hist_clone->GetBinError(kk),2)+pow(hist_clone->GetBinError(kk+1),2)));//add overflow bin
         double xbin[kk],ybin[kk],xerror_up[kk],xerror_down[kk],yerror_up[kk],yerror_down[kk];
         double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
-        ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt");
+        ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt");
         ifstream f_sys("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");
-        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt"<<endl;
+        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt"<<endl;
         if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 
 	for(int i=0;i<hist_clone->GetNbinsX();i++){
@@ -46,20 +51,20 @@ void run(TString var, TString recovar, TString title,TString tag){
                 xerror_up[i]=0.5*hist_clone->GetBinWidth(i+1);
                 xerror_down[i]=0.5*hist_clone->GetBinWidth(i+1);
                 yerror_up[i]=Err_up[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3;
-                yerror_up[i]=yerror_up[i]/hist_clone->GetBinWidth(i+1);
+                yerror_up[i]=yerror_up[i]/BinWidth[i];
                 yerror_down[i]=Err_down[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3;
-                yerror_down[i]=yerror_down[i]/hist_clone->GetBinWidth(i+1);
+                yerror_down[i]=yerror_down[i]/BinWidth[i];
                 xerror_sysUp[i]=0;
                 xerror_sysDown[i]=0;
                 yerror_sysUp[i]=Err_sysUp[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3;
-		yerror_sysUp[i]=yerror_sysUp[i]/hist_clone->GetBinWidth(i+1);
+		yerror_sysUp[i]=yerror_sysUp[i]/BinWidth[i];
                 yerror_sysDown[i]=Err_sysDown[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3;
-                yerror_sysDown[i]=yerror_sysDown[i]/hist_clone->GetBinWidth(i+1);
+                yerror_sysDown[i]=yerror_sysDown[i]/BinWidth[i];
 		hist_clone->SetBinError(i+1,Err_up[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3);//handle the bin error
                cout<<"bin"<<i+1<<"; number of events "<<hist_clone->GetBinContent(i+1)<<"; nnumber of events processed "<<(num16+num17+num18)<<"; cross section "<<(xs16+xs17+xs18)/3<<"; normalization "<<hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3<<endl;
                 hist_clone->SetBinContent(i+1,hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)/3);
 		ybin[i]=hist_clone->GetBinContent(i+1);
-                ybin[i]=ybin[i]/hist_clone->GetBinWidth(i+1);
+                ybin[i]=ybin[i]/BinWidth[i];
                 cout<<xbin[i]<<" "<<ybin[i]<<" "<<yerror_up[i]<<" "<< yerror_down[i]<<endl; 
 	}// expected 
         cout<<"before scale "<<h1[0]->GetBinContent(1)<<" "<<h1[0]->GetBinError(1)<<endl;
@@ -97,14 +102,13 @@ void run(TString var, TString recovar, TString title,TString tag){
         TGraphAsymmErrors* gr_sys = new TGraphAsymmErrors(kk, xbin, ybin, xerror_sysDown,xerror_sysUp, yerror_sysDown, yerror_sysUp);
 	TCanvas*c1=new TCanvas("c0","reco && gen",800,600);
 	c1->cd();
-	TPad*    fPads1 = new TPad("pad1", "", 0.00, 0.4, 0.99, 0.99);
-	TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.4);
+	TPad*    fPads1 = new TPad("pad1", "", 0.00, 0.3, 0.99, 0.99);
+	TPad*    fPads2 = new TPad("pad2", "", 0.00, 0.00, 0.99, 0.3);
 	fPads1->SetBottomMargin(0);
 	fPads2->SetTopMargin(0);
-	fPads2->SetBottomMargin(0.3);
+	fPads2->SetBottomMargin(0.5);
 	fPads2->Draw();
 	fPads1->Draw();
-	CMS_lumi(fPads1, 4, 0, "136.1");
 	fPads1->cd();
         fPads1->SetTicky();
         fPads1->SetTickx();
@@ -144,14 +148,15 @@ void run(TString var, TString recovar, TString title,TString tag){
 		//	      cout<<nominal->GetBinContent(j)<<endl;
 		upper->SetBinContent(j,n+sqrt(err2Up));
 		lower->SetBinContent(j,n-sqrt(err2Dn));
-		h1[0]->SetBinContent(j,h1[0]->GetBinContent(j)/h1[0]->GetBinWidth(j));
-                h1[0]->SetBinError(j,sqrt(err2Up)/h1[0]->GetBinWidth(j));
+		h1[0]->SetBinContent(j,h1[0]->GetBinContent(j)/BinWidth[j-1]);
+                h1[0]->SetBinError(j,sqrt(err2Up)/BinWidth[j-1]);
 	}
         h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*35);
         h1[0]->GetYaxis()->SetLabelSize(0.05);
         h1[0]->SetMarkerSize(0);
-	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
-        for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}
+//	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
+	const char *name[7]={"0.5~0.8","8~1.2","1.2~2","0.5~0.8","8~1.2","1.2~2","0.5~2"};
+        if(var.Contains("Mjj")==1) {for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}}
 	h1[0]->Draw("E2");
 	hist_clone->SetMarkerStyle(20);
 	hist_clone->SetMarkerColor(1);
@@ -190,14 +195,15 @@ void run(TString var, TString recovar, TString title,TString tag){
         vline2->Draw();
 	l1->Draw();
 
+        CMS_lumi(fPads1, 4,0, "137.1");
         TLatex latex;
         latex.SetTextSize(0.065);
         latex.SetLineWidth(2);
-        latex.DrawLatex(1.4,0.2,"2.5<#Delta#eta_{jj}<4.5");
-        latex.DrawLatex(4.2,0.13,"4.5<#Delta#eta_{jj}<6");
-        latex.DrawLatex(6.1,0.48,"#Delta#eta_{jj}>6");
+        latex.DrawLatex(1.2,0.00015,"2.5<#Delta#eta_{jj}<4.5");
+        latex.DrawLatex(4.2,0.00015,"4.5<#Delta#eta_{jj}<6");
+        latex.DrawLatex(6.1,0.0013,"#Delta#eta_{jj}>6");
+
 //	cmsLumi(0);
-        CMS_lumi(fPads1, 4,0, "137.1");
 	fPads1->Update();
 	fPads2->cd();
 //        fPads2->SetGridy();
@@ -221,16 +227,18 @@ void run(TString var, TString recovar, TString title,TString tag){
         cout<<nominal->GetBinError(1)<<" "<<nominal->GetBinError(kk)<<endl; 
 	nominal->GetYaxis()->SetRangeUser(-0.5,2);
 	nominal->SetTitle("");
-	nominal->GetXaxis()->SetLabelSize(0.1);
-	nominal->GetXaxis()->SetTitleSize(0.15);
-        nominal->GetXaxis()->SetTitleOffset(0.8);
-        nominal->GetXaxis()->SetTitleFont(32);
-	nominal->GetXaxis()->SetTitle(title);
-	nominal->GetYaxis()->SetTitle("Ratio to MadGraph");
-        nominal->GetYaxis()->SetTitleFont(32);
-	nominal->GetYaxis()->SetTitleOffset(0.45);
-	nominal->GetYaxis()->SetTitleSize(0.08);
-	nominal->GetYaxis()->SetLabelSize(0.07);
+	nominal->GetXaxis()->SetLabelSize(0.2);
+	nominal->GetXaxis()->SetTitleSize(0.2);
+        nominal->GetXaxis()->SetLabelOffset(0.03);
+        nominal->GetXaxis()->SetTitleOffset(1);
+        nominal->GetXaxis()->SetTitleFont(22);
+	nominal->GetXaxis()->SetTitle(title+" [TeV]");
+	nominal->GetYaxis()->SetTitle("Ratio to MG");
+//        nominal->GetYaxis()->SetTitleFont(22);
+        nominal->GetYaxis()->SetNdivisions(404);
+	nominal->GetYaxis()->SetTitleOffset(0.25);
+	nominal->GetYaxis()->SetTitleSize(0.13);
+	nominal->GetYaxis()->SetLabelSize(0.13);
 	TLine*line=new TLine(nominal->GetXaxis()->GetXmin(),1,nominal->GetXaxis()->GetXmax(),1);
         TLine*line1=new TLine(nominal->GetXaxis()->GetXmin(),1.5,nominal->GetXaxis()->GetXmax(),1.5);
         TLine*line2=new TLine(nominal->GetXaxis()->GetXmin(),0.5,nominal->GetXaxis()->GetXmax(),0.5);
@@ -276,14 +284,14 @@ void run(TString var, TString recovar, TString title,TString tag){
 
 
 }
-int Add_df(){
+int Add_Mjj(){
 	gStyle->SetOptStat(0);
 //	vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}","m_{Z#gamma}"};
 //	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
  //      vector<TString> recovars={"ptlep1","photonet","jet1pt"};
         vector<TString> genvars={"genMjj"};
         vector<TString> recovars={"Mjj"};
-        vector<TString> title={"M_{jj}"};
+        vector<TString> title={"m_{jj}"};
 	for(int i=0;i<genvars.size();i++){
 		run(genvars[i],recovars[i],title[i],"full");
 	}
@@ -296,13 +304,13 @@ void cmsLumi(bool channel)
 	latex.SetNDC();
 	latex.SetTextSize(0.05);
 	latex.SetLineWidth(2);
-	float lumiel=136.1;
-	float lumimu=136.1;
+	float lumiel=137.1;
+	float lumimu=137.1;
 	int beamcomenergytev=13;
 	latex.SetTextAlign(31);
 	latex.SetTextAlign(11);
-	latex.DrawLatex(0.18,0.82,"Preliminary");
+	latex.DrawLatex(0.18,0.85,"Preliminary");
 	latex.DrawLatex(0.18,0.86,"CMS");
 	latex.SetTextSize(0.045);
-	latex.DrawLatex(0.76,0.92,Form("136.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
+	latex.DrawLatex(0.76,0.92,Form("137.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }

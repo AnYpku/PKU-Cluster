@@ -1,10 +1,14 @@
 void run(TString channel,TString tag){
 	ofstream f1("./l1pref_uncer_"+channel+"_"+tag+".txt");
 	TFile* file = new TFile("./hist_ewk_pref_"+tag+channel+".root");
+	TFile* file1 = new TFile("../hist_ewk_pref_"+tag+channel+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
-
+	TH1D* hh1 = (TH1D*)file1->Get("hist_0");
+	TH1D* hh2 = (TH1D*)file1->Get("hist_1");
+	TH1D* hh3 = (TH1D*)file1->Get("hist_2");
+        h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
 /*	
 	ofstream f1("./Uncertainty_2.txt");
  	TFile* file = new TFile("./output.root");

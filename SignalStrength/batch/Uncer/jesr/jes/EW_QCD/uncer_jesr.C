@@ -2,9 +2,13 @@ void run(TString sample,TString tag){
         fstream ftxt("./jes_uncer"+tag+".txt", ios::app );
 	ofstream f1("./"+sample+"_jes_uncer"+tag+".txt");
 	TFile*file;TFile*file1;
-	if(sample.Contains("ZA")){
-		file = new TFile("../hist_ZA_jes"+tag+".root");
+	if(sample.Contains("ZA")&&sample.Contains("out")==0){
+		file = new TFile("./hist_ZA_jes"+tag+".root");
 		file1 = new TFile("../hist_ZA-EWK_jes"+tag+".root");
+	}
+	else if(sample.Contains("ZA")&&sample.Contains("out")){
+		file = new TFile("./hist_ZAout_jes"+tag+".root");
+		file1 = new TFile("../hist_ZA-EWKout_jes"+tag+".root");
 	}
         else file=new TFile("../hist_"+sample+"_jes"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");

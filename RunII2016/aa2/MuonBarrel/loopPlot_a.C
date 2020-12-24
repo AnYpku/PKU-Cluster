@@ -59,7 +59,7 @@ void loopPlot() {
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		//double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
 		std::string mcLabels[nMC] = {"ST16", "TTA16", "VV16",
-                                            "plj16_weight","ZA16"};
+                                            "plj16_weight","ZA16_full"};
 		/*std::string mcLabels[nMC] = {"ZA"}; 
 		double kFactorsMC_array[nMC] = { lumiValue};*/
 

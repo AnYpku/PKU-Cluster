@@ -840,9 +840,9 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 		}
 		actualWeight = pileupWeight * scalef * prefWeight*photon_id_scale*photon_veto_scale;
 		if(lep==13)
-                        actualWeight = actualWeight *(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale);//mc
+                        actualWeight = actualWeight *(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*puIdweight_M;//mc
                 if(lep==11)
-                        actualWeight = actualWeight *(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale);//mc
+                        actualWeight = actualWeight *(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*puIdweight_M;//mc
                 if(filename.Contains("plj"))
                      actualWeight = scalef;
 		if(drla==10) drla=-10;

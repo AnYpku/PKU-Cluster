@@ -443,37 +443,37 @@ public :
    TBranch        *b_ak4jet_puIdMedium;   //!
    TBranch        *b_ak4jet_puIdTight;   //!
    TBranch        *b_jet1puIdLoose;   //!
-   TBranch        *b_jet1puIdLoose_newD;   //!
+   TBranch        *b_jet1puIdLoose_new;   //!
    TBranch        *b_jet1puIdLoose_JEC_up;   //!
    TBranch        *b_jet1puIdLoose_JEC_down;   //!
    TBranch        *b_jet1puIdLoose_JER_up;   //!
    TBranch        *b_jet1puIdLoose_JER_down;   //!
    TBranch        *b_jet1puIdMedium;   //!
-   TBranch        *b_jet1puIdMedium_newD;   //!
+   TBranch        *b_jet1puIdMedium_new;   //!
    TBranch        *b_jet1puIdMedium_JEC_up;   //!
    TBranch        *b_jet1puIdMedium_JEC_down;   //!
    TBranch        *b_jet1puIdMedium_JER_up;   //!
    TBranch        *b_jet1puIdMedium_JER_down;   //!
    TBranch        *b_jet1puIdTight;   //!
-   TBranch        *b_jet1puIdTight_newD;   //!
+   TBranch        *b_jet1puIdTight_new;   //!
    TBranch        *b_jet1puIdTight_JEC_up;   //!
    TBranch        *b_jet1puIdTight_JEC_down;   //!
    TBranch        *b_jet1puIdTight_JER_up;   //!
    TBranch        *b_jet1puIdTight_JER_down;   //!
    TBranch        *b_jet2puIdLoose;   //!
-   TBranch        *b_jet2puIdLoose_newD;   //!
+   TBranch        *b_jet2puIdLoose_new;   //!
    TBranch        *b_jet2puIdLoose_JEC_up;   //!
    TBranch        *b_jet2puIdLoose_JEC_down;   //!
    TBranch        *b_jet2puIdLoose_JER_up;   //!
    TBranch        *b_jet2puIdLoose_JER_down;   //!
    TBranch        *b_jet2puIdMedium;   //!
-   TBranch        *b_jet2puIdMedium_newD;   //!
+   TBranch        *b_jet2puIdMedium_new;   //!
    TBranch        *b_jet2puIdMedium_JEC_up;   //!
    TBranch        *b_jet2puIdMedium_JEC_down;   //!
    TBranch        *b_jet2puIdMedium_JER_up;   //!
    TBranch        *b_jet2puIdMedium_JER_down;   //!
    TBranch        *b_jet2puIdTight;   //!
-   TBranch        *b_jet2puIdTight_newD;   //!
+   TBranch        *b_jet2puIdTight_new;   //!
    TBranch        *b_jet2puIdTight_JEC_up;   //!
    TBranch        *b_jet2puIdTight_JEC_down;   //!
    TBranch        *b_jet2puIdTight_JER_up;   //!
@@ -890,37 +890,37 @@ void xx::Init(TTree *tree)
    fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
    fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
    fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
-   fChain->SetBranchAddress("jet1puIdLoose_new", &jet1puIdLoose_new, &b_jet1puIdLoose_newD);
+   fChain->SetBranchAddress("jet1puIdLoose_new", &jet1puIdLoose_new, &b_jet1puIdLoose_new);
    fChain->SetBranchAddress("jet1puIdLoose_JEC_up", &jet1puIdLoose_JEC_up, &b_jet1puIdLoose_JEC_up);
    fChain->SetBranchAddress("jet1puIdLoose_JEC_down", &jet1puIdLoose_JEC_down, &b_jet1puIdLoose_JEC_down);
    fChain->SetBranchAddress("jet1puIdLoose_JER_up", &jet1puIdLoose_JER_up, &b_jet1puIdLoose_JER_up);
    fChain->SetBranchAddress("jet1puIdLoose_JER_down", &jet1puIdLoose_JER_down, &b_jet1puIdLoose_JER_down);
    fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
-   fChain->SetBranchAddress("jet1puIdMedium_new", &jet1puIdMedium_new, &b_jet1puIdMedium_newD);
+   fChain->SetBranchAddress("jet1puIdMedium_new", &jet1puIdMedium_new, &b_jet1puIdMedium_new);
    fChain->SetBranchAddress("jet1puIdMedium_JEC_up", &jet1puIdMedium_JEC_up, &b_jet1puIdMedium_JEC_up);
    fChain->SetBranchAddress("jet1puIdMedium_JEC_down", &jet1puIdMedium_JEC_down, &b_jet1puIdMedium_JEC_down);
    fChain->SetBranchAddress("jet1puIdMedium_JER_up", &jet1puIdMedium_JER_up, &b_jet1puIdMedium_JER_up);
    fChain->SetBranchAddress("jet1puIdMedium_JER_down", &jet1puIdMedium_JER_down, &b_jet1puIdMedium_JER_down);
    fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
-   fChain->SetBranchAddress("jet1puIdTight_new", &jet1puIdTight_new, &b_jet1puIdTight_newD);
+   fChain->SetBranchAddress("jet1puIdTight_new", &jet1puIdTight_new, &b_jet1puIdTight_new);
    fChain->SetBranchAddress("jet1puIdTight_JEC_up", &jet1puIdTight_JEC_up, &b_jet1puIdTight_JEC_up);
    fChain->SetBranchAddress("jet1puIdTight_JEC_down", &jet1puIdTight_JEC_down, &b_jet1puIdTight_JEC_down);
    fChain->SetBranchAddress("jet1puIdTight_JER_up", &jet1puIdTight_JER_up, &b_jet1puIdTight_JER_up);
    fChain->SetBranchAddress("jet1puIdTight_JER_down", &jet1puIdTight_JER_down, &b_jet1puIdTight_JER_down);
    fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
-   fChain->SetBranchAddress("jet2puIdLoose_new", &jet2puIdLoose_new, &b_jet2puIdLoose_newD);
+   fChain->SetBranchAddress("jet2puIdLoose_new", &jet2puIdLoose_new, &b_jet2puIdLoose_new);
    fChain->SetBranchAddress("jet2puIdLoose_JEC_up", &jet2puIdLoose_JEC_up, &b_jet2puIdLoose_JEC_up);
    fChain->SetBranchAddress("jet2puIdLoose_JEC_down", &jet2puIdLoose_JEC_down, &b_jet2puIdLoose_JEC_down);
    fChain->SetBranchAddress("jet2puIdLoose_JER_up", &jet2puIdLoose_JER_up, &b_jet2puIdLoose_JER_up);
    fChain->SetBranchAddress("jet2puIdLoose_JER_down", &jet2puIdLoose_JER_down, &b_jet2puIdLoose_JER_down);
    fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
-   fChain->SetBranchAddress("jet2puIdMedium_new", &jet2puIdMedium_new, &b_jet2puIdMedium_newD);
+   fChain->SetBranchAddress("jet2puIdMedium_new", &jet2puIdMedium_new, &b_jet2puIdMedium_new);
    fChain->SetBranchAddress("jet2puIdMedium_JEC_up", &jet2puIdMedium_JEC_up, &b_jet2puIdMedium_JEC_up);
    fChain->SetBranchAddress("jet2puIdMedium_JEC_down", &jet2puIdMedium_JEC_down, &b_jet2puIdMedium_JEC_down);
    fChain->SetBranchAddress("jet2puIdMedium_JER_up", &jet2puIdMedium_JER_up, &b_jet2puIdMedium_JER_up);
    fChain->SetBranchAddress("jet2puIdMedium_JER_down", &jet2puIdMedium_JER_down, &b_jet2puIdMedium_JER_down);
    fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
-   fChain->SetBranchAddress("jet2puIdTight_new", &jet2puIdTight_new, &b_jet2puIdTight_newD);
+   fChain->SetBranchAddress("jet2puIdTight_new", &jet2puIdTight_new, &b_jet2puIdTight_new);
    fChain->SetBranchAddress("jet2puIdTight_JEC_up", &jet2puIdTight_JEC_up, &b_jet2puIdTight_JEC_up);
    fChain->SetBranchAddress("jet2puIdTight_JEC_down", &jet2puIdTight_JEC_down, &b_jet2puIdTight_JEC_down);
    fChain->SetBranchAddress("jet2puIdTight_JER_up", &jet2puIdTight_JER_up, &b_jet2puIdTight_JER_up);

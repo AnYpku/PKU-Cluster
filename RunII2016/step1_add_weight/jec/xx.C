@@ -41,22 +41,33 @@ void xx::Loop()
         TH2D* iso_GH=0;
         f_iso_BF->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt", iso_BF);
         f_iso_GH->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt", iso_GH);
-	// muon hlt
+	//muon hlt
+	TFile*f_hltmu=new TFile("../muon_HLT_SF16.root");
+	TH2D*HLT_mu=(TH2D*)f_hltmu->Get("h2");
+	cout<<"open the muon hlt file: muon_HLT_SF.root"<<endl;
 
+	//ele hlt
+	TFile*f_ele1=new TFile("../egammaEffi.txt_EGM2D_leg1.root");
+	TFile*f_ele2=new TFile("../egammaEffi.txt_EGM2D_leg2.root");
+	TH2F*HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+	TH2F*HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+	TH2F*HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+	TH2F*HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
+	cout<<"open the ele hlt file"<<endl;
 	// ele id
-        TFile * f= TFile::Open("../ele_SFs/2016LegacyReReco_ElectronMedium_Fall17V2.root");
-        TH2F* ID=0;
-        f->GetObject("EGamma_SF2D", ID);
+	TFile * f= TFile::Open("../ele_SFs/2016LegacyReReco_ElectronMedium_Fall17V2.root");
+	TH2F* ID=0;
+	f->GetObject("EGamma_SF2D", ID);
 
 	//ele reco
 	TFile* Reco_egamma= TFile::Open("../ele_SFs/EGM2D_BtoH_GT20GeV_RecoSF_Legacy2016.root");
-        TH2F* Reco=0;
-        Reco_egamma->GetObject("EGamma_SF2D", Reco);
+	TH2F* Reco=0;
+	Reco_egamma->GetObject("EGamma_SF2D", Reco);
 
 	//photon id
-        TFile* ID_photon_file = TFile::Open("../ele_SFs/Fall17V2_2016_Medium_photons.root");
-        TH2F* ID_photon=0;
-        ID_photon_file->GetObject("EGamma_SF2D", ID_photon);
+	TFile* ID_photon_file = TFile::Open("../ele_SFs/Fall17V2_2016_Medium_photons.root");
+	TH2F* ID_photon=0;
+	ID_photon_file->GetObject("EGamma_SF2D", ID_photon);
 	// for lep and photon scales
 
 	Long64_t nbytes = 0, nb = 0;
@@ -71,6 +82,7 @@ void xx::Loop()
 		muon1_iso_scale=-1;
 		muon2_iso_scale=-1;
 		muon_hlt_scale=-1;
+		ele_hlt_scale=-1;
 		photon_id_scale=-1;
 		photon_veto_scale=-1;
 
@@ -111,13 +123,14 @@ void xx::Loop()
 			ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID);
 			ele1_reco_scale=get_ele_Reco(etalep1, ptlep1,Reco);
 			ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco);
+                        ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
 		}
 		if(lep==13){
 			muon1_id_scale=get_muon_ID(etalep1,ptlep1,ID_BF,ID_GH);
 			muon2_id_scale=get_muon_ID(etalep2,ptlep2,ID_BF,ID_GH);
 			muon1_iso_scale=get_muon_iso(etalep1,ptlep1,iso_BF,iso_GH);
 			muon2_iso_scale=get_muon_iso(etalep2,ptlep2,iso_BF,iso_GH);
-//			muon_hlt_scale=muon_HLT_scale(etalep1,etalep2,di_lep_trigger);
+                        muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 		}
 
 		if(photonet>0){
@@ -129,21 +142,21 @@ void xx::Loop()
 
 		if(jentry%100000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu1<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<"scalef "<<scalef<<" "<<jentry<<" "<<fChain->GetEntries()<<endl;
 
-                LEPmu = lep==13 && (HLT_Mu2>0 || HLT_Mu1>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110;
-                LEPele = lep==11 && ( HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70.&&massVlep<110;
-                PHOTON= photonet>20 && (abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5));
-                JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
-                cut0++;
-                if( !( (LEPmu||LEPele) && PHOTON )  )
-                      continue;
+		LEPmu = lep==13 && (HLT_Mu2>0 || HLT_Mu1>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110;
+		LEPele = lep==11 && ( HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70.&&massVlep<110;
+		PHOTON= photonet>20 && (abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5));
+		JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
+		cut0++;
+		if( !( (LEPmu||LEPele) && PHOTON )  )
+			continue;
 		ExTree->Fill();
 	}
 	f->Close();
 	Reco_egamma->Close();
-        ID_photon_file->Close();
-        f_BF->Close();
-        f_GH->Close();
-        f_iso_BF->Close();
-        f_iso_GH->Close();
+	ID_photon_file->Close();
+	f_BF->Close();
+	f_GH->Close();
+	f_iso_BF->Close();
+	f_iso_GH->Close();
 	input13->Close();
 }

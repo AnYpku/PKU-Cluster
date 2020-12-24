@@ -18,8 +18,6 @@ void xx::Loop()
         bool LEPmu,LEPele,JET,PHOTON,SignalRegion;
         int cut0=0,cut1=0;
 
-//	Long64_t npp = fChain->GetEntries("theWeight>0.");
-//	Long64_t nmm = fChain->GetEntries("theWeight<0.");
 	Long64_t npp=fChain->GetEntries("theWeight>0");
 	Long64_t nmm=fChain->GetEntries("theWeight<0");
 	std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
@@ -44,6 +42,9 @@ void xx::Loop()
         f_iso_BF->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt", iso_BF);
         f_iso_GH->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt", iso_GH);
 	// muon hlt
+        TFile*f_hltmu=new TFile("./muon_HLT_SF16.root");
+        TH2D*HLT_mu=(TH2D*)f_hltmu->Get("h2");
+        cout<<"open the muon hlt file: muon_HLT_SF16.root"<<endl;
 
 	// ele id
         TFile * f= TFile::Open("./ele_SFs/2016LegacyReReco_ElectronMedium_Fall17V2.root");
@@ -54,6 +55,15 @@ void xx::Loop()
 	TFile* Reco_egamma= TFile::Open("./ele_SFs/EGM2D_BtoH_GT20GeV_RecoSF_Legacy2016.root");
         TH2F* Reco=0;
         Reco_egamma->GetObject("EGamma_SF2D", Reco);
+
+        //ele hlt
+        TFile*f_ele1=new TFile("./egammaEffi.txt_EGM2D_leg1.root");
+        TFile*f_ele2=new TFile("./egammaEffi.txt_EGM2D_leg2.root");
+        TH2F*HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+        TH2F*HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+        TH2F*HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+        TH2F*HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
+        cout<<"open the ele hlt file"<<endl;
 
 	//photon id
         TFile* ID_photon_file = TFile::Open("./ele_SFs/Fall17V2_2016_Medium_photons.root");
@@ -73,6 +83,7 @@ void xx::Loop()
 		muon1_iso_scale=-1;
 		muon2_iso_scale=-1;
 		muon_hlt_scale=-1;
+		ele_hlt_scale=-1;
 		photon_id_scale=-1;
 		photon_veto_scale=-1;
 
@@ -116,13 +127,14 @@ void xx::Loop()
 			ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID);
 			ele1_reco_scale=get_ele_Reco(etalep1, ptlep1,Reco);
 			ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco);
+                        ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
 		}
 		if(lep==13){
 			muon1_id_scale=get_muon_ID(etalep1,ptlep1,ID_BF,ID_GH);
 			muon2_id_scale=get_muon_ID(etalep2,ptlep2,ID_BF,ID_GH);
 			muon1_iso_scale=get_muon_iso(etalep1,ptlep1,iso_BF,iso_GH);
 			muon2_iso_scale=get_muon_iso(etalep2,ptlep2,iso_BF,iso_GH);
-//			muon_hlt_scale=muon_HLT_scale(etalep1,etalep2,di_lep_trigger);
+                        muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 		}
 
 		if(photonet>0){

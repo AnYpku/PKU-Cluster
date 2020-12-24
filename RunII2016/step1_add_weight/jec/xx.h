@@ -675,6 +675,7 @@ public :
      double    muon1_iso_scale;
      double    muon2_iso_scale;
      double    muon_hlt_scale;
+     double    ele_hlt_scale;
      double    ele1_id_scale;
      double    ele2_id_scale;
      double    ele1_reco_scale;
@@ -758,6 +759,7 @@ void xx::Init(TTree *tree)
    ExTree->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
    ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D");
    ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
+   ExTree->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
    // lep and photon scales
 
    fChain->SetBranchAddress("event", &event, &b_event);

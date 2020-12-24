@@ -2,9 +2,13 @@ void run(TString sample,TString tag){
         fstream ftxt("./jer_uncer"+tag+".txt", ios::app );
 	ofstream f1("./"+sample+"_jer_uncer"+tag+".txt");
 	TFile*file;TFile*file1;
-	if(sample.Contains("ZA")){
-		file = new TFile("../hist_ZA_jer"+tag+".root");
+	if(sample.Contains("ZA")&&sample.Contains("out")==0){
+		file = new TFile("./hist_ZA_jer"+tag+".root");
 		file1 = new TFile("../hist_ZA-EWK_jer"+tag+".root");
+	}
+	else if(sample.Contains("ZA")&&sample.Contains("out")){
+		file = new TFile("./hist_ZAout_jer"+tag+".root");
+		file1 = new TFile("../hist_ZA-EWKout_jer"+tag+".root");
 	}
         else file=new TFile("../hist_"+sample+"_jer"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
@@ -29,7 +33,7 @@ void run(TString sample,TString tag){
 	for(Int_t i=0;i<num;i++){
 		bincontent_new[i] = h1->GetBinContent(i+1);
 		bincontent_up[i] = h2->GetBinContent(i+1);
-		bincontent_down[i] = h3->GetBinContent(i+1);
+		bincontent_down[i] = fabs(h3->GetBinContent(i+1));
 		double max;
 		if(fabs(bincontent_up[i]-bincontent_new[i])>fabs(bincontent_down[i]-bincontent_new[i]))
 			max=fabs(bincontent_up[i]-bincontent_new[i]);

@@ -1,12 +1,12 @@
 #define num 3
-void run(TString cut1,TString sample,TString channel,TString type){
+void run(TString cut1,TString sample,TString channel,TString type,bool turn){
      Double_t Mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir="/home/pku/anying/cms/rootfiles/2017/";     
      TFile*file;
-//     if(sample.Contains("EWK"))
-//	     file=new TFile(dir+"unfold_GenCutla-"+sample+"17.root");
-//     else
+     if(sample.Contains("EWK"))
+	     file=new TFile(dir+"unfold_GenCutla-"+sample+"17.root");
+     else
 	     file=new TFile(dir+"cutla-out"+sample+"17.root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
@@ -44,13 +44,13 @@ void run(TString cut1,TString sample,TString channel,TString type){
 
      TString cut;
      if(channel.Contains("elebarrel"))
-             cut="lep==11&&fabs(photoneta)<1.4442";
+             cut="(lep==11&&fabs(photoneta)<1.4442)";
      if(channel.Contains("mubarrel"))
-             cut="lep==13&&fabs(photoneta)<1.4442";
+             cut="(lep==13&&fabs(photoneta)<1.4442)";
      if(channel.Contains("eleendcap"))
-             cut="lep==11&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566";
+             cut="(lep==11&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566)";
      if(channel.Contains("muendcap"))
-             cut="lep==13&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566";
+             cut="(lep==13&&fabs(photoneta)<2.5&&fabs(photoneta)>1.566)";
      TTreeFormula *tformula=new TTreeFormula("formula", cut1+"&&("+cut+")", tree);
      double actualWeight[num];
      TH1D*th1[num];
@@ -95,7 +95,10 @@ void run(TString cut1,TString sample,TString channel,TString type){
 	     }
      }
      TFile*fout;
-     fout= new TFile("hist_"+sample+"_puId"+type+"_"+channel+".root","recreate");
+     if(turn&&sample.Contains("EWK"))
+	     fout= new TFile("hist_"+sample+"out_puId"+type+"_"+channel+".root","recreate");
+     else
+	     fout= new TFile("hist_"+sample+"_puId"+type+"_"+channel+".root","recreate");
      fout->cd();
      for(Int_t i=0;i<num;i++){
 	     th1[i]->Write();
@@ -106,7 +109,7 @@ int Uncer_batch_sig(){
 	TString GenLEPmu  = "(genlep==13 && genlep1pt>20 && genlep2pt>20 && fabs(genlep1eta)<2.4 && fabs(genlep2eta)<2.4&& genmassVlep>70 && genmassVlep<110)";
 	TString GenLEPele = "(genlep==11 && genlep1pt>25 && genlep2pt>25 && fabs(genlep1eta)<2.5 && fabs(genlep2eta)<2.5&& genmassVlep>70 && genmassVlep<110)";
 	TString GenPhoton = "(genphotonet>20 && ( (fabs(genphotoneta)<2.5&&fabs(genphotoneta)>1.566) || (fabs(genphotoneta)<1.4442) ))";
-	TString GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+	TString GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 	TString GenDr = "(gendrjj>0.5 && gendrla1>0.7 && gendrla2>0.7 && gendrj1a>0.5 && gendrj2a>0.5 && gendrj1l>0.5 && gendrj2l>0.5 && gendrj1l2>0.5 && gendrj2l2>0.5)";
 	TString GenSignalRegion = "(genMjj >500 && gendetajj>2.5)";
 
@@ -128,9 +131,17 @@ int Uncer_batch_sig(){
 	TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 	for(int j=0;j<kk;j++){
 		for(int i=0;i<sample.size();i++){
-			run(Reco,sample[i],channels[j],"eff");
-			run(Reco,sample[i],channels[j],"mis");
+			if(sample[i].Contains("EWK")){
+				run(cut2,sample[i],channels[j],"eff",1);
+				run(cut2,sample[i],channels[j],"mis",1);
+				run(cut1,sample[i],channels[j],"eff",0);
+				run(cut1,sample[i],channels[j],"mis",0);
+			}
+			else{
+				run(Reco,sample[i],channels[j],"eff",0);
+				run(Reco,sample[i],channels[j],"mis",0);
+			}
 		}
 	}
-return 1;
+	return 1;
 }

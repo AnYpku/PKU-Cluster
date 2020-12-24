@@ -6,11 +6,11 @@ jet1pt
 "
 #Mjj
 years="\
-full
+16
+17
+18
 "
-#16
-#17
-#18
+#full
 for year in $years
 do
   for var in $vars

@@ -11,7 +11,7 @@ void run(TString cut1,TString tag,TString channel,TString sample){
      Double_t Mjj,jet1eta,jet2eta;
      double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
-     double muon_hlt_scale,ele_hlt_scale;
+     double muon_hlt_scale,ele_hlt_scale,puIdweight_M;
      double weight;int lep;
      tree->SetBranchAddress("Mjj",&Mjj);
      tree->SetBranchAddress("lep",&lep);
@@ -19,6 +19,7 @@ void run(TString cut1,TString tag,TString channel,TString sample){
      tree->SetBranchAddress("jet2eta",&jet2eta);
      tree->SetBranchAddress("scalef",&scalef);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
+     tree->SetBranchAddress("puIdweight_M",&puIdweight_M);
      tree->SetBranchAddress("prefWeight",&prefWeight);
      tree->SetBranchAddress("prefWeightUp",&prefWeightUp);
      tree->SetBranchAddress("prefWeightDown",&prefWeightDown);
@@ -57,10 +58,16 @@ void run(TString cut1,TString tag,TString channel,TString sample){
              tree->GetEntry(k);
              double detajj=fabs(jet1eta-jet2eta);
 	     int p=0;
+	     if(tag.Contains("17")==0) puIdweight_M=1;
+	     if(tag.Contains("18")){
+		     prefWeight=1;
+		     prefWeightUp=1;
+		     prefWeightDown=1;
+	     }
 	     if(lep==11)
-		     weight=scalef*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
+		     weight=scalef*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale*puIdweight_M;
 	     if(lep==13)
-		     weight=scalef*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
+		     weight=scalef*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale*puIdweight_M;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
 			     if(p==0)actualWeight[p]=weight*prefWeight;
@@ -80,7 +87,7 @@ void run(TString cut1,TString tag,TString channel,TString sample){
 	     }
      }
      TFile*fout;
-     fout= new TFile("hist_ewk_pref_"+tag+channel+".root","recreate");
+     fout= new TFile("hist_qcd_pref_"+tag+channel+".root","recreate");
      fout->cd();
      for(Int_t i=0;i<num;i++){
 	     th1[i]->Write();
@@ -106,8 +113,8 @@ int Uncer_batch_sig(){
 	const int kk=channels.size();
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
@@ -118,8 +125,7 @@ int Uncer_batch_sig(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-		if(tag[i].Contains("17")) continue;
-		if(tag[i].Contains("16")) continue;
+//		if(tag[i].Contains("17")) continue;
                 cout<<tag[i]<<" "<<jet<<endl;
                 cout<<tag[i]<<" "<<GenJet<<endl;
 		for(int j=0;j<kk;j++){

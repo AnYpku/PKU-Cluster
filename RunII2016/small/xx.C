@@ -45,12 +45,12 @@ void xx::Loop(TString name)
       if(drla2==10) drla2=-1; 
       if(drj1a==10) drj1a=-1;
       if(drj2a==10) drj2a=-1;
-      ele_hlt_scale=1;
-      muon_hlt_scale=1;
-      if(lep==11)
-	      ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
-      if(lep==13)
-	      muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
+//      ele_hlt_scale=1;
+//      muon_hlt_scale=1;
+//      if(lep==11)
+//	      ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
+//      if(lep==13)
+//	      muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 
       LEPele = lep==11 && (HLT_Ele1>0 || HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
       LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && ngoodmus>1;
@@ -60,12 +60,12 @@ void xx::Loop(TString name)
       DR =drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5;
 
       if(jentry%100000==0)   cout<<jentry<<"; "<<nentries<<"; cut1 = "<<cut1<<endl;
-//            if(  !( ( (LEPmu) || (LEPele) ) /*&& JET && DR && SignalRegion*/) )
-//      	      continue;
-//            if( !(PHOTON) )continue;
-      //      if(m_dataset.Contains("ZA")&&m_dataset.Contains("plj")){
-      //	      if(isprompt!=1 ) continue;
-//   }
+            if(  !( ( (LEPmu) || (LEPele) ) /*&& JET && DR && SignalRegion*/) )
+      	      continue;
+            if( !(PHOTON) )continue;
+	    if(m_dataset.Contains("ZA")&&m_dataset.Contains("plj")){
+		    if(isprompt!=1 ) continue;
+   }
    cut1++;//how many events passing the selection 
    newtree->Fill(); 
 

@@ -3,11 +3,12 @@ void run(TString sample,TString tag){
 	ofstream ftxt("./uncer_"+sample+"_"+tag+".txt");//,ios::app);
 	ofstream ff("./uncer_"+tag+".txt",ios::app);
 	TFile*file;TFile*file1;
-	file=new TFile("../hist_qcd_pdf16.root");
 	if(sample.Contains("ZA")){
+		file=new TFile("./hist_qcd_pdf16.root");
 		file1=new TFile("../hist_ewk_pdf"+tag+".root");
 	}
 	else{
+		file=new TFile("./hist_qcdout_pdf16.root");
 		file1=new TFile("../hist_Sigout_pdf"+tag+".root");
 	}
 	double lumi;

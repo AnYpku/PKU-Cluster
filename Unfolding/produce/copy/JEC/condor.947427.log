@@ -1,0 +1,43 @@
+000 (947427.000.000) 12/22 19:08:30 Job submitted from host: <202.38.140.107:9618?addrs=202.38.140.107-9618&noUDP&sock=4412_1e41>
+...
+001 (947427.000.000) 12/22 19:08:47 Job executing on host: <192.168.1.4:9618?addrs=192.168.1.4-9618&noUDP&sock=4505_f2a6_3>
+...
+006 (947427.000.000) 12/22 19:08:56 Image size of job updated: 336376
+	271  -  MemoryUsage of job (MB)
+	276584  -  ResidentSetSize of job (KB)
+...
+006 (947427.000.000) 12/22 19:13:57 Image size of job updated: 1614504
+	1515  -  MemoryUsage of job (MB)
+	1551052  -  ResidentSetSize of job (KB)
+...
+006 (947427.000.000) 12/22 19:18:57 Image size of job updated: 1614636
+	1515  -  MemoryUsage of job (MB)
+	1551184  -  ResidentSetSize of job (KB)
+...
+006 (947427.000.000) 12/22 19:23:57 Image size of job updated: 1614824
+	1516  -  MemoryUsage of job (MB)
+	1551372  -  ResidentSetSize of job (KB)
+...
+012 (947427.000.000) 12/22 20:03:41 Job was held.
+	The job attribute OnExitHold expression '(ExitBySignal == true) || (ExitCode != 0)' evaluated to TRUE
+	Code 3 Subcode 0
+...
+013 (947427.000.000) 12/22 20:14:39 Job was released.
+	The job attribute PeriodicRelease expression '(NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 600)' evaluated to TRUE
+...
+001 (947427.000.000) 12/22 20:14:40 Job executing on host: <192.168.1.3:9618?addrs=192.168.1.3-9618&noUDP&sock=4513_6f68_3>
+...
+004 (947427.000.000) 12/22 20:37:33 Job was evicted.
+	(0) Job was not checkpointed.
+		Usr 0 00:22:17, Sys 0 00:00:11  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	331  -  Run Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     1.00        1         1 
+	   Disk (KB)            :    54          75    708193 
+	   Memory (MB)          :  1709        1709      1792 
+...
+009 (947427.000.000) 12/22 20:37:33 Job was aborted by the user.
+	via condor_rm (by user anying)
+...

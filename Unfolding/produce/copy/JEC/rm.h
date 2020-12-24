@@ -59,6 +59,7 @@ public :
    Double_t        genmuon_pt[6];
    Double_t        genmuon_eta[6];
    Double_t        genmuon_phi[6];
+   Int_t           genmuon_pid[6];
    Double_t        genelectron_pt[6];
    Double_t        genelectron_eta[6];
    Double_t        genelectron_phi[6];
@@ -119,12 +120,42 @@ public :
    Double_t        ak4jet_puIdLoose[6];
    Double_t        ak4jet_puIdMedium[6];
    Double_t        ak4jet_puIdTight[6];
+   Double_t        jet1puIdLoose;
+   Float_t         jet1puIdLoose_new;
+   Double_t        jet1puIdLoose_JEC_up;
+   Double_t        jet1puIdLoose_JEC_down;
+   Double_t        jet1puIdLoose_JER_up;
+   Double_t        jet1puIdLoose_JER_down;
+   Double_t        jet1puIdMedium;
+   Float_t         jet1puIdMedium_new;
+   Double_t        jet1puIdMedium_JEC_up;
+   Double_t        jet1puIdMedium_JEC_down;
+   Double_t        jet1puIdMedium_JER_up;
+   Double_t        jet1puIdMedium_JER_down;
    Double_t        jet1puIdTight;
    Float_t         jet1puIdTight_new;
    Double_t        jet1puIdTight_JEC_up;
    Double_t        jet1puIdTight_JEC_down;
    Double_t        jet1puIdTight_JER_up;
    Double_t        jet1puIdTight_JER_down;
+   Double_t        jet2puIdLoose;
+   Float_t         jet2puIdLoose_new;
+   Double_t        jet2puIdLoose_JEC_up;
+   Double_t        jet2puIdLoose_JEC_down;
+   Double_t        jet2puIdLoose_JER_up;
+   Double_t        jet2puIdLoose_JER_down;
+   Double_t        jet2puIdMedium;
+   Float_t         jet2puIdMedium_new;
+   Double_t        jet2puIdMedium_JEC_up;
+   Double_t        jet2puIdMedium_JEC_down;
+   Double_t        jet2puIdMedium_JER_up;
+   Double_t        jet2puIdMedium_JER_down;
+   Double_t        jet2puIdTight;
+   Float_t         jet2puIdTight_new;
+   Double_t        jet2puIdTight_JEC_up;
+   Double_t        jet2puIdTight_JEC_down;
+   Double_t        jet2puIdTight_JER_up;
+   Double_t        jet2puIdTight_JER_down;
    Double_t        jet1pt;
    Double_t        jet1pt_new;
    Double_t        jet1pt_JEC_up;
@@ -344,6 +375,7 @@ public :
    TBranch        *b_genmuon_pt;   //!
    TBranch        *b_genmuon_eta;   //!
    TBranch        *b_genmuon_phi;   //!
+   TBranch        *b_genmuon_pid;   //!
    TBranch        *b_genelectron_pt;   //!
    TBranch        *b_genelectron_eta;   //!
    TBranch        *b_genelectron_phi;   //!
@@ -404,12 +436,42 @@ public :
    TBranch        *b_ak4jet_puIdLoose;   //!
    TBranch        *b_ak4jet_puIdMedium;   //!
    TBranch        *b_ak4jet_puIdTight;   //!
+   TBranch        *b_jet1puIdLoose;   //!
+   TBranch        *b_jet1puIdLoose_new;   //!
+   TBranch        *b_jet1puIdLoose_JEC_up;   //!
+   TBranch        *b_jet1puIdLoose_JEC_down;   //!
+   TBranch        *b_jet1puIdLoose_JER_up;   //!
+   TBranch        *b_jet1puIdLoose_JER_down;   //!
+   TBranch        *b_jet1puIdMedium;   //!
+   TBranch        *b_jet1puIdMedium_new;   //!
+   TBranch        *b_jet1puIdMedium_JEC_up;   //!
+   TBranch        *b_jet1puIdMedium_JEC_down;   //!
+   TBranch        *b_jet1puIdMedium_JER_up;   //!
+   TBranch        *b_jet1puIdMedium_JER_down;   //!
    TBranch        *b_jet1puIdTight;   //!
-   TBranch        *b_jet1puIdTight_newD;   //!
+   TBranch        *b_jet1puIdTight_new;   //!
    TBranch        *b_jet1puIdTight_JEC_up;   //!
    TBranch        *b_jet1puIdTight_JEC_down;   //!
    TBranch        *b_jet1puIdTight_JER_up;   //!
    TBranch        *b_jet1puIdTight_JER_down;   //!
+   TBranch        *b_jet2puIdLoose;   //!
+   TBranch        *b_jet2puIdLoose_new;   //!
+   TBranch        *b_jet2puIdLoose_JEC_up;   //!
+   TBranch        *b_jet2puIdLoose_JEC_down;   //!
+   TBranch        *b_jet2puIdLoose_JER_up;   //!
+   TBranch        *b_jet2puIdLoose_JER_down;   //!
+   TBranch        *b_jet2puIdMedium;   //!
+   TBranch        *b_jet2puIdMedium_new;   //!
+   TBranch        *b_jet2puIdMedium_JEC_up;   //!
+   TBranch        *b_jet2puIdMedium_JEC_down;   //!
+   TBranch        *b_jet2puIdMedium_JER_up;   //!
+   TBranch        *b_jet2puIdMedium_JER_down;   //!
+   TBranch        *b_jet2puIdTight;   //!
+   TBranch        *b_jet2puIdTight_new;   //!
+   TBranch        *b_jet2puIdTight_JEC_up;   //!
+   TBranch        *b_jet2puIdTight_JEC_down;   //!
+   TBranch        *b_jet2puIdTight_JER_up;   //!
+   TBranch        *b_jet2puIdTight_JER_down;   //!
    TBranch        *b_jet1pt;   //!
    TBranch        *b_jet1pt_new;   //!
    TBranch        *b_jet1pt_JEC_up;   //!
@@ -614,9 +676,9 @@ public :
    virtual void     genparticles();
    virtual void     ResetValue();
    virtual void     SetValue();
-   virtual Double_t get_puIdweight(double ak4jet_eta[6],double ak4jet_phi[6],double genjet_eta[6],double genjet_phi[6],double ak4jet_pt[6],TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId[6]);
 
-   const double lumi = 35.86;
+   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+   virtual Double_t delta_R(Double_t eta1, Double_t phi1, Double_t eta2, Double_t phi2);
    Bool_t LEPmu,LEPele,genmuon[6],genele[6],genjet[6],genphoton[6];
    Bool_t photon,jet,dr,SignalRegion;
    Bool_t GenLEPmu,GenLEPele,GenPhoton,GenJet,GenDr,GenSignalRegion;
@@ -858,6 +920,7 @@ void rm::Init(TTree *tree)
    fChain->SetBranchAddress("genmuon_pt", genmuon_pt, &b_genmuon_pt);
    fChain->SetBranchAddress("genmuon_eta", genmuon_eta, &b_genmuon_eta);
    fChain->SetBranchAddress("genmuon_phi", genmuon_phi, &b_genmuon_phi);
+   fChain->SetBranchAddress("genmuon_pid", genmuon_pid, &b_genmuon_pid);
    fChain->SetBranchAddress("genelectron_pt", genelectron_pt, &b_genelectron_pt);
    fChain->SetBranchAddress("genelectron_eta", genelectron_eta, &b_genelectron_eta);
    fChain->SetBranchAddress("genelectron_phi", genelectron_phi, &b_genelectron_phi);
@@ -919,11 +982,42 @@ void rm::Init(TTree *tree)
    fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
    fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
    fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
-   fChain->SetBranchAddress("jet1puIdTight_new", &jet1puIdTight_new, &b_jet1puIdTight_newD);
+   fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
+   fChain->SetBranchAddress("jet1puIdLoose_new", &jet1puIdLoose_new, &b_jet1puIdLoose_new);
+   fChain->SetBranchAddress("jet1puIdLoose_JEC_up", &jet1puIdLoose_JEC_up, &b_jet1puIdLoose_JEC_up);
+   fChain->SetBranchAddress("jet1puIdLoose_JEC_down", &jet1puIdLoose_JEC_down, &b_jet1puIdLoose_JEC_down);
+   fChain->SetBranchAddress("jet1puIdLoose_JER_up", &jet1puIdLoose_JER_up, &b_jet1puIdLoose_JER_up);
+   fChain->SetBranchAddress("jet1puIdLoose_JER_down", &jet1puIdLoose_JER_down, &b_jet1puIdLoose_JER_down);
+   fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
+   fChain->SetBranchAddress("jet1puIdMedium_new", &jet1puIdMedium_new, &b_jet1puIdMedium_new);
+   fChain->SetBranchAddress("jet1puIdMedium_JEC_up", &jet1puIdMedium_JEC_up, &b_jet1puIdMedium_JEC_up);
+   fChain->SetBranchAddress("jet1puIdMedium_JEC_down", &jet1puIdMedium_JEC_down, &b_jet1puIdMedium_JEC_down);
+   fChain->SetBranchAddress("jet1puIdMedium_JER_up", &jet1puIdMedium_JER_up, &b_jet1puIdMedium_JER_up);
+   fChain->SetBranchAddress("jet1puIdMedium_JER_down", &jet1puIdMedium_JER_down, &b_jet1puIdMedium_JER_down);
+   fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+   fChain->SetBranchAddress("jet1puIdTight_new", &jet1puIdTight_new, &b_jet1puIdTight_new);
    fChain->SetBranchAddress("jet1puIdTight_JEC_up", &jet1puIdTight_JEC_up, &b_jet1puIdTight_JEC_up);
    fChain->SetBranchAddress("jet1puIdTight_JEC_down", &jet1puIdTight_JEC_down, &b_jet1puIdTight_JEC_down);
    fChain->SetBranchAddress("jet1puIdTight_JER_up", &jet1puIdTight_JER_up, &b_jet1puIdTight_JER_up);
    fChain->SetBranchAddress("jet1puIdTight_JER_down", &jet1puIdTight_JER_down, &b_jet1puIdTight_JER_down);
+   fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
+   fChain->SetBranchAddress("jet2puIdLoose_new", &jet2puIdLoose_new, &b_jet2puIdLoose_new);
+   fChain->SetBranchAddress("jet2puIdLoose_JEC_up", &jet2puIdLoose_JEC_up, &b_jet2puIdLoose_JEC_up);
+   fChain->SetBranchAddress("jet2puIdLoose_JEC_down", &jet2puIdLoose_JEC_down, &b_jet2puIdLoose_JEC_down);
+   fChain->SetBranchAddress("jet2puIdLoose_JER_up", &jet2puIdLoose_JER_up, &b_jet2puIdLoose_JER_up);
+   fChain->SetBranchAddress("jet2puIdLoose_JER_down", &jet2puIdLoose_JER_down, &b_jet2puIdLoose_JER_down);
+   fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
+   fChain->SetBranchAddress("jet2puIdMedium_new", &jet2puIdMedium_new, &b_jet2puIdMedium_new);
+   fChain->SetBranchAddress("jet2puIdMedium_JEC_up", &jet2puIdMedium_JEC_up, &b_jet2puIdMedium_JEC_up);
+   fChain->SetBranchAddress("jet2puIdMedium_JEC_down", &jet2puIdMedium_JEC_down, &b_jet2puIdMedium_JEC_down);
+   fChain->SetBranchAddress("jet2puIdMedium_JER_up", &jet2puIdMedium_JER_up, &b_jet2puIdMedium_JER_up);
+   fChain->SetBranchAddress("jet2puIdMedium_JER_down", &jet2puIdMedium_JER_down, &b_jet2puIdMedium_JER_down);
+   fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+   fChain->SetBranchAddress("jet2puIdTight_new", &jet2puIdTight_new, &b_jet2puIdTight_new);
+   fChain->SetBranchAddress("jet2puIdTight_JEC_up", &jet2puIdTight_JEC_up, &b_jet2puIdTight_JEC_up);
+   fChain->SetBranchAddress("jet2puIdTight_JEC_down", &jet2puIdTight_JEC_down, &b_jet2puIdTight_JEC_down);
+   fChain->SetBranchAddress("jet2puIdTight_JER_up", &jet2puIdTight_JER_up, &b_jet2puIdTight_JER_up);
+   fChain->SetBranchAddress("jet2puIdTight_JER_down", &jet2puIdTight_JER_down, &b_jet2puIdTight_JER_down);
    fChain->SetBranchAddress("jet1pt", &jet1pt, &b_jet1pt);
    fChain->SetBranchAddress("jet1pt_new", &jet1pt_new, &b_jet1pt_new);
    fChain->SetBranchAddress("jet1pt_JEC_up", &jet1pt_JEC_up, &b_jet1pt_JEC_up);

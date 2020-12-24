@@ -22,12 +22,12 @@ void rm::genparticles(){
         TLorentzVector lep1p4,lep2p4;
 	TLorentzVector photonp42;
 	TLorentzVector vp4;
-	double gen_pid[2]={0};
+
         for(int i=0;i<6;i++){
                 genphoton[i] = genphoton_pt[i]>20 &&( (fabs(genphoton_eta[i])<1.4442) || ( fabs(genphoton_eta[i])<2.5 && fabs(genphoton_eta[i])>1.566 ) );
                 genjet[i] = genjet_pt[i]>30 && fabs(genjet_eta[i])<4.7;
-                genmuon[i] =  genmuon_pt[i]>20 && fabs(genmuon_eta[i])<2.4;
-                genele[i] =  genelectron_pt[i]>25 && fabs(genelectron_eta[i])<2.5;
+                genmuon[i] = fabs(genmuon_pid[i])==13 && genmuon_pt[i]>20 && fabs(genmuon_eta[i])<2.4;
+                genele[i] = fabs(genmuon_pid[i])!=13 && genelectron_pt[i]>25 && fabs(genelectron_eta[i])<2.5;
 
 		if(genjet[i]) vector_jet.push_back(genjet_pt[i]);
 		else vector_jet.push_back(0);
@@ -50,7 +50,6 @@ void rm::genparticles(){
 		genlep1eta = genmuon_eta[muon1_index]; 
 		genlep1phi = genmuon_phi[muon1_index]; 
 		lep1p4.SetPtEtaPhiM(genlep1pt, genlep1eta, genlep1phi, 0.105666);
-                gen_pid[0]=13;
 	}
 //        cout<<"muon1 "<<*biggest_muon1<<" "<<genmuon_pid[muon1_index]<<endl;
    //muon2_index
@@ -62,13 +61,12 @@ void rm::genparticles(){
 		genlep2eta = genmuon_eta[muon2_index]; 
 		genlep2phi = genmuon_phi[muon2_index]; 
 		lep2p4.SetPtEtaPhiM(genlep2pt, genlep2eta, genlep2phi, 0.105666);
-                gen_pid[1]=13;
 	}        
 //        cout<<genlep1pt<<" "<<genlep1eta<<" "<<genlep2pt<<" "<<genlep2eta<<endl; 
    //ele1_index
       biggest_ele1=max_element(begin(vector_ele),end(vector_ele));
       ele1_index = distance( begin(vector_ele), biggest_ele1);
-        if(*biggest_ele1>0 ){
+        if(*biggest_ele1>0 && fabs(genmuon_pid[ele1_index]!=13)){
 		genlep1pt  = genelectron_pt[ele1_index];
 		genlep1eta = genelectron_eta[ele1_index]; 
 		genlep1phi = genelectron_phi[ele1_index]; 
@@ -81,13 +79,12 @@ void rm::genparticles(){
 		genlep1pt  = lep1p4.Pt();              
 		genlep1eta = lep1p4.Eta(); 
 		genlep1phi = lep1p4.Phi(); 
-		gen_pid[0]=11;
 	}
    //ele2_index
         vector_ele[ele1_index] = 0;
         biggest_ele2=max_element(begin(vector_ele),end(vector_ele));
 	ele2_index = distance( begin(vector_ele), biggest_ele2);
-	if(*biggest_ele2>0){ 
+	if(*biggest_ele2>0 && fabs(genmuon_pid[ele2_index]!=13)){ 
 		genlep2pt  = genelectron_pt[ele2_index];
 		genlep2eta = genelectron_eta[ele2_index]; 
 		genlep2phi = genelectron_phi[ele2_index]; 
@@ -101,10 +98,9 @@ void rm::genparticles(){
 		genlep2eta = lep2p4.Eta(); 
 		genlep2phi = lep2p4.Phi(); 
 	}
-	cout<<genlep1pt<<" "<<genmuon_pt[muon1_index]<<" "<<genelectron_pt[ele1_index]<<endl;
-        if(genlep1pt>0 && genlep2pt>0 && genlep1pt==genmuon_pt[muon1_index] )
+        if(genlep1pt>0 && genlep2pt>0 && fabs(genmuon_pid[muon1_index])==13 && fabs(genmuon_pid[muon2_index])==13)
 		genlep =13;
-        if(genlep1pt>0 && genlep2pt>0 && genlep1pt!=genmuon_pt[muon1_index])
+        if(genlep1pt>0 && genlep2pt>0 && fabs(genmuon_pid[ele1_index])!=13 && fabs(genmuon_pid[ele2_index])!=13)
 		genlep=11;
 //        cout<<genlep<<" "<<genlep1pt<<" "<<genlep1eta<<" "<<genlep2pt<<" "<<genlep2eta<<endl; 
 	genyVlep  =(lep1p4+lep2p4).Eta();

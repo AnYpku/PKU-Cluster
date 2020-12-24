@@ -28,6 +28,7 @@ void rm::Loop(TString tag)
    TH2F*h2_mistag_mc2017_L;TH2F*h2_mistag_mc2017_M;TH2F*h2_mistag_mc2017_T;
    TH2F*h2_eff_sf2017_L;TH2F*h2_eff_sf2017_M;TH2F*h2_eff_sf2017_T;
    TH2F*h2_mistag_sf2017_L;TH2F*h2_mistag_sf2017_M;TH2F*h2_mistag_sf2017_T;
+   TH2F*h_sys_M;TH2F*h_sys_L;TH2F*h_sys_T;
    if(tag.Contains("16")){
 	   file_ID_sys1=new TFile("./muon_SFs/EfficienciesStudies_2016_legacy_rereco_rootfiles_RunBCDEF_SF_ID.root");
 	   file_ID_sys2=new TFile("./muon_SFs/EfficienciesStudies_2016_legacy_rereco_rootfiles_RunGH_SF_ID.root");
@@ -81,6 +82,7 @@ void rm::Loop(TString tag)
            HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
 
 	   fPU=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/PUIDMaps.root");
+	   f1=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/PUID_80XTraining_EffSFandUncties.root");
 	   h2_eff_mc2017_L=(TH2F*)fPU->Get("h2_eff_mc2017_L");
 	   h2_eff_mc2017_M=(TH2F*)fPU->Get("h2_eff_mc2017_M");
 	   h2_eff_mc2017_T=(TH2F*)fPU->Get("h2_eff_mc2017_T");
@@ -195,6 +197,11 @@ void rm::Loop(TString tag)
 			   puIdweight_T=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);
 			   puIdweight_M=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium);
 			   puIdweight_L=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet2puIdLoose);
+			   puIdweight_M_effUp=get_puIdweight_effUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_effUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium,h_sys_M,"M");
+			   puIdweight_M_effDn=get_puIdweight_effDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_effDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium,h_sys_M,"M");
+			   puIdweight_M_misUp=get_puIdweight_misUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_misUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium,h_sys_M,"M");
+			   puIdweight_M_misDn=get_puIdweight_misDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_misDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium,h_sys_M,"M");
+//			   if(jentry%1000==0) cout<<puIdweight_M_effUp<<" "<<puIdweight_M_effDn<<" "<<puIdweight_M_misUp<<" "<<puIdweight_M_misDn<<endl;
 		   }
 		   if(tag.Contains("18")){
 			   if(fabs(photoneta)<1.4442){
@@ -277,5 +284,173 @@ Double_t rm::get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt
         if(MCweight!=0) puIdweight=Dataweight/MCweight;
         else puIdweight=1;
 
+        return puIdweight;
+}
+Double_t rm::get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type){
+        h_sys=(TH2F*)f1->Get("h2_eff_sf2017_"+type+"_Systuncty");
+        double DR1=1e4,DR2=1e4;
+        int ip1=-1,ip2=-1;
+        double MCweight=1,Dataweight=1,puIdweight=1;
+        for(int i=0;i<6;i++){
+                double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+                if(DR1_tmp<DR1){
+                        DR1=DR1_tmp;
+                        ip1=i;
+                }
+        }
+        if(DR1<0.4 && ak4jet_pt<50){
+                int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)+h_sys->GetBinContent(bin));
+                }
+                else{
+                        MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)+h_sys->GetBinContent(bin)));
+                }
+        }
+        else if(DR1>0.4 && ak4jet_pt<50){
+                int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin);
+                }
+                else{
+                        MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin));
+                }
+        }
+        else{
+                MCweight=1;
+                Dataweight=1;
+        }
+        if(MCweight!=0) puIdweight=Dataweight/MCweight;
+        else puIdweight=1;
+        return puIdweight;
+}
+Double_t rm::get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type){
+        h_sys=(TH2F*)f1->Get("h2_eff_sf2017_"+type+"_Systuncty");
+        double DR1=1e4,DR2=1e4;
+        int ip1=-1,ip2=-1;
+        double MCweight=1,Dataweight=1,puIdweight=1;
+        for(int i=0;i<6;i++){
+                double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+                if(DR1_tmp<DR1){
+                        DR1=DR1_tmp;
+                        ip1=i;
+                }
+        }
+        if(DR1<0.4 && ak4jet_pt<50){
+                int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)-h_sys->GetBinContent(bin));
+                }
+                else{
+                        MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*(h2_eff_sf2017->GetBinContent(bin)-h_sys->GetBinContent(bin)));
+                }
+        }
+        else if(DR1>0.4 && ak4jet_pt<50){
+                int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin);
+                }
+                else{
+                        MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*h2_mistag_sf2017->GetBinContent(bin));
+                }
+        }
+        else{
+                MCweight=1;
+                Dataweight=1;
+        }
+        if(MCweight!=0) puIdweight=Dataweight/MCweight;
+        else puIdweight=1;
+        return puIdweight;
+}
+Double_t rm::get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type){
+        h_sys=(TH2F*)f1->Get("h2_mistag_sf2017_"+type+"_Systuncty");
+        double DR1=1e4,DR2=1e4;
+        int ip1=-1,ip2=-1;
+        double MCweight=1,Dataweight=1,puIdweight=1;
+        for(int i=0;i<6;i++){
+                double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+                if(DR1_tmp<DR1){
+                        DR1=DR1_tmp;
+                        ip1=i;
+                }
+        }
+        if(DR1<0.4 && ak4jet_pt<50){
+                int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin);
+                }
+                else{
+                        MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin));
+                }
+        }
+        else if(DR1>0.4 && ak4jet_pt<50){
+                int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)+h_sys->GetBinContent(bin));
+                }
+                else{
+                        MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)+h_sys->GetBinContent(bin)) );
+                }
+        }
+        else{
+                MCweight=1;
+                Dataweight=1;
+        }
+        if(MCweight!=0) puIdweight=Dataweight/MCweight;
+        else puIdweight=1;
+        return puIdweight;
+}
+Double_t rm::get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type){
+        h_sys=(TH2F*)f1->Get("h2_mistag_sf2017_"+type+"_Systuncty");
+        double DR1=1e4,DR2=1e4;
+        int ip1=-1,ip2=-1;
+        double MCweight=1,Dataweight=1,puIdweight=1;
+        for(int i=0;i<6;i++){
+                double DR1_tmp=delta_R(ak4jet_eta,ak4jet_phi,genjet_eta[i],genjet_phi[i]);
+                if(DR1_tmp<DR1){
+                        DR1=DR1_tmp;
+                        ip1=i;
+                }
+        }
+        if(DR1<0.4 && ak4jet_pt<50){
+                int bin=h2_eff_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_eff_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin);
+                }
+                else{
+                        MCweight=MCweight*(1-h2_eff_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_eff_mc2017->GetBinContent(bin)*h2_eff_sf2017->GetBinContent(bin));
+                }
+        }
+        else if(DR1>0.4 && ak4jet_pt<50){
+                int bin=h2_mistag_mc2017->FindBin(ak4jet_pt,ak4jet_eta);
+                if(ak4jet_puId==1){
+                        MCweight=MCweight*h2_mistag_mc2017->GetBinContent(bin);
+                        Dataweight=Dataweight*h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)-h_sys->GetBinContent(bin));
+                }
+                else{
+                        MCweight=MCweight*(1-h2_mistag_mc2017->GetBinContent(bin));
+                        Dataweight=Dataweight*(1-h2_mistag_mc2017->GetBinContent(bin)*(h2_mistag_sf2017->GetBinContent(bin)-h_sys->GetBinContent(bin)) );
+                }
+        }
+        else{
+                MCweight=1;
+                Dataweight=1;
+        }
+        if(MCweight!=0) puIdweight=Dataweight/MCweight;
+        else puIdweight=1;
         return puIdweight;
 }

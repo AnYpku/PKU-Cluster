@@ -508,6 +508,13 @@ public :
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString tag);
    virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+   virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+
+   virtual Double_t get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+
+   virtual Double_t get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+
+   virtual Double_t get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     endJob();
@@ -543,6 +550,7 @@ public :
    vector<double> vector_photon,vector_jet,vector_muon,vector_ele;
    vector<double>::iterator biggest_photon,biggest_jet1,biggest_jet2,biggest_muon1,biggest_muon2,biggest_ele1,biggest_ele2;
 
+   TFile*f1;
  private:
      TTree *ExTree;
      TFile *fout;
@@ -564,6 +572,10 @@ public :
      double puIdweight_L;
      double puIdweight_M;
      double puIdweight_T;
+     double puIdweight_T_effUp,puIdweight_M_effUp,puIdweight_L_effUp;
+     double puIdweight_T_effDn,puIdweight_M_effDn,puIdweight_L_effDn;
+     double puIdweight_T_misUp,puIdweight_M_misUp,puIdweight_L_misUp;
+     double puIdweight_T_misDn,puIdweight_M_misDn,puIdweight_L_misDn;
 };
 
 #endif
@@ -583,7 +595,7 @@ rm::rm(TTree *tree,TString dataset,TString year) : fChain(0)
 
 	}
 	m_dataset=dataset;
-        tag=year;
+	tag=year;
 	Init(tree);
 }
 
@@ -628,7 +640,8 @@ void rm::Init(TTree *tree)
 	fCurrent = -1;
 	fChain->SetMakeClass(1);
 
-	fout = new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_"+m_dataset, "RECREATE");
+//	fout = new TFile("/home/pku/anying/cms/rootfiles/unfold_"+m_dataset, "RECREATE");
+	fout = new TFile("unfold_"+m_dataset, "RECREATE");
 	ExTree = fChain->CloneTree(0);
 	ExTree->Branch("scalef",&scalef,"scalef/D");
 	ExTree->Branch("nentries",&nentries,"nentries/I");
@@ -648,6 +661,21 @@ void rm::Init(TTree *tree)
 	ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
 	ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
 	ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
+        ExTree->Branch("puIdweight_T_effUp",&puIdweight_T_effUp);
+        ExTree->Branch("puIdweight_L_effUp",&puIdweight_L_effUp);
+        ExTree->Branch("puIdweight_M_effUp",&puIdweight_M_effUp);
+
+        ExTree->Branch("puIdweight_T_effDn",&puIdweight_T_effDn);
+        ExTree->Branch("puIdweight_L_effDn",&puIdweight_L_effDn);
+        ExTree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn);
+
+        ExTree->Branch("puIdweight_T_misUp",&puIdweight_T_misUp);
+        ExTree->Branch("puIdweight_L_misUp",&puIdweight_L_misUp);
+        ExTree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp);
+
+        ExTree->Branch("puIdweight_T_misDn",&puIdweight_T_misDn);
+        ExTree->Branch("puIdweight_L_misDn",&puIdweight_L_misDn);
+        ExTree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn);
 	// lep and photon scales
 	ExTree->Branch("genyVlep",     &genyVlep,     "genyVlep/D");
 	ExTree->Branch("genphiVlep",   &genphiVlep,   "genphiVlep/D");

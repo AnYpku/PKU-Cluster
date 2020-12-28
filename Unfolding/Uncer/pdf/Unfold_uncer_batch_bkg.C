@@ -10,41 +10,65 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
              tree->SetBranchStatus(vec_branchname[i],1);
 	     tree->SetBranchAddress(vec_branchname[i], &variables[vec_branchname[i]]);
      }
-     Double_t scalef,pileupWeight,pweight[703];
+     Double_t scalef,pileupWeight,pweight[703],prefWeight;
      double Mjj,deltaetajj;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     int lep;
+     tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("deltaetajj",&deltaetajj);
      tree->SetBranchAddress("scalef",&scalef);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
      tree->SetBranchAddress("pweight",pweight);
+     tree->SetBranchAddress("prefWeight",&prefWeight);
+     tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
+     tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
+     tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
+     tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
+     tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
+     tree->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+     tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
+     tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
+     tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
+     tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
-     double actualWeight[num];
+     double actualWeight[num],weight;
      TH1D*th1[num][kk];
      TString th1name[num][kk];
      Double_t mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      for(Int_t i=0;i<num;i++){
-             for(int j=0;j<kk;j++){
+	     for(int j=0;j<kk;j++){
 		     th1name[i][j]=vec_branchname[j]+Form("_%d",i);
-                     if(vec_branchname[j].Contains("Mjj")==0)
-			  th1[i][j] = new TH1D(th1name[i][j],th1name[i][j],bins[j].size()-1,&bins[j][0]);
+		     if(vec_branchname[j].Contains("Mjj")==0)
+			     th1[i][j] = new TH1D(th1name[i][j],th1name[i][j],bins[j].size()-1,&bins[j][0]);
 		     else th1[i][j] = new TH1D(th1name[i][j],th1name[i][j],7,0,7);
 	     }
      }      
      cout<<tag<<" "<<name<<endl;
      for(int k=0;k<tree->GetEntries();k++){
-             tree->GetEntry(k);
+	     tree->GetEntry(k);
 	     int p=0;
 	     int init;
+	     if(tag.Contains("18")) prefWeight=1;
+	     if(tag.Contains("17")==0) puIdweight_M=1;
+	     weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+	     if(lep==11)
+		     weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
+	     if(lep==13)
+		     weight=weight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
 	     if(tag.Contains("16")&&name.Contains("EWK"))
 		     init=9;//16 ewk
 	     else if(tag.Contains("16")&&name.Contains("EWK")==0)
 		     init=0;//16 qcd
 	     else if(( tag.Contains("17")||tag.Contains("18"))&&name.Contains("EWK"))
 		     init=45;//17 ewk,18 ewk
-             
+
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=init;i<(num+init);i++){
-			     actualWeight[p]=scalef*pweight[i]*pileupWeight;
+			     actualWeight[p]=weight*pweight[i];
 			     for(int j=0;j<kk;j++){
 				     if(vec_branchname[j].Contains("Mjj")==0){
 					     th1[p][j]->Fill(variables[vec_branchname[j]],actualWeight[p]);
@@ -73,7 +97,7 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      TFile*fout[kk];
      for(int j=0;j<kk;j++){
 	     if(name.Contains("EWK")==0){
-			     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_qcd_pdf"+tag+".root","recreate");
+		     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_qcd_pdf"+tag+".root","recreate");
 	     }
 	     else{
 		     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_Sigout_pdf"+tag+".root","recreate");
@@ -123,22 +147,22 @@ int Unfold_uncer_batch_bkg(){
 	TFile*file1[3];
 	TFile*file2[3];
 
-	//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-	//	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
-	vector<TString> genvars={"genMjj"};
-	vector<TString> recovars={"Mjj"};
+	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+//	vector<TString> genvars={"genMjj"};
+//	vector<TString> recovars={"Mjj"};
 	vector<TString> tag={"16","17","18"};
 	for(int i=0;i<3;i++){
 		if(tag[i].Contains("17")){
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{
-			jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
+			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut2 ="("+Reco+")";
 		TString cut1 ="(("+Reco+")&& !("+Gen+"))";
-		if(tag[i].Contains("17")) continue;
+//		if(tag[i].Contains("17")) continue;
 		dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
 		file1[i]=new TFile(dir[i]+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
 		file2[i]=new TFile(dir[i]+"cutla-outZA"+tag[i]+".root");

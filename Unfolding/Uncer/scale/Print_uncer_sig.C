@@ -14,8 +14,10 @@ void run(TString var,int i,TString tag){
         }//combine overflow bin
 	for(int k=0;k<kk;k++){
             cout<<index<<" genbin"<<k+1<<" "<<h1[0]->GetBinContent(k+1)<<" "<<fabs(h1[1]->GetBinContent(k+1)-h1[2]->GetBinContent(k+1))<<endl;
-            double error;
-	    if(h1[0]->GetBinContent(k+1)>0) error=fabs(h1[1]->GetBinContent(k+1)-h1[2]->GetBinContent(k+1))/2/h1[0]->GetBinContent(k+1);
+            double error,factor1=1,factor2=1;
+            factor1=h1[0]->Integral()/h1[1]->Integral();
+            factor2=h1[0]->Integral()/h1[2]->Integral();
+	    if(h1[0]->GetBinContent(k+1)!=0) error=fabs(factor1*h1[1]->GetBinContent(k+1)-factor2*h1[2]->GetBinContent(k+1))/2/h1[0]->GetBinContent(k+1);
 	    else error=0;
             ftxt<<error<<endl;
 	}
@@ -54,7 +56,7 @@ int Print_uncer_sig(){
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
      vector<TString> tag={"16","17","18"};
      for(int k=0;k<tag.size();k++){
-	     if(tag[k].Contains("17")) continue;
+//	     if(tag[k].Contains("17")) continue;
 	     for(int i=0;i<genvars.size();i++){
 		     for(int j=1;j<bins[i].size();j++){//open the jth recobin root file of the ith gen variables
 			     run(genvars[i],j,tag[k]);

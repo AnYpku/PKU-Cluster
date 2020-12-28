@@ -1,11 +1,11 @@
 #!/bin/bash/
 #rm *.txt
-#cp ../txt/*16*.txt ./
-#cp ../CR/txt/*16*.txt ./
-#cp ../txt/*17*.txt ./
-#cp ../CR/txt/*17*.txt ./
-#cp ../txt/*18*.txt ./
-#cp ../CR/txt/*18*.txt ./
+cp ../txt/*16*.txt ./
+cp ../CR/txt/*16*.txt ./
+cp ../txt/*17*.txt ./
+cp ../CR/txt/*17*.txt ./
+cp ../txt/*18*.txt ./
+cp ../CR/txt/*18*.txt ./
 combineCards.py mubarrel_16_* muendcap_16_* elebarrel_16_* eleendcap_16_* >& full16_test.txt
 combineCards.py mubarrel_17_* muendcap_17_* elebarrel_17_* eleendcap_17_* >& full17_test.txt
 combineCards.py mubarrel_18_* muendcap_18_* elebarrel_18_* eleendcap_18_* >& full18_test.txt

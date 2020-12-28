@@ -256,7 +256,7 @@ int unroll_test(){
        vector<TString> tags={"16","17","18"};
        vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
        for(int i=0;i<channels.size();i++){
-	       for(int j=0;j<1;j++){
+	       for(int j=0;j<3;j++){
 		       unroll_run(channels[i],tags[j]);
 	       }
        }

@@ -13,7 +13,7 @@ observation 40.73
 bin	elebarrel7	elebarrel7	elebarrel7	elebarrel7	elebarrel7	elebarrel7	elebarrel7
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	2.96	21.09	15.93	0.09	0.31	0.00	0.35
+rate	2.99	21.09	15.93	0.09	0.31	0.00	0.32
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015
 VBS_Stat_bin7_elebarrel18	lnN	1.05	-	-	-	-	-	-
@@ -22,12 +22,12 @@ non_prompt_Stat_bin7_elebarrel18	lnN	-	-	1.16	-	-	-	-
 TTA_Stat_bin7_elebarrel18	lnN	-	-	-	2.00	-	-	-
 VV_Stat_bin7_elebarrel18	lnN	-	-	-	-	2.00	-	-
 ST_Stat_bin7_elebarrel18	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin7_elebarrel18	lnN	-	-	-	-	-	-	1.14
-Stat group = VBS_Stat_bin7_elebarrel18 QCD_Stat_bin7_elebarrel18 non_prompt_Stat_bin7_elebarrel18 
+ZA_SigOut_Stat_bin7_elebarrel18	lnN	-	-	-	-	-	-	1.15
+Stat group = VBS_Stat_bin7_elebarrel18 QCD_Stat_bin7_elebarrel18 non_prompt_Stat_bin7_elebarrel18 VV_Stat_bin7_elebarrel18 ZA_SigOut_Stat_bin7_elebarrel18 
 fake_elebarrel18	lnN	-	-	1.08	-	-	-	-
 fake group = fake_elebarrel18 
-JES_18	lnN	1.02	1.55	-	1.11	1.16	1.40	1.06
-JER_18	lnN	1.01	1.39	-	1.09	1.29	1.16	1.01
+JES_18	lnN	1.03	1.55	-	1.09	1.16	1.39	1.20
+JER_18	lnN	1.01	1.39	-	1.08	1.28	1.13	1.07
 JESR group = JES_18 JER_18
 pdf_EW	lnN	1.002	-	-	-	-	-	1.002
 pdf_QCD	lnN	-	1.01	-	-	-	-	-

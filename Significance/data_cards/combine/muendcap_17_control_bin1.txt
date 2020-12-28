@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 5   number of processes-1
-kmax 23  number of nuisance parameters (sources of systematical uncertainties)
+kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap1
-observation 307.71
+observation 270.75
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,28 +13,30 @@ observation 307.71
 bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	2.82	148.03	148.44	3.86	3.78	0.77
+rate	2.69	134.14	126.05	3.70	3.66	0.51
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
-VBS_Stat_control_bin1_muendcap17	lnN	1.07	-	-	-	-	-
+VBS_Stat_control_bin1_muendcap17	lnN	1.06	-	-	-	-	-
 QCD_Stat_control_bin1_muendcap17	lnN	-	1.04	-	-	-	-
 non_prompt_Stat_control_bin1_muendcap17	lnN	-	-	1.04	-	-	-
 TTA_Stat_control_bin1_muendcap17	lnN	-	-	-	1.18	-	-
 VV_Stat_control_bin1_muendcap17	lnN	-	-	-	-	1.28	-
-ST_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	1.49
+ST_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	1.55
 fake_muendcap17	lnN	-	-	1.22	-	-	-
-JES_17	lnN	1.02	1.15	-	1.06	1.15	1.02
-JER_17	lnN	1.02	1.11	-	1.01	1.17	1.02
-pdf_EW	lnN	1.00	-	-	-	-	-
+JES_17	lnN	1.13	1.23	-	1.51	1.55	1.02
+JER_17	lnN	1.13	1.21	-	1.71	1.45	1.10
+pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.01	-	-	-	-
 Scale_EW	lnN	1.00	-	-	-	-	-
 Scale_QCD	lnN	-	1.15	-	-	-	-
 Scale_QCD_extra	lnN	-	1.00/0.99	-	-	-	-
 interf	lnN	1.14	-	-	-	-	-
-mu_trigger17	lnN	1.02	1.02	-	1.02	1.02	1.02
+mu_trigger	lnN	1.02	1.02	-	1.02	1.02	1.02
 mu_eff	lnN	1.012	1.012	-	1.012	1.012	1.012
 photon_id	lnN	1.031	1.031	-	1.031	1.031	1.031
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
+pileupId_eff	lnN	1.03	1.01	-	1.00	1.01	1.01
+pileupId_mis	lnN	1.01	1.00	-	1.00	1.00	1.00
 l1pref	lnN	1.02	1.02	-	1.02	1.02	1.02

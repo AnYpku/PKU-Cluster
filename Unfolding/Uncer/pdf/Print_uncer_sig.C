@@ -10,7 +10,7 @@ void run(TString var,int i,TString tag){
 	else if(tag.Contains("17"))
 		lumi=41.52;
 	else if(tag.Contains("18"))
-		lumi=58.7;
+		lumi=59.7;
         TH1D*h1[num];
         cout<<"./root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root"<<endl;
 	for(int j=0;j<num;j++){
@@ -24,9 +24,11 @@ void run(TString var,int i,TString tag){
 	for(int k=0;k<kk;k++){
             double error=0;
 	    double diff=0,sum=0;
+            double factor=1;
             for(int j=0;j<num;j++){
+	       factor=h1[0]->Integral()/h1[j]->Integral();
                double center=h1[0]->GetBinContent(k+1);
-               diff=h1[j]->GetBinContent(k+1)-center;
+               diff=factor*h1[j]->GetBinContent(k+1)-center;
 	       sum+=pow(diff,2);
 	    }
 	    if(sum!=0)
@@ -74,7 +76,7 @@ int Print_uncer_sig(){
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
      vector<TString> tag={"16","17","18"};
      for(int k=0;k<tag.size();k++){
-             if(tag[k].Contains("17")) continue;
+//             if(tag[k].Contains("17")) continue;
 	     for(int i=0;i<genvars.size();i++){
 		     for(int j=1;j<bins[i].size();j++){//open the jth recobin root file of the ith gen variables
 			     run(genvars[i],j,tag[k]);

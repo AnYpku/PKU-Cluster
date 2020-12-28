@@ -18,8 +18,8 @@ files="\
 full16_test.root
 full17_test.root
 full18_test.root
-full_RunII.root
 "
+#full_RunII.root
 for rootfile in $files
 do
 name=`echo $rootfile | awk -F. '{print $1}'`
@@ -38,63 +38,63 @@ sed -i ':label;N;s/\n/,/;t label' tmp
 mv tmp freeze_${name}.txt
 NP=`cat freeze_${name}.txt`
 #echo "$NP"
-#combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n nominal_${name} ${name}.root --expectSignal=1 
+combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n nominal_${name} ${name}.root --expectSignal=1 
 #-t -1 
-#combine -M MultiDimFit --algo none --rMin 0.2 --rMax 4 -m 125 -n bestfit_${name} --saveWorkspace ${name}.root --expectSignal=1  
+combine -M MultiDimFit --algo none --rMin 0.2 --rMax 4 -m 125 -n bestfit_${name} --saveWorkspace ${name}.root --expectSignal=1  
 #-t -1 
-#combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n stat_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --expectSignal=1 #-t -1 
+combine -M MultiDimFit --algo grid --points 50 --rMin 0.2 --rMax 4 -m 125 -n stat_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --expectSignal=1 #-t -1 
 
 
-#combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n theory_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups theory --expectSignal=1
+combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n theory_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups theory --expectSignal=1
 
-#combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n Stat_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups Stat --expectSignal=1
+combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n Stat_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups Stat --expectSignal=1
 
-#combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n JESR_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups JESR --expectSignal=1
+combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n JESR_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups JESR --expectSignal=1
 
-#combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n muon_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups muon --expectSignal=1
+combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n muon_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups muon --expectSignal=1
 
 combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n ele_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups egamma --expectSignal=1
 
-#combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n Others_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups Others --expectSignal=1
+combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n Others_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups Others --expectSignal=1
 
-#combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n fake_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups fake --expectSignal=1
+combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n fake_${name} higgsCombinebestfit_${name}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeNuisanceGroups fake --expectSignal=1
 
-#plot1DScan.py higgsCombinenominal.MultiDimFit.mH125.root \
-#--others 'higgsCombinestat.MultiDimFit.mH125.root:Freeze all:2' \
-#--breakdown syst,stat
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root \
+--others "higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown syst,stat
 
-#plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
-#"higgsCombinetheory_${name}.MultiDimFit.mH125.root:Freeze th.:4" \
-#"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
-#--breakdown theory,syst,stat -o scan_freeze_theory_${name}
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
+"higgsCombinetheory_${name}.MultiDimFit.mH125.root:Freeze th.:4" \
+"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown theory,syst,stat -o scan_freeze_theory_${name}
 #
-#plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
-#"higgsCombineStat_${name}.MultiDimFit.mH125.root:Freeze MCstat.:4" \
-#"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
-#--breakdown MCstat,syst,stat -o scan_freeze_MCstat_${name}
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
+"higgsCombineStat_${name}.MultiDimFit.mH125.root:Freeze MCstat.:4" \
+"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown MCstat,syst,stat -o scan_freeze_MCstat_${name}
 #
-#plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
-#"higgsCombineJESR_${name}.MultiDimFit.mH125.root:Freeze JESR.:4" \
-#"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
-#--breakdown JESR,syst,stat -o scan_freeze_JESR_${name}
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
+"higgsCombineJESR_${name}.MultiDimFit.mH125.root:Freeze JESR.:4" \
+"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown JESR,syst,stat -o scan_freeze_JESR_${name}
 #
 plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
 "higgsCombineele_${name}.MultiDimFit.mH125.root:Freeze egamma:4" \
 "higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
 --breakdown egammaEff,syst,stat -o scan_freeze_egamma_${name}
 #
-#plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
-#"higgsCombinemuon_${name}.MultiDimFit.mH125.root:Freeze muon:4" \
-#"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
-#--breakdown muonEff,syst,stat -o scan_freeze_muon_${name}
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
+"higgsCombinemuon_${name}.MultiDimFit.mH125.root:Freeze muon:4" \
+"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown muonEff,syst,stat -o scan_freeze_muon_${name}
 #
-#plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
-#"higgsCombineOthers_${name}.MultiDimFit.mH125.root:Freeze Others.:4" \
-#"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
-#--breakdown Others,syst,stat -o scan_freeze_Others_${name}
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
+"higgsCombineOthers_${name}.MultiDimFit.mH125.root:Freeze Others.:4" \
+"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown Others,syst,stat -o scan_freeze_Others_${name}
 
-#plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
-#"higgsCombinefake_${name}.MultiDimFit.mH125.root:Freeze Others.:4" \
-#"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
-#--breakdown Others,syst,stat -o scan_freeze_fake_${name}
+plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
+"higgsCombinefake_${name}.MultiDimFit.mH125.root:Freeze Others.:4" \
+"higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
+--breakdown Others,syst,stat -o scan_freeze_fake_${name}
 done

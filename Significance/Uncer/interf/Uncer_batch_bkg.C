@@ -49,8 +49,6 @@ TH1D* run( TString sample,TString tag,TString cut1){
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
-     tree->SetBranchAddress("muon1_track_scale", &muon1_track_scale);
-     tree->SetBranchAddress("muon2_track_scale", &muon2_track_scale);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
 //     TH1D*th1[kk];
      TString th1name;

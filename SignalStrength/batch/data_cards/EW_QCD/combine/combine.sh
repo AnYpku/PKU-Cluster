@@ -1,6 +1,6 @@
 #!/bin/bash/
-rm *.txt
-rm *.root
+#rm *.txt
+#rm *.root
 cp ../txt/*16*.txt ./
 cp ../txt/*17*.txt ./
 cp ../txt/*18*.txt ./

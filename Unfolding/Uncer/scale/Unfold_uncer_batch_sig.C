@@ -4,16 +4,34 @@ void run( TFile*file,TString vec_branchname,TString reco,vector<double> bins,TSt
 	//     tree->SetBranchStatus("*",0);
 	map<TString, double> variables;
 	double Mjj,deltaetajj,gendetajj;
-	Double_t scalef,pileupWeight,pweight[703];
+	Double_t scalef,pileupWeight,pweight[703],prefWeight;
+	double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+	int lep;
+	tree->SetBranchAddress("lep",&lep);
 	tree->SetBranchAddress("scalef",&scalef);
 	tree->SetBranchAddress("pileupWeight",&pileupWeight);
+	tree->SetBranchAddress("prefWeight",&prefWeight);
+	tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
 	tree->SetBranchAddress("deltaetajj",&deltaetajj);
 	tree->SetBranchAddress("gendetajj",&gendetajj);
 	tree->SetBranchAddress("pweight",pweight);
+	tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
+	tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
+	tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
+	tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
+	tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
+	tree->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+	tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
+	tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
+	tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
+	tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+	tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+	tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
+	tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
 	tree->SetBranchAddress(vec_branchname, &variables[vec_branchname]);
 	tree->SetBranchAddress(reco, &variables[reco]);
 	TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
-	double actualWeight[num];
+	double actualWeight[num],weight;
 	TH1D*th1[num][kk];
 	TH2D*th2[num][kk];
 	TString th1name[num][kk];
@@ -28,6 +46,13 @@ void run( TFile*file,TString vec_branchname,TString reco,vector<double> bins,TSt
 	}
 	for(int k=0;k<tree->GetEntries();k++){
 		tree->GetEntry(k);
+		if(tag.Contains("18")) prefWeight=1;
+		if(tag.Contains("17")==0) puIdweight_M=1;
+		weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+		if(lep==11)
+			weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
+		if(lep==13)
+			weight=weight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
 		if ( ! tformula->EvalInstance() ) continue;
 		int p=0;
 		for(Int_t i=0;i<(num);i++){//Loop scale variation
@@ -35,7 +60,7 @@ void run( TFile*file,TString vec_branchname,TString reco,vector<double> bins,TSt
 			if(tag.Contains("16")==0)
 				k=15*i;
 			else    k=i;
-			actualWeight[p]=scalef*pweight[k]*pileupWeight;
+			actualWeight[p]=weight*pweight[k];
 			if(vec_branchname.Contains("Mjj")==0){
 				for(Int_t j=0;j<kk;j++){
 					if(j<kk-1 && variables[reco]>bins[j]&&variables[reco]<bins[j+1]){
@@ -49,46 +74,16 @@ void run( TFile*file,TString vec_branchname,TString reco,vector<double> bins,TSt
 			else{
 				for(int iy=0;iy<3;iy++){
 					for(int ix=0;ix<3;ix++){
-						if(variables[vec_branchname]<2000 && gendetajj<6.5){
-							if(ix<2&&iy<2&&variables[reco]>mjj_bins[ix]&&variables[reco]<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
-							if(ix==2&&iy<2&&variables[reco]>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
-							if(ix<2&&iy==2&&variables[reco]>mjj_bins[ix]&& variables[reco]<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
-							if(ix==2&&iy==2 && variables[reco]>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
-						}
-						else if(variables[vec_branchname]>2000 && gendetajj<6.5){
-							if(ix<2&&iy<2&&variables[reco]>mjj_bins[ix]&&variables[reco]<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(1999,gendetajj,actualWeight[p]);
-							if(ix==2&&iy<2&&variables[reco]>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(1999,gendetajj,actualWeight[p]);
-							if(ix<2&&iy==2&&variables[reco]>mjj_bins[ix]&& variables[reco]<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(1999,gendetajj,actualWeight[p]);
-							if(ix==2&&iy==2 && variables[reco]>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(1999,gendetajj,actualWeight[p]);
-						}
-						else if(variables[vec_branchname]<2000 && gendetajj>6.5){
-							if(ix<2&&iy<2&&variables[reco]>mjj_bins[ix]&&variables[reco]<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],6.1,actualWeight[p]);
-							if(ix==2&&iy<2&&variables[reco]>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],6.1,actualWeight[p]);
-							if(ix<2&&iy==2&&variables[reco]>mjj_bins[ix]&& variables[reco]<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],6.1,actualWeight[p]);
-							if(ix==2&&iy==2 && variables[reco]>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],6.1,actualWeight[p]);
-						}
-						else{
-							if(ix<2&&iy<2&&variables[reco]>mjj_bins[ix]&&variables[reco]<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(1999,6.1,actualWeight[p]);
-							if(ix==2&&iy<2&&variables[reco]>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
-								th2[p][ix+(iy)*3]->Fill(1999,6.1,actualWeight[p]);
-							if(ix<2&&iy==2&&variables[reco]>mjj_bins[ix]&& variables[reco]<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(1999,6.1,actualWeight[p]);
-							if(ix==2&&iy==2 && variables[reco]>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
-								th2[p][ix+(iy)*3]->Fill(1999,6.1,actualWeight[p]);
-						}
+						if(variables[vec_branchname]>2000) variables[vec_branchname]=1999;
+						if(gendetajj>6.5) gendetajj=6.1;
+						if(ix<2&&iy<2&&variables[reco]>mjj_bins[ix]&&variables[reco]<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+							th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
+						if(ix==2&&iy<2&&variables[reco]>mjj_bins[ix]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
+							th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
+						if(ix<2&&iy==2&&variables[reco]>mjj_bins[ix]&& variables[reco]<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
+							th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
+						if(ix==2&&iy==2 && variables[reco]>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
+							th2[p][ix+(iy)*3]->Fill(variables[vec_branchname],gendetajj,actualWeight[p]);
 					}
 				}
 
@@ -152,7 +147,7 @@ int Unfold_uncer_batch_sig(){
 	vector<TString> tag={"16","17","18"};
 	for(int i=0;i<3;i++){
 		if(tag[i].Contains("17")){
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
@@ -160,7 +155,7 @@ int Unfold_uncer_batch_sig(){
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-		if(tag[i].Contains("17")) continue;
+//		if(tag[i].Contains("17")) continue;
 		dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
 		file[i]=new TFile(dir[i]+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
 		for(int j=0;j<genvars.size();j++){

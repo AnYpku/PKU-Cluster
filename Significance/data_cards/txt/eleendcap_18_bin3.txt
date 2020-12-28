@@ -4,7 +4,7 @@ kmax 22  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap3
-observation 2.50
+observation 2.51
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,19 +13,19 @@ observation 2.50
 bin	eleendcap3	eleendcap3	eleendcap3	eleendcap3	eleendcap3	eleendcap3
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	1.30	0.81	0.27	0.12	0.00	0.00
+rate	1.33	0.79	0.27	0.12	0.00	0.00
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015
-VBS_Stat_bin3_eleendcap18	lnN	1.13	-	-	-	-	-
-QCD_Stat_bin3_eleendcap18	lnN	-	1.52	-	-	-	-
+VBS_Stat_bin3_eleendcap18	lnN	1.08	-	-	-	-	-
+QCD_Stat_bin3_eleendcap18	lnN	-	1.53	-	-	-	-
 non_prompt_Stat_bin3_eleendcap18	lnN	-	-	2.00	-	-	-
 TTA_Stat_bin3_eleendcap18	lnN	-	-	-	2.00	-	-
 VV_Stat_bin3_eleendcap18	lnN	-	-	-	-	1.00	-
 ST_Stat_bin3_eleendcap18	lnN	-	-	-	-	-	1.00
 fake_eleendcap18	lnN	-	-	1.17	-	-	-
-JES_18	lnN	1.06	1.14	-	1.19	1.00	1.00
-JER_18	lnN	1.01	1.10	-	1.14	1.20	1.00
-pdf_EW	lnN	1.00	-	-	-	-	-
+JES_18	lnN	1.06	1.13	-	1.19	1.22	1.00
+JER_18	lnN	1.00	1.11	-	1.14	1.20	1.00
+pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.02	-	-	-	-
 Scale_EW	lnN	1.09	-	-	-	-	-
 Scale_QCD	lnN	-	1.25	-	-	-	-

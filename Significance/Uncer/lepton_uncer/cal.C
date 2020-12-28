@@ -38,7 +38,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 		ISO_muon_sys=(TH2D*)file_ISO_sys1->Get("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta_syst");
 		ISO_muon_stat1=(TH2D*)file_ISO_sys1->Get("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta_syst");
 //		file_ID_sys1->Close();file_ISO_sys1->Close();
-                f_hltmu=new TFile("./muon_SFs/muon_HLT_SF17.root");
+                f_hltmu=new TFile("./muon_SFs/muon_HLT_SF16.root");
                 HLT_mu=(TH2D*)f_hltmu->Get("h2");
 	}
 	if(particle.Contains("muon")&&tag.Contains("18")){
@@ -47,7 +47,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 		ID_muon_stat1=(TH2D*)file_ID_sys1->Get("NUM_TightID_DEN_TrackerMuons_pt_abseta");
 		ISO_muon_stat1=(TH2D*)file_ISO_sys1->Get("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta");
 //		file_ID_sys1->Close();file_ISO_sys1->Close();
-                f_hltmu=new TFile("./muon_SFs/muon_HLT_SF18.root");
+                f_hltmu=new TFile("./muon_SFs/muon_HLT_SF16.root");
                 HLT_mu=(TH2D*)f_hltmu->Get("h2");
 	}
 	if(particle.Contains("ele")&&tag.Contains("16")){
@@ -88,7 +88,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	}
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
-	fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-ZA-EWK"+tag+".root");
+	fin=new TFile("/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_ZA-EWK"+tag+".root");
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
 	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 	TString th1name[3];
@@ -97,18 +97,17 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
                    th1[i] = new TH1D(th1name[i],th1name[i],9,0,9);
 		   th1[i]->Sumw2();
 	}
-	TTree*tree=(TTree*)fin->Get("ZPKUCandidates");
+	TTree*tree=(TTree*)fin->Get("outtree");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2;
 	double muon1_id_scale,muon2_id_scale,ele1_id_scale,ele2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,ele_hlt_scale,muon_hlt_scale;
         int lep;double Mjj,deltaetajj,jet1eta,jet2eta;
-	double scalef,pileupWeight,prefWeight,photon_veto_scale;
+	double scalef,pileupWeight,prefWeight,photon_veto_scale,puIdweight_M;
 	map<TString, double> variables;
         tree->SetBranchAddress("lep",&lep);
         tree->SetBranchAddress("Mjj",&Mjj);
         tree->SetBranchAddress("jet1eta",&jet1eta);
         tree->SetBranchAddress("jet2eta",&jet2eta);
-        tree->SetBranchAddress("deltaetajj",&deltaetajj);
 	tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
 	tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
 	tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
@@ -123,6 +122,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	tree->SetBranchAddress("scalef", &scalef);
 	tree->SetBranchAddress("pileupWeight", &pileupWeight);
 	tree->SetBranchAddress("prefWeight", &prefWeight);
+	tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
 	tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
 	tree->SetBranchAddress("ptlep1",&ptlep1);
 	tree->SetBranchAddress("ptlep2",&ptlep2);
@@ -143,6 +143,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 		ele_WeightUp=0,ele_WeightDn=0,ele_Weight=0;
 		photon_WeightUp=0,photon_WeightDn=0,photon_Weight=0;
 		if(tag.Contains("18")) prefWeight=1;
+		if(tag.Contains("17")==0) puIdweight_M=1;
 		double detajj=fabs(jet1eta-jet2eta);
 		if(particle.Contains("muon")&&tag.Contains("16")&&lep==13){
 			muon1_ID_Uncer=sqrt( pow(get_muon_ID_sys16(etalep1,ptlep1,ID_muon_sys1,ID_muon_sys2),2)+ pow(get_muon_ID_stat16(etalep1,ptlep1,ID_muon_stat1,ID_muon_stat2),2)  );
@@ -150,14 +151,14 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			muon1_ISO_Uncer=sqrt(  pow(get_muon_iso_sys16(etalep1,ptlep1,ISO_muon_sys1,ISO_muon_sys2),2)+ pow(get_muon_iso_stat16(etalep1,ptlep1,ISO_muon_stat1,ISO_muon_stat2),2) );
 			muon2_ISO_Uncer=sqrt(  pow(get_muon_iso_sys16(etalep2,ptlep2,ISO_muon_sys1,ISO_muon_sys2),2)+ pow(get_muon_iso_stat16(etalep2,ptlep2,ISO_muon_stat1,ISO_muon_stat2),2) );
 			muon_hlt_Uncer=muon_HLT_scale_sys(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
-			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale;
+			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*puIdweight_M*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale;
 			if(type.Contains("trigger")){
-				muon_WeightUp=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale+muon_hlt_Uncer);
-				muon_WeightDn=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale-muon_hlt_Uncer);
+				muon_WeightUp=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*puIdweight_M*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale+muon_hlt_Uncer);
+				muon_WeightDn=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*puIdweight_M*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale-muon_hlt_Uncer);
 			}
 			else{
-				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
-				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
+				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
+				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
 			}
 			if(k%5000==0){
 				cout<<tag<<" get muon "<<type<<" SFs "<<muon_Weight<<" "<<muon_WeightUp<<" "<<muon_WeightDn<<endl;
@@ -170,14 +171,14 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			muon1_ISO_Uncer=sqrt(  pow(get_muon_iso_sys(etalep1,ptlep1,ISO_muon_sys),2)+ pow(get_muon_iso_stat(etalep1,ptlep1,ISO_muon_stat1),2) );
 			muon2_ISO_Uncer=sqrt(  pow(get_muon_iso_sys(etalep2,ptlep2,ISO_muon_sys),2)+ pow(get_muon_iso_stat(etalep2,ptlep2,ISO_muon_stat1),2) );
 			muon_hlt_Uncer=muon_HLT_scale_sys(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
-			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale;
+			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*puIdweight_M*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale;
 			if(type.Contains("trigger")){
-				muon_WeightUp=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale+muon_hlt_Uncer);
-				muon_WeightDn=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale-muon_hlt_Uncer);
+				muon_WeightUp=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*puIdweight_M*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale+muon_hlt_Uncer);
+				muon_WeightDn=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*puIdweight_M*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale-muon_hlt_Uncer);
 			}
 			else{
-				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
-				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
+				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
+				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
 			}
 			if(k%5000==0){
 				cout<<tag<<" get muon "<<type<<" SFs "<<muon_Weight<<" "<<muon_WeightUp<<" "<<muon_WeightDn<<endl;
@@ -189,14 +190,14 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			muon1_ISO_Uncer=sqrt( pow(get_muon_iso_stat(etalep1,ptlep1,ISO_muon_stat1),2) );
 			muon2_ISO_Uncer=sqrt( pow(get_muon_iso_stat(etalep2,ptlep2,ISO_muon_stat1),2) );
 			muon_hlt_Uncer=muon_HLT_scale_sys(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
-			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
+			muon_Weight=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
 			if(type.Contains("trigger")){
-				muon_WeightUp=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*pileupWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale+muon_hlt_Uncer);
-				muon_WeightDn=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*pileupWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale-muon_hlt_Uncer);
+				muon_WeightUp=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale+muon_hlt_Uncer);
+				muon_WeightDn=muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*(muon_hlt_scale-muon_hlt_Uncer);
 			}
 			else{
-				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
-				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale;
+				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
+				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale;
 			}
 			if(k%5000==0)
 				cout<<tag<<" get muon "<<type<<" SFs "<<muon_Weight<<" "<<muon_WeightUp<<" "<<muon_WeightDn<<endl;
@@ -206,28 +207,28 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 			ele2_ID_Uncer=get_ele_ID(etalep2,ptlep2,ID_ele);
 			ele1_Reco_Uncer=get_ele_Reco(etalep1,ptlep1,Reco_ele);
 			ele2_Reco_Uncer=get_ele_Reco(etalep2,ptlep2,Reco_ele);
-			ele_Weight=ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
+			ele_Weight=ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
 			if(type.Contains("reco")){
-				ele_WeightUp=ele_hlt_scale*(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale+ele1_Reco_Uncer)*(ele2_reco_scale+ele2_Reco_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
-				ele_WeightDn=ele_hlt_scale*(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale-ele1_Reco_Uncer)*(ele2_reco_scale-ele2_Reco_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
+				ele_WeightUp=ele_hlt_scale*(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale+ele1_Reco_Uncer)*(ele2_reco_scale+ele2_Reco_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
+				ele_WeightDn=ele_hlt_scale*(ele1_id_scale)*(ele2_id_scale)*(ele1_reco_scale-ele1_Reco_Uncer)*(ele2_reco_scale-ele2_Reco_Uncer)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
 			}
 			else if(type.Contains("ID")){ 
-				ele_WeightUp=ele_hlt_scale*(ele1_id_scale+ele1_ID_Uncer)*(ele2_id_scale+ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
-				ele_WeightDn=ele_hlt_scale*(ele1_id_scale-ele1_ID_Uncer)*(ele2_id_scale-ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
+				ele_WeightUp=ele_hlt_scale*(ele1_id_scale+ele1_ID_Uncer)*(ele2_id_scale+ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
+				ele_WeightDn=ele_hlt_scale*(ele1_id_scale-ele1_ID_Uncer)*(ele2_id_scale-ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*scalef*puIdweight_M*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight;
 			}
 			if(k%5000==0)cout<<tag<<" get ele "<<type<<" SFs "<<ele_Weight<<" "<<ele_WeightUp<<" "<<ele_WeightDn<<endl;
 		}
 		if(particle.Contains("photon")&&photonet>0){
 			photon_ID_Uncer=get_photon_ID(photoneta,photonet,ID_gamma);
 			if(lep==11){
-				photon_WeightUp=(photon_id_scale+photon_ID_Uncer)*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight;
-				photon_WeightDn=(photon_id_scale-photon_ID_Uncer)*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight;
-				photon_Weight=photon_id_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight;
+				photon_WeightUp=(photon_id_scale+photon_ID_Uncer)*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_veto_scale*prefWeight;
+				photon_WeightDn=(photon_id_scale-photon_ID_Uncer)*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_veto_scale*prefWeight;
+				photon_Weight=photon_id_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_veto_scale*prefWeight;
 			}
 			else if(lep==13){
-				photon_WeightUp=(photon_id_scale+photon_ID_Uncer)*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight;
-				photon_WeightDn=(photon_id_scale-photon_ID_Uncer)*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight;
-				photon_Weight=photon_id_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight;
+				photon_WeightUp=(photon_id_scale+photon_ID_Uncer)*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_veto_scale*prefWeight;
+				photon_WeightDn=(photon_id_scale-photon_ID_Uncer)*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_veto_scale*prefWeight;
+				photon_Weight=photon_id_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*puIdweight_M*pileupWeight*photon_veto_scale*prefWeight;
 			}
 			if(k%5000==0)cout<<tag<<" get photon SFs "<<photon_Weight<<" "<<photon_WeightUp<<" "<<photon_WeightDn<<endl;
 		}
@@ -315,30 +316,30 @@ int cal(){
 	for(int j=0;j<tag.size();j++){
 		if(tag[j].Contains("17")){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{   
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
-		TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
+		TString SignalRegion = "(Mjj>500 && detajj>2.5 && ZGmass>100)";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion; 
-		TString cut1 ="(("+Reco+"))";
+		TString cut1 ="(("+Reco+")&& ("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 		cout<<tag[j]<<" "<<jet<<endl;
 		cout<<tag[j]<<" "<<GenJet<<endl;
 		for(int i=0;i<par.size();i++){
 			if(par[i].Contains("muon")){ 
-				cal(par[i],tag[j],cut1,th2[i],"all");
-				cal(par[i],tag[j],cut1,th2[i],"trigger");
+				cal(par[i],tag[j],Reco,th2[i],"all");
+				cal(par[i],tag[j],Reco,th2[i],"trigger");
 			}
 			if(par[i].Contains("photon")){ 
-				cal(par[i],tag[j],cut1,th2[i],"ID");
+				cal(par[i],tag[j],Reco,th2[i],"ID");
 			}
 			if(par[i].Contains("ele")){ 
-				cal(par[i],tag[j],cut1,th2[i],"ID");
-				cal(par[i],tag[j],cut1,th2[i],"reco");
+				cal(par[i],tag[j],Reco,th2[i],"ID");
+				cal(par[i],tag[j],Reco,th2[i],"reco");
 			}
 		}
 	}

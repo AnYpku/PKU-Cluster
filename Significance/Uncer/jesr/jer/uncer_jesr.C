@@ -3,8 +3,8 @@ void run(TString sample,TString tag){
         fstream ftxt("./jer_uncer"+tag+".txt", ios::app );
 	ofstream f1("./"+sample+"_jer_uncer"+tag+".txt");
 	TFile*file;
-//        file=new TFile("./root/hist_"+sample+"_jer"+tag+".root");
-        file=new TFile("./hist_"+sample+"_jer"+tag+".root");
+        file=new TFile("./root/hist_"+sample+"_jer"+tag+".root");
+//        file=new TFile("./hist_"+sample+"_jer"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");

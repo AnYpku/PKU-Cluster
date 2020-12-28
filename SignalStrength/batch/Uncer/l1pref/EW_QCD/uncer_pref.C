@@ -1,6 +1,6 @@
 void run(TString channel,TString tag){
 	ofstream f1("./l1pref_uncer_"+channel+"_"+tag+".txt");
-	TFile* file = new TFile("./hist_ewk_pref_"+tag+channel+".root");
+	TFile* file = new TFile("./hist_qcd_pref_"+tag+channel+".root");
 	TFile* file1 = new TFile("../hist_ewk_pref_"+tag+channel+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");

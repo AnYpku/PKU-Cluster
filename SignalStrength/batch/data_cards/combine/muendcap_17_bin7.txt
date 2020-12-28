@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 6   number of processes-1
-kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap7
-observation 18.32
+observation 18.24
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,7 +13,7 @@ observation 18.32
 bin	muendcap7	muendcap7	muendcap7	muendcap7	muendcap7	muendcap7	muendcap7
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	1.28	2.97	13.85	0.09	0.00	0.00	0.14
+rate	1.20	2.97	13.85	0.09	0.00	0.00	0.13
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
 VBS_Stat_bin7_muendcap17	lnN	1.07	-	-	-	-	-	-
@@ -26,14 +26,14 @@ ZA_SigOut_Stat_bin7_muendcap17	lnN	-	-	-	-	-	-	1.20
 Stat group = VBS_Stat_bin7_muendcap17 QCD_Stat_bin7_muendcap17 non_prompt_Stat_bin7_muendcap17 ZA_SigOut_Stat_bin7_muendcap17 
 fake_muendcap17	lnN	-	-	1.21	-	-	-	-
 fake group = fake_muendcap17 
-JES_17	lnN	1.04	1.57	-	1.30	1.32	1.28	1.09
-JER_17	lnN	1.02	1.35	-	1.32	1.22	1.06	1.02
+JES_17	lnN	1.17	1.58	-	1.21	1.52	1.00	1.44
+JER_17	lnN	1.15	1.49	-	1.26	1.43	1.00	1.34
 JESR group = JES_17 JER_17
-pdf_EW	lnN	1.007	-	-	-	-	-	1.024
+pdf_EW	lnN	1.003	-	-	-	-	-	1.012
 pdf_QCD	lnN	-	1.01	-	-	-	-	-
-Scale_EW	lnN	1.049	-	-	-	-	-	1.09
-Scale_QCD	lnN	-	1.06	-	-	-	-	-
-Scale_QCD_extra	lnN	-	0.97/1.03	-	-	-	-	-
+Scale_EW	lnN	1.050	-	-	-	-	-	1.09
+Scale_QCD	lnN	-	1.07	-	-	-	-	-
+Scale_QCD_extra	lnN	-	0.95/1.05	-	-	-	-	-
 interf	lnN	1.01	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
 photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
@@ -44,4 +44,6 @@ pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-	-
 VV_xs	lnN	-	-	-	-	1.1	-	-
 l1pref	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-Others group = pileup ttgamma_xs VV_xs lumi_17 l1pref
+pileupId_eff	lnN	1.02	1.03	-	1.00	1.01	1.00	1.06
+pileupId_mis	lnN	1.00	1.01	-	1.00	1.00	1.00	1.01
+Others group = pileup ttgamma_xs VV_xs lumi_17 l1pref pileupId_mis pileupId_eff

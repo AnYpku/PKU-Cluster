@@ -19,7 +19,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double ptVlep, yVlep, phiVlep, massVlep;
      double photonet,photoneta,photone,photonphi;
      double zepp_new,zepp_JEC_up,zepp_JEC_down;
-     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight,puIdweight_M;
+     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight,puIdweight_M,puIdweight_M_new,puIdweight_M_JEC_up,puIdweight_M_JEC_down;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele_hlt_scale,muon_hlt_scale;
      double actualWeight;int lep;
      tree->SetBranchAddress("lep",&lep);
@@ -77,6 +77,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
      tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_M_new", &puIdweight_M_new);
+     tree->SetBranchAddress("puIdweight_M_JEC_up", &puIdweight_M_JEC_up);
+     tree->SetBranchAddress("puIdweight_M_JEC_down", &puIdweight_M_JEC_down);
      map<TString, double> variables;
      tree->SetBranchAddress(var+"_new", &variables[var+"_new"]);
      tree->SetBranchAddress(var+"_JEC_up", &variables[var+"_JEC_up"]);
@@ -114,8 +117,17 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if (delta_phi_JEC_down>pi) delta_phi_JEC_down=2*pi-delta_phi_JEC_down;
 //             cout<<detajj_new<<" "<<Mjj_new<<"; "<<detajj_JEC_up<<" "<<Mjj_JEC_up<<"; "<<detajj_JEC_down<<" "<<Mjj_JEC_down<<endl;
              if(tag.Contains("18"))  prefWeight=1;
-             if(tag.Contains("17")==0)  puIdweight_M=1;
-             actualWeight=scalef*pileupWeight*prefWeight*puIdweight_M;
+	     puIdweight_M=1;
+	     puIdweight_M_new=1;
+	     puIdweight_M_JEC_up=1;
+	     puIdweight_M_JEC_down=1;
+	     if(tag.Contains("17")==0){
+		     puIdweight_M=1;
+		     puIdweight_M_new=1;
+		     puIdweight_M_JEC_up=1;
+		     puIdweight_M_JEC_down=1;
+	     }
+             actualWeight=scalef*pileupWeight*prefWeight;
                      if(lep==11)
                              actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
                      if(lep==13)
@@ -125,14 +137,14 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if(variables[var+"_JEC_up"]>bins[bins.size()-1]) variables[var+"_JEC_up"]=bins[bins.size()-2]+1;
              if(variables[var+"_JEC_down"]>bins[bins.size()-1]) variables[var+"_JEC_down"]=bins[bins.size()-2]+1;
 	     if (  tformula1->EvalInstance() && (delta_phi_new>1.9 && zepp_new<2.4) ){
-		     th1[0]->Fill(variables[var+"_new"],actualWeight);//0~1, 2.5~4.5 and 500~800
+		     th1[0]->Fill(variables[var+"_new"],puIdweight_M_new*actualWeight);//0~1, 2.5~4.5 and 500~800
 	     }
 	     if (  tformula2->EvalInstance() && (delta_phi_JEC_up>1.9 && zepp_JEC_up<2.4) ){
-		     th1[1]->Fill(variables[var+"_JEC_up"],actualWeight);//0~1, 2.5~4.5 and 500~800
+		     th1[1]->Fill(variables[var+"_JEC_up"],puIdweight_M_JEC_up*actualWeight);//0~1, 2.5~4.5 and 500~800
 
 	     }
 	     if (  tformula3->EvalInstance() && (delta_phi_JEC_down>1.9 && zepp_JEC_down<2.4) ){
-		     th1[2]->Fill(variables[var+"_JEC_down"],actualWeight);//0~1, 2.5~4.5 and 500~800
+		     th1[2]->Fill(variables[var+"_JEC_down"],puIdweight_M_JEC_down*actualWeight);//0~1, 2.5~4.5 and 500~800
 	     }
 
      }

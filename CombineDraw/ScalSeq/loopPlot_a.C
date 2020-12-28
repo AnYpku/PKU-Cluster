@@ -96,7 +96,7 @@ void loopPlot() {
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
 	const int nmcsig=fMCSig.size();
-	std::string mcLabelsSig[nmcsig] = { "ZA-EWK16","ZA-EWK_interf16","ZA-EWK17","ZA-EWK_interf17","ZA-EWK18","ZA-EWK_interf18"};
+	std::string mcLabelsSig[nmcsig] = { "ZA-EWK16","ZA_interf16","ZA-EWK17","ZA_interf17","ZA-EWK18","ZA_interf18"};
 	double kFactorsSig_array[nmcsig] = {1,1,1,1,1,1};
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nmcsig; index++) {

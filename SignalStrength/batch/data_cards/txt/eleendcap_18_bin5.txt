@@ -23,11 +23,11 @@ TTA_Stat_bin5_eleendcap18	lnN	-	-	-	2.00	-	-	-
 VV_Stat_bin5_eleendcap18	lnN	-	-	-	-	1.00	-	-
 ST_Stat_bin5_eleendcap18	lnN	-	-	-	-	-	1.00	-
 ZA_SigOut_Stat_bin5_eleendcap18	lnN	-	-	-	-	-	-	1.23
-Stat group = VBS_Stat_bin5_eleendcap18 QCD_Stat_bin5_eleendcap18 non_prompt_Stat_bin5_eleendcap18 
+Stat group = VBS_Stat_bin5_eleendcap18 QCD_Stat_bin5_eleendcap18 non_prompt_Stat_bin5_eleendcap18 TTA_Stat_bin5_eleendcap18 ZA_SigOut_Stat_bin5_eleendcap18 
 fake_eleendcap18	lnN	-	-	1.31	-	-	-	-
 fake group = fake_eleendcap18 
-JES_18	lnN	1.03	1.25	-	1.11	1.16	1.00	1.01
-JER_18	lnN	1.02	1.21	-	1.09	1.29	1.00	1.03
+JES_18	lnN	1.02	1.24	-	1.09	1.16	1.00	1.16
+JER_18	lnN	1.01	1.21	-	1.08	1.28	1.00	1.15
 JESR group = JES_18 JER_18
 pdf_EW	lnN	1.001	-	-	-	-	-	1.001
 pdf_QCD	lnN	-	1.01	-	-	-	-	-

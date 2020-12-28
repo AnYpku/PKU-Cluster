@@ -50,7 +50,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     int p=0;
 	     if(tag.Contains("18")) prefWeight=1;
 	     if(tag.Contains("17")==0) puIdweight_M=1;
-	     weight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+	     weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 	     if(lep==11)
 		     weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
@@ -158,6 +158,7 @@ int Uncer_batch_bkg(){
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
+
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{
@@ -170,7 +171,7 @@ int Uncer_batch_bkg(){
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 		cout<<tag[i]<<" "<<jet<<endl;
 		cout<<tag[i]<<" "<<GenJet<<endl;
-		run(file1[i],Reco,tag[i],9,0);
+//		run(file1[i],Reco,tag[i],9,0);
 		run(file2[i], cut1,tag[i],3,0);
 		run(file2[i], cut2,tag[i],3,1);
 	}

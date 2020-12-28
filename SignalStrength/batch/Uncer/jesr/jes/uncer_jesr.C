@@ -6,8 +6,8 @@ void run(TString sample,TString tag){
 	if(sample.Contains("EWK"))
 //		file = new TFile("./root/hist_"+sample+"_jes"+tag+".root");
 		file = new TFile("./hist_"+sample+"_jes"+tag+".root");
+//      else file=new TFile("./root/hist_"+sample+"_jes"+tag+".root");
         else file=new TFile("./hist_"+sample+"_jes"+tag+".root");
-//        else file=new TFile("./root/hist_"+sample+"_jes"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");

@@ -42,7 +42,7 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 		tree->GetEntry(k);
                 if(tag.Contains("18")) prefWeight=1;
                 if(tag.Contains("17")==0) puIdweight_M=1;
-                weight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+                weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
                 if(lep==11)
                         weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
                 if(lep==13)
@@ -125,8 +125,8 @@ int Uncer_batch_bkg(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		TString cut1 ="("+Reco+")&&("+Gen+")";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-		if(tag[i].Contains("16"))	
-			run(file1[i],Reco,tag[i],0);
+//		if(tag[i].Contains("16"))	
+//			run(file1[i],Reco,tag[i],0);
 		run(file2[i],cut1,tag[i],0);
 		run(file2[i],cut2,tag[i],1);
 	}

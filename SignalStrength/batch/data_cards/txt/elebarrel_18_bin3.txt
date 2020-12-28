@@ -4,7 +4,7 @@ kmax 23  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel3
-observation 8.00
+observation 8.06
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,7 +13,7 @@ observation 8.00
 bin	elebarrel3	elebarrel3	elebarrel3	elebarrel3	elebarrel3	elebarrel3	elebarrel3
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	4.84	2.02	0.22	0.36	0.36	0.00	0.20
+rate	4.99	2.02	0.22	0.36	0.36	0.00	0.11
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015
 VBS_Stat_bin3_elebarrel18	lnN	1.04	-	-	-	-	-	-
@@ -22,18 +22,18 @@ non_prompt_Stat_bin3_elebarrel18	lnN	-	-	2.00	-	-	-	-
 TTA_Stat_bin3_elebarrel18	lnN	-	-	-	1.58	-	-	-
 VV_Stat_bin3_elebarrel18	lnN	-	-	-	-	2.00	-	-
 ST_Stat_bin3_elebarrel18	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin3_elebarrel18	lnN	-	-	-	-	-	-	1.19
-Stat group = VBS_Stat_bin3_elebarrel18 QCD_Stat_bin3_elebarrel18 
+ZA_SigOut_Stat_bin3_elebarrel18	lnN	-	-	-	-	-	-	1.25
+Stat group = VBS_Stat_bin3_elebarrel18 QCD_Stat_bin3_elebarrel18 non_prompt_Stat_bin3_elebarrel18 TTA_Stat_bin3_elebarrel18 VV_Stat_bin3_elebarrel18 ZA_SigOut_Stat_bin3_elebarrel18 
 fake_elebarrel18	lnN	-	-	1.25	-	-	-	-
 fake group = fake_elebarrel18 
-JES_18	lnN	1.06	1.11	-	1.11	1.16	1.00	1.07
-JER_18	lnN	1.01	1.08	-	1.09	1.29	1.00	1.01
+JES_18	lnN	1.06	1.11	-	1.09	1.16	1.00	1.06
+JER_18	lnN	1.01	1.08	-	1.08	1.28	1.00	1.01
 JESR group = JES_18 JER_18
-pdf_EW	lnN	1.002	-	-	-	-	-	1.002
+pdf_EW	lnN	1.000	-	-	-	-	-	1.004
 pdf_QCD	lnN	-	1.02	-	-	-	-	-
 Scale_EW	lnN	1.014	-	-	-	-	-	1.09
 Scale_QCD	lnN	-	1.25	-	-	-	-	-
-Scale_QCD_extra	lnN	-	1.09/0.92	-	-	-	-	-
+Scale_QCD_extra	lnN	-	1.09/0.93	-	-	-	-	-
 interf	lnN	1.06	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD Scale_QCD_extra interf
 photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03

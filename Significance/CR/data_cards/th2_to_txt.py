@@ -52,9 +52,11 @@ for i in range(1,nbins):
    f = open('./txt/%s_%s_control_bin%i.txt'%(sys.argv[2],sys.argv[1],i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 5   number of processes-1\n')
-   if sys.argv[1].find("18") == -1:
+   if sys.argv[1].find("18") == -1 and sys.argv[1].find("17") == -1: #16
         f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
-   else:
+   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18") == -1: #17
+        f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')
+   if sys.argv[1].find("16") == -1 and sys.argv[1].find("17") == -1: #18
         f.write('kmax 22  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
@@ -154,7 +156,7 @@ for i in range(1,nbins):
    f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jer'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jer'+sys.argv[1]+'_ZA'][i-1],arr['jer'+sys.argv[1]+'_TTA'][i-1],arr['jer'+sys.argv[1]+'_VV'][i-1],arr['jer'+sys.argv[1]+'_ST'][i-1]))
 #
    f.write('pdf_EW\tlnN\t')
-   f.write('%0.2f\t-\t-\t-\t-\t-\n'%(arr['Sig_pdf'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['Sig_pdf'][i-1]))
 #
    f.write('pdf_QCD\tlnN\t')
    f.write('-\t%0.2f\t-\t-\t-\t-\n'%(arr['QCD_pdf'][i-1]))
@@ -197,6 +199,13 @@ for i in range(1,nbins):
 
    f.write('VV_xs\tlnN\t')
    f.write('-\t-\t-\t-\t1.1\t-\n')
+
+   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:
+        f.write('pileupId_eff\tlnN\t')
+        f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1]))
+        f.write('pileupId_mis\tlnN\t')
+        f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1]))
+
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1]))

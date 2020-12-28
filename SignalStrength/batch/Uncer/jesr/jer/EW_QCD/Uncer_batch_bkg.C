@@ -147,9 +147,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      }
      TFile*fout;
      if(sample.Contains("ZA")&&turn==1)
-	     fout=new TFile("./hist_"+sample+"out_jes"+tag+".root","recreate");
+	     fout=new TFile("./hist_"+sample+"out_jer"+tag+".root","recreate");
      else 
-	     fout=new TFile("./hist_"+sample+"_jes"+tag+".root","recreate");
+	     fout=new TFile("./hist_"+sample+"_jer"+tag+".root","recreate");
      fout->cd();
      for(int i=0;i<kk;i++){
 	     th1[i]->Write();
@@ -214,7 +214,7 @@ int Uncer_batch_bkg(){
 		cut[0]=cut11; cut[1]=cut12; cut[2]=cut13;//reco && gen
 		cut1[0]=cut21;cut1[1]=cut22;cut1[2]=cut23;//reco && !gen
 		Reco[0]=Reco_new;Reco[1]=Reco_up;Reco[2]=Reco_down; 
-		if(tags[i].Contains("17")==0) continue;
+		if(tags[i].Contains("17")==1) continue;
 		cout<<tags[i]<<" "<<JET_new<<endl;
 		cout<<tags[i]<<" "<<JET_up<<endl;
 		cout<<tags[i]<<" "<<JET_down<<endl;
@@ -323,9 +323,9 @@ void run_1d (TString dir, TString sample,TString cut1[num],int kk,TString tag,bo
 	}
 	TFile*fout;
 	if(sample.Contains("EWK")&&turn==1)
-		fout=new TFile("./hist_1d_"+sample+"out_jes"+tag+".root","recreate");
+		fout=new TFile("./hist_1d_"+sample+"out_jer"+tag+".root","recreate");
 	else 
-		fout=new TFile("./hist_1d_"+sample+"_jes"+tag+".root","recreate");
+		fout=new TFile("./hist_1d_"+sample+"_jer"+tag+".root","recreate");
 	fout->cd();
 	for(int i=0;i<kk;i++){
 		th1[i]->Write();

@@ -14,7 +14,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double ptVlep, yVlep, phiVlep, massVlep;
      double photonet,photoneta,photone,photonphi;
      double zepp_new,zepp_JER_up,zepp_JER_down;
-     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight;
+     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,prefWeight,puIdweight_M_new,puIdweight_M_JER_up,puIdweight_M_JER_down,muon_hlt_scale,ele_hlt_scale;
      int lep;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,actualWeight;
      tree->SetBranchAddress("lep",&lep);
@@ -63,12 +63,17 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
      tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
      tree->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
      tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
      tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
+     tree->SetBranchAddress("puIdweight_M_new", &puIdweight_M_new);
+     tree->SetBranchAddress("puIdweight_M_JER_up", &puIdweight_M_JER_up);
+     tree->SetBranchAddress("puIdweight_M_JER_down", &puIdweight_M_JER_down);
 
      TTreeFormula *tformula1=new TTreeFormula("formula1", cut1[0], tree);
      TTreeFormula *tformula2=new TTreeFormula("formula2", cut1[1], tree);
@@ -103,23 +108,29 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if (delta_phi_JER_down>pi) delta_phi_JER_down=2*pi-delta_phi_JER_down;
 //             cout<<detajj_new<<" "<<Mjj_new<<"; "<<detajj_JER_up<<" "<<Mjj_JER_up<<"; "<<detajj_JER_down<<" "<<Mjj_JER_down<<endl;
              if(tag.Contains("18"))  prefWeight=1;
+             if(tag.Contains("17")==0){
+		     puIdweight_M_new=1;
+		     puIdweight_M_JER_up=1;
+		     puIdweight_M_JER_down=1;
+	     }
+
              actualWeight=scalef*pileupWeight*prefWeight;
                      if(lep==11)
-                             actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale;
+                             actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
                      if(lep==13)
-                             actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale;
+                             actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
              if(k%20000==0)cout<<"actualWeight "<<actualWeight<<endl;
 	     if (  tformula1->EvalInstance() /*&& (delta_phi_new>1.9 && zepp_new<2.4)*/ ){
 		     if(Mjj_new>=150 &&Mjj_new<500)
-			     th1[0]->Fill(Mjj_new,scalef);//0~1, 2.5~4.5 and 500~800
+			     th1[0]->Fill(Mjj_new,puIdweight_M_new*actualWeight);//0~1, 2.5~4.5 and 500~800
 	     }
 	     if (  tformula2->EvalInstance() /*&& (delta_phi_JER_up>1.9 && zepp_JER_up<2.4)*/ ){
 		     if(Mjj_JER_up>=150 &&Mjj_JER_up<500)
-			     th1[1]->Fill(Mjj_JER_up,scalef);//0~1, 2.5~4.5 and 500~800
+			     th1[1]->Fill(Mjj_JER_up,puIdweight_M_JER_up*actualWeight);//0~1, 2.5~4.5 and 500~800
 	     }
 	     if (  tformula3->EvalInstance() /*&& (delta_phi_JER_down>1.9 && zepp_JER_down<2.4)*/ ){
 		     if(Mjj_JER_down>=150 &&Mjj_JER_down<500)
-			     th1[2]->Fill(Mjj_JER_down,scalef);//0~1, 2.5~4.5 and 500~800
+			     th1[2]->Fill(Mjj_JER_down,puIdweight_M_JER_down*actualWeight);//0~1, 2.5~4.5 and 500~800
 	     }
 
      }
@@ -137,12 +148,12 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
 int Uncer_batch_bkg(){
 	gSystem->Load("libTreePlayer.so");
 	TString Pi=Form("%f",pi);
-	TString drjj_JER_up ="sqrt((jet1eta_JER_up-jet2eta_JER_up)*(jet1eta_JER_up-jet2eta_JER_up)+(2*"+Pi+"-fabs(jet1phi_JER_up-jet2phi_JER_up))*(2*"+Pi+"-fabs(jet1phi_JER_up-jet2phi_JER_up)))>0.5 || sqrt((jet1eta_JER_up-jet2eta_JER_up)*(jet1eta_JER_up-jet2eta_JER_up)+(fabs(jet1phi_JER_up-jet2phi_JER_up))*(fabs(jet1phi_JER_up-jet2phi_JER_up)))>0.5";
-	TString drjj_JER_down ="sqrt((jet1eta_JER_down-jet2eta_JER_down)*(jet1eta_JER_down-jet2eta_JER_down)+(2*"+Pi+"-fabs(jet1phi_JER_down-jet2phi_JER_down))*(2*"+Pi+"-fabs(jet1phi_JER_down-jet2phi_JER_down)))>0.5 || sqrt((jet1eta_JER_down-jet2eta_JER_down)*(jet1eta_JER_down-jet2eta_JER_down)+(fabs(jet1phi_JER_down-jet2phi_JER_down))*(fabs(jet1phi_JER_down-jet2phi_JER_down)))>0.5";
-	TString drjj_new ="sqrt((jet1eta_new-jet2eta_new)*(jet1eta_new-jet2eta_new)+(2*"+Pi+"-fabs(jet1phi_new-jet2phi_new))*(2*"+Pi+"-fabs(jet1phi_new-jet2phi_new)))>0.5 || sqrt((jet1eta_new-jet2eta_new)*(jet1eta_new-jet2eta_new)+(fabs(jet1phi_new-jet2phi_new))*(fabs(jet1phi_new-jet2phi_new)))>0.5";
-	TString LEPmu = "lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && Mva>100";
-	TString LEPele = "lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110 && Mva>100";
-	TString photon = "photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )";
+	TString drjj_JER_up ="(sqrt((jet1eta_JER_up-jet2eta_JER_up)*(jet1eta_JER_up-jet2eta_JER_up)+(2*"+Pi+"-fabs(jet1phi_JER_up-jet2phi_JER_up))*(2*"+Pi+"-fabs(jet1phi_JER_up-jet2phi_JER_up)))>0.5 || sqrt((jet1eta_JER_up-jet2eta_JER_up)*(jet1eta_JER_up-jet2eta_JER_up)+(fabs(jet1phi_JER_up-jet2phi_JER_up))*(fabs(jet1phi_JER_up-jet2phi_JER_up)))>0.5)";
+	TString drjj_JER_down ="(sqrt((jet1eta_JER_down-jet2eta_JER_down)*(jet1eta_JER_down-jet2eta_JER_down)+(2*"+Pi+"-fabs(jet1phi_JER_down-jet2phi_JER_down))*(2*"+Pi+"-fabs(jet1phi_JER_down-jet2phi_JER_down)))>0.5 || sqrt((jet1eta_JER_down-jet2eta_JER_down)*(jet1eta_JER_down-jet2eta_JER_down)+(fabs(jet1phi_JER_down-jet2phi_JER_down))*(fabs(jet1phi_JER_down-jet2phi_JER_down)))>0.5)";
+	TString drjj_new ="(sqrt((jet1eta_new-jet2eta_new)*(jet1eta_new-jet2eta_new)+(2*"+Pi+"-fabs(jet1phi_new-jet2phi_new))*(2*"+Pi+"-fabs(jet1phi_new-jet2phi_new)))>0.5 || sqrt((jet1eta_new-jet2eta_new)*(jet1eta_new-jet2eta_new)+(fabs(jet1phi_new-jet2phi_new))*(fabs(jet1phi_new-jet2phi_new)))>0.5)";
+	TString LEPmu = "(lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && Mva>100&&(HLT_Mu1>0||HLT_Mu2>0))";
+	TString LEPele = "(lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110 && Mva>100&&(HLT_Ele1>0||HLT_Ele2>0))";
+	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ))";
 	TString JET_new;
 	TString JET_down;
 	TString JET_up;
@@ -156,20 +167,20 @@ int Uncer_batch_bkg(){
         dir1[0]="/home/pku/anying/cms/rootfiles/JESR/";
         dir1[1]="/home/pku/anying/cms/rootfiles/JESR/";
         dir1[2]="/home/pku/anying/cms/rootfiles/JESR/";
-        TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/JEC/";
+        TString dir="/afs/cern.ch/user/y/yian/work/PKU-Cluster/Unfolding/produce/JER/";
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 //	vector<TString> sample={"WA"};
 	//	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
-			JET_new="( (  ( (fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65&&jet1pt_new>30&&jet1pt_new<50&&jet1puIdTight_new==1) || (!(fabs(jet1eta_new)<3.14&&fabs(jet1eta_new)>2.65) && fabs(jet1eta_new)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_new)<4.7&& jet1pt_new>50) ) && ( (fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65&&jet2pt_new>30&&jet2pt_new<50&&jet2puIdTight_new==1)||(!(fabs(jet2eta_new)<3.14&&fabs(jet2eta_new)>2.65)&&fabs(jet2eta_new)<4.7&&jet2pt_new>30&&jet2pt_new<50) ||(fabs(jet2eta_new)<4.7 && jet2pt_new>50) ) ) && Mjj_new > 150 && Mjj_new<500 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
-			JET_up="( (  ( (fabs(jet1eta_JER_up)<3.14&&fabs(jet1eta_JER_up)>2.65&&jet1pt_JER_up>30&&jet1pt_JER_up<50&&jet1puIdTight_JER_up==1) || (!(fabs(jet1eta_JER_up)<3.14&&fabs(jet1eta_JER_up)>2.65) && fabs(jet1eta_JER_up)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JER_up)<4.7&& jet1pt_JER_up>50) ) && ( (fabs(jet2eta_JER_up)<3.14&&fabs(jet2eta_JER_up)>2.65&&jet2pt_JER_up>30&&jet2pt_JER_up<50&&jet2puIdTight_JER_up==1)||(!(fabs(jet2eta_JER_up)<3.14&&fabs(jet2eta_JER_up)>2.65)&&fabs(jet2eta_JER_up)<4.7&&jet2pt_JER_up>30&&jet2pt_JER_up<50) ||(fabs(jet2eta_JER_up)<4.7 && jet2pt_JER_up>50) ) ) && Mjj_JER_up > 150 && Mjj_JER_up <500 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_up > 0.5 && drj2a_JER_up > 0.5  && ("+drjj_JER_up+")&& drj1l_JER_up > 0.5 && drj2l_JER_up > 0.5 && drj1l2_JER_up > 0.5 && drj2l2_JER_up > 0.5 )";
-			JET_down="( (  ( (fabs(jet1eta_JER_down)<3.14&&fabs(jet1eta_JER_down)>2.65&&jet1pt_JER_down>30&&jet1pt_JER_down<50&&jet1puIdTight_JER_down==1) || (!(fabs(jet1eta_JER_down)<3.14&&fabs(jet1eta_JER_down)>2.65) && fabs(jet1eta_JER_down)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta_JER_down)<4.7&& jet1pt_JER_down>50) ) && ( (fabs(jet2eta_JER_down)<3.14&&fabs(jet2eta_JER_down)>2.65&&jet2pt_JER_down>30&&jet2pt_JER_down<50&&jet2puIdTight_JER_down==1)||(!(fabs(jet2eta_JER_down)<3.14&&fabs(jet2eta_JER_down)>2.65)&&fabs(jet2eta_JER_down)<4.7&&jet2pt_JER_down>30&&jet2pt_JER_down<50) ||(fabs(jet2eta_JER_down)<4.7 && jet2pt_JER_down>50) ) ) && Mjj_JER_down > 150 && Mjj_JER_down<500 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_down > 0.5 && drj2a_JER_down > 0.5  && ("+drjj_JER_down+")&& drj1l_JER_down > 0.5 && drj2l_JER_down > 0.5 && drj1l2_JER_down > 0.5 && drj2l2_JER_down > 0.5)";
+			JET_new="( ( ((jet1pt_new>50&&fabs(jet1eta_new)<4.7)||(jet1pt_new>30&&jet1pt_new<50&&fabs(jet1eta_new)<4.7&&jet1puIdMedium_new==1)) && ((jet2pt_new>50&&fabs(jet2eta_new)<4.7)||(jet2pt_new>30&&jet2pt_new<50&&fabs(jet2eta_new)<4.7&&jet2puIdMedium_new==1)) ) && Mjj_new > 150 && Mjj_new<500 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
+			JET_up="( ( ((jet1pt_JER_up>50&&fabs(jet1eta_JER_up)<4.7)||(jet1pt_JER_up>30&&jet1pt_JER_up<50&&fabs(jet1eta_JER_up)<4.7&&jet1puIdMedium_JER_up==1)) && ((jet2pt_JER_up>50&&fabs(jet2eta_JER_up)<4.7)||(jet2pt_JER_up>30&&jet2pt_JER_up<50&&fabs(jet2eta_JER_up)<4.7&&jet2puIdMedium_JER_up==1)) ) && Mjj_JER_up > 150 && Mjj_JER_up <500 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_up > 0.5 && drj2a_JER_up > 0.5  && ("+drjj_JER_up+")&& drj1l_JER_up > 0.5 && drj2l_JER_up > 0.5 && drj1l2_JER_up > 0.5 && drj2l2_JER_up > 0.5 )";
+			JET_down="(  ( ((jet1pt_JER_down>50&&fabs(jet1eta_JER_down)<4.7)||(jet1pt_JER_down>30&&jet1pt_JER_down<50&&fabs(jet1eta_JER_down)<4.7&&jet1puIdMedium_JER_down==1)) && ((jet2pt_JER_down>50&&fabs(jet2eta_JER_down)<4.7)||(jet2pt_JER_down>30&&jet2pt_JER_down<50&&fabs(jet2eta_JER_down)<4.7&&jet2puIdMedium_JER_down==1)) )  && Mjj_JER_down > 150 && Mjj_JER_down<500 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_down > 0.5 && drj2a_JER_down > 0.5  && ("+drjj_JER_down+")&& drj1l_JER_down > 0.5 && drj2l_JER_down > 0.5 && drj1l2_JER_down > 0.5 && drj2l2_JER_down > 0.5)";
 		}
 		else{
-			JET_new ="jet1pt_new> 30 && jet2pt_new > 30 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 && Mjj_new > 150 && Mjj_new<500";
-			JET_down="jet1pt_JER_down> 30 && jet2pt_JER_down > 30 && fabs(jet1eta_JER_down)< 4.7 && fabs(jet2eta_JER_down)<4.7 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_down > 0.5 && drj2a_JER_down > 0.5  && ("+drjj_JER_down+")&& drj1l_JER_down > 0.5 && drj2l_JER_down > 0.5 && drj1l2_JER_down > 0.5 && drj2l2_JER_down > 0.5 && Mjj_JER_down > 150 && Mjj_JER_down<500";
-			JET_up="jet1pt_JER_up> 30 && jet2pt_JER_up > 30 && fabs(jet1eta_JER_up)< 4.7 && fabs(jet2eta_JER_up)<4.7 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_up > 0.5 && drj2a_JER_up > 0.5  && ("+drjj_JER_up+") && drj1l_JER_up > 0.5 && drj2l_JER_up > 0.5 && drj1l2_JER_up > 0.5 && drj2l2_JER_up > 0.5 && Mjj_JER_up > 150 && Mjj_JER_up<500";
+			JET_new ="(jet1pt_new> 30 && jet2pt_new > 30 && fabs(jet1eta_new)< 4.7 && fabs(jet2eta_new)<4.7 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 && Mjj_new > 150 && Mjj_new<500)";
+			JET_down="(jet1pt_JER_down> 30 && jet2pt_JER_down > 30 && fabs(jet1eta_JER_down)< 4.7 && fabs(jet2eta_JER_down)<4.7 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_down > 0.5 && drj2a_JER_down > 0.5  && ("+drjj_JER_down+")&& drj1l_JER_down > 0.5 && drj2l_JER_down > 0.5 && drj1l2_JER_down > 0.5 && drj2l2_JER_down > 0.5 && Mjj_JER_down > 150 && Mjj_JER_down<500)";
+			JET_up="(jet1pt_JER_up> 30 && jet2pt_JER_up > 30 && fabs(jet1eta_JER_up)< 4.7 && fabs(jet2eta_JER_up)<4.7 && drla > 0.7 && drla2 > 0.7 && drj1a_JER_up > 0.5 && drj2a_JER_up > 0.5  && ("+drjj_JER_up+") && drj1l_JER_up > 0.5 && drj2l_JER_up > 0.5 && drj1l2_JER_up > 0.5 && drj2l2_JER_up > 0.5 && Mjj_JER_up > 150 && Mjj_JER_up<500)";
 		}
 		TString Reco_new= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+JET_new;
 		TString Reco_up= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+JET_up;
@@ -184,7 +195,7 @@ int Uncer_batch_bkg(){
 			cout<<sample[j]<<endl;
 			if(sample[j].Contains("EWK")){
 				run(dir1[i],sample[j],Reco,3,tags[i],0);
-				//run(dir,tags[i]+"outJEC_ZA-EWK",Reco,3,tags[i],0);
+				//run(dir,tags[i]+"outJER_ZA-EWK",Reco,3,tags[i],0);
 			}
 			else{
 				run(dir1[i],sample[j],Reco,3,tags[i],0);

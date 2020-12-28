@@ -7,9 +7,9 @@ void run(TString sample,TString tag, TString cut1,TString cut2,TString cut3,TStr
      const int nbins=9; 
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      double lumi;
-     if(tag.Contains("16"))lumi=35.86;cout<<lumi<<endl;
-     if(tag.Contains("17"))lumi=41.52;cout<<lumi<<endl;
-     if(tag.Contains("18"))lumi=59.7;cout<<lumi<<endl;
+     if(tag.Contains("16")){lumi=35.86;cout<<lumi<<endl;}
+     if(tag.Contains("17")){lumi=41.52;cout<<lumi<<endl;}
+     if(tag.Contains("18")){lumi=59.7;cout<<lumi<<endl;}
 
      TTreeFormula *tformula1=new TTreeFormula("formula1", cut1, tree); 
      TTreeFormula *tformula2=new TTreeFormula("formula2", cut2, tree); 
@@ -113,7 +113,7 @@ void run(TString sample,TString tag, TString cut1,TString cut2,TString cut3,TStr
 					     if(ix<2&&iy==2&&Mjj>mjj_bins[ix]&& Mjj<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
 						     th1[ix+(iy)*3]->Fill(genMjj,6.1,actualWeight);
                                              if(ix==2&&iy==2 && Mjj>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
-                                                     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+                                                     th1[ix+(iy)*3]->Fill(genMjj,6.1,actualWeight);
 				     }
 				     else{
 					     if(ix<2&&iy<2&&Mjj>mjj_bins[ix]&&Mjj<mjj_bins[ix+1]&&deltaetajj>detajj_bins[iy]&&deltaetajj<detajj_bins[iy+1])
@@ -123,7 +123,7 @@ void run(TString sample,TString tag, TString cut1,TString cut2,TString cut3,TStr
 					     if(ix<2&&iy==2&&Mjj>mjj_bins[ix]&& Mjj<mjj_bins[ix+1] &&deltaetajj>detajj_bins[iy])
 						     th1[ix+(iy)*3]->Fill(1999,6.1,actualWeight);
                                              if(ix==2&&iy==2 && Mjj>mjj_bins[ix] && deltaetajj>detajj_bins[iy])
-                                                     th1[ix+(iy)*3]->Fill(genMjj,gendetajj,actualWeight);
+                                                     th1[ix+(iy)*3]->Fill(1999,6.1,actualWeight);
 				     }
 			     }
 		     }

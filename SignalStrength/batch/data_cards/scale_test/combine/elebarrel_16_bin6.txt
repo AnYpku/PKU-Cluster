@@ -4,7 +4,7 @@ kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel6
-observation 6.23
+observation 6.14
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,25 +13,25 @@ observation 6.23
 bin	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	3.85	1.84	0.38	0.00	0.00	0.00	0.16
+rate	3.87	1.80	0.38	0.00	0.00	0.00	0.09
 ------------
 lumi_16	lnN	1.022	1.022	-	1.022	1.022	1.022	1.022
-VBS_Stat_bin6_elebarrel16	lnN	1.06	-	-	-	-	-	-
+VBS_Stat_bin6_elebarrel16	lnN	1.03	-	-	-	-	-	-
 QCD_Stat_bin6_elebarrel16	lnN	-	1.33	-	-	-	-	-
 non_prompt_Stat_bin6_elebarrel16	lnN	-	-	2.00	-	-	-	-
 TTA_Stat_bin6_elebarrel16	lnN	-	-	-	1.00	-	-	-
 VV_Stat_bin6_elebarrel16	lnN	-	-	-	-	1.00	-	-
 ST_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	-	1.27
+ZA_SigOut_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	-	1.20
 Stat group = VBS_Stat_bin6_elebarrel16 QCD_Stat_bin6_elebarrel16 
 fake_elebarrel16	lnN	-	-	1.21	-	-	-	-
 fake group = fake_elebarrel16 
-JES_16	lnN	1.03	1.22	-	1.04	1.00	1.00	1.05
-JER_16	lnN	1.00	1.18	-	1.04	1.00	1.00	1.00
+JES_16	lnN	1.04	1.21	-	1.03	1.00	1.00	1.10
+JER_16	lnN	1.00	1.12	-	1.05	1.00	1.00	1.03
 JESR group = JES_16 JER_16
-pdf_EW	lnN	1.007	-	-	-	-	-	1.056
+pdf_EW	lnN	-	-	-	-	-	-	1.042
 pdf_QCD	lnN	-	1.03	-	-	-	-	-
-Scale_EW	lnN	1.025	-	-	-	-	-	1.05
+Scale_EW	lnN	-	-	-	-	-	-	1.09
 Scale_QCD_band1	lnN	-	1.05	-	-	-	-	-
 Scale_QCD_band2	lnN	-	1.10	-	-	-	-	-
 Scale_QCD_band3	lnN	-	1.15	-	-	-	-	-
@@ -45,4 +45,4 @@ pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-	-
 VV_xs	lnN	-	-	-	-	1.1	-	-
 l1pref	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-Others group = pileup ttgamma_xs VV_xs lumi_16 l1pref
+Others group = pileup ttgamma_xs VV_xs lumi_16 l1pref 

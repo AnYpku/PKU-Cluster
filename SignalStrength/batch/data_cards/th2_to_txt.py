@@ -67,9 +67,11 @@ for i in range(1,nbins):
    f = open('./txt/%s_%s_bin%i.txt'%(sys.argv[2],sys.argv[1],i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 6   number of processes-1\n')
-   if sys.argv[1].find("18") == -1:
+   if sys.argv[1].find("18") == -1 and sys.argv[1].find("17") == -1: #16
 	f.write('kmax 24  number of nuisance parameters (sources of systematical uncertainties)\n')
-   else:
+   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18") == -1: #17
+	f.write('kmax 26  number of nuisance parameters (sources of systematical uncertainties)\n')
+   if sys.argv[1].find("16") == -1 and sys.argv[1].find("17") == -1: #18
 	f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
@@ -231,9 +233,16 @@ for i in range(1,nbins):
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1],arr['l1pref'+sys.argv[1]][i-1]))
-        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s l1pref\n'%(sys.argv[1]))
    else:
         f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s \n'%(sys.argv[1]))
+   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:
+        f.write('pileupId_eff\tlnN\t')
+        f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
+        f.write('pileupId_mis\tlnN\t')
+        f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
+        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s l1pref pileupId_mis pileupId_eff\n'%(sys.argv[1]))
+   if sys.argv[1].find("17") == -1 and sys.argv[1].find("18")==-1:
+        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s l1pref \n'%(sys.argv[1]))
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]
    genbinerror[:]=[]

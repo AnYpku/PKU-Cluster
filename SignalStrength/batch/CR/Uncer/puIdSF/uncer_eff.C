@@ -17,7 +17,7 @@ void run(TString sample,TString channel,TString type){
 		if(sample.Contains("ZA")){
 			bincontent_new[i] = h1->GetBinContent(i+1);
 			bincontent_up[i] = h2->GetBinContent(i+1);
-			bincontent_down[i] = h3->GetBinContent(i+1);
+			bincontent_down[i] = (h3->GetBinContent(i+1));
 		}
 		else{
 			bincontent_new[i] = h1->GetSumOfWeights();

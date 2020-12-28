@@ -132,7 +132,8 @@ int Uncer_batch_bkg(){
         dir1[1]="/home/pku/anying/cms/rootfiles/2017/";
         dir1[2]="/home/pku/anying/cms/rootfiles/2018/";
         TString dir="/home/pku/anying/cms/rootfiles/JESR/";
-	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
 			GenJet="(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";

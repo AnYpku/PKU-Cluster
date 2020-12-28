@@ -4,7 +4,7 @@ kmax 22  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel1
-observation 704.23
+observation 712.41
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,7 +13,7 @@ observation 704.23
 bin	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1	elebarrel1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	8.36	452.41	224.04	12.12	5.01	2.29
+rate	8.50	460.11	224.04	12.33	5.10	2.33
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015
 VBS_Stat_control_bin1_elebarrel18	lnN	1.03	-	-	-	-	-
@@ -23,14 +23,14 @@ TTA_Stat_control_bin1_elebarrel18	lnN	-	-	-	1.18	-	-
 VV_Stat_control_bin1_elebarrel18	lnN	-	-	-	-	1.28	-
 ST_Stat_control_bin1_elebarrel18	lnN	-	-	-	-	-	1.32
 fake_elebarrel18	lnN	-	-	1.10	-	-	-
-JES_18	lnN	1.01	1.10	-	1.03	1.05	1.10
-JER_18	lnN	1.00	1.07	-	1.02	1.05	1.07
-pdf_EW	lnN	1.00	-	-	-	-	-
+JES_18	lnN	1.01	1.10	-	1.04	1.06	1.06
+JER_18	lnN	1.01	1.07	-	1.02	1.05	1.08
+pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.01	-	-	-	-
 Scale_EW	lnN	1.00	-	-	-	-	-
 Scale_QCD	lnN	-	1.13	-	-	-	-
 Scale_QCD_extra	lnN	-	1.00/1.00	-	-	-	-
-interf	lnN	1.18	-	-	-	-	-
+interf	lnN	1.17	-	-	-	-	-
 ele_reco	lnN	1.006	1.006	-	1.006	1.006	1.006
 ele_ID	lnN	1.07	1.07	-	1.07	1.07	1.07
 photon_id	lnN	1.028	1.028	-	1.028	1.028	1.028

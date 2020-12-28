@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 5   number of processes-1
-kmax 23  number of nuisance parameters (sources of systematical uncertainties)
+kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap1
-observation 169.04
+observation 155.94
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,19 +13,19 @@ observation 169.04
 bin	eleendcap1	eleendcap1	eleendcap1	eleendcap1	eleendcap1	eleendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	1.71	87.88	76.70	1.31	1.12	0.31
+rate	1.61	82.03	70.04	1.08	0.88	0.29
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
-VBS_Stat_control_bin1_eleendcap17	lnN	1.09	-	-	-	-	-
+VBS_Stat_control_bin1_eleendcap17	lnN	1.06	-	-	-	-	-
 QCD_Stat_control_bin1_eleendcap17	lnN	-	1.05	-	-	-	-
-non_prompt_Stat_control_bin1_eleendcap17	lnN	-	-	1.05	-	-	-
-TTA_Stat_control_bin1_eleendcap17	lnN	-	-	-	1.44	-	-
-VV_Stat_control_bin1_eleendcap17	lnN	-	-	-	-	1.44	-
+non_prompt_Stat_control_bin1_eleendcap17	lnN	-	-	1.06	-	-	-
+TTA_Stat_control_bin1_eleendcap17	lnN	-	-	-	1.52	-	-
+VV_Stat_control_bin1_eleendcap17	lnN	-	-	-	-	1.48	-
 ST_Stat_control_bin1_eleendcap17	lnN	-	-	-	-	-	1.79
 fake_eleendcap17	lnN	-	-	1.26	-	-	-
-JES_17	lnN	1.02	1.15	-	1.06	1.15	1.02
-JER_17	lnN	1.02	1.11	-	1.01	1.17	1.02
-pdf_EW	lnN	1.00	-	-	-	-	-
+JES_17	lnN	1.13	1.23	-	1.51	1.55	1.02
+JER_17	lnN	1.13	1.21	-	1.71	1.45	1.10
+pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.01	-	-	-	-
 Scale_EW	lnN	1.00	-	-	-	-	-
 Scale_QCD	lnN	-	1.15	-	-	-	-
@@ -37,4 +37,6 @@ photon_id	lnN	1.031	1.031	-	1.031	1.031	1.031
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
+pileupId_eff	lnN	1.03	1.01	-	1.01	1.01	1.00
+pileupId_mis	lnN	1.00	1.01	-	1.00	1.00	1.00
 l1pref	lnN	1.03	1.03	-	1.03	1.03	1.03

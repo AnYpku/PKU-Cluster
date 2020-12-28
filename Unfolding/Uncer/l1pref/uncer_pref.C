@@ -20,7 +20,7 @@ void run(TString var,TString tag){
         }//add over flow
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
 	Double_t uncer[num];
-	cout<<"uncertainty ";
+	cout<<var<<" "<<tag<<" uncertainty ";
 	f1<<"l1pref=[";
 		 for(Int_t i=0;i<num;i++){
 			 bincontent_new[i] = h1->GetBinContent(i+1);

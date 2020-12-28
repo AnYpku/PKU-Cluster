@@ -10,7 +10,7 @@ void run(TString var,TString sample, TString tag){
 	else if(tag.Contains("17"))
 		lumi=41.52;
 	else if(tag.Contains("18"))
-		lumi=58.7;
+		lumi=59.7;
 
         TH1D*h1[num];
 	for(int j=0;j<num;j++){

@@ -8,14 +8,33 @@ void run(TFile* file, vector<TString> vec_branchname,vector<vector<double>> bins
              tree->SetBranchStatus(vec_branchname[i],1);
 	     tree->SetBranchAddress(vec_branchname[i], &variables[vec_branchname[i]]);
      }
-     Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
+     Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown,puIdweight_M;
+     double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
+     double muon_hlt_scale,ele_hlt_scale;
+     int lep;
+     tree->SetBranchAddress("lep", &lep);
      tree->SetBranchAddress("scalef",&scalef);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
      tree->SetBranchAddress("prefWeight",&prefWeight);
      tree->SetBranchAddress("prefWeightUp",&prefWeightUp);
      tree->SetBranchAddress("prefWeightDown",&prefWeightDown);
+     tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
+     tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
+     tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
+     tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
+     tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
+     tree->SetBranchAddress("ele2_reco_scale", &ele2_reco_scale);
+     tree->SetBranchAddress("muon1_id_scale",   &muon1_id_scale);
+     tree->SetBranchAddress("muon2_id_scale",   &muon2_id_scale);
+     tree->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale);
+     tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
+     tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
+     tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
+     tree->SetBranchAddress("puIdweight_M",&puIdweight_M);
+
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
-     double actualWeight[num];
+     double actualWeight[num],weight;
      TH1D*th1[num][kk];
      TString th1name[num][kk];
      for(Int_t i=0;i<num;i++){
@@ -27,12 +46,17 @@ void run(TFile* file, vector<TString> vec_branchname,vector<vector<double>> bins
      }      
      for(int k=0;k<tree->GetEntries();k++){
              tree->GetEntry(k);
+             if(tag.Contains("17")==0) puIdweight_M=1;
+             if(lep==11)
+                     weight=scalef*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale*puIdweight_M;
+             if(lep==13)
+                     weight=scalef*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale*puIdweight_M;
 	     int p=0;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
-			     if(p==0)actualWeight[p]=scalef*prefWeight*pileupWeight;
-			     if(p==1)actualWeight[p]=scalef*prefWeightUp*pileupWeight;
-			     if(p==2)actualWeight[p]=scalef*prefWeightDown*pileupWeight;
+			     if(p==0)actualWeight[p]=weight*prefWeight;
+			     if(p==1)actualWeight[p]=weight*prefWeightUp;
+			     if(p==2)actualWeight[p]=weight*prefWeightDown;
 			     for(int j=0;j<kk;j++){
 				     th1[p][j]->Fill(variables[vec_branchname[j]],actualWeight[p]);
 			     }
@@ -87,16 +111,16 @@ int Unfold_uncer_batch_sig(){
      vector<TString> tag={"16","17"};
      for(int i=0;i<2;i++){
 	     if(tag[i].Contains("17")){
-		     jet="(  ( (fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65&&jet1pt>30&&jet1pt<50&&jet1puIdTight==1) || (!(fabs(jet1eta)<3.14&&fabs(jet1eta)>2.65) && fabs(jet1eta)<4.7 && jet1pt>30 && jet1pt<50)||(fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65&&jet2pt>30&&jet2pt<50&&jet2puIdTight==1)||(!(fabs(jet2eta)<3.14&&fabs(jet2eta)>2.65)&&fabs(jet2eta)<4.7&&jet2pt>30&&jet2pt<50) ||(fabs(jet2eta)<4.7 && jet2pt>50) ) )";
+		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 	     }
 	     else{
-		     jet = "jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7";
+		     jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	     }
 	     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 	     TString cut1 ="(("+Reco+")&&("+Gen+"))";
 	     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 	     dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
-	     file[i]=new TFile(dir[i]+"unfold_GenCutla-outZA-EWK"+tag[i]+".root");
+	     file[i]=new TFile(dir[i]+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
 	     run(file[i],recovars, bins,Reco,tag[i]);
      }
      return 1;

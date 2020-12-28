@@ -50,7 +50,7 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 			init=45;//17 ewk,18 ewk
                 if(tag.Contains("18")) prefWeight=1;
                 if(tag.Contains("17")==0) puIdweight_M=1;
-		weight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+		weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 		if(lep==11)
 			weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 		if(lep==13)

@@ -185,8 +185,8 @@ int Uncer_batch_bkg(){
 	dir1[1]="/home/pku/anying/cms/rootfiles/2017/";     
 	dir1[2]="/home/pku/anying/cms/rootfiles/2018/";     
 	TString dir="/home/pku/anying/cms/rootfiles/JESR/";
-	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-//	vector<TString> sample={"ZA"};
+//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
 			GenJet="(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";       
@@ -215,7 +215,7 @@ int Uncer_batch_bkg(){
 		cut[0]=cut11; cut[1]=cut12; cut[2]=cut13;//reco && gen
 		cut1[0]=cut21;cut1[1]=cut22;cut1[2]=cut23;//reco && !gen
 		Reco[0]=Reco_new;Reco[1]=Reco_up;Reco[2]=Reco_down; 
-		if(tags[i].Contains("17")==1) continue;
+//		if(tags[i].Contains("17")==1) continue;
 		cout<<tags[i]<<" "<<JET_new<<endl;
 		cout<<tags[i]<<" "<<JET_up<<endl;
 		cout<<tags[i]<<" "<<JET_down<<endl;

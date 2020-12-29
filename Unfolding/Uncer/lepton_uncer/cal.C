@@ -1,6 +1,8 @@
 #include "ele_channel_scale.C"
 #include "muon_channel_scale.C"
 #include "muon16_channel_scale.C"
+#include "uncer_eff.C"
+double frac_ele,frac_mu;
 void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TString vars,vector<double> bins){
 	TFile* file_ID;TH2F*ID_ele;TH2F*ID_gamma;
 	TFile*file_ID_sys1;TH2F*ID_muon_sys1;TH2D*ID_muon_stat1;TH2D*ID_muon_sys;
@@ -99,6 +101,11 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 	}
 	TTree*tree=(TTree*)fin->Get("ZPKUCandidates");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
+        double ntot=tree->GetEntries(cut);
+        double n_ele=tree->GetEntries("("+cut+"&&(lep==11))");
+        double n_mu =tree->GetEntries("("+cut+"&&(lep==13))");
+	frac_ele=n_ele/ntot;
+	frac_mu=n_mu/ntot;
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2;
 	double muon1_id_scale,muon2_id_scale,ele1_id_scale,ele2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,ele_hlt_scale,muon_hlt_scale;
         int lep;double Mjj,deltaetajj,jet1eta,jet2eta;
@@ -183,7 +190,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 			}
-			if(k%5000==0){
+			if(k%10000==0){
 				cout<<tag<<" get muon "<<type<<" SFs "<<muon_Weight<<" "<<muon_WeightUp<<" "<<muon_WeightDn<<endl;
 			}
 		}
@@ -202,7 +209,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 				muon_WeightUp=muon_hlt_scale*(muon1_id_scale+muon1_ID_Uncer)*(muon2_id_scale+muon2_ID_Uncer)*(muon1_iso_scale+muon1_ISO_Uncer)*(muon2_iso_scale+muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 				muon_WeightDn=muon_hlt_scale*(muon1_id_scale-muon1_ID_Uncer)*(muon2_id_scale-muon2_ID_Uncer)*(muon1_iso_scale-muon1_ISO_Uncer)*(muon2_iso_scale-muon2_ISO_Uncer)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
 			}
-			if(k%5000==0)
+			if(k%10000==0)
 				cout<<tag<<" get muon "<<type<<" SFs "<<muon_Weight<<" "<<muon_WeightUp<<" "<<muon_WeightDn<<endl;
 		}
 		if(particle.Contains("ele")&&lep==11){
@@ -219,7 +226,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 				ele_WeightUp=ele_hlt_scale*(ele1_id_scale+ele1_ID_Uncer)*(ele2_id_scale+ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight*puIdweight_M;
 				ele_WeightDn=ele_hlt_scale*(ele1_id_scale-ele1_ID_Uncer)*(ele2_id_scale-ele2_ID_Uncer)*(ele1_reco_scale)*(ele2_reco_scale)*scalef*pileupWeight*photon_id_scale*photon_veto_scale*prefWeight*puIdweight_M;
 			}
-			if(k%5000==0)cout<<tag<<" get ele "<<type<<" SFs "<<ele_Weight<<" "<<ele_WeightUp<<" "<<ele_WeightDn<<endl;
+			if(k%10000==0)cout<<tag<<" get ele "<<type<<" SFs "<<ele_Weight<<" "<<ele_WeightUp<<" "<<ele_WeightDn<<endl;
 		}
 		if(particle.Contains("photon")&&photonet>0){
 			photon_ID_Uncer=get_photon_ID(photoneta,photonet,ID_gamma);
@@ -233,7 +240,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TStri
 				photon_WeightDn=(photon_id_scale-photon_ID_Uncer)*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight*puIdweight_M;
 				photon_Weight=photon_id_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*scalef*pileupWeight*photon_veto_scale*prefWeight*puIdweight_M;
 			}
-			if(k%5000==0)cout<<tag<<" get photon SFs "<<photon_Weight<<" "<<photon_WeightUp<<" "<<photon_WeightDn<<endl;
+			if(k%10000==0)cout<<tag<<" get photon SFs "<<photon_Weight<<" "<<photon_WeightUp<<" "<<photon_WeightDn<<endl;
 		}
 
 		muon_weight[0]=muon_Weight;muon_weight[1]=muon_WeightUp;muon_weight[2]=muon_WeightDn;
@@ -316,21 +323,28 @@ int cal(){
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion; 
 		TString cut1 ="(("+Reco+")&& ("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-		cout<<tag[j]<<" "<<jet<<endl;
-		cout<<tag[j]<<" "<<GenJet<<endl;
+//		cout<<tag[j]<<" "<<jet<<endl;
+//		cout<<tag[j]<<" "<<GenJet<<endl;
 		for(int k=0;k<recovars.size();k++){
 			for(int i=0;i<par.size();i++){
 				cout<<tag[j]<<" "<<recovars[k]<<" "<<par[i]<<endl;
 				if(par[i].Contains("muon")){ 
-					cal(par[i],tag[j],cut1,th2[i],"all",recovars[k],bins[k]);
-					cal(par[i],tag[j],cut1,th2[i],"trigger",recovars[k],bins[k]);
+//					cal(par[i],tag[j],cut1,th2[i],"all",recovars[k],bins[k]);
+//					cal(par[i],tag[j],cut1,th2[i],"trigger",recovars[k],bins[k]);
+//					cout<<tag[j]<<" fraction in "<<par[i]<<" "<<frac_mu<<" "<<frac_ele<<endl;
+//					run(recovars[k],par[i],"all",tag[j],frac_mu);
+//					run(recovars[k],par[i],"trigger",tag[j],frac_mu);
 				}
 				if(par[i].Contains("photon")){ 
 					cal(par[i],tag[j],cut1,th2[i],"ID",recovars[k],bins[k]);
+					run(recovars[k],par[i],"ID",tag[j],1);
 				}
 				if(par[i].Contains("ele")){ 
-					cal(par[i],tag[j],cut1,th2[i],"ID",recovars[k],bins[k]);
-					cal(par[i],tag[j],cut1,th2[i],"reco",recovars[k],bins[k]);
+//					cal(par[i],tag[j],cut1,th2[i],"ID",recovars[k],bins[k]);
+//					cal(par[i],tag[j],cut1,th2[i],"reco",recovars[k],bins[k]);
+//					cout<<tag[j]<<" fraction in "<<par[i]<<" "<<frac_mu<<" "<<frac_ele<<endl;
+//					run(recovars[k],par[i],"ID",tag[j],frac_ele);
+//					run(recovars[k],par[i],"reco",tag[j],frac_ele);
 				}
 			}
 		}

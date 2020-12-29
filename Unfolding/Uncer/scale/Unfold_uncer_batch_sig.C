@@ -142,10 +142,13 @@ int Unfold_uncer_batch_sig(){
 
 	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
 	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+//	vector<TString> genvars={"genMjj"};
+//	vector<TString> recovars={"Mjj"};
 	TString dir[3];
 	TFile*file[3];
 	vector<TString> tag={"16","17","18"};
-	for(int i=0;i<3;i++){
+//	vector<TString> tag={"17"};
+	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
@@ -155,7 +158,6 @@ int Unfold_uncer_batch_sig(){
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-//		if(tag[i].Contains("17")) continue;
 		dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
 		file[i]=new TFile(dir[i]+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
 		for(int j=0;j<genvars.size();j++){

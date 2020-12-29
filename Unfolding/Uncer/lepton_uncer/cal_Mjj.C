@@ -1,6 +1,8 @@
 #include "ele_channel_scale.C"
 #include "muon_channel_scale.C"
 #include "muon16_channel_scale.C"
+#include "uncer_eff.C"
+double frac_ele,frac_mu;
 void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	TFile* file_ID;TH2F*ID_ele;TH2F*ID_gamma;
 	TFile*file_ID_sys1;TH2F*ID_muon_sys1;TH2D*ID_muon_stat1;TH2D*ID_muon_sys;
@@ -99,6 +101,11 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	}
 	TTree*tree=(TTree*)fin->Get("ZPKUCandidates");
 	TTreeFormula *tformula=new TTreeFormula("formula", cut, tree);
+        double ntot=tree->GetEntries(cut);
+        double n_ele=tree->GetEntries("("+cut+"&&(lep==11))");
+        double n_mu =tree->GetEntries("("+cut+"&&(lep==13))");
+        frac_ele=n_ele/ntot;
+        frac_mu=n_mu/ntot;
 	double photoneta,photonet,ptlep1,ptlep2,etalep1,etalep2;
 	double muon1_id_scale,muon2_id_scale,ele1_id_scale,ele2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,ele_hlt_scale,muon_hlt_scale;
         int lep;double Mjj,deltaetajj,jet1eta,jet2eta;
@@ -325,16 +332,22 @@ int cal_Mjj(){
 		cout<<tag[j]<<" "<<jet<<endl;
 		cout<<tag[j]<<" "<<GenJet<<endl;
 		for(int i=0;i<par.size();i++){
+			cout<<tag[j]<<" fraction"<<" "<<frac_mu<<" "<<frac_ele<<endl;
 			if(par[i].Contains("muon")){ 
 				cal(par[i],tag[j],cut1,th2[i],"all");
 				cal(par[i],tag[j],cut1,th2[i],"trigger");
+				run("Mjj",par[i],"all",tag[j],frac_mu);
+				run("Mjj",par[i],"trigger",tag[j],frac_mu);
 			}
 			if(par[i].Contains("photon")){ 
 				cal(par[i],tag[j],cut1,th2[i],"ID");
+				run("Mjj",par[i],"ID",tag[j],1);
 			}
 			if(par[i].Contains("ele")){ 
 				cal(par[i],tag[j],cut1,th2[i],"ID");
 				cal(par[i],tag[j],cut1,th2[i],"reco");
+				run("Mjj",par[i],"ID",tag[j],frac_ele);
+				run("Mjj",par[i],"reco",tag[j],frac_ele);
 			}
 		}
 	}

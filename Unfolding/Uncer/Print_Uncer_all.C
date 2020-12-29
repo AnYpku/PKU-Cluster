@@ -31,14 +31,22 @@ int Print_Uncer_all(){
 			TString f_QCD_scale_extra_down  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_QCD_extra_down_"+tag[j]+".txt";
 			TString f_Sigout_scale="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_SigOut_"+tag[j]+".txt";
 			TString f_Sig_scale   ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+genvars[i]+"_uncer"+tag[j]+".txt";
-			TString f_jes         ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jes/"+recovars[i]+"_jes_uncer"+tag[j]+".txt";
-			TString f_jer         ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jer/"+recovars[i]+"_jer_uncer"+tag[j]+".txt";
+			TString f_jes         ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jes/"+recovars[i]+"_uncer_"+tag[j]+".txt";
+			TString f_jer         ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jer/"+recovars[i]+"_uncer_"+tag[j]+".txt";
 			TString f_l1pref      ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/l1pref/"+recovars[i]+"_l1pref"+tag[j]+"_uncer.txt";
 			TString f_ele_ID ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_ele_ID_"+tag[j]+".txt";
 			TString f_ele_reco ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_ele_reco_"+tag[j]+".txt";
 			TString f_mu_eff ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_all_"+tag[j]+".txt";
 			TString f_mu_trigger ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_trigger_"+tag[j]+".txt";
 			TString f_photon_ID ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_photon_ID_"+tag[j]+".txt";
+                        TString f_puId_eff="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+recovars[i]+"_uncer_eff"+tag[j]+".txt";
+                        TString f_puId_mis="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+recovars[i]+
++"_uncer_mis"+tag[j]+".txt";
+                        TString f_puId_eff_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+genvars[i]+"_uncer_eff"+tag[j]+".txt";
+                        TString f_puId_mis_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+genvars[i]+"_uncer_mis"+tag[j]+".txt";
+                        TString f_l1pref_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/l1pref/"+genvars[i]+"_uncer"+tag[j]+".txt";
+                        TString f_jes_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jes/"+genvars[i]+"_uncer"+tag[j]+".txt";
+                        TString f_jer_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jer/"+genvars[i]+"_uncer"+tag[j]+".txt";
 			run(recovars[i],genvars[i],tag[j],f_fake);
 			run(recovars[i],genvars[i],tag[j],f_QCD_pdf);
 			run(recovars[i],genvars[i],tag[j],f_Sigout_pdf);
@@ -56,6 +64,16 @@ int Print_Uncer_all(){
 			run(recovars[i],genvars[i],tag[j],f_mu_eff);
 			run(recovars[i],genvars[i],tag[j],f_mu_trigger);
 			run(recovars[i],genvars[i],tag[j],f_photon_ID);
+			run(recovars[i],genvars[i],tag[j],f_l1pref_sig);
+			run(recovars[i],genvars[i],tag[j],f_jes_sig);
+			run(recovars[i],genvars[i],tag[j],f_jer_sig);
+			if(tag[j].Contains("17")){
+				run(recovars[i],genvars[i],tag[j],f_puId_eff);
+				run(recovars[i],genvars[i],tag[j],f_puId_mis);
+				run(recovars[i],genvars[i],tag[j],f_puId_eff_sig);
+				run(recovars[i],genvars[i],tag[j],f_puId_mis_sig);
+			}
+                       
 		}
 	}
 	return 1;

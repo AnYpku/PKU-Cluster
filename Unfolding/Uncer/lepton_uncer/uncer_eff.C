@@ -1,4 +1,4 @@
-void run(TString var,TString particle,TString type,TString tag){
+void run(TString var,TString particle,TString type,TString tag,double frac){
 	ofstream f2("./"+var+"_"+particle+"_"+type+"_"+tag+".txt");
 	TFile* file = new TFile("./root/"+var+particle+"_"+type+tag+".root");
 //	cout<<var+particle+"_"+type+tag+".root"<<endl;
@@ -9,18 +9,18 @@ void run(TString var,TString particle,TString type,TString tag){
 	const int num =h1->GetNbinsX();
 	Double_t bincontent_new,bincontent_up,bincontent_down;
 	Double_t uncer;
-	cout<<var<<" "<<particle<<" "<<type<<" "<<tag<<" uncertainty ";
+//	cout<<var<<" "<<particle<<" "<<type<<" "<<tag<<" uncertainty ";
                  bincontent_new=h1->GetSum();
                  bincontent_up=h2->GetSum();
                  bincontent_down=h3->GetSum();
-		 //cout<<h1->GetSum()<<endl;
-                 uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
-//		 cout<<bincontent_new<<" "<< bincontent_up<<" "<< bincontent_down<<endl;
+                 uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new*frac;
                  f2<<particle<<"_"<<type<<"=["<<fixed<<setprecision(3)<<1+uncer<<"]"<<endl;
-                 cout<<fixed<<setprecision(3)<<1+uncer<<endl;
-		 cout<<endl;
+//               cout<<h1->GetSum()<<endl;
+//		 cout<<bincontent_new<<" "<< bincontent_up<<" "<< bincontent_down<<endl;
+//               cout<<fixed<<setprecision(3)<<1+uncer<<endl;
+//		 cout<<endl;
 }
-int uncer_eff(){
+/*int uncer_eff(){
 	vector<TString> par={"ele","muon","photon"};
 	vector<TString> tag={"16","17","18"};
         vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
@@ -51,4 +51,4 @@ int uncer_eff(){
 		}
 	}    
 	return 1;
-}
+}*/

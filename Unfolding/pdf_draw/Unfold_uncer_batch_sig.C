@@ -40,8 +40,7 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
 			     init=9;
 		     else    init=45;
 		     for(Int_t i=init;i<(num+init);i++){
-//			     actualWeight[p]=scalef*pweight[i]*pileupWeight;
-			     actualWeight[p]=/*scalef*/pweight[i];//*pileupWeight;
+			     actualWeight[p]=pweight[i];
 			     for(int j=0;j<kk;j++){
 				     if(vec_branchname[j].Contains("Mjj")==0)
 					     th1[p][j]->Fill(variables[vec_branchname[j]],actualWeight[p]);

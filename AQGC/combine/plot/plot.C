@@ -11,16 +11,27 @@
 //#include "tdrstyle.C"
 ////CMS Preliminary label and lumi -- upper left corner
 TH1D* merge(TString sample,TString channel){
-	TFile*f1=new TFile("out_aqgc_"+channel+"16.root");
-	TFile*f2=new TFile("out_aqgc_"+channel+"17.root");
-	TFile*f3=new TFile("out_aqgc_"+channel+"18.root");
-	TH1D*h1=(TH1D*)f1->Get(sample);
-	TH1D*h2=(TH1D*)f2->Get(sample);
-	TH1D*h3=(TH1D*)f3->Get(sample);
+	TString dir="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/hist_root/";
+	TFile*f1=new TFile(dir+"hist_"+sample+"16"+channel+".root");
+	TFile*f2=new TFile(dir+"hist_"+sample+"17"+channel+".root");
+	TFile*f3=new TFile(dir+"hist_"+sample+"18"+channel+".root");
+	TH1D*h1=(TH1D*)f1->Get("hist");
+	TH1D*h2=(TH1D*)f2->Get("hist");
+	TH1D*h3=(TH1D*)f3->Get("hist");
 	TH1D*hist=(TH1D*)h1->Clone();
 	hist->Add(h2,1);
 	hist->Add(h3,1);
-	return hist;
+	int n=hist->GetNbinsX();
+	hist->SetBinContent(n,hist->GetBinContent(n)+hist->GetBinContent(n+1));
+	hist->SetBinError(n,sqrt(pow(hist->GetBinError(n),2)+pow(hist->GetBinError(n+1),2)));
+        hist->SetBinContent(n+1,0);
+        vector<double> ZGbin={150,400,600,800,1000,2e3};
+        TH1D*hist_clone=new TH1D(sample,"",ZGbin.size()-1,&ZGbin[0]);
+	for(int i=1;i<=n;i++){
+           hist_clone->SetBinContent(i,hist->GetBinContent(i));
+	   hist_clone->SetBinError(i,hist->GetBinError(i));
+	}
+	return hist_clone;
 }
 void cmsLumi(bool channel) //0 for el
 {
@@ -41,7 +52,7 @@ void cmsLumi(bool channel) //0 for el
 	//latex.SetTextAlign(11); // align left
 	latex.DrawLatex(0.16,0.88,"CMS");
 	latex.SetTextSize(0.06);
-	latex.DrawLatex(0.76,0.96,Form("136.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
+	latex.DrawLatex(0.76,0.96,Form("137.1 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 
 
@@ -84,7 +95,7 @@ void aa(string a, double limit){
         TH1D*h1=merge("Muon","mu");
         TH1D*h2=merge("ZA-EWK","mu");
         TH1D*h3=merge("plj","mu");
-        TH1D*h4=merge("bkg","mu");
+        TH1D*h4=merge("others","mu");
         TH1D*h5=merge("ZA","mu");
 	TH1D* h6= (TH1D*)h2->Clone();
 	h1->Sumw2();
@@ -97,7 +108,7 @@ void aa(string a, double limit){
 	TH1D* h11=merge("Ele","ele"); 
 	TH1D* h21=merge("ZA-EWK","ele");
 	TH1D* h31=merge("plj","ele"); 
-	TH1D* h41=merge("bkg","ele");
+	TH1D* h41=merge("others","ele");
 	TH1D* h51=merge("ZA","ele");
 	TH1D* h61=(TH1D*)h21->Clone();
 

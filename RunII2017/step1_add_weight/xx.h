@@ -10,6 +10,7 @@
 
 #include <TROOT.h>
 #include <TChain.h>
+#include <TH2F.h>
 #include <TFile.h>
 
 // Header file for the classes stored in the TTree if any.
@@ -508,6 +509,8 @@ public :
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Loop();
+   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+   virtual Double_t delta_R(Double_t eta1, Double_t phi1, Double_t eta2, Double_t phi2);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     endJob();
@@ -530,9 +533,7 @@ public :
      double    ele2_reco_scale;
      double    photon_id_scale;
      double    photon_veto_scale;
-     double puIdweight_L;
      double puIdweight_M;
-     double puIdweight_T;
 };
 
 #endif
@@ -612,9 +613,7 @@ void xx::Init(TTree *tree)
 	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
 	ExTree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
 	ExTree->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/D");
-	ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
 	ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
-	ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
 	// lep and photon scales
 
 	fChain->SetBranchAddress("event", &event, &b_event);

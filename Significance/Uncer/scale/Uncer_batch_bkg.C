@@ -34,7 +34,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      TString th1name[num];
      for(Int_t i=0;i<num;i++){
 	     th1name[i]=Form("hist_%d",i);
-	     th1[i] = new TH1D(th1name[i],th1name[i],9,0,9);
+	     th1[i] = new TH1D(th1name[i],th1name[i],7,0,7);
 	     th1[i]->Sumw2(); 
      }      
      bool flag=false;
@@ -70,9 +70,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     if(Mjj>=500&&Mjj<800&&detajj>=4.5&&detajj<6)th1[p]->Fill(3.5,Weight[p]);//3~4 4.5~6 500~800 
 				     if(Mjj>=800&&Mjj<1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(4.5,Weight[p]);//4~5 4.5~6 800~1200
 				     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(5.5,Weight[p]);//5~6 6~infi 500~800
-				     if(Mjj>=500&&Mjj<800&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
-				     if(Mjj>=800&&Mjj<1200&&detajj>=6)th1[p]->Fill(7.5,Weight[p]);//7~8 6~infi800~1200
-				     if(Mjj>=1200&&detajj>=6)th1[p]->Fill(8.5,Weight[p]);//8~9 6~infi 800~1200
+				     if(Mjj>=500&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
 			     }
 			     else if(name.Contains("EWK")==0 && tag.Contains("16")==0){
 				     if( flag && (i==5 || i==7) ) continue;
@@ -84,9 +82,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     if(Mjj>=500&&Mjj<800&&detajj>=4.5&&detajj<6)th1[p]->Fill(3.5,Weight[p]);//3~4 4.5~6 500~800 
 				     if(Mjj>=800&&Mjj<1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(4.5,Weight[p]);//4~5 4.5~6 800~1200
 				     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(5.5,Weight[p]);//5~6 6~infi 500~800
-				     if(Mjj>=500&&Mjj<800&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
-				     if(Mjj>=800&&Mjj<1200&&detajj>=6)th1[p]->Fill(7.5,Weight[p]);//7~8 6~infi800~1200
-				     if(Mjj>=1200&&detajj>=6)th1[p]->Fill(8.5,Weight[p]);//8~9 6~infi 800~1200
+				     if(Mjj>=500&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
 			     }
 			     else if(name.Contains("EWK")){
 				     int k;
@@ -101,9 +97,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     if(Mjj>=500&&Mjj<800&&detajj>=4.5&&detajj<6)th1[p]->Fill(3.5,Weight[p]);//3~4 4.5~6 500~800 
 				     if(Mjj>=800&&Mjj<1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(4.5,Weight[p]);//4~5 4.5~6 800~1200
 				     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(5.5,Weight[p]);//5~6 6~infi 500~800
-				     if(Mjj>=500&&Mjj<800&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
-				     if(Mjj>=800&&Mjj<1200&&detajj>=6)th1[p]->Fill(7.5,Weight[p]);//7~8 6~infi800~1200
-				     if(Mjj>=1200&&detajj>=6)th1[p]->Fill(8.5,Weight[p]);//8~9 6~infi 800~1200
+				     if(Mjj>=500&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
 			     }
 			     p++;
 		     }
@@ -160,7 +154,7 @@ int Uncer_batch_bkg(){
 
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			GenJet = "genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7";
+			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
 		}
 		else{

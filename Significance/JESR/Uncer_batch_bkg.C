@@ -117,10 +117,10 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if (delta_phi_JEC_down>pi) delta_phi_JEC_down=2*pi-delta_phi_JEC_down;
 //             cout<<detajj_new<<" "<<Mjj_new<<"; "<<detajj_JEC_up<<" "<<Mjj_JEC_up<<"; "<<detajj_JEC_down<<" "<<Mjj_JEC_down<<endl;
              if(tag.Contains("18"))  prefWeight=1;
-	     puIdweight_M=1;
-	     puIdweight_M_new=1;
-	     puIdweight_M_JEC_up=1;
-	     puIdweight_M_JEC_down=1;
+//	     puIdweight_M=1;
+//	     puIdweight_M_new=1;
+//	     puIdweight_M_JEC_up=1;
+//	     puIdweight_M_JEC_down=1;
 	     if(tag.Contains("17")==0){
 		     puIdweight_M=1;
 		     puIdweight_M_new=1;

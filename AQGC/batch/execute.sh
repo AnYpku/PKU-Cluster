@@ -1,7 +1,5 @@
 #!/bin/bash
-# "genMjj" "genZGmass")
 channel=("mu"  "ele")
-# "Mjj" "Mva")
 year=("16" "17" "18")
 #year=("17")
 for (( i = 0 ; i < ${#channel[@]} ; i++ ))

@@ -187,7 +187,7 @@ int Unfold_uncer_batch_bkg(){
 				cout<<recovars[i]<<" "<<sample[j]<<endl;
 				if(sample[j].Contains("EWK"))
 					run(dir,sample[j],recovars[i], bins[i],cut,3,tags[k]);
-				run(dir,sample[j],recovars[i], bins[i],Reco,3,tags[k]);
+				else    run(dir,sample[j],recovars[i], bins[i],Reco,3,tags[k]);
 			}
 		}
 	}

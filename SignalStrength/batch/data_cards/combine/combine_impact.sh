@@ -1,10 +1,10 @@
 #!/bin/bash/
 files="\
+full16_test.root
+full17_test.root
 full18_test.root
 full_RunII.root
 "
-#full16_test.root
-#full17_test.root
 for rootfile in $files
 do
 name=`echo $rootfile | awk -F. '{print $1}'`

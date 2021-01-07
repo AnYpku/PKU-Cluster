@@ -1,8 +1,7 @@
 sed -e 's/result/result_total/g' draw_1d_limit_plot.py  > python_total.py
-year=("16")
+year=("16" "17" "18" "combine")
 for (( j = 0 ; j < ${#year[@]} ; j++ ))
 do
-python2.6 python_total.py fM0 "F_{M0} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fM0_${year[$j]}.root "expected 2#DeltaNLL"
 python2.6 python_total.py fM0 "F_{M0} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fM0_${year[$j]}.root "expected 2#DeltaNLL" 
 python2.6 python_total.py fM1 "F_{M1} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fM1_${year[$j]}.root "expected 2#DeltaNLL" 
 python2.6 python_total.py fM2 "F_{M2} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fM2_${year[$j]}.root "expected 2#DeltaNLL" 
@@ -19,4 +18,5 @@ python2.6 python_total.py fT6 "F_{T6} / #Lambda^{4} (TeV^{-4})"  "expected 95% c
 python2.6 python_total.py fT7 "F_{T7} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fT7_${year[$j]}.root "expected 2#DeltaNLL" 
 python2.6 python_total.py fT8 "F_{T8} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fT8_${year[$j]}.root "expected 2#DeltaNLL" 
 python2.6 python_total.py fT9 "F_{T9} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fT9_${year[$j]}.root "expected 2#DeltaNLL" 
+mv result_total.txt result_total_${year[$j]}.txt
 done

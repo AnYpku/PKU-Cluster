@@ -178,8 +178,8 @@ int Unfold_uncer_batch_sig(){
 	bins.push_back(jetptBins);
 	bins.push_back(MjjBins);
 
-	//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"/*,"genMjj"*/};
-	//	vector<TString> recovars={"ptlep1","photonet","jet1pt"/*,"Mjj"*/};
+//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
+//	vector<TString> recovars={"ptlep1","photonet","jet1pt"};
 	vector<TString> genvars={"genMjj"};
 	vector<TString> recovars={"Mjj"};
 	TString dir="/home/pku/anying/cms/rootfiles/JESR/";     
@@ -212,7 +212,7 @@ int Unfold_uncer_batch_sig(){
 			for(int j=0;j<sample.size();j++){
 				cout<<tags[k]<<" "<<recovars[i]<<" "<<sample[j]<<endl;
 				if(genvars[j].Contains("Mjj")==0)
-					run(sample[j],genvars[i],recovars[i],bins[i],cut,bins[j].size()-1,tags[k]);
+					run(sample[j],genvars[i],recovars[i],bins[i],cut,bins[i].size()-1,tags[k]);
 				else
 					run(sample[j],genvars[i],recovars[i],bins[i],cut,9,tags[k]);
 			}

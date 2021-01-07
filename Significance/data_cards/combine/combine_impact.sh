@@ -10,11 +10,11 @@
 #combineCards.py mu*18*.txt ele*18*.txt >& full18_test.txt
 #combineCards.py full16_test.txt full17_test.txt full18_test.txt >& full_RunII.txt
 files="\
-full16_test.root
 full17_test.root
-full18_test.root
-full_RunII.root
 "
+#full16_test.root
+#full18_test.root
+#full_RunII.root
 for rootfile in $files
 do
 name=`echo $rootfile | awk -F. '{print $1}'`

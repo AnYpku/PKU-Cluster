@@ -157,8 +157,8 @@ int Build_Hist(){
         dir[1]="/home/pku/anying/cms/rootfiles/2017/unfold_GenCutla-";
         dir[2]="/home/pku/anying/cms/rootfiles/2018/unfold_GenCutla-";
 
-//	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
-	vector<TString> names={"ZA-EWK"};
+	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
+//	vector<TString> names={"ZA-EWK"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 
 	for(int k=0;k<tags.size();k++){

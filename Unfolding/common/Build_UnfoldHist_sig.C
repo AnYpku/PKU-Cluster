@@ -95,22 +95,23 @@ int Build_UnfoldHist_sig(){
      TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
 
      vector<vector<double>> bins;
-     vector<double> ptlepBins={20,80,120,200,400};
-     vector<double> photonEtBins={20,80,120,200,400};
-     vector<double> jetptBins={30,150,250,350,800};
-//     vector<double> massVlepBins={70,85,100,110};
-     bins.push_back(ptlepBins);
-     bins.push_back(photonEtBins);
-     bins.push_back(jetptBins);
-//     bins.push_back(massVlepBins);
-//     bins.push_back(MjjBins);
+//     vector<double> ptlepBins={20,80,120,200,400};
+//     vector<double> photonEtBins={20,80,120,200,400};
+//     vector<double> jetptBins={30,150,250,350,800};
+     vector<double> MvaBins={100,200,300,500,1000};
+     vector<double> massVlepBins={70,80,90,100,110};
+//     bins.push_back(ptlepBins);
+//     bins.push_back(photonEtBins);
+//     bins.push_back(jetptBins);
+     bins.push_back(MvaBins);
+     bins.push_back(massVlepBins);
 
      TFile*file[3];
 
-     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
-     vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-//     vector<TString> genvars={"genZGmass","genMjj"};
-//     vector<TString> recovars={"Mva","Mjj"};
+//     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
+//     vector<TString> recovars={"ptlep1","photonet","jet1pt"};
+     vector<TString> genvars={"genZGmass","genmassVlep"};
+     vector<TString> recovars={"Mva","massVlep"};
      vector<TString> tag={"16","17","18"};
      for(int i=0;i<tag.size();i++){
 	     if(tag[i].Contains("17")){

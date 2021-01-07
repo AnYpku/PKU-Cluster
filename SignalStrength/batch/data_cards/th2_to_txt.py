@@ -212,7 +212,7 @@ for i in range(1,nbins):
       f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0]))
       f.write('mu_trigger\tlnN\t')
       f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0],arr['muon'+'_trigger'][0]))
-      f.write('muon group = mu_eff mu_trigger_%s\n'%(sys.argv[1]))
+      f.write('muon group = mu_eff mu_trigger\n')
 #   
    else: 
       f.write('ele_reco\tlnN\t')

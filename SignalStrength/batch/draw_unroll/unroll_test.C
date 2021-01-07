@@ -65,7 +65,7 @@ void unroll_run(TString channel,TString tag){
 	th2_ZA->SetMarkerColor(kBlue-6);
 	th2_ZA->SetLineColor(kBlue-6);
 //	th2_ZA->Scale(lumi*ZA_scale);
-	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
+	const char *name[7]={"0.5~0.8","8~1.2","1.2~2","0.5~0.8","8~1.2","1.2~2","0.5~2"};
 
 	TFile* f_ZA_sig=TFile::Open("../root/hist_ZA-EWK_"+tag+channel+".root");
         TH1D* th2_ZA_sig16=(TH1D*)f_ZA_sig->Get("hist_sig");
@@ -236,12 +236,13 @@ void unroll_run(TString channel,TString tag){
         nominal->Divide(nomNoErr);
         nominal->GetYaxis()->SetRangeUser(0,2);
         nominal->SetLineColor(2);
-        nominal->SetTitle(";m_{jj} [GeV];Data/MC;");
+        nominal->SetTitle(";m_{jj} [TeV];Data/MC;");
         nominal->GetYaxis()->SetNdivisions(404);
         nominal->GetYaxis()->SetTitleOffset(0.23);
         nominal->GetYaxis()->SetTitleSize(0.2);
         nominal->GetYaxis()->SetLabelSize(0.15);
         nominal->GetXaxis()->SetLabelSize(0.18);
+	nominal->GetXaxis()->SetLabelOffset(0.032);
 	nominal->GetXaxis()->SetTitleSize(0.2);
         nominal->GetXaxis()->SetTitleOffset(1);
         nominal->Draw("E2");

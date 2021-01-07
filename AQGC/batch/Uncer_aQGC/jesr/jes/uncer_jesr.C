@@ -22,7 +22,7 @@ void run_year(TString sample,TString tag){
 			max=fabs(bincontent_up[i]-bincontent_new[i]);
 		else
 			max=fabs(bincontent_down[i]-bincontent_new[i]);
-		if(bincontent_new[i]<=0||h1->GetSum()==0) uncer[i] =0;
+		if(bincontent_new[i]<=0||h1->GetSum()<=0) uncer[i] =0;
 		else{
 			if(sample.Contains("ZA")){
 				uncer[i] = max/bincontent_new[i];

@@ -22,8 +22,8 @@ void get_interf(TString tag){
 	cout<<endl;
 }
 int uncer_interf(){
-//	vector<TString> tag={"16","17"};
-	vector<TString> tag={"17"};
+	vector<TString> tag={"16","17","18"};
+//	vector<TString> tag={"17"};
 	for(int i=0;i<tag.size();i++){
 		get_interf(tag[i]);
 	}

@@ -14,7 +14,7 @@ void run(TString channel, TString tag, TString sample,TString cut,vector<double>
 	if(tag.Contains("16"))lumi=Form("%f",35.86);
 	if(tag.Contains("17"))lumi=Form("%f",41.52);
 	if(tag.Contains("18"))lumi=Form("%f",59.7);
-        if(sample.Contains("plj")) lumi=Form("%f",1.0);
+        if(sample.Contains("plj")||sample.Contains("Muon")||sample.Contains("Ele")) lumi=Form("%f",1.0);
 	cout<<sample<<" "<<channel<<" "<<tag<<" "<< lumi;
 	tree->Draw("ZGmass>>"+hname,cut+"*actualWeight*"+lumi,"goff");
 	cout<<" "<<h1->GetSumOfWeights()<<endl;
@@ -25,7 +25,7 @@ void run(TString channel, TString tag, TString sample,TString cut,vector<double>
 	file->Close();
 }
 int Build_histo_aQGC(){
-	TString LEPmu = "(lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && (HLT_Mu1>0||HLT_Mu2>0))";
+	TString LEPmu = "(lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 && (HLT_Mu1>0||HLT_Mu2>0||HLT_Mu3>0))";
 	TString LEPele = "(lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110 && (HLT_Ele1>0 || HLT_Ele2>0))";
 	TString photon = "(photonet>100 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )  )";
 	TString jet;
@@ -33,8 +33,8 @@ int Build_histo_aQGC(){
 	TString SignalRegion = "(Mjj>500 && fabs(jet1eta-jet2eta)>2.5)";
 	vector<TString> tag={"16","17","18"};
 	vector<TString> channel={"ele","mu"};
-	vector<TString> sample={"plj","ZA","ZA-EWK","others"};
-//	vector<TString> sample={"ST","plj","TTA","VV","ZA","ZA-EWK"};
+//	vector<TString> sample={"plj","ZA","ZA-EWK","others"};
+	vector<TString> sample={"Muon","Ele"};
 	vector<double> ZGbin={150,400,600,800,1000,2e4};
 	TString Reco;
 	for(int k=0;k<tag.size();k++){
@@ -47,6 +47,10 @@ int Build_histo_aQGC(){
 		Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
 		for(int i=0;i<sample.size();i++){
 			for(int j=0;j<channel.size();j++){
+				if(sample[i].Contains("Ele")&&channel[j].Contains("mu"))
+					continue;
+				if(sample[i].Contains("Muon")&&channel[j].Contains("ele"))
+					continue;
 				run(channel[j], tag[k], sample[i],Reco,ZGbin);
 			}
 		}

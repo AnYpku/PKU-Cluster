@@ -50,7 +50,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
 	     double detajj=fabs(jet1eta-jet2eta);
              if(tag.Contains("18"))  prefWeight=1;
 	     if(tag.Contains("17")==0) puIdweight_M=1;
-             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M*prefWeight;
 	     if(lep==11)
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)

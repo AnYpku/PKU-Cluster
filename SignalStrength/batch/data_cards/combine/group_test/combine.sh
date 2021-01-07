@@ -61,7 +61,7 @@ combine -M MultiDimFit --algo grid --points 50  --rMin 0.2 --rMax 4 -m 125 -n fa
 
 plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root \
 --others "higgsCombinestat_${name}.MultiDimFit.mH125.root:Freeze all:2" \
---breakdown syst,stat
+--breakdown syst,stat -o scan_${name}
 
 plot1DScan.py higgsCombinenominal_${name}.MultiDimFit.mH125.root --others \
 "higgsCombinetheory_${name}.MultiDimFit.mH125.root:Freeze th.:4" \

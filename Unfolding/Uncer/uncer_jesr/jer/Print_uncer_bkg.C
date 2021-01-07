@@ -36,8 +36,8 @@ void run(TString var,TString sample, TString tag){
             else    error=0;
             if(error>1) error=1;
 	    if(k==0){
-		    ftxt<<sample<<"_jer=[";
-		    ff<<sample<<"_jer=[";
+		    ftxt<<"jer"<<tag<<"_"<<sample<<"=[";
+		    ff<<"jer"<<tag<<"_"<<sample<<"=[";
 	    }
 	    if(k<kk-1){
 		    ftxt<<fixed<<setprecision(3)<<1+error<<",";

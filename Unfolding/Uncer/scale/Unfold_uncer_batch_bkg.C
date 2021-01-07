@@ -186,16 +186,14 @@ int Unfold_uncer_batch_bkg(){
 	vector<double> ptlepBins={20,80,120,200,400};
 	vector<double> photonEtBins={20,80,120,200,400};
 	vector<double> jetptBins={30,150,250,350,800};
-	vector<double> MvaBins={100,150,1000};
 	vector<double> MjjBins={500,1000,1500,2000};
 	bins.push_back(ptlepBins);
 	bins.push_back(photonEtBins);
 	bins.push_back(jetptBins);
-	bins.push_back(MvaBins);
 	bins.push_back(MjjBins);
 
-	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genZGmass","genMjj"};
-	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
+	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
 	//     for(int i=0;i<bins.size();i++){
 	TString dir[3];TFile* f2[3];
 	TFile* f1[3];

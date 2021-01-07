@@ -803,7 +803,7 @@ void xx::Init(TTree *tree)
 	fChain->SetBranchAddress("passFilter_duplicateMuon", &passFilter_duplicateMuon, &b_passFilter_duplicateMuon_);
 	fChain->SetBranchAddress("lumiWeight", &lumiWeight, &b_lumiWeight);
 	fChain->SetBranchAddress("pileupWeight", &pileupWeight, &b_pileupWeight);
-	fChain->SetBranchAddress("pweight", pweight, &b_pweight);
+//	fChain->SetBranchAddress("pweight", pweight, &b_pweight);
 	fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
 	fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
 	fChain->SetBranchAddress("prefWeightDown", &prefWeightDown, &b_prefWeightDown);

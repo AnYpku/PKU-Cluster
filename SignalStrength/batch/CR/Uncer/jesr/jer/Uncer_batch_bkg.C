@@ -57,7 +57,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      TString th1name[kk];
      for(int j=0;j<kk;j++){
 	     th1name[j]=Form("hist_%i",j);
-	     th1[j] = new TH1D(th1name[j],th1name[j],mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
+	     th1[j] = new TH1D(th1name[j],th1name[j],mjj_bins.size()-1,&mjj_bins[0]);
 	     th1[j]->Sumw2(); 
      }
      for(int k=0;k<tree->GetEntries();k++){
@@ -132,8 +132,8 @@ int Uncer_batch_bkg(){
         dir1[1]="/home/pku/anying/cms/rootfiles/2017/";
         dir1[2]="/home/pku/anying/cms/rootfiles/2018/";
         TString dir="/home/pku/anying/cms/rootfiles/JESR/";
-//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-	vector<TString> sample={"ZA-EWK"};
+	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+//	vector<TString> sample={"ZA-EWK"};
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
 			GenJet="(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";

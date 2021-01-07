@@ -35,7 +35,7 @@ void run(TString var,TString tag){
 		 }
 		 cout<<endl;
 }
-int uncer_pref(){
+int Print_uncer_bkg(){
      vector<TString> genvars={"ptlep1","photonet","jet1pt","Mjj"};
      for(int i=0;i<genvars.size();i++){
 	run(genvars[i],"16");

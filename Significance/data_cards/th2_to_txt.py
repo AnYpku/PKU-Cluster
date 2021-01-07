@@ -221,7 +221,7 @@ for i in range(1,nbins):
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:
         f.write('pileupId_eff\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1]))
-        f.write('pileupId_mis\tlnN\t')
+        f.write('pileupId_mis_SR\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1]))
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')

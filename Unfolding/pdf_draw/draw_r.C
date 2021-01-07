@@ -9,10 +9,10 @@ void run(TString var, TString recovar,TString title,TString tag){
 	double xbin[kk],ybin[kk],xerror_up[kk],xerror_down[kk],yerror_up[kk],yerror_down[kk];
 	double Err_up[kk],Err_down[kk];
 	double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
-	ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt");
-	ifstream f_sys("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");
-	if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/r_"+recovar+"_"+tag+".txt"<<endl;
-	if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
+	ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt");
+	ifstream f_sys("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt");
+	if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt"<<endl;
+	if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 	for(int i=0;i<h1[0]->GetNbinsX();i++){
                 f_in>>Err_down[i]>>Err_up[i];
                 f_sys>>Err_sysDown[i]>>Err_sysUp[i];
@@ -62,12 +62,12 @@ void run(TString var, TString recovar,TString title,TString tag){
         c1->Print(var+"_signal_strength"+tag+".pdf");
 }
 int draw_r(){
-//        vector<TString> title={"leading p_{T}^{lep}","leading p_{T}^{#gamma}","leading p_{T}^{j}","M_{jj}","m_{Z#gamma}"};
-//        vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};//,"genZGmass","genMjj"};
-//        vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-        vector<TString> genvars={"genMjj"};
-        vector<TString> recovars={"Mjj"}; 
-        vector<TString> title={"M_{jj}"};
+        vector<TString> title={" p_{T}^{l_{1}}", "p_{T}^{#gamma}","p_{T}^{j_{1}}","M_{jj}"};
+        vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+        vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+//        vector<TString> genvars={"genMjj"};
+//        vector<TString> recovars={"Mjj"}; 
+//        vector<TString> title={"M_{jj}"};
         for(int i=0;i<genvars.size();i++){
                 run(genvars[i],recovars[i],title[i],"16");
                 run(genvars[i],recovars[i],title[i],"17");

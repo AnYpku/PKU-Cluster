@@ -4,7 +4,7 @@ from ROOT import gROOT, THStack, TH1D, TList, TFile
 import sys
 from numpy import sum
 print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
-
+print sys.argv[1],' ',sys.argv[2],' ',sys.argv[3]
 fdir = '/home/pku/anying/cms/PKU-Cluster/Unfolding/common/root/'
 f_EW = TFile.Open(fdir+'hist_ZA-EWK_'+sys.argv[1]+sys.argv[3]+'.root')
 f_ZA = TFile.Open(fdir+'hist_ZA_'+sys.argv[2]+sys.argv[3]+'.root')
@@ -50,7 +50,7 @@ for line in f:
 #print arr 
 print '>>>>begin to read bin content to the txt file>>>>'
 nbins=th1_ZA_sig_out.GetNbinsX()+1
-n_NP=24+nbins-1
+n_NP=25+nbins-1
 jmax=6+nbins-1-1
 for i in range(1,nbins):
    f = open('./txt/%s_%s_bin%i.txt'%(sys.argv[2],sys.argv[3],i),'w')
@@ -205,13 +205,13 @@ for i in range(1,nbins):
 
    f.write('JES_%s\tlnN\t'%(sys.argv[3]))
    for j in range(1,nbins):
-         f.write('-\t')
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jes'+sys.argv[3]+'_ZA'][i-1],arr['jes'+sys.argv[3]+'_TTA'][i-1],arr['jes'+sys.argv[3]+'_VV'][i-1],arr['jes'+sys.argv[3]+'_ST'][i-1],arr['jes'+sys.argv[3]+'_ZA-EWK'][i-1]))
+	 f.write('%0.2f\t'%(arr['genbin{}_jes'.format(j)][i-1]))
+   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jes'+sys.argv[3]+'_ZA'][i-1],arr['jes'+sys.argv[3]+'_TTA'][i-1],arr['jes'+sys.argv[3]+'_VV'][i-1],arr['jes'+sys.argv[3]+'_ST'][i-1],arr['jes'+sys.argv[3]+'_ZA-EWKout'][i-1]))
 
    f.write('JER_%s\tlnN\t'%(sys.argv[3]))
    for j in range(1,nbins):
-         f.write('-\t')
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jer'+sys.argv[3]+'_ZA'][i-1],arr['jer'+sys.argv[3]+'_TTA'][i-1],arr['jer'+sys.argv[3]+'_VV'][i-1],arr['jer'+sys.argv[3]+'_ST'][i-1],arr['jer'+sys.argv[3]+'_ZA-EWK'][i-1]))
+	 f.write('%0.2f\t'%(arr['genbin{}_jer'.format(j)][i-1]))
+   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jer'+sys.argv[3]+'_ZA'][i-1],arr['jer'+sys.argv[3]+'_TTA'][i-1],arr['jer'+sys.argv[3]+'_VV'][i-1],arr['jer'+sys.argv[3]+'_ST'][i-1],arr['jer'+sys.argv[3]+'_ZA-EWKout'][i-1]))
 #
    f.write('pdf_EW\tlnN\t')
    for j in range(1,nbins):
@@ -238,34 +238,39 @@ for i in range(1,nbins):
          f.write('-\t')
    f.write('%0.2f/%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale_up'][i-1],arr['QCD_scale_down'][i-1]))
 #
+   f.write('interf\tlnN\t')
+   for j in range(1,nbins):
+	 f.write('%0.2f\t'%(arr['genbin{}_interf'.format(j)][i-1]))
+   f.write('\t-\t-\t-\t-\t-\t-\n')
+#
    f.write('mu_trigger\tlnN\t')
    for j in range(1,nbins):
-         f.write('-\t')
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0]))
+	 f.write('%0.3f\t'%(arr['muon_trigger'][0]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0]))
 #
    f.write('mu_eff\tlnN\t')
    for j in range(1,nbins):
-         f.write('-\t')
+	 f.write('%0.2f\t'%(arr['muon_all'][0]))
    f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0]))
 #
    f.write('ele_reco\tlnN\t')
    for j in range(1,nbins):
-         f.write('-\t')
+	 f.write('%0.2f\t'%(arr['ele_reco'][0]))
    f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0]))
 #
    f.write('ele_ID\tlnN\t')
    for j in range(1,nbins):
-         f.write('-\t')
+	 f.write('%0.2f\t'%(arr['ele_ID'][0]))
    f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0]))
 #
    f.write('photon_id\tlnN\t')
    for j in range(1,nbins):
-         f.write('-\t')
+	 f.write('%0.2f\t'%(arr['photon_ID'][0]))
    f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
 #
    f.write('pileup\tlnN\t')
    for j in range(1,nbins):
-         f.write('-\t')
+	 f.write('%0.2f\t'%(1.01))
    f.write('1.01\t-\t1.01\t1.01\t1.01\t1.01\n')
 #
    f.write('ttgamma_xs\tlnN\t')
@@ -280,7 +285,7 @@ for i in range(1,nbins):
    if sys.argv[3].find("18") == -1:
         f.write('l1pref\tlnN\t')
         for j in range(1,nbins):
-               f.write('-\t')
+	       f.write('%0.2f\t'%(arr['genbin{}_pref'.format(j)][i-1]))
         f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1]))
 
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror

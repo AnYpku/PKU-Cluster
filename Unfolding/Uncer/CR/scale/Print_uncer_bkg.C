@@ -7,7 +7,7 @@ void run(TString var,TString sample, TString tag,int num){
 		f_down.open("./"+var+"_uncer_QCD_extra_down_"+tag+"CR.txt");//,ios::app);
 	}
 	ofstream ff("./"+var+"_uncer_"+tag+"CR.txt",ios::app);
-	TFile*file=new TFile("./bkg_root/unfold_"+var+"_"+sample+"_scale"+tag+".root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+sample+"_scale"+tag+".root");
 	TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -15,7 +15,7 @@ void run(TString var,TString sample, TString tag,int num){
 	else if(tag.Contains("17"))
 		lumi=41.52;
 	else if(tag.Contains("18"))
-		lumi=58.7;
+		lumi=59.7;
 
         TH1D*h1[num];
 	vector<double> vec_content;

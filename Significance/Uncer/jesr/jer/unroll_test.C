@@ -49,7 +49,7 @@ void unroll_name(TString filename,TString tag){
 	std::ostringstream strs;
 	Double_t mjj_bins[4]={500, 800, 1200,2000};
 	Double_t detajj_bins[4]={2.5,4.5,6,6.5};
-	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
+	const char *name[7]={"0.5~0.8","0.8~1.2","1.2~2","0.5~0.8","0.8~1.2","1.2~2","0.5~2"};
 
 	TFile* f_ZA;
 	f_ZA=new TFile("./root/hist_"+filename+"_jer"+tag+".root");

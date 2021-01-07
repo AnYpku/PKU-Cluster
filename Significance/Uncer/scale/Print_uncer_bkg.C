@@ -16,7 +16,7 @@ void run(TString sample, TString tag,int num){
 	else if(tag.Contains("17"))
 		lumi=41.52;
 	else if(tag.Contains("18"))
-		lumi=58.7;
+		lumi=59.7;
 
         TH1D*h1[num];
 	vector<double> vec_content;
@@ -27,10 +27,10 @@ void run(TString sample, TString tag,int num){
 		h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
 		h1[j]->Scale(lumi);
 	}
-        const int kk=h1[0]->GetNbinsX()-2;
-        for(int i=0;i<num;i++){
-                h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1)+h1[i]->GetBinContent(kk+2)+h1[i]->GetBinContent(kk+3));
-        }//combine the last three bins and overflow bin to the seventh bin
+        const int kk=h1[0]->GetNbinsX();
+//        for(int i=0;i<num;i++){
+//                h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1)+h1[i]->GetBinContent(kk+2)+h1[i]->GetBinContent(kk+3));
+//        }//combine the last three bins and overflow bin to the seventh bin
 	double scale_band1[kk],scale_band2[kk],scale_band3[kk];
 	for(int k=0;k<kk;k++){
             double error=0,extra_up=0,extra_down=0;

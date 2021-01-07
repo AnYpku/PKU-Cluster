@@ -39,6 +39,8 @@ int Print_Uncer_all(){
 			TString f_mu_trigger ="./lepton_uncer/txt/muon_trigger"+tag[j]+".txt";
 			TString f_photon_ID ="./lepton_uncer/txt/photon_ID"+tag[j]+".txt";
 			TString f_lumi ="./lumi/lumi_uncer"+tag[j]+".txt";
+			TString f_puIdeff ="./puIdSF/eff_uncer_"+channel[i]+tag[j]+".txt";
+			TString f_puIdmis ="./puIdSF/mis_uncer_"+channel[i]+tag[j]+".txt";
 			run(channel[i],tag[j],f_fake);
 			run(channel[i],tag[j],f_interf);
 			run(channel[i],tag[j],f_QCD_pdf);
@@ -57,6 +59,10 @@ int Print_Uncer_all(){
 			run(channel[i],tag[j],f_mu_trigger);
 			run(channel[i],tag[j],f_photon_ID);
 			run(channel[i],tag[j],f_lumi);
+			if(tag[j].Contains("16")==0&&tag[j].Contains("18")==0){
+				run(channel[i],tag[j],f_puIdeff);
+				run(channel[i],tag[j],f_puIdmis);
+			}
 		}
 	}
 	return 1;

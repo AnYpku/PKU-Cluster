@@ -1,0 +1,5 @@
+    python2.6 python_total.py fT0 "F_{T0} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombineTest.MultiDimFit.mH120.expected.fT0.root "expected 2#DeltaNLL" 
+    python2.6 python_total.py fT1 "F_{T1} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombineTest.MultiDimFit.mH120.expected.fT1.root "expected 2#DeltaNLL" 
+    python2.6 python_total.py fT2 "F_{T2} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombineTest.MultiDimFit.mH120.expected.fT2.root "expected 2#DeltaNLL" 
+    python2.6 python_total.py fT8 "F_{T8} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombineTest.MultiDimFit.mH120.expected.fT8.root "expected 2#DeltaNLL" 
+    python2.6 python_total.py fT9 "F_{T9} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombineTest.MultiDimFit.mH120.expected.fT9.root "expected 2#DeltaNLL" 

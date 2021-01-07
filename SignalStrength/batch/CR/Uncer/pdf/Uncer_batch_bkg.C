@@ -34,7 +34,7 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 	vector<double> mjj_bins={150,300,400,500};
 	for(Int_t i=0;i<num;i++){
 		th1name[i]=Form("hist_%d",i);
-		th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
+		th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,&mjj_bins[0]);
 		th1[i]->Sumw2(); 
 	}
 	cout<<tag<<" "<<name<<endl;
@@ -125,8 +125,8 @@ int Uncer_batch_bkg(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		TString cut1 ="("+Reco+")&&("+Gen+")";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-//		if(tag[i].Contains("16"))	
-//			run(file1[i],Reco,tag[i],0);
+		if(tag[i].Contains("16"))	
+			run(file1[i],Reco,tag[i],0);
 		run(file2[i],cut1,tag[i],0);
 		run(file2[i],cut2,tag[i],1);
 	}

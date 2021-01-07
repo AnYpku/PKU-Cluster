@@ -24,7 +24,7 @@ void run(TString channel,TString tag){
 		f1<<"fake17=[";
         if(tag.Contains("18"))
 		f1<<"fake18=[";
-	cout<<"uncertainty ";
+	cout<<channel<<" "<<tag<<" uncertainty ";
 		 for(Int_t i=0;i<num;i++){
 			 bincontent_new[i] = h1->GetBinContent(i+1);
 			 bincontent_up[i] = h2->GetBinContent(i+1);

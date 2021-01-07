@@ -4,7 +4,7 @@
 void cmsLumi(bool channel);
 void run(TString var, TString recovar, TString title,TString tag){
         double xs16=109.7,xs17=114.3,xs18=114.3;//cross section [fb] for 2016/2017/2018 EW sample 
-        int num16=299991,num17=299973,num18=287399;//the number of events for 2016/2017/2018 EW process
+        int num16,num17,num18;//the number of events for 2016/2017/2018 EW process
 	num16=884668;num17=799717;num18=879399;
 	TFile*file1=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf16.root");
 	TFile*file2=new TFile("../pdf_draw/unfold_"+var+"_ewk_pdf17.root");
@@ -12,6 +12,9 @@ void run(TString var, TString recovar, TString title,TString tag){
         TFile*file11=new TFile("../scale_draw/"+var+"_unfold_ewk_scale16.root");
         TFile*file22=new TFile("../scale_draw/"+var+"_unfold_ewk_scale17.root");
         TFile*file33=new TFile("../scale_draw/"+var+"_unfold_ewk_scale18.root");
+	TFile*f1=new TFile("../pdf_draw/unfold_"+var+"_ewk16.root");
+	TFile*f2=new TFile("../pdf_draw/unfold_"+var+"_ewk17.root");
+	TFile*f3=new TFile("../pdf_draw/unfold_"+var+"_ewk18.root");
 	TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
         TH1D*h11[3];TH1D*h22[3];TH1D*h33[3];
         for(int i=0;i<num;i++){
@@ -29,16 +32,19 @@ void run(TString var, TString recovar, TString title,TString tag){
            h1[i]->Add(h3[i],1);
 	}
         const int kk=h1[0]->GetNbinsX();
-	TH1D*hist_clone=(TH1D*)h1[0]->Clone();
+	TH1D*hist_clone=(TH1D*)f1->Get(var+"_0");
+	TH1D*hist_clone2=(TH1D*)f2->Get(var+"_0");
+	TH1D*hist_clone3=(TH1D*)f3->Get(var+"_0");
+        hist_clone->Add(hist_clone2,1);hist_clone->Add(hist_clone3,1);
         hist_clone->SetBinContent(kk,hist_clone->GetBinContent(kk)+hist_clone->GetBinContent(kk+1));
         hist_clone->SetBinError(kk,sqrt(pow(hist_clone->GetBinError(kk),2)+pow(hist_clone->GetBinError(kk+1),2)));//add overflow bin
         double xbin[kk],ybin[kk],xerror_up[kk],xerror_down[kk],yerror_up[kk],yerror_down[kk];
         double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
-        ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt");
-        ifstream f_sys("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt");
-        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/ori/r_"+recovar+"_"+tag+".txt"<<endl;
-        if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/txt/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
+        ifstream f_in("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt");
+        ifstream f_sys("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt");
+        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt"<<endl;
+        if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 
 	for(int i=0;i<hist_clone->GetNbinsX();i++){
                 f_in>>Err_down[i]>>Err_up[i];
@@ -63,7 +69,7 @@ void run(TString var, TString recovar, TString title,TString tag){
                 ybin[i]=ybin[i]/hist_clone->GetBinWidth(i+1);
                 cout<<xbin[i]<<" "<<ybin[i]<<" "<<yerror_up[i]<<" "<< yerror_down[i]<<endl; 
 	}// expected 
-        cout<<"before scale "<<h1[0]->GetBinContent(1)<<" "<<h1[0]->GetBinError(1)<<endl;
+        cout<<"before scale "<<hist_clone->GetBinContent(1)<<" "<<hist_clone->GetBinError(1)<<endl;
 	for(int i=0;i<num;i++){
 		h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1));
 		h2[i]->SetBinContent(kk,h2[i]->GetBinContent(kk)+h2[i]->GetBinContent(kk+1));
@@ -110,18 +116,18 @@ void run(TString var, TString recovar, TString title,TString tag){
         fPads1->SetTicky();
         fPads1->SetTickx();
         fPads1->SetLogy();
-        h1[0]->SetTitle("");
+        hist_clone->SetTitle("");
         if(var.Contains("Mjj")==0)
-                h1[0]->GetYaxis()->SetTitle("d#sigma/dp_{T} [fb/GeV]");
+                hist_clone->GetYaxis()->SetTitle("d#sigma/dp_{T} [fb/GeV]");
         else
-                h1[0]->GetYaxis()->SetTitle("d#sigma/dm [fb/GeV]");
-        h1[0]->GetYaxis()->SetTitleOffset(0.45);
-        h1[0]->GetYaxis()->SetTitleSize(0.10);
-	h1[0]->SetLineStyle(1);
-	h1[0]->SetLineColor(kRed-7);
-	h1[0]->SetLineWidth(3);
-        h1[0]->SetFillStyle(3002);
-        h1[0]->SetFillColor(kRed-7);
+                hist_clone->GetYaxis()->SetTitle("d#sigma/dm [fb/GeV]");
+        hist_clone->GetYaxis()->SetTitleOffset(0.45);
+        hist_clone->GetYaxis()->SetTitleSize(0.10);
+	hist_clone->SetLineStyle(1);
+	hist_clone->SetLineColor(kRed-7);
+	hist_clone->SetLineWidth(3);
+        hist_clone->SetFillStyle(3002);
+        hist_clone->SetFillColor(kRed-7);
 	TH1D * upper =(TH1D*) h1[0]->Clone("upper");
 	TH1D * lower =(TH1D*) h1[0]->Clone("lower");
 	upper->Reset();
@@ -140,29 +146,25 @@ void run(TString var, TString recovar, TString title,TString tag){
 		cout<<"sys pdf "<<sqrt(err2Up/(num-1))<<"; stat+sys(pdf)"<<sqrt(err2Up/(num-1)+pow(h1[0]->GetBinError(j),2))<<endl;
 		err2Up=err2Up/(num-1)+pow(h1[0]->GetBinError(j),2)+pow(err_scale,2); 
 		err2Dn=err2Dn/(num-1)+pow(h1[0]->GetBinError(j),2)+pow(err_scale,2); 
-		//	      cout<<sqrt(err2Dn/num+pow(h1[0]->GetBinError(j),2))<<endl;
-		//            cout<<n+sqrt(err2Up/num)<<endl;
-		//	      cout<<nominal->GetBinContent(j)<<endl;
+		//cout<<sqrt(err2Dn/num+pow(h1[0]->GetBinError(j),2))<<endl;
+		//cout<<n+sqrt(err2Up/num)<<endl;
+		//cout<<nominal->GetBinContent(j)<<endl;
 		upper->SetBinContent(j,n+sqrt(err2Up));
 		lower->SetBinContent(j,n-sqrt(err2Dn));
-		h1[0]->SetBinContent(j,h1[0]->GetBinContent(j)/h1[0]->GetBinWidth(j));
-                h1[0]->SetBinError(j,sqrt(err2Up)/h1[0]->GetBinWidth(j));
+		hist_clone->SetBinContent(j,hist_clone->GetBinContent(j)/hist_clone->GetBinWidth(j));
+                hist_clone->SetBinError(j,sqrt(err2Up)/hist_clone->GetBinWidth(j));
 	}
-        h1[0]->GetYaxis()->SetRangeUser(h1[0]->GetMinimum()*0.2,h1[0]->GetMaximum()*35);
-        h1[0]->GetYaxis()->SetLabelSize(0.05);
-        h1[0]->SetMarkerSize(0);
+        hist_clone->GetYaxis()->SetRangeUser(hist_clone->GetMinimum()*0.2,hist_clone->GetMaximum()*35);
+        hist_clone->GetYaxis()->SetLabelSize(0.05);
+        hist_clone->SetMarkerSize(0);
 	const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
-//        for(int i=0;i<h1[0]->GetNbinsX();i++){h1[0]->GetXaxis()->SetBinLabel(i+1,name[i]);}
-	h1[0]->Draw("E2");
-	hist_clone->SetMarkerStyle(20);
-	hist_clone->SetMarkerColor(1);
-	hist_clone->SetLineColor(1);
-//	hist_clone->Draw("PE same");
+//      for(int i=0;i<hist_clone->GetNbinsX();i++){hist_clone->GetXaxis()->SetBinLabel(i+1,name[i]);}
         cout<<"Uncertainty of data "<<hist_clone->GetBinError(1)<<endl;
+	hist_clone->Draw("E2");
 
         TLegend*l1=new TLegend(0.45,0.5,0.88,0.88);
         TLegend*l2=new TLegend(0.2,0.5,0.5,0.88);
-        l1->AddEntry(h1[0],"EW Z#gamma MadGraph");
+        l1->AddEntry(hist_clone,"EW Z#gamma MadGraph");
         l1->AddEntry(gr,"Expected result (stat.#oplus syst.)");
         l1->AddEntry(gr_sys,"systematic uncertainty");
         l1->SetTextSize(0.065);
@@ -181,9 +183,9 @@ void run(TString var, TString recovar, TString title,TString tag){
         gr_sys->SetMarkerSize(0);
         gr_sys->Draw("P SAME");
 
-        double max=h1[0]->GetMaximum();
-        TLine* vline1 = new TLine(h1[0]->GetBinLowEdge(4),0,h1[0]->GetBinLowEdge(4),max*1.);
-        TLine* vline2 = new TLine(h1[0]->GetBinLowEdge(7),0,h1[0]->GetBinLowEdge(7),max*1.);
+        double max=hist_clone->GetMaximum();
+        TLine* vline1 = new TLine(hist_clone->GetBinLowEdge(4),0,hist_clone->GetBinLowEdge(4),max*1.);
+        TLine* vline2 = new TLine(hist_clone->GetBinLowEdge(7),0,hist_clone->GetBinLowEdge(7),max*1.);
         vline1->SetLineStyle(2);
         vline2->SetLineStyle(2);
         vline1->SetLineWidth(2);
@@ -209,13 +211,13 @@ void run(TString var, TString recovar, TString title,TString tag){
 		cout<<upper->GetBinContent(i+1)<<" "<<lower->GetBinContent(i+1)<<endl;
 
 	}*///check the bincontent
-	TH1D*nominal=(TH1D*)h1[0]->Clone("nominal");
+	TH1D*nominal=(TH1D*)hist_clone->Clone("nominal");
 	TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
 	for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
 	nominal->Divide(nomNoErr);
 	upper->Divide(nominal);
 	lower->Divide(nominal);
-	cout<<"check the stat uncertainty "<<h1[0]->GetBinError(1)/h1[0]->GetBinContent(1)<<" "<<nominal->GetBinError(1)<<endl;
+	cout<<"check the stat uncertainty "<<hist_clone->GetBinError(1)/hist_clone->GetBinContent(1)<<" "<<nominal->GetBinError(1)<<endl;
 	nominal->SetFillStyle(3002);
 	nominal->SetFillColor(kRed-7);
 	nominal->SetLineColor(kRed-7);
@@ -230,7 +232,6 @@ void run(TString var, TString recovar, TString title,TString tag){
         nominal->GetXaxis()->SetTitleFont(22);
 	nominal->GetXaxis()->SetTitle(title+" [GeV]");
 	nominal->GetYaxis()->SetTitle("Ratio to MG");
-//        nominal->GetYaxis()->SetTitleFont(32);
         nominal->GetYaxis()->SetNdivisions(404);
 	nominal->GetYaxis()->SetTitleOffset(0.4);
 	nominal->GetYaxis()->SetTitleSize(0.1);

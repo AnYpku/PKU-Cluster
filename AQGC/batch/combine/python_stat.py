@@ -119,9 +119,7 @@ print "95% confidence limits of :"+output_file_name
 print "["+str(param_95_neg)+","+str(param_95_pos)+"]"
 
 f_txt.write(output_file_name)
-#f_txt.write("["+str(param_95_neg)+","+str(param_95_pos)+"]")
-f_txt.write('%0.3f\t,\t%0.3f'%(param_95_neg,param_95_pos))
-f_txt.write("\n")
+f_txt.write('\t%0.3f\t,\t%0.3f\n'%(param_95_neg,param_95_pos))
 graph.GetXaxis().SetTitle(x_axis_label)
 graph.GetYaxis().SetTitle("2#DeltaNLL")
 graph.SetLineColor(kBlue)

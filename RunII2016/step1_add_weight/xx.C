@@ -84,8 +84,8 @@ void xx::Loop()
 		muon2_iso_scale=-1;
 		muon_hlt_scale=-1;
 		ele_hlt_scale=-1;
-		photon_id_scale=-1;
-		photon_veto_scale=-1;
+		photon_id_scale=1;
+		photon_veto_scale=1;
 
 		Long64_t ientry = LoadTree(jentry);
 		if (ientry < 0) break;
@@ -152,8 +152,8 @@ void xx::Loop()
                 PHOTON= photonet>20 && (abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5));
                 JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
-                if( !( (LEPmu||LEPele)/* && PHOTON*/  )  )
-                      continue;
+//                if( !( (LEPmu||LEPele)/* && PHOTON*/  )  )
+//                      continue;
 		ExTree->Fill();
 	}
 	f->Close();

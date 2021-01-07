@@ -35,7 +35,7 @@ void open(TString var,vector<double> genbins,TString tag,int kk){
 	for(int i=0;i<kk-1;i++){
             for(int j=0;j<kk-1;j++){
                if(j==0)fout<<"genbin"<<i+1<<"_scale=[";
-               if(j<kk-2)fout<<fixed<<setprecision(2)<<1+uncer[j][i]<<",";
+               if(j<kk-2)fout<<fixed<<setprecision(3)<<1+uncer[j][i]<<",";
                if(j==kk-2) fout<<1+uncer[j][i]<<"]"<<endl;
 	    }
 	}

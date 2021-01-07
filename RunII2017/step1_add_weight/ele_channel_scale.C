@@ -32,17 +32,118 @@ double get_eleHLT_SF(double etalep1, double ptlep1,double etalep2,double ptlep2,
 
 	double lep_HLT_scale_Data=MC1->GetBinContent(MC1->FindBin(etalep1,ptlep1))*SF1->GetBinContent(SF1->FindBin(etalep1,ptlep1))*MC2->GetBinContent(MC2->FindBin(etalep2,ptlep2))*SF2->GetBinContent(SF2->FindBin(etalep2,ptlep2))+MC1->GetBinContent(MC1->FindBin(etalep2,ptlep2))*SF1->GetBinContent(SF1->FindBin(etalep2,ptlep2))*MC2->GetBinContent(MC2->FindBin(etalep1,ptlep1))*SF2->GetBinContent(SF2->FindBin(etalep1,ptlep1))-MC1->GetBinContent(MC1->FindBin(etalep1,ptlep1))*SF1->GetBinContent(SF1->FindBin(etalep1,ptlep1))*MC1->GetBinContent(MC1->FindBin(etalep2,ptlep2))*SF1->GetBinContent(SF1->FindBin(etalep2,ptlep2));
 
-        lep_HLT_scale=lep_HLT_scale_Data/lep_HLT_scale_MC;
+	lep_HLT_scale=lep_HLT_scale_Data/lep_HLT_scale_MC;
 
-        return lep_HLT_scale;
+	return lep_HLT_scale;
 }
-double get_PUID_SF(double jeteta,double jetpt,TH2F*eff,TH2F*misrate,TH2F*effSF,TH2F*misrateSF){
-       double PUweight=1;
-       if(jetpt<50){
-               double PMC=eff->GetBinContent(eff->FindBin(jetpt,jeteta))*(1-misrate->GetBinContent(misrate->FindBin(jetpt,jeteta))); 
-	       double PData= effSF->GetBinContent(effSF->FindBin(jetpt,jeteta))*eff->GetBinContent(eff->FindBin(jetpt,jeteta))*(1-misrateSF->GetBinContent(misrateSF->FindBin(jetpt,jeteta))*misrate->GetBinContent(misrate->FindBin(jetpt,jeteta)) );
-	       PUweight=PData/PMC;
-       }
-       else PUweight=1;
-       return PUweight;
+double get_PUID_SF(double jet1eta,double jet1pt,double jet2eta,double jet2pt,TH2F*eff,TH2F*SFeff,TH2F*mis,TH2F*SFmis,int flag1,int flag2,double puId1,double puId2){
+	double PUweight;
+	int bin1=eff->FindBin(jet1pt,jet1eta);
+	int bin2=eff->FindBin(jet2pt,jet2eta);
+	if(jet1pt<50 && jet2pt<50 ){
+		double PMC;
+		double PData;
+		if(flag1==1&&flag2==1){
+			if(puId1==1&&puId2==1){
+				PMC=eff->GetBinContent(bin1)*eff->GetBinContent(bin2);
+				PData=SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1)*SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2);
+			}
+			else if(puId1==1&&puId2==0){
+				PMC=eff->GetBinContent(bin1)*(1-eff->GetBinContent(bin2));
+				PData=SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1)*(1-SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2));
+			}
+			else if(puId1==0&&puId2==1){
+				PMC=eff->GetBinContent(bin2)*(1-eff->GetBinContent(bin1));
+				PData=SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2)*(1-SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1));
+			}
+			else{
+				PMC=(1-eff->GetBinContent(bin2))*(1-eff->GetBinContent(bin1));
+				PData=(1-SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2))*(1-SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1));
+			}
+		}
+		if(flag1==1&&flag2==0){
+			if(puId1==1&&puId2==1){
+				PMC=eff->GetBinContent(bin1)*mis->GetBinContent(bin2);
+				PData=SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1)*SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2);
+			}
+			else if(puId1==1&&puId2==0){
+				PMC=eff->GetBinContent(bin1)*(1-mis->GetBinContent(bin2));
+				PData=SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1)*(1-SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2));
+			}
+			else if(puId1==0&&puId2==1){
+				PMC=mis->GetBinContent(bin2)*(1-eff->GetBinContent(bin1));
+				PData=SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2)*(1-SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1));
+			}
+			else{
+				PMC=(1-mis->GetBinContent(bin2))*(1-eff->GetBinContent(bin1));
+				PData=(1-SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2))*(1-SFeff->GetBinContent(bin1)*eff->GetBinContent(bin1));
+			}
+		}
+		if(flag1==0&&flag2==1){
+			if(puId1==1&&puId2==1){
+				PMC=eff->GetBinContent(bin2)*mis->GetBinContent(bin1);
+				PData=SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2)*SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1);
+			}
+			else if(puId1==1&&puId2==0){
+				PMC=mis->GetBinContent(bin1)*(1-eff->GetBinContent(bin2));
+				PData=(1-SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2))*SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1);
+			}
+			else if(puId1==0&&puId2==1){
+				PMC=(1-mis->GetBinContent(bin1))*eff->GetBinContent(bin2);
+				PData=(1-SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1))*SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2);
+			}
+			else{
+				PMC=(1-mis->GetBinContent(bin1))*(1-eff->GetBinContent(bin2));
+				PData=(1-SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1))*(1-SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2));
+			}
+		}
+		if(flag1==0&&flag2==0){
+			if(puId1==1&&puId2==1){
+				PMC=mis->GetBinContent(bin1)*mis->GetBinContent(bin2);
+				PData=SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1)*SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2);
+			}
+			else if(puId1==1&&puId2==0){
+				PMC=mis->GetBinContent(bin1)*(1-mis->GetBinContent(bin2));
+				PData=SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1)*(1-SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2));
+			}
+			else if(puId1==0&&puId2==1){
+				PMC=mis->GetBinContent(bin2)*(1-mis->GetBinContent(bin1));
+				PData=SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2)*(1-SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1));
+			}
+			else{
+				PMC=(1-mis->GetBinContent(bin2))*(1-mis->GetBinContent(bin1));
+				PData=(1-SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2))*(1-SFmis->GetBinContent(bin1)*mis->GetBinContent(bin1));
+			}
+		}
+		if(PMC!=0)  PUweight=PData/PMC;
+		else PUweight=1;
+	}
+	else if(jet2pt<50 && jet1pt>50 ){
+		double PMC;
+		double PData;
+                if(flag2==1){
+			if(puId2==1){
+                           PMC=eff->GetBinContent(bin2);
+			   PData=SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2);
+			}
+			else{
+                           PMC=1-eff->GetBinContent(bin2);
+			   PData=1-SFeff->GetBinContent(bin2)*eff->GetBinContent(bin2);
+			}
+		}
+		else{
+			if(puId2==1){
+                           PMC=mis->GetBinContent(bin2);
+			   PData=SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2);
+			}
+			else{
+                           PMC=1-mis->GetBinContent(bin2);
+			   PData=1-SFmis->GetBinContent(bin2)*mis->GetBinContent(bin2);
+			}
+		}
+		if(PMC!=0)  PUweight=PData/PMC;
+		else PUweight=1;
+	}
+	else PUweight=1;
+	return PUweight;
 }

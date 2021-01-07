@@ -3,7 +3,7 @@ void run(TString var,int i,TString tag){
 	ofstream ftxt(Form("./txt/"+var+"_recobin%i_uncer"+tag+"CR.txt",i));//,ios::app);
 	TString index=Form("recobin%i",i);
 //        ftxt<<index<<" "<<endl;
-	TFile*file=new TFile("./sig_root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+index+"_ewk_pdf"+tag+".root");
 	double lumi;
 	if(tag.Contains("16"))
 		lumi=35.86;
@@ -23,12 +23,16 @@ void run(TString var,int i,TString tag){
 	for(int k=0;k<kk;k++){
             double error=0;
 	    double diff=0,sum=0;
+	    double factor=1;
             for(int j=0;j<num;j++){
+	       factor=h1[0]->Integral()/h1[j]->Integral();
                double center=h1[0]->GetBinContent(k+1);
-               diff=h1[j]->GetBinContent(k+1)-center;
+               diff=factor*h1[j]->GetBinContent(k+1)-center;
 	       sum+=pow(diff,2);
 	    }
-            cout<<var<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" "<<sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1)<<endl;
+	    if(h1[0]->GetBinContent(k+1)!=0)
+		    cout<<var<<" "<<sqrt(sum/(num-1))<<" "<<h1[0]->GetBinContent(k+1)<<" "<<sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1)<<endl;
+	    else cout<<"no events"<<endl;
 	    if(h1[0]->GetBinContent(k+1)!=0) 
 		    error=sqrt(sum/(num-1))/h1[0]->GetBinContent(k+1);
 	    else    error=0;

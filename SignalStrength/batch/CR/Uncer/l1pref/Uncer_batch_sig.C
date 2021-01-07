@@ -50,7 +50,7 @@ void run(TString cut1,TString tag,TString channel){
      TString th1name[num];
      for(Int_t i=0;i<num;i++){
 		     th1name[i]=Form("hist_%d",i);
-		     th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,mjj_bins[0],mjj_bins[mjj_bins.size()-1]);
+		     th1[i] = new TH1D(th1name[i],th1name[i],mjj_bins.size()-1,&mjj_bins[0]);
 		     th1[i]->Sumw2(); 
      }      
      for(int k=0;k<tree->GetEntries();k++){

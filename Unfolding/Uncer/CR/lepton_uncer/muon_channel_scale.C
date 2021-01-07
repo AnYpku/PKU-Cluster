@@ -33,20 +33,35 @@ double get_muon_iso_stat(double etalep, double ptlep, TH2D* iso_BF){
 	
         return lep_iso_scale;
 }
-
-
-double muon_HLT_scale(double ptlep1, double ptlep2, TH2D* di_lep_trigger){
-	double hlt_scale=-1;
+double muon_HLT_scale(double ptlep1, double ptlep2,double etalep1,double etalep2, TH2D* di_lep_trigger){
+        double hlt_scale=-1;
        if(ptlep1 > ptlep2){
                if(ptlep1>200) ptlep1=199;
                if(ptlep2>200) ptlep1=198;
-	       hlt_scale=di_lep_trigger->GetBinError(di_lep_trigger->FindBin(fabs(ptlep1),fabs(ptlep2)));
+               hlt_scale=di_lep_trigger->GetBinContent(di_lep_trigger->FindBin(fabs(etalep1),fabs(etalep2)));
        }
        if(ptlep2 > ptlep1){
                if(ptlep1>200) ptlep1=198;
                if(ptlep2>200) ptlep1=199;
-	       hlt_scale=di_lep_trigger->GetBinError(di_lep_trigger->FindBin(fabs(ptlep2),fabs(ptlep1)));
+               hlt_scale=di_lep_trigger->GetBinContent(di_lep_trigger->FindBin(fabs(etalep2),fabs(etalep1)));
        }
 
-	return hlt_scale;
+        return hlt_scale;
 }
+double muon_HLT_scale_sys(double ptlep1, double ptlep2,double etalep1,double etalep2, TH2D* di_lep_trigger){
+        double hlt_scale=-1;
+       if(ptlep1 > ptlep2){
+               if(ptlep1>200) ptlep1=199;
+               if(ptlep2>200) ptlep1=198;
+               hlt_scale=di_lep_trigger->GetBinError(di_lep_trigger->FindBin(fabs(etalep1),fabs(etalep2)));
+       }
+       if(ptlep2 > ptlep1){
+               if(ptlep1>200) ptlep1=198;
+               if(ptlep2>200) ptlep1=199;
+               hlt_scale=di_lep_trigger->GetBinError(di_lep_trigger->FindBin(fabs(etalep2),fabs(etalep1)));
+       }
+
+        return hlt_scale;
+}
+
+

@@ -70,10 +70,10 @@ for i in range(1,nbins):
    f = open('./txt/%s%s_bin_%d.txt'%(sys.argv[2],sys.argv[1], i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 3   number of processes-1\n')
-   f.write('kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n')
+   f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
-   f.write('bin ele%i\n'%(i))
+   f.write('bin %s%i\n'%(sys.argv[2],i))
    bin_content = th1_others.GetBinContent(i)+th1_non_prompt.GetBinContent(i)+th1_ZA.GetBinContent(i)+th1_ZA_sig.GetBinContent(i)
 # bincontent of each precess
    others_bincontent = th1_others.GetBinContent(i) if th1_others.GetBinContent(i)>0 else 0
@@ -136,6 +136,8 @@ for i in range(1,nbins):
 
    f.write('photon_id\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
    f.write('l1prefiring\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1]))
+   f.write('puId_eff\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['others_eff'][i-1]))
+   f.write('puId_mis\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['others_mis'][i-1]))
    f.write('pileup\tlnN\t1.02\t1.02\t-\t1.02\n')
    f.write('others_xs\tlnN\t-\t-\t-\t1.1\n')
 

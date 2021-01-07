@@ -49,7 +49,7 @@ void unroll_name(TString tag){
 	std::ostringstream strs;
 	Double_t mjj_bins[4]={500, 800, 1200,2000};
 	Double_t detajj_bins[4]={2.5,4.5,6,6.5};
-	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
+	const char *name[7]={"0.5~0.8","0.8~1.2","1.2~2","0.5~0.8","0.8~1.2","1.2~2","0.5~2"};
 
 	TFile* f_ZA1;TFile* f_ZA2;
 	f_ZA1=new TFile("./hist_"+tag+".root");
@@ -155,7 +155,7 @@ void unroll_name(TString tag){
         h_up->GetYaxis()->SetNdivisions(404);
         h_up->SetLineColor(1);
         h_up->SetMarkerStyle(20);
-        h_up->GetXaxis()->SetTitle("mjj [GeV]");
+        h_up->GetXaxis()->SetTitle("mjj [TeV]");
         h_up->GetXaxis()->SetLabelSize(0.14);
         h_up->GetXaxis()->SetTitleFont(12);
         h_up->GetXaxis()->SetTitleSize(0.2);

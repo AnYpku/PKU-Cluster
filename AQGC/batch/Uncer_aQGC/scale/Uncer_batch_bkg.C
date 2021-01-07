@@ -2,19 +2,20 @@
 #define pi 3.1415926
 void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      TString name=file->GetName();
-     TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
+     TTree*tree=(TTree*)file->Get("outtree");     
      Double_t scalef,pileupWeight,pweight[703],Mjj,zepp,puIdweight_M,prefWeight;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
-     double ptVlep, yVlep, phiVlep, massVlep,Mva;
+     double ptVlep, yVlep, phiVlep, massVlep,ZGmass;
      double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,ele_hlt_scale;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,muon_hlt_scale;
      double photon_id_scale,photon_veto_scale;
      int lep;
      double actualWeight;
      tree->SetBranchAddress("scalef",&scalef);
+     tree->SetBranchAddress("actualWeight",&actualWeight);
      tree->SetBranchAddress("lep",&lep);
-     tree->SetBranchAddress("Mva",&Mva);
+     tree->SetBranchAddress("ZGmass",&ZGmass);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
      tree->SetBranchAddress("pweight",pweight);
      tree->SetBranchAddress("Mjj",&Mjj);
@@ -71,7 +72,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      double delta_phi,detajj;
      for(int k=0;k<tree->GetEntries();k++){
 	     tree->GetEntry(k);
-	     if(Mva>2e4)Mva=1999;
+	     if(ZGmass>2e4)ZGmass=1999;
 	     detajj=fabs(jet1eta-jet2eta);
 	     Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, massVlep);
 	     photonp4.SetPtEtaPhiE(photonet, photoneta, photonphi, photone);
@@ -80,12 +81,6 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
 	     if(tag.Contains("18"))prefWeight=1;
 	     if(tag.Contains("17")==0)puIdweight_M=1;
-	     actualWeight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
-	     if(lep==11)
-		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
-	     if(lep==13)
-		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
-
 	     if (delta_phi>pi) delta_phi=2*pi-delta_phi;
 	     int p=0;
 	     if (  tformula->EvalInstance() && (zepp<2.4 && delta_phi>1.9) ){
@@ -95,13 +90,13 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     if(p==0) Weight[p]=actualWeight*pweight[i];
 				     else Weight[p]=actualWeight*pweight[i]*2;
 				     if(k%1000==0)cout<<p<<" "<<Weight[p]<<endl;
-				     th1[p]->Fill(Mva,Weight[p]);
+				     th1[p]->Fill(ZGmass,Weight[p]);
 			     }
 			     else if(name.Contains("EWK")==0 && tag.Contains("16")==0){
 				     if( flag && (i==5 || i==7) ) continue;
 				     Weight[p]=actualWeight*pweight[i];
 				     cout<<p<<" "<<Weight[p]<<endl;
-				     th1[p]->Fill(Mva,Weight[p]);
+				     th1[p]->Fill(ZGmass,Weight[p]);
 			     }
 			     else if(name.Contains("EWK")){
 				     int k;
@@ -110,7 +105,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     else k=i;
 				     Weight[p]=actualWeight*pweight[k];
 				     cout<<p<<" "<<Weight[p]<<endl;
-				     th1[p]->Fill(Mva,Weight[p]);
+				     th1[p]->Fill(ZGmass,Weight[p]);
 			     }
 			     p++;
 		     }
@@ -134,8 +129,8 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 }
 int Uncer_batch_bkg(){
 	gSystem->Load("libTreePlayer.so");
-	TString LEPmu = "(lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110)";
-	TString LEPele = "(lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
+	TString LEPmu = "(lep==13 && (HLT_Mu1>0 || HLT_Mu2>0 || HLT_Mu3>0) &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110)";
+	TString LEPele = "(lep==11 && (HLT_Ele1>0 || HLT_Ele2>0)  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
 	TString photon = "(photonet>100 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )  )";
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	TString Pi=Form("%f",pi);
@@ -145,17 +140,17 @@ int Uncer_batch_bkg(){
 	vector<TString> tag={"16","17","18"};
 
 	TFile*file1[3];
-	TString dir1="/home/pku/anying/cms/rootfiles/2016/";
-	TString dir2="/home/pku/anying/cms/rootfiles/2017/";
-	TString dir3="/home/pku/anying/cms/rootfiles/2018/";
-	file1[0]=new TFile(dir1+"cutla-outZA16.root");
-	file1[1]=new TFile(dir2+"cutla-outZA17.root");
-	file1[2]=new TFile(dir3+"cutla-outZA18.root");
+	TString dir1="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/rootfiles/";
+	TString dir2="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/rootfiles/";
+	TString dir3="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/rootfiles/";
+	file1[0]=new TFile(dir1+"optimal_ZA16.root");
+	file1[1]=new TFile(dir2+"optimal_ZA17.root");
+	file1[2]=new TFile(dir3+"optimal_ZA18.root");
 
 	TFile*file2[3];
-	file2[0]=new TFile(dir1+"cutla-outZA-EWK16.root");
-	file2[1]=new TFile(dir2+"cutla-outZA-EWK17.root");
-	file2[2]=new TFile(dir3+"cutla-outZA-EWK18.root");
+	file2[0]=new TFile(dir1+"optimal_ZA-EWK16.root");
+	file2[1]=new TFile(dir2+"optimal_ZA-EWK17.root");
+	file2[2]=new TFile(dir3+"optimal_ZA-EWK18.root");
 
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){

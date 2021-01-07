@@ -45,7 +45,7 @@ void unroll_name(TString sample,TString tag,int num){
 	gStyle->SetNdivisions(510, "XYZ");
 
 	TFile* fout = new TFile("aa_"+sample+"_"+tag+".root","RECREATE");
-	const char *name[7]={"500~800","800~1200","1200~2000","500~800","800~1200","1200~2000","500~2000"};
+	const char *name[7]={"0.5~0.8","0.8~1.2","1.2~2","0.5~0.8","0.8~1.2","1.2~2","0.5~2"};
 
 	TFile* file=TFile::Open("./hist_"+sample+"_scale"+tag+".root");
 	TH1D* t_ZA[num];TH1D* th1_ZA[num];
@@ -59,8 +59,9 @@ void unroll_name(TString sample,TString tag,int num){
 		cc[p] = new TCanvas(Form("cc_%d",i),Form("Mjj vs deltajj %d",i+1),900,600);
 		cout<<"get "<<i+1<<" histo"<<endl;
 		th1_ZA[p]=(TH1D*)file->Get(Form("hist_%d",i));
-		const int nbins=th1_ZA[p]->GetNbinsX()-2;
-                t_ZA[p]=new TH1D(Form("t_ZA%d",i),"",nbins,0,nbins);
+		const int nbins=th1_ZA[p]->GetNbinsX();
+                t_ZA[p]=(TH1D*)th1_ZA[p]->Clone();
+                /*t_ZA[p]=new TH1D(Form("t_ZA%d",i),"",nbins,0,nbins);
                 for(int k=1;k<=nbins;k++){
                    if(k<nbins)  {
                            t_ZA[p]->SetBinContent(k,th1_ZA[p]->GetBinContent(k));
@@ -70,7 +71,7 @@ void unroll_name(TString sample,TString tag,int num){
                            t_ZA[p]->SetBinContent(k,th1_ZA[p]->GetBinContent(k)+th1_ZA[p]->GetBinContent(k+1)+th1_ZA[p]->GetBinContent(k+2));
                            t_ZA[p]->SetBinError(k,sqrt(pow(th1_ZA[p]->GetBinError(k),2)+pow(th1_ZA[p]->GetBinError(k+1),2)+pow(th1_ZA[p]->GetBinError(k+2),2)));
                    }
-                }
+                }*/
 		t_ZA[p]->SetLineWidth(3);
 		t_ZA[p]->SetLineColor(i+11);
 		for(Int_t j=1;j<=t_ZA[p]->GetNbinsX();j++){ t_ZA[p]->GetXaxis()->SetBinLabel(j,name[j-1]);}
@@ -150,7 +151,7 @@ void unroll_name(TString sample,TString tag,int num){
 	nominal->SetMarkerStyle(20);
 	nominal->GetYaxis()->SetLabelSize(0.15);
         nominal->GetYaxis()->SetNdivisions(404);
-        nominal->GetXaxis()->SetTitle("mjj [GeV]");
+        nominal->GetXaxis()->SetTitle("mjj [TeV]");
         nominal->GetXaxis()->SetLabelSize(0.15);
 	nominal->GetXaxis()->SetLabelOffset(0.03);
         nominal->GetXaxis()->SetTitleFont(12);

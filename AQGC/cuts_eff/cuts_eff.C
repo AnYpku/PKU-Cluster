@@ -15,14 +15,21 @@ void run(/*double medium_barrel,double medium_endcap,*/TString cut1,TString tag,
 
 	cout<<tag<<":"<<endl;
 	TString dir;
-	if(tag.Contains("16")==0)
-		dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
-	else    dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
+	dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
 
-	TString filename = isEW? dir+"outZA-EWK"+tag+".root": dir+"outZA"+tag+".root";
-
+	TString filename = isEW? dir+"outZA-EWK"+tag+".root": dir+"cutlep-outZA"+tag+".root";
+	cout<<filename<<endl;
+        /*TChain*chain;
+	chain=new TChain("ZPKUCandidates","");
+        if(tag.Contains("17")||filename.Contains("EW")){
+		chain->Add(filename);
+	}
+	else{
+		chain->Add(dir+"outZA"+tag+".root");
+		chain->Add(dir+"outZA"+tag+"_1.root");
+	}
+        TTree*tree;tree = chain;*/
         TFile*file=new TFile(filename);
-
 	TTree*tree=(TTree*)file->Get("ZPKUCandidates");
         double photon_pt[6],photon_eta[6];double photon_hoe[6],photon_sieie[6], photon_chiso[6],photon_nhiso[6],photon_phoiso[6]; bool photon_pev[6];
         double scalef,pileupWeight,prefWeight;
@@ -247,9 +254,9 @@ int cuts_eff(){
 	TString LEP = "("+LEPmu+")||("+LEPele+")";
 
 	//QCD samples
-//	run(LEP,"16", 20967546, 35.86, false);
-	run(LEP,"17", 30482963, 41.52, false);
-//	run(LEP,"18", 33805459, 59.7, false);
+//	run(LEP,"16", 30040390, 35.86, false);
+//	run(LEP,"17", 30482963, 41.52, false);
+	run(LEP,"18", 33805459, 59.7, false);
 
 	//EWK samples
 //	run(LEP,"17", 799717, 41.52, true);

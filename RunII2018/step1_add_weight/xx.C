@@ -154,8 +154,8 @@ void xx::Loop()
 		PHOTON= photonet>20 && ( (fabs(photoneta)<1.4442) || (fabs(photoneta)>1.566 && fabs(photoneta)<2.5) ) ;
 		JET=jet1pt> 10 && jet2pt > 10 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
-//		if( ! (LEPmu||LEPele) )
-//			continue;
+		if( ! (LEPmu||LEPele) )
+			continue;
 //                if( !(PHOTON) )
 //			continue;
                 cut1++;

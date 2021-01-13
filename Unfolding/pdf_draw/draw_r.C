@@ -1,3 +1,4 @@
+#include "CMS_lumi.C"
 #define num 103
 void run(TString var, TString recovar,TString title,TString tag){
         TFile*file1=new TFile("unfold_"+var+"_ewk_pdf16.root");
@@ -29,17 +30,28 @@ void run(TString var, TString recovar,TString title,TString tag){
                 yerror_sysDown[i]=Err_sysDown[i];
 	}
 	TCanvas*c1=new TCanvas("c0","signal strength",800,600);
+        TPad*    fPads1 = new TPad("pad1", "", 0.00, 0.0, 0.99, 0.99);
+        fPads1->SetBottomMargin(0.2);
+        fPads1->Draw();
+        fPads1->cd();
         TGraphAsymmErrors* gr = new TGraphAsymmErrors(kk, xbin, ybin, xerror_down,xerror_up, yerror_down, yerror_up);
         TGraphAsymmErrors* gr_sys = new TGraphAsymmErrors(kk, xbin, ybin, xerror_sysDown,xerror_sysUp, yerror_sysDown, yerror_sysUp);
-        gr->SetTitle(";"+title+";signal strength");
+        const char *name[7]={"Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~800","Mjj 800~1200","Mjj 1200~2000","Mjj 500~2000"};
+//        if(var.Contains("Mjj")==1) {for(int i=0;i<h1[0]->GetNbinsX();i++){gr->GetXaxis()->SetBinLabel(i+1,name[i]);}}
+        gr->SetTitle(";"+title+" [GeV];signal strength");
         gr->GetXaxis()->SetRangeUser(h1[0]->GetBinLowEdge(1),h1[0]->GetBinCenter(kk)+0.5*h1[0]->GetBinWidth(kk));
-        
+	if(var.Contains("Mjj")==1) gr->GetXaxis()->SetTitle(title+"-#Delta#eta_{jj}");
         gr->GetYaxis()->SetRangeUser(-2.1,6.1);
 	gr->SetMarkerColor(1);
         gr->SetMarkerStyle(20);
         gr->SetFillColor(0);
         gr->SetMarkerSize(1);
         gr->SetLineColor(1);
+	gr->GetXaxis()->SetLabelSize(0.05);
+        gr->GetXaxis()->SetLabelOffset(0.01);
+        gr->GetXaxis()->SetTitleSize(0.08);
+        gr->GetXaxis()->SetTitleOffset(1);
+        gr->GetXaxis()->SetTitleFont(22);
         gr->Draw("AP SAME");
         gr_sys->SetLineColor(2);
         gr_sys->SetLineWidth(4);
@@ -59,6 +71,13 @@ void run(TString var, TString recovar,TString title,TString tag){
         line1->Draw();
         line2->Draw();
 	l1->Draw();
+	string lumi;
+        if(tag.Contains("16"))  lumi="35.86";
+        else if(tag.Contains("17"))  lumi="41.52";
+        else if(tag.Contains("18"))  lumi="59.7";
+	else  lumi="137.1";
+        CMS_lumi(fPads1, 4,0, lumi);
+        fPads1->Update();
         c1->Print(var+"_signal_strength"+tag+".pdf");
 }
 int draw_r(){

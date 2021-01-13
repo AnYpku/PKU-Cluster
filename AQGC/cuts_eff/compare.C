@@ -94,7 +94,7 @@ void run(TString sample, TString type){
 int compare(){
     TString type[3]={"entries","yields","eff_entries"};
     for(int i=0;i<3;i++){
-        run("EWK",type[i]);
+//        run("EWK",type[i]);
         run("QCD",type[i]);
     }
     return 1;

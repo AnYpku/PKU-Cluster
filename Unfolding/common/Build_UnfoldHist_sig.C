@@ -6,7 +6,9 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
 
      TString h2name="hist_"+var1;
      TString h1name="hist1_"+var1;
+     TString hist2Dname="hist2D_"+var1;
      TH2D* h2 = new TH2D(h2name,"reco && gen",bins.size()-1,&bins[0],bins.size()-1,&bins[0]);
+//     TH2D* hist2D = new TH2D(hist2Dname,"reco && gen",bins.size()-1,&bins[0],bins.size()-1,&bins[0]);
      TH1D* h1 = new TH1D(h1name,var1+" reco && gen",bins.size()-1,&bins[0]); 
      TString th2name;
      th2name="hist_"+var2;
@@ -60,11 +62,33 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
      for(Int_t i=0;i<nbins;i++){
              th1[i]->SetBinContent(nbins,th1[i]->GetBinContent(nbins)+th1[i]->GetBinContent(nbins+1));
 	     th1[i]->SetBinError(nbins,sqrt(pow(th1[i]->GetBinError(nbins),2)+pow(th1[i]->GetBinError(nbins+1),2)));
+             if(i<nbins-1){
+		     h2->SetBinContent(i+1,nbins,h2->GetBinContent(i+1,nbins)+h2->GetBinContent(i+1,nbins+1));
+		     h2->SetBinError(i+1,nbins,sqrt(pow(h2->GetBinError(i+1,nbins),2)+pow(h2->GetBinError(i+1,nbins+1),2)));
+		     h2->SetBinContent(nbins,i+1,h2->GetBinContent(nbins,i+1)+h2->GetBinContent(nbins+1,i+1));
+		     h2->SetBinError(nbins,i+1,sqrt(pow(h2->GetBinError(nbins,i+1),2)+pow(h2->GetBinError(nbins+1,i+1),2)));
+		     h2->SetBinContent(i+1,nbins+1,0);
+		     h2->SetBinError(i+1,nbins+1,0);
+		     h2->SetBinContent(nbins+1,i+1,0);
+		     h2->SetBinError(nbins+1,i+1,0);
+	     }
+	     if(i==nbins-1){
+		     h2->SetBinContent(nbins,nbins,h2->GetBinContent(nbins,nbins)+h2->GetBinContent(nbins+1,nbins+1)+h2->GetBinContent(nbins,nbins+1)+h2->GetBinContent(nbins+1,nbins));
+		     h2->SetBinError(nbins,nbins,sqrt(pow(h2->GetBinError(nbins,nbins),2)+pow(h2->GetBinError(nbins+1,nbins+1),2)+pow(h2->GetBinError(nbins,nbins+1),2)+pow(h2->GetBinError(nbins+1,nbins),2)));
+                     h2->SetBinContent(nbins,nbins+1,0);
+                     h2->SetBinError(nbins,nbins+1,0);
+                     h2->SetBinContent(nbins+1,nbins,0);
+                     h2->SetBinError(nbins+1,nbins,0);
+                     h2->SetBinContent(nbins+1,nbins+1,0);
+                     h2->SetBinError(nbins+1,nbins+1,0);
+	     }
      }//add overflow bin and error
      th2->SetBinContent(nbins,th2->GetBinContent(nbins)+th2->GetBinContent(nbins+1));//add overflowbin
      th2->SetBinError(nbins,sqrt(pow(th2->GetBinError(nbins),2)+pow(th2->GetBinError(nbins+1),2)));//error
      h1->SetBinContent(nbins,h1->GetBinContent(nbins)+h1->GetBinContent(nbins+1));//add overflowbin
      h1->SetBinError(nbins,sqrt(pow(h1->GetBinError(nbins),2)+pow(h1->GetBinError(nbins+1),2)));//error
+     h3->SetBinContent(nbins,h3->GetBinContent(nbins)+h3->GetBinContent(nbins+1));//add overflowbin
+     h3->SetBinError(nbins,sqrt(pow(h3->GetBinError(nbins),2)+pow(h3->GetBinError(nbins+1),2)));//error
      fout->cd();
      for(Int_t i=0;i<nbins;i++){
 	     th1[i]->Write();
@@ -95,23 +119,23 @@ int Build_UnfoldHist_sig(){
      TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
 
      vector<vector<double>> bins;
-//     vector<double> ptlepBins={20,80,120,200,400};
-//     vector<double> photonEtBins={20,80,120,200,400};
-//     vector<double> jetptBins={30,150,250,350,800};
+     vector<double> ptlepBins={20,80,120,200,400};
+     vector<double> photonEtBins={20,80,120,200,400};
+     vector<double> jetptBins={30,150,250,350,800};
      vector<double> MvaBins={100,200,300,500,1000};
      vector<double> massVlepBins={70,80,90,100,110};
-//     bins.push_back(ptlepBins);
-//     bins.push_back(photonEtBins);
-//     bins.push_back(jetptBins);
-     bins.push_back(MvaBins);
-     bins.push_back(massVlepBins);
+     bins.push_back(ptlepBins);
+     bins.push_back(photonEtBins);
+     bins.push_back(jetptBins);
+//     bins.push_back(MvaBins);
+//     bins.push_back(massVlepBins);
 
      TFile*file[3];
 
-//     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
-//     vector<TString> recovars={"ptlep1","photonet","jet1pt"};
-     vector<TString> genvars={"genZGmass","genmassVlep"};
-     vector<TString> recovars={"Mva","massVlep"};
+     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt"};
+//     vector<TString> genvars={"genZGmass","genmassVlep"};
+//     vector<TString> recovars={"Mva","massVlep"};
      vector<TString> tag={"16","17","18"};
      for(int i=0;i<tag.size();i++){
 	     if(tag[i].Contains("17")){

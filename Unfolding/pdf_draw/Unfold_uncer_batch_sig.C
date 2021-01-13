@@ -1,5 +1,5 @@
 #define num 103
-void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1,TString tag){
+void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1,TString tag,TString sample){
      const int kk = vec_branchname.size();
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
@@ -36,9 +36,12 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
 	     int p=0;
 	     if (  tformula->EvalInstance() ){
 		     int init;
-		     if(tag.Contains("16"))
-			     init=9;
-		     else    init=45;
+		     if(tag.Contains("16")&&sample.Contains("ewk"))
+			     init=9;//16 ewk
+		     else if(tag.Contains("16")&&sample.Contains("EWK")==0)
+			     init=0;//16 qcd
+		     else if(( tag.Contains("17")||tag.Contains("18"))&&sample.Contains("EWK"))
+			     init=45;//17 ewk, 18 ewk
 		     for(Int_t i=init;i<(num+init);i++){
 			     actualWeight[p]=pweight[i];
 			     for(int j=0;j<kk;j++){
@@ -60,8 +63,8 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      }
      TFile*fout[kk];
      for(int j=0;j<kk;j++){
-	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_ewk_pdf"+tag+".root","recreate");
-	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_ewk_pdf"+tag+".root","recreate");
+	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_"+sample+"_pdf"+tag+".root","recreate");
+	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_"+sample+"_pdf"+tag+".root","recreate");
      }
      for(int j=0;j<kk;j++){
 	     fout[j]->cd();
@@ -99,22 +102,26 @@ int Unfold_uncer_batch_sig(){
      vector<double> jetptBins={30,150,250,350,800};
      vector<double> MvaBins={100,150,1000};
      vector<double> MjjBins={500,1000,1500,2000};
+     bins.push_back(MjjBins);
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
-     bins.push_back(MjjBins);
 
-     vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+     vector<TString> genvars={"genMjj","genlep1pt","genphotonet","genjet1pt"};
+     vector<TString> recovars={"Mjj","ptlep1","photonet","jet1pt"};
      TString dir1="/home/pku/anying/cms/rootfiles/2016/";
      TString dir2="/home/pku/anying/cms/rootfiles/2017/";
      TString dir3="/home/pku/anying/cms/rootfiles/2018/";
      TFile*file1=new TFile(dir1+"unfold_GenCutla-ZA-EWK16.root");
      TFile*file2=new TFile(dir2+"unfold_GenCutla-ZA-EWK17.root");
      TFile*file3=new TFile(dir3+"unfold_GenCutla-ZA-EWK18.root");
+     TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA16.root");
+     TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
+     TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
 //     for(int i=0;i<bins.size();i++){
-	     run(file1,genvars, bins,cut1,"16");
-	     run(file2,genvars, bins,cut1,"17");
-	     run(file3,genvars, bins,cut1,"18");
+//	     run(file1,genvars, bins,cut1,"16","ewk");
+//	     run(file2,genvars, bins,cut1,"17","ewk");
+//	     run(file3,genvars, bins,cut1,"18","ewk");
+	     run(f1,genvars, bins,cut1,"16","qcd");
      return 1;
 }

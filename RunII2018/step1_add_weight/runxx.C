@@ -19,7 +19,7 @@ getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
 infilename = /*"cutlep-"out"+*/infilename;
-TString outname="out"+infilename;
+TString outname="cutlep-out"+infilename;
 
 cout<<dir<<infilename<<" -> "<<outname<<endl;
 

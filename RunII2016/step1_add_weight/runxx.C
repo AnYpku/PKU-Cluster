@@ -7,7 +7,7 @@ void runxx() {
 //gROOT->LoadMacro("xx.C");
 //TString dir="/data/pku/home/anying/cms/file_in_cms/files_weighted/";
 //TString dir ="/eos/user/y/yian/2016cutla/";
-TString dir ="/home/pku/anying/cms/rootfiles/2016/";
+TString dir ="/home/pku/anying/cms/rootfiles/2016/nohlt/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -19,7 +19,7 @@ getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
 infilename = /*"cutlep-"out"+*/infilename;
-TString outname="out"+infilename;
+TString outname="cutlep-out"+infilename;
 
 cout<<dir<<infilename<<" -> "<<outname<<endl;
 

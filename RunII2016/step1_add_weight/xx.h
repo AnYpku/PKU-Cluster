@@ -610,7 +610,7 @@ void xx::Init(TTree *tree)
 	// lep and photon scales
 
 	fChain->SetBranchAddress("event", &event, &b_event);
-//	fChain->SetBranchAddress("size", &size, &b_size);
+	fChain->SetBranchAddress("size", &size, &b_size);
 	fChain->SetBranchAddress("run", &run, &b_run);
 	fChain->SetBranchAddress("ls", &ls, &b_ls);
 	fChain->SetBranchAddress("nVtx", &nVtx, &b_nVtx);

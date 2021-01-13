@@ -1,4 +1,5 @@
-#define num 3
+//#define num 3
+#define num 9
 TH1D*unroll_hist(TH2D*h2,TString histname){
         int binsx=h2->GetNbinsX();int binsy=h2->GetNbinsY();
 	int nbins=binsx*binsy;
@@ -32,25 +33,22 @@ int unroll_2d(){
 	TH2D* th2[num];
 	TH1D*h1;TH2D*h2;
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"ZA-EWK"};//,"ZA","plj","TTA","VV","ST";
+	vector<TString> sample={"ewk","qcd"};//,"ZA","plj","TTA","VV","ST";
 	for(int i=0;i<tag.size();i++){
-		for(int j=0;j<sample.size();j++){
+		for(int j=1;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
-			TFile*file=new TFile("./2droot/genMjj_unfold_ewk_scale"+tag[i]+".root");
+			TFile*file=new TFile("./2droot/genMjj_unfold_"+sample[j]+"_scale"+tag[i]+".root");
 			TFile*fout;
-			if(sample[j].Contains("EWK")){
-				fout=new TFile("genMjj_unfold_ewk_scale"+tag[i]+".root","recreate");
-				for(int k=0;k<num;k++){
-					th2[k]=(TH2D*)file->Get(Form("genMjj_%i",k));
-					hist[k]=unroll_hist(th2[k],Form("genMjj_%i",k));
-				}
+			fout=new TFile("genMjj_unfold_"+sample[j]+"_scale"+tag[i]+".root","recreate");
+			for(int k=0;k<num;k++){
+				th2[k]=(TH2D*)file->Get(Form("genMjj_%i",k));
+				hist[k]=unroll_hist(th2[k],Form("genMjj_%i",k));
 			}
-			if(sample[j].Contains("EWK")){
-				fout->cd(); 
-				for(int k=0;k<num;k++){
-					hist[k]->Write();
-				}
+			fout->cd(); 
+			for(int k=0;k<num;k++){
+				hist[k]->Write();
 			}
+
 			fout->Close();
 		}
 	} 

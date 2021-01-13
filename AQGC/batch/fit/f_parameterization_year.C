@@ -293,7 +293,7 @@ void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TStr
 void f_parameterization_year(){
 
 	gSystem->Load("libTreePlayer.so");
-	TString cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7  && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+	TString cut;
 	vector<TString>channel={"ele","muon"};
 	vector<TString> tag={"16","17","18"};
         vector<TString> file={"outZA_aQGC16_new.root","outZA_aQGC17.root","outZA_aQGC18.root"};
@@ -304,7 +304,7 @@ void f_parameterization_year(){
 			else if(channel[j].Contains("ele")&&tag[k].Contains("17"))
 				cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) ) && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 			else if(channel[j].Contains("muon")&&tag[k].Contains("17")==0)
-				cut="(lep == 13 && (HLT_Mu1 >0 || HLT_Mu2 >0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+				cut="(lep == 13 && (HLT_Mu1 >0 || HLT_Mu2 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 			else if(channel[j].Contains("muon")&&tag[k].Contains("17"))
 				cut="(lep == 13 && (HLT_Mu1>0 || HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus <3 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 					for(int i=1;i<=16;i++){

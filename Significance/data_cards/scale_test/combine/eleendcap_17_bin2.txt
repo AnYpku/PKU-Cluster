@@ -1,42 +1,43 @@
 imax 1   number of channels
-jmax 6   number of processes-1
-kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+jmax 5   number of processes-1
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap2
-observation 3.88
+observation 4.108
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
-bin	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2
-process	Sig	QCD	non_prompt	TTA	VV	ST	WA
-process	0	1	2	3	4	5	6
-rate	0.86	1.82	1.07	0.00	0.00	0.13	0.00
+bin	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2
+process	Sig	QCD	non_prompt	TTA	VV	ST
+process	0	1	2	3	4	5
+rate	0.962	1.716	1.430	0.000	0.000	0.000
 ------------
-lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
-VBS_Stat_bin2_eleendcap17	lnN	1.12	-	-	-	-	-	-
-QCD_Stat_bin2_eleendcap17	lnN	-	1.29	-	-	-	-	-
-non_prompt_Stat_bin2_eleendcap17	lnN	-	-	1.42	-	-	-	-
-TTA_Stat_bin2_eleendcap17	lnN	-	-	-	1.00	-	-	-
-VV_Stat_bin2_eleendcap17	lnN	-	-	-	-	1.00	-	-
-ST_Stat_bin2_eleendcap17	lnN	-	-	-	-	-	2.00	-
-WA_Stat_bin2_eleendcap17	lnN	-	-	-	-	-	-	1.00
-fake_eleendcap17	lnN	-	-	1.32	-	-	-	-
-JES_17	lnN	1.04	1.11	-	1.25	1.42	1.25	1.00
-JER_17	lnN	1.01	1.08	-	1.31	1.22	1.25	1.00
-pdf_EW	lnN	1.00	-	-	-	-	-	-
-pdf_QCD	lnN	-	1.03	-	-	-	-	-
-Scale_EW	lnN	1.06	-	-	-	-	-	-
-QCDZA_Scale_band1	lnN	-	1.06	-	-	-	-	-
-QCDZA_Scale_band2	lnN	-	1.15	-	-	-	-	-
-QCDZA_Scale_band3	lnN	-	1.21	-	-	-	-	-
-interf	lnN	1.05	-	-	-	-	-	-
-ele_reco	lnN	1.009	1.009	-	1.009	1.009	1.009	1.009
-ele_ID	lnN	1.04	1.04	-	1.04	1.04	1.04	1.04
-photon_id	lnN	1.02	1.02	-	1.02	1.02	1.02	1.02
-pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	1.1	-	-	-
-VV_xs	lnN	-	-	-	-	1.1	-	-
-l1pref	lnN	1.05	1.05	-	1.05	1.05	1.05	1.05
+lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
+VBS_Stat_bin2_eleendcap17	lnN	1.072	-	-	-	-	-
+QCD_Stat_bin2_eleendcap17	lnN	-	1.278	-	-	-	-
+non_prompt_Stat_bin2_eleendcap17	lnN	-	-	1.416	-	-	-
+TTA_Stat_bin2_eleendcap17	lnN	-	-	-	1.000	-	-
+VV_Stat_bin2_eleendcap17	lnN	-	-	-	-	1.000	-
+ST_Stat_bin2_eleendcap17	lnN	-	-	-	-	-	1.000
+fake_eleendcap17	lnN	-	-	1.262	-	-	-
+JES_17	lnN	1.040	1.120	-	1.100	1.550	1.330
+JER_17	lnN	1.010	1.080	-	1.310	1.420	1.020
+pdf_EW	lnN	1.001	-	-	-	-	-
+pdf_QCD	lnN	-	1.020	-	-	-	-
+Scale_EW	lnN	1.059	-	-	-	-	-
+Scale_muF1	lnN	-	1.138	-	-	-	-
+Scale_muR1	lnN	-	1.053	-	-	-	-
+Scale_muFmuR	lnN	-	1.193	-	-	-	-
+interf	lnN	1.048	-	-	-	-	-
+ele_reco	lnN	1.010	1.010	-	1.000	1.000	1.000
+ele_ID	lnN	1.091	1.098	-	1.000	1.000	1.000
+photon_id	lnN	1.034	1.034	-	1.045	1.026	1.020
+pileup	lnN	1.004	1.004	-	1.004	1.004	1.004
+ttgamma_xs	lnN	-	-	-	1.1	-	-
+VV_xs	lnN	-	-	-	-	1.1	-
+pileupId_eff	lnN	1.000	1.001	-	1.000	1.047	1.000
+pileupId_mis	lnN	1.018	1.000	-	1.108	1.000	1.000
+l1pref	lnN	1.048	1.046	-	1.000	1.000	1.000

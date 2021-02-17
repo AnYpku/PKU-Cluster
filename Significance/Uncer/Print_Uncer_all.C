@@ -40,6 +40,7 @@ int Print_Uncer_all(){
 			TString f_mu_eff ="./lepton_uncer/muon_all_"+tag[j]+".txt";
 			TString f_mu_trigger ="./lepton_uncer/muon_trigger_"+tag[j]+".txt";
 			TString f_photon_ID ="./lepton_uncer/photon_ID_"+tag[j]+".txt";
+			TString f_pileup ="./pileup/pu_uncer_"+tag[j]+".txt";
 			TString f_puId_eff ="./puIdSF/eff_uncer_"+channel[i]+".txt";
 			TString f_puId_mis ="./puIdSF/mis_uncer_"+channel[i]+".txt";
 			run(channel[i],tag[j],f_fake);
@@ -61,6 +62,7 @@ int Print_Uncer_all(){
 			run(channel[i],tag[j],f_mu_eff);
 			run(channel[i],tag[j],f_mu_trigger);
 			run(channel[i],tag[j],f_photon_ID);
+			run(channel[i],tag[j],f_pileup);
 			run(channel[i],tag[j],f_puId_eff);
 			run(channel[i],tag[j],f_puId_mis);
 		}

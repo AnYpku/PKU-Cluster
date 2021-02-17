@@ -8,11 +8,11 @@ import ROOT
 from ROOT import *
 
 if sys.argv[4].find("combine")==-1:
-   input_filename_e = '/home/pku/anying/cms/PKU-Cluster/AQGC/20'+sys.argv[4]+'/ele/paramsets_'+sys.argv[1]+'_el.txt'
-   input_filename_m = '/home/pku/anying/cms/PKU-Cluster/AQGC/20'+sys.argv[4]+'/muon/paramsets_'+sys.argv[1]+'_mu.txt'
+   input_filename_e = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/paramsets_'+sys.argv[1]+'_ele'+sys.argv[4]+'.txt'
+   input_filename_m = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/paramsets_'+sys.argv[1]+'_muon'+sys.argv[4]+'.txt'
 else:
-   input_filename_e = '/home/pku/anying/cms/PKU-Cluster/AQGC/'+sys.argv[4]+'/ele/paramsets_'+sys.argv[1]+'_el.txt'
-   input_filename_m = '/home/pku/anying/cms/PKU-Cluster/AQGC/'+sys.argv[4]+'/muon/paramsets_'+sys.argv[1]+'_mu.txt'
+   input_filename_e = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/paramsets_'+sys.argv[1]+'_ele.txt'
+   input_filename_m = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/paramsets_'+sys.argv[1]+'_mu.txt'
 
 input_file_e = open(input_filename_e, "r")
 input_file_m = open(input_filename_m, "r")

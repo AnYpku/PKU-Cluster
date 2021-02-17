@@ -112,9 +112,9 @@ int Unfold_sig(){
      TFile*file1=new TFile(dir1+"unfold_GenCutla-ZA-EWK16.root");
      TFile*file2=new TFile(dir2+"unfold_GenCutla-ZA-EWK17.root");
      TFile*file3=new TFile(dir3+"unfold_GenCutla-ZA-EWK18.root");
-//     for(int i=0;i<bins.size();i++){
-	     run(file1,genvars, bins,cut1,"16");
-	     run(file2,genvars, bins,cut1,"17");
-	     run(file3,genvars, bins,cut1,"18");
+
+     run(file1,genvars, bins,cut1,"16");
+     run(file2,genvars, bins,cut1,"17");
+     run(file3,genvars, bins,cut1,"18");
      return 1;
 }

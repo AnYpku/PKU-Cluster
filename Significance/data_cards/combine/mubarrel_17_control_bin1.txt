@@ -4,7 +4,7 @@ kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel1
-observation 701.76
+observation 884.00
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -37,6 +37,6 @@ photon_id	lnN	1.031	1.031	-	1.031	1.031	1.031
 pileup	lnN	1.01	1.01	-	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
-pileupId_eff	lnN	1.02	1.01	-	1.01	1.03	1.01
-pileupId_mis_CR	lnN	1.00	3.05	-	1.01	1.00	1.00
+pileupId_eff	lnN	1.01	1.02	-	1.00	1.01	1.01
+pileupId_mis	lnN	1.00	1.01	-	1.00	1.00	1.00
 l1pref	lnN	1.01	1.01	-	1.01	1.01	1.01

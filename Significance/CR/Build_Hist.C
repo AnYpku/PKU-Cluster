@@ -55,9 +55,13 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      if(name.Contains("EWK")) {
 	     th2name="hist_sig";
      }
+     else if(name.Contains("Muon")||name.Contains("Ele")) {
+	     th2name="hist_data";
+     }
      else  th2name="hist_bkg";
              
-     TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco;;yields",mjj_bins[0],mjj_bins[mjj_bins.size()-1]),mjj_bins.size()-1,&mjj_bins[0]);
+//     TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco;;yields",mjj_bins[0],mjj_bins[mjj_bins.size()-1]),mjj_bins.size()-1,&mjj_bins[0]);
+     TH1F* hist= new TH1F(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco;;yields",mjj_bins[0],mjj_bins[mjj_bins.size()-1]),mjj_bins.size()-1,&mjj_bins[0]);
      
      TString var2="Mjj";
      TString var1="fabs(jet1eta-jet2eta)";
@@ -95,6 +99,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 	     if(lep==13)       
 		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
 	     if(name.Contains("plj")) actualWeight=scalef;
+	     else if(name.Contains("Muon") || name.Contains("Ele")) actualWeight=1;
 		     if (  tformula1->EvalInstance() ){ 
 			     //cout<<name<<" "<<scalef<<" "<<pileupWeight<<" "
 			     //<<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "
@@ -105,7 +110,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 
 		     }
      }
-     TFile*fout=new TFile("./root/hist_"+name+"_"+tag+channel+".root","recreate");
+     TFile*fout=new TFile("./root/hist_"+name+"_"+tag+channel+"_CR.root","recreate");
      fout->cd();
      hist->Write();
      fout->Close();
@@ -122,7 +127,8 @@ int Build_Hist(){
 //	vector<TString> tags={"16"};
 	TString dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
         TString Reco;
-	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
+	vector<TString> names={"ZA-EWK"/*,"ST","VV","TTA","ZA","plj"*/};
+//	vector<TString> names={"Muon","Ele"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int k=0;k<tags.size();k++){
 		if(tags[k].Contains("17")==1){

@@ -29,7 +29,7 @@ echo "$line"
 sed -i "1,$line d" tmp
 theory=`sed -n -e '/theory/p' tmp`
 sed -i '/theory/d' tmp
-sed -i '/ST_Stat_control_bin1_eleendcap/d' tmp
+sed -i '/ST_Stat_bin1_eleendcap16/d' tmp
 echo "$theory"
 sed -i ':label;N;s/\n/,/;t label' tmp
 #sed -i "$ a $theory" tmp

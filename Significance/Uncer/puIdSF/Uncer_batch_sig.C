@@ -4,10 +4,7 @@ void run(TString cut1,TString sample,TString channel,TString type,bool turn){
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir="/home/pku/anying/cms/rootfiles/2017/";     
      TFile*file;
-     if(sample.Contains("EWK"))
-	     file=new TFile(dir+"unfold_GenCutla-"+sample+"17.root");
-     else
-	     file=new TFile(dir+"cutla-out"+sample+"17.root");
+     file=new TFile(dir+"cutla-out"+sample+"17.root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;

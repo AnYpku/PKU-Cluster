@@ -122,7 +122,7 @@ int Uncer_batch_sig(){
 
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	vector<TString> sample={"ZA-EWK"};
-//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+//	vector<TString> sample={"ZA","TTA","VV","ST"};
 	const int kk=channels.size();
 	TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
 	TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";

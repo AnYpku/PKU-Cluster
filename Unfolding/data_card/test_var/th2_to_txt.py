@@ -59,7 +59,7 @@ for i in range(1,nbins):
    if sys.argv[3].find("18") == -1:
 	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP))
    else:
-	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP-1))
+	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP))
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin recobin%i\n'%(i))

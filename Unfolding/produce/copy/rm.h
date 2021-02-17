@@ -569,13 +569,11 @@ public :
      double    photon_id_scale;
      double    photon_veto_scale;
      double ele_hlt_scale;
-     double puIdweight_L;
      double puIdweight_M;
-     double puIdweight_T;
-     double puIdweight_T_effUp,puIdweight_M_effUp,puIdweight_L_effUp;
-     double puIdweight_T_effDn,puIdweight_M_effDn,puIdweight_L_effDn;
-     double puIdweight_T_misUp,puIdweight_M_misUp,puIdweight_L_misUp;
-     double puIdweight_T_misDn,puIdweight_M_misDn,puIdweight_L_misDn;
+     double puIdweight_M_effUp;
+     double puIdweight_M_effDn;
+     double puIdweight_M_misUp;
+     double puIdweight_M_misDn;
 };
 
 #endif
@@ -658,23 +656,10 @@ void rm::Init(TTree *tree)
 	ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D"); 
 	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
 	ExTree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
-	ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
 	ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
-	ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
-        ExTree->Branch("puIdweight_T_effUp",&puIdweight_T_effUp);
-        ExTree->Branch("puIdweight_L_effUp",&puIdweight_L_effUp);
         ExTree->Branch("puIdweight_M_effUp",&puIdweight_M_effUp);
-
-        ExTree->Branch("puIdweight_T_effDn",&puIdweight_T_effDn);
-        ExTree->Branch("puIdweight_L_effDn",&puIdweight_L_effDn);
         ExTree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn);
-
-        ExTree->Branch("puIdweight_T_misUp",&puIdweight_T_misUp);
-        ExTree->Branch("puIdweight_L_misUp",&puIdweight_L_misUp);
         ExTree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp);
-
-        ExTree->Branch("puIdweight_T_misDn",&puIdweight_T_misDn);
-        ExTree->Branch("puIdweight_L_misDn",&puIdweight_L_misDn);
         ExTree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn);
 	// lep and photon scales
 	ExTree->Branch("genyVlep",     &genyVlep,     "genyVlep/D");

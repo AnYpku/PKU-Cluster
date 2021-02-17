@@ -9,6 +9,7 @@ void runxx() {
 //TString dir ="/eos/cms/store/user/yian/";
 TString dir ="/home/pku/anying/cms/rootfiles/2018/";
 ifstream infile("file");
+//ifstream infile("file_all");
 string buffer; 
 TString infilename;
 
@@ -19,7 +20,8 @@ getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
 infilename = /*"cutlep-"out"+*/infilename;
-TString outname="cutlep-out"+infilename;
+//TString outname="cutla-out"+infilename;
+TString outname="cutla-out"+infilename;
 
 cout<<dir<<infilename<<" -> "<<outname<<endl;
 

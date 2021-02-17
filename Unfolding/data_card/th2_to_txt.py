@@ -56,9 +56,11 @@ for i in range(1,nbins):
    f = open('./txt/%s_%s_bin%i.txt'%(sys.argv[2],sys.argv[3],i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax %i   number of processes-1\n'%(jmax))
-   if sys.argv[3].find("18") == -1:
+   if sys.argv[3].find("18") == -1 and sys.argv[3].find("17") == -1:#16
 	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP))
-   else:
+   if sys.argv[3].find("16") == -1 and sys.argv[3].find("18") == -1:#17
+	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+2))
+   if sys.argv[3].find("16") == -1 and sys.argv[3].find("17") == -1:#18
 	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP-1))
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
@@ -108,7 +110,7 @@ for i in range(1,nbins):
 #          print genbincontent[j-1],' ',genbinerror[j-1]
 #   data=th1_DMuon.GetBinContent(i)+th1_DEle.GetBinContent(i)
    data=sum(genbincontent)+ ZA_bincontent+non_prompt_bincontent+TTA_bincontent+VV_bincontent+ST_bincontent+ZA_sig_out_bincontent
-   f.write('observation %0.2f\n'%(data))
+   f.write('observation %0.3f\n'%(data))
    f.write('------------\n')
    f.write('# now we list the expected events for signal and all backgrounds in that bin\n')
    f.write('# the second process line must have a positive number for backgrounds, and 0 for signal\n')
@@ -128,8 +130,8 @@ for i in range(1,nbins):
    f.write('0\t1\t2\t3\t4\t5\n')
    f.write('rate\t')
    for j in range(1,nbins):
-         f.write('%0.2f\t' %(genbincontent[j-1]))
-   f.write('%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(ZA_bincontent, non_prompt_bincontent, TTA_bincontent, VV_bincontent, ST_bincontent, ZA_sig_out_bincontent))
+         f.write('%0.3f\t' %(genbincontent[j-1]))
+   f.write('%0.3f\t%0.3f\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(ZA_bincontent, non_prompt_bincontent, TTA_bincontent, VV_bincontent, ST_bincontent, ZA_sig_out_bincontent))
    f.write('------------\n')
 
    f.write('lumi_%s\tlnN\t'%(sys.argv[3]))
@@ -149,7 +151,7 @@ for i in range(1,nbins):
    for j in range(1,nbins):
           f.write('genbin%i_Stat_recobin%d_%s\tlnN\t'%(j,i,sys.argv[3],))
           if j==1:
-		  f.write('%0.2f\t'%(genbinerror[j-1]))
+		  f.write('%0.3f\t'%(genbinerror[j-1]))
                   for k in range(j+1,nbins):
                       f.write('-\t')
                   f.write('-\t-\t-\t-\t-\t-\n')
@@ -158,7 +160,7 @@ for i in range(1,nbins):
                       if(k<j):
 			      f.write('-\t')
                       if(k==j):
-                              f.write('%0.2f\t'%(genbinerror[j-1]))
+                              f.write('%0.3f\t'%(genbinerror[j-1]))
                   if j<(nbins-1):
                       for k in range(j+1,nbins):
                             f.write('-\t')
@@ -167,33 +169,33 @@ for i in range(1,nbins):
    f.write('QCD_Stat_recobin%d_%s\tlnN\t'%(i,sys.argv[3]))
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('%0.2f\t-\t-\t-\t-\t-\n'%(ZA_binerror))
+   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(ZA_binerror))
 
    f.write('non_prompt_Stat_recobin%d_%s\tlnN\t'%(i,sys.argv[3]))
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('-\t%0.2f\t-\t-\t-\t-\n'%(non_prompt_binerror))
+   f.write('-\t%0.3f\t-\t-\t-\t-\n'%(non_prompt_binerror))
 
    f.write('TTA_Stat_recobin%d_%s\tlnN\t'%(i,sys.argv[3]))
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('-\t-\t%0.2f\t-\t-\t-\n'%(TTA_binerror))
+   f.write('-\t-\t%0.3f\t-\t-\t-\n'%(TTA_binerror))
 
    f.write('VV_Stat_recobin%d_%s\tlnN\t'%(i,sys.argv[3]))
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('-\t-\t-\t%0.2f\t-\t-\n'%(VV_binerror))
+   f.write('-\t-\t-\t%0.3f\t-\t-\n'%(VV_binerror))
 
    f.write('ST_Stat_recobin%d_%s\tlnN\t'%(i,sys.argv[3]))
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('-\t-\t-\t-\t%0.2f\t-\n'%(ST_binerror))
+   f.write('-\t-\t-\t-\t%0.3f\t-\n'%(ST_binerror))
 
 
    f.write('ZA_SigOut_Stat_recobin%d_%s\tlnN\t'%(i,sys.argv[3]))
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('-\t-\t-\t-\t-\t%0.2f\n'%(ZA_sig_out_binerror))
+   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(ZA_sig_out_binerror))
 
    f.write('fake_%s\tlnN\t'%(sys.argv[3]))
    for j in range(1,nbins):
@@ -201,46 +203,46 @@ for i in range(1,nbins):
    if non_prompt_bincontent==0:
        f.write('-\t-\t-\t-\t-\t-\n')
    else: 
-        f.write('-\t%0.2f\t-\t-\t-\t-\n'%(arr['fake'+sys.argv[3]][i-1]))
+        f.write('-\t%0.3f\t-\t-\t-\t-\n'%(arr['fake'+sys.argv[3]][i-1]))
 
    f.write('JES_%s\tlnN\t'%(sys.argv[3]))
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['genbin{}_jes'.format(j)][i-1]))
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jes'+sys.argv[3]+'_ZA'][i-1],arr['jes'+sys.argv[3]+'_TTA'][i-1],arr['jes'+sys.argv[3]+'_VV'][i-1],arr['jes'+sys.argv[3]+'_ST'][i-1],arr['jes'+sys.argv[3]+'_ZA-EWKout'][i-1]))
+	 f.write('%0.3f\t'%(arr['genbin{}_jes'.format(j)][i-1]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['jes'+sys.argv[3]+'_ZA'][i-1],arr['jes'+sys.argv[3]+'_TTA'][i-1],arr['jes'+sys.argv[3]+'_VV'][i-1],arr['jes'+sys.argv[3]+'_ST'][i-1],arr['jes'+sys.argv[3]+'_ZA-EWKout'][i-1]))
 
    f.write('JER_%s\tlnN\t'%(sys.argv[3]))
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['genbin{}_jer'.format(j)][i-1]))
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['jer'+sys.argv[3]+'_ZA'][i-1],arr['jer'+sys.argv[3]+'_TTA'][i-1],arr['jer'+sys.argv[3]+'_VV'][i-1],arr['jer'+sys.argv[3]+'_ST'][i-1],arr['jer'+sys.argv[3]+'_ZA-EWKout'][i-1]))
+	 f.write('%0.3f\t'%(arr['genbin{}_jer'.format(j)][i-1]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['jer'+sys.argv[3]+'_ZA'][i-1],arr['jer'+sys.argv[3]+'_TTA'][i-1],arr['jer'+sys.argv[3]+'_VV'][i-1],arr['jer'+sys.argv[3]+'_ST'][i-1],arr['jer'+sys.argv[3]+'_ZA-EWKout'][i-1]))
 #
    f.write('pdf_EW\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['genbin{}_pdf'.format(j)][i-1]))
-   f.write('-\t-\t-\t-\t-\t%0.2f\n'%(arr['SigOut_pdf'][i-1]))
+	 f.write('%0.3f\t'%(arr['genbin{}_pdf'.format(j)][i-1]))
+   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['SigOut_pdf'][i-1]))
 #
    f.write('pdf_QCD\tlnN\t')
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_pdf'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['QCD_pdf'][i-1]))
 #
    f.write('Scale_EW\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['genbin{}_scale'.format(j)][i-1]))
-   f.write('-\t-\t-\t-\t-\t%0.2f\n'%(arr['SigOut_scale'][i-1]))
+	 f.write('%0.3f\t'%(arr['genbin{}_scale'.format(j)][i-1]))
+   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['SigOut_scale'][i-1]))
 #
    f.write('Scale_QCD\tlnN\t')
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale'][i-1]))
 #
    f.write('Scale_QCD_extra\tlnN\t')
    for j in range(1,nbins):
          f.write('-\t')
-   f.write('%0.2f/%0.2f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale_up'][i-1],arr['QCD_scale_down'][i-1]))
+   f.write('%0.3f/%0.3f\t-\t-\t-\t-\t-\n'%(arr['QCD_scale_up'][i-1],arr['QCD_scale_down'][i-1]))
 #
    f.write('interf\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['genbin{}_interf'.format(j)][i-1]))
+	 f.write('%0.3f\t'%(arr['genbin{}_interf'.format(j)][i-1]))
    f.write('\t-\t-\t-\t-\t-\t-\n')
 #
    f.write('mu_trigger\tlnN\t')
@@ -250,27 +252,27 @@ for i in range(1,nbins):
 #
    f.write('mu_eff\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['muon_all'][0]))
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0]))
+	 f.write('%0.3f\t'%(arr['muon_all'][0]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0]))
 #
    f.write('ele_reco\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['ele_reco'][0]))
+	 f.write('%0.3f\t'%(arr['ele_reco'][0]))
    f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0]))
 #
    f.write('ele_ID\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['ele_ID'][0]))
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0]))
+	 f.write('%0.3f\t'%(arr['ele_ID'][0]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0]))
 #
    f.write('photon_id\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(arr['photon_ID'][0]))
-   f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
+	 f.write('%0.3f\t'%(arr['photon_ID'][0]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
 #
    f.write('pileup\tlnN\t')
    for j in range(1,nbins):
-	 f.write('%0.2f\t'%(1.01))
+	 f.write('%0.3f\t'%(1.01))
    f.write('1.01\t-\t1.01\t1.01\t1.01\t1.01\n')
 #
    f.write('ttgamma_xs\tlnN\t')
@@ -285,8 +287,17 @@ for i in range(1,nbins):
    if sys.argv[3].find("18") == -1:
         f.write('l1pref\tlnN\t')
         for j in range(1,nbins):
-	       f.write('%0.2f\t'%(arr['genbin{}_pref'.format(j)][i-1]))
-        f.write('%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1]))
+	       f.write('%0.3f\t'%(arr['genbin{}_pref'.format(j)][i-1]))
+        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1]))
+   if sys.argv[3].find("16") == -1 and sys.argv[3].find("18")==-1:
+        f.write('pileupId_mis\tlnN\t')
+        for j in range(1,nbins):
+	       f.write('%0.3f\t'%(arr['genbin{}_mis'.format(j)][i-1]))
+        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
+        f.write('pileupId_eff\tlnN\t')
+        for j in range(1,nbins):
+	       f.write('%0.3f\t'%(arr['genbin{}_eff'.format(j)][i-1]))
+        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
 
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]

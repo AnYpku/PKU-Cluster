@@ -4,7 +4,7 @@ kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel6
-observation 6.14
+observation 6.694
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,36 +13,38 @@ observation 6.14
 bin	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6	elebarrel6
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	3.87	1.80	0.38	0.00	0.00	0.00	0.09
+rate	3.907	2.310	0.380	0.000	0.000	0.000	0.096
 ------------
 lumi_16	lnN	1.022	1.022	-	1.022	1.022	1.022	1.022
-VBS_Stat_bin6_elebarrel16	lnN	1.03	-	-	-	-	-	-
-QCD_Stat_bin6_elebarrel16	lnN	-	1.33	-	-	-	-	-
-non_prompt_Stat_bin6_elebarrel16	lnN	-	-	2.00	-	-	-	-
-TTA_Stat_bin6_elebarrel16	lnN	-	-	-	1.00	-	-	-
-VV_Stat_bin6_elebarrel16	lnN	-	-	-	-	1.00	-	-
-ST_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	1.00	-
-ZA_SigOut_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	-	1.20
-Stat group = VBS_Stat_bin6_elebarrel16 QCD_Stat_bin6_elebarrel16 
-fake_elebarrel16	lnN	-	-	1.21	-	-	-	-
+VBS_Stat_bin6_elebarrel16	lnN	1.031	-	-	-	-	-	-
+QCD_Stat_bin6_elebarrel16	lnN	-	1.230	-	-	-	-	-
+non_prompt_Stat_bin6_elebarrel16	lnN	-	-	2.000	-	-	-	-
+TTA_Stat_bin6_elebarrel16	lnN	-	-	-	1.000	-	-	-
+VV_Stat_bin6_elebarrel16	lnN	-	-	-	-	1.000	-	-
+ST_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	1.000	-
+ZA_SigOut_Stat_bin6_elebarrel16	lnN	-	-	-	-	-	-	1.196
+Stat group = VBS_Stat_bin6_elebarrel16 QCD_Stat_bin6_elebarrel16 non_prompt_Stat_bin6_elebarrel16 ZA_SigOut_Stat_bin6_elebarrel16 
+fake_elebarrel16	lnN	-	-	1.211	-	-	-	-
 fake group = fake_elebarrel16 
-JES_16	lnN	1.04	1.21	-	1.03	1.00	1.00	1.10
-JER_16	lnN	1.00	1.12	-	1.05	1.00	1.00	1.03
+JES_16	lnN	1.040	1.210	-	1.030	1.000	1.000	1.100
+JER_16	lnN	1.000	1.120	-	1.050	1.000	1.000	1.030
 JESR group = JES_16 JER_16
-pdf_EW	lnN	-	-	-	-	-	-	1.042
-pdf_QCD	lnN	-	1.03	-	-	-	-	-
-Scale_EW	lnN	-	-	-	-	-	-	1.09
-Scale_QCD_band1	lnN	-	1.05	-	-	-	-	-
-Scale_QCD_band2	lnN	-	1.10	-	-	-	-	-
-Scale_QCD_band3	lnN	-	1.15	-	-	-	-	-
-interf	lnN	1.01	-	-	-	-	-	-
-theory group = pdf_EW pdf_QCD Scale_EW Scale_QCD_band1 Scale_QCD_band2 Scale_QCD_band3 interf
-photon_id	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-ele_reco	lnN	1.012	1.012	-	1.012	1.012	1.012	1.012
-ele_ID	lnN	1.06	1.06	-	1.06	1.06	1.06	1.06
+pdf_EW	lnN	1.007	-	-	-	-	-	1.040
+pdf_QCD	lnN	-	1.024	-	-	-	-	-
+Scale_EW	lnN	1.025	-	-	-	-	-	1.088
+Scale_muF1	lnN	-	1.100	-	-	-	-	-
+Scale_muR1	lnN	-	1.048	-	-	-	-	-
+Scale_muFmuR	lnN	-	1.151	-	-	-	-	-
+interf	lnN	1.012	-	-	-	-	-	-
+theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf
+photon_id	lnN	1.026	1.026	-	1.034	1.000	1.000	1.026
+ele_reco	lnN	1.012	1.013	-	1.000	1.000	1.000	1.012
+ele_ID	lnN	1.060	1.044	-	1.000	1.000	1.000	1.060
 egamma group = ele_reco ele_ID photon_id
-pileup	lnN	1.01	1.01	-	1.01	1.01	1.01	1.01
-ttgamma_xs	lnN	-	-	-	1.1	-	-	-
-VV_xs	lnN	-	-	-	-	1.1	-	-
-l1pref	lnN	1.03	1.03	-	1.03	1.03	1.03	1.03
-Others group = pileup ttgamma_xs VV_xs lumi_16 l1pref 
+pileup	lnN	1.004	1.014	-	1.069	1.000	1.000	1.004
+ttgamma_xs	lnN	-	-	-	-	-	-	-
+VV_xs	lnN	-	-	-	-	-	-	-
+l1pref	lnN	1.030	1.011	-	1.020	1.000	1.000	1.030
+luminosity group =  lumi_16 
+pu group = pileup
+pref group = l1pref 

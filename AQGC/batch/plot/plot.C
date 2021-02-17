@@ -275,22 +275,22 @@ void aa(string a, double limit){
 	//        l2->SetFillStyle(4000);
 	//	l1->AddEntry(h1,"data","EP");
 	char buffer[256];
-	if (a.find("fM0")!=std::string::npos) sprintf(buffer, "F_{M,0}=-%0.2fe-12",limit);
-	if (a.find("fM1")!=std::string::npos) sprintf(buffer, "F_{M,1}=-%0.2fe-12",limit);
-	if (a.find("fM2")!=std::string::npos) sprintf(buffer, "F_{M,2}=-%0.2fe-12",limit);
-	if (a.find("fM3")!=std::string::npos) sprintf(buffer, "F_{M,3}=-%0.2fe-12",limit);
-	if (a.find("fM4")!=std::string::npos) sprintf(buffer, "F_{M,4}=-%0.2fe-12",limit);
-	if (a.find("fM5")!=std::string::npos) sprintf(buffer, "F_{M,5}=-%0.2fe-12",limit);
-	if (a.find("fM6")!=std::string::npos) sprintf(buffer, "F_{M,6}=-%0.2fe-12",limit);
-	if (a.find("fM7")!=std::string::npos) sprintf(buffer, "F_{M,7}=-%0.2fe-12",limit);
-	if (a.find("fT0")!=std::string::npos) sprintf(buffer, "F_{T,0}=-%0.2fe-12",limit);
-	if (a.find("fT1")!=std::string::npos) sprintf(buffer, "F_{T,1}=-%0.2fe-12",limit);
-	if (a.find("fT2")!=std::string::npos) sprintf(buffer, "F_{T,2}=-%0.2fe-12",limit);
-	if (a.find("fT5")!=std::string::npos) sprintf(buffer, "F_{T,5}=-%0.2fe-12",limit);
-	if (a.find("fT6")!=std::string::npos) sprintf(buffer, "F_{T,6}=-%0.2fe-12",limit);
-	if (a.find("fT7")!=std::string::npos) sprintf(buffer, "F_{T,7}=-%0.2fe-12",limit);
-	if (a.find("fT8")!=std::string::npos) sprintf(buffer, "F_{T,8}=-%0.2fe-12",limit);
-	if (a.find("fT9")!=std::string::npos) sprintf(buffer, "F_{T,9}=-%0.2fe-12",limit);
+	if (a.find("fM0")!=std::string::npos) sprintf(buffer, "F_{M,0}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM1")!=std::string::npos) sprintf(buffer, "F_{M,1}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM2")!=std::string::npos) sprintf(buffer, "F_{M,2}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM3")!=std::string::npos) sprintf(buffer, "F_{M,3}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM4")!=std::string::npos) sprintf(buffer, "F_{M,4}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM5")!=std::string::npos) sprintf(buffer, "F_{M,5}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM6")!=std::string::npos) sprintf(buffer, "F_{M,6}=%0.2f TeV^{-4}",limit);
+	if (a.find("fM7")!=std::string::npos) sprintf(buffer, "F_{M,7}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT0")!=std::string::npos) sprintf(buffer, "F_{T,0}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT1")!=std::string::npos) sprintf(buffer, "F_{T,1}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT2")!=std::string::npos) sprintf(buffer, "F_{T,2}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT5")!=std::string::npos) sprintf(buffer, "F_{T,5}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT6")!=std::string::npos) sprintf(buffer, "F_{T,6}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT7")!=std::string::npos) sprintf(buffer, "F_{T,7}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT8")!=std::string::npos) sprintf(buffer, "F_{T,8}=%0.2f TeV^{-4}",limit);
+	if (a.find("fT9")!=std::string::npos) sprintf(buffer, "F_{T,9}=%0.2f TeV^{-4}",limit);
 	l1->AddEntry(g,"Data","lp");
 	l1->AddEntry(h2,"VBS Z#gamma","f");
 	l1->AddEntry(h5,"QCD Z#gamma","f");
@@ -316,20 +316,9 @@ void aa(string a, double limit){
 }
 
 void plot(){
-	aa("fM0",20.5);
-	aa("fM1",40.5);
-	aa("fM2",8.5);
-	aa("fM3",18);
-	aa("fM4",16);
-	aa("fM5",25);
-	aa("fM6",40.5);
-	aa("fM7",62.5);
-	aa("fT0",0.75);
-	aa("fT1",1.0);
-	aa("fT2",2.0);
-	aa("fT5",0.75);
-	aa("fT6",1.7);
-	aa("fT7",2.85);
-	aa("fT8",0.5);
-	aa("fT9",1.3);
+        vector<double> limit={11.582,23.396,4.685,7.227,8.972,13.658,23.164,35.968,0.376,0.544,1.030,0.426,0.949,1.599,0.305,0.643};
+        vector<string> op={"fM0","fM1","fM2","fM3","fM4","fM5","fM6","fM7","fT0","fT1","fT2","fT5","fT6","fT7","fT8","fT9"};
+        for(int i=0;i<op.size();i++){
+		aa(op[i],limit[i]);
+	}
 }

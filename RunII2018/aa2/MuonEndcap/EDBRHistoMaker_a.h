@@ -590,8 +590,8 @@ void EDBRHistoMaker::createAllHistos() {
 	hs.setHisto("jet2pt", 9, 30, 300);
 	hs.setHisto("jet2eta", 16, -4.7, 4.7);
 //	hs.setHisto("Mjj", 8, 500, 2000);
-	hs.setHisto("Mjj", 5, 150, 400);
-	hs.setHisto("ZGmass", 8, 70, 400);
+	hs.setHisto("Mjj", 5, 150, 500);
+	hs.setHisto("ZGmass", 8, 70, 500);
 	hs.setHisto("nVtx", 19, 0,76);
 	hs.setHisto("zepp", 9, 0, 4.5);
 	hs.setHisto("delta_phi", 10, 0, 3.15);
@@ -748,9 +748,9 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
                 if(drla2==10) drla2=-10;
 //		actualWeight=0;
 //data
-                if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&  (HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && ZGmass>100&& (  fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>150 && Mjj<400 && ZGmass>100/*&& Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 */) 
+                if(  (drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 &&  (HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && ZGmass>100&& (  fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>150 && Mjj<500 && ZGmass>100/*&& Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 */) 
 		  ) {
-			//if(Mjj<400) 
+			//if(Mjj<500) 
 			sum = sum + actualWeight;
 			numbe_out++;
 			treename->Fill();
@@ -788,7 +788,7 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 			(theHistograms["detajj"])->Fill(detajj, actualWeight);
 
 		}
-           //if(Mjj<400)	
+           //if(Mjj<500)	
 	}     //end loop over entries
         cout<<"count "<<count<<endl;
 	cout << "after cut: " << numbe_out << "*actualweight " << actualWeight
@@ -905,8 +905,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
                 if(filename.Contains("plj")) 
                      actualWeight = scalef;
 // mc
-                if( drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 && ( HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && ZGmass>100&& (fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>150 && Mjj<400 && ZGmass>100/*&& Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 */){
-			//if(Mjj<400)	
+                if( drll>0.3 &&drla>0.7 && drla2>0.7 && lep == 13 && ( HLT_Mu1 > 0||HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && fabs(etalep1) < 2.4 && fabs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( /*(fabs(photoneta) < 1.4442) ||*/ ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 ) ) && ZGmass>100&& (fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 && jet1pt>30 && jet2pt>30 )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>150 && Mjj<500 && ZGmass>100/*&& Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 */){
+			//if(Mjj<500)	
 			if(theWeight>0) npp++;
 			if(theWeight<0) nmm++;
 			numbe_out++;
@@ -947,7 +947,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			(theHistograms["detajj"])->Fill(detajj, actualWeight);
 
 		}
-          //if(Mjj<400) 
+          //if(Mjj<500) 
 	}
 	cout << "after cut: " << numbe_out << "; actualweight" << actualWeight<<"; theWeight>0 "<<npp<<"; theWeight<0 "<<nmm<<"; (npp-nmm) = "<<npp-nmm<<"; yields = "<<(npp-nmm)*scalef*58.7<<endl;
 		cout<< " result " << sum <<"; yields "<<sum*58.7<<endl;

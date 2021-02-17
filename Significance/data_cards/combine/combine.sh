@@ -1,20 +1,20 @@
 #!/bin/bash
-#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*16* .
-#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*16* .
+cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*16* .
+cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*16* .
 cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*17* .
 cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*17* .
-#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*18* .
-#cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*18* .
-#combineCards.py mu*16*.txt ele*16*.txt >& full16_test.txt
+cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/CR/data_cards/txt/*18* .
+cp -f /data/pku/home/anying/cms/PKU-Cluster/Significance/data_cards/txt/*18* .
+combineCards.py mu*16*.txt ele*16*.txt >& full16_test.txt
 combineCards.py mu*17*.txt ele*17*.txt >& full17_test.txt
-#combineCards.py mu*18*.txt ele*18*.txt >& full18_test.txt
+combineCards.py mu*18*.txt ele*18*.txt >& full18_test.txt
 combineCards.py full16_test.txt full17_test.txt full18_test.txt >& full_RunII.txt
 
-#full16_test.root
-#full18_test.root
-#full_RunII.root
 files="\
+full16_test.root
 full17_test.root
+full18_test.root
+full_RunII.root
 "
 for rootfile in $files
 do
@@ -43,10 +43,10 @@ text2workspace.py ${name}.txt -m 125
 #combineTool.py -M Impacts -d ${name}.root -m 125 --robustFit 1 --doFits
 #combineTool.py -M Impacts -d ${name}.root -m 125 -o impacts_${name}.json
 #plotImpacts.py -i impacts_${name}.json -o impacts_${name}
-if [[ ${name} = *17* ]];then
-   combine -M MultiDimFit -m 125 --algo impact -P pileupId_mis_SR ${name}.txt --expectSignal=1 >> impact_${name}.txt
-   combine -M MultiDimFit -m 125 --algo impact -P pileupId_mis_CR ${name}.txt --expectSignal=1 >> impact_${name}.txt
-fi
+#if [[ ${name} = *17* ]];then
+#   combine -M MultiDimFit -m 125 --algo impact -P pileupId_mis_SR ${name}.txt --expectSignal=1 >> impact_${name}.txt
+#   combine -M MultiDimFit -m 125 --algo impact -P pileupId_mis_CR ${name}.txt --expectSignal=1 >> impact_${name}.txt
+#fi
 done
 
 years="\

@@ -87,16 +87,18 @@ int Unfold_batch_sig(){
 	TString dr = "(( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 	vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"EWK","interf"};
-	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+//	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+	vector<TString> genvars={"genMjj"};
+	vector<TString> recovars={"Mjj"};
 	vector<vector<double>> bins;
-	vector<double> ptlepBins={20,80,120,200,400};
-	vector<double> photonEtBins={20,80,120,200,400};
-	vector<double> jetptBins={30,150,250,350,800};
+//	vector<double> ptlepBins={20,80,120,200,400};
+//	vector<double> photonEtBins={20,80,120,200,400};
+//	vector<double> jetptBins={30,150,250,350,800};
 	vector<double> MjjBins={150,300,400,500};
-	bins.push_back(ptlepBins);
-	bins.push_back(photonEtBins);
-	bins.push_back(jetptBins);
+//	bins.push_back(ptlepBins);
+//	bins.push_back(photonEtBins);
+//	bins.push_back(jetptBins);
 	bins.push_back(MjjBins);
 	const int kk=sample.size();
 	for(int i=0;i<tag.size();i++){

@@ -34,8 +34,9 @@ int unroll_2d(){
 	vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"ewk","qcd"};//,"ZA","plj","TTA","VV","ST";
 	for(int i=0;i<tag.size();i++){
-		for(int j=1;j<sample.size();j++){
+		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
+                        if(sample[j].Contains("qcd")&& tag[i].Contains("16")==0) continue;
 			TFile*file=new TFile("./2droot/unfold_genMjj_"+sample[j]+"_pdf"+tag[i]+".root");
 			TFile*fout;
 			fout=new TFile("unfold_genMjj_"+sample[j]+"_pdf"+tag[i]+".root","recreate");

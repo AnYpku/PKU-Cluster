@@ -67,7 +67,7 @@ void unroll_run(TString channel){
 	th2_ZA->SetMarkerColor(kBlue-6);
 	th2_ZA->SetLineColor(kBlue-6);
 //	th2_ZA->Scale(lumi*ZA_scale);
-	const char *name[7]={"0.5~0.8","8~1.2","1.2~2","0.5~0.8","8~1.2","1.2~2","0.5~2"};
+	const char *name[7]={"0.5-0.8","8-1.2","1.2-#infty ","0.5-0.8","8-1.2","1.2-#infty","0.5-#infty"};
 
 	TFile* f_ZA_sig=TFile::Open("../root/hist_ZA-EWK_16"+channel+".root");
 	TFile* f_ZA_sig17=TFile::Open("../root/hist_ZA-EWK_17"+channel+".root");

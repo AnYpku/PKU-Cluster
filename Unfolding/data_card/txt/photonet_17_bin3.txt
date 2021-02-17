@@ -1,6 +1,6 @@
 imax 1   number of channels
 jmax 9   number of processes-1
-kmax 29  number of nuisance parameters (sources of systematical uncertainties)
+kmax 31  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin recobin3
@@ -43,4 +43,6 @@ photon_id	lnN	1.03	1.03	1.03	1.03	1.03	-	1.03	1.03	1.03	1.03
 pileup	lnN	1.01	1.01	1.01	1.01	1.01	-	1.01	1.01	1.01	1.01
 ttgamma_xs	lnN	-	-	-	-	-	-	1.1	-	-	-
 VV_xs	lnN	-	-	-	-	-	-	-	1.1	-	-
-l1pref	lnN	1.01	1.02	1.04	1.04	1.03	-	1.03	1.03	1.03	1.03
+l1pref	lnN	1.01	1.02	1.04	1.04	1.04	-	1.04	1.04	1.04	1.04
+pileupId_mis	lnN	1.00	1.00	1.00	1.00	1.01	-	1.00	1.00	1.00	1.00
+pileupId_eff	lnN	1.00	1.01	1.00	1.01	1.02	-	1.01	1.00	1.00	1.01

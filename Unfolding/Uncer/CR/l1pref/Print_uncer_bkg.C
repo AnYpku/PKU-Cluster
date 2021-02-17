@@ -1,8 +1,8 @@
 #define num 3
-void run(TString var, TString tag){
-	ofstream ftxt("./"+var+"_l1pref_uncer"+tag+"CR.txt");//,ios::app);
+void run(TString var, TString tag,TString sample){
+	ofstream ftxt("./txt/"+var+"_l1pref_"+sample+"_uncer"+tag+"CR.txt");//,ios::app);
 	ofstream ff("./"+var+"_uncer"+tag+"CR.txt",ios::app);
-	TFile*file=new TFile("./root/unfold_"+var+"_ewk_pref"+tag+".root");
+	TFile*file=new TFile("./root/unfold_"+var+"_"+sample+"_pref"+tag+".root");
         TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -28,8 +28,8 @@ void run(TString var, TString tag){
             else    error=0;
             if(error>1) error=1;
 	    if(k==0){
-                    ftxt<<"l1pref"<<"=[";
-                    ff<<"l1pref"<<"=[";
+                    ftxt<<"l1pref_"<<sample<<"=[";
+                    ff<<  "l1pref_"<<sample<<"=[";
 	    }
 	    if(k<kk-1){
 		    ftxt<<fixed<<setprecision(3)<<1+error<<",";
@@ -52,9 +52,12 @@ int Print_uncer_bkg(){
 	bins.push_back(jetptBins);
 	bins.push_back(MjjBins);
 	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	for(int i=0;i<recovars.size();i++){
-			run(recovars[i],"16");
-			run(recovars[i],"17");
+		for(int k=0;k<sample.size();k++){
+			run(recovars[i],"16",sample[k]);
+			run(recovars[i],"17",sample[k]);
+		}
 	}
 	return 0;
 }

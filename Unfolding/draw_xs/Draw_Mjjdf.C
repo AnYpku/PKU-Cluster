@@ -48,11 +48,11 @@ void run(TString var, TString recovar,TString title,TString tag){
 	double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
         ifstream f_in;
-	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt");  
+	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/combine/r_"+recovar+"_"+tag+".txt");  
         ifstream f_sys;
-	f_sys.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
-        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt"<<endl;
-        if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
+	f_sys.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
+        if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/combine/r_"+recovar+"_"+tag+".txt"<<endl;
+        if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 	for(int i=0;i<hist_clone->GetNbinsX();i++){
                 f_in>>Err_down[i]>>Err_up[i];
                 f_sys>>Err_sysDown[i]>>Err_sysUp[i];
@@ -71,7 +71,7 @@ void run(TString var, TString recovar,TString title,TString tag){
                 yerror_sysDown[i]=Err_sysDown[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18);
                 yerror_sysDown[i]=yerror_sysDown[i]/BinWidth[i];
 		hist_clone->SetBinError(i+1,Err_up[i]*hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18));//handle the bin error
-                cout<<"bin"<<i+1<<"; number of events "<<hist_clone->GetBinContent(i+1)<<"; number of events processed "<<(num16+num17+num18)<<"; cross section "<<(xs16+xs17+xs18)<<"; normalization "<<hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)<<" "<<hist_clone->GetBinError(i+1)<<endl;
+                cout<<"bin"<<i+1<<"; number of events "<<hist_clone->GetBinContent(i+1)<<"; number of events processed "<<(num16+num17+num18)<<"; cross section "<<(xs16+xs17+xs18)<<"; xs in bin"<<i+1<<" "<<hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18)<<endl;
                 hist_clone->SetBinContent(i+1,hist_clone->GetBinContent(i+1)/(num16+num17+num18)*(xs16+xs17+xs18));//scale the bincontent to cross section
                 ybin[i]=hist_clone->GetBinContent(i+1);
                 ybin[i]=ybin[i]/BinWidth[i];
@@ -104,6 +104,7 @@ void run(TString var, TString recovar,TString title,TString tag){
 	hist_clone->SetLineColor(1);
         TGraphAsymmErrors* gr = new TGraphAsymmErrors(kk, xbin, ybin, xerror_down,xerror_up, yerror_down, yerror_up);
         TGraphAsymmErrors* gr_sys = new TGraphAsymmErrors(kk, xbin, ybin, xerror_sysDown,xerror_sysUp, yerror_sysDown, yerror_sysUp);
+//	cout<<yerror_sysDown[3]<<" "<<yerror_sysUp[3]<<endl;
         for(int i=0;i<hin->GetNbinsX();i++){
              hin->SetBinContent(i+1,ybin[i]/1000);
              hin->SetBinError(i+1,yerror_up[i]/1000);
@@ -151,16 +152,16 @@ void run(TString var, TString recovar,TString title,TString tag){
 			err2Dn+=pow(err,2);
 		}
 		err_scale=fabs(h11[1]->GetBinContent(j)-h11[2]->GetBinContent(j))/2;
-//		cout<<"sys pdf "<<sqrt(err2Up/(num-1))<<"; stat+sys(pdf)"<<sqrt(err2Up/(num-1)+pow(h1[0]->GetBinError(j),2))<<endl;
 		err2Up=err2Up/(num-1)+pow(h1[0]->GetBinError(j),2)+pow(err_scale,2); 
 		err2Dn=err2Dn/(num-1)+pow(h1[0]->GetBinError(j),2)+pow(err_scale,2); 
-		//	      cout<<sqrt(err2Dn/num+pow(h1[0]->GetBinError(j),2))<<endl;
-		//            cout<<n+sqrt(err2Up/num)<<endl;
-		//	      cout<<nominal->GetBinContent(j)<<endl;
+		//cout<<sqrt(err2Dn/num+pow(h1[0]->GetBinError(j),2))<<endl;
+		//cout<<n+sqrt(err2Up/num)<<endl;
+		//cout<<nominal->GetBinContent(j)<<endl;
 		upper->SetBinContent(j,n+sqrt(err2Up));
 		lower->SetBinContent(j,n-sqrt(err2Dn));
                 hist_clone->SetBinContent(j,hist_clone->GetBinContent(j)/BinWidth[j-1]);
                 hist_clone->SetBinError(j,sqrt(err2Up)/BinWidth[j-1]);
+		cout<<"bin"<<j<<" MadGraph(stat included) info, theoretical unc "<<sqrt(err2Up/(num-1))<<" scale to binwidth("<<BinWidth[j-1]<<") bin error "<<hist_clone->GetBinError(j)<<"; bin content "<<hist_clone->GetBinContent(j)<<endl;
 	}
         hist_clone->GetYaxis()->SetLabelSize(0.05);
         hist_clone->SetMarkerSize(0);
@@ -168,7 +169,6 @@ void run(TString var, TString recovar,TString title,TString tag){
 	const char *name[7]={"0.5~0.8","8~1.2","1.2~2","0.5~0.8","8~1.2","1.2~2","0.5~2"};
         if(var.Contains("Mjj")==1) {for(int i=0;i<hist_clone->GetNbinsX();i++){hist_clone->GetXaxis()->SetBinLabel(i+1,name[i]);}}
 	hist_clone->Draw("E2");
-        cout<<"Uncertainty of data "<<hist_clone->GetBinError(1)<<endl;
 
 	TLegend*l1=new TLegend(0.4,0.5,0.8,0.88);
 	TLegend*l2=new TLegend(0.2,0.5,0.5,0.88);
@@ -226,13 +226,13 @@ void run(TString var, TString recovar,TString title,TString tag){
 	TH1D*nominal=(TH1D*)hist_clone->Clone("nominal");
 	TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
 	for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
-	nominal->Divide(nomNoErr);
 	upper->Divide(nominal);
 	lower->Divide(nominal);
-	cout<<"check the stat uncertainty "<<hist_clone->GetBinError(1)/hist_clone->GetBinContent(1)<<" "<<nominal->GetBinError(1)<<endl;
+	nominal->Divide(nomNoErr);
+        cout<<"consistency of stat uncertainty check for 1st bin "<<hist_clone->GetBinError(1)/hist_clone->GetBinContent(1)<<" "<<nominal->GetBinError(1)<<endl;
 	nominal->SetFillStyle(3002);
 	nominal->SetFillColor(kRed-7);
-	nominal->SetLineColor(kRed-7);
+	nominal->SetLineColor(0);
 	const int m=upper->GetNbinsX();
 	nominal->SetTitle("");
         nominal->GetXaxis()->SetLabelSize(0.2);
@@ -246,6 +246,7 @@ void run(TString var, TString recovar,TString title,TString tag){
         nominal->GetYaxis()->SetTitleOffset(0.25);
         nominal->GetYaxis()->SetTitleSize(0.13);
         nominal->GetYaxis()->SetLabelSize(0.13);
+//        nominal->SetLineColor(0);
 	TLine*line=new TLine(nominal->GetXaxis()->GetXmin(),1,nominal->GetXaxis()->GetXmax(),1);
 	TLine*line1=new TLine(nominal->GetXaxis()->GetXmin(),1.5,nominal->GetXaxis()->GetXmax(),1.5);
 	TLine*line2=new TLine(nominal->GetXaxis()->GetXmin(),0.5,nominal->GetXaxis()->GetXmax(),0.5);
@@ -266,7 +267,7 @@ void run(TString var, TString recovar,TString title,TString tag){
                  y_ratio[i]=ybin[i]/nomNoErr->GetBinContent(i+1);
                  yerror_down_ratio[i]=yerror_down[i]/nomNoErr->GetBinContent(i+1);
                  yerror_up_ratio[i]=yerror_up[i]/nomNoErr->GetBinContent(i+1);
-//                 cout<<y_ratio[i]<<" "<< yerror_down_ratio[i]<<" "<<yerror_up_ratio[i]<<" "<<hist_nominal->GetBinError(i+1)<<endl;
+                 cout<<"bin"<<i+1<<" "<<y_ratio[i]<<" "<< yerror_down_ratio[i]<<" "<<yerror_up_ratio[i]<<" "<<nominal->GetBinError(i+1)<<endl;
                  ye_h.push_back(yerror_up_ratio[i]); 
                  ye_l.push_back(yerror_down_ratio[i]); 
 	}
@@ -290,7 +291,7 @@ void run(TString var, TString recovar,TString title,TString tag){
 	}*/
 //	upper->Draw("same hist ][");
 //	lower->Draw("same hist ][");
-	line->Draw();
+//	line->Draw();
 	line1->Draw();
 	line2->Draw();
 	fPads2->Update();

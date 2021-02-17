@@ -1,24 +1,24 @@
 #!/bin/bash/
-cp ../txt/*16*.txt ./
-cp ../../CR/data_cards/txt/*16*.txt ./
+#cp ../txt/*16*.txt ./
+#cp ../../CR/data_cards/txt/*16*.txt ./
 cp ../txt/*17*.txt ./
 cp ../../CR/data_cards/txt/*17*.txt ./
-cp ../txt/*18*.txt ./
-cp ../../CR/data_cards/txt/*18*.txt ./
-combineCards.py mubarrel_16_* muendcap_16_* elebarrel_16_* eleendcap_16_* >& full16_test.txt
+#cp ../txt/*18*.txt ./
+#cp ../../CR/data_cards/txt/*18*.txt ./
+#combineCards.py mubarrel_16_* muendcap_16_* elebarrel_16_* eleendcap_16_* >& full16_test.txt
 combineCards.py mubarrel_17_* muendcap_17_* elebarrel_17_* eleendcap_17_* >& full17_test.txt
-combineCards.py mubarrel_18_* muendcap_18_* elebarrel_18_* eleendcap_18_* >& full18_test.txt
+#combineCards.py mubarrel_18_* muendcap_18_* elebarrel_18_* eleendcap_18_* >& full18_test.txt
 combineCards.py full16_test.txt full17_test.txt full18_test.txt >&full_RunII.txt
 text2workspace.py full16_test.txt -m 125 
 text2workspace.py full17_test.txt -m 125 
 text2workspace.py full18_test.txt -m 125 
 text2workspace.py full_RunII.txt -m 125 
 files="\
-full16_test.root
 full17_test.root
-full18_test.root
 full_RunII.root
 "
+#full16_test.root
+#full18_test.root
 for rootfile in $files
 do
 name=`echo $rootfile | awk -F. '{print $1}'`

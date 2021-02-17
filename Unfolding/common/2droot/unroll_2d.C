@@ -36,8 +36,8 @@ int unroll_2d(){
 	TH2D*h2Gen;
 	TH1D*h1Gen;
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
-//	vector<TString> sample={"ZA-EWK"};
+//	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
+	vector<TString> sample={"plj"};
 //	vector<TString> sample={"DMuon","DEle"};
 	for(int i=0;i<tag.size();i++){
 //                if(tag[i].Contains("17")==0) continue;

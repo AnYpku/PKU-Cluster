@@ -47,6 +47,7 @@ do
    sed -i '/VV_xs/d' tmp
    sed -i ':label;N;s/\n/,/;t label' tmp
    mv tmp freeze_all.txt
+   sed -i 's/others_xs,//g' freeze_all.txt
    NP=`cat freeze_Stat.txt`
    NP1=`cat freeze_all.txt`
 #   echo "$NP"
@@ -60,17 +61,17 @@ do
        text2workspace.py -m 125 all_${year[$j]}.txt -o os_mll_${operator}_${year[$j]}.root -P HiggsAnalysis.CombinedLimit.OneParameterPhysicsModel:my_1d_model --PO range_param=[${lower},${upper}] --PO scaling_filename=./wpwp_${operator}_scaling_refined${year[$j]}.root
 #       
        combine os_mll_${operator}_${year[$j]}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100 --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n nominal_${year[$j]} -m 125
-#       
-#       combine os_mll_${operator}_${year[$j]}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit1_${operator}_${year[$j]} -m 125 --saveWorkspace
-#       
-#       combine os_mll_${operator}_${year[$j]}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit2_${operator}_${year[$j]} -m 125 --saveWorkspace
-#       
-#       combine  -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit1_${operator}_${year[$j]}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP1 --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n stat_${year[$j]} -m 125
-#       
-#       combine -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit2_${operator}_${year[$j]}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -m 125 -n MCstat_${year[$j]} 
+       
+       combine os_mll_${operator}_${year[$j]}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit1_${operator}_${year[$j]} -m 125 --saveWorkspace
+       
+       combine os_mll_${operator}_${year[$j]}.root -M MultiDimFit -P param --floatOtherPOIs=0 --algo none --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n bestfit2_${operator}_${year[$j]} -m 125 --saveWorkspace
+       
+       combine  -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit1_${operator}_${year[$j]}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP1 --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -n stat_${year[$j]} -m 125
+       
+       combine -M MultiDimFit -P param --floatOtherPOIs=0 --algo=grid --points=100  higgsCombinebestfit2_${operator}_${year[$j]}.MultiDimFit.mH125.root --snapshotName MultiDimFit --freezeParameters $NP --cminDefaultMinimizerStrategy=2 -t -1 --expectSignal=1 -m 125 -n MCstat_${year[$j]} 
 #       
        mv higgsCombinenominal_${year[$j]}.MultiDimFit.mH125.root higgsCombinenominal.MultiDimFit.mH125.expected.${operator}_${year[$j]}.root
-#       mv higgsCombineMCstat_${year[$j]}.MultiDimFit.mH125.root higgsCombineMCstat.MultiDimFit.mH125.expected.${operator}_${year[$j]}.root
-#       mv higgsCombinestat_${year[$j]}.MultiDimFit.mH125.root higgsCombinestat.MultiDimFit.mH125.expected.${operator}_${year[$j]}.root
+       mv higgsCombineMCstat_${year[$j]}.MultiDimFit.mH125.root higgsCombineMCstat.MultiDimFit.mH125.expected.${operator}_${year[$j]}.root
+       mv higgsCombinestat_${year[$j]}.MultiDimFit.mH125.root higgsCombinestat.MultiDimFit.mH125.expected.${operator}_${year[$j]}.root
    done
 done

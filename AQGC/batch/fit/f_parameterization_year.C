@@ -18,8 +18,8 @@
 using namespace std;
 void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TString channel){
 
-	const TString InData_New = "/home/pku/anying/cms/rootfiles/20"+tag+"/cutla-";
-
+//	const TString InData_New = "/home/pku/anying/cms/rootfiles/20"+tag+"/cutla-";
+        const TString InData_New = "../rootfiles/optimal_";
 	// Specify event selection cuts:
 	// Create output ROOT file:
 
@@ -45,12 +45,12 @@ void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TStr
 	// The input tree
 	TFile *f_file;
 	f_file =  new TFile(InData_New+file);
-	TTree* treef = (TTree*) f_file->Get("ZPKUCandidates");
+	TTree* treef = (TTree*) f_file->Get("outtree");
 	Long64_t numberOfEntries = treef->GetEntries();
 	cout<<"Nentry="<<numberOfEntries<<endl;
         Double_t        jet1eta;
         Double_t        jet2eta;
-        Double_t        Mva;
+        Double_t        ZGmass;
 	Double_t        photoneta;
 	Double_t        pweight[703];
 	Double_t        prefWeight;
@@ -72,7 +72,7 @@ void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TStr
 
         treef->SetBranchAddress("jet1eta", &jet1eta);
         treef->SetBranchAddress("jet2eta", &jet2eta);
-        treef->SetBranchAddress("Mva", &Mva);
+        treef->SetBranchAddress("ZGmass", &ZGmass);
         treef->SetBranchAddress("photoneta", &photoneta);
 	treef->SetBranchAddress("pweight",pweight);
         treef->SetBranchAddress("scalef", &scalef);
@@ -135,7 +135,7 @@ void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TStr
 				weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*puIdweight_M;
 			else    weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*puIdweight_M;
 			if(count%4000==0)  cout<<"abin="<<abin<<" count="<<count<<";weight "<<weight<<endl;
-			if(fabs(jet1eta-jet2eta)>2.5 && Mva>ZGbin[abin]&&Mva<ZGbin[abin+1]){
+			if(fabs(jet1eta-jet2eta)>2.5 && ZGmass>ZGbin[abin]&&ZGmass<ZGbin[abin+1]){
 //				weight=1;
 				rf[0] +=pweight[iii]*weight;
                                 rf[1] +=pweight[iii+1]*weight;
@@ -296,17 +296,17 @@ void f_parameterization_year(){
 	TString cut;
 	vector<TString>channel={"ele","muon"};
 	vector<TString> tag={"16","17","18"};
-        vector<TString> file={"outZA_aQGC16_new.root","outZA_aQGC17.root","outZA_aQGC18.root"};
+        vector<TString> file={"ZA_aQGC16.root","ZA_aQGC17.root","ZA_aQGC18.root"};
 	for(int k=0;k<tag.size();k++){
 		for(int j=0;j<channel.size();j++){
 			if(channel[j].Contains("ele")&&tag[k].Contains("17")==0)
-				cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7  && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+				cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7  && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 			else if(channel[j].Contains("ele")&&tag[k].Contains("17"))
-				cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) ) && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+				cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) ) && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 			else if(channel[j].Contains("muon")&&tag[k].Contains("17")==0)
-				cut="(lep == 13 && (HLT_Mu1 >0 || HLT_Mu2 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+				cut="(lep == 13 && (HLT_Mu1 >0 || HLT_Mu2 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 			else if(channel[j].Contains("muon")&&tag[k].Contains("17"))
-				cut="(lep == 13 && (HLT_Mu1>0 || HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus <3 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && Mjj>500. &&deltaetajj>2.5 && photonet>100.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
+				cut="(lep == 13 && (HLT_Mu1>0 || HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus <3 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
 					for(int i=1;i<=16;i++){
 						cout<<tag[k]<<" "<<file[k]<<" "<<channel[j]<<endl;
 						cout<<cut<<endl;

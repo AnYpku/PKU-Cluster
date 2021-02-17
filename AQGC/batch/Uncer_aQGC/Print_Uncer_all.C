@@ -33,6 +33,7 @@ int Print_Uncer_all(){
 			TString f_jes         ="./jesr/jes/jes_uncer"+tag[j]+".txt";
 			TString f_jer         ="./jesr/jer/jer_uncer"+tag[j]+".txt";
 			TString f_l1pref      ="./l1pref/l1pref_uncer_"+tag[j]+".txt";
+			TString f_pileup      ="./pileup/pu_uncer"+tag[j]+".txt";
 			TString f_ele_ID ="./lepton_uncer/txt/ele_ID"+tag[j]+".txt";
 			TString f_ele_reco ="./lepton_uncer/txt/ele_reco"+tag[j]+".txt";
 			TString f_mu_eff ="./lepton_uncer/txt/muon_all"+tag[j]+".txt";
@@ -51,6 +52,7 @@ int Print_Uncer_all(){
 			run(channel[i],tag[j],f_jes);
 			run(channel[i],tag[j],f_jer);
 			run(channel[i],tag[j],f_l1pref);
+			run(channel[i],tag[j],f_pileup);
 			run(channel[i],tag[j],f_Sig_scale);
 			run(channel[i],tag[j],f_Sig_pdf);
 			run(channel[i],tag[j],f_ele_ID);

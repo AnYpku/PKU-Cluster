@@ -27,6 +27,7 @@ int Print_Uncer_all(){
 			TString f_Sigout_pdf  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pdf/"+recovars[i]+"_uncer_Sigout_"+tag[j]+".txt";
 			TString f_Sig_pdf     ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pdf/"+genvars[i]+"_uncer"+tag[j]+".txt";
 			TString f_QCD_scale   ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_qcd_"+tag[j]+".txt";
+			TString f_QCD_scaleband   ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_scaleband_"+tag[j]+".txt";
 			TString f_QCD_scale_extra_up  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_QCD_extra_up_"+tag[j]+".txt";
 			TString f_QCD_scale_extra_down  ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_QCD_extra_down_"+tag[j]+".txt";
 			TString f_Sigout_scale="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/scale/"+recovars[i]+"_uncer_SigOut_"+tag[j]+".txt";
@@ -40,11 +41,13 @@ int Print_Uncer_all(){
 			TString f_mu_eff ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_all_"+tag[j]+".txt";
 			TString f_mu_trigger ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_muon_trigger_"+tag[j]+".txt";
 			TString f_photon_ID ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/lepton_uncer/"+recovars[i]+"_photon_ID_"+tag[j]+".txt";
+			TString f_pileup ="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pileup/"+recovars[i]+"_pileup"+tag[j]+"_uncer.txt";
                         TString f_puId_eff="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+recovars[i]+"_uncer_eff"+tag[j]+".txt";
                         TString f_puId_mis="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+recovars[i]+"_uncer_mis"+tag[j]+".txt";
                         TString f_puId_eff_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+genvars[i]+"_uncer_eff"+tag[j]+".txt";
                         TString f_puId_mis_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/puIdSF/"+genvars[i]+"_uncer_mis"+tag[j]+".txt";
                         TString f_l1pref_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/l1pref/"+genvars[i]+"_uncer"+tag[j]+".txt";
+                        TString f_pileup_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/pileup/"+genvars[i]+"_uncer"+tag[j]+".txt";
                         TString f_interf_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/interf/"+genvars[i]+"_uncer"+tag[j]+".txt";
                         TString f_jes_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jes/"+genvars[i]+"_uncer"+tag[j]+".txt";
                         TString f_jer_sig="/home/pku/anying/cms/PKU-Cluster/Unfolding/Uncer/uncer_jesr/jer/"+genvars[i]+"_uncer"+tag[j]+".txt";
@@ -52,6 +55,7 @@ int Print_Uncer_all(){
 			run(recovars[i],genvars[i],tag[j],f_QCD_pdf);
 			run(recovars[i],genvars[i],tag[j],f_Sigout_pdf);
 			run(recovars[i],genvars[i],tag[j],f_QCD_scale);
+			run(recovars[i],genvars[i],tag[j],f_QCD_scaleband);
 			run(recovars[i],genvars[i],tag[j],f_QCD_scale_extra_up);
 			run(recovars[i],genvars[i],tag[j],f_QCD_scale_extra_down);
 			run(recovars[i],genvars[i],tag[j],f_Sigout_scale);
@@ -66,6 +70,8 @@ int Print_Uncer_all(){
 			run(recovars[i],genvars[i],tag[j],f_mu_eff);
 			run(recovars[i],genvars[i],tag[j],f_mu_trigger);
 			run(recovars[i],genvars[i],tag[j],f_photon_ID);
+			run(recovars[i],genvars[i],tag[j],f_pileup);
+			run(recovars[i],genvars[i],tag[j],f_pileup_sig);
 			run(recovars[i],genvars[i],tag[j],f_l1pref_sig);
 			run(recovars[i],genvars[i],tag[j],f_interf_sig);
 			run(recovars[i],genvars[i],tag[j],f_jes_sig);

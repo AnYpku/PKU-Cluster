@@ -882,7 +882,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			nn = 1;
 		else
 			nn = -1;
-		actualWeight = pileupWeight*scalef*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_T;//mc
+		actualWeight = pileupWeight*scalef*prefWeight*photon_id_scale*photon_veto_scale;//mc
 		detajj = fabs(jet1eta - jet2eta);
 		if (fabs(jet1phi-jet2phi)>Pi) drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*Pi-fabs(jet1phi-jet2phi))*(2*Pi-fabs(jet1phi-jet2phi)));
                 else drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)));

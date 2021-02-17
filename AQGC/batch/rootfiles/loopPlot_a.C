@@ -86,7 +86,7 @@ void loopPlot() {
 	const int nMCSig = 6;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 		<< std::endl;
-	std::string mcSig[nMCSig] = { "ZA-EWK16","ZA-EWK_interf16","ZA-EWK17","ZA-EWK_interf17","ZA-EWK18","ZA-EWK_interf18"};
+	std::string mcSig[nMCSig] = { "ZA-EWK16","ZA_aQGC16","ZA-EWK17","ZA_aQGC17","ZA-EWK18","ZA_aQGC18"};
 	std::vector < TString > fMCSig;
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMCSig; ii++) {
@@ -96,7 +96,7 @@ void loopPlot() {
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
 	const int nmcsig=fMCSig.size();
-	std::string mcLabelsSig[nmcsig] = { "ZA-EWK16","ZA-EWK_interf16","ZA-EWK17","ZA-EWK_interf17","ZA-EWK18","ZA-EWK_interf18"};
+	std::string mcLabelsSig[nmcsig] = { "ZA-EWK16","ZA_aQGC16","ZA-EWK17","ZA_aQGC17","ZA-EWK18","ZA_aQGC18"};
 	double kFactorsSig_array[nmcsig] = {1,1,1,1,1,1};
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nmcsig; index++) {
@@ -123,7 +123,7 @@ void loopPlot() {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-//		continue;
+		continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 
@@ -187,7 +187,7 @@ void loopPlot() {
 
 	//loop over MC signal files and make histograms individually for each of them
 	for (int  i = 0; i < fMCSig.size(); i++) {
-		continue;
+//		continue;
 		std::cout << "\n-------\nRunning over " << mcLabelsSig[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;

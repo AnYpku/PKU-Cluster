@@ -43,9 +43,9 @@ void run(TString var, TString recovar,TString title,TString tag){
 	double Err_up[kk],Err_down[kk];
         double Err_sysUp[kk],Err_sysDown[kk],yerror_sysUp[kk],yerror_sysDown[kk],xerror_sysUp[kk],xerror_sysDown[kk];
         ifstream f_in;
-	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt");  
+	f_in.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/combine/r_"+recovar+"_"+tag+".txt");  
         ifstream f_sys;
-	f_sys.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
+	f_sys.open("/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt");  
         if(!f_in.is_open())cout<<"can not open the file "<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/r_"+recovar+"_"+tag+".txt"<<endl;
         if(!f_sys.is_open())cout<<"/home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/combine/breakdown/r_sys_"+recovar+"_"+tag+".txt"<<endl;
 	for(int i=0;i<hist_clone->GetNbinsX();i++){

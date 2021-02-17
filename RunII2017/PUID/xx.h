@@ -279,6 +279,21 @@ public :
    Double_t        puIdweight_L;
    Double_t        puIdweight_M;
    Double_t        puIdweight_T;
+   Int_t           realjet1;
+   Int_t           realjet2;
+   Double_t        puIdweight_T_effUp;
+   Double_t        puIdweight_L_effUp;
+   Double_t        puIdweight_M_effUp;
+   Double_t        puIdweight_T_effDn;
+   Double_t        puIdweight_L_effDn;
+   Double_t        puIdweight_M_effDn;
+   Double_t        puIdweight_T_misUp;
+   Double_t        puIdweight_L_misUp;
+   Double_t        puIdweight_M_misUp;
+   Double_t        puIdweight_T_misDn;
+   Double_t        puIdweight_L_misDn;
+   Double_t        puIdweight_M_misDn;
+
 
    // List of branches
    TBranch        *b_event;   //!
@@ -528,6 +543,20 @@ public :
    TBranch        *b_puIdweight_L;   //!
    TBranch        *b_puIdweight_M;   //!
    TBranch        *b_puIdweight_T;   //!
+   TBranch        *b_realjet1;   //!
+   TBranch        *b_realjet2;   //!
+   TBranch        *b_puIdweight_T_effUp;   //!
+   TBranch        *b_puIdweight_L_effUp;   //!
+   TBranch        *b_puIdweight_M_effUp;   //!
+   TBranch        *b_puIdweight_T_effDn;   //!
+   TBranch        *b_puIdweight_L_effDn;   //!
+   TBranch        *b_puIdweight_M_effDn;   //!
+   TBranch        *b_puIdweight_T_misUp;   //!
+   TBranch        *b_puIdweight_L_misUp;   //!
+   TBranch        *b_puIdweight_M_misUp;   //!
+   TBranch        *b_puIdweight_T_misDn;   //!
+   TBranch        *b_puIdweight_L_misDn;   //!
+   TBranch        *b_puIdweight_M_misDn;   //!
 
    xx(TTree *tree=0,TString dataset="");
    virtual ~xx();
@@ -537,7 +566,8 @@ public :
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString name);
 
-   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+//   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
+   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,int realjet);
 
    virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
 
@@ -559,12 +589,6 @@ public :
 private:
    TTree *newtree;
    TFile *fout;
-   double puIdweight_T_effUp,puIdweight_M_effUp,puIdweight_L_effUp;
-   double puIdweight_T_effDn,puIdweight_M_effDn,puIdweight_L_effDn;
-   double puIdweight_T_misUp,puIdweight_M_misUp,puIdweight_L_misUp;
-   double puIdweight_T_misDn,puIdweight_M_misDn,puIdweight_L_misDn;
-   int realjet1;
-   int realjet2;
 };
 
 #endif
@@ -629,27 +653,27 @@ void xx::Init(TTree *tree)
 	fChain->SetMakeClass(1);
 	fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
 	newtree = fChain->CloneTree(0);
-        newtree->Branch("realjet1",&realjet1);
-        newtree->Branch("realjet2",&realjet2);
-        newtree->Branch("puIdweight_T_effUp",&puIdweight_T_effUp);
-        newtree->Branch("puIdweight_L_effUp",&puIdweight_L_effUp);
         newtree->Branch("puIdweight_M_effUp",&puIdweight_M_effUp);
-
-        newtree->Branch("puIdweight_T_effDn",&puIdweight_T_effDn);
-        newtree->Branch("puIdweight_L_effDn",&puIdweight_L_effDn);
         newtree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn);
-
-        newtree->Branch("puIdweight_T_misUp",&puIdweight_T_misUp);
-        newtree->Branch("puIdweight_L_misUp",&puIdweight_L_misUp);
         newtree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp);
-
-        newtree->Branch("puIdweight_T_misDn",&puIdweight_T_misDn);
-        newtree->Branch("puIdweight_L_misDn",&puIdweight_L_misDn);
         newtree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn);
 
-	fChain->SetBranchAddress("puIdweight_L",&puIdweight_L,&b_puIdweight_L);
+        newtree->Branch("puIdweight_T",&puIdweight_T);
 	fChain->SetBranchAddress("puIdweight_M",&puIdweight_M,&b_puIdweight_M);
-	fChain->SetBranchAddress("puIdweight_T",&puIdweight_T,&b_puIdweight_T);
+	fChain->SetBranchAddress("realjet1", &realjet1, &b_realjet1);
+	fChain->SetBranchAddress("realjet2", &realjet2, &b_realjet2);
+//	fChain->SetBranchAddress("puIdweight_T_effUp", &puIdweight_T_effUp, &b_puIdweight_T_effUp);
+//	fChain->SetBranchAddress("puIdweight_L_effUp", &puIdweight_L_effUp, &b_puIdweight_L_effUp);
+//	fChain->SetBranchAddress("puIdweight_M_effUp", &puIdweight_M_effUp, &b_puIdweight_M_effUp);
+//	fChain->SetBranchAddress("puIdweight_T_effDn", &puIdweight_T_effDn, &b_puIdweight_T_effDn);
+//	fChain->SetBranchAddress("puIdweight_L_effDn", &puIdweight_L_effDn, &b_puIdweight_L_effDn);
+//	fChain->SetBranchAddress("puIdweight_M_effDn", &puIdweight_M_effDn, &b_puIdweight_M_effDn);
+//	fChain->SetBranchAddress("puIdweight_T_misUp", &puIdweight_T_misUp, &b_puIdweight_T_misUp);
+//	fChain->SetBranchAddress("puIdweight_L_misUp", &puIdweight_L_misUp, &b_puIdweight_L_misUp);
+//	fChain->SetBranchAddress("puIdweight_M_misUp", &puIdweight_M_misUp, &b_puIdweight_M_misUp);
+//	fChain->SetBranchAddress("puIdweight_T_misDn", &puIdweight_T_misDn, &b_puIdweight_T_misDn);
+//	fChain->SetBranchAddress("puIdweight_L_misDn", &puIdweight_L_misDn, &b_puIdweight_L_misDn);
+//	fChain->SetBranchAddress("puIdweight_M_misDn", &puIdweight_M_misDn, &b_puIdweight_M_misDn);
 	fChain->SetBranchAddress("event", &event, &b_event);
 	fChain->SetBranchAddress("run", &run, &b_run);
 	fChain->SetBranchAddress("ls", &ls, &b_ls);

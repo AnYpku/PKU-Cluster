@@ -1,3 +1,4 @@
+#include "get_rochester.C"
 #define pi 3.1415926
 void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString channel){
      Double_t mjj_bins[4]={500, 800, 1200, 2000};
@@ -12,6 +13,11 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      int lep;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     double ptlep1,etalep1, philep1, matchedgenMu1_pt;
+     double ptlep2,etalep2, philep2, matchedgenMu2_pt;
+     double massVlep,yVlep,phiVlep,ptVlep;
+     int lep1_sign,muon1_trackerLayers;
+     int lep2_sign,muon2_trackerLayers;
      double Mjj,jet1eta,jet2eta,scalef;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mjj",&Mjj);
@@ -33,31 +39,47 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("lep1_sign", &lep1_sign);
+     tree->SetBranchAddress("lep2_sign", &lep2_sign);
+     tree->SetBranchAddress("muon1_trackerLayers", &muon1_trackerLayers);
+     tree->SetBranchAddress("muon2_trackerLayers", &muon2_trackerLayers);
+     tree->SetBranchAddress("matchedgenMu1_pt", &matchedgenMu1_pt);
+     tree->SetBranchAddress("matchedgenMu2_pt", &matchedgenMu2_pt);
+     tree->SetBranchAddress("ptlep1", &ptlep1);
+     tree->SetBranchAddress("etalep1", &etalep1);
+     tree->SetBranchAddress("philep1", &philep1);
+     tree->SetBranchAddress("ptlep2", &ptlep2);
+     tree->SetBranchAddress("etalep2", &etalep2);
+     tree->SetBranchAddress("philep2", &philep2);
+     tree->SetBranchAddress("ptVlep", &ptVlep);
+     tree->SetBranchAddress("yVlep", &yVlep);
+     tree->SetBranchAddress("phiVlep", &phiVlep);
+     tree->SetBranchAddress("massVlep", &massVlep);
      TString th2name,th2name_out;
      if(name.Contains("EWK")) {
 	     th2name="hist_sig";
 	     th2name_out="hist_sigout";
      }
      else  th2name="hist_bkg";
-             
-//     TH2D* hist= new TH2D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco && gen;;yields",mjj_bins[0],mjj_bins[3]),3,mjj_bins,3,detajj_bins);
-//     TH2D* hist_out= new TH2D(th2name_out,name+Form("\t\t %0.f<Mjj<%0.f  reco && !gen;;yields",mjj_bins[0],mjj_bins[3]),3,mjj_bins,3,detajj_bins);
+
+     //TH2D* hist= new TH2D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco && gen;;yields",mjj_bins[0],mjj_bins[3]),3,mjj_bins,3,detajj_bins);
+     //TH2D* hist_out= new TH2D(th2name_out,name+Form("\t\t %0.f<Mjj<%0.f  reco && !gen;;yields",mjj_bins[0],mjj_bins[3]),3,mjj_bins,3,detajj_bins);
      TH1D* hist= new TH1D(th2name,name+Form("\t\t %0.f<Mjj<%0.f  reco && gen;;yields",mjj_bins[0],mjj_bins[3]),9,0,9);
      TH1D* hist_out= new TH1D(th2name_out,name+Form("\t\t %0.f<Mjj<%0.f  reco && !gen;;yields",mjj_bins[0],mjj_bins[3]),9,0,9);
-     
+
      TString var2="Mjj";
      TString var1="fabs(jet1eta-jet2eta)";
-//     TString lumi;
-//     if(tag.Contains("16"))lumi=Form("%f",35.86);cout<<lumi<<endl;
-//     if(tag.Contains("17"))lumi=Form("%f",41.52);cout<<lumi<<endl;
-//     if(tag.Contains("18"))lumi=Form("%f",58.7);cout<<lumi<<endl;
+     //TString lumi;
+     //if(tag.Contains("16"))lumi=Form("%f",35.86);cout<<lumi<<endl;
+     //if(tag.Contains("17"))lumi=Form("%f",41.52);cout<<lumi<<endl;
+     //if(tag.Contains("18"))lumi=Form("%f",58.7);cout<<lumi<<endl;
      double lumi;
      if(tag.Contains("16"))lumi=35.86;
      if(tag.Contains("17"))lumi=41.52;
      if(tag.Contains("18"))lumi=59.7;
      TString weight="1";
      if(channel.Contains("mu")){
-             if(tag.Contains("2018")==0){
+	     if(tag.Contains("2018")==0){
 		     weight=weight+"*pileupWeight * scalef*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*prefWeight*photon_veto_scale";
 	     }
 	     else 
@@ -82,23 +104,42 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      TTreeFormula *tformula1=new TTreeFormula("formula1", "("+cut1+"&&("+cut+"))", tree);
      TTreeFormula *tformula2=new TTreeFormula("formula1", "("+cut2+"&&("+cut+"))", tree);
      double actualWeight,detajj;
+     double muon1_rochester=1,muon2_rochester=1;
+     bool isdata=1;
+     TLorentzVector Zp4, photonp4, jet1p4, jet2p4,lep1p4,lep2p4;
      for(int i=0;i<tree->GetEntries();i++){
 	     tree->GetEntry(i);
-             detajj=fabs(jet1eta-jet2eta);
-             if(tag.Contains("18"))  prefWeight=1;
-             if(tag.Contains("17")==0)  puIdweight_M=1;
+	     double r1=gRandom->Rndm(i);
+	     detajj=fabs(jet1eta-jet2eta);
+	     if(tag.Contains("18"))  prefWeight=1;
+	     if(tag.Contains("17")==0)  puIdweight_M=1;
 	     actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale*puIdweight_M;
 	     if(lep==11)       
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*ele_hlt_scale;
 	     if(lep==13)       
 		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*muon_hlt_scale;
 	     if(name.Contains("plj"))actualWeight=scalef;
+             if(name.Contains("Muon")||name.Contains("Ele"))isdata=true; 
+	     else isdata=false;
+	     /*if(lep==13 && name.Contains("plj")==0){
+		     muon1_rochester=get_rochester_scale(isdata, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1,tag);
+		     muon2_rochester=get_rochester_scale(isdata, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1,tag);
+		     ptlep1*=muon1_rochester;
+		     ptlep2*=muon2_rochester;
+
+		     lep1p4.SetPtEtaPhiM(ptlep1, etalep1, philep1, 0.105666);
+		     lep2p4.SetPtEtaPhiM(ptlep2, etalep2, philep2, 0.105666);
+		     massVlep=(lep1p4+lep2p4).M();
+		     yVlep=(lep1p4+lep2p4).Eta();
+		     phiVlep=(lep1p4+lep2p4).Phi();
+		     ptVlep=(lep1p4+lep2p4).Pt();
+	     }*/
 	     if (  tformula1->EvalInstance() ){ 
 		     //cout<<name<<" "<<scalef<<" "<<pileupWeight<<" "
-		     //    <<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "
-		     //    <<muon1_id_scale<<" "<<muon2_id_scale<<" "<<muon1_iso_scale<<" "<<muon2_iso_scale<<" "
-		     //    <<photon_id_scale<<" "
-		     //    <<prefWeight<<" "<<actualWeight<<endl;
+		     //<<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "
+		     //<<muon1_id_scale<<" "<<muon2_id_scale<<" "<<muon1_iso_scale<<" "<<muon2_iso_scale<<" "
+		     //<<photon_id_scale<<" "
+		     //<<prefWeight<<" "<<actualWeight<<endl;
 		     if(Mjj>=500&&Mjj<800&&detajj>=2.5&&detajj<4.5)hist->Fill(0.5,actualWeight);//0~1, 2.5~4.5 and 500~800
 		     if(Mjj>=800&&Mjj<1200&&detajj>=2.5&&detajj<4.5)hist->Fill(1.5,actualWeight);//1~2 2.5~4.5 and 800~1200
 		     if(Mjj>=1200&&detajj>=2.5&&detajj<4.5)hist->Fill(2.5,actualWeight);//2~3 2.5~4.5 1200~2000
@@ -151,11 +192,11 @@ int Build_Hist(){
 	dir1[0]="/home/pku/anying/cms/rootfiles/2016/cutla-out";
 	dir1[1]="/home/pku/anying/cms/rootfiles/2017/cutla-out";
 	dir1[2]="/home/pku/anying/cms/rootfiles/2018/cutla-out";
-               
+
 	dir[0]="/home/pku/anying/cms/rootfiles/2016/unfold_GenCutla-";
 	dir[1]="/home/pku/anying/cms/rootfiles/2017/unfold_GenCutla-";
 	dir[2]="/home/pku/anying/cms/rootfiles/2018/unfold_GenCutla-";
-         
+
 	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 
@@ -173,7 +214,7 @@ int Build_Hist(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-//                if(tags[k].Contains("17")==0)continue;
+		//                if(tags[k].Contains("17")==0)continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
 				if(names[j].Contains("EWK")){

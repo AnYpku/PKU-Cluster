@@ -1,8 +1,8 @@
 #define num 3
-void run(TString cut1,TString tag,TString channel){
+void run(TString cut1,TString tag,TString channel,TString sample){
      TFile*file;
      TString dir="../../rootfiles/";     
-     file=new TFile(dir+"optimal_ZA-EWK"+tag+".root");
+     file=new TFile(dir+"optimal_"+sample+tag+".root");
      TTree*tree=(TTree*)file->Get("outtree");     
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
      Double_t ZGmass,jet1eta,jet2eta,actualWeight;
@@ -54,7 +54,7 @@ void run(TString cut1,TString tag,TString channel){
 	     }
      }
      TFile*fout;
-     fout= new TFile("hist_ewk_pref_"+tag+channel+".root","recreate");
+     fout= new TFile("hist_"+sample+"_pref_"+tag+channel+".root","recreate");
      fout->cd();
      for(Int_t i=0;i<num;i++){
 	     th1[i]->Write();
@@ -65,10 +65,11 @@ int Uncer_batch_sig(){
 
 	TString LEPmu = "(lep==13 && (HLT_Mu1>0||HLT_Mu2>0||HLT_Mu3>0) &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110)";
 	TString LEPele = "(lep==11 && (HLT_Ele1>0 || HLT_Ele2>0)  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
-	TString photon = "(photonet>100 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )  )";
+	TString photon = "(photonet>120 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) )  )";
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
         vector<TString> tag={"16","17","18"};
+        vector<TString> sample={"ZA-EWK","ZA","others"};
         for(int i=0;i<tag.size();i++){
            if(tag[i].Contains("17")){
 		   jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
@@ -83,7 +84,9 @@ int Uncer_batch_sig(){
 	const int kk=channels.size();
 	for(int j=0;j<kk;j++){
 		for(int i=0;i<tag.size();i++){
-			run(Reco,tag[i],channels[j]);
+			for(int k=0;k<sample.size();k++){
+				run(Reco,tag[i],channels[j],sample[k]);
+			}
 		}
 	}
 	return 1;

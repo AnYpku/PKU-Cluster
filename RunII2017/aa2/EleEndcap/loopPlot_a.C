@@ -37,7 +37,7 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
-//	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/cutlep/";
+//	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/m1/cutlep/";
 	std::string outputDir = "./fig-output_a/";
 	
 	RoccoR  rc("./RoccoR2017.txt");

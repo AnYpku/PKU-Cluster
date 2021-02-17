@@ -54,7 +54,7 @@ void loopPlot() {
 		}
 	}
 	const int kk=fData.size();
-	std::string dataLabels[kk] = { "Ele16","Ele16","Ele17","Ele17","Ele18","Ele18"};
+	std::string dataLabels[kk] = { "Ele16","Ele16","Ele18"};
 	cout<<"Data size "<<fData.size()<<endl;
 	// set mc imformation
 	const int nMC = 15;//

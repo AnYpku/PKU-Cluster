@@ -152,10 +152,10 @@ int Unfold_uncer_batch_sig(){
 	bins.push_back(jetptBins);
 	bins.push_back(MjjBins);
 
-//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-//	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
-	vector<TString> genvars={"genMjj"};
-	vector<TString> recovars={"Mjj"};
+	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+//	vector<TString> genvars={"genMjj"};
+//	vector<TString> recovars={"Mjj"};
 	TString dir[3];
 	TFile*file[3];
 	vector<TString> tag={"17"};
@@ -179,7 +179,7 @@ int Unfold_uncer_batch_sig(){
 			}
 			else{
 				run(file[i],genvars[j], recovars[j], bins[j],cut1,tag[i],9,"eff");
-//				run(file[i],genvars[j], recovars[j], bins[j],cut1,tag[i],9,"mis");
+				run(file[i],genvars[j], recovars[j], bins[j],cut1,tag[i],9,"mis");
 			}
 		}
 	}

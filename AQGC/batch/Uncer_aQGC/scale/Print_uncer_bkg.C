@@ -17,7 +17,7 @@ void run(TString sample, TString tag,int num){
 	else if(tag.Contains("17"))
 		lumi=41.52;
 	else if(tag.Contains("18"))
-		lumi=58.7;
+		lumi=59.7;
 
         TH1D*h1[num];
 	vector<double> vec_content;
@@ -29,7 +29,7 @@ void run(TString sample, TString tag,int num){
 		h1[j]->Scale(lumi);
 	}
         const int kk=h1[0]->GetNbinsX();
-	double scale_band1[kk],scale_band2[kk],scale_band3[kk];
+	double scale_muR1[kk],scale_muF1[kk],scale_muFmuR[kk];
 	for(int k=0;k<kk;k++){
             double error=0,extra_up=0,extra_down=0;
 	    double diff=0,sum=0;
@@ -48,16 +48,16 @@ void run(TString sample, TString tag,int num){
 	    if(h1[0]->GetBinContent(k+1)>0){
 		    error=(*biggest - *smallest)/2/h1[0]->GetBinContent(k+1);
 		    if(name.Contains("qcd")){
-			    scale_band1[k]=fabs(vec_content[5]-vec_content[3])/2/h1[0]->GetBinContent(k+1);
-			    scale_band2[k]=fabs(vec_content[2]-vec_content[1])/2/h1[0]->GetBinContent(k+1);
-			    scale_band3[k]=fabs(vec_content[6]-vec_content[4])/2/h1[0]->GetBinContent(k+1);
-                            cout<<tag<<" "<<scale_band1[k]<<" "<<scale_band2[k]<<" "<<scale_band3[k]<<endl;
+			    scale_muR1[k]=fabs(vec_content[5]-vec_content[3])/2/h1[0]->GetBinContent(k+1);
+			    scale_muF1[k]=fabs(vec_content[2]-vec_content[1])/2/h1[0]->GetBinContent(k+1);
+			    scale_muFmuR[k]=fabs(vec_content[6]-vec_content[4])/2/h1[0]->GetBinContent(k+1);
+                            cout<<tag<<" "<<scale_muR1[k]<<" "<<scale_muF1[k]<<" "<<scale_muFmuR[k]<<endl;
 		    }
 	    }
 	    else{    error=0;
-                     scale_band1[k]=0;
-		     scale_band2[k]=0;
-		     scale_band3[k]=0;
+                     scale_muR1[k]=0;
+		     scale_muF1[k]=0;
+		     scale_muFmuR[k]=0;
 	    }
 //            cout<<*biggest<<" "<<*smallest<<" "<<h1[0]->GetBinContent(k+1)<<" "<<error<<endl;
 	    if(name.Contains("qcd")){
@@ -117,19 +117,19 @@ void run(TString sample, TString tag,int num){
             vec_content.clear();
 	}
            for(int j=0;j<kk;j++){
-             if(j==0)    fband<<"scale_band1=[";
-	     if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_band1[j]<<","; 
-             if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_band1[j]<<"]"<<endl; 
+             if(j==0)    fband<<"scale_muR1=[";
+	     if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_muR1[j]<<","; 
+             if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_muR1[j]<<"]"<<endl; 
 	   }
            for(int j=0;j<kk;j++){
-             if(j==0)    fband<<"scale_band2=[";
-             if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_band2[j]<<","; 
-             if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_band2[j]<<"]"<<endl; 
+             if(j==0)    fband<<"scale_muF1=[";
+             if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_muF1[j]<<","; 
+             if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_muF1[j]<<"]"<<endl; 
 	   }
            for(int j=0;j<kk;j++){
-             if(j==0)    fband<<"scale_band3=[";
-             if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_band3[j]<<","; 
-             if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_band3[j]<<"]"<<endl; 
+             if(j==0)    fband<<"scale_muFmuR=[";
+             if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_muFmuR[j]<<","; 
+             if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_muFmuR[j]<<"]"<<endl; 
 	   }
 }
 int Print_uncer_bkg(){
@@ -172,7 +172,7 @@ void run_combine(TString sample,int num){
 		h1[j]->Add(h3[j],1);
 	}
 	const int kk=h1[0]->GetNbinsX();
-	double scale_band1[kk],scale_band2[kk],scale_band3[kk];
+	double scale_muR1[kk],scale_muF1[kk],scale_muFmuR[kk];
 	for(int k=0;k<kk;k++){
 		double error=0,extra_up=0,extra_down=0;
 		double diff=0,sum=0;
@@ -191,16 +191,16 @@ void run_combine(TString sample,int num){
 		if(h1[0]->GetBinContent(k+1)>0){
 			error=(*biggest - *smallest)/2/h1[0]->GetBinContent(k+1);
 			if(name.Contains("qcd")){
-				scale_band1[k]=fabs(vec_content[5]-vec_content[3])/2/h1[0]->GetBinContent(k+1);
-				scale_band2[k]=fabs(vec_content[2]-vec_content[1])/2/h1[0]->GetBinContent(k+1);
-				scale_band3[k]=fabs(vec_content[6]-vec_content[4])/2/h1[0]->GetBinContent(k+1);
-				cout<<"combined "<<scale_band1[k]<<" "<<scale_band2[k]<<" "<<scale_band3[k]<<endl;
+				scale_muR1[k]=fabs(vec_content[5]-vec_content[3])/2/h1[0]->GetBinContent(k+1);
+				scale_muF1[k]=fabs(vec_content[2]-vec_content[1])/2/h1[0]->GetBinContent(k+1);
+				scale_muFmuR[k]=fabs(vec_content[6]-vec_content[4])/2/h1[0]->GetBinContent(k+1);
+				cout<<"combined "<<scale_muR1[k]<<" "<<scale_muF1[k]<<" "<<scale_muFmuR[k]<<endl;
 			}
 		}
 		else{    error=0;
-			scale_band1[k]=0;
-			scale_band2[k]=0;
-			scale_band3[k]=0;
+			scale_muR1[k]=0;
+			scale_muF1[k]=0;
+			scale_muFmuR[k]=0;
 		}
 		//            cout<<*biggest<<" "<<*smallest<<" "<<h1[0]->GetBinContent(k+1)<<" "<<error<<endl;
 		if(name.Contains("qcd")){
@@ -260,18 +260,18 @@ void run_combine(TString sample,int num){
 		vec_content.clear();
 	}
 	for(int j=0;j<kk;j++){
-		if(j==0)    fband<<"scale_band1=[";
-		if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_band1[j]<<","; 
-		if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_band1[j]<<"]"<<endl; 
+		if(j==0)    fband<<"scale_muR1=[";
+		if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_muR1[j]<<","; 
+		if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_muR1[j]<<"]"<<endl; 
 	}
 	for(int j=0;j<kk;j++){
-		if(j==0)    fband<<"scale_band2=[";
-		if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_band2[j]<<","; 
-		if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_band2[j]<<"]"<<endl; 
+		if(j==0)    fband<<"scale_muF1=[";
+		if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_muF1[j]<<","; 
+		if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_muF1[j]<<"]"<<endl; 
 	}
 	for(int j=0;j<kk;j++){
-		if(j==0)    fband<<"scale_band3=[";
-		if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_band3[j]<<","; 
-		if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_band3[j]<<"]"<<endl; 
+		if(j==0)    fband<<"scale_muFmuR=[";
+		if(j<kk-1)  fband<<fixed<<setprecision(3)<<1+scale_muFmuR[j]<<","; 
+		if(j==kk-1) fband<<fixed<<setprecision(3)<<1+scale_muFmuR[j]<<"]"<<endl; 
 	}
 }

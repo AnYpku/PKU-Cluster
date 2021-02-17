@@ -1,10 +1,13 @@
 #define num 3
-void run(TString cut1,TString tag,TString channel){
+void run(TString cut1,TString tag,TString channel,TString sample){
      Double_t Mjj_bins[4]={500, 800, 1200, 2000};
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";     
      TFile*file;
-     file=new TFile(dir+"unfold_GenCutla-ZA-EWK"+tag+".root");
+     if(sample.Contains("EWK"))
+	     file=new TFile(dir+"unfold_GenCutla-ZA-EWK"+tag+".root");
+     else 
+file=new TFile(dir+"cutla-out"+sample+tag+".root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown,puIdweight_M;
@@ -82,7 +85,10 @@ void run(TString cut1,TString tag,TString channel){
 	     }
      }
      TFile*fout;
-     fout= new TFile("hist_ewk_pref_"+tag+channel+".root","recreate");
+     if(sample.Contains("EWK"))
+	     fout= new TFile("hist_ewk_pref_"+tag+channel+".root","recreate");
+     else
+	     fout= new TFile("hist_"+sample+"_pref_"+tag+channel+".root","recreate");
      fout->cd();
      for(Int_t i=0;i<num;i++){
 	     th1[i]->Write();
@@ -101,10 +107,11 @@ int Uncer_batch_sig(){
 	TString LEPele = "(lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
 	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ))";
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-	TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
+	TString dr = "(drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
         vector<TString> tag={"16","17"};
 
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
+        vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	const int kk=channels.size();
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
@@ -119,11 +126,14 @@ int Uncer_batch_sig(){
 		TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
-		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
+		TString cut2 ="(("+Reco+"))";
                 cout<<tag[i]<<" "<<jet<<endl;
                 cout<<tag[i]<<" "<<GenJet<<endl;
 		for(int j=0;j<kk;j++){
-			run(cut1,tag[i],channels[j]);
+			for(int n=0;n<sample.size();n++){
+				if(sample[n].Contains("EWK"))run(cut1,tag[i],channels[j],sample[n]);
+				else run(cut2,tag[i],channels[j],sample[n]);
+			}
 		}
 	}
 	return 1;

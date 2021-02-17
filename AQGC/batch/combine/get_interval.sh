@@ -1,5 +1,6 @@
 sed -e 's/result/result_total/g' draw_1d_limit_plot.py  > python_total.py
-year=("16" "17" "18" "combine")
+#year=("16" "17" "18" "combine")
+year=("test")
 for (( j = 0 ; j < ${#year[@]} ; j++ ))
 do
 python2.6 python_total.py fM0 "F_{M0} / #Lambda^{4} (TeV^{-4})"  "expected 95% confidence limit" higgsCombinenominal.MultiDimFit.mH125.expected.fM0_${year[$j]}.root "expected 2#DeltaNLL" 

@@ -37,7 +37,7 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2017/";
-//	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/cutlep/";
+//	std::string pathToTrees = "/eos/uscms/store/user/qliphy/andy/2017/m1/cutlep/";
 	std::string outputDir = "./fig-output_a/";
 	
 	RoccoR  rc("./RoccoR2017.txt");
@@ -58,7 +58,7 @@ void loopPlot() {
 		//std::string mcLabels[nMC] = { "ZJets_FX", "ZA" };
 		//std::string mcLabels[nMC] = {"ST","TTA","VV","WA", "ZJets_FX","WJets_FX","TTJets_FX","ZA" };
 		std::string mcLabels[nMC] = {"ST17", "TTA17", "VV17", 
-                                             "plj17_weight_down","ZA17"};
+                                             "plj17_weight","ZA17"};
 		double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,1,lumiValue};
 //        	double kFactorsMC_array[nMC] = { lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
 		std::vector< std::string > fMC;

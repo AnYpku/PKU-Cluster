@@ -11,10 +11,10 @@
 #combineCards.py full16_test.txt full17_test.txt full18_test.txt >& full_RunII.txt
 files="\
 full17_test.root
+full_RunII.root
 "
 #full16_test.root
 #full18_test.root
-#full_RunII.root
 for rootfile in $files
 do
 name=`echo $rootfile | awk -F. '{print $1}'`
@@ -38,9 +38,9 @@ NP=`cat freeze_${name}.txt`
 #combine -M Significance --expectSignal=1 -t -1 ${name}.txt --freezeParameters $NP > result_freezeMCStat${name}.txt 
 #text2workspace.py ${name}.txt -m 125
 
-combineTool.py -M Impacts -d ${name}.root -m 125 --doInitialFit --robustFit 1
-combineTool.py -M Impacts -d ${name}.root -m 125 --robustFit 1 --doFits
-combineTool.py -M Impacts -d ${name}.root -m 125 -o impacts_${name}.json
+combineTool.py -M Impacts -d ${name}.root -t -1 --expectSignal=1 -m 125 --doInitialFit --robustFit 1
+combineTool.py -M Impacts -d ${name}.root -t -1 --expectSignal=1 -m 125 --robustFit 1 --doFits --parallel 4
+combineTool.py -M Impacts -d ${name}.root -t -1 --expectSignal=1 -m 125 -o impacts_${name}.json
 plotImpacts.py -i impacts_${name}.json -o impacts_${name}
 #combine -M MultiDimFit -m 125 --algo impact -P Scale_QCD ${name}.txt --expectSignal=1 >> impact_${name}.txt
 #combine -M MultiDimFit -m 125 --algo impact -P Scale_QCD_extra ${name}.txt --expectSignal=1 >> impact_${name}.txt

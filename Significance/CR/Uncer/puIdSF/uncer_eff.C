@@ -44,7 +44,8 @@ void run(TString sample,TString channel,TString type){
 int uncer_eff(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-	vector<TString> tag={"16","17","18"};
+//	vector<TString> channels={"mubarrel"};
+//	vector<TString> sample={"ZA"};
 	for(int i=0;i<channels.size();i++){
 		for(int j=0;j<sample.size();j++){
 			run(sample[j],channels[i],"mis");

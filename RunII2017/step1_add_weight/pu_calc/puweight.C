@@ -12,7 +12,9 @@
         std::vector<double> result(nPUMax,0.);
         double s = 0.;
 
-	TFile*input1 = new TFile("./MyDataPileupHistogram.root");
+//	TFile*input1 = new TFile("./MyDataPileupHistogram_nominal.root");
+//	TFile*input1 = new TFile("./MyDataPileupHistogram_up.root");
+	TFile*input1 = new TFile("./MyDataPileupHistogram_down.root");
         TH1* h = NULL;
         input1->GetObject("pileup",h);
 
@@ -34,7 +36,9 @@
         }
 
 
-        fout = new TFile("puweight.root", "RECREATE");
+//        fout = new TFile("puweight.root", "RECREATE");
+        fout = new TFile("puweight_down.root", "RECREATE");
+//        fout = new TFile("puweight_up.root", "RECREATE");
         TH1D *h2   = new TH1D("h2","",99,0,98);
         for(unsigned int npu = 0; npu < nPUMax; ++npu) {
             h2->SetBinContent(npu+1, result[npu]);

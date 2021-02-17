@@ -7,13 +7,17 @@ from numpy import sum
 print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
 
 fdir = '/data/pku/home/anying/cms/PKU-Cluster/Significance/CR/root/'
-f_EW = TFile.Open(fdir+'hist_ZA-EWK_'+sys.argv[1]+sys.argv[2]+'.root')
-f_ZA = TFile.Open(fdir+'hist_ZA_'+sys.argv[1]+sys.argv[2]+'.root')
-f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[1]+sys.argv[2]+'.root')
-f_TTA = TFile.Open(fdir+'hist_TTA_'+sys.argv[1]+sys.argv[2]+'.root')
-f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[1]+sys.argv[2]+'.root')
-f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[1]+sys.argv[2]+'.root')
-#f_WA = TFile.Open(fdir+'hist_WA_'+sys.argv[1]+sys.argv[2]+'.root')
+f_EW = TFile.Open(fdir+'hist_ZA-EWK_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+f_ZA = TFile.Open(fdir+'hist_ZA_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+f_TTA = TFile.Open(fdir+'hist_TTA_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+#f_WA = TFile.Open(fdir+'hist_WA_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+if sys.argv[2].find("ele") == -1: 
+   f_Data=TFile.Open(fdir+'hist_Muon_'+sys.argv[1]+sys.argv[2]+'_CR.root')
+else:
+   f_Data=TFile.Open(fdir+'hist_Ele_'+sys.argv[1]+sys.argv[2]+'_CR.root')
 
 th1_ZA_sig=f_EW.Get('hist_sig')
 th1_ZA=f_ZA.Get('hist_bkg')
@@ -21,6 +25,7 @@ th1_non_prompt=f_plj.Get('hist_bkg')
 th1_TTA=f_TTA.Get('hist_bkg')
 th1_VV=f_VV.Get('hist_bkg')
 th1_ST=f_ST.Get('hist_bkg')
+th1_Data=f_Data.Get('hist_data')
 #th1_WA=f_WA.Get('hist_bkg')
 # the bkg histo and signal histo have already contain the overflow bin in the last bin when creat the histograms 
 genbincontent=[]
@@ -99,7 +104,8 @@ for i in range(1,nbins):
    ZA_sig_binerror = ZA_sig_binerror if ZA_sig_binerror<1 else 1
    ZA_sig_binerror = ZA_sig_binerror+1
 
-   data= ZA_sig_bincontent+ ZA_bincontent+non_prompt_bincontent+TTA_bincontent+VV_bincontent+ST_bincontent
+#   data= ZA_sig_bincontent+ ZA_bincontent+non_prompt_bincontent+TTA_bincontent+VV_bincontent+ST_bincontent
+   data= th1_Data.GetBinContent(i)
    f.write('observation %0.2f\n'%(data))
    f.write('------------\n')
    f.write('# now we list the expected events for signal and all backgrounds in that bin\n')
@@ -203,7 +209,7 @@ for i in range(1,nbins):
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:
         f.write('pileupId_eff\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1]))
-        f.write('pileupId_mis_CR\tlnN\t')
+        f.write('pileupId_mis\tlnN\t')
         f.write('%0.2f\t%0.2f\t-\t%0.2f\t%0.2f\t%0.2f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1]))
 
    if sys.argv[1].find("18") == -1:

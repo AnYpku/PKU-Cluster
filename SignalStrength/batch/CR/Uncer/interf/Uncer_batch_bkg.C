@@ -3,8 +3,8 @@
 TH1D* run( TString sample,TString tag,TString cut1){
      vector<double> mjj_bins={150,300,400,500};
      TString dir1;
-//     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";
-//     else dir1="/eos/user/y/yian/"+tag+"cutla/";
+//   if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";
+//   else dir1="/eos/user/y/yian/"+tag+"cutla/";
      dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-";
      TFile*file;
      if(sample.Contains("EWK"))
@@ -108,14 +108,5 @@ int Uncer_batch_bkg(){
 			fout[i][j]->Close();
 		}//fout[year][sample]
 	}
-	/*     for(int j=0;j<kk;j++){
-	       for(int i=0;i<3;i++){
-	       fout[i][j]->cd();
-	       hist[i][j]->Write();
-	       hist_up[i][j]->Write();
-	       hist_down[i][j]->Write();
-	       fout[i][j]->Close();
-	       }
-	       }*/
 	return 1;
 }

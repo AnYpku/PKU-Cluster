@@ -13,6 +13,10 @@ f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_TTA = TFile.Open(fdir+'hist_TTA_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
+if sys.argv[2].find("ele") == -1:
+   f_Data = TFile.Open(fdir+'hist_DMuon_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
+else:
+   f_Data = TFile.Open(fdir+'hist_DEle_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 
 th1_ZA_sig_out=f_EW.Get('hist_sigout')
 th1_ZA_sig=f_EW.Get('hist_sig')
@@ -21,6 +25,7 @@ th1_non_prompt=f_plj.Get('hist_bkg')
 th1_TTA=f_TTA.Get('hist_bkg')
 th1_VV=f_VV.Get('hist_bkg')
 th1_ST=f_ST.Get('hist_bkg')
+th1_Data=f_Data.Get("hist_data")
 # the bkg histo and signal histo have already contain the overflow bin in the last bin when creat the histograms 
 genbincontent=[]
 genbinerror=[]
@@ -100,7 +105,8 @@ for i in range(1,nbins):
    ZA_sig_out_binerror = ZA_sig_out_binerror if ZA_sig_out_binerror<1 else 1
    ZA_sig_out_binerror = ZA_sig_out_binerror+1
 
-   data= ZA_sig_bincontent+ ZA_bincontent+non_prompt_bincontent+TTA_bincontent+VV_bincontent+ST_bincontent+ZA_sig_out_bincontent
+#   data= ZA_sig_bincontent+ ZA_bincontent+non_prompt_bincontent+TTA_bincontent+VV_bincontent+ST_bincontent+ZA_sig_out_bincontent
+   data= th1_Data.GetBinContent(i) 
    f.write('observation %0.2f\n'%(data))
    f.write('------------\n')
    f.write('# now we list the expected events for signal and all backgrounds in that bin\n')

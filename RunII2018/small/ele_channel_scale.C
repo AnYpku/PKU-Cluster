@@ -35,13 +35,3 @@ double get_eleHLT_SF(double etalep1, double ptlep1,double etalep2,double ptlep2,
 
         return lep_HLT_scale;
 }
-double get_PUID_SF(double jeteta,double jetpt,TH2F*eff,TH2F*misrate,TH2F*effSF,TH2F*misrateSF){
-       double PUweight=1;
-       if(jetpt<50){
-               double PMC=eff->GetBinContent(eff->FindBin(jetpt,jeteta))*(1-misrate->GetBinContent(misrate->FindBin(jetpt,jeteta))); 
-	       double PData= effSF->GetBinContent(effSF->FindBin(jetpt,jeteta))*eff->GetBinContent(eff->FindBin(jetpt,jeteta))*(1-misrateSF->GetBinContent(misrateSF->FindBin(jetpt,jeteta))*misrate->GetBinContent(misrate->FindBin(jetpt,jeteta)) );
-	       PUweight=PData/PMC;
-       }
-       else PUweight=1;
-       return PUweight;
-}

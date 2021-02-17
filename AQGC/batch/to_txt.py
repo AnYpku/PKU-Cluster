@@ -60,11 +60,11 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax 3   number of processes-1\n')
    if sys.argv[1].find("17")==-1 and sys.argv[1].find("18")==-1:#16
-      f.write('kmax 19  number of nuisance parameters (sources of systematical uncertainties)\n')
-   if sys.argv[1].find("16")==-1 and sys.argv[1].find("18")==-1:#17
       f.write('kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n')
+   if sys.argv[1].find("16")==-1 and sys.argv[1].find("18")==-1:#17
+      f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16")==-1 and sys.argv[1].find("17")==-1:#18
-      f.write('kmax 18  number of nuisance parameters (sources of systematical uncertainties)\n')
+      f.write('kmax 20  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -101,7 +101,7 @@ for i in range(1,nbins):
    f.write('bin\t%s%i\t%s%i\t%s%i\t%s%i\n'%(sys.argv[2],i,sys.argv[2],i,sys.argv[2],i,sys.argv[2],i))
    f.write('process\tsig\tQCD\tnon_prompt\tothers\n')
    f.write('process\t0\t1\t2\t3\n')
-   f.write('rate\t%0.2f\t%0.2f\t%0.2f\t%0.2f\n'%(ZA_sig_bincontent,ZA_bincontent, non_prompt_bincontent, others_bincontent))
+   f.write('rate\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(ZA_sig_bincontent,ZA_bincontent, non_prompt_bincontent, others_bincontent))
    f.write('------------\n')
 
    if sys.argv[1].find("17")==-1 and sys.argv[1].find("18")==-1:
@@ -114,31 +114,35 @@ for i in range(1,nbins):
        f.write('fake_%s_%s\tlnN\t-\t-\t-\t-\t#0. uncertainty on %s%s\n'%(sys.argv[2],sys.argv[1],sys.argv[2],sys.argv[1]))
    else: 
        f.write('fake_%s_%s\tlnN\t-\t-\t-\t-\t#0. uncertainty on %s%s\n'%(sys.argv[2],sys.argv[1],sys.argv[2],sys.argv[1]))
-   f.write('VBS_stat_%s_%s_bin_%d\tlnN\t%0.2f\t-\t-\t-\n'%(sys.argv[2],sys.argv[1],i,ZA_sig_binerror))
-   f.write('QCD_stat_%s_%s_bin_%d\tlnN\t-\t%0.2f\t-\t-\n'%(sys.argv[2],sys.argv[1],i,ZA_binerror))
-   f.write('non_prompt_stat_%s_%s_bin_%d\tlnN\t-\t-\t%0.2f\t-\n'%(sys.argv[2],sys.argv[1],i,non_prompt_binerror))
-   f.write('others_stat_%s_%s_bin_%d\tlnN\t-\t-\t-\t%0.2f\n'%(sys.argv[2],sys.argv[1],i,others_binerror))
-   f.write('JES_%s\tlnN\t%0.2f\t%0.2f\t-\t%0.2f\n'%(sys.argv[1],arr['jes'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jes'+sys.argv[1]+'_ZA'][i-1],arr['jes'+sys.argv[1]+'_others'][i-1]))
-   f.write('JER_%s\tlnN\t%0.2f\t%0.2f\t-\t%0.2f\n'%(sys.argv[1],arr['jer'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jer'+sys.argv[1]+'_ZA'][i-1],arr['jer'+sys.argv[1]+'_others'][i-1]))
-   f.write('QCDZA_pdf\tlnN\t-\t%0.2f\t-\t-\n'%(arr['QCD_pdf'][i-1]))
-   f.write('QCDZA_scale\tlnN\t-\t%0.2f\t-\t-\n'%(arr['Sig_scale'][i-1]))
-   f.write('signal_pdf\tlnN\t%0.2f\t-\t-\t-\n'%(arr['Sig_pdf'][i-1]))
-   f.write('signal_scale\tlnN\t%0.2f\t-\t-\t-\n'%(arr['Sig_scale'][i-1]))
+   f.write('VBS_stat_%s_%s_bin_%d\tlnN\t%0.3f\t-\t-\t-\n'%(sys.argv[2],sys.argv[1],i,ZA_sig_binerror))
+   f.write('QCD_stat_%s_%s_bin_%d\tlnN\t-\t%0.3f\t-\t-\n'%(sys.argv[2],sys.argv[1],i,ZA_binerror))
+   f.write('non_prompt_stat_%s_%s_bin_%d\tlnN\t-\t-\t%0.3f\t-\n'%(sys.argv[2],sys.argv[1],i,non_prompt_binerror))
+   f.write('others_stat_%s_%s_bin_%d\tlnN\t-\t-\t-\t%0.3f\n'%(sys.argv[2],sys.argv[1],i,others_binerror))
+   f.write('JES_%s\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(sys.argv[1],arr['jes'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jes'+sys.argv[1]+'_ZA'][i-1],arr['jes'+sys.argv[1]+'_others'][i-1]))
+   f.write('JER_%s\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(sys.argv[1],arr['jer'+sys.argv[1]+'_ZA-EWK'][i-1],arr['jer'+sys.argv[1]+'_ZA'][i-1],arr['jer'+sys.argv[1]+'_others'][i-1]))
+
+   f.write('QCDZA_pdf\tlnN\t-\t%0.3f\t-\t-\n'%(arr['QCD_pdf'][i-1]))
+   f.write('Scale_muF1\tlnN\t-\t%0.3f\t-\t-\n'%(arr['scale_muF1'][i-1]))
+   f.write('Scale_muR1\tlnN\t-\t%0.3f\t-\t-\n'%(arr['scale_muR1'][i-1]))
+   f.write('Scale_muFmuR\tlnN\t-\t%0.3f\t-\t-\n'%(arr['scale_muFmuR'][i-1]))
+
+   f.write('signal_pdf\tlnN\t%0.3f\t-\t-\t-\n'%(arr['Sig_pdf'][i-1]))
+   f.write('signal_scale\tlnN\t%0.3f\t-\t-\t-\n'%(arr['Sig_scale'][i-1]))
    f.write('interference\tlnN\t%0.3f\t-\t-\t-\n'%(arr['interf'][i-1]))
    if sys.argv[2].find("ele") == -1:
-      f.write('muon_all\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['muon_all'][0],arr['muon_all'][0],arr['muon_all'][0]))
-      f.write('muon_trigger\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['muon_trigger'][0],arr['muon_trigger'][0],arr['muon_trigger'][0]))
+      f.write('muon_all\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['muon_ZA-EWK_all'][0],arr['muon_ZA_all'][0],arr['muon_others_all'][0]))
+      f.write('muon_trigger\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['muon_ZA-EWK_trigger'][0],arr['muon_ZA_trigger'][0],arr['muon_others_trigger'][0]))
    else:
-      f.write('ele_ID\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ele_ID'][0],arr['ele_ID'][0],arr['ele_ID'][0]))
-      f.write('ele_reco\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ele_reco'][0],arr['ele_reco'][0],arr['ele_reco'][0]))
+      f.write('ele_ID\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ele_ZA-EWK_ID'][0],arr['ele_ZA_ID'][0],arr['ele_others_ID'][0]))
+      f.write('ele_reco\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ele_ZA-EWK_reco'][0],arr['ele_ZA_reco'][0],arr['ele_others_reco'][0]))
 
-   f.write('photon_id\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['photon_ID'][0],arr['photon_ID'][0],arr['photon_ID'][0]))
+   f.write('photon_id\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['photon_ZA-EWK_ID'][0],arr['photon_ZA_ID'][0],arr['photon_others_ID'][0]))
    if sys.argv[1].find("18")==-1:
-      f.write('l1prefiring\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['l1pref'][i-1],arr['l1pref'][i-1],arr['l1pref'][i-1]))
+      f.write('l1prefiring\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['l1pref_ZA-EWK'][i-1],arr['l1pref_ZA'][i-1],arr['l1pref_others'][i-1]))
    if sys.argv[1].find("16")==-1 and sys.argv[1].find("18")==-1:
        f.write('puId_eff\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['others_eff'][i-1]))
        f.write('puId_mis\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['others_mis'][i-1]))
-   f.write('pileup\tlnN\t1.02\t1.02\t-\t1.02\n')
+   f.write('pileup\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['pu_ZA-EWK'][i-1],arr['pu_ZA'][i-1],arr['pu_others'][i-1]))
    f.write('others_xs\tlnN\t-\t-\t-\t1.1\n')
 
    print 'bin ',i,' ',ZA_sig_binerror,' ',ZA_binerror,' ',non_prompt_binerror,' ',others_binerror

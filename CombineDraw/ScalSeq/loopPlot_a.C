@@ -60,9 +60,9 @@ void loopPlot() {
 	const int nMC = 21;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-	std::string mc[nMC] ={"ST16","TTA16","VV16","plj16_weight","plj16_weight_down","plj16_weight_up","ZA16",
-		              "ST17","TTA17","VV17","plj17_weight","plj17_weight_down","plj17_weight_up","ZA17",
-			      "ST18","TTA18","VV18","plj18_weight","plj18_weight_down","plj18_weight_up","ZA18" };
+	std::string mc[nMC] ={"ST16","TTA16","VV16","plj16_weight","plj16_weight_up","plj16_weight_down","ZA16",
+		              "ST17","TTA17","VV17","plj17_weight","plj17_weight_up","plj17_weight_down","ZA17",
+			      "ST18","TTA18","VV18","plj18_weight","plj18_weight_up","plj18_weight_down","ZA18" };
 	std::vector< TString > fMC;
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMC; ii++) {
@@ -71,9 +71,9 @@ void loopPlot() {
 		}
 	}
 	const int nmc=fMC.size();
-	std::string mcLabels[nmc] ={"ST16","TTA16","VV16","plj16_weight","plj16_weight_down","plj16_weight_up","ZA16",
-		                    "ST17","TTA17","VV17","plj17_weight","plj17_weight_down","plj17_weight_up","ZA17",
-				    "ST18","TTA18","VV18","plj18_weight","plj18_weight_down","plj18_weight_up","ZA18"};
+	std::string mcLabels[nmc] ={"ST16","TTA16","VV16","plj16_weight","plj16_weight_up","plj16_weight_down","ZA16",
+		                    "ST17","TTA17","VV17","plj17_weight","plj17_weight_up","plj17_weight_down","ZA17",
+				    "ST18","TTA18","VV18","plj18_weight","plj18_weight_up","plj18_weight_down","ZA18"};
 	double kFactorsMC_array[nmc] ={1,1,1,1,1,1,1,
 		                       1,1,1,1,1,1,1,
 				       1,1,1,1,1,1,1};
@@ -86,7 +86,7 @@ void loopPlot() {
 	const int nMCSig = 6;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 		<< std::endl;
-	std::string mcSig[nMCSig] = { "ZA-EWK16","ZA-EWK_interf16","ZA-EWK17","ZA-EWK_interf17","ZA-EWK18","ZA-EWK_interf18"};
+	std::string mcSig[nMCSig] = { "ZA-EWK16","ZA_interf16","ZA-EWK17","ZA_interf17","ZA-EWK18","ZA_interf18"};
 	std::vector < TString > fMCSig;
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMCSig; ii++) {
@@ -123,7 +123,8 @@ void loopPlot() {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-//		continue;
+//		if(fData.at(i).Contains("2017")==0)
+//			continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 
@@ -155,7 +156,8 @@ void loopPlot() {
 
 	//loop over MC files and make histograms individually for each of them
 	for (int i = 0; i < fMC.size(); i++) {
-//		continue;
+//		if(fMC.at(i).Contains("2017")==0)
+//			continue;
 		std::cout << "\n-------\nRunning over " << mcLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;
@@ -187,7 +189,8 @@ void loopPlot() {
 
 	//loop over MC signal files and make histograms individually for each of them
 	for (int  i = 0; i < fMCSig.size(); i++) {
-//		continue;
+//		if(fMCSig.at(i).Contains("2017")==0)
+//			continue;
 		std::cout << "\n-------\nRunning over " << mcLabelsSig[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;

@@ -1,6 +1,6 @@
-void run(TString var,TString tag){
-	ofstream f1("./"+var+"_l1pref"+tag+"_uncer.txt");
-	TFile* file = new TFile("./root/unfold_"+var+"_ewk_pref"+tag+".root");
+void run(TString var,TString sample,TString tag){
+	ofstream f1("./"+var+"_l1pref"+tag+"_uncer.txt",ios::app);
+	TFile* file = new TFile("./root/unfold_"+var+"_"+sample+"_pref"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get(var+"_0");
 	TH1D* h2 = (TH1D*)file->Get(var+"_1");
 	TH1D* h3 = (TH1D*)file->Get(var+"_2");
@@ -21,7 +21,7 @@ void run(TString var,TString tag){
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
 	Double_t uncer[num];
 	cout<<var<<" "<<tag<<" uncertainty ";
-	f1<<"l1pref=[";
+	f1<<"l1pref_"<<sample<<"=[";
 		 for(Int_t i=0;i<num;i++){
 			 bincontent_new[i] = h1->GetBinContent(i+1);
 			 bincontent_up[i] = h2->GetBinContent(i+1);
@@ -37,9 +37,12 @@ void run(TString var,TString tag){
 }
 int Print_uncer_bkg(){
      vector<TString> genvars={"ptlep1","photonet","jet1pt","Mjj"};
+     vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
      for(int i=0;i<genvars.size();i++){
-	run(genvars[i],"16");
-	run(genvars[i],"17");
+	     for(int k=0;k<sample.size();k++){
+		     run(genvars[i],sample[k],"16");
+		     run(genvars[i],sample[k],"17");
+	     }
      }
-return 1;
+     return 1;
 }

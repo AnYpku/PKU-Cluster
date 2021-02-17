@@ -134,14 +134,5 @@ int Uncer_batch_bkg(){
 			fout[i][j]->Close();
 		}//fout[year][vars]
 	}
-	/*     for(int j=0;j<kk;j++){
-	       for(int i=0;i<3;i++){
-	       fout[i][j]->cd();
-	       hist[i][j]->Write();
-	       hist_up[i][j]->Write();
-	       hist_down[i][j]->Write();
-	       fout[i][j]->Close();
-	       }
-	       }*/
 	return 1;
 }

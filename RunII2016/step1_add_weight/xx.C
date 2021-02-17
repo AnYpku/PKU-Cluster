@@ -111,10 +111,11 @@ void xx::Loop()
 		if(m_dataset.Contains("ZZ")){ scalef=1000.*16.523/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("EWK")){ scalef=1000.*0.1097/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("interf")){ scalef=1000.*0.014/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("WWA")){ scalef=1000.*0.2147/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("WZA")){ scalef=1000.*0.04123/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("aQGC")){ 
-			npp=fChain->GetEntries("theWeight>0 && size>702");
-			nmm=fChain->GetEntries("theWeight<0 && size>702");
-			scalef=1000.*1.411/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;
+//			scalef=1000.*1.411/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;
+			scalef=0.00185236*fabs(theWeight)/theWeight;
 		}
 
 		if(m_dataset.Contains("Mu")==0&&m_dataset.Contains("Ele")==0){	
@@ -153,8 +154,12 @@ void xx::Loop()
                 PHOTON= photonet>20 && (abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5));
                 JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
-                if( !( (LEPmu||LEPele) && PHOTON && size>702  )  )
-                      continue;
+                if( !( (LEPmu||LEPele) && PHOTON   )  )
+			continue;
+                if( !(JET) )
+			continue;
+		if(m_dataset.Contains("aQGC") && !(size>702))
+			continue; 
 		ExTree->Fill();
 	}
 	f->Close();

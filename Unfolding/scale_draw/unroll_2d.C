@@ -1,5 +1,5 @@
-//#define num 3
-#define num 9
+#define num 3
+//#define num 9
 TH1D*unroll_hist(TH2D*h2,TString histname){
         int binsx=h2->GetNbinsX();int binsy=h2->GetNbinsY();
 	int nbins=binsx*binsy;
@@ -33,9 +33,10 @@ int unroll_2d(){
 	TH2D* th2[num];
 	TH1D*h1;TH2D*h2;
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"ewk","qcd"};//,"ZA","plj","TTA","VV","ST";
+//	vector<TString> sample={"qcd"};//,"ZA","plj","TTA","VV","ST";
+	vector<TString> sample={"ewk"};//,"ZA","plj","TTA","VV","ST";
 	for(int i=0;i<tag.size();i++){
-		for(int j=1;j<sample.size();j++){
+		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			TFile*file=new TFile("./2droot/genMjj_unfold_"+sample[j]+"_scale"+tag[i]+".root");
 			TFile*fout;

@@ -144,6 +144,7 @@ int Build_UnfoldHist_sig(){
 	     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	     TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
 	     TString cut1 ="(("+Reco+")&&("+Gen+"))";
+//	     TString cut1 ="(("+Gen+"))";
 	     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 	     TString cut3 =Gen; 
 	     TString dir="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";

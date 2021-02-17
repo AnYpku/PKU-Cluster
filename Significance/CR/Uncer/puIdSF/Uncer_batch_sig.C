@@ -4,10 +4,7 @@ void run(TString cut1,TString sample,TString channel,TString type,bool turn){
      Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
      TString dir="/home/pku/anying/cms/rootfiles/2017/";     
      TFile*file;
-     if(sample.Contains("EWK"))
-	     file=new TFile(dir+"unfold_GenCutla-"+sample+"17.root");
-     else
-	     file=new TFile(dir+"cutla-out"+sample+"17.root");
+     file=new TFile(dir+"cutla-out"+sample+"17.root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
@@ -113,11 +110,12 @@ int Uncer_batch_sig(){
 	TString dr = "(drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
-	vector<TString> sample={"ZA-EWK"};
-//	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+//      vector<TString> channels={"mubarrel"};
+//	vector<TString> sample={"ZA"};
 	const int kk=channels.size();
 	TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
-	TString SignalRegion = "(Mjj<500 && Mjj>150 && deltaetajj>2.5 && Mva>100)";
+	TString SignalRegion = "(Mjj<500 && Mjj>150 && Mva>100)";
 	TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 	TString cut1 ="(("+Reco+")&&("+Gen+"))";
 	TString cut2 ="(("+Reco+")&& !("+Gen+"))";

@@ -20,19 +20,15 @@ void fX0_parameterization_el(int index,vector<double>ZGbin,TString channel){
 	TString dir6;
 	TString dir7;
 	TString dir8;
-	if(channel.Contains("mu")){
-		dir6="/home/pku/anying/cms/PKU-Cluster/AQGC/2016/"+channel+"on/hist/hist_"+channel+"_"; 
-		dir7="/home/pku/anying/cms/PKU-Cluster/AQGC/2017/"+channel+"on/hist/hist_"+channel+"_"; 
-		dir8="/home/pku/anying/cms/PKU-Cluster/AQGC/2018/"+channel+"on/hist/hist_"+channel+"_"; 
-	}
-	else{
-		dir6="/home/pku/anying/cms/PKU-Cluster/AQGC/2016/"+channel+"/hist/hist_"+channel+"_"; 
-		dir7="/home/pku/anying/cms/PKU-Cluster/AQGC/2017/"+channel+"/hist/hist_"+channel+"_"; 
-		dir8="/home/pku/anying/cms/PKU-Cluster/AQGC/2018/"+channel+"/hist/hist_"+channel+"_"; 
-	}
-	TFile*f6=new TFile(dir6+name+".root");
-	TFile*f7=new TFile(dir7+name+".root");
-	TFile*f8=new TFile(dir8+name+".root");
+	TString ch;
+	if(channel.Contains("mu")) ch="muon";
+	else ch="ele";
+	dir6="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/hist_"+ch+"_"; 
+	dir7="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/hist_"+ch+"_"; 
+	dir8="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/hist_"+ch+"_"; 
+	TFile*f6=new TFile(dir6+name+"_16.root");
+	TFile*f7=new TFile(dir7+name+"_17.root");
+	TFile*f8=new TFile(dir8+name+"_18.root");
 	std::ofstream ParamSetf ;
 	//      ParamSetf.open("paramsets_fT0_mu.txt");
 	if(index==1) {ParamSetf.open("./txt/paramsets_fM0_"+channel+".txt"); }

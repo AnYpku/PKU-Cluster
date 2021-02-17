@@ -1,7 +1,10 @@
 #define num 3
 #define pi 3.1415926
-void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1,TString tag){
+void run(vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1,TString tag,TString sample){
      const int kk = vec_branchname.size();
+     TString dir;
+     dir="/home/pku/anying/cms/rootfiles/20"+tag+"/";
+     TFile*file=new TFile(dir+"cutla-out"+sample+tag+".root");
      TString name=file->GetName();
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
@@ -91,7 +94,7 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      }
      TFile*fout[kk];
      for(int j=0;j<kk;j++){
-	     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_ewk_pref"+tag+".root","recreate");
+	     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_"+sample+"_pref"+tag+".root","recreate");
      }
      for(int j=0;j<kk;j++){
 	     fout[j]->cd();
@@ -142,6 +145,7 @@ int Unfold_uncer_batch_bkg(){
 //	vector<TString> genvars={"genMjj"};
 //	vector<TString> recovars={"Mjj"};
 	vector<TString> tag={"16","17"};
+	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
@@ -153,9 +157,9 @@ int Unfold_uncer_batch_bkg(){
 		TString cut2 ="("+Reco+")";
 		TString cut1 ="(("+Reco+")&& !("+Gen+"))";
 //		if(tag[i].Contains("17")) continue;
-		dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
-		file1[i]=new TFile(dir[i]+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
-		run(file1[i],recovars, bins,cut1,tag[i]);
+		for(int k=0;k<sample.size();k++){
+			run(recovars, bins,cut2,tag[i],sample[k]);
+		}
 	}
 	return 1;
 }

@@ -140,14 +140,14 @@ int Unfold_uncer_batch_sig(){
 	bins.push_back(jetptBins);
 	bins.push_back(MjjBins);
 
-	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
-//	vector<TString> genvars={"genMjj"};
-//	vector<TString> recovars={"Mjj"};
+//	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
+//	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
+	vector<TString> genvars={"genMjj"};
+	vector<TString> recovars={"Mjj"};
 	TString dir[3];
 	TFile*file[3];
-	vector<TString> tag={"16","17","18"};
-//	vector<TString> tag={"17"};
+//	vector<TString> tag={"16","17","18"};
+	vector<TString> tag={"17"};
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";

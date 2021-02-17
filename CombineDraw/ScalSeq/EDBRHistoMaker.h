@@ -790,7 +790,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 
 		//rochester correction
 		TString name=fileTMP_->GetName();
-		if(lep==13 && name.Contains("plj")==0){
+		if(lep==13){
 			muon1_rochester=get_rochester_scale(false, lep1_sign, ptlep1,etalep1, philep1, muon1_trackerLayers, matchedgenMu1_pt,r1);
 			muon2_rochester=get_rochester_scale(false, lep2_sign, ptlep2,etalep2, philep2, muon2_trackerLayers, matchedgenMu2_pt,r1);
 

@@ -1,8 +1,8 @@
 void get_interf(TString tag){
 	ofstream f1("./interf_uncer"+tag+".txt");
-	TFile* file1 = new TFile("./hist_"+tag+".root");
+	TFile* file1 = new TFile("./hist-EWK_"+tag+".root");
 	TFile* file2 = new TFile("./hist_interf_"+tag+".root");
-	TH1D* h1 = (TH1D*)file1->Get("hist");
+	TH1D* h1 = (TH1D*)file1->Get("hist-EWK");
 	TH1D* h2 = (TH1D*)file2->Get("hist_interf");
         const int num=h1->GetNbinsX()-2;
         const int kk=h1->GetNbinsX(); 

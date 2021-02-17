@@ -24,11 +24,11 @@ void rm::Loop(TString tag)
    TFile*file_reco; TH2F*Reco_ele;
    TFile*f_ele1; TFile*f_hltmu; TH2D*HLT_mu;TH2F*HLT_MC1;TH2F*HLT_MC2;
    TFile*f_ele2; TH2F*HLT_SF1;TH2F*HLT_SF2;
-   TFile*fPU;TH2F*h2_eff_mc2017_L;TH2F*h2_eff_mc2017_M;TH2F*h2_eff_mc2017_T;
-   TH2F*h2_mistag_mc2017_L;TH2F*h2_mistag_mc2017_M;TH2F*h2_mistag_mc2017_T;
-   TH2F*h2_eff_sf2017_L;TH2F*h2_eff_sf2017_M;TH2F*h2_eff_sf2017_T;
-   TH2F*h2_mistag_sf2017_L;TH2F*h2_mistag_sf2017_M;TH2F*h2_mistag_sf2017_T;
-   TH2F*h_sys_M;TH2F*h_sys_L;TH2F*h_sys_T;
+   TFile*fPU;TH2F*h2_eff_mc2017_M;
+   TH2F*h2_mistag_mc2017_M;
+   TH2F*h2_eff_sf2017_M;
+   TH2F*h2_mistag_sf2017_M;
+   TH2F*h_sys_M;
    if(tag.Contains("16")){
 	   file_ID_sys1=new TFile("./muon_SFs/EfficienciesStudies_2016_legacy_rereco_rootfiles_RunBCDEF_SF_ID.root");
 	   file_ID_sys2=new TFile("./muon_SFs/EfficienciesStudies_2016_legacy_rereco_rootfiles_RunGH_SF_ID.root");
@@ -83,18 +83,10 @@ void rm::Loop(TString tag)
 
 	   fPU=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/PUIDMaps.root");
 	   f1=new TFile("/home/pku/anying/cms/PKU-Cluster/RunII2017/PUID/PUID_80XTraining_EffSFandUncties.root");
-	   h2_eff_mc2017_L=(TH2F*)fPU->Get("h2_eff_mc2017_L");
 	   h2_eff_mc2017_M=(TH2F*)fPU->Get("h2_eff_mc2017_M");
-	   h2_eff_mc2017_T=(TH2F*)fPU->Get("h2_eff_mc2017_T");
-	   h2_mistag_mc2017_L=(TH2F*)fPU->Get("h2_mistag_mc2017_L");
 	   h2_mistag_mc2017_M=(TH2F*)fPU->Get("h2_mistag_mc2017_M");
-	   h2_mistag_mc2017_T=(TH2F*)fPU->Get("h2_mistag_mc2017_T");
-	   h2_eff_sf2017_L=(TH2F*)fPU->Get("h2_eff_sf2017_L");
 	   h2_eff_sf2017_M=(TH2F*)fPU->Get("h2_eff_sf2017_M");
-	   h2_eff_sf2017_T=(TH2F*)fPU->Get("h2_eff_sf2017_T");
-	   h2_mistag_sf2017_L=(TH2F*)fPU->Get("h2_mistag_sf2017_L");
 	   h2_mistag_sf2017_M=(TH2F*)fPU->Get("h2_mistag_sf2017_M");
-	   h2_mistag_sf2017_T=(TH2F*)fPU->Get("h2_mistag_sf2017_T");
    }
    if(tag.Contains("18")){
 	   file_ID_sys1=new TFile("./muon_SFs/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ID.root");
@@ -194,13 +186,11 @@ void rm::Loop(TString tag)
 		   if(tag.Contains("17")){
 			   if(fabs(photoneta)<1.4442) photon_veto_scale=0.9862;
 			   if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
-			   puIdweight_T=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);
 			   puIdweight_M=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium);
-			   puIdweight_L=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet1puIdLoose)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_L,h2_eff_sf2017_L,h2_mistag_mc2017_L,h2_mistag_sf2017_L,jet2puIdLoose);
 			   puIdweight_M_effUp=get_puIdweight_effUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_effUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium,h_sys_M,"M");
-			   puIdweight_M_effDn=get_puIdweight_effDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_effDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium,h_sys_M,"M");
-			   puIdweight_M_misUp=get_puIdweight_misUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_misUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium,h_sys_M,"M");
-			   puIdweight_M_misDn=get_puIdweight_misDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_misDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdMedium,h_sys_M,"M");
+			   puIdweight_M_effDn=get_puIdweight_effDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_effDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium,h_sys_M,"M");
+			   puIdweight_M_misUp=get_puIdweight_misUp(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_misUp(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium,h_sys_M,"M");
+			   puIdweight_M_misDn=get_puIdweight_misDn(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium,h_sys_M,"M")*get_puIdweight_misDn(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium,h_sys_M,"M");
 //			   if(jentry%1000==0) cout<<puIdweight_M_effUp<<" "<<puIdweight_M_effDn<<" "<<puIdweight_M_misUp<<" "<<puIdweight_M_misDn<<endl;
 		   }
 		   if(tag.Contains("18")){
@@ -240,9 +230,7 @@ void rm::SetValue(){
 	photon_veto_scale=1;
 	ele_hlt_scale=1;
 	muon_hlt_scale=1;
-	puIdweight_T=1;
 	puIdweight_M=1;
-	puIdweight_L=1;
 }
 Double_t rm::get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId){
         double DR1=1e4,DR2=1e4;

@@ -37,6 +37,8 @@ void run(TString dir,TString sample,TString var1, vector<double> bins,TString cu
 	weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*";
      if(sample.Contains("plj"))
 	     tree->Draw(var1+">>"+th2name,cut1+"*scalef","goff");
+     else if(sample.Contains("Muon")||sample.Contains("Ele"))
+	     tree->Draw(var1+">>"+th2name,cut1+"*1","goff");
      else
 	     tree->Draw(var1+">>"+th2name,cut1+weight+lumi,"goff");
 
@@ -64,7 +66,8 @@ int Build_UnfoldHist_bkg(){
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
      bins.push_back(MjjBins);
-     TString sample[5]={"plj","VV","ST","ZA","TTA"};
+     vector<TString> sample={"plj","VV","ST","ZA","TTA"};
+//     vector<TString> sample={"DMuon","DEle"};
      TString vars[4]={"ptlep1","photonet","jet1pt","Mjj"};
      TString dir[3];
      dir[0]="/home/pku/anying/cms/rootfiles/2016/";
@@ -79,7 +82,7 @@ int Build_UnfoldHist_bkg(){
 	     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 	     TString cut1 ="("+Reco+")";
 	     for(int i=0;i< bins.size();i++){
-		     for(int j=0;j<5;j++){//sample index
+		     for(int j=0;j<sample.size();j++){//sample index
 			     cout<<sample[j]<<" "<<bins[i].size()<<endl;
 			     run(dir[k],sample[j],vars[i],bins[i],cut1,tag[k]);
 		     }

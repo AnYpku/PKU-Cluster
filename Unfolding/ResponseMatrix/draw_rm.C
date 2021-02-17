@@ -41,7 +41,7 @@ int draw_rm(){
 			TPad*    fPads1 = new TPad("pad1", "", 0.00, 0., 0.99, 0.99);
 			fPads1->Draw();
 			fPads1->cd();
-			fPads1->SetBottomMargin(0.15);
+			fPads1->SetBottomMargin(0.2);
 			Int_t palette[5];
 			palette[0] = 19;
 			palette[1] = 20;

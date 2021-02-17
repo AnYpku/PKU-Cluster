@@ -8,7 +8,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      if(name.Contains("plj")) file=new TFile(dir+fname+"_weight"+".root") ; 
      else file=new TFile(dir+fname+".root") ;
      cout<<tag<<" "<<name<<" "<<channel<<endl;
-//   TTree*tree=(TTree*)file->Get("demo");
+//     TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      TTree*tree=(TTree*)file->Get("outtree");
      int lep;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,puIdweight_M;
@@ -127,14 +127,15 @@ int Build_Hist(){
 	TString jet;
 	TString Pi=Form("%f",pi);
 	TString dr = "(( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
-	TString SignalRegion = "(Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && ZGmass>100)";
+	TString SignalRegion = "(Mjj>500 && detajj>2.5 && ZGmass>100)";
 	TString opt="(zepp<2.4 && delta_phi>1.9)";
-//	vector<TString> tags={"16","17","18"};
-	vector<TString> tags={"18"};
+	vector<TString> tags={"16","17","18"};
+//	vector<TString> tags={"17"};
 	TString dir1;
 	dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
 	TString Reco;
 	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
+//	vector<TString> names={"ZA"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int k=0;k<tags.size();k++){
 		if(tags[k].Contains("17")==1){

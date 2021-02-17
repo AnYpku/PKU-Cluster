@@ -42,9 +42,9 @@ void xx::Loop()
 	f_iso_BF->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta", iso_BF);
         cout<<"open the muon ISO file: EfficienciesStudies_2018_rootfiles_RunABCD_SF_ISO.root"<<endl;
 	//muon hlt
-	TFile*f_hltmu=new TFile("./SF/muon_HLT_SF.root");
+	TFile*f_hltmu=new TFile("./SF/muon_HLT_SF18.root");
         TH2D*HLT_mu=(TH2D*)f_hltmu->Get("h2");
-	cout<<"open the muon hlt file: muon_HLT_SF.root"<<endl;
+	cout<<"open the muon hlt file: muon_HLT_SF18.root"<<endl;
 
 	// ele id
 	TFile * f= TFile::Open("./SF/2018_ElectronMedium.root");
@@ -59,8 +59,12 @@ void xx::Loop()
         cout<<"open the ele RECO file: egammaEffi.txt_EGM2D_updatedAll.root"<<endl;
 
 	//ele hlt
-	TFile*f_hltele=new TFile("./SF/eleHLT18_SF.root");
-        TH2D*HLT_ele=(TH2D*)f_hltele->Get("SF");
+	TFile*f_ele1=new TFile("./SF/egammaEffi.txt_EGM2D_leg1.root");
+	TFile*f_ele2=new TFile("./SF/egammaEffi.txt_EGM2D_leg2.root");
+	TH2F*HLT_MC1=(TH2F*)f_ele1->Get("EGamma_EffMC2D");
+	TH2F*HLT_MC2=(TH2F*)f_ele2->Get("EGamma_EffMC2D");
+	TH2F*HLT_SF1=(TH2F*)f_ele1->Get("EGamma_SF2D");
+	TH2F*HLT_SF2=(TH2F*)f_ele2->Get("EGamma_SF2D");
 	cout<<"open the ele hlt file: eleHLT18_SF.root"<<endl;
 
 	//photon id
@@ -96,7 +100,7 @@ void xx::Loop()
 
 		if(m_dataset.Contains("outWA")){ scalef=1000.*464.3/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("DY")){ scalef=1000.*6077.22/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		if(m_dataset.Contains("outZA")){ scalef=1000.*55.49/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("ZA18")){ scalef=1000.*55.49/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA_sherpa")){ scalef=1000.*93.6/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA-EWK_sherpa")){ scalef=1000.*0.07811/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA-EWK")){ scalef=1000.*0.1143/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
@@ -112,6 +116,8 @@ void xx::Loop()
 		if(m_dataset.Contains("outZZ")){ scalef=1000.*12.14/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("aQGC")){ scalef=1000.*1.073/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
                 if(m_dataset.Contains("interf")){ scalef=1000.*0.012/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+                if(m_dataset.Contains("WWA")){ scalef=1000.*0.2147/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+                if(m_dataset.Contains("WZA")){ scalef=1000.*0.04345/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 
 		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<" "<<scalef<<endl;
 		if(m_dataset.Contains("Mu")==0 && m_dataset.Contains("Ele")==0){	
@@ -125,7 +131,7 @@ void xx::Loop()
 			ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID);
 			ele1_reco_scale=get_ele_Reco(etalep1, ptlep1,Reco);
 			ele2_reco_scale=get_ele_Reco(etalep2, ptlep2,Reco);
-			ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,HLT_ele);
+			ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
 		}
 		if(lep==13){
 			muon1_id_scale=get_muon_ID(etalep1,ptlep1,ID_BF);
@@ -152,11 +158,13 @@ void xx::Loop()
 		LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
 		SignalRegion= deltaetajj>2.5 && zepp<1.8&&Mjj>500;
 		PHOTON= photonet>20 && ( (fabs(photoneta)<1.4442) || (fabs(photoneta)>1.566 && fabs(photoneta)<2.5) ) ;
-		JET=jet1pt> 10 && jet2pt > 10 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
+		JET=jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7 ;
                 cut0++;
 		if( ! (LEPmu||LEPele) )
 			continue;
-//                if( !(PHOTON) )
+                if( !(PHOTON) )
+			continue;
+//                if( !(JET) )
 //			continue;
                 cut1++;
 		ExTree->Fill();
@@ -168,6 +176,7 @@ void xx::Loop()
 	f_iso_BF->Close();
 	input13->Close();
 	f_hltmu->Close();
-	f_hltele->Close();
+	f_ele1->Close();
+	f_ele2->Close();
         cout<<"before cut: "<<cut0<<"; after cut: "<<cut1<<endl;
 }

@@ -1,6 +1,5 @@
 #define num 3
 void run(TString var,TString sample, TString tag,TString type){
-	ofstream ftxt("./"+var+"_uncer_"+sample+"_"+type+tag+".txt");//,ios::app);
 	ofstream ff("./"+var+"_uncer_"+type+tag+".txt",ios::app);
 	TFile*file=new TFile("./root/unfold_"+var+"_"+sample+"_"+type+tag+".root");
         TString name=file->GetName();
@@ -28,15 +27,15 @@ void run(TString var,TString sample, TString tag,TString type){
                     error=fabs(h1[1]->GetBinContent(k+1)-h1[2]->GetBinContent(k+1))/2/h1[0]->GetBinContent(k+1);
             else    error=0;
 	    if(k==0){
-		    ftxt<<sample<<"_"<<type<<"=[";
+//		    ftxt<<sample<<"_"<<type<<"=[";
 		    ff<<sample<<"_"<<type<<"=[";
 	    }
 	    if(k<kk-1){
-		    ftxt<<fixed<<setprecision(3)<<1+error<<",";
+//		    ftxt<<fixed<<setprecision(3)<<1+error<<",";
 		    ff<<fixed<<setprecision(3)<<1+error<<",";
 	    }
 	    if(k==kk-1){
-		    ftxt<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
+//		    ftxt<<fixed<<setprecision(3)<<1+error<<"]"<<endl;
 		    ff<<setprecision(3)<<1+error<<"]"<<endl;
 	    }
 	}

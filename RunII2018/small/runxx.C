@@ -6,7 +6,7 @@ using namespace std;
 void runxx() {
 //gROOT->LoadMacro("xx.C");
 //TString dir = "./";
-TString dir = "/home/pku/anying/cms/rootfiles/2018/nohlt/";
+TString dir = "/home/pku/anying/cms/rootfiles/2018/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -17,8 +17,8 @@ while (k>0){
 getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("out")==0) {k=-2; continue;}
-TString outname=/*"cutla-"+*/infilename;//+".root";
-TString inname=/*"cutlep-"+*/infilename;//+".root";
+TString outname="cutla-"+infilename;//+".root";
+TString inname="cutlep-"+infilename;//+".root";
 
 cout<<dir<<inname<<"->"<<dir<<outname<<endl;
 

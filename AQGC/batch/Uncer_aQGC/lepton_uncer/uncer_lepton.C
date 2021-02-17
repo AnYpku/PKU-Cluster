@@ -1,7 +1,7 @@
-void run_combine(TString particle,TString type);
-void run(TString particle,TString type,TString tag){
-	ofstream f2("./txt/"+particle+"_"+type+tag+".txt");
-	TFile* file1 = new TFile("./"+particle+"_"+type+tag+".root");
+void run_combine(TString particle,TString sample,TString type);
+void run(TString particle,TString sample,TString type,TString tag){
+	ofstream f2("./txt/"+particle+"_"+type+tag+".txt",ios::app);
+	TFile* file1 = new TFile("./root/"+particle+"_"+sample+"_"+type+tag+".root");
 
 	cout<<particle+"_"+type+".root"<<endl;
 	TH1D* h1 = (TH1D*)file1->Get("hist_0");
@@ -17,46 +17,49 @@ void run(TString particle,TString type,TString tag){
 	cout<<h1->GetSum()<<endl;
 	uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
 	cout<<bincontent_new<<" "<< bincontent_up<<" "<< bincontent_down<<endl;
-	f2<<particle<<"_"<<type<<"=["<<fixed<<setprecision(2)<<1+uncer<<"]"<<endl;
+	f2<<particle<<"_"<<sample<<"_"<<type<<"=["<<fixed<<setprecision(2)<<1+uncer<<"]"<<endl;
 	cout<<uncer<<endl;
 	cout<<endl;
 }
 int uncer_lepton(){
 	vector<TString> par={"ele","muon","photon"};
 	vector<TString> tag={"16","17","18"};
-	for(int i=0;i<par.size();i++){
-		if(par[i].Contains("muon")){
-			run_combine(par[i],"all");
-			run_combine(par[i],"trigger");
-		}
-		if(par[i].Contains("photon")){
-			run_combine(par[i],"ID");
-		}
-		if(par[i].Contains("ele")){
-			run_combine(par[i],"ID");
-			run_combine(par[i],"reco");
-		}
-		for(int j=0;j<tag.size();j++){
+        vector<TString> sample={"ZA","ZA-EWK","others"};
+	for(int k=0;k<sample.size();k++){
+		for(int i=0;i<par.size();i++){
 			if(par[i].Contains("muon")){
-				run(par[i],"all",tag[j]);
-				run(par[i],"trigger",tag[j]);
+				run_combine(par[i],sample[k],"all");
+				run_combine(par[i],sample[k],"trigger");
 			}
 			if(par[i].Contains("photon")){
-				run(par[i],"ID",tag[j]);
+				run_combine(par[i],sample[k],"ID");
 			}
 			if(par[i].Contains("ele")){
-				run(par[i],"ID",tag[j]);
-				run(par[i],"reco",tag[j]);
+				run_combine(par[i],sample[k],"ID");
+				run_combine(par[i],sample[k],"reco");
+			}
+			for(int j=0;j<tag.size();j++){
+				if(par[i].Contains("muon")){
+					run(par[i],sample[k],"all",tag[j]);
+					run(par[i],sample[k],"trigger",tag[j]);
+				}
+				if(par[i].Contains("photon")){
+					run(par[i],sample[k],"ID",tag[j]);
+				}
+				if(par[i].Contains("ele")){
+					run(par[i],sample[k],"ID",tag[j]);
+					run(par[i],sample[k],"reco",tag[j]);
+				}
 			}
 		}
 	}    
 	return 1;
 }
-void run_combine(TString particle,TString type){
-	ofstream f2("./txt/"+particle+"_"+type+".txt");
-	TFile* file1 = new TFile("./"+particle+"_"+type+"16.root");
-	TFile* file2 = new TFile("./"+particle+"_"+type+"17.root");
-	TFile* file3 = new TFile("./"+particle+"_"+type+"18.root");
+void run_combine(TString particle,TString sample,TString type){
+	ofstream f2("./txt/"+particle+"_"+type+".txt",ios::app);
+	TFile* file1 = new TFile("./root/"+particle+"_"+sample+"_"+type+"16.root");
+	TFile* file2 = new TFile("./root/"+particle+"_"+sample+"_"+type+"17.root");
+	TFile* file3 = new TFile("./root/"+particle+"_"+sample+"_"+type+"18.root");
 
 	cout<<particle+"_"+type+".root"<<endl;
 	TH1D* h1 = (TH1D*)file1->Get("hist_0");
@@ -81,7 +84,7 @@ void run_combine(TString particle,TString type){
 	cout<<h1->GetSum()<<endl;
 	uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new;
 	cout<<bincontent_new<<" "<< bincontent_up<<" "<< bincontent_down<<endl;
-	f2<<particle<<"_"<<type<<"=["<<fixed<<setprecision(2)<<1+uncer<<"]"<<endl;
+	f2<<particle<<"_"<<sample<<"_"<<type<<"=["<<fixed<<setprecision(2)<<1+uncer<<"]"<<endl;
 	cout<<uncer<<endl;
 	cout<<endl;
 }

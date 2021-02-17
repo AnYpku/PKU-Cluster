@@ -3,6 +3,7 @@ void run(TString var,TString sample, TString tag){
 	ofstream ftxt("./"+var+"_uncer_"+sample+"_"+tag+".txt");//,ios::app);
 	ofstream ff("./"+var+"_uncer_"+tag+".txt",ios::app);
 	TFile*file=new TFile("./root/unfold_"+sample+"_"+var+"_jes"+tag+".root");
+	TFile*file1=new TFile("./root/unfold_"+sample+"_"+var+"_jes"+tag+".root");
         TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))

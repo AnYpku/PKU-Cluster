@@ -40,12 +40,12 @@ void xx::Loop(TString name)
       if(name.Contains("Mu")) scalef=1;
       if(name.Contains("Ele"))  scalef=1;
 
-      ele_hlt_scale=1;
-      muon_hlt_scale=1;
-      if(lep==11)
-              ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
-      if(lep==13)
-              muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
+//      ele_hlt_scale=1;
+//      muon_hlt_scale=1;
+//      if(lep==11)
+//              ele_hlt_scale=get_eleHLT_SF(etalep1,ptlep1,etalep2,ptlep2,HLT_MC1,HLT_SF1,HLT_MC2,HLT_SF2);
+//      if(lep==13)
+//              muon_hlt_scale=muon_HLT_scale(ptlep1,ptlep2,etalep1,etalep2,HLT_mu);
 
       if(drla==10) drla=-1; if(drla2==10) drla2=-1; if(drj1a==10) drj1a=-1;if(drj2a==10) drj2a=-1;
 

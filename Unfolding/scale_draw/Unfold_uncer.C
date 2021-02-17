@@ -65,9 +65,9 @@ int Unfold_uncer(){
 	vector<double> MjjBins={500,2000};
 	vector<vector<double>> bins;
 	bins.push_back(MjjBins);
-	bins.push_back(ptlepBins);
-	bins.push_back(photonEtBins);
-	bins.push_back(jetptBins);
+//	bins.push_back(ptlepBins);
+//	bins.push_back(photonEtBins);
+//	bins.push_back(jetptBins);
 
 	TString dir1="/home/pku/anying/cms/rootfiles/2016/";
 	TString dir2="/home/pku/anying/cms/rootfiles/2017/";
@@ -78,15 +78,15 @@ int Unfold_uncer(){
 	TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA16.root");
 	TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
 	TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
-	vector<TString> genvars={"genMjj","genlep1pt","genphotonet","genjet1pt"};
-	vector<TString> recovars={"Mjj","ptlep1","photonet","jet1pt"};
+	vector<TString> genvars={"genMjj"/*,"genlep1pt","genphotonet","genjet1pt"*/};
+	vector<TString> recovars={"Mjj"/*,"ptlep1","photonet","jet1pt"*/};
 
 	for(int i=0;i<genvars.size();i++){
-		//run(file1,genvars[i],"ewk", bins[i],cut1,"16",3);
-		//run(file2,genvars[i],"ewk", bins[i],cut1,"17",3);
-		//run(file3,genvars[i],"ewk", bins[i],cut1,"18",3);
-//		run(f1,genvars[i],"qcd", bins[i],cut1,"16",9);
-//		run(f2,genvars[i],"qcd", bins[i],cut1,"17",9);
+		run(file1,genvars[i],"ewk", bins[i],cut1,"16",3);
+		run(file2,genvars[i],"ewk", bins[i],cut1,"17",3);
+		run(file3,genvars[i],"ewk", bins[i],cut1,"18",3);
+		run(f1,genvars[i],"qcd", bins[i],cut1,"16",9);
+		run(f2,genvars[i],"qcd", bins[i],cut1,"17",9);
 		run(f3,genvars[i],"qcd", bins[i],cut1,"18",9);
 	}
 	return 1;

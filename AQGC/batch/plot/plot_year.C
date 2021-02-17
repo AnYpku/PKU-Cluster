@@ -276,22 +276,22 @@ void aa(TString tag,TString a, double limit){
 	//        l2->SetFillStyle(4000);
 	//	l1->AddEntry(h1,"data","EP");
 	char buffer[256];
-	if (a.Contains("fM0")) sprintf(buffer, "F_{M,0}=-%0.2fe-12",limit);
-	if (a.Contains("fM1")) sprintf(buffer, "F_{M,1}=-%0.2fe-12",limit);
-	if (a.Contains("fM2")) sprintf(buffer, "F_{M,2}=-%0.2fe-12",limit);
-	if (a.Contains("fM3")) sprintf(buffer, "F_{M,3}=-%0.2fe-12",limit);
-	if (a.Contains("fM4")) sprintf(buffer, "F_{M,4}=-%0.2fe-12",limit);
-	if (a.Contains("fM5")) sprintf(buffer, "F_{M,5}=-%0.2fe-12",limit);
-	if (a.Contains("fM6")) sprintf(buffer, "F_{M,6}=-%0.2fe-12",limit);
-	if (a.Contains("fM7")) sprintf(buffer, "F_{M,7}=-%0.2fe-12",limit);
-	if (a.Contains("fT0")) sprintf(buffer, "F_{T,0}=-%0.2fe-12",limit);
-	if (a.Contains("fT1")) sprintf(buffer, "F_{T,1}=-%0.2fe-12",limit);
-	if (a.Contains("fT2")) sprintf(buffer, "F_{T,2}=-%0.2fe-12",limit);
-	if (a.Contains("fT5")) sprintf(buffer, "F_{T,5}=-%0.2fe-12",limit);
-	if (a.Contains("fT6")) sprintf(buffer, "F_{T,6}=-%0.2fe-12",limit);
-	if (a.Contains("fT7")) sprintf(buffer, "F_{T,7}=-%0.2fe-12",limit);
-	if (a.Contains("fT8")) sprintf(buffer, "F_{T,8}=-%0.2fe-12",limit);
-	if (a.Contains("fT9")) sprintf(buffer, "F_{T,9}=-%0.2fe-12",limit);
+	if (a.Contains("fM0")) sprintf(buffer, "F_{M,0}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM1")) sprintf(buffer, "F_{M,1}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM2")) sprintf(buffer, "F_{M,2}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM3")) sprintf(buffer, "F_{M,3}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM4")) sprintf(buffer, "F_{M,4}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM5")) sprintf(buffer, "F_{M,5}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM6")) sprintf(buffer, "F_{M,6}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fM7")) sprintf(buffer, "F_{M,7}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT0")) sprintf(buffer, "F_{T,0}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT1")) sprintf(buffer, "F_{T,1}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT2")) sprintf(buffer, "F_{T,2}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT5")) sprintf(buffer, "F_{T,5}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT6")) sprintf(buffer, "F_{T,6}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT7")) sprintf(buffer, "F_{T,7}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT8")) sprintf(buffer, "F_{T,8}=%0.2f TeV^{-4}",limit);
+	if (a.Contains("fT9")) sprintf(buffer, "F_{T,9}=%0.2f TeV^{-4}",limit);
 	l1->AddEntry(g,"Data","lp");
 	l1->AddEntry(h2,"VBS Z#gamma","f");
 	l1->AddEntry(h5,"QCD Z#gamma","f");
@@ -315,22 +315,13 @@ void aa(TString tag,TString a, double limit){
 
 void plot_year(){
 	vector<TString> tag={"16","17","18"};
-	for(int i=0;i<tag.size();i++){
-		aa(tag[i],"fM0",20.5);
-		aa(tag[i],"fM1",40.5);
-		aa(tag[i],"fM2",8.5);
-		aa(tag[i],"fM3",18);
-		aa(tag[i],"fM4",16);
-		aa(tag[i],"fM5",25);
-		aa(tag[i],"fM6",40.5);
-		aa(tag[i],"fM7",62.5);
-		aa(tag[i],"fT0",0.75);
-		aa(tag[i],"fT1",1.0);
-		aa(tag[i],"fT2",2.0);
-		aa(tag[i],"fT5",0.75);
-		aa(tag[i],"fT6",1.7);
-		aa(tag[i],"fT7",2.85);
-		aa(tag[i],"fT8",0.5);
-		aa(tag[i],"fT9",1.3);
+	vector<double> limit16={19.555,41.089,8.294,14.841,15.229,24.599,39.110,62.681,0.663,0.949,1.816,0.724,1.676,2.724,0.535,0.960};
+	vector<double> limit17={18.391,37.364,7.421,8.342,14.502,21.107,36.782,57.443,0.619,0.873,1.682,0.668,1.461,2.468,0.359,1.009};
+	vector<double> limit18={13.735,27.238,5.413,10.039,10.525,16.296,27.470,41.904,0.450,0.637,1.222,0.494,1.117,1.878,0.437,0.859};
+        vector<TString> op={"fM0","fM1","fM2","fM3","fM4","fM5","fM6","fM7","fT0","fT1","fT2","fT5","fT6","fT7","fT8","fT9"};
+	for(int i=0;i<op.size();i++){
+		aa("16",op[i],limit16[i]);
+		aa("17",op[i],limit17[i]);
+		aa("18",op[i],limit18[i]);
 	}
 }

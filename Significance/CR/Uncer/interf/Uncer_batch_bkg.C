@@ -6,7 +6,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TString dir1;
      dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
      TFile*file;
-     file=new TFile(dir1+"ZA-EWK"+sample+tag+".root");
+     file=new TFile(dir1+"ZA"+sample+tag+".root");
      TTree*tree=(TTree*)file->Get("outtree");
      map<TString, double> variables;
      int lep;
@@ -79,7 +79,7 @@ int Uncer_batch_bkg(){
 	TString Pi=Form("%f",pi);
 	TString dr = "(( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"","_interf"};
+	vector<TString> sample={"-EWK","_interf"};
 	const int kk=sample.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][sample]
 	for(int i=0;i<tag.size();i++){

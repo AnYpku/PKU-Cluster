@@ -24,19 +24,11 @@ void xx::Loop()
 	std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
 
 	TFile*file=new TFile("../PUID/PUIDMaps.root");
-	TH2F*h2_eff_mc2017_L=(TH2F*)file->Get("h2_eff_mc2017_L");
 	TH2F*h2_eff_mc2017_M=(TH2F*)file->Get("h2_eff_mc2017_M");
-	TH2F*h2_eff_mc2017_T=(TH2F*)file->Get("h2_eff_mc2017_T");
-	TH2F*h2_mistag_mc2017_L=(TH2F*)file->Get("h2_mistag_mc2017_L");
 	TH2F*h2_mistag_mc2017_M=(TH2F*)file->Get("h2_mistag_mc2017_M");
-	TH2F*h2_mistag_mc2017_T=(TH2F*)file->Get("h2_mistag_mc2017_T");
-	TH2F*h2_eff_sf2017_L=(TH2F*)file->Get("h2_eff_sf2017_L");
 	TH2F*h2_eff_sf2017_M=(TH2F*)file->Get("h2_eff_sf2017_M");
-	TH2F*h2_eff_sf2017_T=(TH2F*)file->Get("h2_eff_sf2017_T");
-	TH2F*h2_mistag_sf2017_L=(TH2F*)file->Get("h2_mistag_sf2017_L");
 	TH2F*h2_mistag_sf2017_M=(TH2F*)file->Get("h2_mistag_sf2017_M");
-	TH2F*h2_mistag_sf2017_T=(TH2F*)file->Get("h2_mistag_sf2017_T");
-	TH2F*h_sys_M;TH2F*h_sys_L;TH2F*h_sys_T;
+	TH2F*h_sys_M;
 
 	TFile * input13 = new TFile ("./puweight.root");//puweight.root
 	TH1D* h13 = NULL;
@@ -115,7 +107,7 @@ void xx::Loop()
 		if (ientry < 0) break;
 		nb = fChain->GetEntry(jentry);   nbytes += nb;
 		// if (Cut(ientry) < 0) continue;
-		if(jentry%100000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<endl;
+		if(jentry%10000==0) cout<<" "<<HLT_Ele1<<" "<<HLT_Mu2<<" "<<fabs(theWeight)/theWeight<<" "<<m_dataset<<" "<<jentry<<" "<<nentries<<endl;
 
 		if(m_dataset.Contains("Muon")){ scalef=1.0; run_period=1;}
 		if(m_dataset.Contains("Ele")) { scalef=1.0; run_period=5;}
@@ -123,9 +115,9 @@ void xx::Loop()
 		if(m_dataset.Contains("WA")){ scalef=1000.*464.3/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZJets")){ scalef=1000.*6259.0/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("DY")){ scalef=1000.*6077.22/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		if(m_dataset.Contains("ZA")){ scalef=1000.*55.49/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		//		if(m_dataset.Contains("ZA_sherpa")){ scalef=1000.*93.6/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
-		//		if(m_dataset.Contains("ZA-EWK_sherpa")){ scalef=1000.*0.07811/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("ZA17")){ scalef=1000.*55.49/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		//if(m_dataset.Contains("ZA_sherpa")){ scalef=1000.*93.6/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		//if(m_dataset.Contains("ZA-EWK_sherpa")){ scalef=1000.*0.07811/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA-EWK")){ scalef=1000.*0.1143/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("TTA")){ scalef=1000.*4.078/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("TTJets_FX")){ scalef=1000.*831.76/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
@@ -139,6 +131,8 @@ void xx::Loop()
 		if(m_dataset.Contains("ZZ")){ scalef=1000.*12.14/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA_aQGC")){ scalef=1000.*1.073/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("interf")){ scalef=1000.*0.012/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+                if(m_dataset.Contains("WWA")){ scalef=1000.*0.2147/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+                if(m_dataset.Contains("WZA")){ scalef=1000.*0.04345/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 
 		if(m_dataset.Contains("Muon")==0 && m_dataset.Contains("Ele")==0){	
 			pileupWeight=h13->GetBinContent(h13->GetXaxis()->FindBin(npT));
@@ -148,11 +142,11 @@ void xx::Loop()
 
 		LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0||HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110 ;
 		LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110;
+                PHOTON= photonet>20 && (fabs(photoneta)<1.4442||(fabs(photoneta)>1.566&&fabs(photoneta)<2.5));
 		cut0++;
-		//		if( ! (LEPmu||LEPele) )
-		//			continue;
-
-		//////  lep and photon scales
+		if( !( (LEPmu||LEPele) && PHOTON) )
+			continue;
+		//  lep and photon scales
 		if(lep==11){
 			ele1_id_scale=get_ele_ID(etalep1, ptlep1, ID);
 			ele2_id_scale=get_ele_ID(etalep2, ptlep2, ID);
@@ -173,7 +167,7 @@ void xx::Loop()
 			if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
 		}
 		puIdweight_M=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium);
-		//////  lep and photon scacles
+		//  lep and photon scacles
 		cut1++;
 		ExTree->Fill();
 	}

@@ -1,9 +1,10 @@
+#define pi 3.1415926
 #include "ele_channel_scale.C"
 #include "muon_channel_scale.C"
 #include "muon16_channel_scale.C"
 #include "uncer_eff.C"
 double frac_ele,frac_mu;
-void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
+void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type,TString sample){
 	TFile* file_ID;TH2F*ID_ele;TH2F*ID_gamma;
 	TFile*file_ID_sys1;TH2F*ID_muon_sys1;TH2D*ID_muon_stat1;TH2D*ID_muon_sys;
 	TFile*file_ID_sys2;TH2F*ID_muon_sys2;TH2D*ID_muon_stat2;
@@ -90,7 +91,10 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	}
 	cout<<"open SFs file successfully"<<endl;
 	TFile*fin;
-	fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-ZA-EWK"+tag+".root");
+	if(sample.Contains("EWK"))
+		fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-ZA-EWK"+tag+".root");
+	else
+		fin=new TFile("/home/pku/anying/cms/rootfiles/20"+tag+"/cutla-out"+sample+tag+".root");
 	Double_t mjj_bins[4]={500, 800, 1200, 2000};
 	Double_t detajj_bins[4]={2.5, 4.5,  6, 6.5};
 	TString th1name[3];
@@ -293,7 +297,7 @@ void cal(TString particle,TString tag,TString cut,TH1D*th1[3],TString type){
 	cout<<particle<<" "<<count_mu<<" "<<count_muUp<<" "<<count_muDn<<endl;
 	cout<<particle<<" "<<count_ele<<" "<<count_eleUp<<" "<<count_eleDn<<endl;
 	cout<<particle<<" "<<count_gamma<<" "<<count_gammaUp<<" "<<count_gammaDn<<endl;
-	TFile*fout=new TFile("./root/Mjj"+particle+"_"+type+tag+".root","recreate");
+	TFile*fout=new TFile("./root/Mjj"+particle+"_"+sample+"_"+type+tag+".root","recreate");
 	fout->cd();
 	for(int i=0;i<3;i++){
 		th1[i]->Write();
@@ -311,9 +315,12 @@ int cal_Mjj(){
 	TString LEPele = "(lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
 	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ) )";
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-	TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
+        TString Pi=Form("%f",pi);
+        TString drjj="(sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 || sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5)";
+        TString dr = "("+ drjj+"&& drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 	vector<TString> tag={"16","17","18"};
 	vector<TString> par={"ele","muon","photon"};
+        vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	TH1D*th2[3][3];//[particle][3]
 	for(int j=0;j<tag.size();j++){
 		if(tag[j].Contains("17")){
@@ -328,26 +335,33 @@ int cal_Mjj(){
 		TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion; 
 		TString cut1 ="(("+Reco+")&& ("+Gen+"))";
+		TString cut ="(("+Reco+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 		cout<<tag[j]<<" "<<jet<<endl;
 		cout<<tag[j]<<" "<<GenJet<<endl;
 		for(int i=0;i<par.size();i++){
 			cout<<tag[j]<<" fraction"<<" "<<frac_mu<<" "<<frac_ele<<endl;
-			if(par[i].Contains("muon")){ 
-				cal(par[i],tag[j],cut1,th2[i],"all");
-				cal(par[i],tag[j],cut1,th2[i],"trigger");
-				run("Mjj",par[i],"all",tag[j],frac_mu);
-				run("Mjj",par[i],"trigger",tag[j],frac_mu);
-			}
-			if(par[i].Contains("photon")){ 
-				cal(par[i],tag[j],cut1,th2[i],"ID");
-				run("Mjj",par[i],"ID",tag[j],1);
-			}
-			if(par[i].Contains("ele")){ 
-				cal(par[i],tag[j],cut1,th2[i],"ID");
-				cal(par[i],tag[j],cut1,th2[i],"reco");
-				run("Mjj",par[i],"ID",tag[j],frac_ele);
-				run("Mjj",par[i],"reco",tag[j],frac_ele);
+			for(int k=0;k<sample.size();k++){
+				TString cut_final;
+				if(sample[k].Contains("EWK")) cut_final=cut1;
+				else cut_final=cut;
+				cout<<sample[k]<<endl;
+				if(par[i].Contains("muon")){ 
+					cal(par[i],tag[j],cut_final,th2[i],"all",sample[k]);
+					cal(par[i],tag[j],cut_final,th2[i],"trigger",sample[k]);
+//					run("Mjj",sample[k],par[i],"all",tag[j],frac_mu);
+//					run("Mjj",sample[k],par[i],"trigger",tag[j],frac_mu);
+				}
+				if(par[i].Contains("photon")){ 
+					cal(par[i],tag[j],cut_final,th2[i],"ID",sample[k]);
+//					run("Mjj",sample[k],par[i],"ID",tag[j],1);
+				}
+				if(par[i].Contains("ele")){ 
+					cal(par[i],tag[j],cut_final,th2[i],"ID",sample[k]);
+					cal(par[i],tag[j],cut_final,th2[i],"reco",sample[k]);
+//					run("Mjj",sample[k],par[i],"ID",tag[j],frac_ele);
+//					run("Mjj",sample[k],par[i],"reco",tag[j],frac_ele);
+				}
 			}
 		}
 	}

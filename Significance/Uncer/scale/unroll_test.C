@@ -53,6 +53,7 @@ void unroll_name(TString sample,TString tag,int num){
 	TLegend *ll[num];
         vector<double> vec_ymax;
 	int p=0;
+	vector<TString> lable_scale={"scale(1,1)","scale(1,2)","scale(1,0.5)","scale(2,1)","scale(2,2)","scale(2,0.5)","scale(0.5,1)","scale(0.5,2)","scale(0.5,0.5)"};
 	for(Int_t i=0;i<num;i++){
 		if((i==5||i==7) && sample.Contains("qcd")) continue;
 		ll[p] = new TLegend(0.55,0.4,0.8,0.9);
@@ -78,7 +79,7 @@ void unroll_name(TString sample,TString tag,int num){
 		t_ZA[p]->Draw("HIST");
 		cout<<"hist"<<i<<" "<<t_ZA[p]->GetBinContent(1)<<endl;
 		if(i==1) ll[p]->AddEntry(t_ZA[p],Form("%d central scale variation",i+1));
-		else     ll[p]->AddEntry(t_ZA[p],Form("%d scale variation",i+1));
+		else     ll[p]->AddEntry(t_ZA[p],lable_scale[p]);
 		ll[p]->Draw();
 		cc[p]->Print(Form("./figs/tmp-hist2d_%d.eps",i+1));
 		vec_ymax.push_back(t_ZA[p]->GetMaximum());
@@ -112,9 +113,9 @@ void unroll_name(TString sample,TString tag,int num){
 		t_ZA[i]->SetLineStyle(2);
 		for(Int_t j=1;j<=t_ZA[i]->GetNbinsX();j++){ t_ZA[i]->GetXaxis()->SetBinLabel(j,name[j-1]);}
 		t_ZA[i]->Draw("HIST,SAME");
-		if(i<5) l2->AddEntry(t_ZA[i],  Form("scale%d ",i+1));
-		else if(i==5)   l2->AddEntry(t_ZA[i],"scale7 ");
-		else if(i==6)   l2->AddEntry(t_ZA[i],"scale9 ");
+		if(i<5) l2->AddEntry(t_ZA[i], lable_scale[i]);
+		else if(i==5)   l2->AddEntry(t_ZA[i],"scale(0.5,1) ");
+		else if(i==6)   l2->AddEntry(t_ZA[i],"scale(0.5,0.5) ");
 	}
 	cout<<"Draw latex"<<endl;
         TLatex latex;

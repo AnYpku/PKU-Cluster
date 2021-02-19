@@ -11,10 +11,10 @@ combineCards.py mubarrel_16_* muendcap_16_* elebarrel_16_* eleendcap_16_* >& ful
 combineCards.py mubarrel_17_* muendcap_17_* elebarrel_17_* eleendcap_17_* >& full17_test.txt
 combineCards.py mubarrel_18_* muendcap_18_* elebarrel_18_* eleendcap_18_* >& full18_test.txt
 combineCards.py full16_test.txt full17_test.txt full18_test.txt >&full_RunII.txt
+#full16_test.root
+#full18_test.root
 files="\
-full16_test.root
 full17_test.root
-full18_test.root
 full_RunII.root
 "
 for rootfile in $files

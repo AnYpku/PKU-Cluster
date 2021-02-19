@@ -21,10 +21,12 @@ void run(TString var,int i,TString tag){
 	    else error=0;
             ftxt<<error<<endl;
 	}
+	cout<<"end run "<<var<<" "<<tag<<endl;
 }
 void open(TString var,vector<double> genbins,TString tag,int kk){
 	double uncer[kk-1][kk-1];
 	ofstream fout("./"+var+"_uncer"+tag+".txt");
+	cout<<var<<" "<<tag<<endl;
 	for(int k=0;k<kk-1;k++){
 		ifstream f1(Form("./txt/"+var+"_recobin%i_uncer"+tag+".txt",k+1));
 		for(int j=0;j<kk-1;j++){
@@ -56,7 +58,7 @@ int Print_uncer_sig(){
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
      vector<TString> tag={"16","17","18"};
      for(int k=0;k<tag.size();k++){
-//	     if(tag[k].Contains("17")) continue;
+	     if(tag[k].Contains("17")==0) continue;
 	     for(int i=0;i<genvars.size();i++){
 		     for(int j=1;j<bins[i].size();j++){//open the jth recobin root file of the ith gen variables
 			     run(genvars[i],j,tag[k]);

@@ -29,6 +29,11 @@ void xx::Loop()
 	TH2F*h2_eff_sf2017_M=(TH2F*)file->Get("h2_eff_sf2017_M");
 	TH2F*h2_mistag_sf2017_M=(TH2F*)file->Get("h2_mistag_sf2017_M");
 	TH2F*h_sys_M;
+	TH2F*h2_eff_mc2017_T=(TH2F*)file->Get("h2_eff_mc2017_T");
+	TH2F*h2_mistag_mc2017_T=(TH2F*)file->Get("h2_mistag_mc2017_T");
+	TH2F*h2_eff_sf2017_T=(TH2F*)file->Get("h2_eff_sf2017_T");
+	TH2F*h2_mistag_sf2017_T=(TH2F*)file->Get("h2_mistag_sf2017_T");
+	TH2F*h_sys_T;
 
 	TFile * input13 = new TFile ("./puweight.root");//puweight.root
 	TH1D* h13 = NULL;
@@ -167,6 +172,7 @@ void xx::Loop()
 			if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.9638;
 		}
 		puIdweight_M=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet1puIdMedium)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_M,h2_eff_sf2017_M,h2_mistag_mc2017_M,h2_mistag_sf2017_M,jet2puIdMedium);
+		puIdweight_T=get_puIdweight(jet1eta,jet1phi,jet1pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet1puIdTight)*get_puIdweight(jet2eta,jet2phi,jet2pt,h2_eff_mc2017_T,h2_eff_sf2017_T,h2_mistag_mc2017_T,h2_mistag_sf2017_T,jet2puIdTight);
 		//  lep and photon scacles
 		cut1++;
 		ExTree->Fill();

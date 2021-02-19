@@ -4,7 +4,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      TString name=file->GetName();
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      Double_t scalef,pileupWeight,prefWeight,pweight[703],jet1eta,jet2eta,Mjj;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T;
      int lep;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("scalef",&scalef);
@@ -23,7 +23,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
-     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
      tree->SetBranchAddress("Mjj",&Mjj);
      tree->SetBranchAddress("jet1eta",&jet1eta);
      tree->SetBranchAddress("jet2eta",&jet2eta);
@@ -49,8 +49,8 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     double detajj=fabs(jet1eta-jet2eta);
 	     int p=0;
 	     if(tag.Contains("18")) prefWeight=1;
-	     if(tag.Contains("17")==0) puIdweight_M=1;
-	     weight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_M;
+	     if(tag.Contains("17")==0) puIdweight_T=1;
+	     weight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_T;
 	     if(lep==11)
 		     weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
@@ -163,7 +163,7 @@ int Uncer_batch_bkg(){
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
@@ -173,6 +173,7 @@ int Uncer_batch_bkg(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="("+Reco+")&&("+Gen+")";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
+		if(tag[i].Contains("17")==0) continue;
 		cout<<tag[i]<<" "<<jet<<endl;
 		cout<<tag[i]<<" "<<GenJet<<endl;
 		run(file2[i], cut1,tag[i],9,0);

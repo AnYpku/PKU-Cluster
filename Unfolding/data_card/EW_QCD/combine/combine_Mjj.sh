@@ -5,7 +5,7 @@ fi
 cp ../txt/*Mjj*bin*.txt ./
 recovar=( "Mjj" )
 year=("16" "17" "18")
-for (( i = 0 ; i < 1 ; i++ ))
+for (( i = 0 ; i < 3 ; i++ ))
 do
    for (( j = 0 ; j < ${#year[@]} ; j++ ))
    do

@@ -1,10 +1,10 @@
 #!/bin/bash/
 
-#cp ../full* ./
+cp ../full* ./
 #full16_test.root
+#full17_test.root
+#full18_test.root
 files="\
-full17_test.root
-full18_test.root
 full_RunII.root
 "
 for rootfile in $files

@@ -4,7 +4,7 @@ kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin elebarrel2
-observation 9.247
+observation 8.890
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,31 +13,31 @@ observation 9.247
 bin	elebarrel2	elebarrel2	elebarrel2	elebarrel2	elebarrel2	elebarrel2
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	3.831	3.476	1.940	0.000	0.000	0.000
+rate	3.846	3.455	1.590	0.000	0.000	0.000
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
 VBS_Stat_bin2_elebarrel17	lnN	1.037	-	-	-	-	-
-QCD_Stat_bin2_elebarrel17	lnN	-	1.203	-	-	-	-
-non_prompt_Stat_bin2_elebarrel17	lnN	-	-	1.425	-	-	-
+QCD_Stat_bin2_elebarrel17	lnN	-	1.204	-	-	-	-
+non_prompt_Stat_bin2_elebarrel17	lnN	-	-	1.470	-	-	-
 TTA_Stat_bin2_elebarrel17	lnN	-	-	-	1.000	-	-
 VV_Stat_bin2_elebarrel17	lnN	-	-	-	-	1.000	-
 ST_Stat_bin2_elebarrel17	lnN	-	-	-	-	-	1.000
-fake_elebarrel17	lnN	-	-	1.229	-	-	-
-JES_17	lnN	1.040	1.120	-	1.100	1.550	1.330
-JER_17	lnN	1.010	1.080	-	1.310	1.420	1.020
+fake_elebarrel17	lnN	-	-	1.223	-	-	-
+JES_17	lnN	1.040	1.090	-	1.080	1.500	1.320
+JER_17	lnN	1.010	1.070	-	1.350	1.420	1.010
 pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.020	-	-	-	-
 Scale_EW	lnN	1.059	-	-	-	-	-
-Scale_muF1	lnN	-	1.138	-	-	-	-
+Scale_muF1	lnN	-	1.140	-	-	-	-
 Scale_muR1	lnN	-	1.053	-	-	-	-
-Scale_muFmuR	lnN	-	1.193	-	-	-	-
-interf	lnN	1.048	-	-	-	-	-
+Scale_muFmuR	lnN	-	1.195	-	-	-	-
+interf	lnN	1.050	-	-	-	-	-
 ele_reco	lnN	1.010	1.010	-	1.000	1.000	1.000
-ele_ID	lnN	1.091	1.098	-	1.000	1.000	1.000
-photon_id	lnN	1.034	1.034	-	1.045	1.026	1.020
-pileup	lnN	1.004	1.004	-	1.004	1.004	1.004
+ele_ID	lnN	1.090	1.098	-	1.000	1.000	1.000
+photon_id	lnN	1.034	1.033	-	1.046	1.027	1.020
+pileup	lnN	1.003	1.003	-	1.003	1.003	1.003
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
-pileupId_eff	lnN	1.000	1.000	-	1.002	1.006	1.010
-pileupId_mis	lnN	1.004	1.002	-	1.016	1.043	1.000
+pileupId_eff	lnN	1.001	1.000	-	1.007	1.010	1.000
+pileupId_mis	lnN	1.000	1.003	-	1.009	1.060	1.000
 l1pref	lnN	1.035	1.022	-	11.434	1.000	1.000

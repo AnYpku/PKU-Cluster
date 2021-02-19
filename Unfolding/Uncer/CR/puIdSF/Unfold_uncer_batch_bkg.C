@@ -17,7 +17,7 @@ void run( TString sample,vector<TString> vec_branchname,vector<vector<double>> b
      double Mjj,deltaetajj;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale;
      int lep;
-     Double_t puIdweight_M,puIdweight_M_effUp,puIdweight_M_effDn,puIdweight_M_misUp,puIdweight_M_misDn;
+     Double_t puIdweight_T,puIdweight_T_effUp,puIdweight_T_effDn,puIdweight_T_misUp,puIdweight_T_misDn;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("deltaetajj",&deltaetajj);
      tree->SetBranchAddress("scalef",&scalef);
@@ -35,11 +35,11 @@ void run( TString sample,vector<TString> vec_branchname,vector<vector<double>> b
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
-     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
-     tree->SetBranchAddress("puIdweight_M_effUp",&puIdweight_M_effUp);
-     tree->SetBranchAddress("puIdweight_M_effDn",&puIdweight_M_effDn);
-     tree->SetBranchAddress("puIdweight_M_misUp",&puIdweight_M_misUp);
-     tree->SetBranchAddress("puIdweight_M_misDn",&puIdweight_M_misDn);
+     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
+     tree->SetBranchAddress("puIdweight_T_effUp",&puIdweight_T_effUp);
+     tree->SetBranchAddress("puIdweight_T_effDn",&puIdweight_T_effDn);
+     tree->SetBranchAddress("puIdweight_T_misUp",&puIdweight_T_misUp);
+     tree->SetBranchAddress("puIdweight_T_misDn",&puIdweight_T_misDn);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
      double actualWeight[num],weight;
      TH1D*th1[num][kk];
@@ -55,7 +55,7 @@ void run( TString sample,vector<TString> vec_branchname,vector<vector<double>> b
 	     tree->GetEntry(k);
 	     int p=0;
 	     if(tag.Contains("18")) prefWeight=1;
-	     if(tag.Contains("17")==0) puIdweight_M=1;
+	     if(tag.Contains("17")==0) puIdweight_T=1;
 	     weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale;
 	     if(lep==11)
 		     weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
@@ -64,14 +64,14 @@ void run( TString sample,vector<TString> vec_branchname,vector<vector<double>> b
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
 			     if(type.Contains("eff")){
-				     if(p==0)actualWeight[p]=weight*puIdweight_M;
-				     if(p==1)actualWeight[p]=weight*puIdweight_M_effUp;
-				     if(p==2)actualWeight[p]=weight*puIdweight_M_effDn;
+				     if(p==0)actualWeight[p]=weight*puIdweight_T;
+				     if(p==1)actualWeight[p]=weight*puIdweight_T_effUp;
+				     if(p==2)actualWeight[p]=weight*puIdweight_T_effDn;
 			     }
 			     else if(type.Contains("mis")){
-				     if(p==0)actualWeight[p]=weight*puIdweight_M;
-				     if(p==1)actualWeight[p]=weight*puIdweight_M_misUp;
-				     if(p==2)actualWeight[p]=weight*puIdweight_M_misDn;
+				     if(p==0)actualWeight[p]=weight*puIdweight_T;
+				     if(p==1)actualWeight[p]=weight*puIdweight_T_misUp;
+				     if(p==2)actualWeight[p]=weight*puIdweight_T_misDn;
 
 			     }
 			     for(int j=0;j<kk;j++){
@@ -136,7 +136,7 @@ int Unfold_uncer_batch_bkg(){
 	vector<TString> tag={"17"};
 	for(int i=0;i<1;i++){
 		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";

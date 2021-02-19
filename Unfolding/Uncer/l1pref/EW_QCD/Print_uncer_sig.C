@@ -70,7 +70,7 @@ int Print_uncer_sig(){
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
      vector<TString> tag={"16","17"};
      for(int k=0;k<tag.size();k++){
-//             if(tag[k].Contains("17")) continue;
+	     if(tag[k].Contains("17")==0) continue;
 	     for(int i=0;i<genvars.size();i++){
 		     for(int j=1;j<bins[i].size();j++){//open the jth recobin root file of the ith gen variables
 			     run(genvars[i],j,tag[k]);

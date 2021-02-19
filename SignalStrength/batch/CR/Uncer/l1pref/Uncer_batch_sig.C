@@ -100,7 +100,8 @@ int Uncer_batch_sig(){
 	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ))";
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	TString dr = "(drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
-        vector<TString> tag={"16","17"};
+//        vector<TString> tag={"16","17"};
+        vector<TString> tag={"17"};
 
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
         vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};

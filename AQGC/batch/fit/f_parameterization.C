@@ -188,7 +188,7 @@ void fX0_parameterization_el(int index,vector<double>ZGbin,TString channel){
 }
 void f_parameterization(){
 	vector<TString>channel={"ele","mu"};
-	vector<double>ZGbin={150,400,600,800, 1000, 2e4};
+	vector<double>ZGbin={150,400,600,800, 1000,1200, 2e4};
 	for(int i=1;i<17;i++){
 		for(int j=0;j<channel.size();j++){
 			fX0_parameterization_el(i,ZGbin,channel[j]);

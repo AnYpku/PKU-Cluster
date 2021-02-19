@@ -15,7 +15,7 @@ void run(vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1
      }
      Double_t scalef,pileupWeight,pweight[703],prefWeight,prefWeightUp,prefWeightDown;
      double Mjj,deltaetajj;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T;
      int lep; double npT;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("npT",&npT);
@@ -38,7 +38,7 @@ void run(vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1
      tree->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale);
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
-     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
      double actualWeight[num],weight;
      TH1D*th1[num][kk];
@@ -65,9 +65,9 @@ void run(vector<TString> vec_branchname,vector<vector<double>> bins,TString cut1
 	     int p=0;
              pileupWeight_up=h_up->GetBinContent(h_up->GetXaxis()->FindBin(npT));
              pileupWeight_down=h_dn->GetBinContent(h_dn->GetXaxis()->FindBin(npT));
-             if(tag.Contains("17")==0) puIdweight_M=1;
+             if(tag.Contains("17")==0) puIdweight_T=1;
              if(tag.Contains("18")==1) prefWeight=1;
-	     weight=scalef*photon_id_scale*photon_veto_scale*puIdweight_M*prefWeight;
+	     weight=scalef*photon_id_scale*photon_veto_scale*puIdweight_T*prefWeight;
 	     if(lep==11)
 		     weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
@@ -159,7 +159,7 @@ int Unfold_uncer_batch_bkg(){
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
@@ -167,7 +167,7 @@ int Unfold_uncer_batch_bkg(){
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut2 ="("+Reco+")";
 		TString cut1 ="(("+Reco+")&& !("+Gen+"))";
-//		if(tag[i].Contains("17")) continue;
+		if(tag[i].Contains("17")==0) continue;
 		for(int k=0;k<sample.size();k++){
 			run(recovars, bins,cut2,tag[i],sample[k]);
 		}

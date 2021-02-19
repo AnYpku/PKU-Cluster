@@ -16,7 +16,7 @@
 #include "math.h"
 
 using namespace std;
-void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TString channel){
+void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TString channel,vector<double>ZGbin){
 
 //	const TString InData_New = "/home/pku/anying/cms/rootfiles/20"+tag+"/cutla-";
 	const TString InData_New = "../rootfiles/optimal_";
@@ -115,8 +115,7 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
         treef->SetBranchAddress("muon_hlt_scale",   &muon_hlt_scale);
 
 	// Do parameterization
-	double ZGbin[6] = {150,400,600,800,1000,2e4};
-        const int num=5;
+        const int num=ZGbin.size()-1;
 
 //	double ZGbin[7] = {150,300,450,600,750,1000,2e4};;
 //      const int num=6;
@@ -234,7 +233,9 @@ void f_hist(){
         vector<TString> tag={"16","17","18"};
 //        vector<TString> tag={"17"};
         vector<TString> file={"ZA_aQGC16.root","ZA_aQGC17.root","ZA_aQGC18.root"};
+	vector<double> ZGbin = {150,400,600,800,1000,1200,2e4};
         for(int k=0;k<tag.size();k++){
+		if(tag[k].Contains("17")==0) continue;
                for(int j=0;j<channel.size();j++){
                         if(channel[j].Contains("ele")&&tag[k].Contains("17")==0)
                                 cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7  && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
@@ -247,7 +248,7 @@ void f_hist(){
                                         for(int i=1;i<=16;i++){
                                                 cout<<tag[k]<<" "<<file[k]<<" "<<channel[j]<<endl;
                                                 cout<<cut<<endl;
-						fX0_parameterization_hist(i,tag[k],file[k],cut,channel[j]);
+						fX0_parameterization_hist(i,tag[k],file[k],cut,channel[j],ZGbin);
                                         }
                 }
         }

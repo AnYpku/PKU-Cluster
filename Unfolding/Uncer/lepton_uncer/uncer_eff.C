@@ -70,6 +70,7 @@ int uncer_eff(){
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&& ("+Gen+"))";
 		TString cut ="(("+Reco+"))";
+		if(tag[ik].Contains("17")==0) continue;
 		for(int k=0;k<sample.size();k++){
 			TFile*fin;
 			TString cut_final;

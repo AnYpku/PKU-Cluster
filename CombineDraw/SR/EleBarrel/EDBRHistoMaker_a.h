@@ -109,9 +109,9 @@ class EDBRHistoMaker {
 		Double_t jet2eta;
 		Double_t jet1phi;
 		Double_t jet2phi;
-		Double_t jet1puIdMedium;
-		Double_t jet2puIdMedium;
-		Double_t puIdweight_M;
+		Double_t jet1puIdTight;
+		Double_t jet2puIdTight;
+		Double_t puIdweight_T;
 		Double_t Mjj;
 		Double_t ngoodmus;
 		Double_t zepp;//need to be modified for rochester
@@ -234,9 +234,9 @@ class EDBRHistoMaker {
 		TBranch *b_jet2phi;
 		TBranch *b_jet1e;
 		TBranch *b_jet2e;
-		TBranch *b_jet1puIdMedium;
-		TBranch *b_jet2puIdMedium;
-		TBranch *b_puIdweight_M;
+		TBranch *b_jet1puIdTight;
+		TBranch *b_jet2puIdTight;
+		TBranch *b_puIdweight_T;
 		TBranch *b_Mjj;    //!
 		TBranch *b_ngoodmus;    //!
 		TBranch *b_zepp;
@@ -379,9 +379,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("jet2eta", &jet2eta, "jet2eta/D");
 	treename->Branch("jet2phi", &jet2phi, "jet2phi/D");
 	treename->Branch("jet2e", &jet2e, "jet2e/D");
-	treename->Branch("jet1puIdMedium", &jet1puIdMedium, "jet1puIdMedium/D");
-	treename->Branch("jet2puIdMedium", &jet2puIdMedium, "jet2puIdMedium/D");
-	treename->Branch("puIdweight_M", &puIdweight_M, "puIdweight_M/D");
+	treename->Branch("jet1puIdTight", &jet1puIdTight, "jet1puIdTight/D");
+	treename->Branch("jet2puIdTight", &jet2puIdTight, "jet2puIdTight/D");
+	treename->Branch("puIdweight_T", &puIdweight_T, "puIdweight_T/D");
 	treename->Branch("Mjj", &Mjj, "Mjj/D");
 	treename->Branch("zepp", &zepp, "zepp/D");
 	treename->Branch("deltaetajj", &deltaetajj, "deltaetajj/D");
@@ -496,9 +496,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("jet1e", &jet1e, &b_jet1e);
 	fChain->SetBranchAddress("jet2e", &jet2e, &b_jet2e);
 	fChain->SetBranchAddress("Mjj", &Mjj, &b_Mjj);
-	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
-	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
-	fChain->SetBranchAddress("puIdweight_M", &puIdweight_M, &b_puIdweight_M);
+	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+	fChain->SetBranchAddress("puIdweight_T", &puIdweight_T, &b_puIdweight_T);
 	fChain->SetBranchAddress("ngoodmus", &ngoodmus,&b_ngoodmus);
 	fChain->SetBranchAddress("zepp", &zepp, &b_zepp);
 	fChain->SetBranchAddress("deltaetajj", &deltaetajj, &b_deltaetajj);
@@ -747,7 +747,7 @@ void EDBRHistoMaker::Loop(std::string outFileName,double lumi) {
 		actualWeight=0;
                 Bool_t full=false;
 		if(filename.Contains("17"))
-			full= (drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 &&  Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 );
+			full= (drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 &&  Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 );
 		else full=(drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7 && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4);
 //data
 		if(full==true){
@@ -901,8 +901,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double lumi){
                 if(lep2_phi_station2<0) lep2_phi_station2_tmp = lep2_phi_station2+6.28319;
                 l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
                 if(drla==10) drla=-10;if(drla2==10) drla2=-10;
-		if(name.Contains("17")==0) puIdweight_M=1;
-		actualWeight = actualWeight*(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*puIdweight_M;
+		if(name.Contains("17")==0) puIdweight_T=1;
+		actualWeight = actualWeight*(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*puIdweight_T;
                 if(filename.Contains("plj")){
                      actualWeight = scalef;
 		     lumi=1;
@@ -910,7 +910,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double lumi){
 		Bool_t full=false;
 // mc
 		if(filename.Contains("17"))
-			full= (drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 &&  Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4);
+			full= (drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 &&  Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4);
 		else full=(drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7 && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4);
                 if(full){
 			//if(Mjj<400)	

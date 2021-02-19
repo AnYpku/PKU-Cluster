@@ -35,16 +35,17 @@ int Build_histo_aQGC(){
 	vector<TString> channel={"ele","mu"};
 	vector<TString> sample={"plj","ZA","ZA-EWK","others"};
 //	vector<TString> sample={"Muon","Ele"};
-	vector<double> ZGbin={150,400,600,800,1000,2e4};
+	vector<double> ZGbin={150,400,600,800,1000,1200,2e4};
 	TString Reco;
 	for(int k=0;k<tag.size();k++){
 		if(tag[k].Contains("17")==1){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
 		Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
+		if(tag[k].Contains("17")==0) continue;
 		for(int i=0;i<sample.size();i++){
 			for(int j=0;j<channel.size();j++){
 				if(sample[i].Contains("Ele")&&channel[j].Contains("mu"))

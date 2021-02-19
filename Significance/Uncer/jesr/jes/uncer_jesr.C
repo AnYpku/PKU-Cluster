@@ -60,9 +60,9 @@ int uncer_jesr(){
 //	     run_1d(sample[j],"16");
 //	     run_1d(sample[j],"17");
 //	     run_1d(sample[j],"18");
-	     run(sample[j],"16");
+//	     run(sample[j],"16");
 	     run(sample[j],"17");
-	     run(sample[j],"18");
+//	     run(sample[j],"18");
      }
      return 1;
 }

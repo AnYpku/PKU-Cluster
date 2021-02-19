@@ -29,7 +29,7 @@ genbincontent=[]
 genbinerror=[]
 arr={}
 print 'get histograms'
-f=open('/home/pku/anying/cms/PKU-Cluster/AQGC/batch/Uncer_aQGC/summary_uncer_'+sys.argv[2]+sys.argv[1]+'.txt')
+f=open('/home/pku/anying/cms/PKU-Cluster/AQGC/batch/Uncer_aQGC/6bins/summary_uncer_'+sys.argv[2]+sys.argv[1]+'.txt')
 import re
 import numpy as np
 for line in f:
@@ -68,7 +68,6 @@ for i in range(1,nbins):
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
-   bin_content = th1_others.GetBinContent(i)+th1_non_prompt.GetBinContent(i)+th1_ZA.GetBinContent(i)+th1_ZA_sig.GetBinContent(i)
 # bincontent of each precess
    others_bincontent = th1_others.GetBinContent(i) if th1_others.GetBinContent(i)>0 else 0
    non_prompt_bincontent = th1_non_prompt.GetBinContent(i) if th1_non_prompt.GetBinContent(i)>0 else 0
@@ -92,6 +91,7 @@ for i in range(1,nbins):
    ZA_sig_binerror = ZA_sig_binerror+1
 
 
+   bin_content = others_bincontent+non_prompt_bincontent+ZA_bincontent+ZA_sig_bincontent
    f.write('observation %.2f\n'%bin_content)
    f.write('------------\n')
    f.write('# now we list the expected events for signal and all backgrounds in that bin\n')

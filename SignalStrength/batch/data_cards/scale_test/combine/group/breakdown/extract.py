@@ -3,7 +3,7 @@ import numpy as np
 import sys
 from math import sqrt
 from numpy import sum
-f=open('/home/pku/anying/cms/PKU-Cluster/SignalStrength/batch/data_cards/scale_test/combine/group/t4/tmp_'+sys.argv[1]+"_full"+sys.argv[2]+'_test.txt')
+f=open('/home/pku/anying/cms/PKU-Cluster/SignalStrength/batch/data_cards/scale_test/combine/group/breakdown/tmp_'+sys.argv[1]+"_full"+sys.argv[2]+'_test.txt')
 fout = open('./r_%s_%s.txt'%(sys.argv[1],sys.argv[2]),'w')
 fout1 = open('./r_%s.txt'%(sys.argv[2]),'a')
 f1=open('./all/r_'+sys.argv[2]+'.txt')

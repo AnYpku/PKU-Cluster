@@ -19,9 +19,13 @@ void run(TString var,TString sample,TString particle,TString type,TString tag,do
 		if(bincontent_new>0)
 			uncer=fabs(bincontent_up-bincontent_down)/2/bincontent_new*frac;
 		else    uncer=0;
-		if(i<num-1){
+		if(i==0){
 			f2<<fixed<<setprecision(3)<<1+uncer<<",";
 			cout<<fixed<<setprecision(3)<<"["<<1+uncer<<",";
+		}
+		else if(i<num-1){
+			f2<<fixed<<setprecision(3)<<1+uncer<<",";
+			cout<<fixed<<setprecision(3)<<1+uncer<<",";
 		}
 		else{
 			f2<<fixed<<setprecision(3)<<1+uncer<<"]"<<endl;
@@ -57,6 +61,7 @@ int uncer_eff(){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
+                if(tag[ik].Contains("17")==0) continue;
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenControlRegion;
 		TString ControlRegion = "(Mjj>150 && Mjj<500 && Mva>100)";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;

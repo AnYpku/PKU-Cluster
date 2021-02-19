@@ -44,6 +44,7 @@ int unroll_2d(){
 		else  sample={"ZAout","ZA","ST","TTA","VV"};
 		for(int kk=0;kk<sample.size();kk++){
 			for(int i=0;i<tag.size();i++){
+				if(tag[i].Contains("17")==0) continue;
 				for(int j=0;j<6;j++){
 					file[j][i]=new TFile("unfold_"+sample[kk]+"_2d"+var[ik]+Form("_recobin%i_jes",j+1)+tag[i]+".root");
 					fout[j][i]=new TFile("unfold_"+sample[kk]+"_"+var[ik]+Form("_recobin%i_jes",j+1)+tag[i]+".root","recreate");

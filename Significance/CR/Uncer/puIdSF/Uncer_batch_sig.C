@@ -9,7 +9,7 @@ void run(TString cut1,TString sample,TString channel,TString type,bool turn){
 //     tree->SetBranchStatus("*",0);
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
      Double_t Mjj,jet1eta,jet2eta;
-     Double_t puIdweight_M,puIdweight_M_effUp,puIdweight_M_effDn,puIdweight_M_misUp,puIdweight_M_misDn;
+     Double_t puIdweight_T,puIdweight_T_effUp,puIdweight_T_effDn,puIdweight_T_misUp,puIdweight_T_misDn;
      double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
      double muon_hlt_scale,ele_hlt_scale;
@@ -21,11 +21,11 @@ void run(TString cut1,TString sample,TString channel,TString type,bool turn){
      tree->SetBranchAddress("scalef",&scalef);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
      tree->SetBranchAddress("prefWeight",&prefWeight);
-     tree->SetBranchAddress("puIdweight_M",&puIdweight_M);
-     tree->SetBranchAddress("puIdweight_M_effUp",&puIdweight_M_effUp);
-     tree->SetBranchAddress("puIdweight_M_effDn",&puIdweight_M_effDn);
-     tree->SetBranchAddress("puIdweight_M_misUp",&puIdweight_M_misUp);
-     tree->SetBranchAddress("puIdweight_M_misDn",&puIdweight_M_misDn);
+     tree->SetBranchAddress("puIdweight_T",&puIdweight_T);
+     tree->SetBranchAddress("puIdweight_T_effUp",&puIdweight_T_effUp);
+     tree->SetBranchAddress("puIdweight_T_effDn",&puIdweight_T_effDn);
+     tree->SetBranchAddress("puIdweight_T_misUp",&puIdweight_T_misUp);
+     tree->SetBranchAddress("puIdweight_T_misDn",&puIdweight_T_misDn);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
@@ -68,14 +68,14 @@ void run(TString cut1,TString sample,TString channel,TString type,bool turn){
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
 			     if(type.Contains("eff")){
-				     if(p==0)actualWeight[p]=weight*puIdweight_M;
-				     if(p==1)actualWeight[p]=weight*puIdweight_M_effUp;
-				     if(p==2)actualWeight[p]=weight*puIdweight_M_effDn;
+				     if(p==0)actualWeight[p]=weight*puIdweight_T;
+				     if(p==1)actualWeight[p]=weight*puIdweight_T_effUp;
+				     if(p==2)actualWeight[p]=weight*puIdweight_T_effDn;
 			     }
 			     else if(type.Contains("mis")){
-				     if(p==0)actualWeight[p]=weight*puIdweight_M;
-				     if(p==1)actualWeight[p]=weight*puIdweight_M_misUp;
-				     if(p==2)actualWeight[p]=weight*puIdweight_M_misDn;
+				     if(p==0)actualWeight[p]=weight*puIdweight_T;
+				     if(p==1)actualWeight[p]=weight*puIdweight_T_misUp;
+				     if(p==2)actualWeight[p]=weight*puIdweight_T_misDn;
 
 			     }
 			     if(Mjj<500)th1[p]->Fill(Mjj,actualWeight[p]);//0~1, 2.5~4.5 and 500~800
@@ -105,7 +105,7 @@ int Uncer_batch_sig(){
 	TString LEPmu = "(lep==13 &&  ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110&&(HLT_Mu1>0||HLT_Mu2>0))";
 	TString LEPele = "(lep==11  && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110&&(HLT_Ele1>0||HLT_Ele2>0))";
 	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ))";
-	TString jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+	TString jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 
 	TString dr = "(drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 

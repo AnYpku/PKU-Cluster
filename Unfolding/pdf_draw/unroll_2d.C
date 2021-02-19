@@ -31,7 +31,8 @@ int unroll_2d(){
 	TH1D* hist[num];
 	TH2D* th2[num];
 	TH1D*h1;TH2D*h2;
-	vector<TString> tag={"16","17","18"};
+//	vector<TString> tag={"16","17","18"};
+	vector<TString> tag={"17"};
 	vector<TString> sample={"ewk","qcd"};//,"ZA","plj","TTA","VV","ST";
 	for(int i=0;i<tag.size();i++){
 		for(int j=0;j<sample.size();j++){

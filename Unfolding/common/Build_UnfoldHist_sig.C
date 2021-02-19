@@ -21,7 +21,7 @@ void run(TFile*file,TString var1, TString var2, vector<double> bins,TString cut1
      if(tag.Contains("16"))
         weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*"+lumi;
      else if(tag.Contains("17"))
-        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*puIdweight_M*"+lumi;
+        weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*puIdweight_T*"+lumi;
      else if(tag.Contains("18"))
         weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*"+lumi;
      TTreeFormula *tformula=new TTreeFormula("formula", cut3, tree); 
@@ -139,7 +139,7 @@ int Build_UnfoldHist_sig(){
      vector<TString> tag={"16","17","18"};
      for(int i=0;i<tag.size();i++){
 	     if(tag[i].Contains("17")){
-		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 	     }
 	     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	     TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
@@ -149,6 +149,7 @@ int Build_UnfoldHist_sig(){
 	     TString cut3 =Gen; 
 	     TString dir="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
 	     file[i]=new TFile(dir+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
+	     if(tag[i].Contains("17")==0) continue;
 	     for(int j=0;j<genvars.size();j++){     
 		     run(file[i],genvars[j], recovars[j], bins[j],cut1,cut2,cut3,tag[i]);
 	     }

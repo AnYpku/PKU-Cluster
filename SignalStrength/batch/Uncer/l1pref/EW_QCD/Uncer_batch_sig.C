@@ -7,11 +7,12 @@ void run(TString cut1,TString tag,TString channel,TString sample){
      file=new TFile(dir+"unfold_GenCutla-"+sample+tag+".root");
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
 //     tree->SetBranchStatus("*",0);
+     cout<<file->GetName()<<endl;
      Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown;
      Double_t Mjj,jet1eta,jet2eta;
      double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
-     double muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     double muon_hlt_scale,ele_hlt_scale,puIdweight_T;
      double weight;int lep;
      tree->SetBranchAddress("Mjj",&Mjj);
      tree->SetBranchAddress("lep",&lep);
@@ -19,7 +20,7 @@ void run(TString cut1,TString tag,TString channel,TString sample){
      tree->SetBranchAddress("jet2eta",&jet2eta);
      tree->SetBranchAddress("scalef",&scalef);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
-     tree->SetBranchAddress("puIdweight_M",&puIdweight_M);
+     tree->SetBranchAddress("puIdweight_T",&puIdweight_T);
      tree->SetBranchAddress("prefWeight",&prefWeight);
      tree->SetBranchAddress("prefWeightUp",&prefWeightUp);
      tree->SetBranchAddress("prefWeightDown",&prefWeightDown);
@@ -58,16 +59,16 @@ void run(TString cut1,TString tag,TString channel,TString sample){
              tree->GetEntry(k);
              double detajj=fabs(jet1eta-jet2eta);
 	     int p=0;
-	     if(tag.Contains("17")==0) puIdweight_M=1;
+	     if(tag.Contains("17")==0) puIdweight_T=1;
 	     if(tag.Contains("18")){
 		     prefWeight=1;
 		     prefWeightUp=1;
 		     prefWeightDown=1;
 	     }
 	     if(lep==11)
-		     weight=scalef*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale*puIdweight_M;
+		     weight=scalef*pileupWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale*puIdweight_T;
 	     if(lep==13)
-		     weight=scalef*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale*puIdweight_M;
+		     weight=scalef*pileupWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale*puIdweight_T;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
 			     if(p==0)actualWeight[p]=weight*prefWeight;
@@ -107,14 +108,15 @@ int Uncer_batch_sig(){
 	TString photon = "(photonet>20 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ))";
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
-        vector<TString> tag={"16","17","18"};
+//        vector<TString> tag={"16","17","18"};
+        vector<TString> tag={"17"};
 
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	const int kk=channels.size();
 	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";

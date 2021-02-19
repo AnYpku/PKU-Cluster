@@ -4,7 +4,8 @@ if [[ -f *.txt ]];then
 fi
 cp ../txt/*bin*.txt ./
 recovar=("ptlep1" "photonet" "jet1pt")
-year=("16" "17" "18")
+#year=("16" "17" "18")
+year=("17")
 for (( i = 0 ; i < 3 ; i++ ))
 do
    for (( j = 0 ; j < ${#year[@]} ; j++ ))

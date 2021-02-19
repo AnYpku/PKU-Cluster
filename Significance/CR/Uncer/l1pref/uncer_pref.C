@@ -54,7 +54,7 @@ int uncer_pref(){
 vector<TString> tag={"16","17"};
 vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 for(int i=0;i<channels.size();i++){
-	for(int j=0;j<tag.size();j++){
+	for(int j=1;j<tag.size();j++){
 		for(int k=0;k<sample.size();k++){
 			run(channels[i],tag[j],sample[k]);
 		}

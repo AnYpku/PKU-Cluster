@@ -1,7 +1,7 @@
 #!/bin/bash
 channel=("mu"  "ele")
-year=("16" "17" "18")
-#year=("17")
+#year=("16" "17" "18")
+year=("17")
 for (( i = 0 ; i < ${#channel[@]} ; i++ ))
 do
     python to_txt_all.py "" ${channel[$i]}

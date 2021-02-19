@@ -10,10 +10,10 @@ combineCards.py mubarrel_16_* muendcap_16_* elebarrel_16_* eleendcap_16_* >& ful
 combineCards.py mubarrel_17_* muendcap_17_* elebarrel_17_* eleendcap_17_* >& full17_test.txt
 combineCards.py mubarrel_18_* muendcap_18_* elebarrel_18_* eleendcap_18_* >& full18_test.txt
 combineCards.py full16_test.txt full17_test.txt full18_test.txt >&full_RunII.txt
+#full16_test.root
+#full18_test.root
 files="\
-full16_test.root
 full17_test.root
-full18_test.root
 full_RunII.root
 "
 for rootfile in $files
@@ -23,20 +23,20 @@ do
     combineCards.py ${name}.txt -S > shape_${name}.txt
     combine -M FitDiagnostics -t -1 --expectSignal 1 shape_${name}.txt > result_all_${name}.txt
     combine -M FitDiagnostics -t -1 --expectSignal 1 --freezeParameters all shape_${name}.txt > result_freezeAll_${name}.txt
-    group=("Stat" "theory" "JESR" "luminosity" "pu" "fake" "muon" "egamma" "Others" "pref" "pileupId" )
-    for (( i = 0 ; i < ${#group[@]} ; i++  ))    
-    do
-         if [[ ${name} =~ "16" ]] && [[ ${group[${i}]} =~ "pileupId" ]]; then
-             continue; 
-         fi
-         if [[ ${name} =~ "18" ]] && [[ ${group[${i}]} =~ "pileupId" ]]; then
-             continue; 
-         fi
-         if [[ ${name} =~ "18" ]] && [[ ${group[${i}]} =~ "pref" ]]; then
-             continue; 
-         fi
-   	   combine -M FitDiagnostics --freezeNuisanceGroups ${group[${i}]} -t -1 --expectSignal 1 shape_${name}.txt > result_${group[${i}]}_${name}.txt
-	   echo "combine -M FitDiagnostics --freezeNuisanceGroups ${group[${i}]} -t -1 --expectSignal 1 shape_${name}.txt > result_${group[${i}]}_${name}.txt"
-
-	done
+#    group=("Stat" "theory" "JESR" "luminosity" "pu" "fake" "muon" "egamma" "Others" "pref" "pileupId" )
+#    for (( i = 0 ; i < ${#group[@]} ; i++  ))    
+#    do
+#         if [[ ${name} =~ "16" ]] && [[ ${group[${i}]} =~ "pileupId" ]]; then
+#             continue; 
+#         fi
+#         if [[ ${name} =~ "18" ]] && [[ ${group[${i}]} =~ "pileupId" ]]; then
+#             continue; 
+#         fi
+#         if [[ ${name} =~ "18" ]] && [[ ${group[${i}]} =~ "pref" ]]; then
+#             continue; 
+#         fi
+#   	   combine -M FitDiagnostics --freezeNuisanceGroups ${group[${i}]} -t -1 --expectSignal 1 shape_${name}.txt > result_${group[${i}]}_${name}.txt
+#	   echo "combine -M FitDiagnostics --freezeNuisanceGroups ${group[${i}]} -t -1 --expectSignal 1 shape_${name}.txt > result_${group[${i}]}_${name}.txt"
+#
+#	done
 done

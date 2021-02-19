@@ -1,8 +1,8 @@
 #!/bin/bash
 genvar=("genlep1pt" "genphotonet" "genjet1pt" "genMjj")
 recovar=("ptlep1" "photonet" "jet1pt" "Mjj")
-year=("16" "17" "18")
-#year=("17")
+#year=("16" "17" "18")
+year=("17")
 for (( j = 0 ; j < ${#year[@]} ; j++ ))
 do
     for (( i = 0 ; i < ${#genvar[@]} ; i++ ))

@@ -119,9 +119,9 @@ int Unfold_uncer_batch_sig(){
      TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
      TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
 //     for(int i=0;i<bins.size();i++){
-	     run(file1,genvars, bins,cut1,"16","ewk");
+//	     run(file1,genvars, bins,cut1,"16","ewk");
 	     run(file2,genvars, bins,cut1,"17","ewk");
-	     run(file3,genvars, bins,cut1,"18","ewk");
-	     run(f1,genvars, bins,cut1,"16","qcd");
+//	     run(file3,genvars, bins,cut1,"18","ewk");
+//	     run(f1,genvars, bins,cut1,"16","qcd");
      return 1;
 }

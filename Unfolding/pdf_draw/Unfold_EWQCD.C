@@ -113,8 +113,8 @@ int Unfold_EWQCD(){
      TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
      TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
 
-     run(f1,genvars, bins,cut1,"16");
+//     run(f1,genvars, bins,cut1,"16");
      run(f2,genvars, bins,cut1,"17");
-     run(f3,genvars, bins,cut1,"18");
+//     run(f3,genvars, bins,cut1,"18");
      return 1;
 }

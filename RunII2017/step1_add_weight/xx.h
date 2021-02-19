@@ -534,6 +534,7 @@ public :
      double    photon_id_scale;
      double    photon_veto_scale;
      double puIdweight_M;
+     double puIdweight_T;
 };
 
 #endif
@@ -613,7 +614,7 @@ void xx::Init(TTree *tree)
 	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
 	ExTree->Branch("ele_hlt_scale",&ele_hlt_scale,"ele_hlt_scale/D");
 	ExTree->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/D");
-	ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
+//	ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
 	// lep and photon scales
 
 	fChain->SetBranchAddress("event", &event, &b_event);

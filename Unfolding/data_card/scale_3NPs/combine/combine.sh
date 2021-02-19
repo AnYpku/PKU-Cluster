@@ -4,11 +4,13 @@
 #fi
 cp /home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/CR/scale_3NPs/txt/*control_bin*.txt ./
 cp /home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/txt/*bin*.txt ./
-#recovar=("Mjj" "ptlep1" "photonet" "jet1pt")
-recovar=("Mjj")
+recovar=("Mjj" "ptlep1" "photonet" "jet1pt")
+#recovar=("Mjj")
 year=("16" "17" "18")
+#year=("17" "full")
 for (( i = 0 ; i < ${#recovar[@]} ; i++ ))
 do
+#   combineCards.py ${recovar[$i]}_16_*bin*.txt ${recovar[$i]}_17_*bin*.txt ${recovar[$i]}_18_*bin*.txt >& ${recovar[$i]}_full.txt
    for (( j = 0 ; j < ${#year[@]} ; j++ ))
    do
        echo "${year[$j]}  ${recovar[$i]}"

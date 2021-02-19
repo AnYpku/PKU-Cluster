@@ -11,7 +11,7 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      cout<<tag<<" "<<name<<" "<<channel<<endl;
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      int lep;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_M;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T;
      double Mjj,jet1eta,jet2eta,scalef;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("Mjj",&Mjj);
@@ -20,7 +20,7 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      tree->SetBranchAddress("scalef", &scalef);
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
-     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
@@ -86,8 +86,8 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
 	     tree->GetEntry(i);
              detajj=fabs(jet1eta-jet2eta);
              if(tag.Contains("18"))  prefWeight=1;
-             if(tag.Contains("17")==0)  puIdweight_M=1;
-	     actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale*puIdweight_M*photon_id_scale;
+             if(tag.Contains("17")==0)  puIdweight_T=1;
+	     actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale*puIdweight_T*photon_id_scale;
 	     if(lep==11)       
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)       
@@ -186,7 +186,7 @@ int Build_Hist(){
 	for(int k=0;k<tags.size();k++){
 		if(tags[k].Contains("17")==1){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)"; 
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
@@ -197,7 +197,7 @@ int Build_Hist(){
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
-//                if(tags[k].Contains("17")==1)continue;
+                if(tags[k].Contains("17")==0)continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
 				if(names[j].Contains("ZA")){

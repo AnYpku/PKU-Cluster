@@ -55,9 +55,9 @@ int uncer_jesr(){
      vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
      vector<TString> genvars={"ptlep1","photonet","jet1pt","Mva","Mjj"};
      for(int j=0;j<sample.size();j++){
-	     run(sample[j],"16");
+//	     run(sample[j],"16");
 	     run(sample[j],"17");
-	     run(sample[j],"18");
+//	     run(sample[j],"18");
      }
      return 1;
 }

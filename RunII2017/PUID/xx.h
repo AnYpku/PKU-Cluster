@@ -569,13 +569,13 @@ public :
 //   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
    virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,int realjet);
 
-   virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
 
-   virtual Double_t get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
 
-   virtual Double_t get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
 
-   virtual Double_t get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
    virtual void     modify_photon_jets();
    virtual void     endJob();
    virtual Bool_t   Notify();
@@ -653,13 +653,17 @@ void xx::Init(TTree *tree)
 	fChain->SetMakeClass(1);
 	fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
 	newtree = fChain->CloneTree(0);
-        newtree->Branch("puIdweight_M_effUp",&puIdweight_M_effUp);
-        newtree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn);
-        newtree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp);
-        newtree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn);
+        newtree->Branch("puIdweight_M_effUp",&puIdweight_M_effUp,"puIdweight_M_effUp/D");
+        newtree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn,"puIdweight_M_effDn/D");
+        newtree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp,"puIdweight_M_misUp/D");
+        newtree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn,"puIdweight_M_misDn/D");
+        newtree->Branch("puIdweight_T_effUp",&puIdweight_T_effUp,"puIdweight_T_effUp/D");
+        newtree->Branch("puIdweight_T_effDn",&puIdweight_T_effDn,"puIdweight_T_effDn/D");
+        newtree->Branch("puIdweight_T_misUp",&puIdweight_T_misUp,"puIdweight_T_misUp/D");
+        newtree->Branch("puIdweight_T_misDn",&puIdweight_T_misDn,"puIdweight_T_misDn/D");
 
-        newtree->Branch("puIdweight_T",&puIdweight_T);
-	fChain->SetBranchAddress("puIdweight_M",&puIdweight_M,&b_puIdweight_M);
+        newtree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
+        newtree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
 	fChain->SetBranchAddress("realjet1", &realjet1, &b_realjet1);
 	fChain->SetBranchAddress("realjet2", &realjet2, &b_realjet2);
 //	fChain->SetBranchAddress("puIdweight_T_effUp", &puIdweight_T_effUp, &b_puIdweight_T_effUp);

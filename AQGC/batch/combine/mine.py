@@ -32,6 +32,8 @@ newFormatInput7 = TH1D('aqgc_scaling_bin_7','aqgc_scaling_bin_7',nGridPointsForN
 newFormatInput8 = TH1D('aqgc_scaling_bin_8','aqgc_scaling_bin_8',nGridPointsForNewF,par1GridMin,par1GridMax)
 newFormatInput9 = TH1D('aqgc_scaling_bin_9','aqgc_scaling_bin_9',nGridPointsForNewF,par1GridMin,par1GridMax)
 newFormatInput10 = TH1D('aqgc_scaling_bin_10','aqgc_scaling_bin_10',nGridPointsForNewF,par1GridMin,par1GridMax)
+newFormatInput11 = TH1D('aqgc_scaling_bin_11','aqgc_scaling_bin_11',nGridPointsForNewF,par1GridMin,par1GridMax)
+newFormatInput12 = TH1D('aqgc_scaling_bin_12','aqgc_scaling_bin_12',nGridPointsForNewF,par1GridMin,par1GridMax)
 hists = []
 hists.append(newFormatInput1)
 hists.append(newFormatInput2)
@@ -43,6 +45,8 @@ hists.append(newFormatInput7)
 hists.append(newFormatInput8)
 hists.append(newFormatInput9)
 hists.append(newFormatInput10)
+hists.append(newFormatInput11)
+hists.append(newFormatInput12)
 
 for l_num, l in enumerate(input_file_m):
 	ll = re.split(r'[\s]',l)
@@ -60,7 +64,7 @@ for l_num, l in enumerate(input_file_e):
 	a2_e = float(ll[0])
 	a1_e = float(ll[1])
 	for bin_x in range(1,nGridPointsForNewF+1):
-	        par1_value=hists[l_num+5].GetXaxis().GetBinCenter(bin_x)
+	        par1_value=hists[l_num+6].GetXaxis().GetBinCenter(bin_x)
         	yield_bin=1+a1_e*par1_value+a2_e*par1_value*par1_value
-	        hists[l_num+5].SetBinContent(bin_x,yield_bin)
-	hists[l_num+5].Write()#the last five histos are electron channel ZGmass bins
+	        hists[l_num+6].SetBinContent(bin_x,yield_bin)
+	hists[l_num+6].Write()#the last five histos are electron channel ZGmass bins

@@ -92,7 +92,7 @@ void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TStr
         treef->SetBranchAddress("muon2_iso_scale",   &muon2_iso_scale);
         treef->SetBranchAddress("muon_hlt_scale",   &muon_hlt_scale);
 
-	double ZGbin[6] = {150,400,600,800, 1000, 2e4};
+	vector<double> ZGbin = {150,400,600,800, 1000, 1200,2e4};
 
 	// Ratio of fT0
 
@@ -118,7 +118,7 @@ void fX0_parameterization_el(int index,TString tag,TString file,TString cut,TStr
 //	const double xf[17] = {-20, -10, -6, -5, -3, -2, -1, -0.6, 0, 0.6, 1, 2, 3, 5, 6, 10, 20};
 
 	TTreeFormula* formula= new TTreeFormula("f",cut,treef);
-	for(int abin=0;abin<5;abin++){
+	for(int abin=0;abin<ZGbin.size()-1;abin++){
 		cout<<"abin="<<abin<<endl;
 		double rf[17] ={0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.};
 		int iii;
@@ -298,6 +298,7 @@ void f_parameterization_year(){
 	vector<TString> tag={"16","17","18"};
         vector<TString> file={"ZA_aQGC16.root","ZA_aQGC17.root","ZA_aQGC18.root"};
 	for(int k=0;k<tag.size();k++){
+		if(tag[k].Contains("17")==0) continue;
 		for(int j=0;j<channel.size();j++){
 			if(channel[j].Contains("ele")&&tag[k].Contains("17")==0)
 				cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7  && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";

@@ -65,7 +65,8 @@ void run(TString sample, TString tag){
 	}
 }
 int uncer_pdf(){
-	vector<TString> tag={"16","17","18"};
+//	vector<TString> tag={"16","17","18"};
+	vector<TString> tag={"17"};
 	for(int i=0;i<tag.size();i++){
 		run("qcd",tag[i]);
 //		run("Sigout",tag[i]);

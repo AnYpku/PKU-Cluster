@@ -4,7 +4,7 @@ kmax 27  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap2
-observation 6.296
+observation 6.247
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,11 +13,11 @@ observation 6.296
 bin	muendcap2	muendcap2	muendcap2	muendcap2	muendcap2	muendcap2	muendcap2
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	1.628	2.332	1.730	0.159	0.404	0.000	0.045
+rate	1.620	2.289	1.730	0.159	0.404	0.000	0.045
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020	1.020
 VBS_Stat_bin2_muendcap17	lnN	1.056	-	-	-	-	-	-
-QCD_Stat_bin2_muendcap17	lnN	-	1.256	-	-	-	-	-
+QCD_Stat_bin2_muendcap17	lnN	-	1.272	-	-	-	-	-
 non_prompt_Stat_bin2_muendcap17	lnN	-	-	1.382	-	-	-	-
 TTA_Stat_bin2_muendcap17	lnN	-	-	-	1.817	-	-	-
 VV_Stat_bin2_muendcap17	lnN	-	-	-	-	1.729	-	-
@@ -26,8 +26,8 @@ ZA_SigOut_Stat_bin2_muendcap17	lnN	-	-	-	-	-	-	1.320
 Stat group = VBS_Stat_bin2_muendcap17 QCD_Stat_bin2_muendcap17 non_prompt_Stat_bin2_muendcap17 TTA_Stat_bin2_muendcap17 VV_Stat_bin2_muendcap17 ZA_SigOut_Stat_bin2_muendcap17 
 fake_muendcap17	lnN	-	-	1.228	-	-	-	-
 fake group = fake_muendcap17 
-JES_17	lnN	1.030	1.110	-	1.210	1.520	1.260	1.130
-JER_17	lnN	1.010	1.070	-	1.260	1.430	1.020	1.070
+JES_17	lnN	1.030	1.120	-	1.180	1.460	1.260	1.120
+JER_17	lnN	1.010	1.070	-	1.230	1.390	1.020	1.070
 JESR group = JES_17 JER_17
 pdf_EW	lnN	1.001	-	-	-	-	-	1.004
 pdf_QCD	lnN	-	1.017	-	-	-	-	-
@@ -35,20 +35,20 @@ Scale_EW	lnN	1.017	-	-	-	-	-	1.060
 Scale_muF1	lnN	-	1.146	-	-	-	-	-
 Scale_muR1	lnN	-	1.058	-	-	-	-	-
 Scale_muFmuR	lnN	-	1.206	-	-	-	-	-
-interf	lnN	1.039	-	-	-	-	-	-
+interf	lnN	1.041	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf
-photon_id	lnN	1.034	1.034	-	1.046	1.026	1.020	1.034
-mu_eff	lnN	1.013	1.012	-	1.012	1.015	1.019	1.013
+photon_id	lnN	1.034	1.033	-	1.047	1.027	1.020	1.034
+mu_eff	lnN	1.013	1.011	-	1.012	1.016	1.019	1.013
 mu_trigger	lnN	1.006	1.007	-	1.006	1.010	1.008	1.006
 muon group = mu_eff mu_trigger
 egamma group = photon_id
-pileup	lnN	1.007	1.035	-	1.184	1.016	1.021	1.007
+pileup	lnN	1.006	1.038	-	1.176	1.025	1.046	1.006
 ttgamma_xs	lnN	-	-	-	1.1	-	-	-
 VV_xs	lnN	-	-	-	-	1.1	-	-
 Others group = ttgamma_xs VV_xs 
-l1pref	lnN	1.051	1.027	-	1.047	1.028	1.000	1.051
-pileupId_eff	lnN	1.000	1.000	-	1.011	1.000	1.000	1.000
-pileupId_mis	lnN	1.000	1.000	-	1.081	1.000	1.000	1.000
+l1pref	lnN	1.051	1.025	-	1.044	1.029	1.000	1.051
+pileupId_eff	lnN	1.002	1.000	-	1.016	1.000	1.000	1.000
+pileupId_mis	lnN	1.000	1.000	-	1.000	1.000	1.000	1.000
 luminosity group =  lumi_17 
 pref group = l1pref 
 pu group = pileup

@@ -11,7 +11,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 //     TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      TTree*tree=(TTree*)file->Get("outtree");
      int lep;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,puIdweight_M;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,puIdweight_T;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double muon_hlt_scale,ele_hlt_scale;
@@ -40,7 +40,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      tree->SetBranchAddress("scalef", &scalef);
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
-     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
@@ -90,8 +90,8 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 //	     delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
 //	     if (delta_phi>pi) delta_phi=2*pi-delta_phi;
 	     if(tag.Contains("18"))  prefWeight=1;
-	     if(tag.Contains("17")==0)  puIdweight_M=1;
-	     actualWeight=scalef*pileupWeight*prefWeight*puIdweight_M*lumi;
+	     if(tag.Contains("17")==0)  puIdweight_T=1;
+	     actualWeight=scalef*pileupWeight*prefWeight*puIdweight_T*lumi;
 		     if(lep==11)       
 			     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
 		     if(lep==13)       
@@ -139,14 +139,14 @@ int Build_Hist(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int k=0;k<tags.size();k++){
 		if(tags[k].Contains("17")==1){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
 		else{
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
 		Reco= "((("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+"&&"+opt+")";
 		cout<<tags[k]<<" "<<jet<<endl;
-//		if(tags[k].Contains("17")==0) continue;
+		if(tags[k].Contains("17")==0) continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
 				run(dir1,names[j],Reco,tags[k],channels[i]);

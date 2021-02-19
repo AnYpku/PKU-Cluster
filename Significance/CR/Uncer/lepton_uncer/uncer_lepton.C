@@ -46,26 +46,18 @@ int uncer_lepton(){
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	for(int i=0;i<par.size();i++){
 		for(int k=0;k<sample.size();k++){
-			if(par[i].Contains("muon")){
-				run(par[i],sample[k],"all","16");
-				run(par[i],sample[k],"all","17");
-				run(par[i],sample[k],"all","18");
-				run(par[i],sample[k],"trigger","16");
-				run(par[i],sample[k],"trigger","17");
-				run(par[i],sample[k],"trigger","18");
-			}
-			if(par[i].Contains("photon")){
-				run(par[i],sample[k],"ID","16");
-				run(par[i],sample[k],"ID","17");
-				run(par[i],sample[k],"ID","18");
-			}
-			if(par[i].Contains("ele")){
-				run(par[i],sample[k],"ID","16");
-				run(par[i],sample[k],"ID","17");
-				run(par[i],sample[k],"ID","18");
-				run(par[i],sample[k],"reco","16");
-				run(par[i],sample[k],"reco","17");
-				run(par[i],sample[k],"reco","18");
+			for(int j=0;j<tag.size();j++){
+				if(par[i].Contains("muon")){
+					run(par[i],sample[k],"all",tag[j]);
+					run(par[i],sample[k],"trigger",tag[j]);
+				}
+				if(par[i].Contains("photon")){
+					run(par[i],sample[k],"ID",tag[j]);
+				}
+				if(par[i].Contains("ele")){
+					run(par[i],sample[k],"ID",tag[j]);
+					run(par[i],sample[k],"reco",tag[j]);
+				}
 			}
 		}
 	}    

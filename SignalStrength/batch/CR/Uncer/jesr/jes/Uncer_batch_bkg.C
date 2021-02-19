@@ -20,7 +20,7 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
      double muon_hlt_scale,ele_hlt_scale;
      double actualWeight;int lep;
-     double puIdweight_M_new,puIdweight_M_JEC_up,puIdweight_M_JEC_down,puIdweight_M_JER_up,puIdweight_M_JER_down;
+     double puIdweight_T_new,puIdweight_T_JEC_up,puIdweight_T_JEC_down,puIdweight_T_JER_up,puIdweight_T_JER_down;
 
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("scalef",&scalef);
@@ -33,11 +33,11 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
      tree->SetBranchAddress("jet2eta_new",&jet2eta_new);
      tree->SetBranchAddress("jet2eta_JEC_up",&jet2eta_JEC_up);
      tree->SetBranchAddress("jet2eta_JEC_down",&jet2eta_JEC_down);
-     tree->SetBranchAddress("puIdweight_M_new",&puIdweight_M_new);
-     tree->SetBranchAddress("puIdweight_M_JEC_up",&puIdweight_M_JEC_up);
-     tree->SetBranchAddress("puIdweight_M_JEC_down",&puIdweight_M_JEC_down);
-     tree->SetBranchAddress("puIdweight_M_JER_up",&puIdweight_M_JER_up);
-     tree->SetBranchAddress("puIdweight_M_JER_down",&puIdweight_M_JER_down);
+     tree->SetBranchAddress("puIdweight_T_new",&puIdweight_T_new);
+     tree->SetBranchAddress("puIdweight_T_JEC_up",&puIdweight_T_JEC_up);
+     tree->SetBranchAddress("puIdweight_T_JEC_down",&puIdweight_T_JEC_down);
+     tree->SetBranchAddress("puIdweight_T_JER_up",&puIdweight_T_JER_up);
+     tree->SetBranchAddress("puIdweight_T_JER_down",&puIdweight_T_JER_down);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
      tree->SetBranchAddress("ele2_id_scale",   &ele2_id_scale);
      tree->SetBranchAddress("ele1_reco_scale", &ele1_reco_scale);
@@ -69,9 +69,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              double detajj_JEC_down=fabs(jet1eta_JEC_down-jet2eta_JEC_down);
              if(tag.Contains("18"))  prefWeight=1;
              if(tag.Contains("17")==0){
-                     puIdweight_M_new=1;
-                     puIdweight_M_JEC_up=1;
-                     puIdweight_M_JEC_down=1;
+                     puIdweight_T_new=1;
+                     puIdweight_T_JEC_up=1;
+                     puIdweight_T_JEC_down=1;
              }
              actualWeight=scalef*pileupWeight*prefWeight;
              if(lep==11)
@@ -79,9 +79,9 @@ void run(TString dir, TString sample,TString cut1[num],int kk,TString tag,bool t
              if(lep==13)
                      actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
              double weight[3];
-             weight[0]=actualWeight*puIdweight_M_new;
-             weight[1]=actualWeight*puIdweight_M_JEC_up;
-             weight[2]=actualWeight*puIdweight_M_JEC_down;
+             weight[0]=actualWeight*puIdweight_T_new;
+             weight[1]=actualWeight*puIdweight_T_JEC_up;
+             weight[2]=actualWeight*puIdweight_T_JEC_down;
 	     if (  tformula1->EvalInstance() ){
 		     if(Mjj_new>=150 &&Mjj_new<500)
 			     th1[0]->Fill(Mjj_new,weight[0]);//0~1, 2.5~4.5 and 500~800
@@ -125,8 +125,8 @@ int Uncer_batch_bkg(){
 	TString GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 	TString GenDr = "(gendrjj>0.5 && gendrla1>0.7 && gendrla2>0.7 && gendrj1a>0.5 && gendrj2a>0.5 && gendrj1l>0.5 && gendrj2l>0.5 && gendrj1l2>0.5 && gendrj2l2>0.5)";
 	TString GenControlRegion = "(genMjj > 150 && genMjj<500 && genZGmass>100)";
-      vector<TString> tags={"16","17","18"};
-//        vector<TString> tags={"17"};
+//      vector<TString> tags={"16","17","18"};
+        vector<TString> tags={"17"};
 	TString dir1[3];
 	TString cut[3];  
 	TString cut1[3]; 
@@ -140,9 +140,9 @@ int Uncer_batch_bkg(){
 	for(int i=0;i<tags.size();i++){
 		if(tags[i].Contains("17")){
 			GenJet="(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			JET_new="( ( ((jet1pt_new>50&&fabs(jet1eta_new)<4.7)||(jet1pt_new>30&&jet1pt_new<50&&fabs(jet1eta_new)<4.7&&jet1puIdMedium_new==1)) && ((jet2pt_new>50&&fabs(jet2eta_new)<4.7)||(jet2pt_new>30&&jet2pt_new<50&&fabs(jet2eta_new)<4.7&&jet2puIdMedium_new==1)) ) && Mjj_new > 150 && Mjj_new<500 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
-			JET_up="( ( ((jet1pt_JEC_up>50&&fabs(jet1eta_JEC_up)<4.7)||(jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&fabs(jet1eta_JEC_up)<4.7&&jet1puIdMedium_JEC_up==1)) && ((jet2pt_JEC_up>50&&fabs(jet2eta_JEC_up)<4.7)||(jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&fabs(jet2eta_JEC_up)<4.7&&jet2puIdMedium_JEC_up==1)) ) && Mjj_JEC_up > 150 && Mjj_JEC_up<500 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
-			JET_down="( ( ((jet1pt_JEC_down>50&&fabs(jet1eta_JEC_down)<4.7)||(jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&fabs(jet1eta_JEC_down)<4.7&&jet1puIdMedium_JEC_down==1)) && ((jet2pt_JEC_down>50&&fabs(jet2eta_JEC_down)<4.7)||(jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&fabs(jet2eta_JEC_down)<4.7&&jet2puIdMedium_JEC_down==1)) ) && Mjj_JEC_down > 150 && Mjj_JEC_down<500 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
+			JET_new="( ( ((jet1pt_new>50&&fabs(jet1eta_new)<4.7)||(jet1pt_new>30&&jet1pt_new<50&&fabs(jet1eta_new)<4.7&&jet1puIdTight_new==1)) && ((jet2pt_new>50&&fabs(jet2eta_new)<4.7)||(jet2pt_new>30&&jet2pt_new<50&&fabs(jet2eta_new)<4.7&&jet2puIdTight_new==1)) ) && Mjj_new > 150 && Mjj_new<500 && drla > 0.7 && drla2 > 0.7 && drj1a_new > 0.5 && drj2a_new > 0.5 && ("+drjj_new+") && drj1l_new > 0.5 && drj2l_new > 0.5 && drj1l2_new > 0.5 && drj2l2_new > 0.5 )";
+			JET_up="( ( ((jet1pt_JEC_up>50&&fabs(jet1eta_JEC_up)<4.7)||(jet1pt_JEC_up>30&&jet1pt_JEC_up<50&&fabs(jet1eta_JEC_up)<4.7&&jet1puIdTight_JEC_up==1)) && ((jet2pt_JEC_up>50&&fabs(jet2eta_JEC_up)<4.7)||(jet2pt_JEC_up>30&&jet2pt_JEC_up<50&&fabs(jet2eta_JEC_up)<4.7&&jet2puIdTight_JEC_up==1)) ) && Mjj_JEC_up > 150 && Mjj_JEC_up<500 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_up > 0.5 && drj2a_JEC_up > 0.5  && ("+drjj_JEC_up+")&& drj1l_JEC_up > 0.5 && drj2l_JEC_up > 0.5 && drj1l2_JEC_up > 0.5 && drj2l2_JEC_up > 0.5 )";
+			JET_down="( ( ((jet1pt_JEC_down>50&&fabs(jet1eta_JEC_down)<4.7)||(jet1pt_JEC_down>30&&jet1pt_JEC_down<50&&fabs(jet1eta_JEC_down)<4.7&&jet1puIdTight_JEC_down==1)) && ((jet2pt_JEC_down>50&&fabs(jet2eta_JEC_down)<4.7)||(jet2pt_JEC_down>30&&jet2pt_JEC_down<50&&fabs(jet2eta_JEC_down)<4.7&&jet2puIdTight_JEC_down==1)) ) && Mjj_JEC_down > 150 && Mjj_JEC_down<500 && drla > 0.7 && drla2 > 0.7 && drj1a_JEC_down > 0.5 && drj2a_JEC_down > 0.5  && ("+drjj_JEC_down+")&& drj1l_JEC_down > 0.5 && drj2l_JEC_down > 0.5 && drj1l2_JEC_down > 0.5 && drj2l2_JEC_down > 0.5)";
 		}
 		else{
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";

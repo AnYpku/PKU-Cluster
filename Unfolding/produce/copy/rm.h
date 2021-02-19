@@ -142,6 +142,8 @@ public :
    Double_t        jet1puIdLoose;
    Double_t        jet1puIdMedium;
    Double_t        jet1puIdTight;
+   Int_t           realjet1;
+   Int_t           realjet2;
    Double_t        jet2puIdLoose;
    Double_t        jet2puIdMedium;
    Double_t        jet2puIdTight;
@@ -375,6 +377,8 @@ public :
    TBranch        *b_jet1puIdLoose;   //!
    TBranch        *b_jet1puIdMedium;   //!
    TBranch        *b_jet1puIdTight;   //!
+   TBranch        *b_realjet1;   //!
+   TBranch        *b_realjet2;   //!
    TBranch        *b_jet2puIdLoose;   //!
    TBranch        *b_jet2puIdMedium;   //!
    TBranch        *b_jet2puIdTight;   //!
@@ -507,14 +511,14 @@ public :
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString tag);
-   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId);
-   virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,int realjet);
+   virtual Double_t get_puIdweight_effUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
 
-   virtual Double_t get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_effDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
 
-   virtual Double_t get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_misUp(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
 
-   virtual Double_t get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type);
+   virtual Double_t get_puIdweight_misDn(double ak4jet_eta,double ak4jet_phi,double ak4jet_pt,TH2F*h2_eff_mc2017,TH2F*h2_eff_sf2017,TH2F*h2_mistag_mc2017,TH2F*h2_mistag_sf2017,double ak4jet_puId,TH2F*h_sys,TString type,int realjet);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     endJob();
@@ -574,6 +578,11 @@ public :
      double puIdweight_M_effDn;
      double puIdweight_M_misUp;
      double puIdweight_M_misDn;
+     double puIdweight_T;
+     double puIdweight_T_effUp;
+     double puIdweight_T_effDn;
+     double puIdweight_T_misUp;
+     double puIdweight_T_misDn;
 };
 
 #endif
@@ -661,6 +670,11 @@ void rm::Init(TTree *tree)
         ExTree->Branch("puIdweight_M_effDn",&puIdweight_M_effDn);
         ExTree->Branch("puIdweight_M_misUp",&puIdweight_M_misUp);
         ExTree->Branch("puIdweight_M_misDn",&puIdweight_M_misDn);
+	ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
+        ExTree->Branch("puIdweight_T_effUp",&puIdweight_T_effUp);
+        ExTree->Branch("puIdweight_T_effDn",&puIdweight_T_effDn);
+        ExTree->Branch("puIdweight_T_misUp",&puIdweight_T_misUp);
+        ExTree->Branch("puIdweight_T_misDn",&puIdweight_T_misDn);
 	// lep and photon scales
 	ExTree->Branch("genyVlep",     &genyVlep,     "genyVlep/D");
 	ExTree->Branch("genphiVlep",   &genphiVlep,   "genphiVlep/D");
@@ -831,6 +845,8 @@ void rm::Init(TTree *tree)
 	fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
 	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
 	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+        fChain->SetBranchAddress("realjet1", &realjet1, &b_realjet1);
+        fChain->SetBranchAddress("realjet2", &realjet2, &b_realjet2);
 	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
 	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
 	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);

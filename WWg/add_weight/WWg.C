@@ -35,10 +35,8 @@ void WWg::Loop(TString name)
       if(name.Contains("WJets") && name.Contains("TTW")==0 ){ scalef=1000.*61526.7/float(npp-nmm)*fabs(gen_weight)/gen_weight;}
       if(name.Contains("TTJets")){ scalef=1000.*831.76/float(npp-nmm)*fabs(gen_weight)/gen_weight;}
       if(name.Contains("WWG"))   { scalef=1000*0.402852/float(npp-nmm)*fabs(gen_weight)/gen_weight;}
-      if(name.Contains("TTGJets_f")){ scalef=0.0024552*fabs(gen_weight)/gen_weight;}
-      if(name.Contains("TGJets_f") && name.Contains("TTGJets_f")==0){ scalef=0.0079501*fabs(gen_weight)/gen_weight;}
-      if(name.Contains("ZGJets_f")) { scalef=0.0032680*fabs(gen_weight)/gen_weight;}
-      if(name.Contains("WGJets_f")) { scalef=0.0297882 *fabs(gen_weight)/gen_weight;}
+      if(name.Contains("ST_tW"))   { scalef=1000.*34.91/float(npp-nmm)*fabs(gen_weight)/gen_weight;}
+      if(name.Contains("ST_tbarW"))   { scalef=1000.*34.91/float(npp-nmm)*fabs(gen_weight)/gen_weight;}
    
       HLT_mm = (HLT_IsoMu24) || (HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL);
       HLT_ee = (HLT_Ele32_WPTight_Gsf) || (HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL);

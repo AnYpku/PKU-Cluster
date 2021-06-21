@@ -17,7 +17,7 @@ infilename = buffer;
 //if(infilename.Contains("root")==0) {k=-2; continue;}
 if(infilename.Contains("end")==1) {k=-2; break;}
 infilename = infilename;
-TString outname=infilename+"_weight.root";
+TString outname="cutla-outplj_weight.root";
 
 cout<<dir<<infilename<<" -> "<<outname<<endl;
 

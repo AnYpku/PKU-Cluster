@@ -3395,7 +3395,7 @@ void WWg::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/home/pku/anying/cms/rootfiles/WWg/"+m_dataset, "RECREATE");
+   fout = new TFile("./"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
 
    fChain->SetBranchAddress("scalef", &scalef_tmp, &b_scalef);

@@ -11,6 +11,8 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <TH1D.h>
+#define num 6
 
 // Header file for the classes stored in the TTree if any.
 
@@ -22,6 +24,7 @@ public :
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
+   Double_t scalef;
    UInt_t          run;
    UInt_t          luminosityBlock;
    ULong64_t       event;
@@ -1669,6 +1672,7 @@ public :
    Float_t         puWeightDown;
 
    // List of branches
+   TBranch        *b_scalef;   //!
    TBranch        *b_run;   //!
    TBranch        *b_luminosityBlock;   //!
    TBranch        *b_event;   //!
@@ -3323,15 +3327,20 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString name);
+   virtual void     Loop(TString name,Bool_t isBarrel,int lep_channel);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     endJob();
 
+   TH1D*   htrue_mc[num];
+   TH1D*   hfake_mc[num];
+   TH1D*   hdata_data[num];
+   TH1D*   hfake_data[num];
+   Double_t lowpt[num] ={20,25,30,40,50,60};
+   Double_t highpt[num]={25,30,40,50,60,400};
 private:
      TTree *ExTree;
      TFile *fout;
-     double scalef;
 };
 
 #endif
@@ -3393,10 +3402,10 @@ void WWg::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
+   fout = new TFile("./template_"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
-   ExTree->Branch("scalef",&scalef,"scalef/D");
 
+   fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
    fChain->SetBranchAddress("event", &event, &b_event);

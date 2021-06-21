@@ -26,14 +26,14 @@ void fit(float lowpt, float highpt, Bool_t isBarrel,TString channel){
 	else c="endcap_";
         vector<TFile*>fdata;
         vector<TFile*>ftrue;
-        if(channel!="emu")ftrue.push_back(TFile::Open("../../hist_"+c+channel+"_outZGJets_f.root"));
-        else ftrue.push_back(TFile::Open("../../hist_"+c+channel+"_outTTGJets_f18.root"));
+        if(channel!="emu")ftrue.push_back(TFile::Open("../../barrel/hist_"+c+channel+"_outZGJets_f18.root"));
+        else ftrue.push_back(TFile::Open("../../barrel/hist_"+c+channel+"_outTTGJets_f18.root"));
         vector<TString> data={"MuonEG","DMuon","DEle"};
 	for(int i=0;i<data.size();i++){
 		if(data[i].Contains("DEle") && channel=="mm") continue;
 		if(data[i].Contains("DMuon") && channel=="ee") continue;
-		fdata.push_back(TFile::Open("../../hist_"+c+channel+"_"+data[i]+"_f18.root"));
-                cout<<"../hist_"+c+channel+"_"+data[i]+"_f.root"<<endl;
+		fdata.push_back(TFile::Open("../../barrel/hist_"+c+channel+"_"+data[i]+"_f18.root"));
+                cout<<"../barrel/hist_"+c+channel+"_"+data[i]+"_f18.root"<<endl;
 	}
 	TH1D* hdata_ = getHist(lowpt,highpt,"data",fdata);  
 	TH1D* hfake_ = getHist(lowpt,highpt,"fake",fdata);
@@ -168,10 +168,10 @@ void fit(float lowpt, float highpt, Bool_t isBarrel,TString channel){
 	Double_t fakerateErr = sqrt(nFake_inwindowErr*nFake_inwindowErr/(nDataInWindow*nDataInWindow)
 								+ nFake_inwindow*nFake_inwindow*nDataInWindowErr*nDataInWindowErr/(nDataInWindow
 									*nDataInWindow*nDataInWindow*nDataInWindow));
-	ofstream myfile(TString("./txt/fakerate_") + Form("photon_pt%0.f_%0.f.txt", lowpt, highpt),ios::out);
-	ofstream myfile1(TString("./txt/fakerate_")+ name + Form("_pt%0.f_%0.f.txt", lowpt, highpt),ios::out);
-	ofstream file(TString("./txt/TrueNumber_") + Form("pt%0.f-%0.f.txt", lowpt, highpt),ios::out);
-	ofstream file1(TString("./txt/FakeNumber_") + Form("pt%0.f-%0.f.txt", lowpt, highpt),ios::out);
+	ofstream myfile(TString("./txt/fakerate_") + channel+Form("_photon_pt%0.f_%0.f.txt", lowpt, highpt),ios::out);
+	ofstream myfile1(TString("./txt/fakerate_")+ channel+ "_" +name + Form("_pt%0.f_%0.f.txt", lowpt, highpt),ios::out);
+	ofstream file(TString("./txt/TrueNumber_") + channel+Form("_pt%0.f-%0.f.txt", lowpt, highpt),ios::out);
+	ofstream file1(TString("./txt/FakeNumber_") +channel+ Form("_pt%0.f-%0.f.txt", lowpt, highpt),ios::out);
 
 	myfile << "data in window = " << nDataInWindow << "+-" << nDataInWindowErr <<" "<<nDataInWindow_1<<" "<<nDataInWindow_2<<" "<<nDataInWindow_3<<" "<<nDataInWindow_4<<" "<<nDataInWindow_5<<" "<<nDataInWindow_6<<" "<<nDataInWindow_7<<std::endl;
 	myfile << "nDatatotal = " << nDatatotal << std::endl;

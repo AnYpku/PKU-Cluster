@@ -28,7 +28,7 @@ void runxx() {
 		WWg m1(tree1,outname);
 		cout<<outname<<endl;
 		for(int i=0;i<isBarrel.size()-1;i++){
-			for(int j=1;j<channel_number.size();j++){
+			for(int j=0;j<channel_number.size()-2;j++){
                                 if(outname.Contains("DMuon") && channel_number[j] == 2) 
 					continue;
                                 if( (outname.Contains("EGamma") || outname.Contains("Ele")) && channel_number[j] == 3) 

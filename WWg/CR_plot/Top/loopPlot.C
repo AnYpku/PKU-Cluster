@@ -12,18 +12,18 @@
 #include "CMSTDRStyle.h"
 #include "RoccoR.cc"
 #include "TH2.h"
-void loopPlot(bool isBarrel,TString isChannel) {
+void loopPlot(int isBarrel,TString isChannel) {
 	gErrorIgnoreLevel = kFatal; //suppresses all info messages
 
 	setTDRStyle(); //TDR style
 	//#####################EDIT THE OPTIONS##############################
 
 	TString channel,lep_ch;
-	if(isBarrel)channel="b";else channel="e";
+	if(isBarrel==1)channel="b";else if(isBarrel==0)channel="e"; else channel="a";
 	double lumiValue1 = 59.7;
 	double lumiValue2 = 41.52;
 	double lumiValue3 = 35.86;
-	double lumiValue = 137;
+	double lumiValue;
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?
@@ -58,20 +58,20 @@ void loopPlot(bool isBarrel,TString isChannel) {
 	std::string dataLabels[kk] = { "MuonEG"};
 	cout<<"Data size "<<fData.size()<<endl;
 	// set mc imformation
-	const int nMC = 8;//
+	const int nMC = 9;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-        std::string mc[nMC] ={"plj","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
-        mc[0]=mc[0]+isChannel+"_weight";
+        std::string mc[nMC] ={"plj","fakeLepton","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
+//        mc[0]=mc[0]+isChannel+"_weight";
 	std::vector< TString > fMC;
 	for (int ii = 0; ii < nMC; ii++) {
 		fMC.push_back(pathToTrees[0] +"cutla-out"+ mc[ii] + "18.root");
 		cout<<pathToTrees[0]<<"cutla-out"<<mc[ii] <<"18.root"<<endl;
 	}
 	const int nmc=fMC.size();
-	std::string mcLabels[nmc] ={"plj","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
+	std::string mcLabels[nmc] ={"plj","fakeLepton","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
 //	std::string mcLabels[nmc] ={"DY","TTJets","TTWJets","WJets","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
-	double kFactorsMC_array[nmc] ={1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
+	double kFactorsMC_array[nmc] ={1,1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
 //	double kFactorsMC_array[nmc] ={lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
 	cout<<"MC size "<<fMC.size()<<endl;
 	std::vector<double> kFactorsMC;
@@ -101,7 +101,7 @@ void loopPlot(bool isBarrel,TString isChannel) {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
-        std::vector < TString > histName={"m_{ll}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","m_{ll#gamma}","p_{T}^{ll}","p_{T}^{ll}","#phi_{ll}","#eta_{ll}","MET","npvs","N_{bjets}"};
+        std::vector < TString > histName={"m_{ll}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","m_{ll#gamma}","p_{T}^{ll}","p_{T}^{ll}","#phi_{ll}","#eta_{ll}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{l_{2}+W}}"};
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
 
@@ -249,13 +249,14 @@ void loopPlot(bool isBarrel,TString isChannel) {
 	std::vector<int> fColorsMC;
 
 	fColorsMC.push_back(kGreen+2);
+	fColorsMC.push_back(kGreen-3);
 	fColorsMC.push_back(kCyan);
 	fColorsMC.push_back(40);
 	fColorsMC.push_back(kYellow-7);
 	fColorsMC.push_back(kBlue-6);
 	fColorsMC.push_back(kBlue);
 	fColorsMC.push_back(kGreen);
-	fColorsMC.push_back(kGreen-6);
+	fColorsMC.push_back(kGreen-7);
 
 
 	std::vector<int> fColorsMCSig;
@@ -273,8 +274,9 @@ void loopPlot(bool isBarrel,TString isChannel) {
 }
 
 int main() {
-	loopPlot(1,"emu");
-//	loopPlot(0);
+//	loopPlot(1,"mm");
+//	loopPlot(1,"emu");
+	loopPlot(2,"emu");
 	return 0;
 }
 

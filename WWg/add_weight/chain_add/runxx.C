@@ -15,8 +15,8 @@ void runxx(TString dir,TString outname){
 }
 int main(){
 //	TString dir="./rootfiles/";
-	TString dir="/home/pku/anying/cms/rootfiles/WWg/EGammaA/tree*";
-	TString name="DEleA18.root";
+	TString dir="/home/pku/anying/cms/rootfiles/WWg/EGammaD/tree*";
+	TString name="DEleD18.root";
         runxx(dir,name);
         return 1;
 }

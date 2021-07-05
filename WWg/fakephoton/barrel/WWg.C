@@ -50,6 +50,7 @@ void WWg::Loop(TString name,Bool_t isBarrel,int lep_channel)
       HLT_ee = (HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL);
       HLT_emu = (HLT_Ele32_WPTight_Gsf) || (HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL); 
 
+      double mT=sqrt(2*(ptll*puppimet*(1-cos(phiVlep-puppimetphi) ) ) );
       if(name.Contains("Muon") || name.Contains("Egamma") || name.Contains("Ele")){
         lepton1_isprompt=1;lepton2_isprompt=1;
       }
@@ -67,9 +68,9 @@ void WWg::Loop(TString name,Bool_t isBarrel,int lep_channel)
 
       if(jentry%10000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<" "<<HLT_data<<" "<<(HLT_mm||HLT_ee||HLT_emu)<<endl;
 
-      BSL_emu = (channel==1 && lep1_pid==13 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>20 && fabs(lep2eta)<2.5 && (n_loose_ele+n_loose_mu)==2) && HLT_emu && mll>70 && mll<110;
-      BSL_ee = (channel==2 && lep1_pid==11 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.5 && lep2pt>20 && fabs(lep2eta)<2.5  && (n_loose_ele+n_loose_mu)==2) && HLT_ee && mll>70 && mll<110 ;
-      BSL_mumu = (channel==3 && lep1_pid==13 && lep2_pid==13 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>20 && fabs(lep2eta)<2.4  && (n_loose_ele+n_loose_mu)==2) && HLT_mm && mll>70 && mll<110 ;
+      BSL_emu = (channel==1 && lep1_pid==13 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>25 && fabs(lep2eta)<2.5 && (n_loose_ele+n_loose_mu)==2) && HLT_emu && mT<60;
+      BSL_ee = (channel==2 && lep1_pid==11 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.5 && lep2pt>20 && fabs(lep2eta)<2.5  && (n_loose_ele+n_loose_mu)==2) && HLT_ee && mT<60 ;
+      BSL_mumu = (channel==3 && lep1_pid==13 && lep2_pid==13 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>20 && fabs(lep2eta)<2.4  && (n_loose_ele+n_loose_mu)==2) && HLT_mm && mT<60 ;
       if( !( BSL_emu || BSL_ee || BSL_mumu ) )
               continue;
       ExTree->Fill();

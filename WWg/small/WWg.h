@@ -24,6 +24,7 @@ public :
    // Declaration of leaf types
    UInt_t          run;
    Double_t        scalef;
+   Double_t        scalef_tmp;
    UInt_t          luminosityBlock;
    ULong64_t       event;
    Float_t         HTXS_Higgs_pt;
@@ -1619,6 +1620,8 @@ public :
    Float_t         lep2phi;
    Int_t           lepton1_isprompt;
    Int_t           lepton2_isprompt;
+   Int_t           lep1_is_tight;
+   Int_t           lep2_is_tight;
    Int_t           n_loose_mu;
    Int_t           n_loose_ele;
    Int_t           n_photon;
@@ -3255,6 +3258,8 @@ public :
    TBranch        *b_lep2phi;   //!
    TBranch        *b_lepton1_isprompt;   //!
    TBranch        *b_lepton2_isprompt;   //!
+   TBranch        *b_lep1_is_tight;   //!
+   TBranch        *b_lep2_is_tight;   //!
    TBranch        *b_n_loose_mu;   //!
    TBranch        *b_n_loose_ele;   //!
    TBranch        *b_n_photon;   //!
@@ -3369,10 +3374,10 @@ void WWg::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/home/pku/anying/cms/rootfiles/WWg/"+m_dataset, "RECREATE");
+   fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
 
-   fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+   fChain->SetBranchAddress("scalef", &scalef_tmp, &b_scalef);
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
    fChain->SetBranchAddress("event", &event, &b_event);
@@ -4969,6 +4974,8 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("lep2phi", &lep2phi, &b_lep2phi);
    fChain->SetBranchAddress("lepton1_isprompt", &lepton1_isprompt, &b_lepton1_isprompt);
    fChain->SetBranchAddress("lepton2_isprompt", &lepton2_isprompt, &b_lepton2_isprompt);
+   fChain->SetBranchAddress("lep1_is_tight", &lep1_is_tight, &b_lep1_is_tight);
+   fChain->SetBranchAddress("lep2_is_tight", &lep2_is_tight, &b_lep2_is_tight);
    fChain->SetBranchAddress("n_loose_mu", &n_loose_mu, &b_n_loose_mu);
    fChain->SetBranchAddress("n_loose_ele", &n_loose_ele, &b_n_loose_ele);
    fChain->SetBranchAddress("n_photon", &n_photon, &b_n_photon);

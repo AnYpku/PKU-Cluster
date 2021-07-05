@@ -24,8 +24,8 @@ void WWg::Loop(TString name)
    double scalef_fb[num_b];
    double scalef_fe[num_e];
    ifstream f1,f2;
-   f1.open("../cal_weight/pljweight_mm_barrel18.txt");
-   f2.open("../cal_weight/pljweight_mm_endcap18.txt");
+   f1.open("../cal_weight/pljweight_emu_barrel18.txt");
+   f2.open("../cal_weight/pljweight_emu_endcap18.txt");
    for(int i=0;i<num_b;i++){
        f1>>scalef_fb[i];
        cout<<scalef_fb[i]<<endl;

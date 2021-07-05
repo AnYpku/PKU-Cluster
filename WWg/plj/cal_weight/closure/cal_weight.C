@@ -29,7 +29,7 @@ int cal_weight(){
 	vector<TString> channel={"emu","mm","ee"};
         vector<TString> isBarrel={"barrel","endcap"};
 	vector<TString> year={"16","17","18"};
-	for(int i=1;i<fname.size();i++){
+	for(int i=0;i<fname.size()-2;i++){
 		for(int ik=2;ik<year.size();ik++){
 			for(int k=0;k<isBarrel.size()-1;k++){
                                 cout<<fname[i]<<" "<<channel[i]<<" "<<isBarrel[k]<<endl;
@@ -38,10 +38,12 @@ int cal_weight(){
                                 if(channel[i]=="emu")ikk=1;else if(channel[i]=="mm")ikk=3;else ikk=2;
 				TH1D*h1=run(cut1,"n","out"+fname[i]+year[ik],channel[i],isBarrel[k],"mll>70 && mll<110");  
 				TH1D*h2=run(cut2,"d","out"+fname[i]+"_f"+year[ik],channel[i],isBarrel[k],"mll>70 && mll<110");
-				TH1D*h3=run(cut1,"n","out"+fname[i]+year[ik],channel[i],isBarrel[k],"met>30"); 
-				TH1D*h4=run(cut2,"d","out"+fname[i]+"_f"+year[ik],channel[i],isBarrel[k],"met>30");
+				TH1D*h3=run(cut1,"n","out"+fname[i]+year[ik],channel[i],isBarrel[k],"mt<60"); 
+				TH1D*h4=run(cut2,"d","out"+fname[i]+"_f"+year[ik],channel[i],isBarrel[k],"mt<60");
 				TH1D*h5=run(cut1,"n","out"+fname[i]+year[ik],channel[i],isBarrel[k],Form("channel==%0.d",ikk)); 
 				TH1D*h6=run(cut2,"d","out"+fname[i]+"_f"+year[ik],channel[i],isBarrel[k],Form("channel==%0.d",ikk));
+				TH1D*h7=run(cut1,"n","out"+fname[i]+year[ik],channel[i],isBarrel[k],"mt>60");  
+				TH1D*h8=run(cut2,"d","out"+fname[i]+"_f"+year[ik],channel[i],isBarrel[k],"mt>60");
 				fout->cd();
 				h1->Write();
 				h2->Write();

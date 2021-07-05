@@ -120,8 +120,8 @@ public:
 	void cleanupMCSig();
 	void cleanupDATA();
 	void makeLabels();
-	void makeStackPlots(std::string histoName,TString histTitle,bool isBarrel);
-	void setOutDir(std::string outDirNew,bool isBarrel);
+	void makeStackPlots(std::string histoName,TString histTitle,int isBarrel);
+	void setOutDir(std::string outDirNew,int isBarrel);
 
 	/// set debug mode
 	void setDebug(bool debug) {
@@ -238,25 +238,28 @@ void EDBRHistoPlotter::makeLabels() {
 }
 
 ///set output directories for plots.
-void EDBRHistoPlotter::setOutDir(std::string outDirNew,bool isBarrel) {
+void EDBRHistoPlotter::setOutDir(std::string outDirNew,int isBarrel) {
 	char buffer[256];
 	nameOutDir_ = outDirNew;
 
-        if(isBarrel)
+        if(isBarrel==1)
 		sprintf(buffer, "%s/pdf_b", nameOutDir_.c_str());
-        else    sprintf(buffer, "%s/pdf_e", nameOutDir_.c_str());
+        else if(isBarrel==0)    sprintf(buffer, "%s/pdf_e", nameOutDir_.c_str());
+	else  sprintf(buffer, "%s/pdf_a", nameOutDir_.c_str());
 	printf("%s\n", buffer);
 	gSystem->mkdir(buffer, true);
 
-        if(isBarrel)
+        if(isBarrel==1)
 		sprintf(buffer, "%s/root_b", nameOutDir_.c_str());
-	else    sprintf(buffer, "%s/root_e", nameOutDir_.c_str());
+	else if(isBarrel==0)    sprintf(buffer, "%s/root_e", nameOutDir_.c_str());
+	else sprintf(buffer, "%s/root_a", nameOutDir_.c_str());
+
 	printf("%s\n", buffer);
 	gSystem->mkdir(buffer, true);
 
 }
 
-void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,bool isBarrel) {
+void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,int isBarrel) {
 
 	cleanupMC();
 	cleanupMCSig();
@@ -594,23 +597,26 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,bo
 	}
 	cout<<"test"<<endl;
 	for (size_t i = 0; i != histosMC.size(); ++i) {
-		mcTotalLabels.push_back("plj");mcTotalLabels.push_back("VV");mcTotalLabels.push_back("ST");
+		mcTotalLabels.push_back("plj");mcTotalLabels.push_back("Nonprompt lepton");mcTotalLabels.push_back("VV");mcTotalLabels.push_back("ST");
 		mcTotalLabels.push_back("ZGJets");mcTotalLabels.push_back("TGJets");
 		mcTotalLabels.push_back("TTGJets");mcTotalLabels.push_back("WGJets");mcTotalLabels.push_back("tZq");
 		TH1D* h1=(TH1D*)histosMC.at(i)->Clone();
 		double yerr;
 		double yields=h1->IntegralAndError(0,histosMC.at(i)->GetNbinsX(),yerr);
 		yields = h1->GetSumOfWeights();
+                if(yields<0){yields=0;yerr=0;}
 		char y[100];sprintf(y,"%.1f",yields);
 		char ye[100];sprintf(ye,"%.1f",yerr);
 		TString samples ;
 		if(mcTotalLabels.at(i).find("plj")!=string::npos)
 			samples="Nonprompt #gamma";
 		else    samples= mcTotalLabels.at(i).c_str();
-	      TString LabelMC = samples +" ["+ y+ "#pm"+ye+"]";
+		TString LabelMC = samples +" ["+ y+ "#pm"+ye+"]";
 //		TString LabelMC = samples ;
-		if(i<3)leg1->AddEntry(h1, LabelMC, "f");
-                else   leg2->AddEntry(h1, LabelMC, "f");
+                if(yields>0){
+			if(i<2)leg1->AddEntry(h1, LabelMC, "f");
+			else   leg2->AddEntry(h1, LabelMC, "f");
+		}
 		ftxt<<samples<<" "<<y<< "$pm$"<<ye<<""<<endl;
 		cout<<LabelMC<<endl;
 	}
@@ -730,14 +736,18 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,bo
 	// Save the picture
 	char buffer[256];
 	cv->SetLogy(false);
-        if(isBarrel)	
-		sprintf(buffer, "%s/root_b/can_%s.root", nameOutDir_.c_str(),histoName.c_str());
-	else    sprintf(buffer, "%s/root_e/can_%s.root", nameOutDir_.c_str(),histoName.c_str());
+        if(isBarrel==1)	
+		                 sprintf(buffer, "%s/root_b/can_%s.root", nameOutDir_.c_str(),histoName.c_str());
+	else if(isBarrel==0)     sprintf(buffer, "%s/root_e/can_%s.root", nameOutDir_.c_str(),histoName.c_str());
+	else                     sprintf(buffer, "%s/root_a/can_%s.root", nameOutDir_.c_str(),histoName.c_str());
 	cv->SaveAs(buffer);
-	if(isBarrel)
-		sprintf(buffer, "%s/pdf_b/can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
-	else    sprintf(buffer, "%s/pdf_e/can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
+
+	if(isBarrel==1)
+		               sprintf(buffer, "%s/pdf_b/can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
+	else if(isBarrel==0)   sprintf(buffer, "%s/pdf_e/can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
+	else                   sprintf(buffer, "%s/pdf_a/can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
 	cv->SaveAs(buffer);
+
 	if (makeRatio_ && isDataPresent_) {
 		fPads1->cd();
 		fPads1->SetLogy(true);
@@ -752,9 +762,10 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,bo
 	cv->Update();
 	cv->Modified(true);
 	cv->Draw();
-        if(isBarrel)
+        if(isBarrel==1)
 		sprintf(buffer, "%s/pdf_b/LOG_can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
-        else    sprintf(buffer, "%s/pdf_e/LOG_can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
+        else if(isBarrel==0)    sprintf(buffer, "%s/pdf_e/LOG_can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
+	else  sprintf(buffer, "%s/pdf_a/LOG_can_%s.pdf", nameOutDir_.c_str(),histoName.c_str());
 	cv->SaveAs(buffer);
 
 }

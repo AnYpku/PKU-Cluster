@@ -9,15 +9,15 @@ TH1D* run(TString cut,TString file,TString channel,TString isBarrel){
         TH1D*h1 = new TH1D(histname,"",ptbins.size()-1,&ptbins[0]);
         if(channel=="ee") cut = "( ( (channel==2 && lep1_pid==11 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.5 && lep2pt>20 && fabs(lep2eta)<2.5) && "+cut +")" + "&& (HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL) && mll>70 && mll<110)";
         else if(channel=="mm") cut = "( ( (channel==3 && lep1_pid==13 && lep2_pid==13 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>20 && fabs(lep2eta)<2.4) && "+cut +")"+"&& ((HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ)) && mll>70 && mll<110 )";
-        else if(channel=="emu") cut = "( ( (channel==1 && lep1_pid==13 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>20 && fabs(lep2eta)<2.5) && "+cut +")"+" && ((HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL)) )";
+        else if(channel=="emu") cut = "( ( (channel==1 && lep1_pid==13 && lep2_pid==11 && lep1pt>20 && fabs(lep1eta)<2.4 && lep2pt>25 && fabs(lep2eta)<2.5) && "+cut +")"+" && ((HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL)) )";
         if(isBarrel.Contains("barrel")) cut="("+cut+"&& (fabs(photoneta)<1.4442)"+")";
         else cut="("+cut+"&& (fabs(photoneta)<2.5&&fabs(photoneta)>1.566)"+")";
-        cout<<cut<<endl;
+//      cout<<cut<<endl;
 	if(file.Contains("Muon")||file.Contains("Ele"))
 		tree->Draw("photonet>>"+histname,cut+"*1","goff");
         else
 		tree->Draw("photonet>>"+histname,cut+"*scalef","goff");
-
+        cout<<channel<<" "<<isBarrel<<" "<<h1->GetSum()<<endl;
 	return h1;
 }
 int cal_weight(){
@@ -30,7 +30,7 @@ int cal_weight(){
 	vector<TString> channel={"emu","mm","ee"};
         vector<TString> isBarrel={"barrel","endcap"};
 //      vector<TString> isBarrel={"endcap"};
-	for(int i=1;i<fname.size()-1;i++){
+	for(int i=0;i<fname.size()-2;i++){
 		for(int ik=2;ik<year.size();ik++){
 			for(int k=0;k<isBarrel.size();k++){
 				cout<<fname[i]<<" "<<channel[i]<<" "<<year[ik]<<" "<<isBarrel[k]<<endl;

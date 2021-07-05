@@ -4,15 +4,15 @@
 #include "TH1.h"
 #include "RooRealVar.h"
 #include "RooAddPdf.h"
-#define num 6
+#define num 8
 
 using namespace RooFit;
 using namespace std;
 TString dir = "./fractionfitResult_za/"; 
 ofstream file3( dir + "info_fit_fr.txt");
 ofstream file2( dir + "frac_number.txt");
-TFile* fdata = TFile::Open("../hist_barrel_emu_MuonEG_f.root");
-TFile* ftrue = TFile::Open("../hist_barrel_emu_outZGJets_f.root");
+TFile* fdata = TFile::Open("../../barrel/hist_barrel_emu_MuonEG_f18.root");
+TFile* ftrue = TFile::Open("../../barrel/hist_barrel_emu_outTTGJets_f18.root");
 Double_t fr,fr_Error;
 TString name;
 void fitf(float lowpt, float highpt){
@@ -178,8 +178,8 @@ void fitf(float lowpt, float highpt){
 void run_fitf(Int_t b){
   float lowchiso[21];
   float highchiso[21];
-  Double_t lowpt[num] ={20,30,40,50,80,100};
-  Double_t highpt[num]={30,40,50,80,100,400};
+  Double_t lowpt[num] ={20,25,30,35,40,50,60,100};
+  Double_t highpt[num]={25,30,35,40,50,60,100,400};
   for(Int_t j=0;j<21;j++){
 	  if(j<6)       {lowchiso[j]=3;highchiso[j]=j+8;}
 	  if(5<j&&j<11) {lowchiso[j]=4;highchiso[j]=j+3;}
@@ -199,6 +199,8 @@ int fitfraction(){
 	run_fitf(3);
 	run_fitf(4);
 	run_fitf(5);
+	run_fitf(6);
+	run_fitf(7);
         return 0;
 }
 

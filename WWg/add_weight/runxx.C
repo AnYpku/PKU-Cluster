@@ -4,33 +4,33 @@
 using namespace std;
 
 void runxx() {
-TString dir ="/home/pku/anying/cms/rootfiles/WWg/";
-ifstream infile("file");
-string buffer; 
-TString infilename;
+	TString dir ="/home/pku/anying/cms/rootfiles/WWg/";
+	ifstream infile("file");
+	string buffer; 
+	TString infilename;
 
-int k=1;
+	int k=1;
 
-while (k>0){
-getline (infile, buffer) ;
-infilename = buffer;
-if(infilename.Contains("root")==0) {k=-2; continue;}
-if(infilename.Contains("end")==1) {k=-2; break;}
-infilename = infilename;
-TString outname="out"+infilename;
+	while (k>0){
+		getline (infile, buffer) ;
+		infilename = buffer;
+		if(infilename.Contains("root")==0) {k=-2; continue;}
+		if(infilename.Contains("end")==1) {k=-2; break;}
+		infilename = infilename;
+		TString outname="cutlep-out"+infilename;
 
-cout<<dir<<infilename<<" -> "<<outname<<endl;
+		TFile *file1 =new TFile(dir+infilename);
+		TTree *tree1 = (TTree*) file1->Get("Events");
+		WWg m1(tree1,outname);
+		cout<<outname<<endl;
+		TH1D*h1=(TH1D*)file1->Get("nEventsGenWeighted");
+		double nevents=0;
+		nevents=h1->GetSum();
+		cout<<dir<<infilename<<" -> "<<outname<<endl;
+		m1.Loop(outname,nevents);
+		m1.endJob();
 
-TFile *file1 =new TFile(dir+infilename);
-//TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");
-//TTree *tree1 = (TTree*) dir1->Get("ZPKUCandidates");
-TTree *tree1 = (TTree*) file1->Get("Events");
-WWg m1(tree1,outname);
-cout<<outname<<endl;
-m1.Loop(outname);
-m1.endJob();
- 
-}
+	}
 }
 
 int main(){

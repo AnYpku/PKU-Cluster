@@ -3236,7 +3236,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString name);
+   virtual void     Loop(TString name,float number);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     endJob();
@@ -3306,7 +3306,7 @@ void WWg::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("./"+m_dataset, "RECREATE");
+   fout = new TFile("./rootfiles/"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
 
    ExTree->Branch("scalef",&scalef,"scalef/D");  

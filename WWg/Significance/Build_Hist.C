@@ -19,11 +19,12 @@ void run(TString dir,TString name,TString cut,TString tag){
      cout<<tag<<" "<<name<<" "<<endl;
      TTree*tree=(TTree*)file->Get("outtree");
      double actualWeight,scalef,mT;
-     float mll;
+     float mll,mllg;
      tree->SetBranchAddress("scalef", &scalef);
      tree->SetBranchAddress("actualWeight", &actualWeight);
      tree->SetBranchAddress("mT", &mT);
      tree->SetBranchAddress("mll", &mll);
+     tree->SetBranchAddress("mllg", &mllg);
      TString th2name,th2name_out;
      if(name.Contains("WWG")) {
 	     th2name="sig";
@@ -32,7 +33,9 @@ void run(TString dir,TString name,TString cut,TString tag){
              
      vector<Double_t> mT_bins    ={60,90,120,160,200};
      vector<Double_t> mll_bins   ={20,80,120,160,200};
+//   vector<Double_t> mllg_bins   ={40,100,150,200,300};
      TH2D* h2=new TH2D(th2name,"",mT_bins.size()-1,&mT_bins[0],mll_bins.size()-1,&mll_bins[0]);
+//   TH2D* h2=new TH2D(th2name,"",mT_bins.size()-1,&mT_bins[0],mllg_bins.size()-1,&mllg_bins[0]);
      double lumi;
      if(tag.Contains("16"))lumi=35.86;else if(tag.Contains("17"))lumi=41.52;else if(tag.Contains("18"))lumi=59.7;
      TTreeFormula *tformula1=new TTreeFormula("formula1", cut, tree);
@@ -44,7 +47,9 @@ void run(TString dir,TString name,TString cut,TString tag){
 	     if (  tformula1->EvalInstance() ){ 
 		if (mT>=200) mT=199;
 		if (mll>=200) mll=199;
+                if(mllg>300) mllg=299;
 		h2->Fill(mT,mll,actualWeight);
+//		h2->Fill(mT,mllg,actualWeight);
 	     }
 
      }
@@ -56,9 +61,9 @@ void run(TString dir,TString name,TString cut,TString tag){
      fout->Close();
 }
 int Build_Hist(){
-	TString LEP = "((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && lep1_pid==13 && lep2_pid==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 )";
-	TString photon = "(n_photon>0  && photonet > 20. && (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ) )";
-	TString met="(n_bjets==0 && puppimet > 20 && mT2>30 && mT>60 )";
+	TString LEP = "((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && lep1_charge*lep2_charge<0 && drll>0.5)";
+	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 )";
+	TString met="(n_bjets==0 && PuppiMET_T1Smear_pt > 20 && mT2>30 && mT>60 )";
 	vector<TString> tags={"18"};
 	TString dir1;
 	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/SR/output-slimmed-rootfiles/optimal_emua_";

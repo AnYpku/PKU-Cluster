@@ -4,7 +4,7 @@
 using namespace std;
 
 void runxx() {
-TString dir ="/home/pku/anying/cms/rootfiles/WWg/raw/MuonEG/";
+TString dir ="/home/pku/anying/cms/rootfiles/WWg/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -16,14 +16,12 @@ getline (infile, buffer) ;
 infilename = buffer;
 if(infilename.Contains("root")==0) {k=-2; continue;}
 if(infilename.Contains("end")==1) {k=-2; break;}
-infilename =/*"cutlep-"+*/infilename;
-TString outname="cutlep-"+infilename;
+TString filename ="cutlep-"+infilename;
+TString outname="cutla-"+infilename;
 
 cout<<dir<<infilename<<" -> "<<outname<<endl;
 
-TFile *file1 =new TFile(dir+infilename);
-//TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");
-//TTree *tree1 = (TTree*) dir1->Get("ZPKUCandidates");
+TFile *file1 =new TFile(dir+filename);
 TTree *tree1 = (TTree*) file1->Get("Events");
 WWg m1(tree1,outname);
 cout<<outname<<endl;

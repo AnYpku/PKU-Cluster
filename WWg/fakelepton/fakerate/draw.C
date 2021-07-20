@@ -1,6 +1,11 @@
 TH1D*run(TString filename,TString cut,TString channel,TString type){
-	TFile*f1=new TFile("../out"+filename+"18_fakerate.root");
-        TTree*tree=(TTree*)f1->Get("Events");
+	TChain*tree=new TChain("Events","");
+	if(filename.Contains("Ele")==0){
+		tree->Add("../rootfiles/out"+filename+"_fakerate18.root");
+	}
+	else{
+		tree->Add("../rootfiles/out"+filename+"_fakerate18.root"); 
+	}
         if(channel.Contains("mu")){
                 if(filename.Contains("Muon")==0){
                         cut="("+cut+" && ( (lepton_pt>25 && HLT_Mu17_TrkIsoVVL)||(lepton_pt<25 && HLT_Mu8_TrkIsoVVL) ) && lepton_isprompt==1"+")";
@@ -25,17 +30,19 @@ TH1D*run(TString filename,TString cut,TString channel,TString type){
         cout<<cut<<endl;
 	return h1;
 }
-TCanvas* get_canvas(TString type){
+void get_canvas(TString type,TString channel,TString filename){
         gStyle->SetOptStat(0);
         TString cut="( fabs(lepton_pid)==13 && lepton_pt>10 && fabs(lepton_eta)<2.4 && puppimet<30 && puppimt<20)";
-	TH1D*h1=run("DMuon",cut,"mu",type);
-	TH1D*h2=run("WJets",cut,"mu",type);
-	TH1D*h3=run("DY",cut,"mu",type);
+	TH1D*h1=run(filename,cut,channel,type);
+	TH1D*h2=run("WJets",cut,channel,type);
+	TH1D*h3=run("DYJets",cut,channel,type);
+	TH1D*h4=run("TTJets",cut,channel,type);
         TCanvas*c1=new TCanvas("c1_"+type,"",800,600);
         c1->SetLogy();
         h1->SetLineColor(1);
         h2->SetLineColor(2);
         h3->SetLineColor(3);
+        h4->SetLineColor(4);
         h1->Draw();
         h2->Draw("same");
         h3->Draw("same");
@@ -43,13 +50,21 @@ TCanvas* get_canvas(TString type){
         l1->AddEntry(h1,"Muon "+type);
         l1->AddEntry(h2,"WJets "+type);
         l1->AddEntry(h3,"DY "+type);
+        l1->AddEntry(h4,"TTJets "+type);
         l1->Draw();
         c1->Print("com_"+type+".pdf");
-return c1;
+        TFile*fout=new TFile("hist_lepton_pt_"+type+"_"+channel+"18.root","recreate");
+        fout->cd();
+        h1->Write();
+        h2->Write();
+        h3->Write();
+        h4->Write();
+        fout->Close();
+         
 }
 int draw(){
         
-	TCanvas*c1=get_canvas("tight");
-	TCanvas*c2=get_canvas("loose_not_tight");
+	get_canvas("tight","mu","DMuon");
+//	get_canvas("loose_not_tight");
 	return 0;
 }

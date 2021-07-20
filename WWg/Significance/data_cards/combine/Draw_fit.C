@@ -47,7 +47,7 @@ int Draw_fit(){
                 cout<<tag[j]<<endl;
 		TH1F*h_ST        =run(file,tag[j],"ST",index);
 		TH1F*h_VV        =run(file,tag[j],"VV",index);
-		TH1F*h_QCD       =run(file,tag[j],"QCD",index);
+		TH1F*h_QCD       =run(file,tag[j],"VA",index);
 		TH1F*h_Sig       =run(file,tag[j],"Sig",index);
 		TH1F*h_TTA       =run(file,tag[j],"TTA",index);
 		TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index);

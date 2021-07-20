@@ -1,11 +1,11 @@
 TH2D* run(TString filename,TString cut,TString particle,TString year,TString type){
-	vector<double> ptbins={10,15,20,25,30,35,40,60,200};
+	vector<double> ptbins={20,25,30,35,40,60};
 	vector<double> etabins={0,0.5,1,1.5,2,2.5};
         TChain*tree=new TChain("Events","");
         if(filename.Contains("Ele")) 
-		tree->Add("../out"+filename+"*"+year+"_fakerate.root");
+		tree->Add("../rootfiles/out"+filename+"*"+year+"_fakerate.root");
 	else
-		tree->Add("../out"+filename+year+"_fakerate.root");
+		tree->Add("../rootfiles/out"+filename+"_fakerate"+year+".root");
 //	TFile*f1=new TFile("../out"+filename+year+"_fakerate.root");
 //      cout<<f1->GetName()<<endl;
 //	TTree*tree=(TTree*)f1->Get("Events");
@@ -51,8 +51,12 @@ TFile* run_cal_num(TString channel){
         TH2D*h_mu_L=run(file,cut,channel,"18","is_lepton_tight==0");
         TH2D*h_WJets_T=run("WJets",cut,channel,"18","is_lepton_tight==1");
         TH2D*h_WJets_L=run("WJets",cut,channel,"18","is_lepton_tight==0");
-        TH2D*h_DY_T=run("DY",cut,channel,"18","is_lepton_tight==1");
-        TH2D*h_DY_L=run("DY",cut,channel,"18","is_lepton_tight==0");
+        TH2D*h_DY_T=run("DYJets",cut,channel,"18","is_lepton_tight==1");
+        TH2D*h_DY_L=run("DYJets",cut,channel,"18","is_lepton_tight==0");
+        TH2D*h_TTJets_T=run("TTJets",cut,channel,"18","is_lepton_tight==1");
+        TH2D*h_TTJets_L=run("TTJets",cut,channel,"18","is_lepton_tight==0");
+        TH2D*h_TTWJets_T=run("TTWJets",cut,channel,"18","is_lepton_tight==1");
+        TH2D*h_TTWJets_L=run("TTWJets",cut,channel,"18","is_lepton_tight==0");
 	TFile*fout=new TFile("hist_num"+channel+".root","recreate");
         h_mu_L->Write();     
         h_mu_T->Write();     
@@ -60,6 +64,10 @@ TFile* run_cal_num(TString channel){
         h_WJets_T->Write();     
         h_DY_L->Write();     
         h_DY_T->Write();     
+        h_TTJets_L->Write();     
+        h_TTJets_T->Write();     
+        h_TTWJets_L->Write();     
+        h_TTWJets_T->Write();     
 	fout->Close();
 	return fout;
 }

@@ -1,4 +1,6 @@
 #!/bin/bash
+rm *.txt
+rm *.root
 cp -f /home/pku/anying/cms/PKU-Cluster/WWg/Significance/data_cards/txt/*.txt .
 years="\
 18

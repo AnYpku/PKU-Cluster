@@ -18,7 +18,7 @@ void run(TString tag){
 
         TFile*f1=new TFile("./hist_fit"+tag+".root");
 
-        TH1F*th2_ZA  =(TH1F*)f1->Get("hist_QCD_"+tag);
+        TH1F*th2_ZA  =(TH1F*)f1->Get("hist_VA_"+tag);
 	cout<<th2_ZA->GetSum()<<endl;
 
 	th2_ZA->SetFillColor(kYellow-7);
@@ -143,9 +143,9 @@ void run(TString tag){
 //	leg1->AddEntry(th2_VV, Form("VV  [%.1f#pm %.1f]", th2_VV->GetSum() ,VV_e) );
 //	leg1->AddEntry(th2_TTA, Form("t#bar{t}#gamma [%.1f #pm %.1f]",th2_TTA->GetSum(),TTA_e) );
 //	leg1->AddEntry(th2_ST, Form("tW [%.1f #pm %.1f]",th2_ST->GetSum() ,ST_e) );
-//      leg2->AddEntry(htot,"Stat #oplus Syst");
+
 	leg->AddEntry(th2_ZA_sig,"WW#gamma");
-	leg->AddEntry(th2_ZA, "QCD Z#gamma");
+	leg->AddEntry(th2_ZA, "QCD V#gamma");
 	leg->AddEntry(th2_plj, "Nonprompt #gamma");
 	leg->AddEntry(th2_fakeL, "Nonprompt #font[12]{l}");
 	leg1->AddEntry(th2_VV, "VV");

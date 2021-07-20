@@ -25,9 +25,12 @@ TFile *file1 =new TFile(dir+infilename);
 //TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");
 //TTree *tree1 = (TTree*) dir1->Get("ZPKUCandidates");
 TTree *tree1 = (TTree*) file1->Get("Events");
+TH1D*h1=(TH1D*)file1->Get("nEventsGenWeighted");
+double nevents=0;
+nevents=h1->GetSum();
 WWg m1(tree1,outname);
 cout<<outname<<endl;
-m1.Loop(outname);
+m1.Loop(outname,nevents);
 m1.endJob();
  
 }

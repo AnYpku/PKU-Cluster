@@ -21,16 +21,22 @@ f_ZA = TFile.Open(fdir+'hist_ZGJets_'+sys.argv[1]+'.root')
 f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[1]+'.root')
 f_fakeL = TFile.Open(fdir+'hist_fakeLepton_'+sys.argv[1]+'.root')
 f_TTA = TFile.Open(fdir+'hist_TTGJets_'+sys.argv[1]+'.root')
+f_WA = TFile.Open(fdir+'hist_WGJets_'+sys.argv[1]+'.root')
 f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[1]+'.root')
 f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[1]+'.root')
+f_tZq = TFile.Open(fdir+'hist_tZq_'+sys.argv[1]+'.root')
 
 th1_ZA_sig=f_EW.Get('hist_sig')
 th1_ZA=f_ZA.Get('hist_bkg')
 th1_non_prompt=f_plj.Get('hist_bkg')
-th1_fakeL=f_plj.Get('hist_bkg')
+th1_fakeL=f_fakeL.Get('hist_bkg')
 th1_TTA=f_TTA.Get('hist_bkg')
+th1_WA=f_WA.Get('hist_bkg')
 th1_VV=f_VV.Get('hist_bkg')
 th1_ST=f_ST.Get('hist_bkg')
+th1_tZq=f_tZq.Get('hist_bkg')
+th1_ST.Add(th1_tZq)
+th1_ZA.Add(th1_WA)
 # the bkg histo and signal histo have already contain the overflow bin in the last bin when creat the histograms 
 genbincontent=[]
 genbinerror=[]
@@ -125,7 +131,7 @@ for i in range(1,nbins):
    f.write('bin\t')
    f.write('emu%s_%i\temu%s_%i\temu%s_%i\temu%s_%i\temu%s_%i\temu%s_%i\temu%s_%i\n'%(sys.argv[1],i,sys.argv[1],i,sys.argv[1],i,sys.argv[1],i,sys.argv[1],i,sys.argv[1],i,sys.argv[1],i))
    f.write('process\t')
-   f.write('Sig\tQCD\tNonprompt_photon\tNonprompt_lepton\tTTA\tVV\tST\n')
+   f.write('Sig\tVA\tNonprompt_photon\tNonprompt_lepton\tTTA\tVV\tST\n')
    f.write('process\t0\t1\t2\t3\t4\t5\t6\n')
    f.write('rate\t')
    f.write('%0.3f\t%0.3f\t%0.3f\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(ZA_sig_bincontent,ZA_bincontent, non_prompt_bincontent,fakeL_bincontent,TTA_bincontent, VV_bincontent, ST_bincontent))
@@ -136,7 +142,7 @@ for i in range(1,nbins):
 
    f.write('WWG_Stat_bin%d_%s\tlnN\t'%(i,sys.argv[1]))
    f.write('%0.3f\t-\t-\t-\t-\t-\t-\n'%(ZA_sig_binerror))
-   f.write('QCD_Stat_bin%d_%s\tlnN\t'%(i,sys.argv[1]))
+   f.write('VA_Stat_bin%d_%s\tlnN\t'%(i,sys.argv[1]))
    f.write('-\t%0.3f\t-\t-\t-\t-\t-\n'%(ZA_binerror))
 
    f.write('Nonprompt_photon_Stat_bin%d_%s\tlnN\t'%(i,sys.argv[1]))
@@ -153,6 +159,12 @@ for i in range(1,nbins):
 
    f.write('ST_Stat_bin%d_%s\tlnN\t'%(i,sys.argv[1]))
    f.write('-\t-\t-\t-\t-\t-\t%0.3f\n'%(ST_binerror))
+
+#   f.write('fakelepton_unc\tlnN\t'%(i,sys.argv[1]))
+#   if fakeL_bincontent==0:
+#      f.write('-\t-\t-\t-\t-\t-\t-\n'%(ST_binerror))
+#   else:
+#      f.write('-\t-\t-\t1.3\t-\t-\t-\n'%(ST_binerror))
 
 #   f.write('fake_%s\tlnN\t'%(sys.argv[1]))
 #   if non_prompt_bincontent==0:

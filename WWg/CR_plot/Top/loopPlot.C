@@ -125,7 +125,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 		if(fData.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt");lumiValue=41.52; }
 		if(fData.at(i).Contains("18")) {tag="18";rc.init("roccor/RoccoR2018UL.txt");lumiValue=59.7; }
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s.root",dataLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s.root",dataLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s"+tag+".root",dataLabels[i].c_str());
 		fHistosData.push_back(buffer);
 
 		std::cout << "retrieve "<<i+1<<"th data file" << std::endl;
@@ -157,7 +157,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 		if(fMC.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt"); lumiValue=41.52;}
 		if(fMC.at(i).Contains("18")) {tag="18";rc.init("roccor/RoccoR2018UL.txt"); lumiValue=59.7; }
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s.root", mcLabels[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s.root", mcLabels[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s"+tag+".root", mcLabels[i].c_str());
 		fHistosMC.push_back(buffer);
 		std::cout << "test" << std::endl;
 
@@ -189,7 +189,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 		if(fMCSig.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt"); lumiValue=41.52;}
 		if(fMCSig.at(i).Contains("18")) {tag="18";rc.init("roccor/RoccoR2018UL.txt"); lumiValue=59.7; }
 		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s.root",mcLabelsSig[i].c_str());
-		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s.root",mcLabelsSig[i].c_str());
+		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s"+tag+".root",mcLabelsSig[i].c_str());
 		fHistosMCSig.push_back(buffer);
 
 		if (redoHistograms) {

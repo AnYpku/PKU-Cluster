@@ -61,7 +61,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 	const int nMC = 9;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-        std::string mc[nMC] ={"plj","fakeL","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
+        std::string mc[nMC] ={"plj","fakeL","VV","ST","ZGJets","TGJets","TTGJets_weight","WGJets","tZq"};
 //        mc[0]=mc[0]+isChannel+"_weight";
 	std::vector< TString > fMC;
 	for (int ii = 0; ii < nMC; ii++) {

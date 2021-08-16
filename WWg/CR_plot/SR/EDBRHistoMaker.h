@@ -50,6 +50,8 @@ class EDBRHistoMaker {
                 double mT1;
                 double mT2;
                 double muon1_rochester;
+                Float_t         LHEScaleWeight[9];
+                Float_t         LHEPdfWeight[103];
                 Bool_t          photon_flag;
                 Bool_t          lepton_flag;
 		UInt_t          lumi;
@@ -146,6 +148,8 @@ class EDBRHistoMaker {
 		// List of branches
 		TBranch        *b_lumi;   //!
 		TBranch        *b_channel;   //!
+                TBranch        *b_LHEScaleWeight;
+                TBranch        *b_LHEPdfWeight;
 		TBranch        *b_lep1_pid;   //!
 		TBranch        *b_lep2_pid;   //!
 		TBranch        *b_lep1pt;   //!
@@ -299,8 +303,10 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("ptVlep", &ptVlep,   "ptVlep/F");
 	treename->Branch("phiVlep", &phiVlep,   "phiVlep/F");
 	treename->Branch("yVlep", &yVlep,   "yVlep/F");
+	treename->Branch("LHEScaleWeight", LHEScaleWeight, "LHEScaleWeight[9]/F");
+	treename->Branch("LHEPdfWeight", LHEPdfWeight, "LHEPdfWeight[103]/F");
 	treename->Branch("lep1_pid", &lep1_pid, "lep1_pid/I");
-	treename->Branch("lep2_pid", &lep2_pid, "lep1_pid/I");
+	treename->Branch("lep2_pid", &lep2_pid, "lep2_pid/I");
 	treename->Branch("lep1pt", &lep1pt,     "lep1pt/F");
 	treename->Branch("lep2pt", &lep2pt,     "lep2pt/F");
 	treename->Branch("lep1eta", &lep1eta,   "lep1eta/F");
@@ -376,6 +382,8 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	cout<<"make outfile tree end"<<endl;
 
 	fChain->SetBranchAddress("channel", &channel, &b_channel);
+	fChain->SetBranchAddress("LHEScaleWeight", LHEScaleWeight, &b_LHEScaleWeight);
+	fChain->SetBranchAddress("LHEPdfWeight", LHEPdfWeight, &b_LHEPdfWeight);
 	fChain->SetBranchAddress("lep1_pid", &lep1_pid, &b_lep1_pid);
 	fChain->SetBranchAddress("lep2_pid", &lep2_pid, &b_lep2_pid);
 	fChain->SetBranchAddress("lep1pt", &lep1pt, &b_lep1pt);
@@ -653,7 +661,7 @@ void EDBRHistoMaker::Loop(std::string outFileName,double luminosity,int isBarrel
                 HLT_emu4=HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
                 HLT_Ele1=HLT_Ele32_WPTight_Gsf;HLT_Ele2=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		//data
-		actualWeight=0;
+		actualWeight=1;
                 bool photon_channel=false,lepton_channel=false;
                 if(isChannel=="emu") 
 			lepton_channel= ((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5) && lep1_charge*lep2_charge<0 && drll>0.5;

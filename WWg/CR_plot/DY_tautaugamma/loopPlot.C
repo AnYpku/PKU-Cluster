@@ -101,7 +101,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
-        std::vector < TString > histName={"m_{ll}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","m_{ll#gamma}","p_{T}^{ll}","p_{T}^{ll}","#phi_{ll}","#eta_{ll}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{l_{2}+W}}"};
+        std::vector < TString > histName={"m_{ll}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","m_{ll#gamma}","p_{T}^{ll}","p_{T}^{ll}","#phi_{ll}","#eta_{ll}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}"};
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
 

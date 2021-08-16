@@ -10,55 +10,55 @@
 #include "CMS_lumi.C"
 using namespace std;
 
-void run(TString tag){
+void run(TString tag,TString type){
 	setTDRStyle();
 	TFile* fout = new TFile("aa_"+tag+".root","RECREATE");
 	std::ostringstream strs;
 	Double_t lumi=137.1;
 
-        TFile*f1=new TFile("./hist_fit"+tag+".root");
+        TFile*f1=new TFile("./hist_"+type+"_fit"+tag+".root");
 
-        TH1F*th2_ZA  =(TH1F*)f1->Get("hist_VA_"+tag);
+        TH1F*th2_ZA  =(TH1F*)f1->Get("hist_VA_"+tag+"_"+type);
 	cout<<th2_ZA->GetSum()<<endl;
 
 	th2_ZA->SetFillColor(kYellow-7);
 	th2_ZA->SetMarkerColor(kYellow-7);
 	th2_ZA->SetLineColor(kYellow-7);
 
-        const char *name[16]={"20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty"};
+//      const char *name[16]={"20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty"};
 
-        TH1F*th2_ZA_sig  =(TH1F*)f1->Get("hist_Sig_"+tag);
+        TH1F*th2_ZA_sig  =(TH1F*)f1->Get("hist_Sig_"+tag+"_"+type);
 
 	th2_ZA_sig->SetFillColor(kRed-7);
 	th2_ZA_sig->SetMarkerColor(kRed-7);
         th2_ZA_sig->SetLineColor(kRed-7);
 	th2_ZA_sig->SetMarkerStyle(21);
 
-        TH1F* th2_VV  =(TH1F*)f1->Get("hist_VV_"+tag);
+        TH1F* th2_VV  =(TH1F*)f1->Get("hist_VV_"+tag+"_"+type);
 
 	th2_VV->SetFillColor(kCyan);
 	th2_VV->SetMarkerColor(kCyan);
         th2_VV->SetLineColor(kCyan);
 
-        TH1F* th2_TTA  =(TH1F*)f1->Get("hist_TTA_"+tag);
+        TH1F* th2_TTA  =(TH1F*)f1->Get("hist_TTA_"+tag+"_"+type);
 
 	th2_TTA->SetFillColor(kBlue);
 	th2_TTA->SetMarkerColor(kBlue);
         th2_TTA->SetLineColor(kBlue);
 
-        TH1F* th2_ST  =(TH1F*)f1->Get("hist_ST_"+tag);
+        TH1F* th2_ST  =(TH1F*)f1->Get("hist_ST_"+tag+"_"+type);
 
 	th2_ST->SetFillColor(40);
 	th2_ST->SetMarkerColor(40);
         th2_ST->SetLineColor(40);
 
-        TH1F* th2_plj  =(TH1F*)f1->Get("hist_Nonprompt_photon_"+tag);
+        TH1F* th2_plj  =(TH1F*)f1->Get("hist_Nonprompt_photon_"+tag+"_"+type);
 
 	th2_plj->SetFillColor(kGreen+2);
 	th2_plj->SetMarkerColor(kGreen+2);
         th2_plj->SetLineColor(kGreen+2);
 
-        TH1F* th2_fakeL  =(TH1F*)f1->Get("hist_Nonprompt_lepton_"+tag);
+        TH1F* th2_fakeL  =(TH1F*)f1->Get("hist_Nonprompt_lepton_"+tag+"_"+type);
 
 	th2_fakeL->SetFillColor(kGreen-3);
 	th2_fakeL->SetMarkerColor(kGreen-3);
@@ -72,7 +72,7 @@ void run(TString tag){
 	hs->Add(th2_fakeL);
 	hs->Add(th2_ZA);
 	hs->Add(th2_ZA_sig);
-        TH1F*htot  =(TH1F*)f1->Get("hist_total_"+tag);
+        TH1F*htot  =(TH1F*)f1->Get("hist_total_"+tag+"_"+type);
         TGraphAsymmErrors*gr1=(TGraphAsymmErrors*)f1->Get("data_"+tag);
 
 	cout<<"create THStack"<<endl;
@@ -154,25 +154,54 @@ void run(TString tag){
         leg2->AddEntry(htot,"Stat #oplus Syst");
 ////
         TLatex latex;
-        latex.SetTextSize(0.06);
         latex.SetLineWidth(2);
-        latex.DrawLatex(0.5,1.2*max,"20<m_{#font[12]{ll}}<80");
-        latex.DrawLatex(4.5,1.2*max,"80<m_{#font[12]{ll}}<120");
-        latex.DrawLatex(8.5,1.2*max,"120<m_{#font[12]{ll}}<160");
-        latex.DrawLatex(13, 1.2*max,"m_{#font[12]{ll}}>160");
-
-        TLine* vline1 = new TLine(htot->GetBinLowEdge(5),0,htot->GetBinLowEdge(5),max*1.5);
-        TLine* vline2 = new TLine(htot->GetBinLowEdge(9),0,htot->GetBinLowEdge(9),max*1.5);
-        TLine* vline3 = new TLine(htot->GetBinLowEdge(13),0,htot->GetBinLowEdge(13),max*1.5);
+        if(type=="full"){
+                latex.SetTextSize(0.04);
+                latex.DrawLatex(0.4,1.2*max,"50<m_{#font[12]{ll}}<100");
+                latex.DrawLatex(4.2,1.2*max,"100<m_{#font[12]{ll}}<150");
+                latex.DrawLatex(8.2,1.2*max,"150<m_{#font[12]{ll}}<200");
+                latex.DrawLatex(12.3,1.2*max,"20<m_{#font[12]{ll}}<80");
+                latex.DrawLatex(16.3,1.2*max,"80<m_{#font[12]{ll}}<120");
+                latex.DrawLatex(20.2,1.2*max,"120<m_{#font[12]{ll}}<160");
+                latex.DrawLatex(24.5, 1.2*max,"m_{#font[12]{ll}}>160");
+        }
+        else if(type=="SR"){
+                latex.SetTextSize(0.07);
+                latex.DrawLatex(0.5,1.2*max,"20<m_{#font[12]{ll}}<80");
+                latex.DrawLatex(4.2,1.2*max,"80<m_{#font[12]{ll}}<120");
+                latex.DrawLatex(8.1,1.2*max,"120<m_{#font[12]{ll}}<160");
+                latex.DrawLatex(12.5, 1.2*max,"m_{#font[12]{ll}}>160");
+        }
+        else{
+                latex.SetTextSize(0.07);
+                latex.DrawLatex(0.8,1.2*max,"50<m_{#font[12]{ll}}<100");
+                latex.DrawLatex(4.5,1.2*max,"100<m_{#font[12]{ll}}<150");
+                latex.DrawLatex(8.5,1.2*max,"150<m_{#font[12]{ll}}<200");
+        }
+        TLine* vline1 = new TLine(htot->GetBinLowEdge(13),0,htot->GetBinLowEdge(13),max*1.5);
+        TLine* vline2 = new TLine(htot->GetBinLowEdge(17),0,htot->GetBinLowEdge(17),max*1.5);
+        TLine* vline3 = new TLine(htot->GetBinLowEdge(21),0,htot->GetBinLowEdge(21),max*1.5);
+        TLine* vline4 = new TLine(htot->GetBinLowEdge(25),0,htot->GetBinLowEdge(25),max*1.5);
+        TLine* vline5 = new TLine(htot->GetBinLowEdge(5),0,htot->GetBinLowEdge(5),max*1.5);
+        TLine* vline6 = new TLine(htot->GetBinLowEdge(9),0,htot->GetBinLowEdge(9),max*1.5);
         vline1->SetLineStyle(2);
         vline2->SetLineStyle(2);
         vline3->SetLineStyle(2);
+        vline4->SetLineStyle(2);
+        vline5->SetLineStyle(2);
+        vline6->SetLineStyle(2);
         vline1->SetLineWidth(2);
         vline2->SetLineWidth(2);
         vline3->SetLineWidth(2);
+        vline4->SetLineWidth(2);
+        vline5->SetLineWidth(2);
+        vline6->SetLineWidth(2);
         vline1->Draw();
         vline2->Draw();
         vline3->Draw();
+        vline4->Draw();
+        vline5->Draw();
+        vline6->Draw();
 	leg1->Draw();
 	leg->Draw();
 
@@ -187,9 +216,10 @@ void run(TString tag){
         TH1F*nomNoErr=(TH1F*)nominal->Clone("nomNoErr");
         for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
 
-	double x[16],x_up[16],x_down[16],y_up[16],y_down[16];
-	double y[16];
-        TH1D*h_data=new TH1D("h_data","",16,0,16);
+        const int num=gr1->GetN();
+        double x[num],x_up[num],x_down[num],y_up[num],y_down[num];
+        double y[num];
+        TH1D*h_data=new TH1D("h_data","",num,0,num);
 	for(int i=0;i<gr1->GetN();i++){
                 y[i]=0;
 		gr1->GetPoint(i,x[i],y[i]);
@@ -202,6 +232,7 @@ void run(TString tag){
                 y_down[i]=sqrt( pow(gr1->GetErrorYlow(i),2) )/nominal->GetBinContent(i+1);
                 
 	}
+        cout<<"get data hist"<<endl;
         h_data->SetMarkerStyle(20);
         h_data->SetMarkerSize(1);
         h_data->SetLineColor(1);
@@ -228,7 +259,7 @@ void run(TString tag){
         nominal->GetXaxis()->SetLabelOffset(0.032);
         nominal->GetXaxis()->SetTitleSize(0.2);
         nominal->GetXaxis()->SetTitleOffset(1.05);
-	for(Int_t i=1;i<=nominal->GetNbinsX();i++){ nominal->GetXaxis()->SetBinLabel(i,name[i-1]);}
+//	for(Int_t i=1;i<=nominal->GetNbinsX();i++){ nominal->GetXaxis()->SetBinLabel(i,name[i-1]);}
 
         nominal->Draw("E2");
         gr->SetMarkerStyle(20);
@@ -242,12 +273,13 @@ void run(TString tag){
 	hs->Write();
 	fout->Close();
 
-	c1->SaveAs("aa_"+tag+".pdf");
+	c1->SaveAs("aa_"+type+tag+".pdf");
 }
 int unroll_test(){
        vector<TString> tag={"16","17","18"};
        for(int j=2;j<tag.size();j++){
-		       run(tag[j]);
+		       run(tag[j],"full");
+		       run(tag[j],"SR");
        }
        return 0;
 

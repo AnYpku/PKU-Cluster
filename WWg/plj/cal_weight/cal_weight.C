@@ -52,9 +52,9 @@ int cal_weight(){
 				h7->Scale(lumi);
 				fhist->cd();
 				h1->Write();
-				h2->Write();
+                                TString name=h2->GetName();
+				h2->Write(name+"_f");
 				h3->Write();
-				h4->Write();
 				h4->Write();
 				h5->Write();
 				h6->Write();

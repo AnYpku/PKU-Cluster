@@ -22,7 +22,7 @@ void WWg::Loop(TString name,double nevents)
    // muon iso
    TFile * f_muonIso= TFile::Open("./SFs/Efficiencies_muon_generalTracks_Z_Run2018_UL_ISO.root");
    TH2F* muon_ISO=0;
-   f_muonIso->GetObject("NUM_TightRelIso_DEN_TightID_abseta_pt", muon_ISO);
+   f_muonIso->GetObject("NUM_TightRelIso_DEN_TightIDandIPCut_abseta_pt", muon_ISO);
    cout<<"open the muon ISO file: Efficiencies_muon_generalTracks_Z_Run2018_UL_ISO.root"<<endl;
 
    // ele id
@@ -74,7 +74,7 @@ void WWg::Loop(TString name,double nevents)
       ele_id_scale=get_ele_ID(lep2eta,lep2pt,ele_ID);
       ele_reco_scale=get_ele_Reco(lep2eta,lep2pt,ele_Reco);
       muon_id_scale=get_muon_ID(lep1eta,lep1pt,muon_ID);
-      muon_iso_scale=get_muon_iso(lep2eta,lep2pt,muon_ISO);
+      muon_iso_scale=get_muon_iso(lep1eta,lep1pt,muon_ISO);
       photon_id_scale=get_photon_ID(photoneta,photonet,photon_ID);
       if(fabs(photoneta)<1.4442) photon_veto_scale=0.96284181;
       if(fabs(photoneta)<2.5 && fabs(photoneta)>1.566) photon_veto_scale=0.88641977; 

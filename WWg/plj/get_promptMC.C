@@ -1,5 +1,5 @@
 void run(TString var,TString cut,vector<double> bins){
-	vector<TString>sample={"MuonEG","ZGJets","TTGJets","WGJets","ST","VV","WW","tZq"};
+	vector<TString>sample={"MuonEG","ZGJets","TTGJets","WGJets","ST","VV","WW","WWG","tZq"};
 	const int num=sample.size();
 	cout<<var<<endl;
         TFile*fout=new TFile("hist_"+var+".root","recreate");

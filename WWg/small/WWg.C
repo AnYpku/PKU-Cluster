@@ -35,7 +35,7 @@ void WWg::Loop(TString name)
       lep2p4.SetPtEtaPhiM(lep2pt, lep2eta, lep2phi, 0.000511);
       phiVlep=(lep1p4+lep2p4).Phi();
 
-      if(name.Contains("Muon")){ met_tmp=PuppiMET_T1_pt;metphi_tmp=PuppiMET_T1_phi;}
+      if(name.Contains("Muon")||name.Contains("plj")){ met_tmp=PuppiMET_T1_pt;metphi_tmp=PuppiMET_T1_phi;}
       else{ met_tmp=PuppiMET_T1Smear_pt;metphi_tmp=PuppiMET_T1Smear_phi;}
       mT=sqrt(2*(ptll*met_tmp*(1-cos(phiVlep-metphi_tmp) ) ) );
       if(lep1pt>lep2pt){

@@ -212,11 +212,11 @@ public :
    Float_t         genWeight;
    Float_t         LHEWeight_originalXWGTUP;
    UInt_t          nLHEPdfWeight;
-   Float_t         LHEPdfWeight[1];   //[nLHEPdfWeight]
+   Float_t         LHEPdfWeight[103];   //[nLHEPdfWeight]
    UInt_t          nLHEReweightingWeight;
    Float_t         LHEReweightingWeight[1];   //[nLHEReweightingWeight]
    UInt_t          nLHEScaleWeight;
-   Float_t         LHEScaleWeight[1];   //[nLHEScaleWeight]
+   Float_t         LHEScaleWeight[9];   //[nLHEScaleWeight]
    UInt_t          nPSWeight;
    Float_t         PSWeight[4];   //[nPSWeight]
    UInt_t          nIsoTrack;

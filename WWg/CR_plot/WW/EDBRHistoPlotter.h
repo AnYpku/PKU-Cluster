@@ -460,8 +460,9 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 	hs->SetMaximum(max*70);
 	hs->Draw("HIST ");
 	hs->GetYaxis()->SetTitle("Events/bin");  //40.24pb-1");
+	hs->GetYaxis()->SetNdivisions(404);
 	hs->GetYaxis()->SetLabelSize(0.06);  //40.24pb-1");
-	hs->GetYaxis()->SetTitleOffset(1.15);
+	hs->GetYaxis()->SetTitleOffset(1.17);
 //  hs->GetYaxis()->CenterTitle();
 
 	///------------------------------------
@@ -557,8 +558,8 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 	      //double yieldsMC=sumMC->GetSumOfWeights();
 		double yieldsMCerr;
 		double yieldsMC=sumMC->IntegralAndError(0,sumMC->GetNbinsX(),yieldsMCerr);
-		char yMC[100];sprintf(yMC,"%0.1f",yieldsMC);
-		char yMCerr[100];sprintf(yMCerr,"%0.1f",yieldsMCerr);
+		char yMC[100];sprintf(yMC,"%0.f",yieldsMC);
+		char yMCerr[100];sprintf(yMCerr,"%0.f",yieldsMCerr);
 		TString samplesMC = "Pred. stat. unc.";
 	      TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
 //		TString LabelMC = samplesMC ;

@@ -3520,6 +3520,7 @@ public :
  private:
      TTree *ExTree;
      TFile *fout;
+     double btag_weight,btag_weight_up,btag_weight_down;
 };
 
 #endif
@@ -3581,8 +3582,11 @@ void WWg::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
+   fout = new TFile("./"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
+   ExTree->Branch("btag_weight",&btag_weight,"btag_weight/D");
+   ExTree->Branch("btag_weight_up",&btag_weight_up,"btag_weight_up/D");
+   ExTree->Branch("btag_weight_down",&btag_weight_down,"btag_weight_down/D");
 
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);

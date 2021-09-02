@@ -560,7 +560,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		char yMC[100];sprintf(yMC,"%0.1f",yieldsMC);
 		char yMCerr[100];sprintf(yMCerr,"%0.1f",yieldsMCerr);
 		TString samplesMC = "Pred. stat. unc.";
-	      TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
+		TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
 //		TString LabelMC = samplesMC ;
 		ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
 		leg1->AddEntry(sumMC, LabelMC);

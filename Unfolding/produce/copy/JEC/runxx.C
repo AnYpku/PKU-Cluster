@@ -15,11 +15,11 @@ m1.endJob();
 
 int main(){
 	TString dir16="/home/pku/anying/cms/rootfiles/JESR/raw/";
-	TString name16="JESR_ZA16.root";
+	TString name16="JESR_ZA_interf16.root";
 	TString dir17="/home/pku/anying/cms/rootfiles/JESR/raw/";
-	TString name17="JESR_ZA17.root";
+	TString name17="JESR_ZA_interf17.root";
 	TString dir18="/home/pku/anying/cms/rootfiles/JESR/raw/";	
-	TString name18="JESR_ZA18.root";
+	TString name18="JESR_ZA_interf18.root";
 	runxx(dir16,name16,"16");
 	runxx(dir17,name17,"17");
 	runxx(dir18,name18,"18");

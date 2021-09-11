@@ -9,7 +9,7 @@ TH1D* run( TString sample,TString tag,TString cut1,TString channel){
      TTree*tree=(TTree*)file->Get("outtree");     
      map<TString, double> variables;
      int lep;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,pileupWeight,prefWeight;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double ptVlep, yVlep, phiVlep, massVlep;
@@ -93,12 +93,15 @@ int Uncer_batch_bkg(){
 	const int kk=channels.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][channels]
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
 		cout<<tag[i]<<" "<<jet<<endl;
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		TString cut1 ="("+Reco+")";
@@ -121,14 +124,5 @@ int Uncer_batch_bkg(){
 			fout[i][j]->Close();
 		}//fout[year][vars]
 	}
-	/*     for(int j=0;j<kk;j++){
-	       for(int i=0;i<3;i++){
-	       fout[i][j]->cd();
-	       hist[i][j]->Write();
-	       hist_up[i][j]->Write();
-	       hist_down[i][j]->Write();
-	       fout[i][j]->Close();
-	       }
-	       }*/
 	return 1;
 }

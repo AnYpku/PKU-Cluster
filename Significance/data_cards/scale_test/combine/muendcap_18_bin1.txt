@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 5   number of processes-1
-kmax 23  number of nuisance parameters (sources of systematical uncertainties)
+kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap1
-observation 38.402
+observation 36.782
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,28 +13,30 @@ observation 38.402
 bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	4.273	17.929	14.840	0.348	0.790	0.223
+rate	4.254	17.769	13.410	0.348	0.778	0.223
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015
 VBS_Stat_bin1_muendcap18	lnN	1.043	-	-	-	-	-
 QCD_Stat_bin1_muendcap18	lnN	-	1.116	-	-	-	-
-non_prompt_Stat_bin1_muendcap18	lnN	-	-	1.122	-	-	-
+non_prompt_Stat_bin1_muendcap18	lnN	-	-	1.129	-	-	-
 TTA_Stat_bin1_muendcap18	lnN	-	-	-	2.000	-	-
-VV_Stat_bin1_muendcap18	lnN	-	-	-	-	1.710	-
+VV_Stat_bin1_muendcap18	lnN	-	-	-	-	1.711	-
 ST_Stat_bin1_muendcap18	lnN	-	-	-	-	-	2.000
 fake_muendcap18	lnN	-	-	1.286	-	-	-
-JES_18	lnN	1.010	1.100	-	1.190	1.220	1.540
-JER_18	lnN	1.000	1.070	-	1.140	1.200	1.250
+JES_18	lnN	1.030	1.140	-	1.250	1.350	1.360
+JER_18	lnN	1.040	1.090	-	1.200	1.130	1.110
 pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.013	-	-	-	-
 Scale_EW	lnN	1.036	-	-	-	-	-
-Scale_muF1	lnN	-	1.113	-	-	-	-
-Scale_muR1	lnN	-	1.029	-	-	-	-
-Scale_muFmuR	lnN	-	1.143	-	-	-	-
-interf	lnN	1.043	-	-	-	-	-
-mu_trigger	lnN	1.007	1.006	-	1.006	1.005	1.008
+Scale_muF1	lnN	-	1.118	-	-	-	-
+Scale_muR1	lnN	-	1.030	-	-	-	-
+Scale_muFmuR	lnN	-	1.149	-	-	-	-
+interf	lnN	1.044	-	-	-	-	-
+mu_trigger	lnN	1.007	1.006	-	1.006	1.004	1.008
 mu_eff	lnN	1.003	1.003	-	1.003	1.004	1.001
 photon_id	lnN	1.027	1.028	-	1.031	1.026	1.031
-pileup	lnN	1.076	1.076	-	1.076	1.076	1.076
+pileup	lnN	1.075	1.075	-	1.075	1.075	1.075
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
+pileupId_eff_18	lnN	1.002	1.005	-	1.001	1.000	1.000
+pileupId_mis_18	lnN	1.001	1.001	-	1.026	1.019	1.000

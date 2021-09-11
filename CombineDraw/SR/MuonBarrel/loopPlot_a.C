@@ -22,7 +22,7 @@ void loopPlot() {
 	double lumiValue1 = 59.7;
 	double lumiValue2 = 41.52;
 	double lumiValue3 = 35.86;
-	double lumiValue = 137.1;
+	double lumiValue = 137;
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?
@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	// Path to wherever the files with the trees are. 
-	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/2016/","/home/pku/anying/cms/rootfiles/2017/","/home/pku/anying/cms/rootfiles/2018/"};
+	vector<TString> pathToTrees = {"/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/","/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/","/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/"};
 	std::string outputDir = "./fig-output_a/";
 	RoccoR  rc;
         /// file for scale factors
@@ -50,7 +50,7 @@ void loopPlot() {
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nDATA; ii++) {
                         if(ii==0) j=0;else if(ii==1) j=1; else if(ii==2)j=2;
-			fData.push_back(pathToTrees[j] + "cutla-outD" + data[ii] + ".root");
+			fData.push_back(pathToTrees[j] + "optimal_" + data[ii] + ".root");
 		}
 	}
 	const int kk=fData.size();
@@ -60,28 +60,20 @@ void loopPlot() {
 	const int nMC = 15;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-//	std::string mc[nMC] ={"ST16","TTA16","VV16","plj16_weight","ZA16",
-//		              "ST17","TTA17","VV17","plj17_weight","ZA17",
-//			      "ST18","TTA18","VV18","plj18_weight","ZA18" };
-        std::string mc[nMC] ={"ST16","ST17","ST18","TTA16","TTA17","TTA18",
-	                      "VV16","VV17","VV18","plj16_weight","plj17_weight","plj18_weight",
-			      "ZA16","ZA17","ZA18"};
+        std::string mc[nMC] ={"ST16","ST17","ST18","TTA16","TTA17","TTA18","VV16","VV17","VV18",
+		              "plj16_weight","plj17_weight","plj18_weight","ZA16","ZA17","ZA18"};
 	std::vector< TString > fMC;
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMC; ii++) {
 			if(ii%3==0) j=0;else if(ii%3==1)j=1;else if(ii%3==2)j=2;
                         cout<<j<<" "<<ii<<endl;
-			fMC.push_back(pathToTrees[j] +"cutla-out"+ mc[ii] + ".root");
-//			cout<<pathToTrees[j]<<"cutla-out"<<mc[ii] <<".root"<<endl;
+			fMC.push_back(pathToTrees[j] +"optimal_"+ mc[ii] + ".root");
+//			cout<<pathToTrees[j]<<"optimal_"<<mc[ii] <<".root"<<endl;
 		}
 	}
 	const int nmc=fMC.size();
-//	std::string mcLabels[nmc] ={"ST16","TTA16","VV16","plj16_weight","ZA16",
-//		                    "ST17","TTA17","VV17","plj17_weight","ZA17",
-//				    "ST18","TTA18","VV18","plj18_weight","ZA18"};
-	std::string mcLabels[nmc] ={"ST16","ST17","ST18","TTA16","TTA17","TTA18",
-		                    "VV16","VV17","VV18","plj16_weight","plj17_weight","plj18_weight",
-				    "ZA16","ZA17","ZA18"};
+	std::string mcLabels[nmc] ={"ST16","ST17","ST18","TTA16","TTA17","TTA18","VV16","VV17","VV18",
+				    "plj16_weight","plj17_weight","plj18_weight","ZA16","ZA17","ZA18"};
 	double kFactorsMC_array[nmc] ={lumiValue3,lumiValue2,lumiValue1,
 		                       lumiValue3,lumiValue2,lumiValue1,
 				       lumiValue3,lumiValue2,lumiValue1,
@@ -101,7 +93,7 @@ void loopPlot() {
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMCSig; ii++) {
 			if(ii==0)j=0;else if(ii==1)j=1;else if(ii==2)j=2;
-			fMCSig.push_back(pathToTrees[j] + "cutla-out" + mcSig[ii] + ".root");
+			fMCSig.push_back(pathToTrees[j] + "optimal_" + mcSig[ii] + ".root");
 		}
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
@@ -118,9 +110,7 @@ void loopPlot() {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
-
-        std::vector < TString > histName={"p_{T}^{Z}","#eta_{Z}","#phi_{Z}","m_{Z}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","#sigma_{i#etai#eta}","#gamma_{nhiso}","#gamma_{chiso}","#gamma_{phoiso}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","p_{T}^{j1}","#eta_{j1}","p_{T}^{j2}","#eta_{j2}","m_{jj}","m_{Z#gamma}","nVtx","zepp","#Delta#phi","#Delta#eta_{jj}"};
-
+        std::vector < TString > histName={"p_{T}^{Z}","#eta_{Z}","#phi_{Z}","m_{Z}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","#sigma_{i#etai#eta}","#gamma_{nhiso}","#gamma_{chiso}","#gamma_{phoiso}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","p_{T}^{j1}","#eta_{j1}","p_{T}^{j2}","#eta_{j2}","m_{jj} [GeV]","m_{Z#gamma}","nVtx","Zeppenfeld","#Delta#phi","#Delta#eta_{jj}"};
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
 
@@ -149,7 +139,7 @@ void loopPlot() {
 
 		std::cout << "retrieve "<<i+1<<"th data file" << std::endl;
 		TFile *fileData = TFile::Open(fData.at(i));
-		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
+		TTree *treeData = (TTree*) fileData->Get("outtree");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (redoHistograms) {
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeData, fileData,
@@ -184,7 +174,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mc file" << std::endl;
 			TFile *fileMC = TFile::Open(fMC.at(i));
 			std::cout << "retrieve tree of mc file" << std::endl;
-			TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
+			TTree *treeMC = (TTree*) fileMC->Get("outtree");
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMC, fileMC,
 					hisRatio, out_buffer, &rc);
 			maker->setUnitaryWeights(false);
@@ -215,7 +205,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i));
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("outtree");
 			std::cout<<"open MC sig file OK"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer,&rc);
@@ -254,7 +244,7 @@ void loopPlot() {
 		}      //end if fmc size >0
 	
 		std::cout << "Creating plotter" << std::endl;
-                lumiValue=137.1;
+                lumiValue=137;
 		EDBRHistoPlotter *plotter = new EDBRHistoPlotter("./", fHistosData,
 				fHistosMC, fHistosMCSig,/* mc2Labels,*/ lumiValue, scaleToData, scaleOnlyWJets,
 				makeRatio, isSignalStackOnBkg, kFactorsMC, kFactorsMCSig);
@@ -267,12 +257,18 @@ void loopPlot() {
 		////// {DYJetsToLL_HT-200to400,DYJetsToLL_HT-200to400,DYJetsToLL_HT-600toInf}
 		std::vector<int> fColorsMC;
 	
-		fColorsMC.push_back(kGreen+2);
-		fColorsMC.push_back(kGreen+2);
-		fColorsMC.push_back(kGreen+2);
-		fColorsMC.push_back(kCyan);
-		fColorsMC.push_back(kCyan);
-		fColorsMC.push_back(kCyan);
+//		fColorsMC.push_back(kGreen+2);
+//		fColorsMC.push_back(kGreen+2);
+//		fColorsMC.push_back(kGreen+2);
+//		fColorsMC.push_back(kCyan);
+//		fColorsMC.push_back(kCyan);
+//		fColorsMC.push_back(kCyan);
+		fColorsMC.push_back(40);
+		fColorsMC.push_back(40);
+		fColorsMC.push_back(40);
+		fColorsMC.push_back(40);
+		fColorsMC.push_back(40);
+		fColorsMC.push_back(40);
 		fColorsMC.push_back(40);
 		fColorsMC.push_back(40);
 		fColorsMC.push_back(40);

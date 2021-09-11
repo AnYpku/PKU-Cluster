@@ -2,14 +2,43 @@
 void run(TString var,TString sample,TString particle,TString type,TString tag,double frac){
 	ofstream f2("./"+var+"_"+particle+"_"+type+"_"+tag+".txt",ios::app);
 	TFile* file;
-	if(var.Contains("Mjj"))
+	TH1D* h1; 
+	TH1D* h2 ;
+	TH1D* h3 ;
+	if(var.Contains("Mjj")){
 		file = new TFile("./root/"+var+particle+"_"+sample+"_"+type+tag+".root");
-	else
+		cout<<var+particle+"_"+type+tag+".root"<<endl;
+		h1 = (TH1D*)file->Get(var+"_0");
+		h2 = (TH1D*)file->Get(var+"_1");
+		h3 = (TH1D*)file->Get(var+"_2");
+		if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+			TFile*f1;
+			f1=new TFile("./root/"+var+particle+"_ZA_interf_"+type+tag+".root");
+			TH1D*hh1 = (TH1D*)f1->Get(var+"_0");
+			TH1D*hh2 = (TH1D*)f1->Get(var+"_1");
+			TH1D*hh3 = (TH1D*)f1->Get(var+"_2");
+			h1->Add(hh1,1);
+			h2->Add(hh2,1);
+			h3->Add(hh3,1);
+		}
+	}
+	else{
 		file = new TFile("./root/"+var+"_"+particle+"_"+sample+"_"+type+tag+".root");
-	cout<<var+particle+"_"+type+tag+".root"<<endl;
-	TH1D* h1 = (TH1D*)file->Get(var+"_0");
-	TH1D* h2 = (TH1D*)file->Get(var+"_1");
-	TH1D* h3 = (TH1D*)file->Get(var+"_2");
+		cout<<var+particle+"_"+type+tag+".root"<<endl;
+		h1 = (TH1D*)file->Get(var+"_0");
+		h2 = (TH1D*)file->Get(var+"_1");
+		h3 = (TH1D*)file->Get(var+"_2");
+		if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+			TFile*f1;
+			f1=new TFile("./root/"+var+"_"+particle+"_ZA_interf_"+type+tag+".root");
+			TH1D*hh1 = (TH1D*)f1->Get(var+"_0");
+			TH1D*hh2 = (TH1D*)f1->Get(var+"_1");
+			TH1D*hh3 = (TH1D*)f1->Get(var+"_2");
+			h1->Add(hh1,1);
+			h2->Add(hh2,1);
+			h3->Add(hh3,1);
+		}
+	}
 
 	const int num =h1->GetNbinsX();
 	cout<<var<<" "<<sample<<" "<<particle<<" "<<type<<" "<<tag<<" "<<frac<<" uncertainty"<<endl;
@@ -57,20 +86,21 @@ int uncer_eff(){
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 	double frac_ele,frac_mu;
 	for(int ik=0;ik<tag.size();ik++){
-		if(tag[ik].Contains("17")){
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
-		}
-		else{
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+                if(tag[ik].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[ik].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[ik].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
 		TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="(("+Reco+")&& ("+Gen+"))";
 		TString cut ="(("+Reco+"))";
-		if(tag[ik].Contains("17")==0) continue;
+//		if(tag[ik].Contains("17")==0) continue;
 		for(int k=0;k<sample.size();k++){
 			TFile*fin;
 			TString cut_final;

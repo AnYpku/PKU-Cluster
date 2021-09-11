@@ -29,26 +29,27 @@ int Uncer_batch_bkg(){
 
 	vector<TString> tag={"16","17","18"};
 	vector<TString> channels={"mu","ele"};
+	const int kk=channels.size();
 	vector<double> ZGbin = {150,400,600,800,1000,1200,2e4};
+	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][channels]
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
+		if(tag[i].Contains("16")){
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+		}
+		else if(tag[i].Contains("17")){
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+		else if(tag[i].Contains("18")){
+			jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
 		}
-	}
-	TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
-	const int kk=channels.size();
-	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][channels]
-	for(int j=0;j<kk;j++){
-		for(int i=0;i<tag.size();i++){
+		TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
+		for(int j=0;j<kk;j++){
 			hist[i][j]=run("",tag[i],Reco,channels[j],ZGbin);
 			hist_up[i][j]=run("_up",tag[i],Reco,channels[j],ZGbin);
 			hist_down[i][j]=run("_down",tag[i],Reco,channels[j],ZGbin);
 		}
 	}
-	//     cout<<hist[0][0]->GetBinContent(1);
+	//cout<<hist[0][0]->GetBinContent(1);
 	TFile*fout[3][kk];//hist[year][channels]
 	for(int j=0;j<kk;j++){
 		for(int i=0;i<3;i++){

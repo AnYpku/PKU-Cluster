@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 5   number of processes-1
-kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap1
-observation 304.000
+observation 278.000
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,29 +13,31 @@ observation 304.000
 bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	2.468	147.132	114.210	4.273	8.267	0.186
+rate	2.523	152.591	102.400	4.668	6.880	0.000
 ------------
 lumi_16	lnN	1.022	1.022	-	1.022	1.022	1.022
-VBS_Stat_control_bin1_muendcap16	lnN	1.040	-	-	-	-	-
-QCD_Stat_control_bin1_muendcap16	lnN	-	1.031	-	-	-	-
-non_prompt_Stat_control_bin1_muendcap16	lnN	-	-	1.047	-	-	-
-TTA_Stat_control_bin1_muendcap16	lnN	-	-	-	1.221	-	-
-VV_Stat_control_bin1_muendcap16	lnN	-	-	-	-	1.381	-
-ST_Stat_control_bin1_muendcap16	lnN	-	-	-	-	-	2.000
-fake_muendcap16	lnN	-	-	1.226	-	-	-
-JES_16	lnN	1.010	1.070	-	1.020	1.020	1.050
-JER_16	lnN	1.010	1.030	-	1.020	1.070	1.040
-pdf_EW	lnN	1.038	-	-	-	-	-
+VBS_Stat_control_bin1_muendcap16	lnN	1.044	-	-	-	-	-
+QCD_Stat_control_bin1_muendcap16	lnN	-	1.039	-	-	-	-
+non_prompt_Stat_control_bin1_muendcap16	lnN	-	-	1.049	-	-	-
+TTA_Stat_control_bin1_muendcap16	lnN	-	-	-	1.213	-	-
+VV_Stat_control_bin1_muendcap16	lnN	-	-	-	-	1.413	-
+ST_Stat_control_bin1_muendcap16	lnN	-	-	-	-	-	1.000
+fake_muendcap16	lnN	-	-	1.225	-	-	-
+JES_16	lnN	1.050	1.090	-	1.030	1.090	1.100
+JER_16	lnN	1.050	1.050	-	1.030	1.040	1.100
+pdf_EW	lnN	1.039	-	-	-	-	-
 pdf_QCD	lnN	-	1.012	-	-	-	-
-Scale_EW	lnN	1.006	-	-	-	-	-
-Scale_muF1	lnN	-	1.118	-	-	-	-
-Scale_muR1	lnN	-	1.002	-	-	-	-
-Scale_muFmuR	lnN	-	1.117	-	-	-	-
-interf	lnN	1.260	-	-	-	-	-
-mu_trigger	lnN	1.006	1.018	-	1.008	1.056	1.006
-mu_eff	lnN	1.023	1.022	-	1.021	1.023	1.021
-photon_id	lnN	1.024	1.024	-	1.029	1.025	1.023
-pileup	lnN	1.004	1.004	-	1.005	1.093	1.010
+Scale_EW	lnN	1.007	-	-	-	-	-
+Scale_muF1	lnN	-	1.119	-	-	-	-
+Scale_muR1	lnN	-	1.006	-	-	-	-
+Scale_muFmuR	lnN	-	1.114	-	-	-	-
+interf	lnN	1.253	-	-	-	-	-
+mu_trigger	lnN	1.004	1.006	-	1.012	1.020	1.000
+mu_eff	lnN	1.023	1.022	-	1.021	1.022	1.000
+photon_id	lnN	1.024	1.024	-	1.029	1.019	1.000
+pileup	lnN	1.005	1.005	-	1.005	1.085	1.000
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
-l1pref	lnN	1.015	1.011	-	1.012	1.014	1.010
+pileupId_eff_16	lnN	1.003	1.004	-	1.002	1.003	1.000
+pileupId_mis_16	lnN	1.031	1.069	-	1.028	1.044	1.000
+l1pref	lnN	1.015	1.011	-	1.011	1.015	1.000

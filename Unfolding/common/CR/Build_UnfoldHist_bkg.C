@@ -30,15 +30,17 @@ void run(TString dir,TString sample,TString var1, vector<double> bins,TString cu
      TH1D*th2 = new TH1D(th2name,"reco && gen",nbins,&bins[0]);
      TString weight;
      if(tag.Contains("16"))
-	weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*";
+	weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*puIdweight_M*";
      else if(tag.Contains("17"))
 	weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*prefWeight*puIdweight_T*";
      else if(tag.Contains("18"))
-	weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*";
+	weight="*scalef*pileupWeight*photon_id_scale*photon_veto_scale*fabs(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*fabs(muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale)*puIdweight_L*";
      if(sample.Contains("plj"))
 	     tree->Draw(var1+">>"+th2name,cut1+"*scalef","goff");
-     else if(sample.Contains("Muon")||sample.Contains("Ele"))
-	     tree->Draw(var1+">>"+th2name,cut1+"*1","goff");
+     else if(sample.Contains("Ele"))
+             tree->Draw(var1+">>"+th2name,"("+cut1+"&&!(lep==13))*1","goff");
+     else if(sample.Contains("Muon"))
+             tree->Draw(var1+">>"+th2name,"("+cut1+"&&!(lep==11))*1","goff");
      else
 	     tree->Draw(var1+">>"+th2name,cut1+weight+lumi,"goff");
 
@@ -66,8 +68,9 @@ int Build_UnfoldHist_bkg(){
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
      bins.push_back(MjjBins);
-     vector<TString> sample={"plj","VV","ST","ZA","TTA"};
+//     vector<TString> sample={"plj","VV","ST","ZA","TTA","DMuon","DEle"};
 //     vector<TString> sample={"DMuon","DEle"};
+     vector<TString> sample={"ZA_interf"};
      TString vars[4]={"ptlep1","photonet","jet1pt","Mjj"};
      TString dir[3];
      dir[0]="/home/pku/anying/cms/rootfiles/2016/";
@@ -75,13 +78,18 @@ int Build_UnfoldHist_bkg(){
      dir[2]="/home/pku/anying/cms/rootfiles/2018/";
      vector<TString> tag={"16","17","18"};
      for(int k=0;k<tag.size();k++){
-	     if(tag[k].Contains("17")){
+	     if(tag[k].Contains("16")){
+		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+	     }
+	     else if(tag[k].Contains("17")){
 		     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 	     }
-	     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+	     else if(tag[k].Contains("18")){
+		     jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+	     }
 	     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 	     TString cut1 ="("+Reco+")";
-	     if(tag[k].Contains("17")==0) continue;
+//	     if(tag[k].Contains("17")==0) continue;
 	     for(int i=0;i< bins.size();i++){
 		     for(int j=0;j<sample.size();j++){//sample index
 			     cout<<sample[j]<<" "<<bins[i].size()<<endl;

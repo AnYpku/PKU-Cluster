@@ -58,4 +58,7 @@ void xx::Set(){
         photon_veto_scale=1;
         photon_id_scale=1;
 	scalef=1;
+        puIdweight_L=1;
+        puIdweight_M=1;
+        puIdweight_T=1;
     }

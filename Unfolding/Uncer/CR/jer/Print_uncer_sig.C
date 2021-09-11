@@ -19,9 +19,6 @@ void run(TString var,int i,TString tag){
 		h1[j]->Scale(lumi);
         }
 	const int kk=h1[0]->GetNbinsX();
-        for(int i=0;i<num;i++){
-                h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1));
-        }//add overflow
 	for(int k=0;k<kk;k++){
             double error=0;
 	    double max=0;

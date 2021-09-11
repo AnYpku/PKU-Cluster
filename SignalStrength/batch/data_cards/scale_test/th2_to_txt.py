@@ -68,11 +68,11 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax 6   number of processes-1\n')
    if sys.argv[1].find("18") == -1 and sys.argv[1].find("17") == -1: #16
-	f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')
+	f.write('kmax 27  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("18") == -1: #17
 	f.write('kmax 27  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("17") == -1: #18
-	f.write('kmax 24  number of nuisance parameters (sources of systematical uncertainties)\n')
+	f.write('kmax 26  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -161,13 +161,13 @@ for i in range(1,nbins):
    f.write('Stat group = VBS_Stat_bin%d_%s%s QCD_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1],i,sys.argv[2],sys.argv[1]))
    if non_prompt_bincontent>0:
       f.write('non_prompt_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if TTA_bincontent>0.:
+   if TTA_bincontent>0.0009:
       f.write('TTA_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if VV_bincontent>0:
+   if VV_bincontent>0.0009:
       f.write('VV_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if ST_bincontent>0:
+   if ST_bincontent>0.0009:
       f.write('ST_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
-   if ZA_sig_out_bincontent>0:
+   if ZA_sig_out_bincontent>0.0009:
       f.write('ZA_SigOut_Stat_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
    f.write('\n')
    f.write('fake_%s%s\tlnN\t'%(sys.argv[2],sys.argv[1]))
@@ -248,24 +248,16 @@ for i in range(1,nbins):
       f.write('Others group = ttgamma_xs \n')
    if VV_bincontent>0 and TTA_bincontent==0:
       f.write('Others group = VV_xs \n')
+   f.write('pileupId_eff_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
+   f.write('pileupId_mis_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
+   f.write('luminosity group =  lumi_%s \n'%(sys.argv[1]))
+   f.write('pu group = pileup\n')
+   f.write('pileupId group = pileupId_mis_%s pileupId_eff_%s\n'%(sys.argv[1],sys.argv[1]))
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref_ewk'][i-1],arr['l1pref_ZA'][i-1],arr['l1pref_TTA'][i-1],arr['l1pref_VV'][i-1],arr['l1pref_ST'][i-1],arr['l1pref_ewk'][i-1]))
-   else:
-        f.write('luminosity group =  lumi_%s \n'%(sys.argv[1]))
-        f.write('pu group = pileup\n')
-   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:#17
-        f.write('pileupId_eff\tlnN\t')
-        f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
-        f.write('pileupId_mis\tlnN\t')
-        f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
-        f.write('luminosity group =  lumi_%s \n'%(sys.argv[1]))
-        f.write('pref group = l1pref \n')
-        f.write('pu group = pileup\n')
-        f.write('pileupId group = pileupId_mis pileupId_eff\n')
-   if sys.argv[1].find("17") == -1 and sys.argv[1].find("18")==-1:#16
-        f.write('luminosity group =  lumi_%s \n'%(sys.argv[1]))
-        f.write('pu group = pileup\n')
         f.write('pref group = l1pref \n')
 #  print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]

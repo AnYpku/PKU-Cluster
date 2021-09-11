@@ -1,8 +1,8 @@
 void run_all(TString sample,TString channel,TString type,double frac);
-void run(TString sample,TString channel,TString type){
+void run(TString sample,TString channel,TString type,TString tag){
 //	ofstream f1("./"+type+"_uncer_"+sample+"_"+channel+".txt");
-	ofstream ftxt("./"+type+"_uncer_"+channel+"17.txt",ios::app);
-	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+".root");
+	ofstream ftxt("./"+type+"_uncer_"+channel+tag+".txt",ios::app);
+	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
@@ -44,6 +44,7 @@ void run(TString sample,TString channel,TString type){
 }
 int uncer_eff(){
 	vector<TString> channels={"mu","ele"};
+        vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"ZA","ZA-EWK","others"};
 	for(int i=0;i<channels.size();i++){
 		for(int j=0;j<sample.size();j++){
@@ -57,8 +58,11 @@ int uncer_eff(){
                         double frac;
 			if(h1->GetSum()>0) frac=h2->GetSum()/h1->GetSum();
 			else frac=0;
-			run(sample[j],channels[i],"mis");
-			run(sample[j],channels[i],"eff");
+                        frac=1;
+			for(int k=0;k<tag.size();k++){
+				run(sample[j],channels[i],"mis",tag[k]);
+				run(sample[j],channels[i],"eff",tag[k]);
+			}
 			run_all(sample[j],channels[i],"mis",frac);
 			run_all(sample[j],channels[i],"eff",frac);
 		}
@@ -68,10 +72,22 @@ int uncer_eff(){
 void run_all(TString sample,TString channel,TString type,double frac){
 //	ofstream f1("./"+type+"_uncer_"+sample+"_"+channel+".txt");
 	ofstream ftxt("./"+type+"_uncer_"+channel+".txt",ios::app);
-	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+".root");
-	TH1D* h1 = (TH1D*)file->Get("hist_0");
-	TH1D* h2 = (TH1D*)file->Get("hist_1");
-	TH1D* h3 = (TH1D*)file->Get("hist_2");
+	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+"16.root");
+	TFile* file1 = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+"17.root");
+	TFile* file2 = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+"18.root");
+
+        TH1D* h1 = (TH1D*)file->Get("hist_0");
+        TH1D* h2 = (TH1D*)file->Get("hist_1");
+        TH1D* h3 = (TH1D*)file->Get("hist_2");
+        TH1D* h11 = (TH1D*)file1->Get("hist_0");
+        TH1D* h12 = (TH1D*)file1->Get("hist_1");
+        TH1D* h13 = (TH1D*)file1->Get("hist_2");
+        TH1D* h21 = (TH1D*)file2->Get("hist_0");
+        TH1D* h22 = (TH1D*)file2->Get("hist_1");
+        TH1D* h23 = (TH1D*)file2->Get("hist_2");
+        h1->Add(h11,1);h1->Add(h21,1);
+        h2->Add(h12,1);h2->Add(h22,1);
+        h3->Add(h13,1);h3->Add(h23,1);
 
 	const int num =h1->GetNbinsX();
 	const int kk =h1->GetNbinsX();

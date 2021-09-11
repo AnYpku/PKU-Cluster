@@ -6,7 +6,7 @@ void run(TString cut1,TString tag,TString sample){
      file=new TFile(dir+"optimal_"+sample+tag+".root");
      TTree*tree=(TTree*)file->Get("outtree");     
      //tree->SetBranchStatus("*",0);
-     Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown,puIdweight_T;
+     Double_t scalef,pileupWeight,prefWeight,prefWeightUp,prefWeightDown,puIdweight;
      Double_t ZGmass,jet1eta,jet2eta;
      double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale;
      double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale;
@@ -18,7 +18,7 @@ void run(TString cut1,TString tag,TString sample){
      tree->SetBranchAddress("jet1eta",&jet1eta);
      tree->SetBranchAddress("jet2eta",&jet2eta);
      tree->SetBranchAddress("scalef",&scalef);
-     tree->SetBranchAddress("puIdweight_T",&puIdweight_T);
+     tree->SetBranchAddress("puIdweight",&puIdweight);
      tree->SetBranchAddress("pileupWeight",&pileupWeight);
      tree->SetBranchAddress("prefWeight",&prefWeight);
      tree->SetBranchAddress("prefWeightUp",&prefWeightUp);
@@ -58,12 +58,11 @@ void run(TString cut1,TString tag,TString sample){
 	     int p=0;
 	     pileupWeight_up=h_up->GetBinContent(h_up->GetXaxis()->FindBin(npT));
 	     pileupWeight_down=h_dn->GetBinContent(h_dn->GetXaxis()->FindBin(npT));
-	     if(tag.Contains("17")==0) puIdweight_T=1;
 	     if(tag.Contains("18")) prefWeight=1;
 	     if(lep==11)
-		     weight=scalef*prefWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale*puIdweight_T;
+		     weight=scalef*prefWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale*puIdweight;
 	     if(lep==13)
-		     weight=scalef*prefWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale*puIdweight_T;
+		     weight=scalef*prefWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale*puIdweight;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
 			     if(p==0)actualWeight[p]=weight*pileupWeight;
@@ -92,13 +91,16 @@ int Uncer_batch_sig(){
 //	vector<TString> tag={"18"};
 	vector<TString> sample={"ZA","ZA-EWK","others"};
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
-		if(tag[i].Contains("17")==0) continue;
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
+//		if(tag[i].Contains("17")==0) continue;
 		TString SignalRegion = "( Mjj>500 && detajj>2.5)";
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut2 ="(("+Reco+"))";

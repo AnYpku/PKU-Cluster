@@ -1,16 +1,18 @@
-void run(TString sample,TString channel,TString type){
+void run(TString sample,TString channel,TString type,TString tag){
 //	ofstream f1("./"+type+"_uncer_"+sample+"_"+channel+".txt");
-	ofstream ftxt("./"+type+"_uncer_"+channel+".txt",ios::app);
-	TFile* file;TFile* file1;
+	ofstream ftxt("./"+type+"_uncer_"+channel+tag+".txt",ios::app);
+	TFile* file;TFile* file1;TFile*file2;
 	if(sample.Contains("ZA")&&sample.Contains("out")==0){
-		file = new TFile("../root/hist_ZA-EWK_puId"+type+"_"+channel+".root");
-		file1 = new TFile("./root/hist_ZA_puId"+type+"_"+channel+".root");
+		file = new TFile("../root/hist_ZA-EWK_puId"+type+"_"+channel+tag+".root");
+		file1 = new TFile("./root/hist_ZA_puId"+type+"_"+channel+tag+".root");
+		file2 = new TFile("./root/hist_ZA_interf_puId"+type+"_"+channel+tag+".root");
 	}
 	else if(sample.Contains("ZA")&&sample.Contains("out")){
-		file = new TFile("../root/hist_ZA-EWKout_puId"+type+"_"+channel+".root");
-		file1 = new TFile("./root/hist_ZAout_puId"+type+"_"+channel+".root");
+		file = new TFile("../root/hist_ZA-EWKout_puId"+type+"_"+channel+tag+".root");
+		file1 = new TFile("./root/hist_ZAout_puId"+type+"_"+channel+tag+".root");
+		file2 = new TFile("./root/hist_ZA_interfout_puId"+type+"_"+channel+tag+".root");
 	}
-	else file = new TFile("../root/hist_"+sample+"_puId"+type+"_"+channel+".root");
+	else file = new TFile("../root/hist_"+sample+"_puId"+type+"_"+channel+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
@@ -19,6 +21,10 @@ void run(TString sample,TString channel,TString type){
 		TH1D* hh2 = (TH1D*)file1->Get("hist_1");
 		TH1D* hh3 = (TH1D*)file1->Get("hist_2");
 		h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+		TH1D* hhh1 = (TH1D*)file2->Get("hist_0");
+                TH1D* hhh2 = (TH1D*)file2->Get("hist_1");
+                TH1D* hhh3 = (TH1D*)file2->Get("hist_2");
+		h1->Add(hhh1);h2->Add(hhh2);h3->Add(hhh3);
 	}
 
 	const int num =h1->GetNbinsX()-2;
@@ -63,10 +69,12 @@ int uncer_eff(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	vector<TString> sample={"ZA","ZAout","TTA","VV","ST"};
 	vector<TString> tag={"16","17","18"};
-	for(int i=0;i<channels.size();i++){
-		for(int j=0;j<sample.size();j++){
-			run(sample[j],channels[i],"mis");
-			run(sample[j],channels[i],"eff");
+	for(int k=0;k<tag.size();k++){
+		for(int i=0;i<channels.size();i++){
+			for(int j=0;j<sample.size();j++){
+				run(sample[j],channels[i],"mis",tag[k]);
+				run(sample[j],channels[i],"eff",tag[k]);
+			}
 		}
 	}
 	return 1;

@@ -13,7 +13,7 @@ TH1D*unroll(TH2D*h2){
 	return h1;
 }
 void run(TString cut,TString tag){
-     TFile*file=new TFile("cutla-outplj_unc18.root");
+     TFile*file=new TFile("cutla-outplj_unc"+tag+".root");
      TTree*tree=(TTree*)file->Get("Events");
 //     TChain* tree=new TChain("Events","");
 //     tree->Add("./cutla-outplj_unc"+tag+".root");
@@ -90,9 +90,9 @@ int Build_Hist(){
 	TString LEP = "(( (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL) ) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && lep1_charge*lep2_charge<0 && drll>0.5 && lep1_is_tight==1 && lep2_is_tight==1)";
 	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && photon_selection !=1)";
 	TString met="(n_bjets==0 && PuppiMET_T1_pt > 20  )";
-	vector<TString> tags={"18"};
+	vector<TString> tags={"17","18"};
 	TString Reco;
-	for(int k=0;k<tags.size();k++){
+	for(int k=0;k<tags.size()-1;k++){
 		Reco= LEP+"&&"+photon+"&&"+met;
 		run(Reco,tags[k]);
 	}

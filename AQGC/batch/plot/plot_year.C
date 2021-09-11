@@ -76,9 +76,9 @@ void cmsLumi(bool channel) //0 for el
 
 void aa(TString tag,TString a, double limit){
 	//	setTDRStyle();
-	TString dir="/home/pku/anying/cms/PKU-Cluster/AQGC/20"+tag+"/";
-	TString mu_file= dir+"/muon/paramsets_"+a+"_mu.txt";
-	TString ele_file=dir+"/ele/paramsets_"+a+"_el.txt";
+	TString dir="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/";
+	TString mu_file= dir+"paramsets_"+a+"_muon"+tag+".txt";
+	TString ele_file=dir+"paramsets_"+a+"_ele"+tag+".txt";
 	ifstream infile_mu;
 	ifstream infile_ele;
 	infile_mu.open(mu_file);
@@ -315,9 +315,9 @@ void aa(TString tag,TString a, double limit){
 
 void plot_year(){
 	vector<TString> tag={"16","17","18"};
-	vector<double> limit16={19.555,41.089,8.294,14.841,15.229,24.599,39.110,62.681,0.663,0.949,1.816,0.724,1.676,2.724,0.535,0.960};
-	vector<double> limit17={18.391,37.364,7.421,8.342,14.502,21.107,36.782,57.443,0.619,0.873,1.682,0.668,1.461,2.468,0.359,1.009};
-	vector<double> limit18={13.735,27.238,5.413,10.039,10.525,16.296,27.470,41.904,0.450,0.637,1.222,0.494,1.117,1.878,0.437,0.859};
+	vector<double> limit16={20.079,20.079,46.211,8.352,17.411,16.344,28.557,40.158,73.856,0.739,1.030,2.002,0.819,1.758,3.081,0.541,1.065};
+	vector<double> limit17={25.666,55.290,10.592,23.862,21.001,32.902,51.332,87.125,0.951,1.301,2.520,1.038,2.130,3.872,0.581,1.582};
+	vector<double> limit18={16.587,34.571,6.460,11.398,12.998,21.573,33.174,56.570,0.586,0.809,1.566,0.650,1.374,2.475,0.509,0.859};
         vector<TString> op={"fM0","fM1","fM2","fM3","fM4","fM5","fM6","fM7","fT0","fT1","fT2","fT5","fT6","fT7","fT8","fT9"};
 	for(int i=0;i<op.size();i++){
 		aa("16",op[i],limit16[i]);

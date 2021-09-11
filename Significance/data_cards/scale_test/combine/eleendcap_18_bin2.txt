@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 5   number of processes-1
-kmax 23  number of nuisance parameters (sources of systematical uncertainties)
+kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap2
-observation 8.109
+observation 8.099
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,7 +13,7 @@ observation 8.109
 bin	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	1.727	4.063	2.320	0.000	0.000	0.000
+rate	1.726	4.053	2.320	0.000	0.000	0.000
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015
 VBS_Stat_bin2_eleendcap18	lnN	1.067	-	-	-	-	-
@@ -23,18 +23,20 @@ TTA_Stat_bin2_eleendcap18	lnN	-	-	-	1.000	-	-
 VV_Stat_bin2_eleendcap18	lnN	-	-	-	-	1.000	-
 ST_Stat_bin2_eleendcap18	lnN	-	-	-	-	-	1.000
 fake_eleendcap18	lnN	-	-	1.362	-	-	-
-JES_18	lnN	1.030	1.110	-	1.190	1.220	1.000
-JER_18	lnN	1.000	1.050	-	1.140	1.200	1.000
+JES_18	lnN	1.040	1.100	-	1.250	1.350	1.000
+JER_18	lnN	1.000	1.030	-	1.200	1.130	1.000
 pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.020	-	-	-	-
 Scale_EW	lnN	1.060	-	-	-	-	-
-Scale_muF1	lnN	-	1.136	-	-	-	-
-Scale_muR1	lnN	-	1.052	-	-	-	-
-Scale_muFmuR	lnN	-	1.190	-	-	-	-
+Scale_muF1	lnN	-	1.138	-	-	-	-
+Scale_muR1	lnN	-	1.054	-	-	-	-
+Scale_muFmuR	lnN	-	1.194	-	-	-	-
 interf	lnN	1.034	-	-	-	-	-
 ele_reco	lnN	1.007	1.009	-	1.004	1.000	1.000
-ele_ID	lnN	1.071	1.069	-	1.006	1.000	1.000
-photon_id	lnN	1.028	1.031	-	1.031	1.026	1.000
+ele_ID	lnN	1.071	1.069	-	1.002	1.000	1.000
+photon_id	lnN	1.028	1.030	-	1.031	1.026	1.000
 pileup	lnN	1.076	1.076	-	1.076	1.076	1.076
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
+pileupId_eff_18	lnN	1.000	1.004	-	1.028	1.024	1.000
+pileupId_mis_18	lnN	1.000	1.000	-	1.000	1.000	1.000

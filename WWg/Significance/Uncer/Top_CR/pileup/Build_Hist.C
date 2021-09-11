@@ -76,9 +76,9 @@ int Build_Hist(){
 	TString LEP = "((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>50 && lep1_charge*lep2_charge<0 && drll>0.5 && lep1_isprompt==1 && lep2_isprompt==1 && lep1_is_tight==1 && lep2_is_tight==1)";
 	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && photon_selection==1 && photon_isprompt==1 )";
 	TString met="(n_bjets>=1 && PuppiMET_T1Smear_pt > 20 && mT2>30 )";
-	vector<TString> tags={"18"};
+	vector<TString> tags={"17"};
 	TString dir1;
-	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/Top/output-slimmed-rootfiles/optimal_emua_";
+	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/Top_gamma/output-slimmed-rootfiles/optimal_emua_";
 	TString Reco;
 	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG"};
 	for(int k=0;k<tags.size();k++){

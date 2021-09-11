@@ -119,7 +119,7 @@ int draw_rm_full(){
 		   h1->GetYaxis()->SetLabelSize(0.07);
 		   h1->GetXaxis()->SetLabelSize(0.07);
 		}
-		h1->Draw("colz");
+		h1->Draw("colz text");
 		TLine* vline1 = new TLine(h1->GetXaxis()->GetBinLowEdge(4),0,h1->GetXaxis()->GetBinLowEdge(4),7);
 		TLine* vline2 = new TLine(h1->GetXaxis()->GetBinLowEdge(7),0,h1->GetXaxis()->GetBinLowEdge(7),7);
 		vline1->SetLineStyle(2);

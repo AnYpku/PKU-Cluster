@@ -1,14 +1,16 @@
 void run(TString sample,TString tag){
         fstream ftxt("./jer_uncer"+tag+".txt", ios::app );
 	ofstream f1("./"+sample+"_jer_uncer"+tag+".txt");
-	TFile*file;TFile*file1;
+	TFile*file;TFile*file1;TFile*file2;
 	if(sample.Contains("ZA")&&sample.Contains("out")==0){
 		file = new TFile("./hist_ZA_jer"+tag+".root");
 		file1 = new TFile("../hist_ZA-EWK_jer"+tag+".root");
+		file2 = new TFile("./hist_ZA_interf_jer"+tag+".root");
 	}
 	else if(sample.Contains("ZA")&&sample.Contains("out")){
 		file = new TFile("./hist_ZAout_jer"+tag+".root");
 		file1 = new TFile("../hist_ZA-EWKout_jer"+tag+".root");
+		file2 = new TFile("./hist_ZA_interfout_jer"+tag+".root");
 	}
         else file=new TFile("../hist_"+sample+"_jer"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
@@ -19,6 +21,10 @@ void run(TString sample,TString tag){
 		TH1D* hh2 = (TH1D*)file1->Get("hist_1");
 		TH1D* hh3 = (TH1D*)file1->Get("hist_2");
 		h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+                TH1D* hhh1 = (TH1D*)file2->Get("hist_0");
+                TH1D* hhh2 = (TH1D*)file2->Get("hist_1");
+                TH1D* hhh3 = (TH1D*)file2->Get("hist_2");
+                h1->Add(hhh1);h2->Add(hhh2);h3->Add(hhh3);
 	}
 	const int kk =h1->GetNbinsX();
 	const int num = kk-2;

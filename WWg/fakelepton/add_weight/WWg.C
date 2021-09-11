@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-void WWg::Loop(TString name)
+void WWg::Loop(TString name,TString year)
 {
    if (fChain == 0) return;
 
@@ -17,19 +17,24 @@ void WWg::Loop(TString name)
    Long64_t nmm = fChain->GetEntries("gen_weight<0.");
    Bool_t HLT_mm=0,HLT_ee=0,HLT_emu=0;
    Bool_t BSL=0,LEP=0,PHOTON=0;
-   TFile*fele=new TFile("/home/pku/anying/cms/PKU-Cluster/WWg/fakelepton/fakerate/mu18_fakerate.root");
+   TFile*fele=new TFile("/home/pku/anying/cms/PKU-Cluster/WWg/fakelepton/fakerate/ele"+year+"_fakerate.root");
    TH2D*hele=(TH2D*)fele->Get("TtoL");
-   TFile*fmu=new TFile("/home/pku/anying/cms/PKU-Cluster/WWg/fakelepton/fakerate/ele18_fakerate.root");
+   TFile*fmu=new TFile("/home/pku/anying/cms/PKU-Cluster/WWg/fakelepton/fakerate/mu"+year+"_fakerate.root");
    TH2D*hmu=(TH2D*)fmu->Get("TtoL");
-   double lumi=59.7;
+   double lumi;
+   if(year.Contains("18"))
+	   lumi=59.7;
+   else if(year.Contains("17"))
+	   lumi=41.5;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
-      scalef=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*puWeight;
-      if(jentry%1000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<endl;
+      if(year.Contains("18")) PrefireWeight=1;
+      scalef=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*puWeight*btag_weight*PrefireWeight;
       if(name.Contains("Ele")||name.Contains("Muon")){ scalef=1;photon_isprompt=1;lep1_isprompt=1;lep2_isprompt=1;}
-      LEP = pass_selection>0 && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1_charge*lep2_charge<0 && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && !(lep1_is_tight==1 && lep2_is_tight==1 ) && lep1_isprompt==1 && lep2_isprompt==1; 
+      if(jentry%1000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<endl;
+      LEP = pass_selection>0 && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 /*&& lep1_charge*lep2_charge<0*/ && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && !(lep1_is_tight==1 && lep2_is_tight==1 ) && lep1_isprompt==1 && lep2_isprompt==1; 
       PHOTON = n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 )) && drl1a>0.5 && drl2a>0.5 && photon_selection==1 /*&& photon_isprompt==1*/;
       if( !( LEP ) )
 	      continue;
@@ -54,15 +59,17 @@ void WWg::Loop(TString name)
 	      }
       }
       else if(lep1_is_tight==1 && lep2_is_tight!=1){
-              if(name.Contains("Muon"))
+              if(name.Contains("Muon")){
 		      scalef=hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp)));
+		      cout<<"lep1_is_tight "<<lep1_is_tight<<"; lep2_is_tight "<<lep2_is_tight<<"; pt "<<lep2pt_tmp<<"; eta "<<lep2eta<<"; fake rate "<<hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))<<"; weight "<<scalef<<endl;
+	      }
 	      else{
 		      scalef=scalef * lumi * hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))) * (-1); //MC tight+loose
 //		      cout<<scalef<<endl;
 	      }
       }
       else scalef=0;
-      if(jentry%1000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<" "<<lep1pt_tmp<<" "<<lep2pt_tmp<<endl;
+      if(jentry%1000==0) cout<<jentry<<" after adding weight "<<nentries<<" "<<scalef<<" "<<lep1pt_tmp<<" "<<lep2pt_tmp<<endl;
 
       ExTree->Fill();
       // if (Cut(ientry) < 0) continue;

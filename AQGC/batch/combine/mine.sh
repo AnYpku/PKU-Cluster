@@ -17,8 +17,8 @@ fT8,-0.6,0.6
 fT9,-1.8,1.8
 "
 
-#year=("16" "17" "18" "combine")
-year=("17" "combine")
+year=("16" "17" "18" "combine")
+#year=("17" "combine")
 for (( j = 0 ; j < ${#year[@]} ; j++ ))
 do 
    if [[ -f all_${year[$j]}.txt ]];then

@@ -18,8 +18,7 @@ void MG_root(){
 	float nbin= 10.0;
 
 
-	TString IFile1 ="/data/pku/home/anying/cms/PKU-Cluster/MC/LLAJJ_aQGC_lhe.root";
-//	TString IFile1 ="/data/pku/home/anying/cms/PKU-Cluster/MC/LLAJJ_EWK_lhe.root";
+	TString IFile1 ="/data/pku/home/anying/cms/PKU-Cluster/MC/input/LLAJJ_aQGC_lhe.root";
 	TChain chain("LHEF");
 	chain.Add(IFile1); 
 	// Create object of class ExRootTreeReader
@@ -32,8 +31,8 @@ void MG_root(){
 	h1->Sumw2();
 	double scalef=5.495412948087E-02*1000/float(numberOfEntries);
 	TLorentzVector J1, J2, JJ,lep1,lep2,photon,V;
-	TFile*fout=new TFile("LLAJJ_aQGC_out.root","recreate");
-//	TFile*fout=new TFile("LLAJJ_EWK_out.root","recreate");
+//	TFile*fout=new TFile("LLAJJ_aQGC_out.root","recreate");
+	TFile*fout=new TFile("LLAJJ_UFO_out.root","recreate");
 	TTree*treename=new TTree("demo","");
 	treename->Branch("lep", &lep, "lep/I");
 	treename->Branch("massVlep", &massVlep, "massVlep/D");
@@ -73,6 +72,8 @@ void MG_root(){
 		treeReader->ReadEntry(i);
 		TRootLHEFEvent *event=(TRootLHEFEvent*) branchEvent->At(0);
 		int np=event->Nparticles;
+		double weight=event->Weight;
+		cout<<"event weight "<<weight<<endl;
 		cout<<"N particles "<<np<<endl;
 		int i_lep=0,i_jet=0;
 		for(int j=2; j<np; j++){//0 and 1 are the two protons

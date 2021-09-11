@@ -3,7 +3,7 @@
 void run( TFile*file,TString cut1,TString tag,bool turn){
 	TString name=file->GetName();
 	TTree*tree=(TTree*)file->Get("outtree");     
-	Double_t scalef,pileupWeight,prefWeight,pweight[703],Mjj,zepp,actualWeight,puIdweight_T;
+	Double_t scalef,pileupWeight,prefWeight,pweight[703],Mjj,zepp,actualWeight,puIdweight;
         double ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,ele_hlt_scale;
 	double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,muon_hlt_scale;
 	double photon_id_scale,photon_veto_scale;
@@ -36,7 +36,7 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 	tree->SetBranchAddress("pileupWeight", &pileupWeight);
 	tree->SetBranchAddress("pweight",pweight);
 	tree->SetBranchAddress("prefWeight",&prefWeight);
-	tree->SetBranchAddress("puIdweight_T",&puIdweight_T);
+	tree->SetBranchAddress("puIdweight",&puIdweight);
 	tree->SetBranchAddress("ele1_id_scale",&ele1_id_scale);
 	tree->SetBranchAddress("ele2_id_scale",&ele2_id_scale);
 	tree->SetBranchAddress("ele1_reco_scale",&ele1_reco_scale);
@@ -81,7 +81,6 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 		else if(( tag.Contains("17")||tag.Contains("18"))&&name.Contains("EWK"))
 			init=45;//17 ewk,18 ewk
 		if(tag.Contains("18"))prefWeight=1;
-		if(tag.Contains("17")==0)puIdweight_T=1;
 		if(ZGmass>2e4)ZGmass=1999;
 		if (  tformula->EvalInstance()  ){
 			for(Int_t i=init;i<(num+init);i++){
@@ -132,15 +131,18 @@ int Uncer_batch_bkg(){
 	file2[2]=new TFile(dir3+"optimal_ZA-EWK18.root");
 
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		cout<<tag[i]<<" "<<jet<<endl;
-		if(tag[i].Contains("17")==0) continue;
+//		if(tag[i].Contains("17")==0) continue;
 		if(tag[i].Contains("16"))	
 			run(file1[i],Reco,tag[i],0);
 		run(file2[i],Reco,tag[i],0);

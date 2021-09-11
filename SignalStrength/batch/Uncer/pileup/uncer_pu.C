@@ -5,6 +5,13 @@ void run(TString tag,TString sample){
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile* f2 = new TFile("./root/hist_ZA_interf_pileup_"+tag+".root");
+                TH1D* hh1 = (TH1D*)f2->Get("hist_0");
+                TH1D* hh2 = (TH1D*)f2->Get("hist_1");
+                TH1D* hh3 = (TH1D*)f2->Get("hist_2");
+                h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+        }
 
 	const int num =h1->GetNbinsX();
         const int kk =h1->GetNbinsX();
@@ -29,7 +36,7 @@ void run(TString tag,TString sample){
 			 bincontent_down[i] = h3->GetBinContent(i+1);
 			 if(bincontent_new[i]<=0) uncer[i] =0;
 			 else{
-				 if(sample.Contains("A"))
+				 if(sample.Contains("A")||sample.Contains("ewk"))
 					 uncer[i] = fabs(bincontent_up[i]-bincontent_down[i])/2/bincontent_new[i];
 				 else
 					 uncer[i] = fabs(h2->GetSum()-h3->GetSum())/2/h1->GetSum();

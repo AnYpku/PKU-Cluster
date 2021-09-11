@@ -61,10 +61,8 @@ int Print_Uncer_all(){
 			run(channel[i],tag[j],f_mu_trigger);
 			run(channel[i],tag[j],f_photon_ID);
 			run(channel[i],tag[j],f_lumi);
-			if(tag[j].Contains("16")==0&&tag[j].Contains("18")==0){
-				run(channel[i],tag[j],f_puIdeff);
-				run(channel[i],tag[j],f_puIdmis);
-			}
+			run(channel[i],tag[j],f_puIdeff);
+			run(channel[i],tag[j],f_puIdmis);
 		}
 	}
 	return 1;

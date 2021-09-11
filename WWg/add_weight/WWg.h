@@ -1801,6 +1801,9 @@ public :
    Float_t         puWeight;
    Float_t         puWeightUp;
    Float_t         puWeightDown;
+   Float_t         PrefireWeight;
+   Float_t         PrefireWeight_Up;
+   Float_t         PrefireWeight_Down;
 
    // List of branches
    TBranch        *b_run;   //!
@@ -3582,6 +3585,9 @@ public :
    TBranch        *b_puWeight;   //!
    TBranch        *b_puWeightUp;   //!
    TBranch        *b_puWeightDown;   //!
+   TBranch        *b_PrefireWeight;   //!
+   TBranch        *b_PrefireWeight_Up;   //!
+   TBranch        *b_PrefireWeight_Down;   //!
 
    TString m_dataset;
    WWg(TTree *tree=0,TString dataset="");
@@ -3590,7 +3596,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString name,double nevents);
+   virtual void     Loop(TString name,double nevents,TString year);
    virtual void     Init();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
@@ -3601,6 +3607,7 @@ public :
      TFile *fout;
      double scalef;
      double ele_id_scale,ele_reco_scale,muon_id_scale,muon_iso_scale,photon_id_scale,photon_veto_scale;
+     double btag_weight,btag_weight_up,btag_weight_down;
 };
 
 #endif
@@ -3671,6 +3678,9 @@ void WWg::Init(TTree *tree)
    ExTree->Branch("muon_iso_scale",&muon_iso_scale,"muon_iso_scale/D");
    ExTree->Branch("photon_id_scale",&photon_id_scale,"photon_id_scale/D");
    ExTree->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/D");
+   ExTree->Branch("btag_weight",&btag_weight,"btag_weight/D");
+   ExTree->Branch("btag_weight_up",&btag_weight_up,"btag_weight_up/D");
+   ExTree->Branch("btag_weight_down",&btag_weight_down,"btag_weight_down/D");
 
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
@@ -5451,6 +5461,9 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("puWeight", &puWeight, &b_puWeight);
    fChain->SetBranchAddress("puWeightUp", &puWeightUp, &b_puWeightUp);
    fChain->SetBranchAddress("puWeightDown", &puWeightDown, &b_puWeightDown);
+   fChain->SetBranchAddress("PrefireWeight", &PrefireWeight, &b_PrefireWeight);
+   fChain->SetBranchAddress("PrefireWeight_Up", &PrefireWeight_Up, &b_PrefireWeight_Up);
+   fChain->SetBranchAddress("PrefireWeight_Down", &PrefireWeight_Down, &b_PrefireWeight_Down);
    Notify();
 }
 

@@ -121,6 +121,9 @@ class EDBRHistoMaker {
 		Bool_t          HLT_Ele32_WPTight_Gsf;
 		Bool_t          HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		Double_t        scalef;
+                Double_t        btag_weight;
+                Double_t        btag_weight_up;
+                Double_t        btag_weight_down;
                 Double_t        ele_id_scale;
                 Double_t        ele_reco_scale;
                 Double_t        muon_id_scale;
@@ -216,6 +219,9 @@ class EDBRHistoMaker {
 		TBranch        *b_HLT_Ele32_WPTight_Gsf;
 		TBranch        *b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		TBranch        *b_scalef;   //!
+                TBranch        *b_btag_weight;   //!
+                TBranch        *b_btag_weight_up;   //!
+                TBranch        *b_btag_weight_down;   //!
 		TBranch        *b_ele_id_scale;   //!
 		TBranch        *b_ele_reco_scale;   //!
 		TBranch        *b_muon_id_scale;   //!
@@ -372,6 +378,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("HLT_Ele1", &HLT_Ele32_WPTight_Gsf, "HLT_Ele1/B");
 	treename->Branch("HLT_Ele2", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, "HLT_Ele2/B");
 	treename->Branch("scalef", &scalef, "scalef/D");
+        treename->Branch("btag_weight", &btag_weight, "btag_weight/D");
+        treename->Branch("btag_weight_up", &btag_weight_up, "btag_weight_up/D");
+        treename->Branch("btag_weight_down", &btag_weight_down, "btag_weight_down/D");
 	treename->Branch("actualWeight", &actualWeight, "actualWeight/D");
 	cout<<"make outfile tree end"<<endl;
 
@@ -438,6 +447,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("puWeightUp", &puWeightUp, &b_puWeightUp);
 	fChain->SetBranchAddress("puWeightDown", &puWeightDown, &b_puWeightDown);
 	fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+        fChain->SetBranchAddress("btag_weight", &btag_weight, &b_btag_weight);
+        fChain->SetBranchAddress("btag_weight_up", &btag_weight_up, &b_btag_weight_up);
+        fChain->SetBranchAddress("btag_weight_down", &btag_weight_down, &b_btag_weight_down);
 	fChain->SetBranchAddress("ele_id_scale", &ele_id_scale, &b_ele_id_scale);
 	fChain->SetBranchAddress("ele_reco_scale", &ele_reco_scale, &b_ele_reco_scale);
 	fChain->SetBranchAddress("muon_id_scale", &muon_id_scale, &b_muon_id_scale);
@@ -526,7 +538,6 @@ void EDBRHistoMaker::createAllHistos(TString isChannel) {
         hs.setHisto("lep2phi", 5, -3.14, 3.14);
         hs.setHisto("mllg", 5, 60, 200);
         hs.setHisto("ptll", 3, 30, 120);
-        hs.setHisto("ptVlep", 3 , 30, 120);
         hs.setHisto("phiVlep", 4, -4, 4);
         hs.setHisto("yVlep", 5, -5, 5);
         hs.setHisto("puppimet", 4,20,120);
@@ -668,7 +679,7 @@ void EDBRHistoMaker::Loop(std::string outFileName,double luminosity,int isBarrel
                 if(isBarrel==1)  photon_channel=( (fabs(photoneta) < 1.4442) );
                 else if(isBarrel==0) photon_channel= ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 );
                 else photon_channel=( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ));
-	        if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && lep1_is_tight==1 && lep2_is_tight==1 && mll >50 && mll<80 && ptll > 30 && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_selection==1 && PuppiMET_T1_pt > 20 && mT < 60 && n_bjets==0 ){
+	        if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && lep1_is_tight==1 && lep2_is_tight==1 && mll >40 && mll<80 && ptll > 30 && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_selection==1 && PuppiMET_T1_pt > 20 && mT < 60 && n_bjets==0 ){
 			sum = sum + actualWeight;
 			numbe_out++;
 			treename->Fill();
@@ -688,7 +699,6 @@ void EDBRHistoMaker::Loop(std::string outFileName,double luminosity,int isBarrel
 		(theHistograms["lep2phi"])->Fill(lep2phi, actualWeight);
 		(theHistograms["mllg"])->Fill(mllg, actualWeight);
 		(theHistograms["ptll"])->Fill(ptll, actualWeight);
-		(theHistograms["ptVlep"])->Fill(ptVlep, actualWeight);
 		(theHistograms["phiVlep"])->Fill(phiVlep, actualWeight);
 		(theHistograms["yVlep"])->Fill(yVlep, actualWeight);
 		(theHistograms["puppimet"])->Fill(puppimet, actualWeight);
@@ -779,7 +789,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double luminosity,int i
 			nn = 1;
 		else
 			nn = -1;
-		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight;//mc
+		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*btag_weight;//mc
 
 		if (fabs(lep1phi-lep2phi)>Pi) drll = sqrt((lep1eta-lep2eta)*(lep1eta-lep2eta)+(2*Pi-fabs(lep1phi-lep2phi))*(2*Pi-fabs(lep1phi-lep2phi)));
 		else drll = sqrt((lep1eta-lep2eta)*(lep1eta-lep2eta)+(fabs(lep1phi-lep2phi))*(fabs(lep1phi-lep2phi)));
@@ -832,7 +842,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double luminosity,int i
                 if(isBarrel==1)  photon_channel=( (fabs(photoneta) < 1.4442) );
                 else if(isBarrel==0) photon_channel= ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 );
                 else photon_channel=( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ));
-		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && mll>50 && mll<80 && ptll > 30 && lepton_flag && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_flag==1 && PuppiMET_T1Smear_pt > 20 && mT<60 && n_bjets==0 ){
+		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && mll>40 && mll<80 && ptll > 30 && lepton_flag && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_flag==1 && PuppiMET_T1Smear_pt > 20 && mT<60 && n_bjets==0 ){
 			if(gen_weight>0) npp++;
 			if(gen_weight<0) nmm++;
 			numbe_out++;
@@ -856,7 +866,6 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double luminosity,int i
 		(theHistograms["lep2phi"])->Fill(lep2phi, actualWeight);
 		(theHistograms["mllg"])->Fill(mllg, actualWeight);
                 (theHistograms["ptll"])->Fill(ptll, actualWeight);
-                (theHistograms["ptVlep"])->Fill(ptVlep, actualWeight);
                 (theHistograms["phiVlep"])->Fill(phiVlep, actualWeight);
                 (theHistograms["yVlep"])->Fill(yVlep, actualWeight);
 		(theHistograms["puppimet"])->Fill(puppimet, actualWeight);

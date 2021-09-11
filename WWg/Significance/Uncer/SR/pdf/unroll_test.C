@@ -8,9 +8,9 @@
 #include "THStack.h"
 #include "CMSTDRStyle.h"
 #include "CMS_lumi.C"
-#define num 103
+//#define num 103
 using namespace std;
-void unroll_name(TString filename,TString tag){
+void unroll_name(TString filename,TString tag,int num){
 	setTDRStyle();
 	gStyle->SetOptStat(0);
 	TFile* f_ZA=new TFile("./root/hist_"+filename+"_"+tag+".root");
@@ -50,8 +50,8 @@ void unroll_name(TString filename,TString tag){
 
 	TLegend *l2 = new TLegend(0.6,0.6,0.9,0.9);
 	TLegend *l1 = new TLegend(0.2,0.6,0.5,0.9);
-        double muf[num]={0.5,1,2,0.5,1,2,0.5,1,2};
-        double mur[num]={0.5,0.5,0.5,1,1,1,2,2,2};
+//        double muf[num]={0.5,1,2,0.5,1,2,0.5,1,2};
+//        double mur[num]={0.5,0.5,0.5,1,1,1,2,2,2};
 	l1->AddEntry(t_ZA[0],"central pdf weight");
         l1->SetTextSize(0.07);
         l2->SetTextSize(0.07);
@@ -139,15 +139,18 @@ void unroll_name(TString filename,TString tag){
 	h_down->Draw("same hist ][");
 
 	fPads2->Update();
-	c1->Print("./figs/hist_"+filename+tag+"_pu.pdf");
+	c1->Print("./figs/hist_"+filename+tag+"_pdf.pdf");
 
 }
 int unroll_test(){
 
-	vector<TString> names={"TTGJets"};
+	vector<TString> names={"TTGJets","ST"};
+	int n;
 	for(int i=0;i<names.size();i++){
-		unroll_name(names[i],"18");
+		if(names[i].Contains("ST")) n=101;
+		else n=103;
+		unroll_name(names[i],"17",n);
+//		unroll_name(names[i],"18");
 	}
-//		unroll_name("ST","18");
 	return 0;
 }

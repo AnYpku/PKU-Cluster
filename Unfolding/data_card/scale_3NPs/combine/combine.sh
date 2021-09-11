@@ -2,21 +2,21 @@
 #if [[ -f *.txt ]];then
 #    rm *.txt
 #fi
-cp /home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/CR/scale_3NPs/txt/*control_bin*.txt ./
-cp /home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/txt/*bin*.txt ./
+cp /home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/CR/scale_3NPs/txt/*control_bin*.txt ./txt
+cp /home/pku/anying/cms/PKU-Cluster/Unfolding/data_card/scale_3NPs/txt/*bin*.txt ./txt
 recovar=("Mjj" "ptlep1" "photonet" "jet1pt")
-#recovar=("Mjj")
 year=("16" "17" "18")
+#recovar=("Mjj")
 #year=("17" "full")
 for (( i = 0 ; i < ${#recovar[@]} ; i++ ))
 do
-#   combineCards.py ${recovar[$i]}_16_*bin*.txt ${recovar[$i]}_17_*bin*.txt ${recovar[$i]}_18_*bin*.txt >& ${recovar[$i]}_full.txt
    for (( j = 0 ; j < ${#year[@]} ; j++ ))
    do
        echo "${year[$j]}  ${recovar[$i]}"
+       cd ./txt/
        combineCards.py ${recovar[$i]}_${year[$j]}_*bin*.txt >& ${recovar[$i]}_${year[$j]}.txt
-       combineCards.py ${recovar[$i]}_${year[$j]}_*bin*.txt >& ${recovar[$i]}_${year[$j]}.txt
-       combineCards.py ${recovar[$i]}_${year[$j]}_*bin*.txt >& ${recovar[$i]}_${year[$j]}.txt
+       cd -
+       mv ./txt/${recovar[$i]}_${year[$j]}.txt ./
        echo "build ${recovar[$i]} worksapce"
        if [[ ${recovar[$i]} =~ "Mjj" ]];then
             echo "in Mjj 7 bins case"

@@ -4,14 +4,14 @@ void run(TString var,TString sample,TString tag){
 	TH1D* h1 = (TH1D*)file->Get(var+"_0");
 	TH1D* h2 = (TH1D*)file->Get(var+"_1");
 	TH1D* h3 = (TH1D*)file->Get(var+"_2");
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile* f2 = new TFile("./root/unfold_"+var+"_ZA_interf_pu"+tag+".root");
+                TH1D* hh1 = (TH1D*)f2->Get(var+"_0");
+                TH1D* hh2 = (TH1D*)f2->Get(var+"_1");
+                TH1D* hh3 = (TH1D*)f2->Get(var+"_2");
+                h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+        }
 
-/*	
-	ofstream f1("./Uncertainty_2.txt");
- 	TFile* file = new TFile("./output.root");
-	TH1D* h1 = (TH1D*)file->Get("mjj_new");
-	TH1D* h2 = (TH1D*)file->Get("mjj_JEC_up");
-	TH1D* h3 = (TH1D*)file->Get("mjj_JEC_down");
-*/
 	const int num =h1->GetNbinsX();
         for(int i=0;i<num;i++){
            h1->SetBinContent(num,h1->GetBinContent(num)+h1->GetBinContent(num+1));

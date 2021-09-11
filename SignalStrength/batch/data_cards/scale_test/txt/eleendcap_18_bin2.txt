@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 6   number of processes-1
-kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap2
-observation 9.231
+observation 9.221
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,7 +13,7 @@ observation 9.231
 bin	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2	eleendcap2
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	1.798	4.579	2.790	0.000	0.000	0.000	0.064
+rate	1.797	4.569	2.790	0.000	0.000	0.000	0.064
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015
 VBS_Stat_bin2_eleendcap18	lnN	1.065	-	-	-	-	-	-
@@ -26,23 +26,26 @@ ZA_SigOut_Stat_bin2_eleendcap18	lnN	-	-	-	-	-	-	1.334
 Stat group = VBS_Stat_bin2_eleendcap18 QCD_Stat_bin2_eleendcap18 non_prompt_Stat_bin2_eleendcap18 ZA_SigOut_Stat_bin2_eleendcap18 
 fake_eleendcap18	lnN	-	-	1.348	-	-	-	-
 fake group = fake_eleendcap18 
-JES_18	lnN	1.030	1.140	-	1.090	1.160	1.000	1.070
-JER_18	lnN	1.000	1.070	-	1.080	1.280	1.000	1.050
+JES_18	lnN	1.110	1.100	-	1.250	1.350	1.000	1.110
+JER_18	lnN	1.010	1.030	-	1.200	1.130	1.000	1.090
 JESR group = JES_18 JER_18
 pdf_EW	lnN	1.001	-	-	-	-	-	1.002
 pdf_QCD	lnN	-	1.017	-	-	-	-	-
-Scale_EW	lnN	1.018	-	-	-	-	-	1.057
-Scale_muF1	lnN	-	1.139	-	-	-	-	-
-Scale_muR1	lnN	-	1.053	-	-	-	-	-
-Scale_muFmuR	lnN	-	1.194	-	-	-	-	-
+Scale_EW	lnN	1.018	-	-	-	-	-	1.058
+Scale_muF1	lnN	-	1.138	-	-	-	-	-
+Scale_muR1	lnN	-	1.057	-	-	-	-	-
+Scale_muFmuR	lnN	-	1.196	-	-	-	-	-
 interf	lnN	1.030	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf
-photon_id	lnN	1.028	1.031	-	1.031	1.026	1.000	1.028
+photon_id	lnN	1.028	1.030	-	1.031	1.026	1.000	1.028
 ele_reco	lnN	1.007	1.009	-	1.004	1.000	1.000	1.007
-ele_ID	lnN	1.072	1.069	-	1.006	1.000	1.000	1.072
+ele_ID	lnN	1.072	1.069	-	1.002	1.000	1.000	1.072
 egamma group = ele_reco ele_ID photon_id
-pileup	lnN	1.072	1.079	-	1.202	1.085	1.000	1.072
+pileup	lnN	1.072	1.079	-	1.202	1.080	1.000	1.072
 ttgamma_xs	lnN	-	-	-	-	-	-	-
 VV_xs	lnN	-	-	-	-	-	-	-
+pileupId_eff_18	lnN	1.000	1.004	-	1.028	1.024	1.000	1.007
+pileupId_mis_18	lnN	1.000	1.000	-	1.000	1.000	1.000	1.000
 luminosity group =  lumi_18 
 pu group = pileup
+pileupId group = pileupId_mis_18 pileupId_eff_18

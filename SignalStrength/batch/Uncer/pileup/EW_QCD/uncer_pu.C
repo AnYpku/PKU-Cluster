@@ -14,6 +14,13 @@ void run(TString tag,TString sample){
 	TH1D* hh2 = (TH1D*)file1->Get("hist_1");
 	TH1D* hh3 = (TH1D*)file1->Get("hist_2");
         h1->Add(hh1,1);h2->Add(hh2,1);h3->Add(hh3,1);
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile* f2 = new TFile("./root/hist_ZA_interf_pileup_"+tag+".root");
+                TH1D* hhh1 = (TH1D*)f2->Get("hist_0");
+                TH1D* hhh2 = (TH1D*)f2->Get("hist_1");
+                TH1D* hhh3 = (TH1D*)f2->Get("hist_2");
+                h1->Add(hhh1);h2->Add(hhh2);h3->Add(hhh3);
+        }
 
 	const int num =h1->GetNbinsX();
         const int kk =h1->GetNbinsX();

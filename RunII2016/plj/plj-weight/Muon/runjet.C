@@ -2,39 +2,33 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-void runjet() {
-//TString dir="/data/pku/home/anying/cms/CMSSW_8_0_26_patch2/analysis_code/plj/plj-production/";
-TString dir = "/eos/user/y/yian/2016legacy/";
-
+void runjet(TString name) {
+TString dir = "/home/pku/anying/cms/rootfiles/2016/";
 ifstream infile("file");
 string buffer; 
-TString name;
-
+TString fname;
 int k=1;
-
 while (k>0){
 getline (infile, buffer) ;
-name = buffer;
-if(name.Contains("out")==0) {k=-2; continue;}
-TString outname=name+"_mu_up.root";
-//TString outname=name+"_mu_down.root";
-//TString outname=name+"_mu.root";
-TString inname=name+".root";
-
-cout<<inname<<endl;
+fname = buffer;
+if(fname.Contains("out")==0) {k=-2; continue;}
+TString inname=fname+".root";
+TString outname=fname+"_weight"+name+".root";
+cout<<outname<<endl;
 
 TFile *file1 =new TFile(dir+inname);
-TTree *tree1 = (TTree*) file1->Get("demo");
+TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 plj m1(tree1,outname);
-cout<<outname<<endl;
-m1.Loop();
+m1.Loop(name);
 m1.endJob();
  
 }
 
 }
 int main(){
-  runjet();
+  runjet("");
+  runjet("_down");
+  runjet("_up");
   return 1;
 }
 

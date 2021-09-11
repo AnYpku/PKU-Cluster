@@ -1,9 +1,9 @@
-TH1D* run(TString cut,TString file,TString channel,TString isBarrel){
+TH1D* run(TString cut,TString file,TString channel,TString isBarrel,TString year){
 	vector<double> ptbins;
 	if(isBarrel.Contains("barrel"))
 		ptbins={20,25,30,35,40,50,60,100,400};
 	else    ptbins={20,25,30,40,50,60,400};
-	TFile*f1=new TFile("/home/pku/anying/cms/rootfiles/WWg/cutlep-"+file+".root");
+	TFile*f1=new TFile("/home/pku/anying/cms/rootfiles/WWg/20"+year+"/cutlep-"+file+".root");
 	TTree*tree=(TTree*)f1->Get("Events");
         TString histname=file+"_"+channel+"_"+isBarrel;
         TH1D*h1 = new TH1D(histname,"",ptbins.size()-1,&ptbins[0]);
@@ -30,7 +30,7 @@ int cal_weight(){
 	vector<TString> channel={"emu"};
         vector<TString> isBarrel={"barrel","endcap"};
 	for(int i=0;i<fname.size();i++){
-		for(int ik=2;ik<year.size();ik++){
+		for(int ik=1;ik<year.size()-1;ik++){
 			TFile*fhist=new TFile("weight_"+year[ik]+".root","recreate");
 			for(int k=0;k<isBarrel.size();k++){
 				cout<<fname[i]<<" "<<channel[i]<<" "<<year[ik]<<" "<<isBarrel[k]<<endl;
@@ -38,13 +38,13 @@ int cal_weight(){
 				if(year[ik].Contains("16")) lumi=36;
 				if(year[ik].Contains("17")) lumi=41.52;
 				if(year[ik].Contains("18")) lumi=59.7;
-				TH1D*h1=run(cut1,fname[i]+year[ik],channel[i],isBarrel[k]);
-				TH1D*h2=run(cut2,fname[i]+year[ik],channel[i],isBarrel[k]);
-				TH1D*h3=run(cut3,"outVV"+year[ik],channel[i],isBarrel[k]);
-				TH1D*h4=run(cut3,"outTTGJets"+year[ik],channel[i],isBarrel[k]);
-				TH1D*h5=run(cut3,"outZGJets"+year[ik],channel[i],isBarrel[k]);
-				TH1D*h6=run(cut3,"outST"+year[ik],channel[i],isBarrel[k]);
-				TH1D*h7=run(cut3,"outWWG"+year[ik],channel[i],isBarrel[k]);
+				TH1D*h1=run(cut1,fname[i]+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h2=run(cut2,fname[i]+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h3=run(cut3,"outVV"+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h4=run(cut3,"outTTGJets"+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h5=run(cut3,"outZGJets"+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h6=run(cut3,"outST"+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h7=run(cut3,"outWWG"+year[ik],channel[i],isBarrel[k],year[ik]);
 				h3->Scale(lumi);
 				h4->Scale(lumi);
 				h5->Scale(lumi);
@@ -85,7 +85,7 @@ int cal_weight(){
 				l1->AddEntry(h6,"ST");
 				l1->AddEntry(h7,"WWG");
 				l1->Draw();
-				c1->Print("hist_com_"+channel[i]+"_"+isBarrel[k]+".pdf");
+				c1->Print("hist_com_"+channel[i]+"_"+isBarrel[k]+year[ik]+".pdf");
 				ifstream f1;
 				vector<double> ptbins;
 				if(isBarrel[k].Contains("barrel"))
@@ -100,9 +100,19 @@ int cal_weight(){
                                 else c=channel[i];
                                 cout<<channel[i]<<" "<<c<<endl;
 				TH2D*hist=new TH2D("weight_"+isBarrel[k],"",1,0,1,ptbins.size()-1,&ptbins[0]);
+                                TString cat[2];
+                                if(year[ik]=="17"){
+                                        cat[0]="Barrel";
+                                        cat[1]="Endcap";
+				}
+				else{
+                                       cat[0]=isBarrel[0]; 
+                                       cat[1]=isBarrel[1]; 
+				}
 				for(int j=0;j<ptbins.size()-1;j++){
-					f1.open(Form("/home/pku/anying/cms/PKU-Cluster/WWg/fakephoton/fit/"+isBarrel[k]+"/txt/fakerate_"+c+"_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
-					if(!f1.is_open())  cout<<"can not open the file "<<Form("/home/pku/anying/cms/PKU-Cluster/WWg/fakephoton/fit/"+isBarrel[k]+"/txt/fakerate_"+c+"_ZA_pt%0.f_%0.f",ptbins[j],ptbins[j+1])<<endl;
+//					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
+					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/"+cat[k]+"Muon/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
+					if(!f1.is_open())  cout<<Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1])<<endl;
 					f1>>fakerate[j];
 					plj_weight[j]=h1->GetBinContent(j+1)/(h2->GetBinContent(j+1)-h3->GetBinContent(j+1)-h4->GetBinContent(j+1)-h5->GetBinContent(j+1)-h6->GetBinContent(j+1)-h7->GetBinContent(j+1))*fakerate[j];
 					cout<<" pt "<<ptbins[j]<<"~"<<ptbins[j+1]<<", fake photon fraction "<<fakerate[j]<<", data yields "<<h1->GetBinContent(j+1)<<", plj yields "<<h2->GetBinContent(j+1)<<", prompt contribution from MC "<<h3->GetBinContent(j+1)+h4->GetBinContent(j+1)+h5->GetBinContent(j+1)+h6->GetBinContent(j+1)+h7->GetBinContent(j+1)<<", event weight "<<plj_weight[j]<<endl;

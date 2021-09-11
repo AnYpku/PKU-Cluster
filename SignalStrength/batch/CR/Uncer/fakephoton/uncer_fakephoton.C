@@ -39,7 +39,7 @@ void run(TString channel,TString tag){
 		 cout<<endl;
 }
 int uncer_fakephoton(){
-     vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};//,"Mva","Mjj"};
+     vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
      vector<TString> tag={"16","17","18"};
      for(int i=0;i<channels.size();i++){
 	     for(int j=0;j<tag.size();j++){

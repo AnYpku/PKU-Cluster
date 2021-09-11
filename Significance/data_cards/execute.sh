@@ -8,6 +8,7 @@ for (( j = 0 ; j < ${#year[@]} ; j++ ))
 do
     for (( i = 0 ; i < ${#channel[@]} ; i++ ))
     do
-        python th2_to_txt.py ${year[$j]} ${channel[$i]}
+#        python th2_to_txt.py ${year[$j]} ${channel[$i]}
+	python th2_to_txt_loose.py ${year[$j]} ${channel[$i]}
     done
 done

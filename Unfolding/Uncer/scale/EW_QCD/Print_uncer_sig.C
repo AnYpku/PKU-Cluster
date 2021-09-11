@@ -5,9 +5,11 @@ void run(TString var,int i,TString tag){
 //        ftxt<<index<<" "<<endl;
 	TFile*file=new TFile("../root/unfold_"+var+"_"+index+"_ewk_scale"+tag+".root");
 	TFile*file1=new TFile("./root/unfold_"+var+"_"+index+"_qcd_scale"+tag+".root");
-        TH1D*h2[3];TH1D*h1[num];
+	TFile*file2=new TFile("./root/unfold_"+var+"_"+index+"_interf_scale"+tag+".root");
+        TH1D*h2[3];TH1D*h1[num];TH1D*h3[3];
 	for(int j=0;j<3;j++){
 		h2[j]=(TH1D*)file->Get(Form(var+"_scale%i_recobin%i",j,i));
+		h3[j]=(TH1D*)file2->Get(Form(var+"_scale%i_recobin%i",j,i));
 	}
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file1->Get(Form(var+"_scale%i_recobin%i",j,i));
@@ -19,9 +21,9 @@ void run(TString var,int i,TString tag){
         }//combine overflow bin ewk
         for(int i=0;i<num;i++){
                 h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1));
-		if(i==0||i==3||i==6) h1[i]->Add(h2[0]);
-		if(i==1||i==4) h1[i]->Add(h2[1]);
-		if(i==2||i==8) h1[i]->Add(h2[2]);
+		if(i==0||i==3||i==6) {h1[i]->Add(h2[0]);  h1[i]->Add(h3[0]);} 
+		if(i==1||i==4)       {h1[i]->Add(h2[1]);  h1[i]->Add(h3[1]);}
+		if(i==2||i==8)       {h1[i]->Add(h2[2]);  h1[i]->Add(h3[2]);}
         }//combine overflow bin qcd
         vector<double> vec_content;
         vector<Double_t>:: iterator biggest;

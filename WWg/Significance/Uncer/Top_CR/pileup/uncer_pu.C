@@ -61,7 +61,7 @@ int uncer_pu(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG","Top"};
-	for(int j=2;j<tag.size();j++){
+	for(int j=1;j<tag.size()-1;j++){
 		for(int k=0;k<sample.size();k++){
 			run(tag[j],sample[k]);
 		}

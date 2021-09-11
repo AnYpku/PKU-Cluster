@@ -15,8 +15,15 @@ void run(TString var, TString tag,TString sample){
         TH1D*h1[num];
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_%i",j));
-		h1[j]->Scale(lumi);
 	}
+        TH1D*hh1[3];
+        if(sample.Contains("ZA")||sample.Contains("EW")==0){
+                TFile*file1=new TFile("./root/unfold_"+var+"_ZA_interf_pref"+tag+".root");
+                for(int j=0;j<num;j++){
+                        hh1[j]=(TH1D*)file1->Get(Form(var+"_%i",j));
+                        h1[j]->Add(hh1[j],1);
+                }
+        }
         const int kk=h1[0]->GetNbinsX();
         for(int i=0;i<num;i++){
                 h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1));

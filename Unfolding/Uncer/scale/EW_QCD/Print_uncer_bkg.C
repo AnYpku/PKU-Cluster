@@ -3,6 +3,7 @@ void run(TString var, TString tag){
 	ofstream ff("./"+var+"_uncer_"+tag+".txt",ios::app);
 	TFile*file=new TFile("../root/unfold_"+var+"_SigOut_scale"+tag+".root");
 	TFile*file1=new TFile("./root/unfold_"+var+"_qcdOut_scale"+tag+".root");
+	TFile*file2=new TFile("./root/unfold_"+var+"_interfOut_scale"+tag+".root");
 	TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -12,22 +13,21 @@ void run(TString var, TString tag){
 	else if(tag.Contains("18"))
 		lumi=58.7;
 
-        TH1D*h1[num];TH1D*h2[3];
+        TH1D*h1[num];TH1D*h2[3];TH1D*h3[3];
 	vector<double> vec_content;
 	vector<Double_t>:: iterator biggest;
 	vector<Double_t>:: iterator smallest;
         double max,min;
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file1->Get(Form(var+"_%i",j));
-		h1[j]->Scale(lumi);
 		if(j<3){
 			h2[j]=(TH1D*)file->Get(Form(var+"_%i",j));
-			h2[j]->Scale(lumi);
+			h3[j]=(TH1D*)file2->Get(Form(var+"_%i",j));
 
 		}
-		if(j==0||j==3||j==6) h1[j]->Add(h2[0]);
-		if(j==1||j==4)       h1[j]->Add(h2[1]);
-		if(j==2||j==8)       h1[j]->Add(h2[2]);
+		if(j==0||j==3||j==6) {h1[j]->Add(h2[0]);h1[j]->Add(h3[0]);}
+		if(j==1||j==4)       {h1[j]->Add(h2[1]);h1[j]->Add(h3[1]);}
+		if(j==2||j==8)       {h1[j]->Add(h2[2]);h1[j]->Add(h3[2]);}
 	}
 	const int kk=h1[0]->GetNbinsX();
 	for(int i=0;i<num;i++){

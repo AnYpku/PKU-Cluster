@@ -1,11 +1,17 @@
-void run(TString sample,TString channel,TString type){
+void run(TString sample,TString channel,TString type,TString tag){
 //	ofstream f1("./"+type+"_uncer_"+sample+"_"+channel+".txt");
-	ofstream ftxt("./"+type+"_uncer_"+channel+"CR.txt",ios::app);
-	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+"CR.root");
+	ofstream ftxt("./"+type+"_uncer_"+channel+tag+"CR.txt",ios::app);
+	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+tag+"CR.root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
-
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile* f2 = new TFile("./root/hist_ZA_interf_puId"+type+"_"+channel+tag+"CR.root");
+                TH1D* hh1 = (TH1D*)f2->Get("hist_0");
+                TH1D* hh2 = (TH1D*)f2->Get("hist_1");
+                TH1D* hh3 = (TH1D*)f2->Get("hist_2");
+                h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+        }
 	const int num =h1->GetNbinsX();
 	const int kk =h1->GetNbinsX();
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
@@ -46,10 +52,13 @@ int uncer_eff(){
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
 //	vector<TString> channels={"mubarrel"};
 //	vector<TString> sample={"ZA"};
+	vector<TString> tag={"16","17","18"};
 	for(int i=0;i<channels.size();i++){
 		for(int j=0;j<sample.size();j++){
-			run(sample[j],channels[i],"mis");
-			run(sample[j],channels[i],"eff");
+			for(int k=0;k<tag.size();k++){
+				run(sample[j],channels[i],"mis",tag[k]);
+				run(sample[j],channels[i],"eff",tag[k]);
+			}
 		}
 	}
 	return 1;

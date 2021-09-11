@@ -3,7 +3,7 @@
 void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      TString name=file->GetName();
      TTree*tree=(TTree*)file->Get("outtree");     
-     Double_t scalef,pileupWeight,pweight[703],Mjj,zepp,puIdweight_T,prefWeight;
+     Double_t scalef,pileupWeight,pweight[703],Mjj,zepp,puIdweight,prefWeight;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double ptVlep, yVlep, phiVlep, massVlep,ZGmass;
@@ -35,7 +35,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      tree->SetBranchAddress("yVlep",&yVlep);
      tree->SetBranchAddress("phiVlep",&phiVlep);
      tree->SetBranchAddress("massVlep",&massVlep);
-     tree->SetBranchAddress("puIdweight_T",&puIdweight_T);
+     tree->SetBranchAddress("puIdweight",&puIdweight);
      tree->SetBranchAddress("prefWeight",&prefWeight);
      tree->SetBranchAddress("ele1_id_scale",&ele1_id_scale);
      tree->SetBranchAddress("ele2_id_scale",&ele2_id_scale);
@@ -80,7 +80,6 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     jet2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
 	     delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
 	     if(tag.Contains("18"))prefWeight=1;
-	     if(tag.Contains("17")==0)puIdweight_T=1;
 	     if (delta_phi>pi) delta_phi=2*pi-delta_phi;
 	     int p=0;
 	     if (  tformula->EvalInstance() && (zepp<2.4 && delta_phi>1.9) ){
@@ -153,13 +152,16 @@ int Uncer_batch_bkg(){
 	file2[2]=new TFile(dir3+"optimal_ZA-EWK18.root");
 
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
-		if(tag[i].Contains("17")==0) continue;
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
+//		if(tag[i].Contains("17")==0) continue;
 		TString Reco= "((("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
 		cout<<tag[i]<<" "<<jet<<endl;
 		run(file1[i],Reco,tag[i],9,0);

@@ -15,7 +15,16 @@ void run(TString var,TString sample, TString tag){
         TH1D*h1[num];
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_%i",j));
-		h1[j]->Scale(lumi);
+	}
+	if(sample.Contains("qcd")){
+                TFile*f2;
+                f2=new TFile("./root/unfold_"+var+"_interf_pdf"+tag+".root");
+                TH1D*h2[num];
+                for(int j=0;j<num;j++){
+                        h2[j]=(TH1D*)f2->Get(Form(var+"_%i",j));
+                        h1[j]->Add(h2[j],1);
+                        cout<<h1[j]->GetBinContent(1)<<endl;
+                }
 	}
         const int kk=h1[0]->GetNbinsX();
         for(int i=0;i<num;i++){
@@ -61,28 +70,6 @@ void run(TString var,TString sample, TString tag){
             }
 	}
 }
-/*void open(TString var,vector<double> genbins,TString tag){
-        const int kk=genbins.size();
-	double uncer[kk-1][kk-1];
-	ofstream fout("./"+var+"_uncer"+tag+".txt");
-	for(int k=0;k<kk-1;k++){
-		ifstream f1(Form("./txt/"+var+"_recobin%i_uncer"+tag+".txt",k+1));
-		for(int j=0;j<kk-1;j++){
-			f1>>uncer[k][j];//the kth file and jth element
-//			cout<<var<<" "<<uncer[k][j]<<endl;
-		}
-	}
-	for(int i=0;i<kk-1;i++){
-            for(int j=0;j<kk-1;j++){
-               if(j==0)fout<<"genbin"<<i+1<<"=[";
-               fout<<fixed<<setprecision(3)<<1+uncer[j][i]<<",";
-               if(j==kk-2) fout<<"]"<<endl;
-	    }
-	}
-
-
-
-}*/
 int Print_uncer_bkg(){
      vector<vector<double>> bins;
      vector<double> ptlepBins={20,80,120,200,400};

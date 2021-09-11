@@ -3,16 +3,16 @@ void CMS_lumi(TPad* pad, int iPeriod, int iPosX, string lumi) {
 	TString cmsText = "CMS";
 	float cmsTextFont = 60; // default is helvetic-bold
 	bool writeExtraText = true;
-	TString extraText = "   Preliminary";
+	TString extraText = "";
 	float extraTextFont = 52; // default is helvetica-italics
 // text sizes and text offsets with respect to the top frame
 // in unit of the top margin size
 	float lumiTextSize = 0.6;
 	float lumiTextOffset = 0.2;
-	float cmsTextSize = 0.75;
+	float cmsTextSize = 1;//0.75;
 	float cmsTextOffset = 0.1; // only used in outOfFrame version
 	float relPosX = 0.045;
-	float relPosY = 0.035;
+	float relPosY = 0.2;
 	float relExtraDY = 1.2;
 // ratio of "CMS" and extra text size
 	float extraOverCmsTextSize = 0.76;

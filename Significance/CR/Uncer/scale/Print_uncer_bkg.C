@@ -9,6 +9,17 @@ void run(TString sample, TString tag,int num){
 	}
 	ofstream ff("./uncer_"+tag+"CR.txt",ios::app);
 	TFile*file=new TFile("./hist_"+sample+"_scale"+tag+".root");
+        TH1D*h1[num];
+        for(int j=0;j<num;j++){
+                h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
+        }
+        TH1D*hh1[3];
+        if(sample.Contains("qcd")){
+                TFile*file1=new TFile("./hist_interf_scale"+tag+".root");
+                for(int j=0;j<3;j++){
+                        hh1[j]=(TH1D*)file1->Get(Form("hist_%i",j));
+                }
+        }
 	TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -18,26 +29,20 @@ void run(TString sample, TString tag,int num){
 	else if(tag.Contains("18"))
 		lumi=58.7;
 
-        TH1D*h1[num];
 	vector<double> vec_content;
 	vector<Double_t>:: iterator biggest;
 	vector<Double_t>:: iterator smallest;
         double max,min;
-	for(int j=0;j<num;j++){
-		h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
-		h1[j]->Scale(lumi);
-	}
         const int kk=h1[0]->GetNbinsX();
-//        const int kk=h1[0]->GetNbinsX()-2;
-//        for(int i=0;i<num;i++){
-//                h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1)+h1[i]->GetBinContent(kk+2)+h1[i]->GetBinContent(kk+3));
-//        }//combine the last three bins and overflow bin to the seventh bin
         double scale_muR1[kk],scale_muF1[kk],scale_muFmuR[kk];
 	for(int k=0;k<kk;k++){
             double error=0,extra_up=0,extra_down=0;
 	    double diff=0,sum=0;
             for(int j=0;j<num;j++){
 		    if(name.Contains("qcd")){
+			    if(j==0||j==3||j==6) h1[j]->Add(hh1[0]);
+			    if(j==1||j==4) h1[j]->Add(hh1[1]);
+			    if(j==2||j==8) h1[j]->Add(hh1[2]);
 			    if(!(j==5||j==7)) vec_content.push_back(h1[j]->GetBinContent(k+1));
 		    }
                     else if(name.Contains("qcd")==0&& num<4)

@@ -60,8 +60,10 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      }
      TFile*fout[kk];
      for(int j=0;j<kk;j++){
-	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_ewk"+tag+".root","recreate");
-	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_ewk"+tag+".root","recreate");
+//	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_ewk"+tag+".root","recreate");
+//	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_ewk"+tag+".root","recreate");
+	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_interf"+tag+".root","recreate");
+	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_interf"+tag+".root","recreate");
      }
      for(int j=0;j<kk;j++){
 	     fout[j]->cd();
@@ -109,12 +111,15 @@ int Unfold_sig(){
      TString dir1="/home/pku/anying/cms/rootfiles/2016/";
      TString dir2="/home/pku/anying/cms/rootfiles/2017/";
      TString dir3="/home/pku/anying/cms/rootfiles/2018/";
-     TFile*file1=new TFile(dir1+"unfold_GenCutla-ZA-EWK16.root");
-     TFile*file2=new TFile(dir2+"unfold_GenCutla-ZA-EWK17.root");
-     TFile*file3=new TFile(dir3+"unfold_GenCutla-ZA-EWK18.root");
+//     TFile*file1=new TFile(dir1+"unfold_GenCutla-ZA-EWK16.root");
+//     TFile*file2=new TFile(dir2+"unfold_GenCutla-ZA-EWK17.root");
+//     TFile*file3=new TFile(dir3+"unfold_GenCutla-ZA-EWK18.root");
+     TFile*file1=new TFile(dir1+"unfold_GenCutla-ZA_interf16.root");
+     TFile*file2=new TFile(dir2+"unfold_GenCutla-ZA_interf17.root");
+     TFile*file3=new TFile(dir3+"unfold_GenCutla-ZA_interf18.root");
 
-//     run(file1,genvars, bins,cut1,"16");
+     run(file1,genvars, bins,cut1,"16");
      run(file2,genvars, bins,cut1,"17");
-//     run(file3,genvars, bins,cut1,"18");
+     run(file3,genvars, bins,cut1,"18");
      return 1;
 }

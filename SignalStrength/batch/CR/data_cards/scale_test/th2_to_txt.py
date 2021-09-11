@@ -9,18 +9,21 @@ print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
 fdir = '../../root/'
 f_EW = TFile.Open(fdir+'hist_ZA-EWK_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_ZA = TFile.Open(fdir+'hist_ZA_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
+f_ZA_interf = TFile.Open(fdir+'hist_ZA_interf_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_TTA = TFile.Open(fdir+'hist_TTA_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 if sys.argv[2].find("ele") == -1:
-   f_Data = TFile.Open(fdir+'hist_Muon_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
+   f_Data = TFile.Open(fdir+'hist_DMuon_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 else:
-   f_Data = TFile.Open(fdir+'hist_Ele_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
+   f_Data = TFile.Open(fdir+'hist_DEle_'+sys.argv[1]+"CR_"+sys.argv[2]+'.root')
 
 th1_ZA_sig_out=f_EW.Get('hist_sigout')
 th1_ZA_sig=f_EW.Get('hist_sig')
 th1_ZA=f_ZA.Get('hist_bkg')
+th1_interf=f_ZA_interf.Get('hist_bkg')
+th1_ZA.Add(th1_interf)
 th1_non_prompt=f_plj.Get('hist_bkg')
 th1_TTA=f_TTA.Get('hist_bkg')
 th1_VV=f_VV.Get('hist_bkg')
@@ -58,11 +61,11 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax 6   number of processes-1\n')
    if sys.argv[1].find("18") == -1 and sys.argv[1].find("17") == -1: #16
-        f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 26  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("18") == -1: #17
-        f.write('kmax 27  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 26  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("17") == -1: #18
-        f.write('kmax 24  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -181,10 +184,6 @@ for i in range(1,nbins):
    f.write('Scale_muFmuR\tlnN\t')
    f.write('-\t%0.3f\t-\t-\t-\t-\t-\n'%(arr['scale_muFmuR'][i-1]))
 #
-   f.write('interf\tlnN\t')
-   f.write('%0.3f\t-\t-\t-\t-\t-\t-\n'%(arr['interf'+sys.argv[1]][i-1]))
-
-
    if sys.argv[2].find("ele") == -1:
         f.write('mu_trigger\tlnN\t')
         f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['muon_ZA-EWK_trigger'][i-1],arr['muon_ZA_trigger'][i-1],arr['muon_TTA_trigger'][i-1],arr['muon_VV_trigger'][i-1],arr['muon_ST_trigger'][i-1],arr['muon_ZA-EWK_trigger'][i-1]))
@@ -208,15 +207,23 @@ for i in range(1,nbins):
    f.write('pileup\tlnN\t')
    f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['pu_ewk'][i-1],arr['pu_ZA'][i-1],arr['pu_TTA'][i-1],arr['pu_VV'][i-1],arr['pu_ST'][i-1],arr['pu_ewk'][i-1]))
 #
+   f.write('pileupId_eff_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
+#
+   f.write('pileupId_mis_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
+#
    f.write('ttgamma_xs\tlnN\t')
    f.write('-\t-\t-\t1.1\t-\t-\t-\n')
-
+#
    f.write('VV_xs\tlnN\t')
    f.write('-\t-\t-\t-\t1.1\t-\t-\n')
+#
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref_ewk'][i-1],arr['l1pref_ZA'][i-1],arr['l1pref_TTA'][i-1],arr['l1pref_VV'][i-1],arr['l1pref_ST'][i-1],arr['l1pref_ewk'][i-1]))
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
+#
    f.write('Stat group = VBS_Stat_control_bin%d_%s%s QCD_Stat_control_bin%d_%s%s non_prompt_Stat_control_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1],i,sys.argv[2],sys.argv[1],i,sys.argv[2],sys.argv[1]))
    if TTA_bincontent>0:
       f.write('TTA_Stat_control_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
@@ -228,27 +235,13 @@ for i in range(1,nbins):
       f.write('ZA_SigOut_Stat_control_bin%d_%s%s '%(i,sys.argv[2],sys.argv[1]))
    f.write('\n')
    f.write('JESR group = JES_%s JER_%s\n'%(sys.argv[1],sys.argv[1]))
-   f.write('theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf \n')
-   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:#17
-        f.write('pileupId_eff\tlnN\t')
-        f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
-        f.write('pileupId_mis\tlnN\t')
-        f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
-        f.write('Others group = ttgamma_xs VV_xs \n')
-        f.write('luminosity group = lumi_%s \n'%(sys.argv[1]))
-        f.write('pu group = pileup\n')
-        f.write('pref group = l1pref \n')
-        f.write('pileupId group = pileupId_mis pileupId_eff\n')
-   if sys.argv[1].find("17") == -1 and sys.argv[1].find("18")==-1:#16
-	f.write('Others group = ttgamma_xs VV_xs \n')
-	f.write('luminosity group = lumi_%s \n'%(sys.argv[1]))
-        f.write('pref group = l1pref \n')
-        f.write('pu group = pileup\n')
-
-   if sys.argv[1].find("17") == -1 and sys.argv[1].find("16")==-1:#18
-        f.write('Others group = ttgamma_xs VV_xs \n')
-        f.write('luminosity group = lumi_%s \n'%(sys.argv[1]))
-        f.write('pu group = pileup\n')
+   f.write('theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR \n')
+   f.write('luminosity group = lumi_%s \n'%(sys.argv[1]))
+   f.write('pu group = pileup\n')
+   f.write('pileupId group = pileupId_mis_%s pileupId_eff_%s\n'%(sys.argv[1],sys.argv[1]))
+   f.write('Others group = ttgamma_xs VV_xs \n')
+   if sys.argv[1].find("18") == -1:
+      f.write('pref group = l1pref \n')
    
    genbincontent[:]=[]
    genbinerror[:]=[]

@@ -5,13 +5,6 @@ void run(TString var,TString tag){
 	TH1D* h2 = (TH1D*)file->Get(var+"_up");
 	TH1D* h3 = (TH1D*)file->Get(var+"_down");
 
-/*	
-	ofstream f1("./Uncertainty_2.txt");
- 	TFile* file = new TFile("./output.root");
-	TH1D* h1 = (TH1D*)file->Get("mjj_new");
-	TH1D* h2 = (TH1D*)file->Get("mjj_JEC_up");
-	TH1D* h3 = (TH1D*)file->Get("mjj_JEC_down");
-*/
 	const int num =h1->GetNbinsX();
         for(int i=0;i<num;i++){
            h1->SetBinContent(num,h1->GetBinContent(num)+h1->GetBinContent(num+1));
@@ -41,7 +34,7 @@ void run(TString var,TString tag){
 		 cout<<endl;
 }
 int uncer_fakephoton(){
-     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};//,"Mva","Mjj"};
+     vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
      vector<TString> tag={"16","17","18"};
      for(int i=0;i<recovars.size();i++){
 	     for(int j=0;j<tag.size();j++){

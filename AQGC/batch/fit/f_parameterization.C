@@ -23,34 +23,34 @@ void fX0_parameterization_el(int index,vector<double>ZGbin,TString channel){
 	TString ch;
 	if(channel.Contains("mu")) ch="muon";
 	else ch="ele";
-	dir6="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/hist_"+ch+"_"; 
-	dir7="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/hist_"+ch+"_"; 
-	dir8="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/hist_"+ch+"_"; 
+	dir6="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/referee/hist_"+ch+"_"; 
+	dir7="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/referee/hist_"+ch+"_"; 
+	dir8="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/hist/referee/hist_"+ch+"_"; 
 	TFile*f6=new TFile(dir6+name+"_16.root");
 	TFile*f7=new TFile(dir7+name+"_17.root");
 	TFile*f8=new TFile(dir8+name+"_18.root");
 	std::ofstream ParamSetf ;
 	//      ParamSetf.open("paramsets_fT0_mu.txt");
-	if(index==1) {ParamSetf.open("./txt/paramsets_fM0_"+channel+".txt"); }
-	if(index==2) {ParamSetf.open("./txt/paramsets_fM1_"+channel+".txt"); }
-	if(index==3) {ParamSetf.open("./txt/paramsets_fM2_"+channel+".txt"); }
-	if(index==4) {ParamSetf.open("./txt/paramsets_fM3_"+channel+".txt"); }
-	if(index==5) {ParamSetf.open("./txt/paramsets_fM4_"+channel+".txt"); }
-	if(index==6) {ParamSetf.open("./txt/paramsets_fM5_"+channel+".txt"); }
-	if(index==7) {ParamSetf.open("./txt/paramsets_fM6_"+channel+".txt"); }
-	if(index==8) {ParamSetf.open("./txt/paramsets_fM7_"+channel+".txt"); }
-	if(index==9) {ParamSetf.open("./txt/paramsets_fT0_"+channel+".txt"); }
-	if(index==10){ParamSetf.open("./txt/paramsets_fT1_"+channel+".txt");}
-	if(index==11){ParamSetf.open("./txt/paramsets_fT2_"+channel+".txt");}
-	if(index==12){ParamSetf.open("./txt/paramsets_fT5_"+channel+".txt");}
-	if(index==13){ParamSetf.open("./txt/paramsets_fT6_"+channel+".txt");}
-	if(index==14){ParamSetf.open("./txt/paramsets_fT7_"+channel+".txt");}
-	if(index==15){ParamSetf.open("./txt/paramsets_fT8_"+channel+".txt");}
-	if(index==16){ParamSetf.open("./txt/paramsets_fT9_"+channel+".txt");}
+	if(index==1) {ParamSetf.open("./txt/referee/paramsets_fM0_"+channel+".txt"); }
+	if(index==2) {ParamSetf.open("./txt/referee/paramsets_fM1_"+channel+".txt"); }
+	if(index==3) {ParamSetf.open("./txt/referee/paramsets_fM2_"+channel+".txt"); }
+	if(index==4) {ParamSetf.open("./txt/referee/paramsets_fM3_"+channel+".txt"); }
+	if(index==5) {ParamSetf.open("./txt/referee/paramsets_fM4_"+channel+".txt"); }
+	if(index==6) {ParamSetf.open("./txt/referee/paramsets_fM5_"+channel+".txt"); }
+	if(index==7) {ParamSetf.open("./txt/referee/paramsets_fM6_"+channel+".txt"); }
+	if(index==8) {ParamSetf.open("./txt/referee/paramsets_fM7_"+channel+".txt"); }
+	if(index==9) {ParamSetf.open("./txt/referee/paramsets_fT0_"+channel+".txt"); }
+	if(index==10){ParamSetf.open("./txt/referee/paramsets_fT1_"+channel+".txt");}
+	if(index==11){ParamSetf.open("./txt/referee/paramsets_fT2_"+channel+".txt");}
+	if(index==12){ParamSetf.open("./txt/referee/paramsets_fT5_"+channel+".txt");}
+	if(index==13){ParamSetf.open("./txt/referee/paramsets_fT6_"+channel+".txt");}
+	if(index==14){ParamSetf.open("./txt/referee/paramsets_fT7_"+channel+".txt");}
+	if(index==15){ParamSetf.open("./txt/referee/paramsets_fT8_"+channel+".txt");}
+	if(index==16){ParamSetf.open("./txt/referee/paramsets_fT9_"+channel+".txt");}
 
 
 	const int num=ZGbin.size()-1;
-	TFile* fout = new TFile("./root/signal_proc_"+channel+"__"+name+".root", "RECREATE");
+	TFile* fout = new TFile("./root/referee/signal_proc_"+channel+"__"+name+".root", "RECREATE");
 	TGraph*g6[num];TGraph*g7[num];TGraph*g8[num];
 	for(int i=0;i<num;i++){
 		g6[i]=(TGraph*)f6->Get(Form("bin%i",i));
@@ -161,22 +161,22 @@ void fX0_parameterization_el(int index,vector<double>ZGbin,TString channel){
 		//leg->AddEntry(gr,TString("SM yield: ")+Form("%f",signal_SM->Integral()),"") ;
 		leg->Draw("SAME") ;
 		cout <<"x9"<<endl;
-		if(index==1) c1->SaveAs(TString("figs/fit_fM0_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==2) c1->SaveAs(TString("figs/fit_fM1_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==3) c1->SaveAs(TString("figs/fit_fM2_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==4) c1->SaveAs(TString("figs/fit_fM3_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==5) c1->SaveAs(TString("figs/fit_fM4_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==6) c1->SaveAs(TString("figs/fit_fM5_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==7) c1->SaveAs(TString("figs/fit_fM6_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==8) c1->SaveAs(TString("figs/fit_fM7_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==9) c1->SaveAs(TString("figs/fit_fT0_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==10)c1->SaveAs(TString("figs/fit_fT1_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==11)c1->SaveAs(TString("figs/fit_fT2_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==12)c1->SaveAs(TString("figs/fit_fT5_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==13)c1->SaveAs(TString("figs/fit_fT6_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==14)c1->SaveAs(TString("figs/fit_fT7_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==15)c1->SaveAs(TString("figs/fit_fT8_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
-		if(index==16)c1->SaveAs(TString("figs/fit_fT9_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==1) c1->SaveAs(TString("figs/referee/fit_fM0_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==2) c1->SaveAs(TString("figs/referee/fit_fM1_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==3) c1->SaveAs(TString("figs/referee/fit_fM2_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==4) c1->SaveAs(TString("figs/referee/fit_fM3_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==5) c1->SaveAs(TString("figs/referee/fit_fM4_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==6) c1->SaveAs(TString("figs/referee/fit_fM5_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==7) c1->SaveAs(TString("figs/referee/fit_fM6_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==8) c1->SaveAs(TString("figs/referee/fit_fM7_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==9) c1->SaveAs(TString("figs/referee/fit_fT0_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==10)c1->SaveAs(TString("figs/referee/fit_fT1_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==11)c1->SaveAs(TString("figs/referee/fit_fT2_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==12)c1->SaveAs(TString("figs/referee/fit_fT5_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==13)c1->SaveAs(TString("figs/referee/fit_fT6_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==14)c1->SaveAs(TString("figs/referee/fit_fT7_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==15)c1->SaveAs(TString("figs/referee/fit_fT8_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
+		if(index==16)c1->SaveAs(TString("figs/referee/fit_fT9_")+channel+Form("_ZGbin_%u",i)+TString(".pdf")) ;
 		//              c1->SaveAs(TString("fit_fT0")+Form("_ZPTbin_%u",i)+TString(".pdf")) ;
 
 		ParamSetf << par0 << " " << par1 << " " << endl;

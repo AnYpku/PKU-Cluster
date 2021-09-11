@@ -3,10 +3,24 @@ void run(TString sample, TString tag){
 	ofstream ftxt("./uncer_"+sample+"_"+tag+"CR.txt");//,ios::app);
 	ofstream ff("./uncer_"+tag+"CR.txt",ios::app);
 	TFile*file;
-	if(sample.Contains("qcd"))
-		file=new TFile("./hist_"+sample+"_pdf16.root");
-	else
-		file=new TFile("./hist_"+sample+"_pdf"+tag+".root");
+        TH1D*h1[num];
+        if(sample.Contains("qcd")){
+                file=new TFile("./hist_"+sample+"_pdf16.root");
+                TFile*f2;
+                f2=new TFile("./hist_interf_pdf"+tag+".root");
+                TH1D*h2[num];
+                for(int j=0;j<num;j++){
+                        h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
+                        h2[j]=(TH1D*)f2->Get(Form("hist_%i",j));
+                        h1[j]->Add(h2[j],1);
+                }
+        }
+        else{
+                file=new TFile("./hist_"+sample+"_pdf"+tag+".root");
+                for(int j=0;j<num;j++){
+                        h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
+                }
+        }
         TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -16,16 +30,7 @@ void run(TString sample, TString tag){
 	else if(tag.Contains("18"))
 		lumi=59.7;
 
-        TH1D*h1[num];
-	for(int j=0;j<num;j++){
-		h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
-		h1[j]->Scale(lumi);
-	}
-      const int kk=h1[0]->GetNbinsX();
-//      const int kk=h1[0]->GetNbinsX()-2;
-//      for(int i=0;i<num;i++){
-//             h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1)+h1[i]->GetBinContent(kk+2)+h1[i]->GetBinContent(kk+3));
-//      }//combine the last three bins and overflow bin to the seventh bin
+	const int kk=h1[0]->GetNbinsX();
 	for(int k=0;k<kk;k++){
             double error=0;
 	    double diff=0,sum=0;

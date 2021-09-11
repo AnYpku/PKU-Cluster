@@ -39,9 +39,9 @@ TGraphAsymmErrors*run_data(TFile*file,TString tag,int index,int num){
 }
 int Draw_fit(){
 	vector<TString> tag={"16","17","18"};
-	TFile*file=new TFile("./fitDiagnostics18.root");
 	TFile*fout;TFile*fout1;TFile*fout2;
-	for(int j=2;j<tag.size();j++){
+	for(int j=1;j<tag.size();j++){
+		TFile*file=new TFile("./fitDiagnostics"+tag[j]+".root");
 		fout=new TFile("hist_full_fit"+tag[j]+".root","recreate");
 		int index;index=1;
                 cout<<tag[j]<<endl;
@@ -58,8 +58,10 @@ int Draw_fit(){
 		h_TTA->Write();h_ST->Write();h_QCD->Write();h_Sig->Write();
 		h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
 		h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
+		file->Close();
 	}
-	for(int j=2;j<tag.size();j++){
+	for(int j=1;j<tag.size();j++){
+		TFile*file=new TFile("./fitDiagnostics"+tag[j]+".root");
 		fout1=new TFile("hist_SR_fit"+tag[j]+".root","recreate");
 		int index;index=13;
 		cout<<tag[j]<<endl;
@@ -76,9 +78,11 @@ int Draw_fit(){
 		h_TTA->Write();h_QCD->Write();h_Sig->Write();h_ST->Write();
 		h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
 		h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
+                file->Close();
 	}
 
-	for(int j=2;j<tag.size();j++){
+	for(int j=1;j<tag.size();j++){
+		TFile*file=new TFile("./fitDiagnostics"+tag[j]+".root");
 		fout2=new TFile("hist_CR_fit"+tag[j]+".root","recreate");
 		int index;index=1;
 		cout<<tag[j]<<endl;
@@ -95,6 +99,7 @@ int Draw_fit(){
 		h_TTA->Write();h_QCD->Write();h_Sig->Write();h_ST->Write();
 		h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
 		h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
+                file->Close();
 	}
 
 	return 0;

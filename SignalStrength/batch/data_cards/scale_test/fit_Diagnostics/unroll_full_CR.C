@@ -22,8 +22,8 @@ void run(TString channel){
         TFile*f3=new TFile("./hist_fit18CR.root");
 
         TString par;
-        if(channel.Contains("mu")) par="Muon";
-        else  par="Ele";
+        if(channel.Contains("mu")) par="DMuon";
+        else  par="DEle";
         TString ch;
         if(channel.Contains("mubarrel")) ch="mubarrel";
         else if(channel.Contains("elebarrel")) ch="elebarrel";

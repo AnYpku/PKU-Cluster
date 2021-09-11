@@ -7,7 +7,7 @@
 #include "ele_channel_scale.C"
 #include "muon_channel_scale.C"
 using namespace std;
-void WWg::Loop(TString name)
+void WWg::Loop(TString name,TString year)
 {
    if (fChain == 0) return;
 
@@ -16,12 +16,12 @@ void WWg::Loop(TString name)
 
    Long64_t nbytes = 0, nb = 0;
    int tot=0;
-   TFile*fbtag=new TFile("eff_b_jet18.root");
-   TH1D*hbeff=(TH1D*)fbtag->Get("b_jet_eff18");
-   TFile*fctag=new TFile("eff_c_jet18.root");
-   TH1D*hceff=(TH1D*)fctag->Get("c_jet_eff18");
-   TFile*fltag=new TFile("eff_l_jet18.root");
-   TH1D*hleff=(TH1D*)fltag->Get("l_jet_eff18");
+   TFile*fbtag=new TFile("eff_b_jet"+year+".root");
+   TH1D*hbeff=(TH1D*)fbtag->Get("b_jet_eff"+year);
+   TFile*fctag=new TFile("eff_c_jet"+year+".root");
+   TH1D*hceff=(TH1D*)fctag->Get("c_jet_eff"+year);
+   TFile*fltag=new TFile("eff_l_jet"+year+".root");
+   TH1D*hleff=(TH1D*)fltag->Get("l_jet_eff"+year);
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;

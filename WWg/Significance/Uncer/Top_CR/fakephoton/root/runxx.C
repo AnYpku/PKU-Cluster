@@ -16,8 +16,8 @@ void runxx(TString dir,TString outname){
 	m1.endJob();
 }
 int main(){
-	TString dir2="./cutla-out*plj_unc.root";
-	TString name2="cutla-outplj_unc18.root";
+	TString dir2="./cutla-out*17*plj_unc.root";
+	TString name2="cutla-outplj_unc17.root";
 	runxx(dir2,name2);
         return 1;
 }

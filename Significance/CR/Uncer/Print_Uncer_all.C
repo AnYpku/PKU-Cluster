@@ -41,8 +41,8 @@ int Print_Uncer_all(){
 			TString f_mu_trigger ="./lepton_uncer/muon_trigger_"+tag[j]+"CR.txt";
 			TString f_photon_ID ="./lepton_uncer/photon_ID_"+tag[j]+"CR.txt";
 			TString f_pileup ="./pileup/pu_uncer_"+tag[j]+"CR.txt";
-			TString f_puId_eff ="./puIdSF/eff_uncer_"+channel[i]+"CR.txt";
-			TString f_puId_mis ="./puIdSF/mis_uncer_"+channel[i]+"CR.txt";
+			TString f_puId_eff ="./puIdSF/eff_uncer_"+channel[i]+tag[j]+"CR.txt";
+			TString f_puId_mis ="./puIdSF/mis_uncer_"+channel[i]+tag[j]+"CR.txt";
 			run(channel[i],tag[j],f_fake);
 			run(channel[i],tag[j],f_interf);
 			run(channel[i],tag[j],f_QCD_pdf);

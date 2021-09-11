@@ -3,21 +3,20 @@ void run(TString sample,TString tag){
         fstream ftxt("./jes_uncer"+tag+".txt", ios::app );
 	ofstream f1("./"+sample+"_jes_uncer"+tag+".txt");
 	TFile*file;
-	if(sample.Contains("EWK"))
-//		file = new TFile("./root/hist_"+sample+"_jes"+tag+".root");
-		file = new TFile("./hist_"+sample+"_jes"+tag+".root");
-//      else file=new TFile("./root/hist_"+sample+"_jes"+tag+".root");
-        else file=new TFile("./hist_"+sample+"_jes"+tag+".root");
+	file = new TFile("./hist_"+sample+"_jes"+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
-/*	
-	ofstream f1("./Uncertainty_2.txt");
- 	TFile* file = new TFile("./output.root");
-	TH1D* h1 = (TH1D*)file->Get("mjj_new");
-	TH1D* h2 = (TH1D*)file->Get("mjj_JEC_up");
-	TH1D* h3 = (TH1D*)file->Get("mjj_JEC_down");
-*/
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+          TFile*f1;
+          f1=new TFile("./hist_ZA_interf_jes"+tag+".root");
+          TH1D*hh1 = (TH1D*)f1->Get("hist_0");
+          TH1D*hh2 = (TH1D*)f1->Get("hist_1");
+          TH1D*hh3 = (TH1D*)f1->Get("hist_2");
+          h1->Add(hh1,1);
+          h2->Add(hh2,1);
+          h3->Add(hh3,1);
+        }
 	const int kk =h1->GetNbinsX();
         const int num = kk-2;
 	h1->SetBinContent(kk-2,h1->GetBinContent(kk-2)+h1->GetBinContent(kk-1)+h1->GetBinContent(kk));

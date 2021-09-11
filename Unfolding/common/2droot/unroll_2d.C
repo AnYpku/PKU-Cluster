@@ -36,11 +36,11 @@ int unroll_2d(){
 	TH2D*h2Gen;
 	TH1D*h1Gen;
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
-//	vector<TString> sample={"plj"};
+//	vector<TString> sample={"ZA-EWK","ZA","plj","TTA","VV","ST"};
+	vector<TString> sample={"ZA_interf"};
 //	vector<TString> sample={"DMuon","DEle"};
 	for(int i=0;i<tag.size();i++){
-                if(tag[i].Contains("17")==0) continue;
+//              if(tag[i].Contains("17")==0) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			TFile*file=new TFile("hist_"+sample[j]+"_2d"+tag[i]+".root");

@@ -28,7 +28,7 @@ void cmsLumi(TString tag)
 	if(tag.Contains("17"))
 		latex.DrawLatex(0.76,0.92,Form("41.52 fb^{-1} (%d TeV)", (beamcomenergytev)));
 	if(tag.Contains("18"))
-		latex.DrawLatex(0.76,0.92,Form("58.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
+		latex.DrawLatex(0.76,0.92,Form("59.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 
 void unroll_name(TString filename,TString tag){
@@ -50,7 +50,7 @@ void unroll_name(TString filename,TString tag){
 	std::string lumivalue = strs.str();
 
 	TFile* f_ZA;
-	f_ZA=new TFile("./hist_"+filename+"_jes"+tag+".root");
+	f_ZA=new TFile("./root/hist_"+filename+"_jes"+tag+".root");
 	TH1D* th1_ZA[num];
 	TH1D* t_ZA[num];
 	TCanvas* cc[num];
@@ -72,6 +72,7 @@ void unroll_name(TString filename,TString tag){
 		t_ZA[i]->SetLineWidth(3);
 		t_ZA[i]->SetLineColor(i+11);
 //		for(Int_t j=1;j<=t_ZA[i]->GetNbinsX();j++){ t_ZA[i]->GetXaxis()->SetBinLabel(j,name[j-1]);}
+		t_ZA[i]->Scale(1/t_ZA[i]->Integral());
 	}
 	vector<double> vec_ymax;
 	vec_ymax.push_back(t_ZA[0]->GetMaximum());
@@ -169,7 +170,7 @@ void unroll_name(TString filename,TString tag){
 int unroll_test(){
 
 	TString sample[2]={"ZA","ZA-EWK"};
-	for(int i=0;i<2;i++){
+	for(int i=0;i<1;i++){
 		unroll_name(sample[i],"16");
 		unroll_name(sample[i],"17");
 		unroll_name(sample[i],"18");

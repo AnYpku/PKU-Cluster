@@ -7,7 +7,16 @@ void run(TString particle,TString sample,TString type,TString tag){
 	h1 = (TH1D*)file->Get("hist_0");
 	h2 = (TH1D*)file->Get("hist_1");
 	h3 = (TH1D*)file->Get("hist_2");
-
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+          TFile*f1;
+          f1=new TFile("./root/"+particle+"_ZA_interf_"+type+tag+".root");
+          TH1D*hh1 = (TH1D*)f1->Get("hist_0");
+          TH1D*hh2 = (TH1D*)f1->Get("hist_1");
+          TH1D*hh3 = (TH1D*)f1->Get("hist_2");
+          h1->Add(hh1,1);
+          h2->Add(hh2,1);
+          h3->Add(hh3,1);
+        }
 	if(tag.Contains("16"))
 		f2<<particle<<"_"<<sample<<"_"<<type<<"=[";
 	if(tag.Contains("17"))
@@ -45,10 +54,11 @@ void run(TString particle,TString sample,TString type,TString tag){
 }
 int uncer_lepton(){
 	vector<TString> par={"ele","muon","photon"};
-//	vector<TString> tag={"16","17","18"};
-	vector<TString> tag={"17"};
+	vector<TString> tag={"16","17","18"};
+//	vector<TString> tag={"17"};
 	vector<TString> recovars={"ptlep1","photonet","jet1pt"};
 	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+//	vector<TString> sample={"ZA"};
 	for(int i=0;i<par.size();i++){
 		for(int k=0;k<sample.size();k++){
 			for(int j=0;j<tag.size();j++){

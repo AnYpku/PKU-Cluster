@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 6   number of processes-1
-kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel1
-observation 101.642
+observation 97.473
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,38 +13,41 @@ observation 101.642
 bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
 process	Sig	QCD	non_prompt	TTA	VV	ST	Sig_out
 process	0	1	2	3	4	5	6
-rate	12.336	52.441	31.820	1.813	0.770	0.201	2.261
+rate	12.314	50.527	29.490	1.933	0.770	0.201	2.238
 ------------
 lumi_18	lnN	1.015	1.015	-	1.015	1.015	1.015	1.015
 VBS_Stat_bin1_mubarrel18	lnN	1.024	-	-	-	-	-	-
-QCD_Stat_bin1_mubarrel18	lnN	-	1.067	-	-	-	-	-
-non_prompt_Stat_bin1_mubarrel18	lnN	-	-	1.104	-	-	-	-
-TTA_Stat_bin1_mubarrel18	lnN	-	-	-	1.489	-	-	-
+QCD_Stat_bin1_mubarrel18	lnN	-	1.068	-	-	-	-	-
+non_prompt_Stat_bin1_mubarrel18	lnN	-	-	1.109	-	-	-	-
+TTA_Stat_bin1_mubarrel18	lnN	-	-	-	1.454	-	-	-
 VV_Stat_bin1_mubarrel18	lnN	-	-	-	-	1.707	-	-
 ST_Stat_bin1_mubarrel18	lnN	-	-	-	-	-	2.000	-
-ZA_SigOut_Stat_bin1_mubarrel18	lnN	-	-	-	-	-	-	1.057
+ZA_SigOut_Stat_bin1_mubarrel18	lnN	-	-	-	-	-	-	1.058
 Stat group = VBS_Stat_bin1_mubarrel18 QCD_Stat_bin1_mubarrel18 non_prompt_Stat_bin1_mubarrel18 TTA_Stat_bin1_mubarrel18 VV_Stat_bin1_mubarrel18 ST_Stat_bin1_mubarrel18 ZA_SigOut_Stat_bin1_mubarrel18 
-fake_mubarrel18	lnN	-	-	1.088	-	-	-	-
+fake_mubarrel18	lnN	-	-	1.086	-	-	-	-
 fake group = fake_mubarrel18 
-JES_18	lnN	1.040	1.120	-	1.090	1.160	1.390	1.170
-JER_18	lnN	1.010	1.070	-	1.080	1.280	1.130	1.070
+JES_18	lnN	1.230	1.140	-	1.250	1.350	1.360	1.230
+JER_18	lnN	1.040	1.090	-	1.200	1.130	1.110	1.120
 JESR group = JES_18 JER_18
 pdf_EW	lnN	1.001	-	-	-	-	-	1.001
 pdf_QCD	lnN	-	1.012	-	-	-	-	-
-Scale_EW	lnN	1.040	-	-	-	-	-	1.027
-Scale_muF1	lnN	-	1.117	-	-	-	-	-
-Scale_muR1	lnN	-	1.026	-	-	-	-	-
-Scale_muFmuR	lnN	-	1.145	-	-	-	-	-
+Scale_EW	lnN	1.040	-	-	-	-	-	1.026
+Scale_muF1	lnN	-	1.120	-	-	-	-	-
+Scale_muR1	lnN	-	1.031	-	-	-	-	-
+Scale_muFmuR	lnN	-	1.153	-	-	-	-	-
 interf	lnN	1.054	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf
 photon_id	lnN	1.027	1.028	-	1.031	1.026	1.031	1.027
 mu_eff	lnN	1.003	1.003	-	1.003	1.004	1.001	1.003
-mu_trigger	lnN	1.007	1.006	-	1.006	1.005	1.008	1.007
+mu_trigger	lnN	1.007	1.006	-	1.006	1.004	1.008	1.007
 muon group = mu_eff mu_trigger
 egamma group = photon_id
-pileup	lnN	1.072	1.072	-	1.153	1.085	1.045	1.072
+pileup	lnN	1.072	1.068	-	1.146	1.080	1.046	1.072
 ttgamma_xs	lnN	-	-	-	1.1	-	-	-
 VV_xs	lnN	-	-	-	-	1.1	-	-
 Others group = ttgamma_xs VV_xs 
+pileupId_eff_18	lnN	1.001	1.004	-	1.007	1.008	1.000	1.002
+pileupId_mis_18	lnN	1.000	1.008	-	1.031	1.046	1.000	1.001
 luminosity group =  lumi_18 
 pu group = pileup
+pileupId group = pileupId_mis_18 pileupId_eff_18

@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	// Path to wherever the files with the trees are. 
-	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/2016/","/home/pku/anying/cms/rootfiles/2017/","/home/pku/anying/cms/rootfiles/2018/"};
+	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/2016/aQGC/","/home/pku/anying/cms/rootfiles/2017/","/home/pku/anying/cms/rootfiles/2018/"};
 	std::string outputDir = "./fig-output_a/";
 	RoccoR  rc;
         /// file for scale factors
@@ -123,8 +123,8 @@ void loopPlot() {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-                if(fData.at(i).Contains("2017")==0)
-                        continue;
+//                if(fData.at(i).Contains("2017")==0)
+//                        continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 
@@ -156,8 +156,8 @@ void loopPlot() {
 
 	//loop over MC files and make histograms individually for each of them
 	for (int i = 0; i < fMC.size(); i++) {
-                if(fMC.at(i).Contains("2017")==0)
-                        continue;
+//                if(fMC.at(i).Contains("2016")==0)
+//                        continue;
 		std::cout << "\n-------\nRunning over " << mcLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;
@@ -189,8 +189,8 @@ void loopPlot() {
 
 	//loop over MC signal files and make histograms individually for each of them
 	for (int  i = 0; i < fMCSig.size(); i++) {
-                if(fMCSig.at(i).Contains("2017")==0)
-                        continue;
+//                if(fMCSig.at(i).Contains("2017")==0)
+//                        continue;
 		std::cout << "\n-------\nRunning over " << mcLabelsSig[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;

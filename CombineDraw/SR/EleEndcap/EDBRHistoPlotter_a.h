@@ -279,8 +279,8 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName) {
 		fPads1->SetLineColor(0);
 		fPads2->SetFillColor(0);
 		fPads2->SetLineColor(0);
-		fPads1->SetBottomMargin(0);
-		fPads2->SetTopMargin(0);
+		fPads1->SetBottomMargin(0.022);
+		fPads2->SetTopMargin(0.022);
 		fPads2->SetBottomMargin(0.3);
 
 		//fPads3->SetFillColor(0);

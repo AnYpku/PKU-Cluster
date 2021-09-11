@@ -120,7 +120,7 @@ public:
 	void cleanupMCSig();
 	void cleanupDATA();
 	void makeLabels();
-	void makeStackPlots(std::string histoName,TString histTitle,int isBarrel);
+	void makeStackPlots(std::string histoName,TString histTitle,int isBarrel,vector<std::string> bkgLegend);
 	void setOutDir(std::string outDirNew,int isBarrel);
 
 	/// set debug mode
@@ -259,7 +259,7 @@ void EDBRHistoPlotter::setOutDir(std::string outDirNew,int isBarrel) {
 
 }
 
-void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,int isBarrel) {
+void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,int isBarrel,vector<std::string> bkgLegend) {
 
 	cleanupMC();
 	cleanupMCSig();
@@ -460,8 +460,9 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 	hs->SetMaximum(max*70);
 	hs->Draw("HIST ");
 	hs->GetYaxis()->SetTitle("Events/bin");  //40.24pb-1");
+//	hs->GetYaxis()->SetNdivisions(404);
 	hs->GetYaxis()->SetLabelSize(0.06);  //40.24pb-1");
-	hs->GetYaxis()->SetTitleOffset(1.15);
+	hs->GetYaxis()->SetTitleOffset(1.17);
 //  hs->GetYaxis()->CenterTitle();
 
 	///------------------------------------
@@ -536,11 +537,11 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 	// histosMCSig.at(0)->Draw("SAME HIST");
 
 	// For the legend, we have to tokenize the name "histos_XXX.root"
-	TLegend* leg1 = new TLegend(0.52, 0.5, 0.82, 0.9);
-	TLegend* leg2 = new TLegend(0.2, 0.5, 0.5, 0.9);
-	TLegend* leg3 = new TLegend(0.2, 0.63,0.57, 0.7);
-	leg1->SetTextSize(0.04);
-	leg2->SetTextSize(0.04);
+        TLegend* leg1 = new TLegend(0.52, 0.5, 0.82, 0.9);
+        TLegend* leg2 = new TLegend(0.2, 0.5, 0.5, 0.9);
+        TLegend* leg3 = new TLegend(0.2, 0.63,0.57, 0.7);
+        leg1->SetTextSize(0.04);
+        leg2->SetTextSize(0.04);
         ofstream ftxt("./yields.txt");
 	if (isDataPresent_){
 		double yieldsDataErr=0;
@@ -553,13 +554,13 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 //		TString LabelData = samplesData; 
 		ftxt<<samplesData.Data()<<" "<<yData<<"$pm$"<<yDataErr<<""<<endl;
 
-//		leg1->AddEntry(sumDATA, LabelData, "ep");
+		leg1->AddEntry(sumDATA, LabelData, "ep");
 	      //double yieldsMC=sumMC->GetSumOfWeights();
 		double yieldsMCerr;
 		double yieldsMC=sumMC->IntegralAndError(0,sumMC->GetNbinsX(),yieldsMCerr);
-		char yMC[100];sprintf(yMC,"%0.1f",yieldsMC);
-		char yMCerr[100];sprintf(yMCerr,"%0.1f",yieldsMCerr);
-		TString samplesMC = "Pred. stat. unc.";
+		char yMC[100];sprintf(yMC,"%0.f",yieldsMC);
+		char yMCerr[100];sprintf(yMCerr,"%0.f",yieldsMCerr);
+		TString samplesMC = "Pred. #oplus stat.";
 	      TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
 //		TString LabelMC = samplesMC ;
 		ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
@@ -582,7 +583,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 						char ySig[100];sprintf(ySig,"%.1f",yieldsMCSig);
 						char ySigErr[100];sprintf(ySigErr,"%.1f",yieldsMCSigErr);
 						TString samplesMCSig = "WW#gamma";
-						TString LabelSig = samplesMCSig +" ["+ ySig + "#pm"+ySigErr +"]";
+					        TString LabelSig = samplesMCSig +" ["+ ySig + "#pm"+ySigErr +"]";
 //						TString LabelSig = samplesMCSig;
 						ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
 						leg1->AddEntry(histosMCSig.at(i), LabelSig, "lf");
@@ -594,25 +595,32 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		}
 	}
 	cout<<"test"<<endl;
+	int num;
+	for(size_t i = 0; i != histosMC.size(); ++i){
+		mcTotalLabels.push_back(bkgLegend.at(i));
+                double y_tmp=histosMC.at(i)->GetSumOfWeights();
+                if(y_tmp>0) num++;
+	}
+	num=(num+3)/2-3;
+	cout<<"num "<<num<<endl;
 	for (size_t i = 0; i != histosMC.size(); ++i) {
-		mcTotalLabels.push_back("plj");mcTotalLabels.push_back("Nonprompt #font[12]{l}");mcTotalLabels.push_back("VV");mcTotalLabels.push_back("tW");
-		mcTotalLabels.push_back("QCD Z#gamma");mcTotalLabels.push_back("QCD t#gamma");
-		mcTotalLabels.push_back("t#bar{t}#gamma");mcTotalLabels.push_back("QCD W#gamma");mcTotalLabels.push_back("tZq");
 		TH1D* h1=(TH1D*)histosMC.at(i)->Clone();
 		double yerr;
 		double yields=h1->IntegralAndError(0,histosMC.at(i)->GetNbinsX(),yerr);
 		yields = h1->GetSumOfWeights();
-                if(yields<0){yields=0;yerr=0;}
+                if(yields<0.049){yields=0;yerr=0;}
 		char y[100];sprintf(y,"%.1f",yields);
 		char ye[100];sprintf(ye,"%.1f",yerr);
 		TString samples ;
 		if(mcTotalLabels.at(i).find("plj")!=string::npos)
 			samples="Nonprompt #gamma";
+		else if(mcTotalLabels.at(i).find("fakeL")!=string::npos)
+			samples="Nonprompt #font[12]{l}";
 		else    samples= mcTotalLabels.at(i).c_str();
 		TString LabelMC = samples +" ["+ y+ "#pm"+ye+"]";
 //		TString LabelMC = samples ;
                 if(yields>0){
-			if(i<3)leg1->AddEntry(h1, LabelMC, "f");
+			if(i<num)leg1->AddEntry(h1, LabelMC, "f");
 			else   leg2->AddEntry(h1, LabelMC, "f");
 		}
 		ftxt<<samples<<" "<<y<< "$pm$"<<ye<<""<<endl;
@@ -686,9 +694,10 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 			nominal->SetTitle("");
 			nominal->GetYaxis()->SetRangeUser(thisYmin, thisYmax);
 			nominal->GetYaxis()->SetNdivisions(404);
-			nominal->GetYaxis()->SetTitle("Data/MC");
-			nominal->GetYaxis()->CenterTitle();
-			nominal->GetYaxis()->SetTitleOffset(0.38);
+			nominal->GetYaxis()->SetTitle("Data/Pred.");
+//			nominal->GetYaxis()->CenterTitle();
+			nominal->GetYaxis()->SetTitleOffset(0.42);
+			nominal->GetXaxis()->SetLabelOffset(0.04);
 			nominal->GetYaxis()->SetTitleSize(0.14);
 			nominal->GetYaxis()->SetLabelSize(0.13);
 			nominal->GetXaxis()->SetLabelSize(0.13);

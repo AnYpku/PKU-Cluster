@@ -12,9 +12,9 @@ text2workspace.py full16_test.txt -m 125
 text2workspace.py full17_test.txt -m 125 
 text2workspace.py full18_test.txt -m 125 
 text2workspace.py full_RunII.txt -m 125 
-#full16_test.root
-#full18_test.root
 files="\
+full16_test.root
+full18_test.root
 full17_test.root
 full_RunII.root
 "

@@ -12,7 +12,7 @@
 #include "CMSTDRStyle.h"
 #include "roccor/RoccoR.cc"
 #include "TH2.h"
-void loopPlot(int isBarrel,TString isChannel) {
+void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	gErrorIgnoreLevel = kFatal; //suppresses all info messages
 
 	setTDRStyle(); //TDR style
@@ -20,10 +20,10 @@ void loopPlot(int isBarrel,TString isChannel) {
 
 	TString channel,lep_ch;
 	if(isBarrel==1)channel="b";else if(isBarrel==0)channel="e"; else channel="a";
-	double lumiValue1 = 59.7;
-	double lumiValue2 = 41.52;
-	double lumiValue3 = 35.86;
-	double lumiValue;
+	double lumiValue; 
+        if(year=="18")     {lumiValue=59.7;}
+	else if(year=="17"){lumiValue=41.5;}
+	else if(year=="16"){lumiValue=35.9;}
 	/// Should we scale the histograms to data?
 	bool scaleToData = false;
 	// Should we scale only wjets to make total MC = DATA?
@@ -37,10 +37,11 @@ void loopPlot(int isBarrel,TString isChannel) {
 	bool dopileupreweight = false;
 
 	// Path to wherever the files with the trees are. 
-	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/WWg/"};
-	std::string outputDir = "./fig-output_a/";
+	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/WWg/20"+year+"/"};
+	std::string outputDir = "./fig-output_"+year+"/";
 	RoccoR  rc;
         /// file for scale factors
+        std::vector<std::string> bkgLegend; 
 
 // Setup names of data files for trees.
 	const int nDATA = 1;
@@ -51,7 +52,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nDATA; ii++) {
                         if(ii==0) j=0;else if(ii==1) j=1; else if(ii==2)j=2;
-			fData.push_back(pathToTrees[j] +"cutla-out"+ data[ii] + "18.root");
+			fData.push_back(pathToTrees[j] +"cutla-out"+ data[ii] + year+".root");
 		}
 	}
 	const int kk=fData.size();
@@ -61,21 +62,21 @@ void loopPlot(int isBarrel,TString isChannel) {
 	const int nMC = 9;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-        std::string mc[nMC] ={"plj","fakeL","VV","ST","ZGJets","TGJets","TTGJets_weight","WGJets","tZq"};
-//        mc[0]=mc[0]+isChannel+"_weight";
+        std::string mc[nMC] ={"plj","fakeL","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
 	std::vector< TString > fMC;
 	for (int ii = 0; ii < nMC; ii++) {
-		fMC.push_back(pathToTrees[0] +"cutla-out"+ mc[ii] + "18.root");
-		cout<<pathToTrees[0]<<"cutla-out"<<mc[ii] <<"18.root"<<endl;
+		fMC.push_back(pathToTrees[0] +"cutla-out"+ mc[ii] + year+".root");
+		cout<<pathToTrees[0]<<"cutla-out"<<mc[ii] +year<<".root"<<endl;
 	}
 	const int nmc=fMC.size();
-	std::string mcLabels[nmc] ={"plj","fakeLepton","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
-//	std::string mcLabels[nmc] ={"DY","TTJets","TTWJets","WJets","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
-	double kFactorsMC_array[nmc] ={1,1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
-//	double kFactorsMC_array[nmc] ={lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
+	std::string bkgLabels[nmc] ={"plj","fakeL","VV","tW","QCD Z#gamma","t#gamma","t#bar{t}#gamma","QCD W#gamma","tZq"};
+	std::string mcLabels[nmc] ={"plj","fakeL","VV","ST","ZGJets","TGJets","TTGJets","WGJets","tZq"};
+	double kFactorsMC_array[nmc] ={1,1,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue,lumiValue};
+
 	cout<<"MC size "<<fMC.size()<<endl;
 	std::vector<double> kFactorsMC;
 	for (int index = 0; index < nmc; index++) {
+                bkgLegend.push_back(bkgLabels[index]);
 		kFactorsMC.push_back(kFactorsMC_array[index]);
 	}
 	// set mcsig information
@@ -85,12 +86,12 @@ void loopPlot(int isBarrel,TString isChannel) {
 	std::string mcSig[nMCSig] = { "WWG"};
 	std::vector < TString > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
-		fMCSig.push_back(pathToTrees[0] + "cutla-out" + mcSig[ii] + "18.root");
+		fMCSig.push_back(pathToTrees[0] + "cutla-out" + mcSig[ii] + year+".root");
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
 	const int nmcsig=fMCSig.size();
 	std::string mcLabelsSig[nmcsig] = { "WWG"};
-	double kFactorsSig_array[nmcsig] = {lumiValue1};
+	double kFactorsSig_array[nmcsig] = {lumiValue};
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nmcsig; index++) {
 		kFactorsMCSig.push_back(kFactorsSig_array[index]);
@@ -101,7 +102,7 @@ void loopPlot(int isBarrel,TString isChannel) {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
-        std::vector < TString > histName={"m_{ll}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{l1}","#eta_{l1}","#phi_{l1}","p_{T}^{l2}","#eta_{l2}","#phi_{l2}","m_{ll#gamma}","p_{T}^{ll}","p_{T}^{ll}","#phi_{ll}","#eta_{ll}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}"};
+        std::vector < TString > histName={"m_{#font[12]{ll}}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{#font[12]{l}_{1}}","#eta_{#font[12]{l}_{1}}","#phi_{#font[12]{l}_{1}}","p_{T}^{#font[12]{l}_{2}}","#eta_{#font[12]{l}_{2}}","#phi_{#font[12]{l}_{2}}","m_{#font[12]{ll}#gamma}","p_{T}^{#font[12]{ll}}","#phi_{#font[12]{ll}}","#eta_{#font[12]{ll}}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}"};
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
 
@@ -121,10 +122,10 @@ void loopPlot(int isBarrel,TString isChannel) {
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 
 		TString tag,sample;
-		if(fData.at(i).Contains("16")) {tag="16";rc.init("roccor/RoccoR2016bUL.txt");lumiValue=35.86; }
-		if(fData.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt");lumiValue=41.52; }
+		if(fData.at(i).Contains("16")) {tag="16";rc.init("roccor/RoccoR2016bUL.txt");lumiValue=35.9; }
+		if(fData.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt");lumiValue=41.5; }
 		if(fData.at(i).Contains("18")) {tag="18";rc.init("roccor/RoccoR2018UL.txt");lumiValue=59.7; }
-		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s"+tag+".root",dataLabels[i].c_str());
+		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s.root",dataLabels[i].c_str());
 		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s"+tag+".root",dataLabels[i].c_str());
 		fHistosData.push_back(buffer);
 
@@ -153,10 +154,10 @@ void loopPlot(int isBarrel,TString isChannel) {
 			<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;
 		TString tag;
-		if(fMC.at(i).Contains("16")) {tag="16";rc.init("roccor/RoccoR2016bUL.txt"); lumiValue=35.86;}
-		if(fMC.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt"); lumiValue=41.52;}
+		if(fMC.at(i).Contains("16")) {tag="16";rc.init("roccor/RoccoR2016bUL.txt"); lumiValue=35.9;}
+		if(fMC.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt"); lumiValue=41.5;}
 		if(fMC.at(i).Contains("18")) {tag="18";rc.init("roccor/RoccoR2018UL.txt"); lumiValue=59.7; }
-		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s"+tag+".root", mcLabels[i].c_str());
+		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s.root", mcLabels[i].c_str());
 		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s"+tag+".root", mcLabels[i].c_str());
 		fHistosMC.push_back(buffer);
 		std::cout << "test" << std::endl;
@@ -185,10 +186,10 @@ void loopPlot(int isBarrel,TString isChannel) {
 			<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;
 		TString tag;
-		if(fMCSig.at(i).Contains("16")) {tag="16";rc.init("roccor/RoccoR2016bUL.txt"); lumiValue=35.86;}
-		if(fMCSig.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt"); lumiValue=41.52;}
+		if(fMCSig.at(i).Contains("16")) {tag="16";rc.init("roccor/RoccoR2016bUL.txt"); lumiValue=35.9;}
+		if(fMCSig.at(i).Contains("17")) {tag="17";rc.init("roccor/RoccoR2017UL.txt"); lumiValue=41.5;}
 		if(fMCSig.at(i).Contains("18")) {tag="18";rc.init("roccor/RoccoR2018UL.txt"); lumiValue=59.7; }
-		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s"+tag+".root",mcLabelsSig[i].c_str());
+		sprintf(buffer, "./output-slimmed-rootfiles/histos_"+isChannel+channel+"_%s.root",mcLabelsSig[i].c_str());
 		sprintf(out_buffer, "./output-slimmed-rootfiles/optimal_"+isChannel+channel+"_%s"+tag+".root",mcLabelsSig[i].c_str());
 		fHistosMCSig.push_back(buffer);
 
@@ -235,7 +236,6 @@ void loopPlot(int isBarrel,TString isChannel) {
 	}      //end if fmc size >0
 
 	std::cout << "Creating plotter" << std::endl;
-	lumiValue=59.7;
 	EDBRHistoPlotter *plotter = new EDBRHistoPlotter("./", fHistosData,
 			fHistosMC, fHistosMCSig, lumiValue, scaleToData, scaleOnlyWJets,
 			makeRatio, isSignalStackOnBkg, kFactorsMC, kFactorsMCSig);
@@ -256,7 +256,10 @@ void loopPlot(int isBarrel,TString isChannel) {
 	fColorsMC.push_back(kBlue-6);
 	fColorsMC.push_back(kBlue);
 	fColorsMC.push_back(kGreen);
+	fColorsMC.push_back(kGreen-6);
 	fColorsMC.push_back(kGreen-7);
+	fColorsMC.push_back(kGreen-9);
+	fColorsMC.push_back(kGreen-10);
 
 
 	std::vector<int> fColorsMCSig;
@@ -267,16 +270,15 @@ void loopPlot(int isBarrel,TString isChannel) {
 
 	int numOfHistos = listOfHistos.size();
 	for (int i = 0; i != numOfHistos; ++i){
-		plotter->makeStackPlots(listOfHistos.at(i),histName[i],isBarrel);
+		plotter->makeStackPlots(listOfHistos.at(i),histName[i],isBarrel,bkgLegend);
 	}
 	printf("Plotting done\n");
 	delete plotter;
 }
 
 int main() {
-//	loopPlot(1,"mm");
-//	loopPlot(1,"emu");
-	loopPlot(2,"emu");
+	loopPlot(2,"emu","18");
+	loopPlot(2,"emu","17");
 	return 0;
 }
 

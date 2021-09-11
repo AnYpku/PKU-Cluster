@@ -114,7 +114,7 @@ void unroll_name(TString filename,TString tag){
 	nominal->SetFillStyle(3001);
 	nominal->SetFillColor(16);
         nominal->GetXaxis()->SetTitle("m_{T_{WW}} [GeV]");
-	nominal->GetYaxis()->SetRangeUser(0.3,1.7);
+//	nominal->GetYaxis()->SetRangeUser(0.3,1.7);
         nominal->GetYaxis()->SetTitleOffset(0.35);
         nominal->GetYaxis()->SetTitleSize(0.16);
         nominal->GetYaxis()->SetNdivisions(303);
@@ -130,15 +130,15 @@ void unroll_name(TString filename,TString tag){
 	h_down->Draw("same hist ][");
 
 	fPads2->Update();
-	c1->Print("./figs/hist_"+filename+tag+"_pu.pdf");
+	c1->Print("./figs/hist_"+filename+tag+"_scale.pdf");
 
 }
 int unroll_test(){
 
-	vector<TString> names={"TTGJets"};
+	vector<TString> names={"TTGJets","ST"};
 	for(int i=0;i<names.size();i++){
-		unroll_name(names[i],"18");
+//		unroll_name(names[i],"18");
+		unroll_name(names[i],"17");
 	}
-//		unroll_name("ST","18");
 	return 0;
 }

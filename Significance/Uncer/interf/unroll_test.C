@@ -52,13 +52,13 @@ void unroll_name(TString tag){
 	const char *name[7]={"0.5~0.8","0.8~1.2","1.2~2","0.5~0.8","0.8~1.2","1.2~2","0.5~2"};
 
 	TFile* f_ZA1;TFile* f_ZA2;
-	f_ZA1=new TFile("./hist_"+tag+".root");
+	f_ZA1=new TFile("./hist-EWK_"+tag+".root");
 	f_ZA2=new TFile("./hist_interf_"+tag+".root");
 	TH1D* th1_ZA[num];
 	TH1D* t_ZA[num];
 	TCanvas* cc[num];
 	TLegend *ll[num];
-	th1_ZA[0]=(TH1D*)f_ZA1->Get("hist");
+	th1_ZA[0]=(TH1D*)f_ZA1->Get("hist-EWK");
 	th1_ZA[1]=(TH1D*)f_ZA2->Get("hist_interf");
 	for(Int_t i=0;i<num;i++){
                 const int nbins=th1_ZA[i]->GetNbinsX()-2;

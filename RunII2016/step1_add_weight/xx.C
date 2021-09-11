@@ -100,6 +100,7 @@ void xx::Loop()
 		if(m_dataset.Contains("DY")){ scalef=1000.*6077.22/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("TTJets")){ scalef=1000.*831.76/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ZA16")){ scalef=1000.*47.46/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
+		if(m_dataset.Contains("ZA_sherpa")){ scalef=1000.*93.60/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("TTA")){ scalef=1000.*3.697/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("STs")){ scalef=1000.*3.36/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
 		if(m_dataset.Contains("ST_tbarW")){ scalef=1000.*35.85/float(npp-nmm)*fabs(theWeight)/theWeight; run_period=8;}
@@ -156,8 +157,8 @@ void xx::Loop()
                 cut0++;
                 if( !( (LEPmu||LEPele) && PHOTON   )  )
 			continue;
-                if( !(JET) )
-			continue;
+//                if( !(JET) )
+//			continue;
 		if(m_dataset.Contains("aQGC") && !(size>702))
 			continue; 
 		ExTree->Fill();

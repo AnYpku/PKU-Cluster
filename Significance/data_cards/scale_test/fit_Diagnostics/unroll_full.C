@@ -32,8 +32,8 @@ void run(TString channel){
 	th2_ZA->SetMarkerColor(kBlue-6);
 	th2_ZA->SetLineColor(kBlue-6);
 
-//	const char *name[7]={"0.5-0.8","8-1.2","1.2-2","0.5-0.8","8-1.2","1.2-2","0.5-2"};
-	const char *name[7]={"0.5-0.8","8-1.2","1.2-#infty ","0.5-0.8","8-1.2","1.2-#infty","0.5-#infty"};
+//	const char *name[7]={"0.5-0.8","0.8-1.2","1.2-2","0.5-0.8","0.8-1.2","1.2-2","0.5-2"};
+	const char *name[7]={"0.5-0.8","0.8-1.2","1.2-#infty ","0.5-0.8","0.8-1.2","1.2-#infty","0.5-#infty"};
 
         TH1F*th2_ZA_sig  =(TH1F*)f1->Get("hist_Sig_"+channel);
         TH1F*th2_ZA_sig17=(TH1F*)f2->Get("hist_Sig_"+channel);
@@ -141,12 +141,18 @@ void run(TString channel){
         leg1->SetFillColor(kWhite);
 	leg1->SetTextSize(0.04);
 	leg2->SetTextSize(0.04);
-	leg->AddEntry(th2_ZA_sig,Form("EWK[%.1f] ",th2_ZA_sig->GetSum()) );
-	leg->AddEntry(th2_ZA, Form("Z#gamma [%.1f] ",th2_ZA->GetSum()));
-	leg->AddEntry(th2_plj, Form("non-prompt [%.1f] ",th2_plj->GetSum() ),"f");
-	leg1->AddEntry(th2_VV, Form("VV  [%.1f] ", th2_VV->GetSum() ) );
-	leg1->AddEntry(th2_TTA, Form("TT#gamma [%.1f] ",th2_TTA->GetSum()) );
-	leg1->AddEntry(th2_ST, Form("ST  [%.1f] ",th2_ST->GetSum() ) );
+//	leg->AddEntry(th2_ZA_sig,Form("EWK[%.1f] ",th2_ZA_sig->GetSum()) );
+//	leg->AddEntry(th2_ZA, Form("Z#gamma [%.1f] ",th2_ZA->GetSum()));
+//	leg->AddEntry(th2_plj, Form("non-prompt [%.1f] ",th2_plj->GetSum() ),"f");
+//	leg1->AddEntry(th2_VV, Form("VV  [%.1f] ", th2_VV->GetSum() ) );
+//	leg1->AddEntry(th2_TTA, Form("TT#gamma [%.1f] ",th2_TTA->GetSum()) );
+//	leg1->AddEntry(th2_ST, Form("ST  [%.1f] ",th2_ST->GetSum() ) );
+	leg->AddEntry(th2_ZA_sig,"EWK" );
+	leg->AddEntry(th2_ZA,    "Z#gamma");
+	leg->AddEntry(th2_plj,   "non-prompt","f");
+	leg1->AddEntry(th2_VV,   "VV");
+	leg1->AddEntry(th2_TTA,  "TT#gamma");
+	leg1->AddEntry(th2_ST,   "ST");
         leg2->AddEntry(htot,"Stat #oplus Syst");
 	leg->Draw();
 	leg1->Draw();

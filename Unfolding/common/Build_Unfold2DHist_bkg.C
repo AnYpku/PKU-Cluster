@@ -14,7 +14,7 @@ void run(TString sample,TString tag,TString Reco){
 
      TTreeFormula *tformula=new TTreeFormula("formula",Reco, tree); 
 
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,ele_hlt_scale,muon_hlt_scale,puIdweight_T;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,ele_hlt_scale,muon_hlt_scale,puIdweight_T,puIdweight_M,puIdweight_L;
      double Mjj,deltaetajj,scalef,jet1eta,jet2eta;
      int lep;
      tree->SetBranchAddress("lep",&lep);
@@ -25,6 +25,8 @@ void run(TString sample,TString tag,TString Reco){
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
      tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_L", &puIdweight_L);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
@@ -54,22 +56,26 @@ void run(TString sample,TString tag,TString Reco){
 	     th1[i]->Sumw2(); 
      }      
      double count=0,nentries=tree->GetEntries();
-     double actualWeight;
+     double actualWeight,puIdweight;
      cout<<"enter loop to build histograms"<<endl;
      for(int i=0;i<tree->GetEntries();i++){
 	     tree->GetEntry(i);
 	     deltaetajj=fabs(jet1eta-jet2eta);
              if(Mjj>2000) Mjj=1999; if(deltaetajj>6.5) deltaetajj=6.1;
-	     if(tag.Contains("18"))  prefWeight=1;
-	     if(tag.Contains("17")==0)  puIdweight_T=1;
-	     actualWeight=scalef*pileupWeight*prefWeight*photon_id_scale*lumi*photon_veto_scale*puIdweight_T;
+             if(tag.Contains("16")){ puIdweight=puIdweight_M;}
+             if(tag.Contains("17")){ puIdweight=puIdweight_T;}
+             if(tag.Contains("18")){ prefWeight=1;  puIdweight=puIdweight_L;}
+	     actualWeight=scalef*pileupWeight*prefWeight*photon_id_scale*lumi*photon_veto_scale*puIdweight;
 	     if(lep==11)
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
 		     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale;
 //             if(i%1000==0) cout<<"actualWeight "<<actualWeight<<endl;
+             if(sample.Contains("Muon")||sample.Contains("Ele")) actualWeight=1;
              if(sample.Contains("plj")) actualWeight=scalef;
-	     if (  tformula->EvalInstance() &&sample.Contains("EWK")==0 ){//reco && !gen
+	     if(sample.Contains("Muon")&& lep==11) continue;
+	     if(sample.Contains("Ele")&& lep==13) continue; 
+	     if (  tformula->EvalInstance() &&sample.Contains("EWK")==0 ){//reco 
                      if(Mjj<2000&deltaetajj<6.5)
                              hist_bkg->Fill(Mjj,deltaetajj,actualWeight);
                      else if(Mjj>2000&&deltaetajj<6.5)
@@ -109,15 +115,20 @@ int Build_Unfold2DHist_bkg(){
 	TString dr = "(( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
 	TString SignalRegion = "(Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && Mva>100)";
 	vector<TString> tag={"16","17","18"};
-	vector<TString> sample={"ZA","plj","TTA","VV","ST"};
-//	vector<TString> sample={"plj"};
+	vector<TString> sample={"ZA_interf"};
+//	vector<TString> sample={"DEle","DMuon"};
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+             if(tag[i].Contains("16")){
+                     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+             }  
+             else if(tag[i].Contains("17")){
+                     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+             }  
+             else if(tag[i].Contains("18")){
+                     jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+             }
 		TString Reco= "(("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
-		if(tag[i].Contains("17")==0) continue;
+//		if(tag[i].Contains("17")==0) continue;
 		for(int j=0;j<sample.size();j++){
 			cout<<tag[i]<<" "<<sample[j]<<endl;
 			run(sample[j],tag[i],Reco);

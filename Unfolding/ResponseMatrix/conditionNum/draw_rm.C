@@ -102,7 +102,7 @@ int draw_rm(){
 				vline1->Draw();
 				vline2->Draw();
 			}
-			c1->Print("rm_"+genvars[i]+tag[j]+".pdf");
+//			c1->Print("rm_"+genvars[i]+tag[j]+".pdf");
 		}
 	}
 	return 0;

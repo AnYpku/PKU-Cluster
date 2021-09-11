@@ -29,7 +29,7 @@ void cmsLumi(bool channel,TString tag)
 	if(tag.Contains("17"))
 		latex.DrawLatex(0.76,0.92,Form("41.52 fb^{-1} (%d TeV)", (beamcomenergytev)));
 	if(tag.Contains("18"))
-		latex.DrawLatex(0.76,0.92,Form("58.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
+		latex.DrawLatex(0.76,0.92,Form("59.7 fb^{-1} (%d TeV)", (beamcomenergytev)));
 }
 
 void unroll_name(TString filename,TString tag){

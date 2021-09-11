@@ -11,7 +11,7 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
 //     TTree*tree=(TTree*)file->Get("ZPKUCandidates");
      TTree*tree=(TTree*)file->Get("outtree");
      int lep;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,puIdweight_T;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,puIdweight_T,puIdweight_M,puIdweight_L;
      double jet1pt,jet2pt,jet1eta,jet2eta,jet1e,jet2e,jet1phi,jet2phi;
      double photonet,photoneta,photone,photonphi;
      double muon_hlt_scale,ele_hlt_scale;
@@ -41,6 +41,8 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
      tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_L", &puIdweight_L);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
@@ -78,25 +80,21 @@ void run(TString dir,TString name,TString cut1,TString tag,TString channel){
      if(channel.Contains("muendcap"))
 	     cut="lep==13&&(fabs(photoneta)<2.5&&fabs(photoneta)>1.566)";
      TTreeFormula *tformula1=new TTreeFormula("formula1", "(("+cut1+")&&("+cut+"))", tree);
-     double actualWeight,detajj;
+     double actualWeight,detajj,puIdweight;
      TLorentzVector Zp4, photonp4, jet1p4, jet2p4;
      for(int i=0;i<tree->GetEntries();i++){
 	     tree->GetEntry(i);
              detajj=fabs(jet1eta-jet2eta);
-//	     Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, massVlep);
-//	     photonp4.SetPtEtaPhiE(photonet, photoneta, photonphi, photone);
-//	     jet1p4.SetPtEtaPhiE(jet1pt, jet1eta, jet1phi, jet1e);
-//	     jet2p4.SetPtEtaPhiE(jet2pt, jet2eta, jet2phi, jet2e);
-//	     delta_phi=fabs((Zp4+photonp4).Phi()-(jet1p4+jet2p4).Phi());
-//	     if (delta_phi>pi) delta_phi=2*pi-delta_phi;
-	     if(tag.Contains("18"))  prefWeight=1;
-	     if(tag.Contains("17")==0)  puIdweight_T=1;
-	     actualWeight=scalef*pileupWeight*prefWeight*puIdweight_T*lumi;
+	     if(tag.Contains("16")){ puIdweight=puIdweight_M;}
+	     if(tag.Contains("17")){ puIdweight=puIdweight_T;}
+	     if(tag.Contains("18")){ prefWeight=1;  puIdweight=puIdweight_L;}
+	     actualWeight=scalef*pileupWeight*prefWeight*puIdweight*lumi;
 		     if(lep==11)       
 			     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*photon_veto_scale*ele_hlt_scale;
 		     if(lep==13)       
 			     actualWeight=actualWeight*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*photon_id_scale*photon_veto_scale*muon_hlt_scale;
 	     if(name.Contains("plj")) actualWeight=scalef;
+             if(name.Contains("Muon")||name.Contains("Ele")) actualWeight=1;
 	     if (  tformula1->EvalInstance() ){ 
 		     //cout<<name<<" "<<scalef<<" "<<pileupWeight<<" "
 		     //<<ele1_id_scale<<" "<<ele2_id_scale<<" "<<ele1_reco_scale<<" "<<ele2_reco_scale<<" "
@@ -134,21 +132,30 @@ int Build_Hist(){
 	TString dir1;
 	dir1="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
 	TString Reco;
-	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
-//	vector<TString> names={"ZA"};
+//	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj"};
+	vector<TString> names={"ZA_interf"};
+//	vector<TString> names={"Muon","Ele"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 	for(int k=0;k<tags.size();k++){
-		if(tags[k].Contains("17")==1){
+		if(tags[k].Contains("16")){
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+		}
+		else if(tags[k].Contains("17")){
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+		else if(tags[k].Contains("18")){
+			jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
 		}
 		Reco= "((("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+"&&"+opt+")";
 		cout<<tags[k]<<" "<<jet<<endl;
-		if(tags[k].Contains("17")==0) continue;
+//		if(tags[k].Contains("17")==1) continue;
+//		if(tags[k].Contains("16")==0) continue;
 		for(int j=0;j<names.size();j++){     
 			for(int i=0;i<channels.size();i++){
+				if(channels[i].Contains("ele")&&names[j].Contains("Muon"))
+					continue;
+				if(channels[i].Contains("mu")&&names[j].Contains("Ele"))
+					continue;
 				run(dir1,names[j],Reco,tags[k],channels[i]);
 			}
 		}

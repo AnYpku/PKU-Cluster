@@ -26,15 +26,15 @@ ZA_SigOut_Stat_bin3_eleendcap17	lnN	-	-	-	-	-	-	1.518
 Stat group = VBS_Stat_bin3_eleendcap17 QCD_Stat_bin3_eleendcap17 non_prompt_Stat_bin3_eleendcap17 ZA_SigOut_Stat_bin3_eleendcap17 
 fake_eleendcap17	lnN	-	-	1.230	-	-	-	-
 fake group = fake_eleendcap17 
-JES_17	lnN	1.050	1.280	-	1.180	1.460	1.000	1.110
-JER_17	lnN	1.020	1.270	-	1.230	1.390	1.000	1.070
+JES_17	lnN	1.100	1.230	-	1.080	1.500	1.000	1.100
+JER_17	lnN	1.010	1.200	-	1.350	1.420	1.000	1.060
 JESR group = JES_17 JER_17
 pdf_EW	lnN	1.001	-	-	-	-	-	1.002
 pdf_QCD	lnN	-	1.016	-	-	-	-	-
 Scale_EW	lnN	1.015	-	-	-	-	-	1.082
-Scale_muF1	lnN	-	1.086	-	-	-	-	-
-Scale_muR1	lnN	-	1.104	-	-	-	-	-
-Scale_muFmuR	lnN	-	1.194	-	-	-	-	-
+Scale_muF1	lnN	-	1.085	-	-	-	-	-
+Scale_muR1	lnN	-	1.108	-	-	-	-	-
+Scale_muFmuR	lnN	-	1.197	-	-	-	-	-
 interf	lnN	1.055	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf
 photon_id	lnN	1.038	1.027	-	1.047	1.027	1.000	1.038
@@ -44,10 +44,10 @@ egamma group = ele_reco ele_ID photon_id
 pileup	lnN	1.006	1.051	-	1.045	1.025	1.000	1.006
 ttgamma_xs	lnN	-	-	-	-	-	-	-
 VV_xs	lnN	-	-	-	-	-	-	-
-l1pref	lnN	1.072	1.082	-	1.000	1.000	1.000	1.072
-pileupId_eff	lnN	1.000	1.008	-	1.023	1.057	1.000	1.000
-pileupId_mis	lnN	1.000	1.000	-	1.096	1.000	1.000	1.000
+pileupId_eff_17	lnN	1.000	1.008	-	1.023	1.057	1.000	1.000
+pileupId_mis_17	lnN	1.000	1.000	-	1.096	1.000	1.000	1.000
 luminosity group =  lumi_17 
-pref group = l1pref 
 pu group = pileup
-pileupId group = pileupId_mis pileupId_eff
+pileupId group = pileupId_mis_17 pileupId_eff_17
+l1pref	lnN	1.072	1.082	-	1.000	1.000	1.000	1.072
+pref group = l1pref 

@@ -76,8 +76,8 @@ void cmsLumi(bool channel) //0 for el
 
 void aa(string a, double limit,int num){
 	//	setTDRStyle();
-	string mu_file= "./txt/paramsets_"+a+"_mu.txt";
-	string ele_file="./txt/paramsets_"+a+"_el.txt";
+	string mu_file= "/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/paramsets_"+a+"_mu.txt";
+	string ele_file="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/paramsets_"+a+"_ele.txt";
 	ifstream infile_mu;
 	ifstream infile_ele;
 	infile_mu.open(mu_file.c_str());
@@ -241,7 +241,7 @@ void aa(string a, double limit,int num){
 	gr->Draw("SAME 2");
 
 	h6->Draw("hist same");  // aQGC
-//		h1->Draw(" PE same");  // 0 for Zero data
+//	h1->Draw(" PE same");  // 0 for Zero data
 
 	const double alpha = 1 - 0.6827;
 	TGraphAsymmErrors * g = new TGraphAsymmErrors(h1);

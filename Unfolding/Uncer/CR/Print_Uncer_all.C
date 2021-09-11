@@ -77,12 +77,10 @@ int Print_Uncer_all(){
                         run(recovars[i],genvars[i],tag[j],f_pileup_sig);
                         run(recovars[i],genvars[i],tag[j],f_jes_sig);
                         run(recovars[i],genvars[i],tag[j],f_jer_sig);
-                        if(tag[j].Contains("17")){
-                                run(recovars[i],genvars[i],tag[j],f_puId_eff);
-                                run(recovars[i],genvars[i],tag[j],f_puId_mis);
-                                run(recovars[i],genvars[i],tag[j],f_puId_eff_sig);
-                                run(recovars[i],genvars[i],tag[j],f_puId_mis_sig);
-			}
+			run(recovars[i],genvars[i],tag[j],f_puId_eff);
+			run(recovars[i],genvars[i],tag[j],f_puId_mis);
+			run(recovars[i],genvars[i],tag[j],f_puId_eff_sig);
+			run(recovars[i],genvars[i],tag[j],f_puId_mis_sig);
 		}
 	}
 	return 1;

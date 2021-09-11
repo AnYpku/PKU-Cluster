@@ -128,9 +128,8 @@ int unroll_test(){
 
 	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG"};
 	for(int i=0;i<names.size();i++){
-		unroll_name(names[i],"18","jer1");
-		unroll_name(names[i],"18","jesTotal");
+		unroll_name(names[i],"17","jer1");
+		unroll_name(names[i],"17","jesTotal");
 	}
-//		unroll_name("ST","18");
 	return 0;
 }

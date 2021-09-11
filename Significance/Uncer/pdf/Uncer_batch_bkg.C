@@ -61,7 +61,7 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 			init=0;//16 qcd
 		else if(( tag.Contains("17")||tag.Contains("18"))&&name.Contains("EWK"))
 			init=45;//17 ewk,18 ewk
-
+                if(name.Contains("interf")) init=45;
 		if (  tformula->EvalInstance() && (zepp<2.4 && delta_phi>1.9) ){
 			for(Int_t i=init;i<(num+init);i++){
 				Weight[p]=actualWeight*pweight[i];
@@ -80,12 +80,14 @@ void run( TFile*file,TString cut1,TString tag,bool turn){
 	}
 	cout<<"end loop"<<endl;
 	TFile*fout;
-	if(name.Contains("EWK")==0)
-		fout= new TFile("hist_qcd_pdf"+tag+".root","recreate");
-	else{
+	if(name.Contains("EWK"))
 		if(turn==1)	fout= new TFile("hist_Sigout_pdf"+tag+".root","recreate");
 		else  fout= new TFile("hist_ewk_pdf"+tag+".root","recreate");
+	else if(name.Contains("interf")){
+		fout= new TFile("hist_interf_pdf"+tag+".root","recreate");
 	}
+	else
+		fout= new TFile("hist_qcd_pdf"+tag+".root","recreate");
 	fout->cd();
 	for(Int_t i=0;i<num;i++){
 		th1[i]->Write();
@@ -127,15 +129,21 @@ int Uncer_batch_bkg(){
 	file2[1]=new TFile(dir+"ZA-EWK17.root");
 	file2[2]=new TFile(dir+"ZA-EWK18.root");
 
+	TFile*file3[3];
+	file3[0]=new TFile(dir+"ZA_interf16.root");
+	file3[1]=new TFile(dir+"ZA_interf17.root");
+	file3[2]=new TFile(dir+"ZA_interf18.root");
+
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="("+Reco+")&&("+Gen+")";
@@ -145,6 +153,7 @@ int Uncer_batch_bkg(){
 		if(tag[i].Contains("16"))	
 			run(file1[i],Reco,tag[i],0);
 		run(file2[i],Reco,tag[i],0);
+		run(file3[i],Reco,tag[i],0);
 	}
 	return 1;
 }

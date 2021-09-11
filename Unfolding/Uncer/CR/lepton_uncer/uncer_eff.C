@@ -6,6 +6,16 @@ void run(TString var,TString sample,TString particle,TString type,TString tag,do
 	TH1D* h1 = (TH1D*)file->Get(var+"_0");
 	TH1D* h2 = (TH1D*)file->Get(var+"_1");
 	TH1D* h3 = (TH1D*)file->Get(var+"_2");
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+          TFile*file1;
+          file1=new TFile("./root/"+var+"_"+particle+"_ZA_interf_"+type+tag+".root");
+          TH1D*hh1 = (TH1D*)file1->Get(var+"_0");
+          TH1D*hh2 = (TH1D*)file1->Get(var+"_1");
+          TH1D*hh3 = (TH1D*)file1->Get(var+"_2");
+          h1->Add(hh1,1);
+          h2->Add(hh2,1);
+          h3->Add(hh3,1);
+        }
 
 	const int num =h1->GetNbinsX();
 	cout<<var<<" "<<sample<<" "<<particle<<" "<<type<<" "<<tag<<" "<<frac<<" uncertainty"<<endl;
@@ -61,7 +71,7 @@ int uncer_eff(){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 		}
-                if(tag[ik].Contains("17")==0) continue;
+//                if(tag[ik].Contains("17")==0) continue;
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenControlRegion;
 		TString ControlRegion = "(Mjj>150 && Mjj<500 && Mva>100)";
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;

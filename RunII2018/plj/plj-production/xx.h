@@ -528,6 +528,9 @@ public :
      double    ele2_reco_scale;
      double    photon_id_scale;
      double    photon_veto_scale;
+     double    puIdweight_L;
+     double    puIdweight_M;
+     double    puIdweight_T;
 };
 
 #endif
@@ -594,19 +597,22 @@ void xx::Init(TTree *tree)
 	fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
 	ExTree = fChain->CloneTree(0);
 	ExTree->Branch("scalef",&scalef,"scalef/D");
+        ExTree->Branch("puIdweight_L",&puIdweight_L,"puIdweight_L/D");
+        ExTree->Branch("puIdweight_M",&puIdweight_M,"puIdweight_M/D");
+        ExTree->Branch("puIdweight_T",&puIdweight_T,"puIdweight_T/D");
 	// lep and photon scales
-	ExTree->Branch("ele1_id_scale", &ele1_id_scale, "ele1_id_scale/D");
-	ExTree->Branch("ele2_id_scale", &ele2_id_scale, "ele2_id_scale/D");
-	ExTree->Branch("ele1_reco_scale", &ele1_reco_scale, "ele1_reco_scale/D");
-	ExTree->Branch("ele2_reco_scale", &ele2_reco_scale, "ele2_reco_scale/D");
-	ExTree->Branch("photon_id_scale", &photon_id_scale, "photon_id_scale/D");
-	ExTree->Branch("photon_veto_scale", &photon_veto_scale, "photon_veto_scale/D");
-	ExTree->Branch("muon1_id_scale", &muon1_id_scale, "muon1_id_scale/D");
-	ExTree->Branch("muon2_id_scale", &muon2_id_scale, "muon2_id_scale/D");
-	ExTree->Branch("muon1_iso_scale", &muon1_iso_scale, "muon1_iso_scale/D");
-	ExTree->Branch("muon2_iso_scale", &muon2_iso_scale, "muon2_iso_scale/D"); 
-	ExTree->Branch("muon_hlt_scale", &muon_hlt_scale, "muon_hlt_scale/D");
-	ExTree->Branch("ele_hlt_scale", &ele_hlt_scale, "ele_hlt_scale/D");
+	ExTree->Branch("ele1_id_scale",    &ele1_id_scale,    "ele1_id_scale/D");
+	ExTree->Branch("ele2_id_scale",    &ele2_id_scale,    "ele2_id_scale/D");
+	ExTree->Branch("ele1_reco_scale",  &ele1_reco_scale,  "ele1_reco_scale/D");
+	ExTree->Branch("ele2_reco_scale",  &ele2_reco_scale,  "ele2_reco_scale/D");
+	ExTree->Branch("photon_id_scale",  &photon_id_scale,  "photon_id_scale/D");
+	ExTree->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/D");
+	ExTree->Branch("muon1_id_scale",   &muon1_id_scale,   "muon1_id_scale/D");
+	ExTree->Branch("muon2_id_scale",   &muon2_id_scale,   "muon2_id_scale/D");
+	ExTree->Branch("muon1_iso_scale",  &muon1_iso_scale,  "muon1_iso_scale/D");
+	ExTree->Branch("muon2_iso_scale",  &muon2_iso_scale,  "muon2_iso_scale/D"); 
+	ExTree->Branch("muon_hlt_scale",   &muon_hlt_scale,   "muon_hlt_scale/D");
+	ExTree->Branch("ele_hlt_scale",    &ele_hlt_scale,    "ele_hlt_scale/D");
 	// lep and photon scales
 
 	fChain->SetBranchAddress("event", &event, &b_event);
@@ -710,15 +716,15 @@ void xx::Init(TTree *tree)
 	fChain->SetBranchAddress("ak4jet_e", ak4jet_e, &b_ak4jet_e);
 	fChain->SetBranchAddress("ak4jet_csv", ak4jet_csv, &b_ak4jet_csv);
 	fChain->SetBranchAddress("ak4jet_icsv", ak4jet_icsv, &b_ak4jet_icsv);
-//	fChain->SetBranchAddress("ak4jet_puIdLoose", ak4jet_puIdLoose, &b_ak4jet_puIdLoose);
-//	fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
-//	fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
-//	fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
-//	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
-//	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
-//	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
-//	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
-//	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+	fChain->SetBranchAddress("ak4jet_puIdLoose", ak4jet_puIdLoose, &b_ak4jet_puIdLoose);
+	fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
+	fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
+	fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
+	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
+	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
+	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
+	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
 	fChain->SetBranchAddress("jet1pt", &jet1pt, &b_jet1pt);
 	fChain->SetBranchAddress("jet1pt_f", &jet1pt_f, &b_jet1pt_f);
 	fChain->SetBranchAddress("jet1eta", &jet1eta, &b_jet1eta);

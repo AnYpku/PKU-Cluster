@@ -45,9 +45,9 @@ void run(TString cut1,TString tag,TString channel,TString sample){
 	     if(ZGmass>2e4)ZGmass=1999;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=0;i<(num);i++){
-			     if(p==0)Weight[p]=actualWeight/prefWeight*prefWeight*pileupWeight*lumi;
-			     if(p==1)Weight[p]=actualWeight/prefWeight*prefWeightUp*pileupWeight*lumi;
-			     if(p==2)Weight[p]=actualWeight/prefWeight*prefWeightDown*pileupWeight*lumi;
+			     if(p==0)Weight[p]=actualWeight/prefWeight*prefWeight*lumi;
+			     if(p==1)Weight[p]=actualWeight/prefWeight*prefWeightUp*lumi;
+			     if(p==2)Weight[p]=actualWeight/prefWeight*prefWeightDown*lumi;
 			     th1[p]->Fill(ZGmass,Weight[p]);
 			     p++;
 		     }
@@ -71,12 +71,15 @@ int Uncer_batch_sig(){
         vector<TString> tag={"16","17","18"};
         vector<TString> sample={"ZA-EWK","ZA","others"};
         for(int i=0;i<tag.size();i++){
-           if(tag[i].Contains("17")){
-		   jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-           }
-           else{
-                   jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-           }
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
         }
 	TString SignalRegion = "(Mjj>500 && fabs(jet1eta-jet2eta) && ZGmass>100)";
 	TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
@@ -84,7 +87,7 @@ int Uncer_batch_sig(){
 	const int kk=channels.size();
 	for(int j=0;j<kk;j++){
 		for(int i=0;i<tag.size();i++){
-			if(tag[i].Contains("17")==0) continue;
+//			if(tag[i].Contains("17")==0) continue;
 			for(int k=0;k<sample.size();k++){
 				run(Reco,tag[i],channels[j],sample[k]);
 			}

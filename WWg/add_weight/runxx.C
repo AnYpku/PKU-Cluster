@@ -3,9 +3,9 @@
 #include <fstream>
 using namespace std;
 
-void runxx() {
-	TString dir ="/home/pku/anying/cms/rootfiles/WWg/";
-	ifstream infile("file");
+void runxx(TString year) {
+	TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/";
+	ifstream infile("file"+year);
 	string buffer; 
 	TString infilename;
 
@@ -17,7 +17,7 @@ void runxx() {
 		if(infilename.Contains("root")==0) {k=-2; continue;}
 		if(infilename.Contains("end")==1) {k=-2; break;}
 		infilename = infilename;
-		TString outname="cutlep-out"+infilename;
+		TString outname="cutlep1-out"+infilename;
 
 		TFile *file1 =new TFile(dir+infilename);
 		TTree *tree1 = (TTree*) file1->Get("Events");
@@ -27,14 +27,15 @@ void runxx() {
 		double nevents=0;
 		nevents=h1->GetSum();
 		cout<<dir<<infilename<<" -> "<<outname<<endl;
-		m1.Loop(outname,nevents);
+		m1.Loop(outname,nevents,year);
 		m1.endJob();
 
 	}
 }
 
 int main(){
-	runxx();
+//	runxx("18");
+	runxx("17");
 	return 1;
 }
 

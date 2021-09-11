@@ -277,7 +277,7 @@ void run(TString tag,TString type){
 }
 int unroll_test(){
        vector<TString> tag={"16","17","18"};
-       for(int j=2;j<tag.size();j++){
+       for(int j=1;j<tag.size();j++){
 		       run(tag[j],"full");
 		       run(tag[j],"SR");
        }

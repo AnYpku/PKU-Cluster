@@ -5,14 +5,16 @@ void run(TString channel,TString tag,TString sample){
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
-
-/*	
-	ofstream f1("./Uncertainty_2.txt");
- 	TFile* file = new TFile("./output.root");
-	TH1D* h1 = (TH1D*)file->Get("mjj_new");
-	TH1D* h2 = (TH1D*)file->Get("mjj_JEC_up");
-	TH1D* h3 = (TH1D*)file->Get("mjj_JEC_down");
-*/
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+          TFile*file1;
+          file1=new TFile("./hist_ZA_interf_pref_"+tag+channel+".root");
+          TH1D*hh1 = (TH1D*)file1->Get("hist_0");
+          TH1D*hh2 = (TH1D*)file1->Get("hist_1");
+          TH1D*hh3 = (TH1D*)file1->Get("hist_2");
+          h1->Add(hh1,1);
+          h2->Add(hh2,1);
+          h3->Add(hh3,1);
+        }
 	const int num =h1->GetNbinsX()-2;
         const int kk =h1->GetNbinsX();
         h1->SetBinContent(kk-2,h1->GetBinContent(kk-2)+h1->GetBinContent(kk-1)+h1->GetBinContent(kk));

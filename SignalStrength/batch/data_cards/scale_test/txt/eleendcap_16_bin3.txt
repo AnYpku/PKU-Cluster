@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 6   number of processes-1
-kmax 25  number of nuisance parameters (sources of systematical uncertainties)
+kmax 27  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin eleendcap3
-observation 1.553
+observation 1.554
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -26,25 +26,28 @@ ZA_SigOut_Stat_bin3_eleendcap16	lnN	-	-	-	-	-	-	1.000
 Stat group = VBS_Stat_bin3_eleendcap16 QCD_Stat_bin3_eleendcap16 non_prompt_Stat_bin3_eleendcap16 
 fake_eleendcap16	lnN	-	-	1.227	-	-	-	-
 fake group = fake_eleendcap16 
-JES_16	lnN	1.040	1.040	-	1.030	1.000	1.000	1.060
-JER_16	lnN	1.010	1.030	-	1.050	1.000	1.000	1.030
+JES_16	lnN	1.070	1.090	-	1.020	1.000	1.000	1.070
+JER_16	lnN	1.010	1.060	-	1.090	1.000	1.000	1.030
 JESR group = JES_16 JER_16
 pdf_EW	lnN	1.006	-	-	-	-	-	1.038
 pdf_QCD	lnN	-	1.016	-	-	-	-	-
 Scale_EW	lnN	1.015	-	-	-	-	-	1.079
-Scale_muF1	lnN	-	1.129	-	-	-	-	-
-Scale_muR1	lnN	-	1.072	-	-	-	-	-
-Scale_muFmuR	lnN	-	1.203	-	-	-	-	-
+Scale_muF1	lnN	-	1.125	-	-	-	-	-
+Scale_muR1	lnN	-	1.073	-	-	-	-	-
+Scale_muFmuR	lnN	-	1.201	-	-	-	-	-
 interf	lnN	1.067	-	-	-	-	-	-
 theory group = pdf_EW pdf_QCD Scale_EW Scale_muF1 Scale_muR1 Scale_muFmuR interf
 photon_id	lnN	1.028	1.030	-	1.034	1.000	1.000	1.028
 ele_reco	lnN	1.012	1.009	-	1.008	1.000	1.000	1.012
 ele_ID	lnN	1.065	1.060	-	1.023	1.000	1.000	1.065
 egamma group = ele_reco ele_ID photon_id
-pileup	lnN	1.004	1.010	-	1.031	1.000	1.000	1.004
+pileup	lnN	1.005	1.010	-	1.031	1.000	1.000	1.005
 ttgamma_xs	lnN	-	-	-	-	-	-	-
 VV_xs	lnN	-	-	-	-	-	-	-
-l1pref	lnN	1.048	1.026	-	1.000	1.000	1.000	1.048
+pileupId_eff_16	lnN	1.000	1.000	-	1.000	1.000	1.000	1.000
+pileupId_mis_16	lnN	1.000	1.000	-	1.000	1.000	1.000	1.000
 luminosity group =  lumi_16 
 pu group = pileup
+pileupId group = pileupId_mis_16 pileupId_eff_16
+l1pref	lnN	1.048	1.026	-	1.000	1.000	1.000	1.048
 pref group = l1pref 

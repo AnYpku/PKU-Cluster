@@ -25,13 +25,13 @@ int Print_Uncer_all(){
 			TString f_interf        ="./interf/interf_uncer"+tag[j]+".txt";
 			TString f_QCD_pdf     ="./pdf/uncer_qcd_"+tag[j]+".txt";
 			TString f_Sigout_pdf  ="./pdf/uncer_Sigout_"+tag[j]+".txt";
-			TString f_Sig_pdf     ="./pdf/uncer_ewk_"+tag[j]+".txt";
 			TString f_QCD_scale   ="./scale/uncer_qcd_"+tag[j]+".txt";
                         TString f_QCD_scale_band   ="./scale/uncer_qcd_scaleband_"+tag[j]+".txt";
 			TString f_QCD_scale_extra_up  ="./scale/uncer_QCD_extra_up_"+tag[j]+".txt";
 			TString f_QCD_scale_extra_down  ="./scale/uncer_QCD_extra_down_"+tag[j]+".txt";
 			TString f_Sigout_scale="./scale/uncer_SigOut_"+tag[j]+".txt";
 			TString f_Sig_scale   ="./scale/uncer_ewk_"+tag[j]+".txt";
+			TString f_Sig_pdf     ="./pdf/uncer_ewk_"+tag[j]+".txt";
 			TString f_jes         ="./jesr/jes/jes_uncer"+tag[j]+".txt";
 			TString f_jer         ="./jesr/jer/jer_uncer"+tag[j]+".txt";
 			TString f_l1pref      ="./l1pref/l1pref_uncer_"+channel[i]+"_"+tag[j]+".txt";
@@ -43,10 +43,8 @@ int Print_Uncer_all(){
 			TString f_pileup ="./pileup/pu_uncer_"+tag[j]+".txt";
                         TString f_mis_uncer;
                         TString f_eff_uncer;
-                        if(tag[j].Contains("17")){
-                                f_mis_uncer ="./puIdSF/mis_uncer_"+channel[i]+".txt";
-                                f_eff_uncer ="./puIdSF/eff_uncer_"+channel[i]+".txt";
-                        }
+			f_mis_uncer ="./puIdSF/mis_uncer_"+channel[i]+tag[j]+".txt";
+			f_eff_uncer ="./puIdSF/eff_uncer_"+channel[i]+tag[j]+".txt";
 			run(channel[i],tag[j],f_fake);
 			run(channel[i],tag[j],f_interf);
 			run(channel[i],tag[j],f_QCD_pdf);
@@ -67,10 +65,8 @@ int Print_Uncer_all(){
 			run(channel[i],tag[j],f_mu_trigger);
 			run(channel[i],tag[j],f_photon_ID);
 			run(channel[i],tag[j],f_pileup);
-                        if(tag[j].Contains("17")){
-				run(channel[i],tag[j],f_eff_uncer);
-				run(channel[i],tag[j],f_mis_uncer);
-                        }
+			run(channel[i],tag[j],f_eff_uncer);
+			run(channel[i],tag[j],f_mis_uncer);
 		}
 	}
 	return 1;

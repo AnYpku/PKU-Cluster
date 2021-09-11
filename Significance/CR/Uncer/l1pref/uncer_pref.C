@@ -5,14 +5,16 @@ void run(TString channel,TString tag,TString sample){
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
-
-/*	
-	ofstream f1("./Uncertainty_2.txt");
- 	TFile* file = new TFile("./output.root");
-	TH1D* h1 = (TH1D*)file->Get("mjj_new");
-	TH1D* h2 = (TH1D*)file->Get("mjj_JEC_up");
-	TH1D* h3 = (TH1D*)file->Get("mjj_JEC_down");
-*/
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile*file1;
+                file1=new TFile("./root/hist_ZA_interf_pref_"+tag+channel+".root");
+                TH1D* hh1 = (TH1D*)file1->Get("hist_0");
+                TH1D* hh2 = (TH1D*)file1->Get("hist_1");
+                TH1D* hh3 = (TH1D*)file1->Get("hist_2");
+                h1->Add(hh1,1);
+                h2->Add(hh2,1);
+                h3->Add(hh3,1);
+        }
 	const int num =h1->GetNbinsX();
         const int kk =h1->GetNbinsX();
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
@@ -50,15 +52,15 @@ void run(TString channel,TString tag,TString sample){
 		 cout<<endl;
 }
 int uncer_pref(){
-	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};//,"Mva","Mjj"};
-vector<TString> tag={"16","17"};
-vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
-for(int i=0;i<channels.size();i++){
-	for(int j=1;j<tag.size();j++){
-		for(int k=0;k<sample.size();k++){
-			run(channels[i],tag[j],sample[k]);
+	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
+	vector<TString> tag={"16","17"};
+	vector<TString> sample={"ZA","ZA-EWK","TTA","VV","ST"};
+	for(int i=0;i<channels.size();i++){
+		for(int j=0;j<tag.size();j++){
+			for(int k=0;k<sample.size();k++){
+				run(channels[i],tag[j],sample[k]);
+			}
 		}
 	}
-}
-return 1;
+	return 1;
 }

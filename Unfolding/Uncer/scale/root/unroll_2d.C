@@ -36,8 +36,8 @@ int unroll_2d(){
         TH1D* hist_7[num];
         TFile*file[7][3];//[recobin][year]
         TFile*fout[7][3];//[recobin][year]
-//	vector<TString> tag={"16","17","18"};
-	vector<TString> tag={"17"};
+	vector<TString> tag={"16","17","18"};
+//	vector<TString> tag={"17"};
 	for(int i=0;i<tag.size();i++){
 		for(int j=0;j<6;j++){
 			file[j][i]=new TFile(Form("unfold_2dgenMjj_recobin%i_ewk_scale",j+1)+tag[i]+".root");

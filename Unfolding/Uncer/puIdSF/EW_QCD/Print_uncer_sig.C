@@ -5,6 +5,7 @@ void run(TString var,int i,TString tag,TString type){
 //        ftxt<<index<<" "<<endl;
 	TFile*file=new TFile("../root/unfold_"+var+"_"+index+"_ewk_"+type+tag+".root");
 	TFile*file1=new TFile("./root/unfold_"+var+"_"+index+"_qcd_"+type+tag+".root");
+	TFile*file2=new TFile("./root/unfold_"+var+"_"+index+"_interf_"+type+tag+".root");
 	double lumi;
 	if(tag.Contains("16"))
 		lumi=35.86;
@@ -12,15 +13,15 @@ void run(TString var,int i,TString tag,TString type){
 		lumi=41.52;
 	else if(tag.Contains("18"))
 		lumi=59.7;
-        TH1D*h1[num];TH1D*h2[num];
+        TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
         cout<<"./root/unfold_"+var+"_"+index+"_ewk_"+type+tag+".root"<<endl;
         cout<<"./root/unfold_"+var+"_"+index+"_qcd_"+type+tag+".root"<<endl;
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_%i_recobin%i",j,i));
-		h1[j]->Scale(lumi);
 		h2[j]=(TH1D*)file1->Get(Form(var+"_%i_recobin%i",j,i));
-		h2[j]->Scale(lumi);
+		h3[j]=(TH1D*)file2->Get(Form(var+"_%i_recobin%i",j,i));
 		h1[j]->Add(h2[j],1);
+		h1[j]->Add(h3[j],1);
         }
 	const int kk=h1[0]->GetNbinsX();
         for(int i=0;i<num;i++){
@@ -30,7 +31,7 @@ void run(TString var,int i,TString tag,TString type){
             double error=0;
 	    double diff=0,sum=0;
             double factor=1;
-	    if(h1[0]->GetBinContent(k+1)!=0) 
+	    if(h1[0]->GetBinContent(k+1)>0) 
 		    error=fabs(h1[1]->GetBinContent(k+1)-h1[2]->GetBinContent(k+1))/2/h1[0]->GetBinContent(k+1);
 	    else    error=0;
 //            error=sqrt(sum/(num-1));
@@ -70,7 +71,7 @@ int Print_uncer_sig(){
      bins.push_back(jetptBins);
      bins.push_back(MjjBins);
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-     vector<TString> tag={"17"};
+     vector<TString> tag={"17","16","18"};
      vector<TString> type={"eff","mis"};
      for(int k=0;k<tag.size();k++){
 //             if(tag[k].Contains("17")) continue;

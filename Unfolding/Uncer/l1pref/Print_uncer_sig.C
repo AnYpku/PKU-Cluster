@@ -23,10 +23,11 @@ void run(TString var,int i,TString tag){
         }//add overflow
 	for(int k=0;k<kk;k++){
             double error=0;
-	    if(h1[0]->GetBinContent(k+1)!=0) 
+	    if(h1[0]->GetBinContent(k+1)>0) 
 		    error=fabs(h1[2]->GetBinContent(k+1)-h1[1]->GetBinContent(k+1))/2/h1[0]->GetBinContent(k+1);
 	    else    error=0;
 //            error=sqrt(sum/(num-1));
+            if(error>1) error=1;
             ftxt<<error<<endl;
 	}
 }
@@ -56,7 +57,6 @@ int Print_uncer_sig(){
      vector<double> ptlepBins={20,80,120,200,400};
      vector<double> photonEtBins={20,80,120,200,400};
      vector<double> jetptBins={30,150,250,350,800};
-     vector<double> MvaBins={100,150,1000};
      vector<double> MjjBins={1,2,3,4,5,6,7,8};
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);

@@ -60,8 +60,10 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      }
      TFile*fout[kk];
      for(int j=0;j<kk;j++){
-	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_qcd"+tag+".root","recreate");
-	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_qcd"+tag+".root","recreate");
+	    //if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_qcd"+tag+".root","recreate");
+	    //else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_qcd"+tag+".root","recreate");
+	    if(vec_branchname[j].Contains("Mjj")==0) fout[j]= new TFile("unfold_"+vec_branchname[j]+"_interf"+tag+".root","recreate");
+	    else fout[j]= new TFile("./2droot/unfold_"+vec_branchname[j]+"_interf"+tag+".root","recreate");
      }
      for(int j=0;j<kk;j++){
 	     fout[j]->cd();
@@ -90,7 +92,6 @@ int Unfold_EWQCD(){
      TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
      TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
      TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
-//     TString cut1 ="(("+Reco+")&&("+Gen+"))";
      TString cut1 ="("+Gen+")";
      TString cut2 ="(("+Reco+")&& !("+Gen+"))";
      vector<vector<double>> bins;
@@ -109,12 +110,15 @@ int Unfold_EWQCD(){
      TString dir1="/home/pku/anying/cms/rootfiles/2016/";
      TString dir2="/home/pku/anying/cms/rootfiles/2017/";
      TString dir3="/home/pku/anying/cms/rootfiles/2018/";
-     TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA16.root");
-     TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
-     TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
+//     TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA16.root");
+//     TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
+//     TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
+     TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA_interf16.root");
+     TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA_interf17.root");
+     TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA_interf18.root");
 
-//     run(f1,genvars, bins,cut1,"16");
+     run(f1,genvars, bins,cut1,"16");
      run(f2,genvars, bins,cut1,"17");
-//     run(f3,genvars, bins,cut1,"18");
+     run(f3,genvars, bins,cut1,"18");
      return 1;
 }

@@ -1,11 +1,17 @@
-void run(TString sample,TString channel,TString type){
+void run(TString sample,TString channel,TString type,TString tag){
 //	ofstream f1("./"+type+"_uncer_"+sample+"_"+channel+".txt");
-	ofstream ftxt("./"+type+"_uncer_"+channel+".txt",ios::app);
-	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+".root");
+	ofstream ftxt("./"+type+"_uncer_"+channel+tag+".txt",ios::app);
+	TFile* file = new TFile("./root/hist_"+sample+"_puId"+type+"_"+channel+tag+".root");
 	TH1D* h1 = (TH1D*)file->Get("hist_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_2");
-
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile* f2 = new TFile("./root/hist_ZA_interf_puId"+type+"_"+channel+tag+".root");
+                TH1D* hh1 = (TH1D*)f2->Get("hist_0");
+                TH1D* hh2 = (TH1D*)f2->Get("hist_1");
+                TH1D* hh3 = (TH1D*)f2->Get("hist_2");
+                h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+        }
 	const int num =h1->GetNbinsX()-2;
 	const int kk =h1->GetNbinsX();
 	h1->SetBinContent(kk-2,h1->GetBinContent(kk-2)+h1->GetBinContent(kk-1)+h1->GetBinContent(kk));
@@ -15,7 +21,7 @@ void run(TString sample,TString channel,TString type){
 	Double_t uncer[num];
 //	f1<<sample<<"_"<<type<<"=[";
 	ftxt<<sample<<"_"<<type<<"=[";
-	cout<<type<<" "<<sample<<" "<<channel<<" uncertainty ";
+	cout<<tag<<" "<<type<<" "<<sample<<" "<<channel<<" uncertainty ";
 	for(Int_t i=0;i<num;i++){
 		if(sample.Contains("ZA")){
 			bincontent_new[i] = h1->GetBinContent(i+1);
@@ -50,8 +56,10 @@ int uncer_eff(){
 	vector<TString> tag={"16","17","18"};
 	for(int i=0;i<channels.size();i++){
 		for(int j=0;j<sample.size();j++){
-			run(sample[j],channels[i],"mis");
-			run(sample[j],channels[i],"eff");
+			for(int k=0;k<tag.size();k++){
+				run(sample[j],channels[i],"mis",tag[k]);
+				run(sample[j],channels[i],"eff",tag[k]);
+			}
 		}
 	}
 	return 1;

@@ -7,6 +7,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
 //     if(tag.Contains("16")==1) dir1="/eos/user/y/yian/"+tag+"legacy/";
 //     else dir1="/eos/user/y/yian/"+tag+"cutla/";
      dir1="/home/pku/anying/cms/rootfiles/20"+tag+"/unfold_GenCutla-";
+     TString dir2="/home/pku/anying/cms/rootfiles/20"+tag+"/cutla-out";
      TFile*file;
      if(sample.Contains("EWK"))
 	     file=new TFile(dir1+"ZA-"+sample+tag+".root");
@@ -14,7 +15,7 @@ TH1D* run( TString sample,TString tag,TString cut1){
      TTree*tree=(TTree*)file->Get("ZPKUCandidates");     
      map<TString, double> variables;
      double Mjj,jet1eta,jet2eta;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,muon1_track_scale,muon2_track_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T,puIdweight_M,puIdweight_L,puIdweight;
      Double_t scalef;
      int lep;
      tree->SetBranchAddress("scalef",&scalef);
@@ -37,6 +38,8 @@ TH1D* run( TString sample,TString tag,TString cut1){
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_L", &puIdweight_L);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
 //     TH1D*th1[kk];
      TString th1name;
@@ -48,9 +51,10 @@ TH1D* run( TString sample,TString tag,TString cut1){
      for(int k=0;k<tree->GetEntries();k++){
              tree->GetEntry(k);
 	     double detajj=fabs(jet1eta-jet2eta);
-             if(tag.Contains("18"))  prefWeight=1;
-	     if(tag.Contains("17")==0) puIdweight_T=1;
-             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight_T*prefWeight;
+             if(tag.Contains("16")){ puIdweight=puIdweight_M;}
+             if(tag.Contains("17")){ puIdweight=puIdweight_T;}
+             if(tag.Contains("18")){ prefWeight=1;  puIdweight=puIdweight_L;}
+             actualWeight=scalef*pileupWeight*photon_id_scale*photon_veto_scale*puIdweight*prefWeight;
 	     if(lep==11)
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
@@ -87,14 +91,18 @@ int Uncer_batch_bkg(){
 	const int kk=sample.size();
 	TH1D*hist[3][kk];TH1D*hist_up[3][kk];TH1D*hist_down[3][kk];//hist[year][sample]
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+                if(tag[i].Contains("16")==1){
+                        GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 &&fabs(genjet2eta)<4.7)";
+                        jet="(  ( (jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1) || (fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+                }
+                else if(tag[i].Contains("17")){
+                        GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
+                        jet="(  ( (jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1) || (fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+                }
+                else if(tag[i].Contains("18")){
+                        GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
+                        jet="(  ( (jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1) || (fabs(jet1eta)<4.7&& jet1pt>50) ) && ( (jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)||(fabs(jet2eta)<4.7 && jet2pt>50) )  )";
+                }
 		TString SignalRegion = "(Mjj>500 && fabs(jet1eta-jet2eta)>2.5 && Mva>100)";
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;

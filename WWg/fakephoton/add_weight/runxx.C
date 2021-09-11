@@ -3,9 +3,9 @@
 #include <fstream>
 using namespace std;
 
-void runxx() {
-	TString dir ="/home/pku/anying/cms/rootfiles/WWg/";
-	ifstream infile("file");
+void runxx(TString year) {
+	TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/";
+	ifstream infile("file"+year);
 	string buffer; 
 	TString infilename,filename;
 
@@ -20,13 +20,13 @@ void runxx() {
 		TTree *tree1 = (TTree*) file1->Get("Events");
 		WWg m1(tree1,infilename+"_plj.root");
 		cout<<dir<<filename<<endl;
-		m1.Loop(filename);
+		m1.Loop(filename,year);
 		m1.endJob(); 
 	}
 }
 
 int main(){
-	runxx();
+	runxx("18");
 	return 1;
 }
 

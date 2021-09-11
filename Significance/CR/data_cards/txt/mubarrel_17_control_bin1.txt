@@ -4,7 +4,7 @@ kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel1
-observation 884.00
+observation 845.00
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,22 +13,22 @@ observation 884.00
 bin	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1	mubarrel1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	8.09	425.61	255.63	16.76	4.74	2.82
+rate	8.26	495.12	240.56	16.91	6.13	2.61
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
 VBS_Stat_control_bin1_mubarrel17	lnN	1.03	-	-	-	-	-
-QCD_Stat_control_bin1_mubarrel17	lnN	-	1.02	-	-	-	-
+QCD_Stat_control_bin1_mubarrel17	lnN	-	1.03	-	-	-	-
 non_prompt_Stat_control_bin1_mubarrel17	lnN	-	-	1.04	-	-	-
 TTA_Stat_control_bin1_mubarrel17	lnN	-	-	-	1.09	-	-
-VV_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	1.24	-
-ST_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	1.25
+VV_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	1.34	-
+ST_Stat_control_bin1_mubarrel17	lnN	-	-	-	-	-	1.26
 fake_mubarrel17	lnN	-	-	1.17	-	-	-
-JES_17	lnN	1.13	1.23	-	1.51	1.55	1.02
-JER_17	lnN	1.13	1.21	-	1.71	1.45	1.10
+JES_17	lnN	1.13	1.23	-	1.10	1.11	1.04
+JER_17	lnN	1.13	1.21	-	1.09	1.03	1.06
 pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.01	-	-	-	-
 Scale_EW	lnN	1.00	-	-	-	-	-
-Scale_QCD	lnN	-	1.15	-	-	-	-
-Scale_QCD_extra	lnN	-	1.00/1.00	-	-	-	-
-interf	lnN	1.14	-	-	-	-	-
+Scale_QCD	lnN	-	1.14	-	-	-	-
+Scale_QCD_extra	lnN	-	0.99/1.00	-	-	-	-
+interf	lnN	1.13	-	-	-	-	-
 mu_trigger	lnN	

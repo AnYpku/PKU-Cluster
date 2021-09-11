@@ -12,7 +12,7 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      }
      Double_t scalef,pileupWeight,pweight[703],prefWeight;
      double Mjj,deltaetajj;
-     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T;
+     double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,muon_hlt_scale,ele_hlt_scale,puIdweight_T,puIdweight_L,puIdweight_M,puIdweight;
      int lep;
      tree->SetBranchAddress("lep",&lep);
      tree->SetBranchAddress("deltaetajj",&deltaetajj);
@@ -33,6 +33,8 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      tree->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale);
      tree->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale);
      tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_L", &puIdweight_L);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
      double actualWeight[num],weight;
      TH1D*th1[num][kk];
@@ -50,9 +52,10 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
 	     tree->GetEntry(k);
 	     int p=0;
 	     int init;
-	     if(tag.Contains("18")) prefWeight=1;
-	     if(tag.Contains("17")==0) puIdweight_T=1;
-	     weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_T;
+             if(tag.Contains("16")){ puIdweight=puIdweight_M;}
+             if(tag.Contains("17")){ puIdweight=puIdweight_T;}
+             if(tag.Contains("18")){ prefWeight=1;  puIdweight=puIdweight_L;}
+	     weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*puIdweight;
 	     if(lep==11)
 		     weight=weight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale;
 	     if(lep==13)
@@ -63,7 +66,7 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
 		     init=0;//16 qcd
 	     else if(( tag.Contains("17")||tag.Contains("18"))&&name.Contains("EWK"))
 		     init=45;//17 ewk,18 ewk
-
+	     if(name.Contains("interf")) init=45;
 	     if (  tformula->EvalInstance() ){
 		     for(Int_t i=init;i<(num+init);i++){
 			     actualWeight[p]=weight*pweight[i];
@@ -76,8 +79,11 @@ void run( TFile*file,vector<TString> vec_branchname,vector<vector<double>> bins,
      }
      TFile*fout[kk];
      for(int j=0;j<kk;j++){
-	     if(name.Contains("EWK")==0){
+	     if(name.Contains("EWK")==0&&name.Contains("interf")==0){
 		     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_qcd_pdf"+tag+".root","recreate");
+	     }
+	     else if(name.Contains("interf")){
+		     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_interf_pdf"+tag+".root","recreate");
 	     }
 	     else{
 		     fout[j]= new TFile("unfold_"+vec_branchname[j]+"_Sigout_pdf"+tag+".root","recreate");
@@ -116,7 +122,6 @@ int Unfold_uncer_batch_bkg(){
 	vector<double> ptlepBins={20,80,120,200,400};
 	vector<double> photonEtBins={20,80,120,200,400};
 	vector<double> jetptBins={30,150,250,350,800};
-	vector<double> MvaBins={100,150,1000};
 	vector<double> MjjBins={150,300,400,500};
 	bins.push_back(ptlepBins);
 	bins.push_back(photonEtBins);
@@ -126,6 +131,7 @@ int Unfold_uncer_batch_bkg(){
 	TString dir[3];     
 	TFile*file1[3];
 	TFile*file2[3];
+	TFile*file3[3];
 
 	vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
 	vector<TString> recovars={"ptlep1","photonet","jet1pt","Mjj"};
@@ -133,21 +139,26 @@ int Unfold_uncer_batch_bkg(){
 //	vector<TString> recovars={"Mjj"};
 	vector<TString> tag={"16","17","18"};
 	for(int i=0;i<3;i++){
-		if(tag[i].Contains("17")){
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+              if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
 		TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut2 ="("+Reco+")";
 		TString cut1 ="(("+Reco+")&& !("+Gen+"))";
-		if(tag[i].Contains("17")==0) continue;
+//		if(tag[i].Contains("17")==0) continue;
 		dir[i]="/home/pku/anying/cms/rootfiles/20"+tag[i]+"/";
 		file1[i]=new TFile(dir[i]+"unfold_GenCutla-ZA-EWK"+tag[i]+".root");
 		file2[i]=new TFile(dir[i]+"cutla-outZA"+tag[i]+".root");
-		run(file1[i],recovars, bins,cut1,tag[i]);
-		if(tag[i].Contains("16"))run(file2[i],recovars, bins,cut2,tag[i]);
+		file3[i]=new TFile(dir[i]+"cutla-outZA_interf"+tag[i]+".root");
+		run(file3[i],recovars, bins,cut2,tag[i]);
+//		run(file1[i],recovars, bins,cut1,tag[i]);
+//		if(tag[i].Contains("16"))run(file2[i],recovars, bins,cut2,tag[i]);
 	}
 	return 1;
 }

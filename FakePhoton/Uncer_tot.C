@@ -1,10 +1,10 @@
 void run(vector<double> lowpt,vector<double> highpt,TString tag,TString channels,TString channel,const int num){
-        ofstream fout1("./txt/uncer_summary_"+channel+tag+".txt");
-        ofstream fout2("./txt/pljweight_"+channel+tag+".txt");
-        ofstream fout3("./txt/pljweight_up_"+channel+tag+".txt");
-        ofstream fout4("./txt/pljweight_down_"+channel+tag+".txt");
-        ofstream fout5("./txt/plj_summary_"+channel+tag+".txt");
-        ofstream fout6("./txt/fakerate_summary_"+channel+tag+".txt");
+        ofstream fout1("./txt-refree/uncer_summary_"+channel+tag+".txt");
+        ofstream fout2("./txt-refree/pljweight_"+channel+tag+".txt");
+        ofstream fout3("./txt-refree/pljweight_up_"+channel+tag+".txt");
+        ofstream fout4("./txt-refree/pljweight_down_"+channel+tag+".txt");
+        ofstream fout5("./txt-refree/plj_summary_"+channel+tag+".txt");
+        ofstream fout6("./txt-refree/fakerate_summary_"+channel+tag+".txt");
 	ifstream f_cl,f_tr,f_sd;
 	f_cl.open("./closure_test/closure_uncer/"+channel+"20"+tag+"_closure_uncer.txt");
 	f_tr.open("./Truetemplate/truetemplate_uncer/"+channel+"20"+tag+"_truetemplate_uncer.txt");
@@ -22,7 +22,7 @@ void run(vector<double> lowpt,vector<double> highpt,TString tag,TString channels
 	if(channels.Contains("Ele")) par="DEle";
         TH1D*hdata=(TH1D*)f1->Get("hist_"+par+tag);
         TH1D*hplj=(TH1D*)f1->Get("hist_plj"+tag);
-        TH1D*hZA_plj=(TH1D*)f1->Get("hist_ZA"+tag+"_plj");
+//        TH1D*hZA_plj=(TH1D*)f1->Get("hist_ZA"+tag+"_plj");
 	for(int i=0;i<num;i++){
 		f_cl>>closure_uncer[i];
 		f_tr>>truetemplate_uncer[i];
@@ -30,9 +30,9 @@ void run(vector<double> lowpt,vector<double> highpt,TString tag,TString channels
                 uncer_tot[i]=sqrt(pow(closure_uncer[i],2)+pow(truetemplate_uncer[i],2)+pow(sideband_uncer[i],2));
                 fakerate_up[i]=fakerate[i]*(1+uncer_tot[i]);
                 fakerate_down[i]=fakerate[i]*(1-uncer_tot[i]);
-                pljweight[i]=hdata->GetBinContent(i+1)*fakerate[i]/(hplj->GetBinContent(i+1)-hZA_plj->GetBinContent(i+1));
-                pljweight_up[i]=hdata->GetBinContent(i+1)*fakerate_up[i]/(hplj->GetBinContent(i+1)-hZA_plj->GetBinContent(i+1));
-                pljweight_down[i]=hdata->GetBinContent(i+1)*fakerate_down[i]/(hplj->GetBinContent(i+1)-hZA_plj->GetBinContent(i+1));
+                pljweight[i]=hdata->GetBinContent(i+1)*fakerate[i]/(hplj->GetBinContent(i+1)/*-hZA_plj->GetBinContent(i+1)*/);
+                pljweight_up[i]=hdata->GetBinContent(i+1)*fakerate_up[i]/(hplj->GetBinContent(i+1)/*-hZA_plj->GetBinContent(i+1)*/);
+                pljweight_down[i]=hdata->GetBinContent(i+1)*fakerate_down[i]/(hplj->GetBinContent(i+1)/*-hZA_plj->GetBinContent(i+1)*/);
                 fout1<<fixed<<setprecision(0)<<lowpt[i]<<"~"<<highpt[i]<<"\t"<<fixed<<setprecision(2)<<closure_uncer[i]<<"\t"<<truetemplate_uncer[i]<<"\t"<<sideband_uncer[i]<<"\t"<<uncer_tot[i]<<endl;
                 fout2<<fixed<<setprecision(2)<<pljweight[i]<<endl;
                 fout3<<fixed<<setprecision(2)<<pljweight_up[i]<<endl;
@@ -42,7 +42,7 @@ void run(vector<double> lowpt,vector<double> highpt,TString tag,TString channels
 	}
 }
 int Uncer_tot(){
-        vector<TString> tag={"17"};
+        vector<TString> tag={"18"};
         vector<TString> channel={"BarrelMuon","EndcapMuon","ElectronBarrel","ElectronEndcap"};
         vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
         vector<double> lowpt;vector<double> highpt;

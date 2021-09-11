@@ -7,6 +7,16 @@ void run(TString particle,TString sample,TString type,TString tag){
 	h1 = (TH1D*)file->Get("hist_0");
 	h2 = (TH1D*)file->Get("hist_1");
 	h3 = (TH1D*)file->Get("hist_2");
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+          TFile*f1;
+          f1=new TFile("./root/"+particle+"_ZA_interf_"+type+tag+".root");
+          TH1D*hh1 = (TH1D*)f1->Get("hist_0");
+          TH1D*hh2 = (TH1D*)f1->Get("hist_1");
+          TH1D*hh3 = (TH1D*)f1->Get("hist_2");
+          h1->Add(hh1,1);
+          h2->Add(hh2,1);
+          h3->Add(hh3,1);
+        }
 
 	if(tag.Contains("16"))
 		f2<<particle<<"_"<<sample<<"_"<<type<<"=[";

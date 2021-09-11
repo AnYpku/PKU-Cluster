@@ -39,7 +39,7 @@ void run(TString channel,TString sample){
 }
 int uncer_pref(){
      vector<TString> channels={"mu","ele",""};//,"Mva","Mjj";
-     vector<TString> tag={"16","17","18"};
+     vector<TString> tag={"16","17"};
      vector<TString> sample={"ZA-EWK","ZA","others"};
      for(int k=0;k<sample.size();k++){
 	     for(int i=0;i<channels.size();i++){

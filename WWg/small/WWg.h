@@ -1755,6 +1755,9 @@ public :
    Float_t         puWeight;
    Float_t         puWeightUp;
    Float_t         puWeightDown;
+   Float_t         PrefireWeight;
+   Float_t         PrefireWeight_Up;
+   Float_t         PrefireWeight_Down;
    Double_t        scalef;
    Double_t        ele_id_scale;
    Double_t        ele_reco_scale;
@@ -1762,6 +1765,9 @@ public :
    Double_t        muon_iso_scale;
    Double_t        photon_id_scale;
    Double_t        photon_veto_scale;
+   Double_t        btag_weight;
+   Double_t        btag_weight_up;
+   Double_t        btag_weight_down;
 
    // List of branches
    TBranch        *b_run;   //!
@@ -3497,7 +3503,13 @@ public :
    TBranch        *b_puWeight;   //!
    TBranch        *b_puWeightUp;   //!
    TBranch        *b_puWeightDown;   //!
+   TBranch        *b_PrefireWeight;   //!
+   TBranch        *b_PrefireWeight_Up;   //!
+   TBranch        *b_PrefireWeight_Down;   //!
    TBranch        *b_scalef;   //!
+   TBranch        *b_btag_weight;   //!
+   TBranch        *b_btag_weight_up;   //!
+   TBranch        *b_btag_weight_down;   //!
    TBranch        *b_ele_id_scale;   //!
    TBranch        *b_ele_reco_scale;   //!
    TBranch        *b_muon_id_scale;   //!
@@ -5320,7 +5332,13 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("puWeight", &puWeight, &b_puWeight);
    fChain->SetBranchAddress("puWeightUp", &puWeightUp, &b_puWeightUp);
    fChain->SetBranchAddress("puWeightDown", &puWeightDown, &b_puWeightDown);
+   fChain->SetBranchAddress("PrefireWeight", &PrefireWeight, &b_PrefireWeight);
+   fChain->SetBranchAddress("PrefireWeight_Up", &PrefireWeight_Up, &b_PrefireWeight_Up);
+   fChain->SetBranchAddress("PrefireWeight_Down", &PrefireWeight_Down, &b_PrefireWeight_Down);
    fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+   fChain->SetBranchAddress("btag_weight", &btag_weight, &b_btag_weight);
+   fChain->SetBranchAddress("btag_weight_up", &btag_weight_up, &b_btag_weight_up);
+   fChain->SetBranchAddress("btag_weight_down", &btag_weight_down, &b_btag_weight_down);
    fChain->SetBranchAddress("ele_id_scale", &ele_id_scale, &b_ele_id_scale);
    fChain->SetBranchAddress("ele_reco_scale", &ele_reco_scale, &b_ele_reco_scale);
    fChain->SetBranchAddress("muon_id_scale", &muon_id_scale, &b_muon_id_scale);

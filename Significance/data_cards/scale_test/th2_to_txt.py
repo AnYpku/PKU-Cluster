@@ -73,11 +73,11 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax 5   number of processes-1\n')
    if sys.argv[1].find("18") == -1 and sys.argv[1].find("17") == -1: #16
-        f.write('kmax 24  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 26  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("18") == -1: #17
         f.write('kmax 26  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("17") == -1: #18
-        f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -220,11 +220,10 @@ for i in range(1,nbins):
 
    f.write('VV_xs\tlnN\t')
    f.write('-\t-\t-\t-\t1.1\t-\n')
-   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:
-        f.write('pileupId_eff\tlnN\t')
-        f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1]))
-        f.write('pileupId_mis\tlnN\t')
-        f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1]))
+   f.write('pileupId_eff_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1]))
+   f.write('pileupId_mis_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1]))
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.3f\t%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref_ZA-EWK'][i-1],arr['l1pref_ZA'][i-1],arr['l1pref_TTA'][i-1],arr['l1pref_VV'][i-1],arr['l1pref_ST'][i-1]))

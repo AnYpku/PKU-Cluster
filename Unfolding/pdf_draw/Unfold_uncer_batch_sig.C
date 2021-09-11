@@ -93,7 +93,6 @@ int Unfold_uncer_batch_sig(){
      TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
      TString SignalRegion = "(Mjj>500 && deltaetajj>2.5 && Mva>100)";
      TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
-//     TString cut1 ="(("+Reco+")&&("+Gen+"))";
      TString cut1 ="("+Gen+")";
      TString cut2 ="(("+Reco+")&& !("+Gen+"))";
      vector<vector<double>> bins;
@@ -118,10 +117,17 @@ int Unfold_uncer_batch_sig(){
      TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA16.root");
      TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
      TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
+     TFile*ff1=new TFile(dir1+"unfold_GenCutla-ZA_interf16.root");
+     TFile*ff2=new TFile(dir2+"unfold_GenCutla-ZA_interf17.root");
+     TFile*ff3=new TFile(dir3+"unfold_GenCutla-ZA_interf18.root");
 //     for(int i=0;i<bins.size();i++){
 //	     run(file1,genvars, bins,cut1,"16","ewk");
-	     run(file2,genvars, bins,cut1,"17","ewk");
+//	     run(file2,genvars, bins,cut1,"17","ewk");
 //	     run(file3,genvars, bins,cut1,"18","ewk");
 //	     run(f1,genvars, bins,cut1,"16","qcd");
+	     run(ff1,genvars, bins,cut1,"16","interf");
+	     run(ff2,genvars, bins,cut1,"17","interf");
+	     run(ff3,genvars, bins,cut1,"18","interf");
+     
      return 1;
 }

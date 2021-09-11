@@ -15,7 +15,7 @@ def merge_bin(th1):
            th1.SetBinError(nbins,0);
 
 print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
-fdir = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/hist_root/'
+fdir = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/hist_root/referee/'
 f_EW = TFile.Open(fdir+'hist_ZA-EWK'+sys.argv[1]+sys.argv[2]+'.root')
 f_ZA = TFile.Open(fdir+'hist_ZA'+sys.argv[1]+sys.argv[2]+'.root')
 f_plj = TFile.Open(fdir+'hist_plj'+sys.argv[1]+sys.argv[2]+'.root')
@@ -56,15 +56,15 @@ merge_bin(th1_others)
 
 nbins=th1_ZA_sig.GetNbinsX()+1
 for i in range(1,nbins):
-   f = open('./txt/%s%s_bin_%d.txt'%(sys.argv[2],sys.argv[1], i),'w')
+   f = open('./txt_referee/%s%s_bin_%d.txt'%(sys.argv[2],sys.argv[1], i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 3   number of processes-1\n')
    if sys.argv[1].find("17")==-1 and sys.argv[1].find("18")==-1:#16
-      f.write('kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n')
+      f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16")==-1 and sys.argv[1].find("18")==-1:#17
       f.write('kmax 23  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16")==-1 and sys.argv[1].find("17")==-1:#18
-      f.write('kmax 20  number of nuisance parameters (sources of systematical uncertainties)\n')
+      f.write('kmax 22  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -139,9 +139,8 @@ for i in range(1,nbins):
    f.write('photon_id\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['photon_ZA-EWK_ID'][0],arr['photon_ZA_ID'][0],arr['photon_others_ID'][0]))
    if sys.argv[1].find("18")==-1:
       f.write('l1prefiring\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['l1pref_ZA-EWK'][i-1],arr['l1pref_ZA'][i-1],arr['l1pref_others'][i-1]))
-   if sys.argv[1].find("16")==-1 and sys.argv[1].find("18")==-1:
-       f.write('puId_eff\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['others_eff'][i-1]))
-       f.write('puId_mis\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['others_mis'][i-1]))
+   f.write('puId_eff\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_eff'][i-1],arr['ZA_eff'][i-1],arr['others_eff'][i-1]))
+   f.write('puId_mis\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['ZA-EWK_mis'][i-1],arr['ZA_mis'][i-1],arr['others_mis'][i-1]))
    f.write('pileup\tlnN\t%0.3f\t%0.3f\t-\t%0.3f\n'%(arr['pu_ZA-EWK'][i-1],arr['pu_ZA'][i-1],arr['pu_others'][i-1]))
    f.write('others_xs\tlnN\t-\t-\t-\t1.1\n')
 

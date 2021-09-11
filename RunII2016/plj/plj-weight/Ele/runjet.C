@@ -3,7 +3,7 @@
 #include <fstream>
 using namespace std;
 void runjet(TString name) {
-TString dir = "/eos/user/y/yian/2016legacy/";
+TString dir = "/home/pku/anying/cms/rootfiles/2016/";
 ifstream infile("file");
 string buffer; 
 TString fname;
@@ -13,11 +13,11 @@ getline (infile, buffer) ;
 fname = buffer;
 if(fname.Contains("out")==0) {k=-2; continue;}
 TString inname=fname+".root";
-TString outname="cutla-outplj_ele"+name+".root";
+TString outname=fname+"_weight"+name+".root";
 cout<<outname<<endl;
 
 TFile *file1 =new TFile(dir+inname);
-TTree *tree1 = (TTree*) file1->Get("demo");
+TTree *tree1 = (TTree*) file1->Get("ZPKUCandidates");
 plj m1(tree1,outname);
 m1.Loop(name);
 m1.endJob();
@@ -26,9 +26,9 @@ m1.endJob();
 
 }
 int main(){
-  runjet("_up");
-  runjet("_down");
   runjet("");
+  runjet("_down");
+  runjet("_up");
   return 1;
 }
 

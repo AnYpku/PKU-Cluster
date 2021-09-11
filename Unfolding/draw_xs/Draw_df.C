@@ -25,7 +25,7 @@ void run(TString var, TString recovar,TString title,TString tag){
         TFile*file11=new TFile("../scale_draw/"+var+"_unfold_ewk_scale"+tag+".root");
 	TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
         TH1D*h11[3];TH1D*h22[3];TH1D*h33[3];
-        TFile*fout=new TFile("histo_"+var+"_df"+tag+".root","recreate");       
+        TFile*fout=new TFile("histo_"+var+"_xsec"+tag+".root","recreate");       
         for(int i=0;i<num;i++){
            if(i<3){
 		   h11[i]=(TH1D*)file11->Get(var+Form("_%i",i));
@@ -100,8 +100,8 @@ void run(TString var, TString recovar,TString title,TString tag){
         TGraphAsymmErrors* gr = new TGraphAsymmErrors(kk, xbin, ybin, xerror_down,xerror_up, yerror_down, yerror_up);
         TGraphAsymmErrors* gr_sys = new TGraphAsymmErrors(kk, xbin, ybin, xerror_sysDown,xerror_sysUp, yerror_sysDown, yerror_sysUp);
         for(int i=0;i<hin->GetNbinsX();i++){
-             hin->SetBinContent(i+1,ybin[i]/1000);
-             hin->SetBinError(i+1,yerror_up[i]/1000);
+             hin->SetBinContent(i+1,ybin[i]/1000*hin->GetBinWidth(i+1));
+             hin->SetBinError(i+1,yerror_up[i]/1000*hin->GetBinWidth(i+1));
 	}
         hin->SetBinContent(hin->GetNbinsX()+1,0);
 	TCanvas*c1=new TCanvas("c0","reco && gen",800,600);

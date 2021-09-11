@@ -33,7 +33,7 @@ void run(TString channel,TString tag){
                          if(bincontent_new[i]==0) uncer[i] =0;
 			 else
 				 uncer[i] = fabs(bincontent_up[i]-bincontent_down[i])/2/bincontent_new[i];
-			 cout<<fixed<<setprecision(2)<<1+uncer[i]<<",";
+			 cout<<fixed<<setprecision(3)<<1+uncer[i]<<",";
 			 if(i<num-1)f1<<fixed<<setprecision(3)<<uncer[i]+1<<",";
 			 if(i==num-1) f1<<fixed<<setprecision(3)<<uncer[i]+1<<"]"<<endl;
 		 }

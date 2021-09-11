@@ -32,7 +32,7 @@ void run(TString tag,TString sample){
 int uncer_fake(){
 	vector<TString> tag={"16","17","18"};
 	vector<TString> sample={"plj"};
-	for(int j=2;j<tag.size();j++){
+	for(int j=1;j<tag.size()-1;j++){
 		for(int k=0;k<sample.size();k++){
 			run(tag[j],sample[k]);
 		}

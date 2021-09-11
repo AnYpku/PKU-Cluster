@@ -4,7 +4,7 @@ kmax 25  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin muendcap1
-observation 335.00
+observation 322.00
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,22 +13,22 @@ observation 335.00
 bin	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1	muendcap1
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	2.49	138.89	126.05	3.86	3.28	0.51
+rate	2.53	154.69	116.61	3.98	3.51	0.80
 ------------
 lumi_17	lnN	1.020	1.020	-	1.020	1.020	1.020
 VBS_Stat_control_bin1_muendcap17	lnN	1.05	-	-	-	-	-
-QCD_Stat_control_bin1_muendcap17	lnN	-	1.04	-	-	-	-
-non_prompt_Stat_control_bin1_muendcap17	lnN	-	-	1.04	-	-	-
-TTA_Stat_control_bin1_muendcap17	lnN	-	-	-	1.18	-	-
-VV_Stat_control_bin1_muendcap17	lnN	-	-	-	-	1.29	-
-ST_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	1.55
+QCD_Stat_control_bin1_muendcap17	lnN	-	1.05	-	-	-	-
+non_prompt_Stat_control_bin1_muendcap17	lnN	-	-	1.05	-	-	-
+TTA_Stat_control_bin1_muendcap17	lnN	-	-	-	1.17	-	-
+VV_Stat_control_bin1_muendcap17	lnN	-	-	-	-	1.28	-
+ST_Stat_control_bin1_muendcap17	lnN	-	-	-	-	-	1.61
 fake_muendcap17	lnN	-	-	1.22	-	-	-
-JES_17	lnN	1.13	1.23	-	1.51	1.55	1.02
-JER_17	lnN	1.13	1.21	-	1.71	1.45	1.10
+JES_17	lnN	1.13	1.23	-	1.10	1.11	1.04
+JER_17	lnN	1.13	1.21	-	1.09	1.03	1.06
 pdf_EW	lnN	1.001	-	-	-	-	-
 pdf_QCD	lnN	-	1.01	-	-	-	-
 Scale_EW	lnN	1.00	-	-	-	-	-
-Scale_QCD	lnN	-	1.15	-	-	-	-
-Scale_QCD_extra	lnN	-	1.00/1.00	-	-	-	-
-interf	lnN	1.14	-	-	-	-	-
+Scale_QCD	lnN	-	1.14	-	-	-	-
+Scale_QCD_extra	lnN	-	0.99/1.00	-	-	-	-
+interf	lnN	1.13	-	-	-	-	-
 mu_trigger	lnN	

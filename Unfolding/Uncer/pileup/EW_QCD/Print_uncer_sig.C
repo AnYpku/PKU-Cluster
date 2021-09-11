@@ -5,6 +5,7 @@ void run(TString var,int i,TString tag){
 //        ftxt<<index<<" "<<endl;
 	TFile*file=new TFile("../root/unfold_"+var+"_"+index+"_ewk_pu"+tag+".root");
 	TFile*file1=new TFile("./root/unfold_"+var+"_"+index+"_qcd_pu"+tag+".root");
+	TFile*file2=new TFile("./root/unfold_"+var+"_"+index+"_interf_pu"+tag+".root");
 	double lumi;
 	if(tag.Contains("16"))
 		lumi=35.86;
@@ -12,14 +13,14 @@ void run(TString var,int i,TString tag){
 		lumi=41.52;
 	else if(tag.Contains("18"))
 		lumi=59.7;
-        TH1D*h1[num];TH1D*h2[num];
+        TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
         cout<<"./root/unfold_"+var+"_"+index+"_ewk_pu"+tag+".root"<<endl;
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_pu%i_recobin%i",j,i));
-		h1[j]->Scale(lumi);
 		h2[j]=(TH1D*)file1->Get(Form(var+"_pu%i_recobin%i",j,i));
-		h2[j]->Scale(lumi);
+		h3[j]=(TH1D*)file2->Get(Form(var+"_pu%i_recobin%i",j,i));
 		h1[j]->Add(h2[j],1);
+		h1[j]->Add(h3[j],1);
         }
 	const int kk=h1[0]->GetNbinsX();
         for(int i=0;i<num;i++){

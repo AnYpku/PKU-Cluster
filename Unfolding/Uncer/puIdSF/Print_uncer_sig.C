@@ -65,7 +65,7 @@ int Print_uncer_sig(){
      bins.push_back(jetptBins);
      bins.push_back(MjjBins);
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt","genMjj"};
-     vector<TString> tag={"17"};
+     vector<TString> tag={"16","17","18"};
      vector<TString> type={"eff","mis"};
      for(int k=0;k<tag.size();k++){
 //             if(tag[k].Contains("17")) continue;

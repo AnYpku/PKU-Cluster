@@ -4,14 +4,16 @@ void run(TString sample, TString tag,int num){
 	ofstream f_up,f_down;
 	ofstream ff("./uncer_"+tag+".txt",ios::app);
 	TFile*file;
-        TFile*file1;
+        TFile*file1;TFile*file2;
 	if(sample.Contains("ZA")){
 		file =new TFile("./hist_qcd_scale"+tag+".root");
 		file1=new TFile("../hist_ewk_scale"+tag+".root");
+		file2=new TFile("./hist_interf_scale"+tag+".root");
 	}
 	else{
 		file =new TFile("./hist_qcdout_scale"+tag+".root");
 		file1=new TFile("../hist_SigOut_scale"+tag+".root");
+		file2=new TFile("./hist_interfout_scale"+tag+".root");
 	}
 	double lumi;
 	if(tag.Contains("16"))
@@ -22,16 +24,18 @@ void run(TString sample, TString tag,int num){
 		lumi=58.7;
 
         TH1D*h1[num];TH1D*hh1[num];
+        TH1D*h2[num];TH1D*hh2[num];
 	vector<double> vec_content;
 	vector<Double_t>:: iterator biggest;
 	vector<Double_t>:: iterator smallest;
         double max,min;
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form("hist_%i",j));
-		h1[j]->Scale(lumi);
 	}
 	for(int i=0;i<3;i++){
 		hh1[i]=(TH1D*)file1->Get(Form("hist_%i",i));//0->0,3,6;1->1,4;2->2,8
+		h2[i]=(TH1D*)file2->Get(Form("hist_%i",i));
+                hh1[i]->Add(h2[i]);
 	}
         const int kk=h1[0]->GetNbinsX()-2;
         for(int i=0;i<num;i++){

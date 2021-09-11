@@ -16,10 +16,11 @@ void run(TFile*file,TString var1, TString sample, vector<double> bins,TString cu
      if(sample.Contains("ewk")) first=0;//16 or 17 or 18 ew sample
      else if(sample.Contains("ewk")==0 && tag.Contains("16"))first=104;//16 qcd sample
      else if(sample.Contains("ewk")==0 && tag.Contains("16")==0)first=0;//17 or 18 qcd sample 
+     if(sample.Contains("interf")) first=0;
      for(Int_t i=first;i<num+first;i++){
 	     TString index;
-	     if(sample.Contains("ewk")){
-		     if(tag.Contains("16"))
+	     if(sample.Contains("ewk")||sample.Contains("interf")){
+		     if(tag.Contains("16")&&sample.Contains("ewk"))
 			     index=Form("%i",i);
 		     else
 			     index=Form("%i",15*i);
@@ -55,14 +56,12 @@ int Unfold_uncer(){
 	TString SignalRegion = "Mjj>500 && deltaetajj>2.5 && Mva>100";
 	TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 	TString cut1 ="("+Gen+")";
-	//     TString cut1 ="(("+Reco+")&&("+Gen+"))";
 	TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 
 	vector<double> ptlepBins={20,80,120,200,400};
 	vector<double> photonEtBins={20,80,120,200,400};
 	vector<double> jetptBins={30,150,250,350,800};
-	vector<double> MvaBins={100,150,1000};
-	vector<double> MjjBins={500,2000};
+	vector<double> MjjBins={500,800,1200,2000};
 	vector<vector<double>> bins;
 	bins.push_back(MjjBins);
 	bins.push_back(ptlepBins);
@@ -78,15 +77,23 @@ int Unfold_uncer(){
 	TFile*f1=new TFile(dir1+"unfold_GenCutla-ZA16.root");
 	TFile*f2=new TFile(dir2+"unfold_GenCutla-ZA17.root");
 	TFile*f3=new TFile(dir3+"unfold_GenCutla-ZA18.root");
+	TFile*ff1=new TFile(dir1+"unfold_GenCutla-ZA_interf16.root");
+	TFile*ff2=new TFile(dir2+"unfold_GenCutla-ZA_interf17.root");
+	TFile*ff3=new TFile(dir3+"unfold_GenCutla-ZA_interf18.root");
 	vector<TString> genvars={"genMjj","genlep1pt","genphotonet","genjet1pt"};
 	vector<TString> recovars={"Mjj","ptlep1","photonet","jet1pt"};
 
 	for(int i=0;i<genvars.size();i++){
+//                if(genvars[i].Contains("genjet")==0) continue;
+		cout<<genvars[i]<<" "<<endl;
+		run(ff1,genvars[i],"interf", bins[i],cut1,"16",3);
+		run(ff2,genvars[i],"interf", bins[i],cut1,"17",3);
+		run(ff3,genvars[i],"interf", bins[i],cut1,"18",3);
 //		run(file1,genvars[i],"ewk", bins[i],cut1,"16",3);
-		run(file2,genvars[i],"ewk", bins[i],cut1,"17",3);
+//		run(file2,genvars[i],"ewk", bins[i],cut1,"17",3);
 //		run(file3,genvars[i],"ewk", bins[i],cut1,"18",3);
 //		run(f1,genvars[i],"qcd", bins[i],cut1,"16",9);
-		run(f2,genvars[i],"qcd", bins[i],cut1,"17",9);
+//		run(f2,genvars[i],"qcd", bins[i],cut1,"17",9);
 //		run(f3,genvars[i],"qcd", bins[i],cut1,"18",9);
 	}
 	return 1;

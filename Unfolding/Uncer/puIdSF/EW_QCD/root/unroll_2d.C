@@ -36,13 +36,13 @@ int unroll_2d(){
         TH1D* hist_7[num];
         TFile*file[7][3];//[recobin][year]
         TFile*fout[7][3];//[recobin][year]
-	vector<TString> tag={"17"};
+	vector<TString> tag={"17","16","18"};
 	vector<TString> type={"eff","mis"};
 	for(int i=0;i<tag.size();i++){
 		for(int ik=0;ik<2;ik++){
 			for(int j=0;j<6;j++){
-				file[j][i]=new TFile(Form("unfold_2dgenMjj_recobin%i_qcd_",j+1)+type[ik]+tag[i]+".root");
-				fout[j][i]=new TFile(Form("unfold_genMjj_recobin%i_qcd_",j+1)+type[ik]+tag[i]+".root","recreate");
+				file[j][i]=new TFile(Form("unfold_2dgenMjj_recobin%i_interf_",j+1)+type[ik]+tag[i]+".root");
+				fout[j][i]=new TFile(Form("unfold_genMjj_recobin%i_interf_",j+1)+type[ik]+tag[i]+".root","recreate");
 				cout<<tag[i]<<" recobin"<<j+1<<endl;
 				fout[j][i]->cd();
 				for(int k=0;k<num;k++){
@@ -53,11 +53,11 @@ int unroll_2d(){
 				cout<<"file index "<<j<<" "<<i<<endl;
 				fout[j][i]->Close();
 			}
-			TFile*f1=new TFile("unfold_2dgenMjj_recobin7_qcd_"+type[ik]+tag[i]+".root");
-			TFile*f2=new TFile("unfold_2dgenMjj_recobin8_qcd_"+type[ik]+tag[i]+".root");
-			TFile*f3=new TFile("unfold_2dgenMjj_recobin9_qcd_"+type[ik]+tag[i]+".root");
+			TFile*f1=new TFile("unfold_2dgenMjj_recobin7_interf_"+type[ik]+tag[i]+".root");
+			TFile*f2=new TFile("unfold_2dgenMjj_recobin8_interf_"+type[ik]+tag[i]+".root");
+			TFile*f3=new TFile("unfold_2dgenMjj_recobin9_interf_"+type[ik]+tag[i]+".root");
 
-			fout[6][i]=new TFile("unfold_genMjj_recobin7_qcd_"+type[ik]+tag[i]+".root","recreate");
+			fout[6][i]=new TFile("unfold_genMjj_recobin7_interf_"+type[ik]+tag[i]+".root","recreate");
 			for(int k=0;k<num;k++){
 				th2_7[k]=merge_hist(f1,f2,f3,k); 
 				//cout<<"get merged histograms"<<endl;

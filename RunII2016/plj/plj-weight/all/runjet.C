@@ -27,8 +27,8 @@ m1.endJob();
 }
 int main(){
 runjet("");
-//  runjet("_down");
-//  runjet("_up");
+runjet("_down");
+runjet("_up");
   
   return 1;
 }

@@ -59,11 +59,11 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax %i   number of processes-1\n'%(jmax))
    if sys.argv[3].find("18") == -1 and sys.argv[3].find("17") == -1:#16
-	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP))
+	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+2))
    if sys.argv[3].find("18") == -1 and sys.argv[3].find("16") == -1:#17
 	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+2))
    if sys.argv[3].find("17") == -1 and sys.argv[3].find("16") == -1:#18
-	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP-1))
+	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+1))
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin recobin%i\n'%(i))
@@ -259,20 +259,22 @@ for i in range(1,nbins):
    for j in range(1,nbins):
          f.write('-\t')
    f.write('-\t-\t1.1\t-\t-\n')
+#
    if sys.argv[3].find("18") == -1:
         f.write('l1pref\tlnN\t')
         for j in range(1,nbins):
 	       f.write('%0.3f\t'%(arr['genbin{}_pref'.format(j)][i-1]))
         f.write('-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref_TTA'][i-1],arr['l1pref_VV'][i-1],arr['l1pref_ST'][i-1],arr['l1pref_ZA'][i-1]))
-   if sys.argv[3].find("16") == -1 and sys.argv[3].find("18")==-1:
-        f.write('pileupId_mis\tlnN\t')
-        for j in range(1,nbins):
-	       f.write('%0.3f\t'%(arr['genbin{}_mis'.format(j)][i-1]))
-        f.write('-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['SigOut_mis'][i-1]))
-        f.write('pileupId_eff\tlnN\t')
-        for j in range(1,nbins):
-	       f.write('%0.3f\t'%(arr['genbin{}_eff'.format(j)][i-1]))
-        f.write('-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['SigOut_eff'][i-1]))
+#
+   f.write('pileupId_mis_%s\tlnN\t'%(sys.argv[3]))
+   for j in range(1,nbins):
+          f.write('%0.3f\t'%(arr['genbin{}_mis'.format(j)][i-1]))
+   f.write('-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['SigOut_mis'][i-1]))
+#
+   f.write('pileupId_eff_%s\tlnN\t'%(sys.argv[3]))
+   for j in range(1,nbins):
+          f.write('%0.3f\t'%(arr['genbin{}_eff'.format(j)][i-1]))
+   f.write('-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['SigOut_eff'][i-1]))
 
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]

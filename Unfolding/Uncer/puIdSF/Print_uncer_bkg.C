@@ -14,8 +14,15 @@ void run(TString var,TString sample, TString tag,TString type){
         TH1D*h1[num];
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_%i",j));
-		h1[j]->Scale(lumi);
 	}
+        TH1D*hh1[num];
+        if(sample.Contains("ZA")&&sample.Contains("EWK")==0){
+                TFile* f2 = new TFile("./root/unfold_"+var+"_ZA_interf_"+type+tag+".root");
+		for(int j=0;j<num;j++){
+			hh1[j]=(TH1D*)f2->Get(Form(var+"_%i",j));
+                        h1[j]->Add(hh1[j],1);
+		}
+        }
         const int kk=h1[0]->GetNbinsX();
         for(int i=0;i<num;i++){
                 h1[i]->SetBinContent(kk,h1[i]->GetBinContent(kk)+h1[i]->GetBinContent(kk+1));
@@ -45,7 +52,6 @@ int Print_uncer_bkg(){
 	vector<double> ptlepBins={20,80,120,200,400};
 	vector<double> photonEtBins={20,80,120,200,400};
 	vector<double> jetptBins={30,150,250,350,800};
-	vector<double> MvaBins={100,150,1000};
 	vector<double> MjjBins={500,1000,1500,2000};
 	bins.push_back(ptlepBins);
 	bins.push_back(photonEtBins);
@@ -57,7 +63,9 @@ int Print_uncer_bkg(){
 	for(int i=0;i<recovars.size();i++){
 		for(int j=0;j<sample.size();j++){
 			for(int k=0;k<type.size();k++){
+				run(recovars[i],sample[j],"16",type[k]);
 				run(recovars[i],sample[j],"17",type[k]);
+				run(recovars[i],sample[j],"18",type[k]);
 			}
 		}
 	}

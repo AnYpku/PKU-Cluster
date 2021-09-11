@@ -87,6 +87,7 @@ void xx::Loop()
 		muon_hlt_scale=1;
 		ele_hlt_scale=1;
 		photon_id_scale=-1;
+		photon_veto_scale=-1;
 
 		Long64_t ientry = LoadTree(jentry);
 		if (ientry < 0) break;

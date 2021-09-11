@@ -21,9 +21,9 @@ void chain_WWg::Loop()
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
       if(jentry%10000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<endl;
-      LEP = channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1_charge*lep2_charge<0 && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20;
+      LEP = channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 /*&& lep1_charge*lep2_charge<0*/ && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20;
       PHOTON = n_photon>0 && photonet > 20. && ( (fabs(photoneta) < 1.4442) || ( fabs(photoneta)<2.5 && fabs(photoneta)>1.566 ) ) && drl1a>0.5 && drl2a>0.5;
-      if( !( LEP && PHOTON  ) )
+      if( !( LEP /*&& PHOTON*/ ) )
               continue;
       ExTree->Fill();
       tot++;

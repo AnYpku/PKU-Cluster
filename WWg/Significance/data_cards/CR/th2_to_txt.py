@@ -19,7 +19,7 @@ fdir = '/home/pku/anying/cms/PKU-Cluster/WWg/Significance/CR/root/'
 f_WWg = TFile.Open(fdir+'hist_WWG_'+sys.argv[1]+'.root')
 f_ZA = TFile.Open(fdir+'hist_ZGJets_'+sys.argv[1]+'.root')
 f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[1]+'.root')
-f_fakeL = TFile.Open(fdir+'hist_fakeLepton_'+sys.argv[1]+'.root')
+f_fakeL = TFile.Open(fdir+'hist_fakeL_'+sys.argv[1]+'.root')
 f_TTA = TFile.Open(fdir+'hist_TTGJets_'+sys.argv[1]+'.root')
 f_WA = TFile.Open(fdir+'hist_WGJets_'+sys.argv[1]+'.root')
 f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[1]+'.root')
@@ -174,6 +174,25 @@ for i in range(1,nbins):
 
    f.write('pileup_%s\tlnN\t'%(sys.argv[1]))
    f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['pu'+'_WWG'][i-1],arr['pu'+'_ZGJets'][i-1],arr['pu'+'_TTGJets'][i-1],arr['pu'+'_VV'][i-1],arr['pu'+'_ST'][i-1]))
+
+   f.write('pdf_TTG%s\tlnN\t'%(sys.argv[1]))
+   f.write('-\t-\t-\t-\t%0.3f\t-\t-\n'%(arr['TTGJets_pdf'][i-1]))
+
+   f.write('Scale_muR_TTG%s\tlnN\t'%(sys.argv[1]))
+   f.write('-\t-\t-\t-\t%0.3f\t-\t-\n'%(arr['TTGJets_scale_muR1'][i-1]))
+
+   f.write('Scale_muF_TTG%s\tlnN\t'%(sys.argv[1]))
+   f.write('-\t-\t-\t-\t%0.3f\t-\t-\n'%(arr['TTGJets_scale_muF1'][i-1]))
+
+   f.write('Scale_muFmuR_TTG%s\tlnN\t'%(sys.argv[1]))
+   f.write('-\t-\t-\t-\t%0.3f\t-\t-\n'%(arr['TTGJets_scale_muFmuR'][i-1]))
+
+   f.write('btag_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['btag'+'_WWG'][i-1],arr['btag'+'_ZGJets'][i-1],arr['btag'+'_TTGJets'][i-1],arr['btag'+'_VV'][i-1],arr['btag'+'_ST'][i-1]))
+
+   if sys.argv[1].find("18") == -1:
+      f.write('l1pref_%s\tlnN\t'%(sys.argv[1]))
+      f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['pref'+'_WWG'][i-1],arr['pref'+'_ZGJets'][i-1],arr['pref'+'_TTGJets'][i-1],arr['pref'+'_VV'][i-1],arr['pref'+'_ST'][i-1]))
 
    f.write('mu_trigger\tlnN\t')
    f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(1.01,1.01,1.01,1.01,1.01))

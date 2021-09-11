@@ -1,5 +1,4 @@
 #include "TGraphAsymmErrors.h"
-#include "L1_weight.C"
 #include <map>
 #include <vector>
 #include <string>
@@ -67,7 +66,7 @@ class EDBRHistoMaker {
                 Int_t HLT_Ele5;
                 Int_t HLT_Mu2;
                 Int_t HLT_Mu1;
-                Int_t HLT_Mu5;
+                Int_t HLT_Mu3;
                 Int_t HLT_Mu6;
 		Double_t nump;
 		Double_t numm;
@@ -127,7 +126,6 @@ class EDBRHistoMaker {
 		Double_t ZGmass;//need to be modified for rochester
 		Double_t delta_phi;//need to be modified for rochester
 		Double_t drjj;
-		Double_t l1_weight;
 		Double_t ele1_id_scale;
 		Double_t ele2_id_scale;
 		Double_t ele1_reco_scale;
@@ -198,7 +196,7 @@ class EDBRHistoMaker {
 		TBranch *b_HLT_Ele5;   //!
 		TBranch *b_HLT_Mu2;   //!
 		TBranch *b_HLT_Mu1;   //!
-		TBranch *b_HLT_Mu5;   //!
+		TBranch *b_HLT_Mu3;   //!
 		TBranch *b_HLT_Mu6;   //!
 		TBranch *b_nump;   //!
 		TBranch *b_numm;   //!
@@ -253,7 +251,6 @@ class EDBRHistoMaker {
 		TBranch *b_ngoodmus;    //!
 		TBranch *b_zepp;
 		TBranch *b_deltaetajj;
-		TBranch *b_l1_weight;
 		TBranch        *b_lep1_eta_station2;   //!
 		TBranch        *b_lep1_phi_station2;   //!
 		TBranch        *b_lep2_eta_station2;   //!
@@ -346,7 +343,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("HLT_Ele5", &HLT_Ele5, "HLT_Ele5/I");
 	treename->Branch("HLT_Mu2", &HLT_Mu2, "HLT_Mu2/I");
 	treename->Branch("HLT_Mu1", &HLT_Mu1, "HLT_Mu1/I");
-	treename->Branch("HLT_Mu5", &HLT_Mu5, "HLT_Mu5/I");
+	treename->Branch("HLT_Mu3", &HLT_Mu3, "HLT_Mu3/I");
 	treename->Branch("HLT_Mu6", &HLT_Mu6, "HLT_Mu6/I");
 	treename->Branch("nump", &nump, "nump/D");
 	treename->Branch("numm", &numm, "numm/D");
@@ -403,7 +400,6 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("delta_phi", &delta_phi, "delta_phi/D");
 	treename->Branch("detajj", &detajj, "detajj/D");
 	treename->Branch("drjj", &drjj, "drjj/D");
-	treename->Branch("l1_weight", &l1_weight, "l1_weight/D");
 	treename->Branch("ele1_id_scale", &ele1_id_scale, "ele1_id_scale/D");
 	treename->Branch("ele2_id_scale", &ele2_id_scale, "ele2_id_scale/D");
 	treename->Branch("ele1_reco_scale", &ele1_reco_scale, "ele1_reco_scale/D");
@@ -468,7 +464,7 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("HLT_Ele5", &HLT_Ele5, &b_HLT_Ele5);
 	fChain->SetBranchAddress("HLT_Mu2", &HLT_Mu2, &b_HLT_Mu2);
 	fChain->SetBranchAddress("HLT_Mu1", &HLT_Mu1, &b_HLT_Mu1);
-	fChain->SetBranchAddress("HLT_Mu5", &HLT_Mu5, &b_HLT_Mu5);
+	fChain->SetBranchAddress("HLT_Mu3", &HLT_Mu3, &b_HLT_Mu3);
 	fChain->SetBranchAddress("HLT_Mu6", &HLT_Mu6, &b_HLT_Mu6);
 	fChain->SetBranchAddress("nump", &nump, &b_nump);
 	fChain->SetBranchAddress("numm", &numm, &b_numm);
@@ -523,7 +519,6 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("ngoodmus", &ngoodmus,&b_ngoodmus);
 	fChain->SetBranchAddress("zepp", &zepp, &b_zepp);
 	fChain->SetBranchAddress("deltaetajj", &deltaetajj, &b_deltaetajj);
-	fChain->SetBranchAddress("l1_weight", &l1_weight, &b_l1_weight);
 	fChain->SetBranchAddress("lep1_eta_station2", &lep1_eta_station2, &b_lep1_eta_station2);
 	fChain->SetBranchAddress("lep1_phi_station2", &lep1_phi_station2, &b_lep1_phi_station2);
 	fChain->SetBranchAddress("lep2_eta_station2", &lep2_eta_station2, &b_lep2_eta_station2);
@@ -770,12 +765,14 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
                 lep2_phi_station2_tmp = lep2_phi_station2;
                 if(lep1_phi_station2<0) lep1_phi_station2_tmp = lep1_phi_station2+6.28319;
                 if(lep2_phi_station2<0) lep2_phi_station2_tmp = lep2_phi_station2+6.28319;
-		l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
                 if(drla==10) drla=-10;
                 if(drla2==10) drla2=-10;
-		actualWeight=0;
+		actualWeight=1;
 //data
-                if(  (drla>0.7 && drla2>0.7 && lep == 11 &&  (HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 ) 
+                if(filename.Contains("18")){ HLT_Mu3=0;HLT_Mu1=0;HLT_Ele2=0;}
+                if(filename.Contains("17")){ HLT_Mu3=0;HLT_Ele2=0;}
+                if(filename.Contains("16")){ HLT_Ele1=0;}
+                if(  (drla>0.7 && drla2>0.7 && lep == 11 &&  (HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) ) && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 &&  drj1l2>0.5&&drj2l2>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 ) 
 		  ) {
 			//if(Mjj<400) 
 			sum = sum + actualWeight;
@@ -807,7 +804,7 @@ void EDBRHistoMaker::Loop(std::string outFileName) {
 			(theHistograms["jet1eta"])->Fill(jet1eta, actualWeight);
 			(theHistograms["jet2pt"])->Fill(jet2pt, actualWeight);
 			(theHistograms["jet2eta"])->Fill(jet2eta, actualWeight);
-			if(Mjj<400)(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
+			(theHistograms["Mjj"])->Fill(Mjj, actualWeight);
 			(theHistograms["ZGmass"])->Fill(ZGmass, actualWeight);
 			(theHistograms["nVtx"])->Fill(nVtx, actualWeight);
 			(theHistograms["zepp"])->Fill(zepp, actualWeight);
@@ -881,7 +878,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
 			nn = 1;
 		else
 			nn = -1;
-		actualWeight = pileupWeight*scalef*prefWeight*photon_id_scale*photon_veto_scale*puIdweight_T;//mc
+		actualWeight = pileupWeight*scalef*prefWeight*photon_id_scale*photon_veto_scale;//mc
 		detajj = fabs(jet1eta - jet2eta);
 		if (fabs(jet1phi-jet2phi)>Pi) drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*Pi-fabs(jet1phi-jet2phi))*(2*Pi-fabs(jet1phi-jet2phi)));
                 else drjj = sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)));
@@ -925,13 +922,15 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName){
                 lep2_phi_station2_tmp = lep2_phi_station2;
                 if(lep1_phi_station2<0) lep1_phi_station2_tmp = lep1_phi_station2+6.28319;
                 if(lep2_phi_station2<0) lep2_phi_station2_tmp = lep2_phi_station2+6.28319;
-                l1_weight = L1_weight(lep1_phi_station2_tmp, lep2_phi_station2_tmp, lep1_eta_station2, lep2_eta_station2);
                 if(drla==10) drla=-10;if(drla2==10) drla2=-10;
 		actualWeight = actualWeight*(ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale)*puIdweight_T;
                 if(filename.Contains("plj")) 
                      actualWeight = scalef;
 // mc
-                if( drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 ){
+                if(filename.Contains("18")){ HLT_Mu3=0;HLT_Mu1=0;HLT_Ele2=0;}
+                if(filename.Contains("17")){ HLT_Mu3=0;HLT_Ele2=0;}
+                if(filename.Contains("16")){ HLT_Ele1=0;}
+                if( drla>0.7 && drla2>0.7 && lep == 11 && ( HLT_Ele1 > 0||HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25. && fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0 && massVlep > 70. && massVlep < 110. && photonet > 20. &&( (fabs(photoneta) < 1.4442) /*|| ( fabs(photoneta)<2.5&&fabs(photoneta)>1.566 )*/ ) && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )  && drj1a>0.5 &&drj2a>0.5 && drj1l>0.5 && drj2l>0.5 && drjj>0.5 &&  drj1l2>0.5&&drj2l2>0.5 && ZGmass>100 && Mjj>500 && detajj>2.5 && delta_phi>1.9 && zepp<2.4 ){
 			//if(Mjj<400)	
 			if(theWeight>0) npp++;
 			if(theWeight<0) nmm++;

@@ -36,7 +36,7 @@ void loopPlot() {
 	bool dopileupreweight = false;
 
 	// Path to wherever the files with the trees are. 
-	vector<TString> pathToTrees = {"/home/pku/anying/cms/rootfiles/2016/","/home/pku/anying/cms/rootfiles/2017/","/home/pku/anying/cms/rootfiles/2018/"};
+	vector<TString> pathToTrees = {"/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/","/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/","/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/"};
 	std::string outputDir = "./fig-output_a/";
 	RoccoR  rc;
         /// file for scale factors
@@ -50,7 +50,7 @@ void loopPlot() {
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nDATA; ii++) {
                         if(ii==0) j=0;else if(ii==1) j=1; else if(ii==2)j=2;
-			fData.push_back(pathToTrees[j] + "cutla-outD" + data[ii] + ".root");
+			fData.push_back(pathToTrees[j] + "optimal_" + data[ii] + ".root");
 		}
 	}
 	const int kk=fData.size();
@@ -71,8 +71,8 @@ void loopPlot() {
 		for (int ii = 0; ii < nMC; ii++) {
 			if(ii%3==0) j=0;else if(ii%3==1)j=1;else if(ii%3==2)j=2;
                         cout<<j<<" "<<ii<<endl;
-			fMC.push_back(pathToTrees[j] +"cutla-out"+ mc[ii] + ".root");
-//			cout<<pathToTrees[j]<<"cutla-out"<<mc[ii] <<".root"<<endl;
+			fMC.push_back(pathToTrees[j] +"optimal_"+ mc[ii] + ".root");
+//			cout<<pathToTrees[j]<<"optimal_"<<mc[ii] <<".root"<<endl;
 		}
 	}
 	const int nmc=fMC.size();
@@ -101,7 +101,7 @@ void loopPlot() {
 	for (int j = 0; j< pathToTrees.size(); j++) {
 		for (int ii = 0; ii < nMCSig; ii++) {
 			if(ii==0)j=0;else if(ii==1)j=1;else if(ii==2)j=2;
-			fMCSig.push_back(pathToTrees[j] + "cutla-out" + mcSig[ii] + ".root");
+			fMCSig.push_back(pathToTrees[j] + "optimal_" + mcSig[ii] + ".root");
 		}
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
@@ -147,7 +147,7 @@ void loopPlot() {
 
 		std::cout << "retrieve "<<i+1<<"th data file" << std::endl;
 		TFile *fileData = TFile::Open(fData.at(i));
-		TTree *treeData = (TTree*) fileData->Get("ZPKUCandidates");
+		TTree *treeData = (TTree*) fileData->Get("outtree");
 		std::cout << "retrieve ith mc file" << std::endl;
 		if (redoHistograms) {
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeData, fileData,
@@ -182,7 +182,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mc file" << std::endl;
 			TFile *fileMC = TFile::Open(fMC.at(i));
 			std::cout << "retrieve tree of mc file" << std::endl;
-			TTree *treeMC = (TTree*) fileMC->Get("ZPKUCandidates");
+			TTree *treeMC = (TTree*) fileMC->Get("outtree");
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMC, fileMC,
 					hisRatio, out_buffer, &rc);
 			maker->setUnitaryWeights(false);
@@ -213,7 +213,7 @@ void loopPlot() {
 			std::cout << "retrieve ith mcsig file" << std::endl;
 			TFile *fileMCSig = TFile::Open(fMCSig.at(i));
 			std::cout << "retrieve tree of mcsig file" << std::endl;
-			TTree *treeMCSig = (TTree*) fileMCSig->Get("ZPKUCandidates");
+			TTree *treeMCSig = (TTree*) fileMCSig->Get("outtree");
 			std::cout<<"open MC sig file OK"<<endl;
 			EDBRHistoMaker* maker = new EDBRHistoMaker(treeMCSig, fileMCSig,
 					hisRatio, out_buffer,&rc);

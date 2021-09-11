@@ -65,9 +65,9 @@ int Build_1DHist(){
 	TString met="(n_bjets>=1 && PuppiMET_T1Smear_pt > 20 && mT2>30)";
 	vector<TString> tags={"18"};
 	TString dir1;
-	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/Top/output-slimmed-rootfiles/optimal_emua_";
+	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/Top_gamma/output-slimmed-rootfiles/optimal_emua_";
 	TString Reco;
-	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeLepton","tZq","TGJets","WGJets","WWG"};
+	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeL","tZq","TGJets","WGJets","WWG"};
 	for(int k=0;k<tags.size();k++){
 		Reco= LEP+"&&"+photon+"&&"+met;
 		for(int j=0;j<names.size();j++){     

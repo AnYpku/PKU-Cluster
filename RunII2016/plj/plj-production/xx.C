@@ -19,7 +19,7 @@ void xx::Loop()
         Long64_t nmm = fChain->GetEntries("theWeight<0.");
         std::cout<< "numberofnp:" << npp << "  numberofnm:" <<nmm << std::endl;
          
-        Bool_t LEPmu=0,LEPele=0;
+        Bool_t LEPmu=0,LEPele=0,PHOTON=0;
 
 	for (Long64_t jentry=0; jentry<nentries;jentry++) {
 		Long64_t ientry = LoadTree(jentry);
@@ -35,7 +35,10 @@ void xx::Loop()
                 Set();
                 LEPmu = lep==13 && (HLT_Mu1>0||HLT_Mu2>0||HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. ;
                 LEPele = lep==11 && (HLT_Ele1>0||HLT_Ele2>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.5 &&abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70.;
+		PHOTON= photonet>20 && ( (fabs(photoneta)<1.4442) || (fabs(photoneta)>1.566 && fabs(photoneta)<2.5) ) ;
                 if( !( (LEPmu) || (LEPele) ) )
+                    continue;
+		if( ! (PHOTON))
                     continue;
 		ExTree->Fill();
 	}
@@ -50,8 +53,6 @@ void xx::Set(){
 	muon2_id_scale=1;
 	muon1_iso_scale=1;
 	muon2_iso_scale=1;
-//	muon1_track_scale=1;
-//	muon2_track_scale=1;
 	muon_hlt_scale=1;
 	scalef=1;
     }

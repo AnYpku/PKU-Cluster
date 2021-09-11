@@ -12,7 +12,7 @@ TH1D* run( TString sample,TString tag,TString vec_branchname,vector<double> bins
      Double_t scalef,pileupWeight;
      tree->SetBranchAddress("scalef",&scalef);
      TTreeFormula *tformula=new TTreeFormula("formula", cut1, tree);
-//     TH1D*th1[kk];
+//   TH1D*th1[kk];
      TString th1name;
      th1name=vec_branchname+sample;
      TH1D* th1;
@@ -46,12 +46,10 @@ int Unfold_uncer_batch_bkg(){
      vector<double> ptlepBins={20,80,120,200,400};
      vector<double> photonEtBins={20,80,120,200,400};
      vector<double> jetptBins={30,150,250,350,800};
-     vector<double> MvaBins={100,150,1000};
      vector<double> MjjBins={500,1000,1500,2000};
      bins.push_back(ptlepBins);
      bins.push_back(photonEtBins);
      bins.push_back(jetptBins);
-//     bins.push_back(MvaBins);
 //     bins.push_back(MjjBins);
 
      vector<TString> genvars={"genlep1pt","genphotonet","genjet1pt"};
@@ -62,10 +60,15 @@ int Unfold_uncer_batch_bkg(){
      for(int j=0;j<kk;j++){
 	     for(int i=0;i<tag.size();i++){
 //		     if(tag[i].Contains("17")==0) continue;
-		     if(tag[i].Contains("17")){
+		     if(tag[i].Contains("16")){
+			     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+		     }
+		     else if(tag[i].Contains("17")){
 			     jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		     }
-		     else jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+		     else if(tag[i].Contains("18")){
+			     jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+		     }
 		     TString Reco= "("+LEPmu+"||"+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		     TString cut1 ="("+Reco+")";
 		     TString cut2 ="(("+Reco+")&& !("+Gen+"))";
@@ -87,14 +90,5 @@ int Unfold_uncer_batch_bkg(){
 		     fout[i][j]->Close();
 	     }//fout[year][vars]
      }
-     /*     for(int j=0;j<kk;j++){
-	    for(int i=0;i<3;i++){
-	    fout[i][j]->cd();
-	    hist[i][j]->Write();
-	    hist_up[i][j]->Write();
-	    hist_down[i][j]->Write();
-	    fout[i][j]->Close();
-	    }
-	    }*/
      return 1;
 }

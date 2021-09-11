@@ -36,7 +36,7 @@ TH2D* run(TString filename,TString cut,TString particle,TString year,TString typ
         cout<<h1->GetEntries()<<endl;
         return h1;
 }
-TFile* run_cal_num(TString channel){
+TFile* run_cal_num(TString channel,TString year){
  
 	TString cut,file;
 	if(channel=="mu"){
@@ -45,19 +45,22 @@ TFile* run_cal_num(TString channel){
 	}
 	else{
 		cut="( fabs(lepton_pid)==11 && lepton_pt>10 && fabs(lepton_eta)<2.4 && puppimet<30 && puppimt<20)";
-		file="DEle";
+		if(year.Contains("18"))
+			file="DEle";
+		else if(year.Contains("17"))
+			file="SingleEle";
 	}
-        TH2D*h_mu_T=run(file,cut,channel,"18","is_lepton_tight==1");
-        TH2D*h_mu_L=run(file,cut,channel,"18","is_lepton_tight==0");
-        TH2D*h_WJets_T=run("WJets",cut,channel,"18","is_lepton_tight==1");
-        TH2D*h_WJets_L=run("WJets",cut,channel,"18","is_lepton_tight==0");
-        TH2D*h_DY_T=run("DYJets",cut,channel,"18","is_lepton_tight==1");
-        TH2D*h_DY_L=run("DYJets",cut,channel,"18","is_lepton_tight==0");
-        TH2D*h_TTJets_T=run("TTJets",cut,channel,"18","is_lepton_tight==1");
-        TH2D*h_TTJets_L=run("TTJets",cut,channel,"18","is_lepton_tight==0");
-        TH2D*h_TTWJets_T=run("TTWJets",cut,channel,"18","is_lepton_tight==1");
-        TH2D*h_TTWJets_L=run("TTWJets",cut,channel,"18","is_lepton_tight==0");
-	TFile*fout=new TFile("hist_num"+channel+".root","recreate");
+        TH2D*h_mu_T=run(file,cut,channel,year,"is_lepton_tight==1");
+        TH2D*h_mu_L=run(file,cut,channel,year,"is_lepton_tight==0");
+        TH2D*h_WJets_T=run("WJets",cut,channel,year,"is_lepton_tight==1");
+        TH2D*h_WJets_L=run("WJets",cut,channel,year,"is_lepton_tight==0");
+        TH2D*h_DY_T=run("DYJets",cut,channel,year,"is_lepton_tight==1");
+        TH2D*h_DY_L=run("DYJets",cut,channel,year,"is_lepton_tight==0");
+        TH2D*h_TTJets_T=run("TTJets",cut,channel,year,"is_lepton_tight==1");
+        TH2D*h_TTJets_L=run("TTJets",cut,channel,year,"is_lepton_tight==0");
+        TH2D*h_TTWJets_T=run("TTWJets",cut,channel,year,"is_lepton_tight==1");
+        TH2D*h_TTWJets_L=run("TTWJets",cut,channel,year,"is_lepton_tight==0");
+	TFile*fout=new TFile("hist_num"+channel+year+".root","recreate");
         h_mu_L->Write();     
         h_mu_T->Write();     
         h_WJets_L->Write();     
@@ -72,7 +75,8 @@ TFile* run_cal_num(TString channel){
 	return fout;
 }
 int cal_num(){
-	TFile*fmu=run_cal_num("mu");
-	TFile*fele=run_cal_num("ele");
+//	TFile*fmu=run_cal_num("mu","18");
+	TFile*fmu=run_cal_num("mu","17");
+//	TFile*fele=run_cal_num("ele","17");
 return 0;
 }

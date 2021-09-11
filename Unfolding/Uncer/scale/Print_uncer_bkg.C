@@ -20,14 +20,20 @@ void run(TString var,TString sample, TString tag,int num){
 		lumi=58.7;
 
         TH1D*h1[num];
+	for(int j=0;j<num;j++){
+		h1[j]=(TH1D*)file->Get(Form(var+"_%i",j));
+	}
+	TH1D*hh1[3];
+        if(sample.Contains("qcd")){
+                TFile*file1=new TFile("./root/unfold_"+var+"_interf_scale"+tag+".root");
+                for(int j=0;j<3;j++){
+                        hh1[j]=(TH1D*)file1->Get(Form(var+"_%i",j));
+                }
+        }
 	vector<double> vec_content;
 	vector<Double_t>:: iterator biggest;
 	vector<Double_t>:: iterator smallest;
         double max,min;
-	for(int j=0;j<num;j++){
-		h1[j]=(TH1D*)file->Get(Form(var+"_%i",j));
-		h1[j]->Scale(lumi);
-	}
         const int kk=h1[0]->GetNbinsX();
         double scale_muR1[kk],scale_muF1[kk],scale_muFmuR[kk];
         for(int i=0;i<num;i++){
@@ -38,6 +44,9 @@ void run(TString var,TString sample, TString tag,int num){
 	    double diff=0,sum=0;
             for(int j=0;j<num;j++){
 		    if(name.Contains("qcd")){
+                            if(j==0||j==3||j==6) h1[j]->Add(hh1[0]);
+                            if(j==1||j==4) h1[j]->Add(hh1[1]);
+                            if(j==2||j==8) h1[j]->Add(hh1[2]);
 			    if((j!=5||j!=7)) vec_content.push_back(h1[j]->GetBinContent(k+1));
 		    }
                     else if(name.Contains("Sig")&& num<4)

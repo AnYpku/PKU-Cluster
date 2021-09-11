@@ -123,7 +123,7 @@ void loopPlot() {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-		if(fData.at(i).Contains("2017")==0)
+//		if(fData.at(i).Contains("2017")==0)
 			continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
@@ -156,7 +156,7 @@ void loopPlot() {
 
 	//loop over MC files and make histograms individually for each of them
 	for (int i = 0; i < fMC.size(); i++) {
-		if(fMC.at(i).Contains("2017")==0)
+//		if(fMC.at(i).Contains("2017")==0)
 			continue;
 		std::cout << "\n-------\nRunning over " << mcLabels[i].c_str()
 			<< std::endl;
@@ -189,8 +189,8 @@ void loopPlot() {
 
 	//loop over MC signal files and make histograms individually for each of them
 	for (int  i = 0; i < fMCSig.size(); i++) {
-		if(fMCSig.at(i).Contains("2017")==0)
-			continue;
+//		if(fMCSig.at(i).Contains("2017")==0)
+//			continue;
 		std::cout << "\n-------\nRunning over " << mcLabelsSig[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMCSig.at(i) << std::endl;

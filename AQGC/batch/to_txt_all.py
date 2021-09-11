@@ -29,7 +29,7 @@ def merge_year(th1,sample):
       th1.Add(th2)
       th1.Add(th3)
 print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
-fdir = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/hist_root/'
+fdir = '/home/pku/anying/cms/PKU-Cluster/AQGC/batch/hist_root/referee/'
 f_EW = TFile.Open(fdir+'hist_ZA-EWK16'+sys.argv[2]+'.root')
 f_ZA = TFile.Open(fdir+'hist_ZA16'+sys.argv[2]+'.root')
 f_plj = TFile.Open(fdir+'hist_plj16'+sys.argv[2]+'.root')
@@ -75,7 +75,7 @@ merge_bin(th1_others)
 
 nbins=th1_ZA_sig.GetNbinsX()+1
 for i in range(1,nbins):
-   f = open('./txt/%s%s_bin_%d.txt'%(sys.argv[2],sys.argv[1], i),'w')
+   f = open('./txt_referee/%s%s_bin_%d.txt'%(sys.argv[2],sys.argv[1], i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax 3   number of processes-1\n')
    f.write('kmax 25  number of nuisance parameters (sources of systematical uncertainties)\n')

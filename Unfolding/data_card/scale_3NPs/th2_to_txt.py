@@ -8,21 +8,24 @@ print sys.argv[1],' ',sys.argv[2],' ',sys.argv[3]
 fdir = '/home/pku/anying/cms/PKU-Cluster/Unfolding/common/root/'
 f_EW = TFile.Open(fdir+'hist_ZA-EWK_'+sys.argv[1]+sys.argv[3]+'.root')
 f_ZA = TFile.Open(fdir+'hist_ZA_'+sys.argv[2]+sys.argv[3]+'.root')
+f_interf = TFile.Open(fdir+'hist_ZA_interf_'+sys.argv[2]+sys.argv[3]+'.root')
 f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[2]+sys.argv[3]+'.root')
 f_TTA = TFile.Open(fdir+'hist_TTA_'+sys.argv[2]+sys.argv[3]+'.root')
 f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[2]+sys.argv[3]+'.root')
 f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[2]+sys.argv[3]+'.root')
-#f_Ele = TFile.Open(fdir+'hist_DEle_'+sys.argv[2]+sys.argv[3]+'.root')
-#f_Muon = TFile.Open(fdir+'hist_DMuon_'+sys.argv[2]+sys.argv[3]+'.root')
+f_Ele = TFile.Open(fdir+'hist_DEle_'+sys.argv[2]+sys.argv[3]+'.root')
+f_Muon = TFile.Open(fdir+'hist_DMuon_'+sys.argv[2]+sys.argv[3]+'.root')
 
 th1_ZA_sig_out=f_EW.Get('hist_'+sys.argv[2])
 th1_ZA=f_ZA.Get('hist_'+sys.argv[2])
+th1_interf=f_interf.Get('hist_'+sys.argv[2])
+th1_ZA.Add(th1_interf)
 th1_non_prompt=f_plj.Get('hist_'+sys.argv[2])
 th1_TTA=f_TTA.Get('hist_'+sys.argv[2])
 th1_VV=f_VV.Get('hist_'+sys.argv[2])
 th1_ST=f_ST.Get('hist_'+sys.argv[2])
-#th1_DEle=f_Ele.Get('hist_'+sys.argv[2])
-#th1_DMuon=f_Muon.Get('hist_'+sys.argv[2])
+th1_DEle=f_Ele.Get('hist_'+sys.argv[2])
+th1_DMuon=f_Muon.Get('hist_'+sys.argv[2])
 
 # the bkg histo and signal histo have already contain the overflow bin in the last bin when creat the histograms 
 genbincontent=[]
@@ -50,18 +53,18 @@ for line in f:
 #print arr 
 print '>>>>begin to read bin content to the txt file>>>>'
 nbins=th1_ZA_sig_out.GetNbinsX()+1
-n_NP=26+nbins-1
+n_NP=25+nbins-1
 jmax=6+nbins-1-1
 for i in range(1,nbins):
    f = open('./txt/%s_%s_bin%i.txt'%(sys.argv[2],sys.argv[3],i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax %i   number of processes-1\n'%(jmax))
    if sys.argv[3].find("18") == -1 and sys.argv[3].find("17") == -1:#16
-	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP))
+	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+2))
    if sys.argv[3].find("16") == -1 and sys.argv[3].find("18") == -1:#17
 	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+2))
    if sys.argv[3].find("16") == -1 and sys.argv[3].find("17") == -1:#18
-	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP-1))
+	f.write('kmax %i  number of nuisance parameters (sources of systematical uncertainties)\n'%(n_NP+1))
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin recobin%i\n'%(i))
@@ -245,11 +248,6 @@ for i in range(1,nbins):
          f.write('-\t')
    f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['scale_muFmuR'][i-1]))
 #
-   f.write('interf\tlnN\t')
-   for j in range(1,nbins):
-	 f.write('%0.3f\t'%(arr['genbin{}_interf'.format(j)][i-1]))
-   f.write('\t-\t-\t-\t-\t-\t-\n')
-#
    f.write('mu_trigger\tlnN\t')
    for j in range(1,nbins):
 	 f.write('%0.3f\t'%(arr['muon_ZA-EWK_trigger'][i-1]))
@@ -289,20 +287,22 @@ for i in range(1,nbins):
    for j in range(1,nbins):
          f.write('-\t')
    f.write('-\t-\t-\t1.1\t-\t-\n')
+#
+   f.write('pileupId_mis_%s\tlnN\t'%(sys.argv[3]))
+   for j in range(1,nbins):
+	   f.write('%0.3f\t'%(arr['genbin{}_mis'.format(j)][i-1]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
+#
+   f.write('pileupId_eff_%s\tlnN\t'%(sys.argv[3]))
+   for j in range(1,nbins):
+	   f.write('%0.3f\t'%(arr['genbin{}_eff'.format(j)][i-1]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
+#
    if sys.argv[3].find("18") == -1:
         f.write('l1pref\tlnN\t')
         for j in range(1,nbins):
 	       f.write('%0.3f\t'%(arr['genbin{}_pref'.format(j)][i-1]))
         f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref_ZA'][i-1],arr['l1pref_TTA'][i-1],arr['l1pref_VV'][i-1],arr['l1pref_ST'][i-1],arr['l1pref_ZA-EWK'][i-1]))
-   if sys.argv[3].find("16") == -1 and sys.argv[3].find("18")==-1:
-        f.write('pileupId_mis\tlnN\t')
-        for j in range(1,nbins):
-	       f.write('%0.3f\t'%(arr['genbin{}_mis'.format(j)][i-1]))
-        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZA-EWKout_mis'][i-1]))
-        f.write('pileupId_eff\tlnN\t')
-        for j in range(1,nbins):
-	       f.write('%0.3f\t'%(arr['genbin{}_eff'.format(j)][i-1]))
-        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZA-EWKout_eff'][i-1]))
 
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]

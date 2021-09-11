@@ -72,11 +72,11 @@ for i in range(1,nbins):
    f.write('imax 1   number of channels\n')
    f.write('jmax 5   number of processes-1\n')
    if sys.argv[1].find("18") == -1 and sys.argv[1].find("17") == -1: #16
-        f.write('kmax 19  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("18") == -1: #17
         f.write('kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n')
    if sys.argv[1].find("16") == -1 and sys.argv[1].find("17") == -1: #18
-        f.write('kmax 18  number of nuisance parameters (sources of systematical uncertainties)\n')
+        f.write('kmax 20  number of nuisance parameters (sources of systematical uncertainties)\n')
    f.write('------------\n')
    f.write('# we have just one channel, in which we observe 0 events\n')
    f.write('bin %s%i\n'%(sys.argv[2],i))
@@ -215,19 +215,21 @@ for i in range(1,nbins):
 
    f.write('VV_xs\tlnN\t')
    f.write('-\t-\t-\t1.1\t-\t-\n')
+#
+   f.write('pileupId_eff_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZAout_eff'][i-1]))
+#
+   f.write('pileupId_mis_%s\tlnN\t'%(sys.argv[1]))
+   f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZAout_mis'][i-1]))
+#
+   f.write('Others group =  ttgamma_xs VV_xs \n')
+   f.write('luminosity group = lumi_%s \n'%(sys.argv[1]))
+   f.write('pileupId group = pileupId_mis_%s pileupId_eff_%s\n'%(sys.argv[1],sys.argv[1]))
+   f.write('pu group = pileup \n')
    if sys.argv[1].find("18") == -1:
         f.write('l1pref\tlnN\t')
         f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['l1pref_ZA'][i-1],arr['l1pref_TTA'][i-1],arr['l1pref_VV'][i-1],arr['l1pref_ST'][i-1],arr['l1pref_ZA'][i-1]))
-   else:
-        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s \n'%(sys.argv[1]))
-   if sys.argv[1].find("16") == -1 and sys.argv[1].find("18")==-1:
-        f.write('pileupId_eff\tlnN\t')
-        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_eff'][i-1],arr['TTA_eff'][i-1],arr['VV_eff'][i-1],arr['ST_eff'][i-1],arr['ZAout_eff'][i-1]))
-        f.write('pileupId_mis\tlnN\t')
-        f.write('%0.3f\t-\t%0.3f\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ZA_mis'][i-1],arr['TTA_mis'][i-1],arr['VV_mis'][i-1],arr['ST_mis'][i-1],arr['ZAout_mis'][i-1]))
-        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s l1pref pileupId_mis pileupId_eff\n'%(sys.argv[1]))
-   if sys.argv[1].find("17") == -1 and sys.argv[1].find("18")==-1:
-        f.write('Others group = pileup ttgamma_xs VV_xs lumi_%s l1pref \n'%(sys.argv[1]))
+        f.write('pref group = l1pref \n')
 #   print 'bin ',i,' ',ZA_binerror,' ',non_prompt_binerror,' ',TTA_binerror,' ',VV_binerror,' ',ST_binerror,' ',WA_binerror,' ',ZA_sig_out_binerror
    genbincontent[:]=[]
    genbinerror[:]=[]

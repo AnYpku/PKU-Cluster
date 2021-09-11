@@ -6,17 +6,17 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-void WWg::Loop(TString name)
+void WWg::Loop(TString name,TString year)
 {
    if (fChain == 0) return;
 
-   Long64_t nentries = fChain->GetEntriesFast();
+   Long64_t nentries = fChain->GetEntries();
    vector<double> ptbins_b,ptbins_e;
    ptbins_b={20,25,30,35,40,50,60,100,400};
    ptbins_e={20,25,30,40,50,60,400};
-   TFile*fb=new TFile("./weight_barrel_uncer18.root");
-   TFile*fe=new TFile("./weight_endcap_uncer18.root");
-   TFile*fin=new TFile("../../../plj/cal_weight/weight_18.root");
+   TFile*fb=new TFile("./weight_barrel_uncer"+year+".root");
+   TFile*fe=new TFile("./weight_endcap_uncer"+year+".root");
+   TFile*fin=new TFile("../../../../fakephoton/cal_weight/weight_"+year+".root");
    TH2D*weight_b=(TH2D*)fin->Get("weight_barrel");
    TH2D*weight_e=(TH2D*)fin->Get("weight_endcap");
    TH1D*weight_b_up=(TH1D*)fb->Get("weight_up");
@@ -26,6 +26,7 @@ void WWg::Loop(TString name)
    Long64_t nbytes = 0, nb = 0;
    double lumi;
    if(name.Contains("18")); lumi=59.7;
+   if(name.Contains("17")); lumi=41.52;
    cout<<lumi<<endl;
    Bool_t cut,cut1;
    double actualWeight;

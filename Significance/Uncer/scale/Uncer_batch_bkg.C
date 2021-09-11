@@ -43,7 +43,8 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
      if(name.Contains("EWK")) first=0;//16 or 17 or 18 ew sample
      else if(name.Contains("EWK")==0 && tag.Contains("16"))first=104;//16 qcd sample
      else if(name.Contains("EWK")==0 && tag.Contains("16")==0)first=0;//17 or 18 qcd sample
-
+     if(name.Contains("interf")) first=0;
+     cout<<first<<endl;
      cout<<"enter the loop"<<endl;
      TLorentzVector Zp4, photonp4, jet1p4, jet2p4;
      double delta_phi,detajj;
@@ -59,7 +60,7 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     int p=0;
 	     if (  tformula->EvalInstance() && (zepp<2.4 && delta_phi>1.9) ){
 		     for(Int_t i=first;i<(num+first);i++){
-			     if(name.Contains("EWK")==0 && tag.Contains("16")){
+			     if(name.Contains("EWK")==0 && tag.Contains("16") && name.Contains("interf")==0){
 				     if( flag && (i==109 || i==111) ) continue;
 				     if(p==0) Weight[p]=actualWeight*pweight[i];
 				     else Weight[p]=actualWeight*pweight[i]*2;
@@ -72,10 +73,10 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(5.5,Weight[p]);//5~6 6~infi 500~800
 				     if(Mjj>=500&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
 			     }
-			     else if(name.Contains("EWK")==0 && tag.Contains("16")==0){
+			     else if(name.Contains("EWK")==0 && tag.Contains("16")==0&& name.Contains("interf")==0){
 				     if( flag && (i==5 || i==7) ) continue;
 				     Weight[p]=actualWeight*pweight[i];
-				     cout<<p<<" "<<Weight[p]<<endl;
+				     //cout<<p<<" "<<Weight[p]<<endl;
 				     if(Mjj>=500&&Mjj<800&&detajj>=2.5&&detajj<4.5)th1[p]->Fill(0.5,Weight[p]);//0~1, 2.5~4.5 and 500~800
 				     if(Mjj>=800&&Mjj<1200&&detajj>=2.5&&detajj<4.5)th1[p]->Fill(1.5,Weight[p]);//1~2 2.5~4.5 and 800~1200
 				     if(Mjj>=1200&&detajj>=2.5&&detajj<4.5)th1[p]->Fill(2.5,Weight[p]);//2~3 2.5~4.5 1200~2000
@@ -84,11 +85,13 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 				     if(Mjj>=1200&&detajj>=4.5&&detajj<6)th1[p]->Fill(5.5,Weight[p]);//5~6 6~infi 500~800
 				     if(Mjj>=500&&detajj>=6)th1[p]->Fill(6.5,Weight[p]);//6~7 6~infi 800~1200
 			     }
-			     else if(name.Contains("EWK")){
+			     else if( name.Contains("EWK")||name.Contains("interf") ){
 				     int k;
-				     if(tag.Contains("16")==0)
+                                     if(tag.Contains("16")&&name.Contains("EWK"))
+					     k=i;
+				     else 
 					     k=15*i;
-				     else k=i;
+                                     if(tag.Contains("16"))cout<<i<<" "<<k<<" "<<pweight[k]<<endl;
 				     Weight[p]=actualWeight*pweight[k];
 				     cout<<p<<" "<<Weight[p]<<endl;
 				     if(Mjj>=500&&Mjj<800&&detajj>=2.5&&detajj<4.5)th1[p]->Fill(0.5,Weight[p]);//0~1, 2.5~4.5 and 500~800
@@ -111,6 +114,8 @@ void run(TFile*file, TString cut1,TString tag,int num,bool turn){
 	     else	     
 		     fout= new TFile("./hist_ewk_scale"+tag+".root","recreate");
      }
+     else if(name.Contains("interf"))
+	     fout= new TFile("./hist_interf_scale"+tag+".root","recreate");
      else
 	     fout= new TFile("./hist_qcd_scale"+tag+".root","recreate");
      fout->cd();
@@ -153,23 +158,30 @@ int Uncer_batch_bkg(){
 	file2[1]=new TFile(dir+"ZA-EWK17.root");
 	file2[2]=new TFile(dir+"ZA-EWK18.root");
 
+	TFile*file3[3];
+	file3[0]=new TFile(dir+"ZA_interf16.root");
+	file3[1]=new TFile(dir+"ZA_interf17.root");
+	file3[2]=new TFile(dir+"ZA_interf18.root");
+
 	for(int i=0;i<tag.size();i++){
-		if(tag[i].Contains("17")){
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
-		}
-		else{
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
-		}
+                if(tag[i].Contains("16")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+                }
+                else if(tag[i].Contains("17")){
+                        jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+                }
+                else if(tag[i].Contains("18")){
+                        jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+                }
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenSignalRegion;
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion;
 		TString cut1 ="("+Reco+")&&("+Gen+")";
 		TString cut2 ="(("+Reco+")&& !("+Gen+"))";
 		cout<<tag[i]<<" "<<jet<<endl;
 		cout<<tag[i]<<" "<<GenJet<<endl;
-		run(file1[i],Reco,tag[i],9,0);
-		run(file2[i],Reco,tag[i],3,0);
+//		run(file1[i],Reco,tag[i],9,0);
+//		run(file2[i],Reco,tag[i],3,0);
+		run(file3[i],Reco,tag[i],3,0);
 	}
 	return 1;
 }

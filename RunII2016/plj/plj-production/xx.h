@@ -142,6 +142,8 @@ public :
    Double_t        jet2puIdLoose;
    Double_t        jet2puIdMedium;
    Double_t        jet2puIdTight;
+   Int_t           realjet1;
+   Int_t           realjet2;
    Double_t        jet1pt;
    Double_t        jet1pt_f;
    Double_t        jet1eta;
@@ -375,6 +377,8 @@ public :
    TBranch        *b_jet2puIdLoose;   //!
    TBranch        *b_jet2puIdMedium;   //!
    TBranch        *b_jet2puIdTight;   //!
+   TBranch        *b_realjet1;   //!
+   TBranch        *b_realjet2;   //!
    TBranch        *b_jet1pt;   //!
    TBranch        *b_jet1pt_f;   //!
    TBranch        *b_jet1eta;   //!
@@ -589,7 +593,7 @@ void xx::Init(TTree *tree)
 	fCurrent = -1;
 	fChain->SetMakeClass(1);
 
-	fout = new TFile("/eos/user/y/yian/2017cutla/"+m_dataset, "RECREATE");
+	fout = new TFile("/home/pku/anying/cms/rootfiles/2016/"+m_dataset, "RECREATE");
 	ExTree = fChain->CloneTree(0);
 	ExTree->Branch("scalef",&scalef,"scalef/D");
 	// lep and photon scales
@@ -706,15 +710,17 @@ void xx::Init(TTree *tree)
 	fChain->SetBranchAddress("ak4jet_e", ak4jet_e, &b_ak4jet_e);
 	fChain->SetBranchAddress("ak4jet_csv", ak4jet_csv, &b_ak4jet_csv);
 	fChain->SetBranchAddress("ak4jet_icsv", ak4jet_icsv, &b_ak4jet_icsv);
-//	fChain->SetBranchAddress("ak4jet_puIdLoose", ak4jet_puIdLoose, &b_ak4jet_puIdLoose);
-//	fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
-//	fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
-//	fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
-//	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
-//	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
-//	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
-//	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
-//	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+	fChain->SetBranchAddress("ak4jet_puIdLoose", ak4jet_puIdLoose, &b_ak4jet_puIdLoose);
+	fChain->SetBranchAddress("ak4jet_puIdMedium", ak4jet_puIdMedium, &b_ak4jet_puIdMedium);
+	fChain->SetBranchAddress("ak4jet_puIdTight", ak4jet_puIdTight, &b_ak4jet_puIdTight);
+	fChain->SetBranchAddress("jet1puIdLoose", &jet1puIdLoose, &b_jet1puIdLoose);
+	fChain->SetBranchAddress("jet1puIdMedium", &jet1puIdMedium, &b_jet1puIdMedium);
+	fChain->SetBranchAddress("jet1puIdTight", &jet1puIdTight, &b_jet1puIdTight);
+	fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
+	fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
+	fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+        fChain->SetBranchAddress("realjet1", &realjet1, &b_realjet1);
+        fChain->SetBranchAddress("realjet2", &realjet2, &b_realjet2);
 	fChain->SetBranchAddress("jet1pt", &jet1pt, &b_jet1pt);
 	fChain->SetBranchAddress("jet1pt_f", &jet1pt_f, &b_jet1pt_f);
 	fChain->SetBranchAddress("jet1eta", &jet1eta, &b_jet1eta);

@@ -25,7 +25,7 @@ TH1D* merge(TString sample,TString channel){
 	hist->SetBinContent(n,hist->GetBinContent(n)+hist->GetBinContent(n+1));
 	hist->SetBinError(n,sqrt(pow(hist->GetBinError(n),2)+pow(hist->GetBinError(n+1),2)));
         hist->SetBinContent(n+1,0);
-        vector<double> ZGbin={150,400,600,800,1000,2e3};
+	vector<double> ZGbin={150,400,600,800,1000,1200,2e3};
         TH1D*hist_clone=new TH1D(sample,"",ZGbin.size()-1,&ZGbin[0]);
 	for(int i=1;i<=n;i++){
            hist_clone->SetBinContent(i,hist->GetBinContent(i));
@@ -42,12 +42,17 @@ TH1D* get_hist(TString sample,TString channel,TString tag){
 	hist->SetBinContent(n,hist->GetBinContent(n)+hist->GetBinContent(n+1));
 	hist->SetBinError(n,sqrt(pow(hist->GetBinError(n),2)+pow(hist->GetBinError(n+1),2)));
         hist->SetBinContent(n+1,0);
-        vector<double> ZGbin={150,400,600,800,1000,2e3};
+	vector<double> ZGbin={150,400,600,800,1000,1200,2e3};
         TH1D*hist_clone=new TH1D(sample,"",ZGbin.size()-1,&ZGbin[0]);
 	for(int i=1;i<=n;i++){
+           if(hist->GetBinContent(i)<0){
+		   hist->SetBinContent(i,0);
+		   hist->SetBinError(i,0);
+	   }
            hist_clone->SetBinContent(i,hist->GetBinContent(i));
 	   hist_clone->SetBinError(i,hist->GetBinError(i));
 	}
+	cout<<tag<<" "<<sample<<" "<<hist_clone->GetBinContent(6)<<endl;
 	return hist_clone;
 }
 void cmsLumi(bool channel) //0 for el
@@ -74,37 +79,37 @@ void cmsLumi(bool channel) //0 for el
 
 
 
-void aa(TString tag,TString a, double limit){
-	//	setTDRStyle();
-	TString dir="/home/pku/anying/cms/PKU-Cluster/AQGC/20"+tag+"/";
-	TString mu_file= dir+"/muon/paramsets_"+a+"_mu.txt";
-	TString ele_file=dir+"/ele/paramsets_"+a+"_el.txt";
+void aa(TString tag,TString a, double limit,int num){
+	//setTDRStyle();
+        TString dir="/home/pku/anying/cms/PKU-Cluster/AQGC/batch/fit/txt/";
+        TString mu_file= dir+"paramsets_"+a+"_muon"+tag+".txt";
+        TString ele_file=dir+"paramsets_"+a+"_ele"+tag+".txt";
 	ifstream infile_mu;
 	ifstream infile_ele;
 	infile_mu.open(mu_file);
 	infile_ele.open(ele_file);
 	double aa, bb, cc, dd;
-	int count=5;
-	double mu_a2[5];
-	double mu_a1[5];
-	double ele_a2[5];
-	double ele_a1[5];
+	int count=num;
+	double mu_a2[num];
+	double mu_a1[num];
+	double ele_a2[num];
+	double ele_a1[num];
 	while (count)
 	{
 		infile_mu >>aa>>bb;
 		infile_ele >>cc>>dd;
 //		cout<<aa<<" "<<bb<<" "<<cc<<" "<<dd<<endl; 
-		mu_a2[5-count]=aa;
-		mu_a1[5-count]=bb;
-		ele_a2[5-count]=cc;
-		ele_a1[5-count]=dd;
+		mu_a2[num-count]=aa;
+		mu_a1[num-count]=bb;
+		ele_a2[num-count]=cc;
+		ele_a1[num-count]=dd;
 		count--;
 	}
 
 	Double_t fT0 = limit;
-	Double_t weight_mu[5]={1.};
-	Double_t weight_ele[5]={1.};
-	for(Int_t i=0;i<5;i++){
+	Double_t weight_mu[6]={1.};
+	Double_t weight_ele[6]={1.};
+	for(Int_t i=0;i<num;i++){
 		weight_mu[i]=mu_a2[i]*fT0*fT0+mu_a1[i]*fT0+1;
 		weight_ele[i]=ele_a2[i]*fT0*fT0+ele_a1[i]*fT0+1;
 	}
@@ -143,7 +148,7 @@ void aa(TString tag,TString a, double limit){
 	h4->Add(h41);//other bkg
 	h5->Add(h51);//QCD ZA
         cout<<"data yields "<<h1->GetSumOfWeights()<<endl;
-	for(Int_t i=0;i<5;i++){
+	for(Int_t i=0;i<num;i++){
 		h6->SetBinContent(i+1,weight_mu[i]*h6->GetBinContent(i+1));
 		h61->SetBinContent(i+1,weight_ele[i]*h61->GetBinContent(i+1));
 	}
@@ -180,8 +185,8 @@ void aa(TString tag,TString a, double limit){
 	THStack * Mstack = new THStack("Mstack","");
 	Mstack->Add(h4);
 	Mstack->Add(h3);
-	Mstack->Add(h5);
 	Mstack->Add(h2);
+	Mstack->Add(h5);
         TH1D*hist=(TH1D*)h2->Clone();
         hist->Add(h3);
         hist->Add(h4);
@@ -218,13 +223,13 @@ void aa(TString tag,TString a, double limit){
 
 	TH1D* htemp = (TH1D*)(Mstack->GetStack()->Last());
 	htemp->SetBinErrorOption(TH1::kPoisson);
-	Double_t x[5];
-	Double_t y[5];
-	Double_t xerror_l[5];
-	Double_t xerror_r[5];
-	Double_t yerror_u[5];
-	Double_t yerror_d[5];
-	for(int i=0;i<5;i++)
+	Double_t x[num];
+	Double_t y[num];
+	Double_t xerror_l[num];
+	Double_t xerror_r[num];
+	Double_t yerror_u[num];
+	Double_t yerror_d[num];
+	for(int i=0;i<num;i++)
 	{
 		x[i]=htemp->GetBinCenter(i+1);
 		y[i]=htemp->GetBinContent(i+1);
@@ -235,13 +240,13 @@ void aa(TString tag,TString a, double limit){
 		if(htemp->GetBinContent(i+1)==0)
 		{yerror_u[i]=0.;yerror_d[i]=0.;}
 	}
-	TGraphAsymmErrors* gr = new TGraphAsymmErrors(5, x, y, xerror_l,xerror_r, yerror_d, yerror_u);
+	TGraphAsymmErrors* gr = new TGraphAsymmErrors(num, x, y, xerror_l,xerror_r, yerror_d, yerror_u);
 	gr->SetFillColor(1);
 	gr->SetFillStyle(3005);
 	gr->Draw("SAME 2");
 
 	h6->Draw("hist same");  // aQGC
-//		h1->Draw(" PE same");  // 0 for Zero data
+//	h1->Draw(" PE same");  // 0 for Zero data
 
 	const double alpha = 1 - 0.6827;
 	TGraphAsymmErrors * g = new TGraphAsymmErrors(h1);
@@ -293,10 +298,14 @@ void aa(TString tag,TString a, double limit){
 	if (a.Contains("fT8")) sprintf(buffer, "F_{T,8}=%0.2f TeV^{-4}",limit);
 	if (a.Contains("fT9")) sprintf(buffer, "F_{T,9}=%0.2f TeV^{-4}",limit);
 	l1->AddEntry(g,"Data","lp");
-	l1->AddEntry(h2,"VBS Z#gamma","f");
-	l1->AddEntry(h5,"QCD Z#gamma","f");
-	l2->AddEntry(h3,"Nonprompt","f");
-	l2->AddEntry(h4,"Other bkg.","f");
+        l1->AddEntry(h2,"VBS Z#gamma","f");
+        l1->AddEntry(h5,"QCD Z#gamma","f");
+        l2->AddEntry(h3,"Nonprompt","f");
+        l2->AddEntry(h4,"Other bkg.","f");
+//	l1->AddEntry(h2,Form("VBS Z#gamma[%0.2f]",h2->GetBinContent(6)),"f");
+//	l1->AddEntry(h5,Form("QCD Z#gamma[%0.2f]",h5->GetBinContent(6)),"f");
+//	l2->AddEntry(h3,Form("Nonprompt  [%0.2f]",h3->GetBinContent(6)),"f");
+//	l2->AddEntry(h4,Form("Other bkg. [%0.2f]",h4->GetBinContent(6)),"f");
 	l2->AddEntry(h6,buffer,"l");
 	l1->Draw("same");
 	l2->Draw("same");
@@ -315,13 +324,13 @@ void aa(TString tag,TString a, double limit){
 
 void plot_year(){
 	vector<TString> tag={"16","17","18"};
-	vector<double> limit16={19.555,41.089,8.294,14.841,15.229,24.599,39.110,62.681,0.663,0.949,1.816,0.724,1.676,2.724,0.535,0.960};
-	vector<double> limit17={18.391,37.364,7.421,8.342,14.502,21.107,36.782,57.443,0.619,0.873,1.682,0.668,1.461,2.468,0.359,1.009};
-	vector<double> limit18={13.735,27.238,5.413,10.039,10.525,16.296,27.470,41.904,0.450,0.637,1.222,0.494,1.117,1.878,0.437,0.859};
+        vector<double> limit16={20.079,46.211,8.352,17.411,16.344,28.557,40.158,73.856,0.739,1.030,2.002,0.819,1.758,3.081,0.541,1.065};
+        vector<double> limit17={25.666,55.290,10.592,23.862,21.001,32.902,51.332,87.125,0.951,1.301,2.520,1.038,2.130,3.872,0.581,1.582};
+        vector<double> limit18={16.587,34.571,6.460,11.398,12.998,21.573,33.174,56.570,0.586,0.809,1.566,0.650,1.374,2.475,0.509,0.859};
         vector<TString> op={"fM0","fM1","fM2","fM3","fM4","fM5","fM6","fM7","fT0","fT1","fT2","fT5","fT6","fT7","fT8","fT9"};
 	for(int i=0;i<op.size();i++){
-		aa("16",op[i],limit16[i]);
-		aa("17",op[i],limit17[i]);
-		aa("18",op[i],limit18[i]);
+		aa("16",op[i],limit16[i],6);
+//		aa("17",op[i],limit17[i],6);
+//		aa("18",op[i],limit18[i],6);
 	}
 }

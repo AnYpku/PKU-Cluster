@@ -77,7 +77,7 @@ int Build_plj_hist(){
                              hist[i][j]=run("DMuon18",tag[i],cut1,channels[j],vec_pt);
 			else hist[i][j]=run("DEle18",tag[i],cut1,channels[j],vec_pt);
 			hist_up[i][j]=run("plj18",tag[i],cut1,channels[j],vec_pt);
-			hist_down[i][j]=run("ZA18_plj",tag[i],cut1,channels[j],vec_pt);
+//			hist_down[i][j]=run("ZA18_plj",tag[i],cut1,channels[j],vec_pt);
                         double bin_za[num],bin_plj[num],bin_data[num],weight[num];
 			double fakerate[num];
                         TString fname="./pljweight_"+copy_channels[j]+"_"+tag[i]+".txt";
@@ -91,9 +91,9 @@ int Build_plj_hist(){
 				cout<<vec_pt[n]<<"<pt<"<<vec_pt[n+1]<<endl;
 				bin_data[n]=hist[i][j]->GetBinContent(n+1);
 				bin_plj[n] =hist_up[i][j]->GetBinContent(n+1);
-				bin_za[n] = lumi*hist_down[i][j]->GetBinContent(n+1);
-				weight[n] = bin_data[n]*fakerate[n]/(bin_plj[n]-bin_za[n]);
-				cout<<fakerate[n]<<" "<<bin_data[n]<<" "<<bin_plj[n]<<" "<<bin_za[n]<<" "<<weight[n] <<endl; 
+//				bin_za[n] = lumi*hist_down[i][j]->GetBinContent(n+1);
+				weight[n] = bin_data[n]*fakerate[n]/(bin_plj[n]/*-bin_za[n]*/);
+				cout<<fakerate[n]<<" "<<bin_data[n]<<" "<<bin_plj[n]<<" "<</*bin_za[n]*/" "<<" "<<weight[n] <<endl; 
 				ftxt<<fixed<<setprecision(2)<<weight[n]<<endl;
 				f1.close();
 		       }
@@ -110,7 +110,7 @@ int Build_plj_hist(){
 			fout[i][j]->cd();
 			hist[i][j]->Write();
 			hist_up[i][j]->Write();
-			hist_down[i][j]->Write();
+//			hist_down[i][j]->Write();
 			fout[i][j]->Close();
 		}//fout[year][vars]
 	}

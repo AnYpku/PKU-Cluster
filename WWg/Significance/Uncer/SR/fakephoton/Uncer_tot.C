@@ -17,7 +17,7 @@ void run(vector<double> ptbins,TString tag,TString channel){
 	if(!f_tr.is_open())cout<<"can not open file /home/pku/anying/cms/PKU-Cluster/FakePhoton/truetemplate/truetemplate_uncer/"<<channel<<tag<<"_truetemplate_uncer.txt"<<endl;
 	if(!f_sd.is_open())cout<<"can not open file /home/pku/anying/cms/PKU-Cluster/FakePhoton/sideband/sideband_uncer/"<<channel<<tag<<"_sideband_uncer.txt"<<endl;
         
-        TFile*f1=new TFile("/home/pku/anying/cms/PKU-Cluster/WWg/plj/cal_weight/weight_"+tag+".root");
+        TFile*f1=new TFile("/home/pku/anying/cms/PKU-Cluster/WWg/fakephoton/cal_weight/weight_"+tag+".root");
         TString par;
         TH1D*hdata=(TH1D*)f1->Get("outMuonEG"+tag+"_emu_"+channel);
         TH1D*hplj=(TH1D*)f1->Get("outMuonEG"+tag+"_emu_"+channel+"_f");
@@ -31,8 +31,16 @@ void run(vector<double> ptbins,TString tag,TString channel){
         TH1D*h_up=new TH1D("weight_up","",ptbins.size()-1,&ptbins[0]);
         TH1D*h_down=new TH1D("weight_down","",ptbins.size()-1,&ptbins[0]);
         TFile*fout=new TFile("weight_"+channel+"_uncer"+tag+".root","recreate");
+        TString cat;
+	if(channel.Contains("barrel")&&tag.Contains("17")) cat="Barrel";
+	else if(channel.Contains("endcap")&&tag.Contains("17")) cat="Endcap";
+	else if(channel.Contains("barrel")&&tag.Contains("18")) cat="barrel";
+	else cat="endcap";
 	for(int i=0;i<num;i++){
-		f_fraction.open(Form("/home/pku/anying/cms/PKU-Cluster/WWg/fakephoton/fit/"+channel+"/txt/fakerate_ee"+"_ZA_pt%0.f_%0.f.txt",ptbins[i],ptbins[i+1]));
+		if(tag.Contains("18"))
+			f_fraction.open(Form("/home/pku/anying/cms/PKU-Cluster/WWg/fakephoton/fit/"+channel+"/txt/fakerate_ee"+"_ZA_pt%0.f_%0.f.txt",ptbins[i],ptbins[i+1]));
+		else if(tag.Contains("17"))
+			f_fraction.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+tag+"/MakeTemplate/With_sieieCorr/"+cat+"Muon/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[i],ptbins[i+1]));
                 if(!f_fraction.is_open()) cout<<"can not open file"<<Form("/home/pku/anying/cms/PKU-Cluster/WWg/fakephoton/fit/"+channel+"/txt/fakerate_ee"+"_ZA_pt%0.f_%0.f.txt",ptbins[i],ptbins[i+1])<<endl;
                 f_fraction>>fakerate[i];
 		f_cl>>closure_uncer[i];
@@ -59,7 +67,8 @@ void run(vector<double> ptbins,TString tag,TString channel){
 	h_down->Write();
 }
 int Uncer_tot(){
-        vector<TString> tag={"18"};
+//        vector<TString> tag={"18"};
+        vector<TString> tag={"17"};
         vector<TString> channel={"barrel","endcap"};
         vector<double> ptbins;
         for(int i=0;i<tag.size();i++){

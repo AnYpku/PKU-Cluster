@@ -1,10 +1,10 @@
 imax 1   number of channels
 jmax 5   number of processes-1
-kmax 24  number of nuisance parameters (sources of systematical uncertainties)
+kmax 26  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin mubarrel4
-observation 33.002
+observation 32.197
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second process line must have a positive number for backgrounds, and 0 for signal
@@ -13,29 +13,31 @@ observation 33.002
 bin	mubarrel4	mubarrel4	mubarrel4	mubarrel4	mubarrel4	mubarrel4
 process	Sig	QCD	non_prompt	TTA	VV	ST
 process	0	1	2	3	4	5
-rate	1.568	18.411	11.100	0.166	1.758	0.000
+rate	1.556	21.274	7.440	0.178	1.749	0.000
 ------------
 lumi_16	lnN	1.022	1.022	-	1.022	1.022	1.022
-VBS_Stat_bin4_mubarrel16	lnN	1.052	-	-	-	-	-
-QCD_Stat_bin4_mubarrel16	lnN	-	1.101	-	-	-	-
-non_prompt_Stat_bin4_mubarrel16	lnN	-	-	1.171	-	-	-
+VBS_Stat_bin4_mubarrel16	lnN	1.057	-	-	-	-	-
+QCD_Stat_bin4_mubarrel16	lnN	-	1.139	-	-	-	-
+non_prompt_Stat_bin4_mubarrel16	lnN	-	-	1.201	-	-	-
 TTA_Stat_bin4_mubarrel16	lnN	-	-	-	2.000	-	-
 VV_Stat_bin4_mubarrel16	lnN	-	-	-	-	2.000	-
 ST_Stat_bin4_mubarrel16	lnN	-	-	-	-	-	1.000
-fake_mubarrel16	lnN	-	-	1.113	-	-	-
-JES_16	lnN	1.040	1.210	-	1.040	1.120	1.000
-JER_16	lnN	1.020	1.200	-	1.090	1.290	1.000
+fake_mubarrel16	lnN	-	-	1.121	-	-	-
+JES_16	lnN	1.060	1.380	-	1.020	1.330	1.000
+JER_16	lnN	1.030	1.250	-	1.090	1.150	1.000
 pdf_EW	lnN	1.038	-	-	-	-	-
-pdf_QCD	lnN	-	1.012	-	-	-	-
-Scale_EW	lnN	1.028	-	-	-	-	-
-Scale_muF1	lnN	-	1.090	-	-	-	-
-Scale_muR1	lnN	-	1.007	-	-	-	-
-Scale_muFmuR	lnN	-	1.085	-	-	-	-
-interf	lnN	1.034	-	-	-	-	-
-mu_trigger	lnN	1.007	1.007	-	1.006	1.007	1.005
-mu_eff	lnN	1.021	1.020	-	1.019	1.019	1.015
-photon_id	lnN	1.023	1.027	-	1.034	1.020	1.050
-pileup	lnN	1.015	1.015	-	1.015	1.015	1.015
+pdf_QCD	lnN	-	1.013	-	-	-	-
+Scale_EW	lnN	1.027	-	-	-	-	-
+Scale_muF1	lnN	-	1.088	-	-	-	-
+Scale_muR1	lnN	-	1.005	-	-	-	-
+Scale_muFmuR	lnN	-	1.095	-	-	-	-
+interf	lnN	1.030	-	-	-	-	-
+mu_trigger	lnN	1.007	1.006	-	1.006	1.007	1.000
+mu_eff	lnN	1.021	1.020	-	1.019	1.019	1.000
+photon_id	lnN	1.023	1.028	-	1.034	1.020	1.000
+pileup	lnN	1.020	1.020	-	1.020	1.020	1.020
 ttgamma_xs	lnN	-	-	-	1.1	-	-
 VV_xs	lnN	-	-	-	-	1.1	-
-l1pref	lnN	1.006	1.004	-	1.005	1.016	1.015
+pileupId_eff_16	lnN	1.007	1.006	-	1.002	1.003	1.000
+pileupId_mis_16	lnN	1.036	1.140	-	1.000	1.029	1.000
+l1pref	lnN	1.006	1.003	-	1.005	1.016	1.000

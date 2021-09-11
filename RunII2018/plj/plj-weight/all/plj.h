@@ -142,6 +142,8 @@ public :
    Double_t        jet2puIdLoose;
    Double_t        jet2puIdMedium;
    Double_t        jet2puIdTight;
+   Int_t           realjet1;
+   Int_t           realjet2;
    Double_t        jet1pt;
    Double_t        jet1pt_f;
    Double_t        jet1eta;
@@ -275,6 +277,10 @@ public :
    Double_t        muon1_iso_scale;
    Double_t        muon2_iso_scale;
    Double_t        muon_hlt_scale;
+   Double_t        ele_hlt_scale;
+   Double_t        puIdweight_L;
+   Double_t        puIdweight_M;
+   Double_t        puIdweight_T;
 
    // List of branches
    TBranch        *b_event;   //!
@@ -387,6 +393,8 @@ public :
    TBranch        *b_jet2puIdLoose;   //!
    TBranch        *b_jet2puIdMedium;   //!
    TBranch        *b_jet2puIdTight;   //!
+   TBranch        *b_realjet1;   //!
+   TBranch        *b_realjet2;   //!
    TBranch        *b_jet1pt;   //!
    TBranch        *b_jet1pt_f;   //!
    TBranch        *b_jet1eta;   //!
@@ -520,6 +528,10 @@ public :
    TBranch        *b_muon1_iso_scale;   //!
    TBranch        *b_muon2_iso_scale;   //!
    TBranch        *b_muon_hlt_scale;   //!
+   TBranch        *b_ele_hlt_scale;   //!
+   TBranch        *b_puIdweight_L;   //!
+   TBranch        *b_puIdweight_M;   //!
+   TBranch        *b_puIdweight_T;   //!
 
    plj(TTree *tree=0,TString dataset="");
    virtual ~plj();
@@ -715,6 +727,8 @@ void plj::Init(TTree *tree)
    fChain->SetBranchAddress("jet2puIdLoose", &jet2puIdLoose, &b_jet2puIdLoose);
    fChain->SetBranchAddress("jet2puIdMedium", &jet2puIdMedium, &b_jet2puIdMedium);
    fChain->SetBranchAddress("jet2puIdTight", &jet2puIdTight, &b_jet2puIdTight);
+   fChain->SetBranchAddress("realjet1", &realjet1, &b_realjet1);
+   fChain->SetBranchAddress("realjet2", &realjet2, &b_realjet2);
    fChain->SetBranchAddress("jet1pt", &jet1pt, &b_jet1pt);
    fChain->SetBranchAddress("jet1pt_f", &jet1pt_f, &b_jet1pt_f);
    fChain->SetBranchAddress("jet1eta", &jet1eta, &b_jet1eta);
@@ -848,40 +862,44 @@ void plj::Init(TTree *tree)
    fChain->SetBranchAddress("muon1_iso_scale", &muon1_iso_scale, &b_muon1_iso_scale);
    fChain->SetBranchAddress("muon2_iso_scale", &muon2_iso_scale, &b_muon2_iso_scale);
    fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
+   fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
+   fChain->SetBranchAddress("puIdweight_L", &puIdweight_L, &b_puIdweight_L);
+   fChain->SetBranchAddress("puIdweight_M", &puIdweight_M, &b_puIdweight_M);
+   fChain->SetBranchAddress("puIdweight_T", &puIdweight_T, &b_puIdweight_T);
    Notify();
 }
 
 Bool_t plj::Notify()
 {
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
+	// The Notify() function is called when a new file is opened. This
+	// can be either for a new TTree in a TChain or when when a new TTree
+	// is started when using PROOF. It is normally not necessary to make changes
+	// to the generated code, but the routine can be extended by the
+	// user if needed. The return value is currently not used.
 
-   return kTRUE;
+	return kTRUE;
 }
 
 void plj::Show(Long64_t entry)
 {
-// Print contents of entry.
-// If entry is not specified, print current entry
-   if (!fChain) return;
-   fChain->Show(entry);
+	// Print contents of entry.
+	// If entry is not specified, print current entry
+	if (!fChain) return;
+	fChain->Show(entry);
 }
 
 void plj::endJob() {
-     fout->cd();
-     ExTree->Write();
-     fout->Write();
-     fout->Close();
-     delete fout;
-  }
+	fout->cd();
+	ExTree->Write();
+	fout->Write();
+	fout->Close();
+	delete fout;
+}
 Int_t plj::Cut(Long64_t entry)
 {
-// This function may be called from Loop.
-// returns  1 if entry is accepted.
-// returns -1 otherwise.
-   return 1;
+	// This function may be called from Loop.
+	// returns  1 if entry is accepted.
+	// returns -1 otherwise.
+	return 1;
 }
 #endif // #ifdef plj_cxx

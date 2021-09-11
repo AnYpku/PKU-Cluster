@@ -4,6 +4,7 @@ void run(TString var, TString tag,TString type){
 	ofstream ff("./"+var+"_uncer_"+type+tag+".txt",ios::app);
 	TFile*file=new TFile("../root/unfold_"+var+"_ZA-EWKout_"+type+tag+".root");
 	TFile*file1=new TFile("./root/unfold_"+var+"_ZAout_"+type+tag+".root");
+	TFile*file2=new TFile("./root/unfold_"+var+"_ZA_interfout_"+type+tag+".root");
         TString name=file->GetName();
 	double lumi;
 	if(tag.Contains("16"))
@@ -13,13 +14,13 @@ void run(TString var, TString tag,TString type){
 	else if(tag.Contains("18"))
 		lumi=59.7;
 
-        TH1D*h1[num];TH1D*h2[num];
+        TH1D*h1[num];TH1D*h2[num];TH1D*h3[num];
 	for(int j=0;j<num;j++){
 		h1[j]=(TH1D*)file->Get(Form(var+"_%i",j));
-		h1[j]->Scale(lumi);
 		h2[j]=(TH1D*)file1->Get(Form(var+"_%i",j));
-		h2[j]->Scale(lumi);
+		h3[j]=(TH1D*)file2->Get(Form(var+"_%i",j));
 		h1[j]->Add(h2[j],1);
+		h1[j]->Add(h3[j],1);
 	}
         const int kk=h1[0]->GetNbinsX();
         for(int i=0;i<num;i++){
@@ -60,7 +61,9 @@ int Print_uncer_bkg(){
 	vector<TString> type={"eff","mis"};
 	for(int i=0;i<recovars.size();i++){
 		for(int k=0;k<type.size();k++){
+			run(recovars[i],"16",type[k]);
 			run(recovars[i],"17",type[k]);
+			run(recovars[i],"18",type[k]);
 		}
 	}
 	return 0;

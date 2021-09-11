@@ -73,6 +73,7 @@ void unroll_name(TString filename,TString tag){
 		}
 		t_ZA[i]->SetLineWidth(3);
 		t_ZA[i]->SetLineColor(i+11);
+                t_ZA[i]->Scale(1/t_ZA[i]->Integral());
 		for(Int_t j=1;j<=t_ZA[i]->GetNbinsX();j++){ t_ZA[i]->GetXaxis()->SetBinLabel(j,name[j-1]);}
 	}
 	vector<double> vec_ymax;
@@ -177,7 +178,7 @@ void unroll_name(TString filename,TString tag){
 int unroll_test(){
 
 	TString sample[2]={"ZA","ZA-EWK"};
-	for(int i=0;i<2;i++){
+	for(int i=0;i<1;i++){
 		unroll_name(sample[i],"16");
 		unroll_name(sample[i],"17");
 		unroll_name(sample[i],"18");

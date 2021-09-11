@@ -14,7 +14,7 @@
 #include "TGraph.h"
 #include <fstream>
 #include "math.h"
-
+#define pi 3.1415926
 using namespace std;
 void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TString channel,vector<double>ZGbin){
 
@@ -42,7 +42,7 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
 	if(index==14) name="fT7";
 	if(index==15) name="fT8";
 	if(index==16) name="fT9";
-	fout = new TFile("./hist/hist_"+channel+"_"+name+"_"+tag+".root", "RECREATE");
+	fout = new TFile("./hist/referee/hist_"+channel+"_"+name+"_"+tag+".root", "RECREATE");
 	// The input tree
 	TFile *f_file;
 	f_file =  new TFile(InData_New+file);
@@ -72,7 +72,7 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
         Double_t        lumiWeight;
         Double_t        scalef;
         Double_t        pileupWeight;
-        Double_t        puIdweight_M;
+        Double_t        puIdweight;
 
 	treef->SetBranchAddress("ZGmass",&ZGmass);
 	treef->SetBranchAddress("HLT_Ele2",&HLT_Ele2);
@@ -111,7 +111,7 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
         treef->SetBranchAddress("lumiWeight", &lumiWeight);
         treef->SetBranchAddress("pileupWeight", &pileupWeight);
         treef->SetBranchAddress("prefWeight", &prefWeight);
-        treef->SetBranchAddress("puIdweight_M", &puIdweight_M);
+        treef->SetBranchAddress("puIdweight", &puIdweight);
         treef->SetBranchAddress("muon_hlt_scale",   &muon_hlt_scale);
 
 	// Do parameterization
@@ -146,7 +146,7 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
 
         TTreeFormula* formula= new TTreeFormula("f",cut,treef);
 	for(int abin=0;abin<num;abin++){
-		cout<<"abin="<<abin<<endl;
+//		cout<<"abin="<<abin<<endl;
 //		h1[abin]=new TH1D(name+Form("_bin%i",abin+1),"yields with every "+name+" value",16,xxf);
 		double rf[17] ={0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.};
                 int iii;
@@ -160,10 +160,9 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
                         if(ZGmass>2e4) ZGmass=1999;
                         Double_t weight;
                         if(tag.Contains("18")) prefWeight=1;
-                        if(tag.Contains("17")==0) puIdweight_M=1;
                         if(channel.Contains("ele"))
-                                weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*puIdweight_M;
-                        else    weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*puIdweight_M;
+                                weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*ele_hlt_scale*puIdweight;
+                        else    weight=scalef*pileupWeight*prefWeight*photon_id_scale*photon_veto_scale*muon1_id_scale*muon2_id_scale*muon1_iso_scale*muon2_iso_scale*muon_hlt_scale*puIdweight;
 			if(fabs(jet1eta-jet2eta)>2.5 && ZGmass>ZGbin[abin]&&ZGmass<ZGbin[abin+1]){
 				rf[0]+=pweight[iii]*weight;
                                 rf[1]+=pweight[iii+1]*weight;
@@ -187,8 +186,8 @@ void fX0_parameterization_hist(int index,TString tag,TString file,TString cut,TS
 			} 
 		}
 		double rsm = rf[8];
-		for(int j=0;j<17;j++){
-			cout<<j<<"; "<<rf[j]<<endl;}
+//		for(int j=0;j<17;j++){
+//			cout<<j<<"; "<<rf[j]<<endl;}
                 g1[abin]=new TGraph(17,xxf,rf); 
 		TGraph *gr = new TGraph(17,xxf,rf);
 		double low;
@@ -234,22 +233,34 @@ void f_hist(){
 //        vector<TString> tag={"17"};
         vector<TString> file={"ZA_aQGC16.root","ZA_aQGC17.root","ZA_aQGC18.root"};
 	vector<double> ZGbin = {150,400,600,800,1000,1200,2e4};
+	TString LEPele="(lep==11  && (HLT_Ele1>0 || HLT_Ele2>0) && ptlep1 > 25. && ptlep2 > 25.&& fabs(etalep1) < 2.5 && fabs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus == 0  && massVlep >70. && massVlep<110)";
+        TString LEPmu = "(drll>0.3 && lep==13 && (HLT_Mu1>0 || HLT_Mu2>0 || HLT_Mu3>0) && ptlep1 > 20. && ptlep2 > 20.&& fabs(etalep1) < 2.4 &&abs(etalep2) < 2.4 && nlooseeles==0 && nloosemus <3  && massVlep >70. && massVlep<110)";
+	TString photon = "(photonet>120 &&( (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) || (fabs(photoneta)<1.4442) ))";
+        TString Pi=Form("%f",pi);
+        TString dr = "(drjj>0.5 && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
+        TString SignalRegion = "(Mjj>500 && detajj>2.5 && zepp<2.4 && delta_phi>1.9)";
+	TString jet;
         for(int k=0;k<tag.size();k++){
-		if(tag[k].Contains("17")==0) continue;
-               for(int j=0;j<channel.size();j++){
-                        if(channel[j].Contains("ele")&&tag[k].Contains("17")==0)
-                                cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && jet1pt>30 && fabs(jet1eta)<4.7 && jet2pt>30 && fabs(jet2eta)<4.7  && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
-                        else if(channel[j].Contains("ele")&&tag[k].Contains("17"))
-                                cut="(lep == 11 && (HLT_Ele1 >0 || HLT_Ele2 >0)  && ptlep1 > 25. && ptlep2 > 25. && abs(etalep1) < 2.5 && abs(etalep2) < 2.5 && nlooseeles < 3 && nloosemus ==0 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) ) && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
-                        else if(channel[j].Contains("muon")&&tag[k].Contains("17")==0)
-                                cut="(lep == 13 && (HLT_Mu1 >0 || HLT_Mu2 >0 || HLT_Mu3>0)  && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus < 3 && massVlep > 70. && massVlep < 110. && jet1pt>30. && jet2pt>30.&& abs(jet1eta)< 4.7 && abs(jet2eta)<4.7 && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
-                        else if(channel[j].Contains("muon")&&tag[k].Contains("17"))
-                                cut="(lep == 13 && (HLT_Mu1>0 || HLT_Mu2>0) && ptlep1 > 20. && ptlep2 > 20. && abs(etalep1) < 2.4 && abs(etalep2) < 2.4 && nlooseeles == 0 && nloosemus <3 && massVlep > 70. && massVlep < 110. && ( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )  && Mjj>500. &&detajj>2.5 && photonet>120.&&(abs(photoneta)<1.4442||(abs(photoneta)>1.566&&abs(photoneta)<2.5)))";
-                                        for(int i=1;i<=16;i++){
-                                                cout<<tag[k]<<" "<<file[k]<<" "<<channel[j]<<endl;
-                                                cout<<cut<<endl;
-						fX0_parameterization_hist(i,tag[k],file[k],cut,channel[j],ZGbin);
-                                        }
-                }
-        }
+//	       if(tag[k].Contains("17")==0) continue;
+		if(tag[k].Contains("16")){
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+		}
+		else if(tag[k].Contains("17")){
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
+		}
+		else if(tag[k].Contains("18")){
+			jet = "( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
+		}
+		for(int j=0;j<channel.size();j++){
+			if(channel[j].Contains("ele"))
+				cut="(("+LEPele+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
+			else if(channel[j].Contains("muon"))
+				cut="(("+LEPmu+")"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+SignalRegion+")";
+			for(int i=1;i<=16;i++){
+				cout<<tag[k]<<" "<<file[k]<<" "<<channel[j]<<endl;
+				cout<<cut<<endl;
+				fX0_parameterization_hist(i,tag[k],file[k],cut,channel[j],ZGbin);
+			}
+		}
+	}
 }

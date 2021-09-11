@@ -4,7 +4,7 @@
 using namespace std;
 
 void runxx() {
-TString dir ="/home/pku/anying/cms/rootfiles/WWg/";
+TString dir ="/home/pku/anying/cms/rootfiles/WWg/2017/";
 ifstream infile("file");
 string buffer; 
 TString infilename;

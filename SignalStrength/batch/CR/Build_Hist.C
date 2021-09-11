@@ -11,8 +11,9 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      if(name.Contains("EWK"))
 	     tree=(TTree*)file->Get("ZPKUCandidates");
      else
-	     tree=(TTree*)file->Get("outtree");
-     int lep;double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight,puIdweight_T;
+	     tree=(TTree*)file->Get("ZPKUCandidates");
+     int lep;double muon1_id_scale,muon2_id_scale,muon1_iso_scale,muon2_iso_scale,ele1_id_scale,ele2_id_scale,ele1_reco_scale,ele2_reco_scale,photon_id_scale,photon_veto_scale,pileupWeight,prefWeight;
+     double puIdweight_T,puIdweight_M,puIdweight_L,puIdweight;
      double ele_hlt_scale,muon_hlt_scale;
      double Mjj,jet1eta,jet2eta,scalef;
      tree->SetBranchAddress("lep",&lep);
@@ -23,6 +24,8 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      tree->SetBranchAddress("pileupWeight", &pileupWeight);
      tree->SetBranchAddress("prefWeight", &prefWeight);
      tree->SetBranchAddress("puIdweight_T", &puIdweight_T);
+     tree->SetBranchAddress("puIdweight_M", &puIdweight_M);
+     tree->SetBranchAddress("puIdweight_L", &puIdweight_L);
      tree->SetBranchAddress("photon_id_scale", &photon_id_scale);
      tree->SetBranchAddress("photon_veto_scale", &photon_veto_scale);
      tree->SetBranchAddress("ele1_id_scale",   &ele1_id_scale);
@@ -69,9 +72,10 @@ void run(TString dir,TString name,TString cut1,TString cut2,TString tag,TString 
      for(int i=0;i<tree->GetEntries();i++){
 	     tree->GetEntry(i);
              double detajj=fabs(jet1eta-jet2eta);
-             if(tag.Contains("18"))  prefWeight=1;
-             if(tag.Contains("17")==0)  puIdweight_T=1;
-             actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale*puIdweight_T;
+             if(tag.Contains("16")){ puIdweight=puIdweight_M;}
+             if(tag.Contains("17")){ puIdweight=puIdweight_T;}
+             if(tag.Contains("18")){ prefWeight=1;  puIdweight=puIdweight_L;}
+             actualWeight=scalef*pileupWeight*prefWeight*lumi*photon_veto_scale*puIdweight;
 	     if(lep==11)       
 		     actualWeight=actualWeight*ele1_id_scale*ele2_id_scale*ele1_reco_scale*ele2_reco_scale*photon_id_scale*ele_hlt_scale;
 	     if(lep==13)       
@@ -107,34 +111,38 @@ int Build_Hist(){
 	TString jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
 	TString Pi=Form("%f",pi);
 	TString dr = "(( sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(2*"+Pi+"-fabs(jet1phi-jet2phi))*(2*"+Pi+"-fabs(jet1phi-jet2phi)))>0.5 ||sqrt((jet1eta-jet2eta)*(jet1eta-jet2eta)+(fabs(jet1phi-jet2phi))*(fabs(jet1phi-jet2phi)))>0.5) && drla>0.7 && drla2>0.7 && drj1a>0.5 && drj2a>0.5 && drj1l>0.5&&drj2l>0.5&&drj1l2>0.5&&drj2l2>0.5)";
-	TString ControlRegion = "(Mjj>150 && Mjj<500 && ZGmass>100)";
-//	TString ControlRegion = "(Mjj>150 && Mjj<500 && Mva>100)";
+//	TString ControlRegion = "(Mjj>150 && Mjj<500 && ZGmass>100)";
+	TString ControlRegion = "(Mjj>150 && Mjj<500 && Mva>100)";
 
         vector<TString> tags={"16","17","18"};
         TString dir1[3],dir[3];
 	TString dir2="/home/pku/anying/cms/PKU-Cluster/CombineDraw/ScalSeq/output-slimmed-rootfiles/optimal_";
-        dir1[0]="/home/pku/anying/cms/rootfiles/2016/cutla-outD";
-        dir1[1]="/home/pku/anying/cms/rootfiles/2017/cutla-outD";
-        dir1[2]="/home/pku/anying/cms/rootfiles/2018/cutla-outD";
+        dir1[0]="/home/pku/anying/cms/rootfiles/2016/cutla-out";
+        dir1[1]="/home/pku/anying/cms/rootfiles/2017/cutla-out";
+        dir1[2]="/home/pku/anying/cms/rootfiles/2018/cutla-out";
 
         dir[0]="/home/pku/anying/cms/rootfiles/2016/unfold_GenCutla-";
         dir[1]="/home/pku/anying/cms/rootfiles/2017/unfold_GenCutla-";
         dir[2]="/home/pku/anying/cms/rootfiles/2018/unfold_GenCutla-";
 
-	vector<TString> names={"ST","VV","TTA","ZA","plj","Muon","Ele"};
-//	vector<TString> names={"ZA-EWK"};
+//	vector<TString> names={"ZA-EWK","ST","VV","TTA","ZA","plj","DMuon","DEle"};
+	vector<TString> names={"ZA_interf"};
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
 
 	for(int k=0;k<tags.size();k++){
-		if(tags[k].Contains("17")){
-			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)"; 
+		if(tags[k].Contains("16")){
+			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdMedium==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdMedium==1)) )";
+		}
+		else if(tags[k].Contains("17")){
+			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
 			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdTight==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdTight==1)) )";
 		}
-		else{
+		else if(tags[k].Contains("18")){
 			GenJet = "(genjet1pt>30 && genjet2pt>30 && fabs(genjet1eta)<4.7 && fabs(genjet2eta)<4.7)";
-			jet = "(jet1pt> 30 && jet2pt > 30 && fabs(jet1eta)< 4.7 && fabs(jet2eta)<4.7)";
+			jet="( ((jet1pt>50&&fabs(jet1eta)<4.7)||(jet1pt>30&&jet1pt<50&&fabs(jet1eta)<4.7&&jet1puIdLoose==1)) && ((jet2pt>50&&fabs(jet2eta)<4.7)||(jet2pt>30&&jet2pt<50&&fabs(jet2eta)<4.7&&jet2puIdLoose==1)) )";
 		}
-		if(tags[k].Contains("17")==0) continue;
+//		if(tags[k].Contains("17")==0) continue;
 		TString Gen= "(" + GenLEPmu +"||"+GenLEPele+")"+"&&"+GenPhoton+"&&"+GenJet+"&&"+GenDr+"&&"+GenControlRegion;
 		TString Reco= "(("+LEPmu+")||("+LEPele+"))"+"&&"+photon+"&&"+dr+"&&"+jet+"&&"+ControlRegion;
 		TString cut1 ="(("+Reco+")&&("+Gen+"))";
@@ -147,10 +155,10 @@ int Build_Hist(){
 					run(dir[k],"ZA-EWK",cut1,cut2,tags[k],channels[i]);
 				}
 				else if(names[j].Contains("Muon")||names[j].Contains("Ele")){
-					run(dir2,names[j],Reco,Reco,tags[k],channels[i]);
+					run(dir1[k],names[j],Reco,Reco,tags[k],channels[i]);
 				}
 				else{
-					run(dir2,names[j],Reco,Reco,tags[k],channels[i]);
+					run(dir1[k],names[j],Reco,Reco,tags[k],channels[i]);
 				}
 			}
 		}

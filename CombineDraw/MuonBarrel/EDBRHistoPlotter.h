@@ -551,7 +551,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle) {
                 char yData[100];sprintf(yData,"%0.f",yieldsData);
                 char yDataErr[100];sprintf(yDataErr,"%0.f",yieldsDataErr);
                 TString samplesData = "Data";
-                TString LabelData = samplesData +" ["+ yData+"#pm"+yDataErr+"]";
+                TString LabelData = samplesData;// +" ["+ yData+"#pm"+yDataErr+"]";
                 ftxt<<samplesData.Data()<<" "<<yData<<"$pm$"<<yDataErr<<""<<endl;
 
                 leg2->AddEntry(sumDATA, LabelData, "ep");
@@ -561,9 +561,9 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle) {
                 char yMC[100];sprintf(yMC,"%0.1f",yieldsMC);
                 char yMCerr[100];sprintf(yMCerr,"%0.1f",yieldsMCerr);
                 TString samplesMC = "All MC";
-                TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
+                TString LabelMC = samplesMC;// +" ["+ yMC+ "#pm"+yMCerr+" ]";
                 ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
-                leg2->AddEntry(sumMC, LabelMC);
+//                leg2->AddEntry(sumMC, LabelMC);
 //
 
 	}
@@ -587,7 +587,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle) {
 			if(mcTotalLabels.at(i).find("plj")!=string::npos)
 				samples="non-prompt #gamma";
 			else    samples= mcTotalLabels.at(i).c_str();
-			TString LabelMC = samples +" ["+ y+ "#pm"+ye+"]";
+			TString LabelMC = samples;// +" ["+ y+ "#pm"+ye+"]";
 			if(mcTotalLabels.at(i).find("plj")==string::npos)
 				leg1->AddEntry(h1, LabelMC, "f");
 			else
@@ -622,7 +622,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle) {
 					char ySig[100];sprintf(ySig,"%.1f",yieldsMCSig);
 					char ySigErr[100];sprintf(ySigErr,"%.1f",yieldsMCSigErr);
 					TString samplesMCSig = "EWK";
-					TString LabelSig = samplesMCSig +" ["+ ySig + "#pm"+ySigErr +"]";
+					TString LabelSig = samplesMCSig;// +" ["+ ySig + "#pm"+ySigErr +"]";
 					ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
 					leg2->AddEntry(histosMCSig.at(i), LabelSig, "lf");
 				}

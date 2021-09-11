@@ -30,6 +30,12 @@ void xx::modify_photon_jets()
     Mla=-99;
     Mla2=-99;
     Mva=-99;
+    jet1puIdTight=-10;
+    jet2puIdTight=-10;
+    jet1puIdMedium=-10;
+    jet2puIdMedium=-10;
+    jet1puIdLoose=-10;
+    jet2puIdLoose=-10;
 	jet1pt=-99;
 	jet1eta=-99;
 	jet1phi=-99;
@@ -123,6 +129,12 @@ void xx::modify_photon_jets()
 	
 	if(jetindexphoton12[0]>-1 && jetindexphoton12[1]>-1) 
 	{
+                jet1puIdTight=ak4jet_puIdTight[jetindexphoton12[0]];
+                jet2puIdTight=ak4jet_puIdTight[jetindexphoton12[1]];
+                jet1puIdMedium=ak4jet_puIdMedium[jetindexphoton12[0]];
+                jet2puIdMedium=ak4jet_puIdMedium[jetindexphoton12[1]];
+                jet1puIdLoose=ak4jet_puIdLoose[jetindexphoton12[0]];
+                jet2puIdLoose=ak4jet_puIdLoose[jetindexphoton12[1]];
 		jet1pt=ak4jet_pt[jetindexphoton12[0]];
 		jet1eta=ak4jet_eta[jetindexphoton12[0]];
 		jet1phi=ak4jet_phi[jetindexphoton12[0]];

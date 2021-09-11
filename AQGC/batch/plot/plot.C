@@ -203,7 +203,6 @@ void aa(string a, double limit){
 	Mstack->SetMaximum(float(4.0)*Mstack->GetMaximum());
 	Mstack->SetMinimum(0.1);
 	Mstack->Draw("bar HIST");
-	//     Mstack->Draw("EP same");
 	Mstack->GetXaxis()->SetTitle("m_{Z#gamma} [GeV] ");
 	Mstack->GetYaxis()->SetTitle("Events / bin");
 	Mstack->GetXaxis()->SetLabelSize(0.05);
@@ -240,7 +239,7 @@ void aa(string a, double limit){
 	gr->Draw("SAME 2");
 
 	h6->Draw("hist same");  // aQGC
-//		h1->Draw(" PE same");  // 0 for Zero data
+//	h1->Draw(" PE same");  // 0 for Zero data
 
 	const double alpha = 1 - 0.6827;
 	TGraphAsymmErrors * g = new TGraphAsymmErrors(h1);
@@ -316,7 +315,7 @@ void aa(string a, double limit){
 }
 
 void plot(){
-        vector<double> limit={11.582,23.396,4.685,7.227,8.972,13.658,23.164,35.968,0.376,0.544,1.030,0.426,0.949,1.599,0.305,0.643};
+        vector<double> limit={12,28,5.2,10.2,10.2,17,25,45,0.52,0.65,1.35,0.45,1.02,1.67,0.36,0.72};
         vector<string> op={"fM0","fM1","fM2","fM3","fM4","fM5","fM6","fM7","fT0","fT1","fT2","fT5","fT6","fT7","fT8","fT9"};
         for(int i=0;i<op.size();i++){
 		aa(op[i],limit[i]);

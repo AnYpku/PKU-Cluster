@@ -5,7 +5,7 @@ using namespace std;
 
 void runxx(TString year) {
 //TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/";
-TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/no_btag/";
+TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/v8/no_btag/";
 ifstream infile("file");
 string buffer; 
 TString infilename;
@@ -35,7 +35,7 @@ m1.endJob();
 }
 
 int main(){
-	runxx("17");
+	runxx("18");
 	return 1;
 }
 

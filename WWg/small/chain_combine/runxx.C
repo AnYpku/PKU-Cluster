@@ -16,13 +16,13 @@ void runxx(TString dir,TString outname){
 	m1.endJob();
 }
 int main(){
-	TString dir="/home/pku/anying/cms/rootfiles/WWg/2018/cutlep1-outMuonEG_*.root";
-	TString name="cutlep1-outMuonEG18.root";
-	TString dir1="/home/pku/anying/cms/rootfiles/WWg/2017/cutlep1*_fakeL.root";
-	TString name1="cutlep-outfakeL17.root";
-	TString dir2="/home/pku/anying/cms/rootfiles/WWg/2018/cutlep1*_fakeL.root";
-	TString name2="cutlep-outfakeL18.root";
-        runxx(dir1,name1);
-	runxx(dir2,name2);
+	TString dir="/home/pku/anying/cms/rootfiles/WWg/2017/cutlep1-out*_plj.root";
+	TString name="cutlep1-outplj17.root";
+	TString dir1="/home/pku/anying/cms/rootfiles/WWg/2017/cutlep1-out*_fakeL.root";
+	TString name1="cutlep1-outfakeL17.root";
+	TString dir2="/home/pku/anying/cms/rootfiles/WWg/2017/cutlep1*_plj.root";
+	TString name2="cutlep1-outplj17.root";
+//        runxx(dir,name);
+	runxx(dir1,name1);
         return 1;
 }

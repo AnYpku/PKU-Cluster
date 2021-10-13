@@ -89,14 +89,14 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 		<< std::endl;
-	std::string mcSig[nMCSig] = { "WWG"};
+	std::string mcSig[nMCSig] = { "WWG_emu"};
 	std::vector < TString > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
-		fMCSig.push_back(pathToTrees[0] + "cutlep-out" + mcSig[ii] + year+"_plj.root");
+		fMCSig.push_back(pathToTrees[0] + "cutlep1-out" + mcSig[ii] + year+".root");
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
 	const int nmcsig=fMCSig.size();
-	std::string mcLabelsSig[nmcsig] = { "WWG_plj"};
+	std::string mcLabelsSig[nmcsig] = { "WWG_emu"};
 	double kFactorsSig_array[nmcsig] = {lumiValue1};
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nmcsig; index++) {
@@ -123,7 +123,7 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	TH1F* hisRatio = 0;
 
 	for (int i = 0; i < fData.size(); i++) {
-//		continue;
+		continue;
 		std::cout << "\n-------\nRunning over " << dataLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fData.at(i) << std::endl; 
@@ -155,7 +155,7 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 
 	//loop over MC files and make histograms individually for each of them
 	for (int i = 0; i < fMC.size(); i++) {
-//		continue;
+		continue;
 		std::cout << "\n-------\nRunning over " << mcLabels[i].c_str()
 			<< std::endl;
 		std::cout << "The file is " << fMC.at(i) << std::endl;

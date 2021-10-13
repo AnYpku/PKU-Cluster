@@ -16,8 +16,8 @@ void runxx(TString dir,TString outname,TString year){
 	m1.endJob();
 }
 int main(){
-	TString dir1="/home/pku/anying/cms/rootfiles/WWg/2018/MuonEG_D/0000/*.root";
-	TString name1="cutlep-outMuonEG_D18.root";
+	TString dir1="/home/pku/anying/cms/rootfiles/WWg/2018/MuonEG_D/*.root";
+	TString name1="cutlep1-outMuonEG_D18.root";
         runxx(dir1,name1,"18");
         return 1;
 }

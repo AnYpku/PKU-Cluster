@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Sat Jul 17 18:52:32 2021 by ROOT version 6.12/07
+// Sun Oct 10 21:03:27 2021 by ROOT version 6.14/09
 // from TTree Events/Events
-// found on file: cutlep-outWZ18.root
+// found on file: cutlep1-outTTGJets17.root
 //////////////////////////////////////////////////////////
 
 #ifndef WWg_h
@@ -40,6 +40,33 @@ public :
    Int_t           HTXS_stage_1_pTjet30;
    UChar_t         HTXS_njets25;
    UChar_t         HTXS_njets30;
+   UInt_t          nboostedTau;
+   Float_t         boostedTau_chargedIso[5];   //[nboostedTau]
+   Float_t         boostedTau_eta[5];   //[nboostedTau]
+   Float_t         boostedTau_leadTkDeltaEta[5];   //[nboostedTau]
+   Float_t         boostedTau_leadTkDeltaPhi[5];   //[nboostedTau]
+   Float_t         boostedTau_leadTkPtOverTauPt[5];   //[nboostedTau]
+   Float_t         boostedTau_mass[5];   //[nboostedTau]
+   Float_t         boostedTau_neutralIso[5];   //[nboostedTau]
+   Float_t         boostedTau_phi[5];   //[nboostedTau]
+   Float_t         boostedTau_photonsOutsideSignalCone[5];   //[nboostedTau]
+   Float_t         boostedTau_pt[5];   //[nboostedTau]
+   Float_t         boostedTau_puCorr[5];   //[nboostedTau]
+   Float_t         boostedTau_rawAntiEle2018[5];   //[nboostedTau]
+   Float_t         boostedTau_rawIso[5];   //[nboostedTau]
+   Float_t         boostedTau_rawIsodR03[5];   //[nboostedTau]
+   Float_t         boostedTau_rawMVAnewDM2017v2[5];   //[nboostedTau]
+   Float_t         boostedTau_rawMVAoldDM2017v2[5];   //[nboostedTau]
+   Float_t         boostedTau_rawMVAoldDMdR032017v2[5];   //[nboostedTau]
+   Int_t           boostedTau_charge[5];   //[nboostedTau]
+   Int_t           boostedTau_decayMode[5];   //[nboostedTau]
+   Int_t           boostedTau_jetIdx[5];   //[nboostedTau]
+   Int_t           boostedTau_rawAntiEleCat2018[5];   //[nboostedTau]
+   UChar_t         boostedTau_idAntiEle2018[5];   //[nboostedTau]
+   UChar_t         boostedTau_idAntiMu[5];   //[nboostedTau]
+   UChar_t         boostedTau_idMVAnewDM2017v2[5];   //[nboostedTau]
+   UChar_t         boostedTau_idMVAoldDM2017v2[5];   //[nboostedTau]
+   UChar_t         boostedTau_idMVAoldDMdR032017v2[5];   //[nboostedTau]
    Float_t         btagWeight_CSVV2;
    Float_t         btagWeight_DeepCSVB;
    Float_t         CaloMET_phi;
@@ -49,167 +76,157 @@ public :
    Float_t         ChsMET_pt;
    Float_t         ChsMET_sumEt;
    UInt_t          nCorrT1METJet;
-   Float_t         CorrT1METJet_area[33];   //[nCorrT1METJet]
-   Float_t         CorrT1METJet_eta[33];   //[nCorrT1METJet]
-   Float_t         CorrT1METJet_muonSubtrFactor[33];   //[nCorrT1METJet]
-   Float_t         CorrT1METJet_phi[33];   //[nCorrT1METJet]
-   Float_t         CorrT1METJet_rawPt[33];   //[nCorrT1METJet]
+   Float_t         CorrT1METJet_area[28];   //[nCorrT1METJet]
+   Float_t         CorrT1METJet_eta[28];   //[nCorrT1METJet]
+   Float_t         CorrT1METJet_muonSubtrFactor[28];   //[nCorrT1METJet]
+   Float_t         CorrT1METJet_phi[28];   //[nCorrT1METJet]
+   Float_t         CorrT1METJet_rawPt[28];   //[nCorrT1METJet]
    Float_t         DeepMETResolutionTune_phi;
    Float_t         DeepMETResolutionTune_pt;
    Float_t         DeepMETResponseTune_phi;
    Float_t         DeepMETResponseTune_pt;
    UInt_t          nElectron;
-   Float_t         Electron_deltaEtaSC[8];   //[nElectron]
-   Float_t         Electron_dr03EcalRecHitSumEt[8];   //[nElectron]
-   Float_t         Electron_dr03HcalDepth1TowerSumEt[8];   //[nElectron]
-   Float_t         Electron_dr03TkSumPt[8];   //[nElectron]
-   Float_t         Electron_dr03TkSumPtHEEP[8];   //[nElectron]
-   Float_t         Electron_dxy[8];   //[nElectron]
-   Float_t         Electron_dxyErr[8];   //[nElectron]
-   Float_t         Electron_dz[8];   //[nElectron]
-   Float_t         Electron_dzErr[8];   //[nElectron]
-   Float_t         Electron_eCorr[8];   //[nElectron]
-   Float_t         Electron_eInvMinusPInv[8];   //[nElectron]
-   Float_t         Electron_energyErr[8];   //[nElectron]
-   Float_t         Electron_eta[8];   //[nElectron]
-   Float_t         Electron_hoe[8];   //[nElectron]
-   Float_t         Electron_ip3d[8];   //[nElectron]
-   Float_t         Electron_jetPtRelv2[8];   //[nElectron]
-   Float_t         Electron_jetRelIso[8];   //[nElectron]
-   Float_t         Electron_mass[8];   //[nElectron]
-   Float_t         Electron_miniPFRelIso_all[8];   //[nElectron]
-   Float_t         Electron_miniPFRelIso_chg[8];   //[nElectron]
-   Float_t         Electron_mvaFall17V1Iso[8];   //[nElectron]
-   Float_t         Electron_mvaFall17V1noIso[8];   //[nElectron]
-   Float_t         Electron_mvaFall17V2Iso[8];   //[nElectron]
-   Float_t         Electron_mvaFall17V2noIso[8];   //[nElectron]
-   Float_t         Electron_pfRelIso03_all[8];   //[nElectron]
-   Float_t         Electron_pfRelIso03_chg[8];   //[nElectron]
-   Float_t         Electron_phi[8];   //[nElectron]
-   Float_t         Electron_pt[8];   //[nElectron]
-   Float_t         Electron_r9[8];   //[nElectron]
-   Float_t         Electron_scEtOverPt[8];   //[nElectron]
-   Float_t         Electron_sieie[8];   //[nElectron]
-   Float_t         Electron_sip3d[8];   //[nElectron]
-   Float_t         Electron_mvaTTH[8];   //[nElectron]
-   Int_t           Electron_charge[8];   //[nElectron]
-   Int_t           Electron_cutBased[8];   //[nElectron]
-   Int_t           Electron_cutBased_Fall17_V1[8];   //[nElectron]
-   Int_t           Electron_jetIdx[8];   //[nElectron]
-   Int_t           Electron_pdgId[8];   //[nElectron]
-   Int_t           Electron_photonIdx[8];   //[nElectron]
-   Int_t           Electron_tightCharge[8];   //[nElectron]
-   Int_t           Electron_vidNestedWPBitmap[8];   //[nElectron]
-   Int_t           Electron_vidNestedWPBitmapHEEP[8];   //[nElectron]
-   Bool_t          Electron_convVeto[8];   //[nElectron]
-   Bool_t          Electron_cutBased_HEEP[8];   //[nElectron]
-   Bool_t          Electron_isPFcand[8];   //[nElectron]
-   UChar_t         Electron_jetNDauCharged[8];   //[nElectron]
-   UChar_t         Electron_lostHits[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V1Iso_WP80[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V1Iso_WP90[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V1Iso_WPL[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V1noIso_WP80[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V1noIso_WP90[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V1noIso_WPL[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V2Iso_WP80[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V2Iso_WP90[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V2Iso_WPL[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V2noIso_WP80[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V2noIso_WP90[8];   //[nElectron]
-   Bool_t          Electron_mvaFall17V2noIso_WPL[8];   //[nElectron]
-   UChar_t         Electron_seedGain[8];   //[nElectron]
+   Float_t         Electron_dEscaleDown[10];   //[nElectron]
+   Float_t         Electron_dEscaleUp[10];   //[nElectron]
+   Float_t         Electron_dEsigmaDown[10];   //[nElectron]
+   Float_t         Electron_dEsigmaUp[10];   //[nElectron]
+   Float_t         Electron_deltaEtaSC[10];   //[nElectron]
+   Float_t         Electron_dr03EcalRecHitSumEt[10];   //[nElectron]
+   Float_t         Electron_dr03HcalDepth1TowerSumEt[10];   //[nElectron]
+   Float_t         Electron_dr03TkSumPt[10];   //[nElectron]
+   Float_t         Electron_dr03TkSumPtHEEP[10];   //[nElectron]
+   Float_t         Electron_dxy[10];   //[nElectron]
+   Float_t         Electron_dxyErr[10];   //[nElectron]
+   Float_t         Electron_dz[10];   //[nElectron]
+   Float_t         Electron_dzErr[10];   //[nElectron]
+   Float_t         Electron_eCorr[10];   //[nElectron]
+   Float_t         Electron_eInvMinusPInv[10];   //[nElectron]
+   Float_t         Electron_energyErr[10];   //[nElectron]
+   Float_t         Electron_eta[10];   //[nElectron]
+   Float_t         Electron_hoe[10];   //[nElectron]
+   Float_t         Electron_ip3d[10];   //[nElectron]
+   Float_t         Electron_jetPtRelv2[10];   //[nElectron]
+   Float_t         Electron_jetRelIso[10];   //[nElectron]
+   Float_t         Electron_mass[10];   //[nElectron]
+   Float_t         Electron_miniPFRelIso_all[10];   //[nElectron]
+   Float_t         Electron_miniPFRelIso_chg[10];   //[nElectron]
+   Float_t         Electron_mvaFall17V2Iso[10];   //[nElectron]
+   Float_t         Electron_mvaFall17V2noIso[10];   //[nElectron]
+   Float_t         Electron_pfRelIso03_all[10];   //[nElectron]
+   Float_t         Electron_pfRelIso03_chg[10];   //[nElectron]
+   Float_t         Electron_phi[10];   //[nElectron]
+   Float_t         Electron_pt[10];   //[nElectron]
+   Float_t         Electron_r9[10];   //[nElectron]
+   Float_t         Electron_scEtOverPt[10];   //[nElectron]
+   Float_t         Electron_sieie[10];   //[nElectron]
+   Float_t         Electron_sip3d[10];   //[nElectron]
+   Float_t         Electron_mvaTTH[10];   //[nElectron]
+   Int_t           Electron_charge[10];   //[nElectron]
+   Int_t           Electron_cutBased[10];   //[nElectron]
+   Int_t           Electron_jetIdx[10];   //[nElectron]
+   Int_t           Electron_pdgId[10];   //[nElectron]
+   Int_t           Electron_photonIdx[10];   //[nElectron]
+   Int_t           Electron_tightCharge[10];   //[nElectron]
+   Int_t           Electron_vidNestedWPBitmap[10];   //[nElectron]
+   Int_t           Electron_vidNestedWPBitmapHEEP[10];   //[nElectron]
+   Bool_t          Electron_convVeto[10];   //[nElectron]
+   Bool_t          Electron_cutBased_HEEP[10];   //[nElectron]
+   Bool_t          Electron_isPFcand[10];   //[nElectron]
+   UChar_t         Electron_jetNDauCharged[10];   //[nElectron]
+   UChar_t         Electron_lostHits[10];   //[nElectron]
+   Bool_t          Electron_mvaFall17V2Iso_WP80[10];   //[nElectron]
+   Bool_t          Electron_mvaFall17V2Iso_WP90[10];   //[nElectron]
+   Bool_t          Electron_mvaFall17V2Iso_WPL[10];   //[nElectron]
+   Bool_t          Electron_mvaFall17V2noIso_WP80[10];   //[nElectron]
+   Bool_t          Electron_mvaFall17V2noIso_WP90[10];   //[nElectron]
+   Bool_t          Electron_mvaFall17V2noIso_WPL[10];   //[nElectron]
+   UChar_t         Electron_seedGain[10];   //[nElectron]
    UInt_t          nFatJet;
-   Float_t         FatJet_area[6];   //[nFatJet]
-   Float_t         FatJet_btagCMVA[6];   //[nFatJet]
-   Float_t         FatJet_btagCSVV2[6];   //[nFatJet]
-   Float_t         FatJet_btagDDBvL[6];   //[nFatJet]
-   Float_t         FatJet_btagDDBvLV2[6];   //[nFatJet]
-   Float_t         FatJet_btagDDBvL_noMD[6];   //[nFatJet]
-   Float_t         FatJet_btagDDCvB[6];   //[nFatJet]
-   Float_t         FatJet_btagDDCvBV2[6];   //[nFatJet]
-   Float_t         FatJet_btagDDCvB_noMD[6];   //[nFatJet]
-   Float_t         FatJet_btagDDCvL[6];   //[nFatJet]
-   Float_t         FatJet_btagDDCvLV2[6];   //[nFatJet]
-   Float_t         FatJet_btagDDCvL_noMD[6];   //[nFatJet]
-   Float_t         FatJet_btagDeepB[6];   //[nFatJet]
-   Float_t         FatJet_btagHbb[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_H4qvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_HbbvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_TvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_WvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_ZHbbvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_ZHccvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_ZbbvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_ZvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_bbvsLight[6];   //[nFatJet]
-   Float_t         FatJet_deepTagMD_ccvsLight[6];   //[nFatJet]
-   Float_t         FatJet_deepTag_H[6];   //[nFatJet]
-   Float_t         FatJet_deepTag_QCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTag_QCDothers[6];   //[nFatJet]
-   Float_t         FatJet_deepTag_TvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTag_WvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_deepTag_ZvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_eta[6];   //[nFatJet]
-   Float_t         FatJet_mass[6];   //[nFatJet]
-   Float_t         FatJet_msoftdrop[6];   //[nFatJet]
-   Float_t         FatJet_n2b1[6];   //[nFatJet]
-   Float_t         FatJet_n3b1[6];   //[nFatJet]
-   Float_t         FatJet_particleNetMD_QCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNetMD_Xbb[6];   //[nFatJet]
-   Float_t         FatJet_particleNetMD_Xcc[6];   //[nFatJet]
-   Float_t         FatJet_particleNetMD_Xqq[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_H4qvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_HbbvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_HccvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_QCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_TvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_WvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_particleNet_ZvsQCD[6];   //[nFatJet]
-   Float_t         FatJet_phi[6];   //[nFatJet]
-   Float_t         FatJet_pt[6];   //[nFatJet]
-   Float_t         FatJet_rawFactor[6];   //[nFatJet]
-   Float_t         FatJet_tau1[6];   //[nFatJet]
-   Float_t         FatJet_tau2[6];   //[nFatJet]
-   Float_t         FatJet_tau3[6];   //[nFatJet]
-   Float_t         FatJet_tau4[6];   //[nFatJet]
-   Float_t         FatJet_lsf3[6];   //[nFatJet]
-   Int_t           FatJet_jetId[6];   //[nFatJet]
-   Int_t           FatJet_subJetIdx1[6];   //[nFatJet]
-   Int_t           FatJet_subJetIdx2[6];   //[nFatJet]
-   Int_t           FatJet_electronIdx3SJ[6];   //[nFatJet]
-   Int_t           FatJet_muonIdx3SJ[6];   //[nFatJet]
+   Float_t         FatJet_area[7];   //[nFatJet]
+   Float_t         FatJet_btagCSVV2[7];   //[nFatJet]
+   Float_t         FatJet_btagDDBvLV2[7];   //[nFatJet]
+   Float_t         FatJet_btagDDCvBV2[7];   //[nFatJet]
+   Float_t         FatJet_btagDDCvLV2[7];   //[nFatJet]
+   Float_t         FatJet_btagDeepB[7];   //[nFatJet]
+   Float_t         FatJet_btagHbb[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_H4qvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_HbbvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_TvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_WvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_ZHbbvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_ZHccvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_ZbbvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_ZvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_bbvsLight[7];   //[nFatJet]
+   Float_t         FatJet_deepTagMD_ccvsLight[7];   //[nFatJet]
+   Float_t         FatJet_deepTag_H[7];   //[nFatJet]
+   Float_t         FatJet_deepTag_QCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTag_QCDothers[7];   //[nFatJet]
+   Float_t         FatJet_deepTag_TvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTag_WvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_deepTag_ZvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_eta[7];   //[nFatJet]
+   Float_t         FatJet_mass[7];   //[nFatJet]
+   Float_t         FatJet_msoftdrop[7];   //[nFatJet]
+   Float_t         FatJet_n2b1[7];   //[nFatJet]
+   Float_t         FatJet_n3b1[7];   //[nFatJet]
+   Float_t         FatJet_particleNetMD_QCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNetMD_Xbb[7];   //[nFatJet]
+   Float_t         FatJet_particleNetMD_Xcc[7];   //[nFatJet]
+   Float_t         FatJet_particleNetMD_Xqq[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_H4qvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_HbbvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_HccvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_QCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_TvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_WvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_ZvsQCD[7];   //[nFatJet]
+   Float_t         FatJet_particleNet_mass[7];   //[nFatJet]
+   Float_t         FatJet_phi[7];   //[nFatJet]
+   Float_t         FatJet_pt[7];   //[nFatJet]
+   Float_t         FatJet_rawFactor[7];   //[nFatJet]
+   Float_t         FatJet_tau1[7];   //[nFatJet]
+   Float_t         FatJet_tau2[7];   //[nFatJet]
+   Float_t         FatJet_tau3[7];   //[nFatJet]
+   Float_t         FatJet_tau4[7];   //[nFatJet]
+   Float_t         FatJet_lsf3[7];   //[nFatJet]
+   Int_t           FatJet_jetId[7];   //[nFatJet]
+   Int_t           FatJet_subJetIdx1[7];   //[nFatJet]
+   Int_t           FatJet_subJetIdx2[7];   //[nFatJet]
+   Int_t           FatJet_electronIdx3SJ[7];   //[nFatJet]
+   Int_t           FatJet_muonIdx3SJ[7];   //[nFatJet]
+   UChar_t         FatJet_nConstituents[7];   //[nFatJet]
    UInt_t          nFsrPhoton;
-   Float_t         FsrPhoton_dROverEt2[3];   //[nFsrPhoton]
-   Float_t         FsrPhoton_eta[3];   //[nFsrPhoton]
-   Float_t         FsrPhoton_phi[3];   //[nFsrPhoton]
-   Float_t         FsrPhoton_pt[3];   //[nFsrPhoton]
-   Float_t         FsrPhoton_relIso03[3];   //[nFsrPhoton]
-   Int_t           FsrPhoton_muonIdx[3];   //[nFsrPhoton]
+   Float_t         FsrPhoton_dROverEt2[4];   //[nFsrPhoton]
+   Float_t         FsrPhoton_eta[4];   //[nFsrPhoton]
+   Float_t         FsrPhoton_phi[4];   //[nFsrPhoton]
+   Float_t         FsrPhoton_pt[4];   //[nFsrPhoton]
+   Float_t         FsrPhoton_relIso03[4];   //[nFsrPhoton]
+   Int_t           FsrPhoton_muonIdx[4];   //[nFsrPhoton]
    UInt_t          nGenJetAK8;
-   Float_t         GenJetAK8_eta[6];   //[nGenJetAK8]
-   Float_t         GenJetAK8_mass[6];   //[nGenJetAK8]
-   Float_t         GenJetAK8_phi[6];   //[nGenJetAK8]
-   Float_t         GenJetAK8_pt[6];   //[nGenJetAK8]
+   Float_t         GenJetAK8_eta[9];   //[nGenJetAK8]
+   Float_t         GenJetAK8_mass[9];   //[nGenJetAK8]
+   Float_t         GenJetAK8_phi[9];   //[nGenJetAK8]
+   Float_t         GenJetAK8_pt[9];   //[nGenJetAK8]
    UInt_t          nGenJet;
-   Float_t         GenJet_eta[23];   //[nGenJet]
-   Float_t         GenJet_mass[23];   //[nGenJet]
-   Float_t         GenJet_phi[23];   //[nGenJet]
-   Float_t         GenJet_pt[23];   //[nGenJet]
+   Float_t         GenJet_eta[28];   //[nGenJet]
+   Float_t         GenJet_mass[28];   //[nGenJet]
+   Float_t         GenJet_phi[28];   //[nGenJet]
+   Float_t         GenJet_pt[28];   //[nGenJet]
    UInt_t          nGenPart;
-   Float_t         GenPart_eta[128];   //[nGenPart]
-   Float_t         GenPart_mass[128];   //[nGenPart]
-   Float_t         GenPart_phi[128];   //[nGenPart]
-   Float_t         GenPart_pt[128];   //[nGenPart]
-   Int_t           GenPart_genPartIdxMother[128];   //[nGenPart]
-   Int_t           GenPart_pdgId[128];   //[nGenPart]
-   Int_t           GenPart_status[128];   //[nGenPart]
-   Int_t           GenPart_statusFlags[128];   //[nGenPart]
+   Float_t         GenPart_eta[181];   //[nGenPart]
+   Float_t         GenPart_mass[181];   //[nGenPart]
+   Float_t         GenPart_phi[181];   //[nGenPart]
+   Float_t         GenPart_pt[181];   //[nGenPart]
+   Int_t           GenPart_genPartIdxMother[181];   //[nGenPart]
+   Int_t           GenPart_pdgId[181];   //[nGenPart]
+   Int_t           GenPart_status[181];   //[nGenPart]
+   Int_t           GenPart_statusFlags[181];   //[nGenPart]
    UInt_t          nSubGenJetAK8;
-   Float_t         SubGenJetAK8_eta[12];   //[nSubGenJetAK8]
-   Float_t         SubGenJetAK8_mass[12];   //[nSubGenJetAK8]
-   Float_t         SubGenJetAK8_phi[12];   //[nSubGenJetAK8]
-   Float_t         SubGenJetAK8_pt[12];   //[nSubGenJetAK8]
+   Float_t         SubGenJetAK8_eta[18];   //[nSubGenJetAK8]
+   Float_t         SubGenJetAK8_mass[18];   //[nSubGenJetAK8]
+   Float_t         SubGenJetAK8_phi[18];   //[nSubGenJetAK8]
+   Float_t         SubGenJetAK8_pt[18];   //[nSubGenJetAK8]
    Float_t         Generator_binvar;
    Float_t         Generator_scalePDF;
    Float_t         Generator_weight;
@@ -231,70 +248,131 @@ public :
    Int_t           GenVisTau_genPartIdxMother[4];   //[nGenVisTau]
    Int_t           GenVisTau_status[4];   //[nGenVisTau]
    Float_t         genWeight;
+   Float_t         LHEWeight_originalXWGTUP;
+   UInt_t          nLHEPdfWeight;
+   Float_t         LHEPdfWeight[103];   //[nLHEPdfWeight]
+   UInt_t          nLHEReweightingWeight;
+   Float_t         LHEReweightingWeight[1];   //[nLHEReweightingWeight]
+   UInt_t          nLHEScaleWeight;
+   Float_t         LHEScaleWeight[9];   //[nLHEScaleWeight]
    UInt_t          nPSWeight;
    Float_t         PSWeight[4];   //[nPSWeight]
    UInt_t          nIsoTrack;
-   Float_t         IsoTrack_dxy[6];   //[nIsoTrack]
-   Float_t         IsoTrack_dz[6];   //[nIsoTrack]
-   Float_t         IsoTrack_eta[6];   //[nIsoTrack]
-   Float_t         IsoTrack_pfRelIso03_all[6];   //[nIsoTrack]
-   Float_t         IsoTrack_pfRelIso03_chg[6];   //[nIsoTrack]
-   Float_t         IsoTrack_phi[6];   //[nIsoTrack]
-   Float_t         IsoTrack_pt[6];   //[nIsoTrack]
-   Float_t         IsoTrack_miniPFRelIso_all[6];   //[nIsoTrack]
-   Float_t         IsoTrack_miniPFRelIso_chg[6];   //[nIsoTrack]
-   Int_t           IsoTrack_fromPV[6];   //[nIsoTrack]
-   Int_t           IsoTrack_pdgId[6];   //[nIsoTrack]
-   Bool_t          IsoTrack_isHighPurityTrack[6];   //[nIsoTrack]
-   Bool_t          IsoTrack_isPFcand[6];   //[nIsoTrack]
-   Bool_t          IsoTrack_isFromLostTrack[6];   //[nIsoTrack]
+   Float_t         IsoTrack_dxy[17];   //[nIsoTrack]
+   Float_t         IsoTrack_dz[17];   //[nIsoTrack]
+   Float_t         IsoTrack_eta[17];   //[nIsoTrack]
+   Float_t         IsoTrack_pfRelIso03_all[17];   //[nIsoTrack]
+   Float_t         IsoTrack_pfRelIso03_chg[17];   //[nIsoTrack]
+   Float_t         IsoTrack_phi[17];   //[nIsoTrack]
+   Float_t         IsoTrack_pt[17];   //[nIsoTrack]
+   Float_t         IsoTrack_miniPFRelIso_all[17];   //[nIsoTrack]
+   Float_t         IsoTrack_miniPFRelIso_chg[17];   //[nIsoTrack]
+   Int_t           IsoTrack_charge[17];   //[nIsoTrack]
+   Int_t           IsoTrack_fromPV[17];   //[nIsoTrack]
+   Int_t           IsoTrack_pdgId[17];   //[nIsoTrack]
+   Bool_t          IsoTrack_isHighPurityTrack[17];   //[nIsoTrack]
+   Bool_t          IsoTrack_isPFcand[17];   //[nIsoTrack]
+   Bool_t          IsoTrack_isFromLostTrack[17];   //[nIsoTrack]
    UInt_t          nJet;
-   Float_t         Jet_area[28];   //[nJet]
-   Float_t         Jet_btagCMVA[28];   //[nJet]
-   Float_t         Jet_btagCSVV2[28];   //[nJet]
-   Float_t         Jet_btagDeepB[28];   //[nJet]
-   Float_t         Jet_btagDeepC[28];   //[nJet]
-   Float_t         Jet_btagDeepCvB[28];   //[nJet]
-   Float_t         Jet_btagDeepCvL[28];   //[nJet]
-   Float_t         Jet_btagDeepFlavB[28];   //[nJet]
-   Float_t         Jet_btagDeepFlavC[28];   //[nJet]
-   Float_t         Jet_btagDeepFlavCvB[28];   //[nJet]
-   Float_t         Jet_btagDeepFlavCvL[28];   //[nJet]
-   Float_t         Jet_btagDeepFlavQG[28];   //[nJet]
-   Float_t         Jet_chEmEF[28];   //[nJet]
-   Float_t         Jet_chFPV0EF[28];   //[nJet]
-   Float_t         Jet_chFPV1EF[28];   //[nJet]
-   Float_t         Jet_chFPV2EF[28];   //[nJet]
-   Float_t         Jet_chFPV3EF[28];   //[nJet]
-   Float_t         Jet_chHEF[28];   //[nJet]
-   Float_t         Jet_eta[28];   //[nJet]
-   Float_t         Jet_hfsigmaEtaEta[28];   //[nJet]
-   Float_t         Jet_hfsigmaPhiPhi[28];   //[nJet]
-   Float_t         Jet_mass[28];   //[nJet]
-   Float_t         Jet_muEF[28];   //[nJet]
-   Float_t         Jet_muonSubtrFactor[28];   //[nJet]
-   Float_t         Jet_neEmEF[28];   //[nJet]
-   Float_t         Jet_neHEF[28];   //[nJet]
-   Float_t         Jet_phi[28];   //[nJet]
-   Float_t         Jet_pt[28];   //[nJet]
-   Float_t         Jet_puIdDisc[28];   //[nJet]
-   Float_t         Jet_qgl[28];   //[nJet]
-   Float_t         Jet_rawFactor[28];   //[nJet]
-   Float_t         Jet_bRegCorr[28];   //[nJet]
-   Float_t         Jet_bRegRes[28];   //[nJet]
-   Float_t         Jet_cRegCorr[28];   //[nJet]
-   Float_t         Jet_cRegRes[28];   //[nJet]
-   Int_t           Jet_electronIdx1[28];   //[nJet]
-   Int_t           Jet_electronIdx2[28];   //[nJet]
-   Int_t           Jet_hfadjacentEtaStripsSize[28];   //[nJet]
-   Int_t           Jet_hfcentralEtaStripSize[28];   //[nJet]
-   Int_t           Jet_jetId[28];   //[nJet]
-   Int_t           Jet_muonIdx1[28];   //[nJet]
-   Int_t           Jet_muonIdx2[28];   //[nJet]
-   Int_t           Jet_nConstituents[28];   //[nJet]
-   Int_t           Jet_nElectrons[28];   //[nJet]
-   Int_t           Jet_nMuons[28];   //[nJet]
-   Int_t           Jet_puId[28];   //[nJet]
+   Float_t         Jet_area[30];   //[nJet]
+   Float_t         Jet_btagCSVV2[30];   //[nJet]
+   Float_t         Jet_btagDeepB[30];   //[nJet]
+   Float_t         Jet_btagDeepCvB[30];   //[nJet]
+   Float_t         Jet_btagDeepCvL[30];   //[nJet]
+   Float_t         Jet_btagDeepFlavB[30];   //[nJet]
+   Float_t         Jet_btagDeepFlavCvB[30];   //[nJet]
+   Float_t         Jet_btagDeepFlavCvL[30];   //[nJet]
+   Float_t         Jet_btagDeepFlavQG[30];   //[nJet]
+   Float_t         Jet_chEmEF[30];   //[nJet]
+   Float_t         Jet_chFPV0EF[30];   //[nJet]
+   Float_t         Jet_chHEF[30];   //[nJet]
+   Float_t         Jet_eta[30];   //[nJet]
+   Float_t         Jet_hfsigmaEtaEta[30];   //[nJet]
+   Float_t         Jet_hfsigmaPhiPhi[30];   //[nJet]
+   Float_t         Jet_mass[30];   //[nJet]
+   Float_t         Jet_muEF[30];   //[nJet]
+   Float_t         Jet_muonSubtrFactor[30];   //[nJet]
+   Float_t         Jet_neEmEF[30];   //[nJet]
+   Float_t         Jet_neHEF[30];   //[nJet]
+   Float_t         Jet_phi[30];   //[nJet]
+   Float_t         Jet_pt[30];   //[nJet]
+   Float_t         Jet_puIdDisc[30];   //[nJet]
+   Float_t         Jet_qgl[30];   //[nJet]
+   Float_t         Jet_rawFactor[30];   //[nJet]
+   Float_t         Jet_bRegCorr[30];   //[nJet]
+   Float_t         Jet_bRegRes[30];   //[nJet]
+   Float_t         Jet_cRegCorr[30];   //[nJet]
+   Float_t         Jet_cRegRes[30];   //[nJet]
+   Int_t           Jet_electronIdx1[30];   //[nJet]
+   Int_t           Jet_electronIdx2[30];   //[nJet]
+   Int_t           Jet_hfadjacentEtaStripsSize[30];   //[nJet]
+   Int_t           Jet_hfcentralEtaStripSize[30];   //[nJet]
+   Int_t           Jet_jetId[30];   //[nJet]
+   Int_t           Jet_muonIdx1[30];   //[nJet]
+   Int_t           Jet_muonIdx2[30];   //[nJet]
+   Int_t           Jet_nElectrons[30];   //[nJet]
+   Int_t           Jet_nMuons[30];   //[nJet]
+   Int_t           Jet_puId[30];   //[nJet]
+   UChar_t         Jet_nConstituents[30];   //[nJet]
+   Float_t         L1PreFiringWeight_Dn;
+   Float_t         L1PreFiringWeight_ECAL_Dn;
+   Float_t         L1PreFiringWeight_ECAL_Nom;
+   Float_t         L1PreFiringWeight_ECAL_Up;
+   Float_t         L1PreFiringWeight_Muon_Nom;
+   Float_t         L1PreFiringWeight_Muon_StatDn;
+   Float_t         L1PreFiringWeight_Muon_StatUp;
+   Float_t         L1PreFiringWeight_Muon_SystDn;
+   Float_t         L1PreFiringWeight_Muon_SystUp;
+   Float_t         L1PreFiringWeight_Nom;
+   Float_t         L1PreFiringWeight_Up;
+   Float_t         LHE_HT;
+   Float_t         LHE_HTIncoming;
+   Float_t         LHE_Vpt;
+   Float_t         LHE_AlphaS;
+   UChar_t         LHE_Njets;
+   UChar_t         LHE_Nb;
+   UChar_t         LHE_Nc;
+   UChar_t         LHE_Nuds;
+   UChar_t         LHE_Nglu;
+   UChar_t         LHE_NpNLO;
+   UChar_t         LHE_NpLO;
+   UInt_t          nLHEPart;
+   Float_t         LHEPart_pt[11];   //[nLHEPart]
+   Float_t         LHEPart_eta[11];   //[nLHEPart]
+   Float_t         LHEPart_phi[11];   //[nLHEPart]
+   Float_t         LHEPart_mass[11];   //[nLHEPart]
+   Float_t         LHEPart_incomingpz[11];   //[nLHEPart]
+   Int_t           LHEPart_pdgId[11];   //[nLHEPart]
+   Int_t           LHEPart_status[11];   //[nLHEPart]
+   Int_t           LHEPart_spin[11];   //[nLHEPart]
+   UInt_t          nLowPtElectron;
+   Float_t         LowPtElectron_ID[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_convVtxRadius[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_deltaEtaSC[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_dxy[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_dxyErr[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_dz[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_dzErr[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_eInvMinusPInv[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_embeddedID[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_energyErr[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_eta[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_hoe[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_mass[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_miniPFRelIso_all[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_miniPFRelIso_chg[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_phi[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_pt[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_ptbiased[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_r9[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_scEtOverPt[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_sieie[11];   //[nLowPtElectron]
+   Float_t         LowPtElectron_unbiased[11];   //[nLowPtElectron]
+   Int_t           LowPtElectron_charge[11];   //[nLowPtElectron]
+   Int_t           LowPtElectron_convWP[11];   //[nLowPtElectron]
+   Int_t           LowPtElectron_pdgId[11];   //[nLowPtElectron]
+   Bool_t          LowPtElectron_convVeto[11];   //[nLowPtElectron]
+   UChar_t         LowPtElectron_lostHits[11];   //[nLowPtElectron]
    Float_t         GenMET_phi;
    Float_t         GenMET_pt;
    Float_t         MET_MetUnclustEnUpDeltaX;
@@ -308,87 +386,92 @@ public :
    Float_t         MET_sumEt;
    Float_t         MET_sumPtUnclustered;
    UInt_t          nMuon;
-   Float_t         Muon_dxy[10];   //[nMuon]
-   Float_t         Muon_dxyErr[10];   //[nMuon]
-   Float_t         Muon_dxybs[10];   //[nMuon]
-   Float_t         Muon_dz[10];   //[nMuon]
-   Float_t         Muon_dzErr[10];   //[nMuon]
-   Float_t         Muon_eta[10];   //[nMuon]
-   Float_t         Muon_ip3d[10];   //[nMuon]
-   Float_t         Muon_jetPtRelv2[10];   //[nMuon]
-   Float_t         Muon_jetRelIso[10];   //[nMuon]
-   Float_t         Muon_mass[10];   //[nMuon]
-   Float_t         Muon_miniPFRelIso_all[10];   //[nMuon]
-   Float_t         Muon_miniPFRelIso_chg[10];   //[nMuon]
-   Float_t         Muon_pfRelIso03_all[10];   //[nMuon]
-   Float_t         Muon_pfRelIso03_chg[10];   //[nMuon]
-   Float_t         Muon_pfRelIso04_all[10];   //[nMuon]
-   Float_t         Muon_phi[10];   //[nMuon]
-   Float_t         Muon_pt[10];   //[nMuon]
-   Float_t         Muon_ptErr[10];   //[nMuon]
-   Float_t         Muon_segmentComp[10];   //[nMuon]
-   Float_t         Muon_sip3d[10];   //[nMuon]
-   Float_t         Muon_softMva[10];   //[nMuon]
-   Float_t         Muon_tkRelIso[10];   //[nMuon]
-   Float_t         Muon_tunepRelPt[10];   //[nMuon]
-   Float_t         Muon_mvaLowPt[10];   //[nMuon]
-   Float_t         Muon_mvaTTH[10];   //[nMuon]
-   Int_t           Muon_charge[10];   //[nMuon]
-   Int_t           Muon_jetIdx[10];   //[nMuon]
-   Int_t           Muon_nStations[10];   //[nMuon]
-   Int_t           Muon_nTrackerLayers[10];   //[nMuon]
-   Int_t           Muon_pdgId[10];   //[nMuon]
-   Int_t           Muon_tightCharge[10];   //[nMuon]
-   Int_t           Muon_fsrPhotonIdx[10];   //[nMuon]
-   UChar_t         Muon_highPtId[10];   //[nMuon]
-   Bool_t          Muon_highPurity[10];   //[nMuon]
-   Bool_t          Muon_inTimeMuon[10];   //[nMuon]
-   Bool_t          Muon_isGlobal[10];   //[nMuon]
-   Bool_t          Muon_isPFcand[10];   //[nMuon]
-   Bool_t          Muon_isTracker[10];   //[nMuon]
-   UChar_t         Muon_jetNDauCharged[10];   //[nMuon]
-   Bool_t          Muon_looseId[10];   //[nMuon]
-   Bool_t          Muon_mediumId[10];   //[nMuon]
-   Bool_t          Muon_mediumPromptId[10];   //[nMuon]
-   UChar_t         Muon_miniIsoId[10];   //[nMuon]
-   UChar_t         Muon_multiIsoId[10];   //[nMuon]
-   UChar_t         Muon_mvaId[10];   //[nMuon]
-   UChar_t         Muon_mvaLowPtId[10];   //[nMuon]
-   UChar_t         Muon_pfIsoId[10];   //[nMuon]
-   UChar_t         Muon_puppiIsoId[10];   //[nMuon]
-   Bool_t          Muon_softId[10];   //[nMuon]
-   Bool_t          Muon_softMvaId[10];   //[nMuon]
-   Bool_t          Muon_tightId[10];   //[nMuon]
-   UChar_t         Muon_tkIsoId[10];   //[nMuon]
-   Bool_t          Muon_triggerIdLoose[10];   //[nMuon]
+   Float_t         Muon_dxy[21];   //[nMuon]
+   Float_t         Muon_dxyErr[21];   //[nMuon]
+   Float_t         Muon_dxybs[21];   //[nMuon]
+   Float_t         Muon_dz[21];   //[nMuon]
+   Float_t         Muon_dzErr[21];   //[nMuon]
+   Float_t         Muon_eta[21];   //[nMuon]
+   Float_t         Muon_ip3d[21];   //[nMuon]
+   Float_t         Muon_jetPtRelv2[21];   //[nMuon]
+   Float_t         Muon_jetRelIso[21];   //[nMuon]
+   Float_t         Muon_mass[21];   //[nMuon]
+   Float_t         Muon_miniPFRelIso_all[21];   //[nMuon]
+   Float_t         Muon_miniPFRelIso_chg[21];   //[nMuon]
+   Float_t         Muon_pfRelIso03_all[21];   //[nMuon]
+   Float_t         Muon_pfRelIso03_chg[21];   //[nMuon]
+   Float_t         Muon_pfRelIso04_all[21];   //[nMuon]
+   Float_t         Muon_phi[21];   //[nMuon]
+   Float_t         Muon_pt[21];   //[nMuon]
+   Float_t         Muon_ptErr[21];   //[nMuon]
+   Float_t         Muon_segmentComp[21];   //[nMuon]
+   Float_t         Muon_sip3d[21];   //[nMuon]
+   Float_t         Muon_softMva[21];   //[nMuon]
+   Float_t         Muon_tkRelIso[21];   //[nMuon]
+   Float_t         Muon_tunepRelPt[21];   //[nMuon]
+   Float_t         Muon_mvaLowPt[21];   //[nMuon]
+   Float_t         Muon_mvaTTH[21];   //[nMuon]
+   Int_t           Muon_charge[21];   //[nMuon]
+   Int_t           Muon_jetIdx[21];   //[nMuon]
+   Int_t           Muon_nStations[21];   //[nMuon]
+   Int_t           Muon_nTrackerLayers[21];   //[nMuon]
+   Int_t           Muon_pdgId[21];   //[nMuon]
+   Int_t           Muon_tightCharge[21];   //[nMuon]
+   Int_t           Muon_fsrPhotonIdx[21];   //[nMuon]
+   UChar_t         Muon_highPtId[21];   //[nMuon]
+   Bool_t          Muon_highPurity[21];   //[nMuon]
+   Bool_t          Muon_inTimeMuon[21];   //[nMuon]
+   Bool_t          Muon_isGlobal[21];   //[nMuon]
+   Bool_t          Muon_isPFcand[21];   //[nMuon]
+   Bool_t          Muon_isStandalone[21];   //[nMuon]
+   Bool_t          Muon_isTracker[21];   //[nMuon]
+   UChar_t         Muon_jetNDauCharged[21];   //[nMuon]
+   Bool_t          Muon_looseId[21];   //[nMuon]
+   Bool_t          Muon_mediumId[21];   //[nMuon]
+   Bool_t          Muon_mediumPromptId[21];   //[nMuon]
+   UChar_t         Muon_miniIsoId[21];   //[nMuon]
+   UChar_t         Muon_multiIsoId[21];   //[nMuon]
+   UChar_t         Muon_mvaId[21];   //[nMuon]
+   UChar_t         Muon_mvaLowPtId[21];   //[nMuon]
+   UChar_t         Muon_pfIsoId[21];   //[nMuon]
+   UChar_t         Muon_puppiIsoId[21];   //[nMuon]
+   Bool_t          Muon_softId[21];   //[nMuon]
+   Bool_t          Muon_softMvaId[21];   //[nMuon]
+   Bool_t          Muon_tightId[21];   //[nMuon]
+   UChar_t         Muon_tkIsoId[21];   //[nMuon]
+   Bool_t          Muon_triggerIdLoose[21];   //[nMuon]
    UInt_t          nPhoton;
-   Float_t         Photon_eCorr[10];   //[nPhoton]
-   Float_t         Photon_energyErr[10];   //[nPhoton]
-   Float_t         Photon_eta[10];   //[nPhoton]
-   Float_t         Photon_hoe[10];   //[nPhoton]
-   Float_t         Photon_mass[10];   //[nPhoton]
-   Float_t         Photon_mvaID[10];   //[nPhoton]
-   Float_t         Photon_mvaID_Fall17V1p1[10];   //[nPhoton]
-   Float_t         Photon_pfRelIso03_all[10];   //[nPhoton]
-   Float_t         Photon_pfRelIso03_chg[10];   //[nPhoton]
-   Float_t         Photon_phi[10];   //[nPhoton]
-   Float_t         Photon_pt[10];   //[nPhoton]
-   Float_t         Photon_r9[10];   //[nPhoton]
-   Float_t         Photon_sieie[10];   //[nPhoton]
-   Int_t           Photon_charge[10];   //[nPhoton]
-   Int_t           Photon_cutBased[10];   //[nPhoton]
-   Int_t           Photon_cutBased_Fall17V1Bitmap[10];   //[nPhoton]
-   Int_t           Photon_electronIdx[10];   //[nPhoton]
-   Int_t           Photon_jetIdx[10];   //[nPhoton]
-   Int_t           Photon_pdgId[10];   //[nPhoton]
-   Int_t           Photon_vidNestedWPBitmap[10];   //[nPhoton]
-   Bool_t          Photon_electronVeto[10];   //[nPhoton]
-   Bool_t          Photon_isScEtaEB[10];   //[nPhoton]
-   Bool_t          Photon_isScEtaEE[10];   //[nPhoton]
-   Bool_t          Photon_mvaID_WP80[10];   //[nPhoton]
-   Bool_t          Photon_mvaID_WP90[10];   //[nPhoton]
-   Bool_t          Photon_pixelSeed[10];   //[nPhoton]
-   UChar_t         Photon_seedGain[10];   //[nPhoton]
+   Float_t         Photon_dEscaleDown[15];   //[nPhoton]
+   Float_t         Photon_dEscaleUp[15];   //[nPhoton]
+   Float_t         Photon_dEsigmaDown[15];   //[nPhoton]
+   Float_t         Photon_dEsigmaUp[15];   //[nPhoton]
+   Float_t         Photon_eCorr[15];   //[nPhoton]
+   Float_t         Photon_energyErr[15];   //[nPhoton]
+   Float_t         Photon_eta[15];   //[nPhoton]
+   Float_t         Photon_hoe[15];   //[nPhoton]
+   Float_t         Photon_mass[15];   //[nPhoton]
+   Float_t         Photon_mvaID[15];   //[nPhoton]
+   Float_t         Photon_mvaID_Fall17V1p1[15];   //[nPhoton]
+   Float_t         Photon_pfRelIso03_all[15];   //[nPhoton]
+   Float_t         Photon_pfRelIso03_chg[15];   //[nPhoton]
+   Float_t         Photon_phi[15];   //[nPhoton]
+   Float_t         Photon_pt[15];   //[nPhoton]
+   Float_t         Photon_r9[15];   //[nPhoton]
+   Float_t         Photon_sieie[15];   //[nPhoton]
+   Int_t           Photon_charge[15];   //[nPhoton]
+   Int_t           Photon_cutBased[15];   //[nPhoton]
+   Int_t           Photon_cutBased_Fall17V1Bitmap[15];   //[nPhoton]
+   Int_t           Photon_electronIdx[15];   //[nPhoton]
+   Int_t           Photon_jetIdx[15];   //[nPhoton]
+   Int_t           Photon_pdgId[15];   //[nPhoton]
+   Int_t           Photon_vidNestedWPBitmap[15];   //[nPhoton]
+   Bool_t          Photon_electronVeto[15];   //[nPhoton]
+   Bool_t          Photon_isScEtaEB[15];   //[nPhoton]
+   Bool_t          Photon_isScEtaEE[15];   //[nPhoton]
+   Bool_t          Photon_mvaID_WP80[15];   //[nPhoton]
+   Bool_t          Photon_mvaID_WP90[15];   //[nPhoton]
+   Bool_t          Photon_pixelSeed[15];   //[nPhoton]
+   UChar_t         Photon_seedGain[15];   //[nPhoton]
    Float_t         Pileup_nTrueInt;
    Float_t         Pileup_pudensity;
    Float_t         Pileup_gpudensity;
@@ -429,10 +512,10 @@ public :
    Int_t           GenDressedLepton_pdgId[5];   //[nGenDressedLepton]
    Bool_t          GenDressedLepton_hasTauAnc[5];   //[nGenDressedLepton]
    UInt_t          nGenIsolatedPhoton;
-   Float_t         GenIsolatedPhoton_eta[3];   //[nGenIsolatedPhoton]
-   Float_t         GenIsolatedPhoton_mass[3];   //[nGenIsolatedPhoton]
-   Float_t         GenIsolatedPhoton_phi[3];   //[nGenIsolatedPhoton]
-   Float_t         GenIsolatedPhoton_pt[3];   //[nGenIsolatedPhoton]
+   Float_t         GenIsolatedPhoton_eta[4];   //[nGenIsolatedPhoton]
+   Float_t         GenIsolatedPhoton_mass[4];   //[nGenIsolatedPhoton]
+   Float_t         GenIsolatedPhoton_phi[4];   //[nGenIsolatedPhoton]
+   Float_t         GenIsolatedPhoton_pt[4];   //[nGenIsolatedPhoton]
    UInt_t          nSoftActivityJet;
    Float_t         SoftActivityJet_eta[6];   //[nSoftActivityJet]
    Float_t         SoftActivityJet_phi[6];   //[nSoftActivityJet]
@@ -445,20 +528,19 @@ public :
    Int_t           SoftActivityJetNjets2;
    Int_t           SoftActivityJetNjets5;
    UInt_t          nSubJet;
-   Float_t         SubJet_btagCMVA[12];   //[nSubJet]
-   Float_t         SubJet_btagCSVV2[12];   //[nSubJet]
-   Float_t         SubJet_btagDeepB[12];   //[nSubJet]
-   Float_t         SubJet_eta[12];   //[nSubJet]
-   Float_t         SubJet_mass[12];   //[nSubJet]
-   Float_t         SubJet_n2b1[12];   //[nSubJet]
-   Float_t         SubJet_n3b1[12];   //[nSubJet]
-   Float_t         SubJet_phi[12];   //[nSubJet]
-   Float_t         SubJet_pt[12];   //[nSubJet]
-   Float_t         SubJet_rawFactor[12];   //[nSubJet]
-   Float_t         SubJet_tau1[12];   //[nSubJet]
-   Float_t         SubJet_tau2[12];   //[nSubJet]
-   Float_t         SubJet_tau3[12];   //[nSubJet]
-   Float_t         SubJet_tau4[12];   //[nSubJet]
+   Float_t         SubJet_btagCSVV2[14];   //[nSubJet]
+   Float_t         SubJet_btagDeepB[14];   //[nSubJet]
+   Float_t         SubJet_eta[14];   //[nSubJet]
+   Float_t         SubJet_mass[14];   //[nSubJet]
+   Float_t         SubJet_n2b1[14];   //[nSubJet]
+   Float_t         SubJet_n3b1[14];   //[nSubJet]
+   Float_t         SubJet_phi[14];   //[nSubJet]
+   Float_t         SubJet_pt[14];   //[nSubJet]
+   Float_t         SubJet_rawFactor[14];   //[nSubJet]
+   Float_t         SubJet_tau1[14];   //[nSubJet]
+   Float_t         SubJet_tau2[14];   //[nSubJet]
+   Float_t         SubJet_tau3[14];   //[nSubJet]
+   Float_t         SubJet_tau4[14];   //[nSubJet]
    UInt_t          nTau;
    Float_t         Tau_chargedIso[8];   //[nTau]
    Float_t         Tau_dxy[8];   //[nTau]
@@ -473,51 +555,34 @@ public :
    Float_t         Tau_photonsOutsideSignalCone[8];   //[nTau]
    Float_t         Tau_pt[8];   //[nTau]
    Float_t         Tau_puCorr[8];   //[nTau]
-   Float_t         Tau_rawAntiEle[8];   //[nTau]
-   Float_t         Tau_rawAntiEle2018[8];   //[nTau]
    Float_t         Tau_rawDeepTau2017v2p1VSe[8];   //[nTau]
    Float_t         Tau_rawDeepTau2017v2p1VSjet[8];   //[nTau]
    Float_t         Tau_rawDeepTau2017v2p1VSmu[8];   //[nTau]
    Float_t         Tau_rawIso[8];   //[nTau]
    Float_t         Tau_rawIsodR03[8];   //[nTau]
-   Float_t         Tau_rawMVAnewDM2017v2[8];   //[nTau]
-   Float_t         Tau_rawMVAoldDM[8];   //[nTau]
-   Float_t         Tau_rawMVAoldDM2017v1[8];   //[nTau]
-   Float_t         Tau_rawMVAoldDM2017v2[8];   //[nTau]
-   Float_t         Tau_rawMVAoldDMdR032017v2[8];   //[nTau]
    Int_t           Tau_charge[8];   //[nTau]
    Int_t           Tau_decayMode[8];   //[nTau]
    Int_t           Tau_jetIdx[8];   //[nTau]
-   Int_t           Tau_rawAntiEleCat[8];   //[nTau]
-   Int_t           Tau_rawAntiEleCat2018[8];   //[nTau]
-   UChar_t         Tau_idAntiEle[8];   //[nTau]
-   UChar_t         Tau_idAntiEle2018[8];   //[nTau]
    Bool_t          Tau_idAntiEleDeadECal[8];   //[nTau]
    UChar_t         Tau_idAntiMu[8];   //[nTau]
-   Bool_t          Tau_idDecayMode[8];   //[nTau]
-   Bool_t          Tau_idDecayModeNewDMs[8];   //[nTau]
+   Bool_t          Tau_idDecayModeOldDMs[8];   //[nTau]
    UChar_t         Tau_idDeepTau2017v2p1VSe[8];   //[nTau]
    UChar_t         Tau_idDeepTau2017v2p1VSjet[8];   //[nTau]
    UChar_t         Tau_idDeepTau2017v2p1VSmu[8];   //[nTau]
-   UChar_t         Tau_idMVAnewDM2017v2[8];   //[nTau]
-   UChar_t         Tau_idMVAoldDM[8];   //[nTau]
-   UChar_t         Tau_idMVAoldDM2017v1[8];   //[nTau]
-   UChar_t         Tau_idMVAoldDM2017v2[8];   //[nTau]
-   UChar_t         Tau_idMVAoldDMdR032017v2[8];   //[nTau]
    Float_t         TkMET_phi;
    Float_t         TkMET_pt;
    Float_t         TkMET_sumEt;
    UInt_t          nTrigObj;
-   Float_t         TrigObj_pt[43];   //[nTrigObj]
-   Float_t         TrigObj_eta[43];   //[nTrigObj]
-   Float_t         TrigObj_phi[43];   //[nTrigObj]
-   Float_t         TrigObj_l1pt[43];   //[nTrigObj]
-   Float_t         TrigObj_l1pt_2[43];   //[nTrigObj]
-   Float_t         TrigObj_l2pt[43];   //[nTrigObj]
-   Int_t           TrigObj_id[43];   //[nTrigObj]
-   Int_t           TrigObj_l1iso[43];   //[nTrigObj]
-   Int_t           TrigObj_l1charge[43];   //[nTrigObj]
-   Int_t           TrigObj_filterBits[43];   //[nTrigObj]
+   Float_t         TrigObj_pt[52];   //[nTrigObj]
+   Float_t         TrigObj_eta[52];   //[nTrigObj]
+   Float_t         TrigObj_phi[52];   //[nTrigObj]
+   Float_t         TrigObj_l1pt[52];   //[nTrigObj]
+   Float_t         TrigObj_l1pt_2[52];   //[nTrigObj]
+   Float_t         TrigObj_l2pt[52];   //[nTrigObj]
+   Int_t           TrigObj_id[52];   //[nTrigObj]
+   Int_t           TrigObj_l1iso[52];   //[nTrigObj]
+   Int_t           TrigObj_l1charge[52];   //[nTrigObj]
+   Int_t           TrigObj_filterBits[52];   //[nTrigObj]
    Int_t           genTtbarId;
    UInt_t          nOtherPV;
    Float_t         OtherPV_z[3];   //[nOtherPV]
@@ -530,49 +595,54 @@ public :
    Int_t           PV_npvs;
    Int_t           PV_npvsGood;
    UInt_t          nSV;
-   Float_t         SV_dlen[17];   //[nSV]
-   Float_t         SV_dlenSig[17];   //[nSV]
-   Float_t         SV_dxy[17];   //[nSV]
-   Float_t         SV_dxySig[17];   //[nSV]
-   Float_t         SV_pAngle[17];   //[nSV]
-   Int_t           Electron_genPartIdx[8];   //[nElectron]
-   UChar_t         Electron_genPartFlav[8];   //[nElectron]
-   Int_t           FatJet_genJetAK8Idx[6];   //[nFatJet]
-   Int_t           FatJet_hadronFlavour[6];   //[nFatJet]
-   UChar_t         FatJet_nBHadrons[6];   //[nFatJet]
-   UChar_t         FatJet_nCHadrons[6];   //[nFatJet]
-   Int_t           GenJetAK8_partonFlavour[6];   //[nGenJetAK8]
-   UChar_t         GenJetAK8_hadronFlavour[6];   //[nGenJetAK8]
-   Int_t           GenJet_partonFlavour[23];   //[nGenJet]
-   UChar_t         GenJet_hadronFlavour[23];   //[nGenJet]
+   Float_t         SV_dlen[19];   //[nSV]
+   Float_t         SV_dlenSig[19];   //[nSV]
+   Float_t         SV_dxy[19];   //[nSV]
+   Float_t         SV_dxySig[19];   //[nSV]
+   Float_t         SV_pAngle[19];   //[nSV]
+   Int_t           SV_charge[19];   //[nSV]
+   Int_t           boostedTau_genPartIdx[5];   //[nboostedTau]
+   UChar_t         boostedTau_genPartFlav[5];   //[nboostedTau]
+   Int_t           Electron_genPartIdx[10];   //[nElectron]
+   UChar_t         Electron_genPartFlav[10];   //[nElectron]
+   Int_t           FatJet_genJetAK8Idx[7];   //[nFatJet]
+   Int_t           FatJet_hadronFlavour[7];   //[nFatJet]
+   UChar_t         FatJet_nBHadrons[7];   //[nFatJet]
+   UChar_t         FatJet_nCHadrons[7];   //[nFatJet]
+   Int_t           GenJetAK8_partonFlavour[9];   //[nGenJetAK8]
+   UChar_t         GenJetAK8_hadronFlavour[9];   //[nGenJetAK8]
+   Int_t           GenJet_partonFlavour[28];   //[nGenJet]
+   UChar_t         GenJet_hadronFlavour[28];   //[nGenJet]
    Float_t         GenVtx_t0;
-   Int_t           Jet_genJetIdx[28];   //[nJet]
-   Int_t           Jet_hadronFlavour[28];   //[nJet]
-   Int_t           Jet_partonFlavour[28];   //[nJet]
-   Int_t           Muon_genPartIdx[10];   //[nMuon]
-   UChar_t         Muon_genPartFlav[10];   //[nMuon]
-   Int_t           Photon_genPartIdx[10];   //[nPhoton]
-   UChar_t         Photon_genPartFlav[10];   //[nPhoton]
+   Int_t           Jet_genJetIdx[30];   //[nJet]
+   Int_t           Jet_hadronFlavour[30];   //[nJet]
+   Int_t           Jet_partonFlavour[30];   //[nJet]
+   Int_t           LowPtElectron_genPartIdx[11];   //[nLowPtElectron]
+   UChar_t         LowPtElectron_genPartFlav[11];   //[nLowPtElectron]
+   Int_t           Muon_genPartIdx[21];   //[nMuon]
+   UChar_t         Muon_genPartFlav[21];   //[nMuon]
+   Int_t           Photon_genPartIdx[15];   //[nPhoton]
+   UChar_t         Photon_genPartFlav[15];   //[nPhoton]
    Float_t         MET_fiducialGenPhi;
    Float_t         MET_fiducialGenPt;
-   UChar_t         Electron_cleanmask[8];   //[nElectron]
-   UChar_t         Jet_cleanmask[28];   //[nJet]
-   UChar_t         Muon_cleanmask[10];   //[nMuon]
-   UChar_t         Photon_cleanmask[10];   //[nPhoton]
+   UChar_t         Electron_cleanmask[10];   //[nElectron]
+   UChar_t         Jet_cleanmask[30];   //[nJet]
+   UChar_t         Muon_cleanmask[21];   //[nMuon]
+   UChar_t         Photon_cleanmask[15];   //[nPhoton]
    UChar_t         Tau_cleanmask[8];   //[nTau]
-   Int_t           SubJet_hadronFlavour[12];   //[nSubJet]
-   UChar_t         SubJet_nBHadrons[12];   //[nSubJet]
-   UChar_t         SubJet_nCHadrons[12];   //[nSubJet]
-   Float_t         SV_chi2[17];   //[nSV]
-   Float_t         SV_eta[17];   //[nSV]
-   Float_t         SV_mass[17];   //[nSV]
-   Float_t         SV_ndof[17];   //[nSV]
-   Float_t         SV_phi[17];   //[nSV]
-   Float_t         SV_pt[17];   //[nSV]
-   Float_t         SV_x[17];   //[nSV]
-   Float_t         SV_y[17];   //[nSV]
-   Float_t         SV_z[17];   //[nSV]
-   UChar_t         SV_ntracks[17];   //[nSV]
+   Int_t           SubJet_hadronFlavour[14];   //[nSubJet]
+   UChar_t         SubJet_nBHadrons[14];   //[nSubJet]
+   UChar_t         SubJet_nCHadrons[14];   //[nSubJet]
+   Float_t         SV_chi2[19];   //[nSV]
+   Float_t         SV_eta[19];   //[nSV]
+   Float_t         SV_mass[19];   //[nSV]
+   Float_t         SV_ndof[19];   //[nSV]
+   Float_t         SV_phi[19];   //[nSV]
+   Float_t         SV_pt[19];   //[nSV]
+   Float_t         SV_x[19];   //[nSV]
+   Float_t         SV_y[19];   //[nSV]
+   Float_t         SV_z[19];   //[nSV]
+   UChar_t         SV_ntracks[19];   //[nSV]
    Int_t           Tau_genPartIdx[8];   //[nTau]
    UChar_t         Tau_genPartFlav[8];   //[nTau]
    Bool_t          L1_AlwaysTrue;
@@ -592,304 +662,424 @@ public :
    Bool_t          L1_BptxPlus;
    Bool_t          L1_BptxXOR;
    Bool_t          L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142;
-   Bool_t          L1_DoubleEG8er2p5_HTT260er;
-   Bool_t          L1_DoubleEG8er2p5_HTT280er;
-   Bool_t          L1_DoubleEG8er2p5_HTT300er;
-   Bool_t          L1_DoubleEG8er2p5_HTT320er;
-   Bool_t          L1_DoubleEG8er2p5_HTT340er;
-   Bool_t          L1_DoubleEG_15_10_er2p5;
-   Bool_t          L1_DoubleEG_20_10_er2p5;
-   Bool_t          L1_DoubleEG_22_10_er2p5;
-   Bool_t          L1_DoubleEG_25_12_er2p5;
-   Bool_t          L1_DoubleEG_25_14_er2p5;
-   Bool_t          L1_DoubleEG_27_14_er2p5;
-   Bool_t          L1_DoubleEG_LooseIso20_10_er2p5;
-   Bool_t          L1_DoubleEG_LooseIso22_10_er2p5;
-   Bool_t          L1_DoubleEG_LooseIso22_12_er2p5;
-   Bool_t          L1_DoubleEG_LooseIso25_12_er2p5;
+   Bool_t          L1_DoubleEG6_HTT240er;
+   Bool_t          L1_DoubleEG6_HTT250er;
+   Bool_t          L1_DoubleEG6_HTT255er;
+   Bool_t          L1_DoubleEG6_HTT270er;
+   Bool_t          L1_DoubleEG6_HTT300er;
+   Bool_t          L1_DoubleEG8er2p6_HTT255er;
+   Bool_t          L1_DoubleEG8er2p6_HTT270er;
+   Bool_t          L1_DoubleEG8er2p6_HTT300er;
+   Bool_t          L1_DoubleEG_15_10;
+   Bool_t          L1_DoubleEG_18_17;
+   Bool_t          L1_DoubleEG_20_18;
+   Bool_t          L1_DoubleEG_22_10;
+   Bool_t          L1_DoubleEG_22_12;
+   Bool_t          L1_DoubleEG_22_15;
+   Bool_t          L1_DoubleEG_23_10;
+   Bool_t          L1_DoubleEG_24_17;
+   Bool_t          L1_DoubleEG_25_12;
+   Bool_t          L1_DoubleEG_25_13;
+   Bool_t          L1_DoubleEG_25_14;
+   Bool_t          L1_DoubleEG_LooseIso23_10;
+   Bool_t          L1_DoubleEG_LooseIso24_10;
+   Bool_t          L1_DoubleIsoTau28er2p1;
+   Bool_t          L1_DoubleIsoTau30er2p1;
    Bool_t          L1_DoubleIsoTau32er2p1;
+   Bool_t          L1_DoubleIsoTau33er2p1;
    Bool_t          L1_DoubleIsoTau34er2p1;
+   Bool_t          L1_DoubleIsoTau35er2p1;
    Bool_t          L1_DoubleIsoTau36er2p1;
+   Bool_t          L1_DoubleIsoTau38er2p1;
    Bool_t          L1_DoubleJet100er2p3_dEta_Max1p6;
-   Bool_t          L1_DoubleJet100er2p5;
+   Bool_t          L1_DoubleJet100er2p7;
    Bool_t          L1_DoubleJet112er2p3_dEta_Max1p6;
-   Bool_t          L1_DoubleJet120er2p5;
-   Bool_t          L1_DoubleJet150er2p5;
-   Bool_t          L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5;
-   Bool_t          L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5;
-   Bool_t          L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5;
-   Bool_t          L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5;
-   Bool_t          L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5;
-   Bool_t          L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5;
-   Bool_t          L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp;
-   Bool_t          L1_DoubleJet40er2p5;
+   Bool_t          L1_DoubleJet112er2p7;
+   Bool_t          L1_DoubleJet120er2p7;
+   Bool_t          L1_DoubleJet150er2p7;
+   Bool_t          L1_DoubleJet30_Mass_Min300_dEta_Max1p5;
+   Bool_t          L1_DoubleJet30_Mass_Min320_dEta_Max1p5;
+   Bool_t          L1_DoubleJet30_Mass_Min340_dEta_Max1p5;
+   Bool_t          L1_DoubleJet30_Mass_Min360_dEta_Max1p5;
+   Bool_t          L1_DoubleJet30_Mass_Min380_dEta_Max1p5;
+   Bool_t          L1_DoubleJet30_Mass_Min400_Mu10;
+   Bool_t          L1_DoubleJet30_Mass_Min400_Mu6;
+   Bool_t          L1_DoubleJet30_Mass_Min400_dEta_Max1p5;
+   Bool_t          L1_DoubleJet35_rmovlp_IsoTau45_Mass_Min450;
+   Bool_t          L1_DoubleJet40er2p7;
+   Bool_t          L1_DoubleJet50er2p7;
+   Bool_t          L1_DoubleJet60er2p7;
+   Bool_t          L1_DoubleJet60er2p7_ETM100;
+   Bool_t          L1_DoubleJet60er2p7_ETM60;
+   Bool_t          L1_DoubleJet60er2p7_ETM70;
+   Bool_t          L1_DoubleJet60er2p7_ETM80;
+   Bool_t          L1_DoubleJet60er2p7_ETM90;
+   Bool_t          L1_DoubleJet80er2p7;
    Bool_t          L1_DoubleJet_100_30_DoubleJet30_Mass_Min620;
+   Bool_t          L1_DoubleJet_100_35_DoubleJet35_Mass_Min620;
    Bool_t          L1_DoubleJet_110_35_DoubleJet35_Mass_Min620;
+   Bool_t          L1_DoubleJet_110_40_DoubleJet40_Mass_Min620;
+   Bool_t          L1_DoubleJet_115_35_DoubleJet35_Mass_Min620;
    Bool_t          L1_DoubleJet_115_40_DoubleJet40_Mass_Min620;
-   Bool_t          L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28;
-   Bool_t          L1_DoubleJet_120_45_DoubleJet45_Mass_Min620;
-   Bool_t          L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28;
-   Bool_t          L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ;
-   Bool_t          L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp;
-   Bool_t          L1_DoubleJet_80_30_Mass_Min420_Mu8;
    Bool_t          L1_DoubleJet_90_30_DoubleJet30_Mass_Min620;
    Bool_t          L1_DoubleLooseIsoEG22er2p1;
    Bool_t          L1_DoubleLooseIsoEG24er2p1;
    Bool_t          L1_DoubleMu0;
-   Bool_t          L1_DoubleMu0_Mass_Min1;
-   Bool_t          L1_DoubleMu0_OQ;
+   Bool_t          L1_DoubleMu0_ETM40;
+   Bool_t          L1_DoubleMu0_ETM55;
+   Bool_t          L1_DoubleMu0_ETM60;
+   Bool_t          L1_DoubleMu0_ETM65;
+   Bool_t          L1_DoubleMu0_ETM70;
    Bool_t          L1_DoubleMu0_SQ;
    Bool_t          L1_DoubleMu0_SQ_OS;
-   Bool_t          L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8;
    Bool_t          L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4;
-   Bool_t          L1_DoubleMu0er1p5_SQ;
+   Bool_t          L1_DoubleMu0er1p4_dEta_Max1p8_OS;
    Bool_t          L1_DoubleMu0er1p5_SQ_OS;
    Bool_t          L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4;
    Bool_t          L1_DoubleMu0er1p5_SQ_dR_Max1p4;
-   Bool_t          L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4;
-   Bool_t          L1_DoubleMu0er2p0_SQ_dR_Max1p4;
-   Bool_t          L1_DoubleMu10_SQ;
+   Bool_t          L1_DoubleMu0er2_SQ_dR_Max1p4;
    Bool_t          L1_DoubleMu18er2p1;
+   Bool_t          L1_DoubleMu22er2p1;
    Bool_t          L1_DoubleMu3_OS_DoubleEG7p5Upsilon;
-   Bool_t          L1_DoubleMu3_SQ_ETMHF50_HTT60er;
-   Bool_t          L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5;
-   Bool_t          L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5;
-   Bool_t          L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5;
+   Bool_t          L1_DoubleMu3_SQ_ETMHF40_Jet60_OR_DoubleJet30;
+   Bool_t          L1_DoubleMu3_SQ_ETMHF50_Jet60_OR_DoubleJet30;
+   Bool_t          L1_DoubleMu3_SQ_ETMHF60_Jet60_OR_DoubleJet30;
+   Bool_t          L1_DoubleMu3_SQ_ETMHF70_Jet60_OR_DoubleJet30;
+   Bool_t          L1_DoubleMu3_SQ_ETMHF80_Jet60_OR_DoubleJet30;
+   Bool_t          L1_DoubleMu3_SQ_HTT100er;
+   Bool_t          L1_DoubleMu3_SQ_HTT200er;
    Bool_t          L1_DoubleMu3_SQ_HTT220er;
    Bool_t          L1_DoubleMu3_SQ_HTT240er;
-   Bool_t          L1_DoubleMu3_SQ_HTT260er;
-   Bool_t          L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8;
-   Bool_t          L1_DoubleMu4_SQ_EG9er2p5;
+   Bool_t          L1_DoubleMu4_OS_EG12;
    Bool_t          L1_DoubleMu4_SQ_OS;
    Bool_t          L1_DoubleMu4_SQ_OS_dR_Max1p2;
+   Bool_t          L1_DoubleMu4p5_SQ;
    Bool_t          L1_DoubleMu4p5_SQ_OS;
    Bool_t          L1_DoubleMu4p5_SQ_OS_dR_Max1p2;
    Bool_t          L1_DoubleMu4p5er2p0_SQ_OS;
    Bool_t          L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18;
    Bool_t          L1_DoubleMu5Upsilon_OS_DoubleEG3;
-   Bool_t          L1_DoubleMu5_SQ_EG9er2p5;
-   Bool_t          L1_DoubleMu9_SQ;
+   Bool_t          L1_DoubleMu5_OS_EG12;
+   Bool_t          L1_DoubleMu5_SQ_OS;
+   Bool_t          L1_DoubleMu5_SQ_OS_Mass7to18;
+   Bool_t          L1_DoubleMu6_SQ_OS;
+   Bool_t          L1_DoubleMu7_EG7;
+   Bool_t          L1_DoubleMu7_SQ_EG7;
+   Bool_t          L1_DoubleMu8_SQ;
+   Bool_t          L1_DoubleMu_10_0_dEta_Max1p8;
+   Bool_t          L1_DoubleMu_11_4;
    Bool_t          L1_DoubleMu_12_5;
+   Bool_t          L1_DoubleMu_12_8;
+   Bool_t          L1_DoubleMu_13_6;
+   Bool_t          L1_DoubleMu_15_5;
    Bool_t          L1_DoubleMu_15_5_SQ;
    Bool_t          L1_DoubleMu_15_7;
-   Bool_t          L1_DoubleMu_15_7_Mass_Min1;
    Bool_t          L1_DoubleMu_15_7_SQ;
+   Bool_t          L1_DoubleMu_15_7_SQ_Mass_Min4;
+   Bool_t          L1_DoubleMu_20_2_SQ_Mass_Max20;
+   Bool_t          L1_DoubleTau50er2p1;
    Bool_t          L1_DoubleTau70er2p1;
+   Bool_t          L1_EG25er2p1_HTT125er;
+   Bool_t          L1_EG27er2p1_HTT200er;
+   Bool_t          L1_ETM100;
+   Bool_t          L1_ETM100_Jet60_dPhi_Min0p4;
+   Bool_t          L1_ETM105;
+   Bool_t          L1_ETM110;
+   Bool_t          L1_ETM110_Jet60_dPhi_Min0p4;
+   Bool_t          L1_ETM115;
    Bool_t          L1_ETM120;
    Bool_t          L1_ETM150;
+   Bool_t          L1_ETM30;
+   Bool_t          L1_ETM40;
+   Bool_t          L1_ETM50;
+   Bool_t          L1_ETM60;
+   Bool_t          L1_ETM70;
+   Bool_t          L1_ETM75;
+   Bool_t          L1_ETM75_Jet60_dPhi_Min0p4;
+   Bool_t          L1_ETM80;
+   Bool_t          L1_ETM80_Jet60_dPhi_Min0p4;
+   Bool_t          L1_ETM85;
+   Bool_t          L1_ETM90;
+   Bool_t          L1_ETM90_Jet60_dPhi_Min0p4;
+   Bool_t          L1_ETM95;
    Bool_t          L1_ETMHF100;
    Bool_t          L1_ETMHF100_HTT60er;
+   Bool_t          L1_ETMHF100_Jet60_OR_DiJet30woTT28;
+   Bool_t          L1_ETMHF100_Jet60_OR_DoubleJet30;
+   Bool_t          L1_ETMHF100_Jet90_OR_DoubleJet45_OR_TripleJet30;
    Bool_t          L1_ETMHF110;
    Bool_t          L1_ETMHF110_HTT60er;
-   Bool_t          L1_ETMHF110_HTT60er_NotSecondBunchInTrain;
+   Bool_t          L1_ETMHF110_Jet60_OR_DiJet30woTT28;
+   Bool_t          L1_ETMHF110_Jet90_OR_DoubleJet45_OR_TripleJet30;
    Bool_t          L1_ETMHF120;
    Bool_t          L1_ETMHF120_HTT60er;
-   Bool_t          L1_ETMHF120_NotSecondBunchInTrain;
-   Bool_t          L1_ETMHF130;
-   Bool_t          L1_ETMHF130_HTT60er;
-   Bool_t          L1_ETMHF140;
+   Bool_t          L1_ETMHF120_Jet60_OR_DiJet30woTT28;
    Bool_t          L1_ETMHF150;
+   Bool_t          L1_ETMHF70;
+   Bool_t          L1_ETMHF70_Jet90_OR_DoubleJet45_OR_TripleJet30;
+   Bool_t          L1_ETMHF80;
+   Bool_t          L1_ETMHF80_HTT60er;
+   Bool_t          L1_ETMHF80_Jet90_OR_DoubleJet45_OR_TripleJet30;
+   Bool_t          L1_ETMHF90;
    Bool_t          L1_ETMHF90_HTT60er;
-   Bool_t          L1_ETT1200;
-   Bool_t          L1_ETT1600;
-   Bool_t          L1_ETT2000;
+   Bool_t          L1_ETMHF90_Jet90_OR_DoubleJet45_OR_TripleJet30;
+   Bool_t          L1_ETT100_BptxAND;
+   Bool_t          L1_ETT110_BptxAND;
+   Bool_t          L1_ETT40_BptxAND;
+   Bool_t          L1_ETT50_BptxAND;
+   Bool_t          L1_ETT60_BptxAND;
+   Bool_t          L1_ETT70_BptxAND;
+   Bool_t          L1_ETT75_BptxAND;
+   Bool_t          L1_ETT80_BptxAND;
+   Bool_t          L1_ETT85_BptxAND;
+   Bool_t          L1_ETT90_BptxAND;
+   Bool_t          L1_ETT95_BptxAND;
    Bool_t          L1_FirstBunchAfterTrain;
-   Bool_t          L1_FirstBunchBeforeTrain;
    Bool_t          L1_FirstBunchInTrain;
    Bool_t          L1_FirstCollisionInOrbit;
    Bool_t          L1_FirstCollisionInTrain;
-   Bool_t          L1_HCAL_LaserMon_Trig;
-   Bool_t          L1_HCAL_LaserMon_Veto;
    Bool_t          L1_HTT120er;
    Bool_t          L1_HTT160er;
    Bool_t          L1_HTT200er;
+   Bool_t          L1_HTT220er;
+   Bool_t          L1_HTT240er;
+   Bool_t          L1_HTT250er_QuadJet_70_55_40_35_er2p5;
    Bool_t          L1_HTT255er;
+   Bool_t          L1_HTT270er;
    Bool_t          L1_HTT280er;
-   Bool_t          L1_HTT280er_QuadJet_70_55_40_35_er2p4;
+   Bool_t          L1_HTT280er_QuadJet_70_55_40_35_er2p5;
+   Bool_t          L1_HTT300er;
+   Bool_t          L1_HTT300er_QuadJet_70_55_40_35_er2p5;
    Bool_t          L1_HTT320er;
    Bool_t          L1_HTT320er_QuadJet_70_55_40_40_er2p4;
-   Bool_t          L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3;
-   Bool_t          L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3;
-   Bool_t          L1_HTT360er;
+   Bool_t          L1_HTT320er_QuadJet_70_55_40_40_er2p5;
+   Bool_t          L1_HTT320er_QuadJet_70_55_45_45_er2p5;
+   Bool_t          L1_HTT340er;
+   Bool_t          L1_HTT340er_QuadJet_70_55_40_40_er2p5;
+   Bool_t          L1_HTT340er_QuadJet_70_55_45_45_er2p5;
+   Bool_t          L1_HTT380er;
    Bool_t          L1_HTT400er;
    Bool_t          L1_HTT450er;
-   Bool_t          L1_IsoEG32er2p5_Mt40;
-   Bool_t          L1_IsoEG32er2p5_Mt44;
-   Bool_t          L1_IsoEG32er2p5_Mt48;
-   Bool_t          L1_IsoTau40er2p1_ETMHF100;
-   Bool_t          L1_IsoTau40er2p1_ETMHF110;
-   Bool_t          L1_IsoTau40er2p1_ETMHF120;
-   Bool_t          L1_IsoTau40er2p1_ETMHF90;
+   Bool_t          L1_HTT500er;
+   Bool_t          L1_IsoEG33_Mt40;
+   Bool_t          L1_IsoEG33_Mt44;
+   Bool_t          L1_IsoEG33_Mt48;
+   Bool_t          L1_IsoTau40er_ETM100;
+   Bool_t          L1_IsoTau40er_ETM105;
+   Bool_t          L1_IsoTau40er_ETM110;
+   Bool_t          L1_IsoTau40er_ETM115;
+   Bool_t          L1_IsoTau40er_ETM120;
+   Bool_t          L1_IsoTau40er_ETM80;
+   Bool_t          L1_IsoTau40er_ETM85;
+   Bool_t          L1_IsoTau40er_ETM90;
+   Bool_t          L1_IsoTau40er_ETM95;
+   Bool_t          L1_IsoTau40er_ETMHF100;
+   Bool_t          L1_IsoTau40er_ETMHF110;
+   Bool_t          L1_IsoTau40er_ETMHF120;
+   Bool_t          L1_IsoTau40er_ETMHF80;
+   Bool_t          L1_IsoTau40er_ETMHF90;
    Bool_t          L1_IsolatedBunch;
-   Bool_t          L1_LastBunchInTrain;
    Bool_t          L1_LastCollisionInTrain;
    Bool_t          L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3;
-   Bool_t          L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3;
    Bool_t          L1_LooseIsoEG24er2p1_HTT100er;
    Bool_t          L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3;
+   Bool_t          L1_LooseIsoEG24er2p1_Jet26er2p7_dR_Min0p3;
+   Bool_t          L1_LooseIsoEG24er2p1_TripleJet_26er2p7_26_26er2p7;
    Bool_t          L1_LooseIsoEG26er2p1_HTT100er;
-   Bool_t          L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3;
+   Bool_t          L1_LooseIsoEG26er2p1_Jet34er2p7_dR_Min0p3;
    Bool_t          L1_LooseIsoEG28er2p1_HTT100er;
-   Bool_t          L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3;
-   Bool_t          L1_LooseIsoEG30er2p1_HTT100er;
-   Bool_t          L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3;
+   Bool_t          L1_LooseIsoEG28er2p1_Jet34er2p7_dR_Min0p3;
+   Bool_t          L1_LooseIsoEG30er2p1_Jet34er2p7_dR_Min0p3;
+   Bool_t          L1_MU20_EG15;
    Bool_t          L1_MinimumBiasHF0_AND_BptxAND;
+   Bool_t          L1_MinimumBiasHF0_OR_BptxAND;
+   Bool_t          L1_Mu10er2p1_ETM30;
    Bool_t          L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6;
-   Bool_t          L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6;
+   Bool_t          L1_Mu12_EG10;
    Bool_t          L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6;
+   Bool_t          L1_Mu14er2p1_ETM30;
+   Bool_t          L1_Mu15_HTT100er;
+   Bool_t          L1_Mu18_HTT100er;
+   Bool_t          L1_Mu18_Jet24er2p7;
+   Bool_t          L1_Mu18er2p1_IsoTau26er2p1;
    Bool_t          L1_Mu18er2p1_Tau24er2p1;
-   Bool_t          L1_Mu18er2p1_Tau26er2p1;
-   Bool_t          L1_Mu20_EG10er2p5;
+   Bool_t          L1_Mu20_EG10;
+   Bool_t          L1_Mu20_EG17;
+   Bool_t          L1_Mu20_LooseIsoEG6;
+   Bool_t          L1_Mu20er2p1_IsoTau26er2p1;
+   Bool_t          L1_Mu20er2p1_IsoTau27er2p1;
+   Bool_t          L1_Mu22er2p1_IsoTau28er2p1;
+   Bool_t          L1_Mu22er2p1_IsoTau30er2p1;
    Bool_t          L1_Mu22er2p1_IsoTau32er2p1;
+   Bool_t          L1_Mu22er2p1_IsoTau33er2p1;
    Bool_t          L1_Mu22er2p1_IsoTau34er2p1;
+   Bool_t          L1_Mu22er2p1_IsoTau35er2p1;
    Bool_t          L1_Mu22er2p1_IsoTau36er2p1;
+   Bool_t          L1_Mu22er2p1_IsoTau38er2p1;
    Bool_t          L1_Mu22er2p1_IsoTau40er2p1;
+   Bool_t          L1_Mu22er2p1_Tau50er2p1;
    Bool_t          L1_Mu22er2p1_Tau70er2p1;
-   Bool_t          L1_Mu3_Jet120er2p5_dR_Max0p4;
-   Bool_t          L1_Mu3_Jet120er2p5_dR_Max0p8;
-   Bool_t          L1_Mu3_Jet16er2p5_dR_Max0p4;
+   Bool_t          L1_Mu23_EG10;
+   Bool_t          L1_Mu23_LooseIsoEG10;
+   Bool_t          L1_Mu3_Jet120er2p7_dEta_Max0p4_dPhi_Max0p4;
+   Bool_t          L1_Mu3_Jet16er2p7_dEta_Max0p4_dPhi_Max0p4;
    Bool_t          L1_Mu3_Jet30er2p5;
-   Bool_t          L1_Mu3_Jet35er2p5_dR_Max0p4;
-   Bool_t          L1_Mu3_Jet60er2p5_dR_Max0p4;
-   Bool_t          L1_Mu3_Jet80er2p5_dR_Max0p4;
-   Bool_t          L1_Mu3er1p5_Jet100er2p5_ETMHF40;
-   Bool_t          L1_Mu3er1p5_Jet100er2p5_ETMHF50;
-   Bool_t          L1_Mu5_EG23er2p5;
-   Bool_t          L1_Mu5_LooseIsoEG20er2p5;
-   Bool_t          L1_Mu6_DoubleEG10er2p5;
-   Bool_t          L1_Mu6_DoubleEG12er2p5;
-   Bool_t          L1_Mu6_DoubleEG15er2p5;
-   Bool_t          L1_Mu6_DoubleEG17er2p5;
+   Bool_t          L1_Mu3_Jet60er2p7_dEta_Max0p4_dPhi_Max0p4;
+   Bool_t          L1_Mu5_EG15;
+   Bool_t          L1_Mu5_EG20;
+   Bool_t          L1_Mu5_EG23;
+   Bool_t          L1_Mu5_LooseIsoEG18;
+   Bool_t          L1_Mu5_LooseIsoEG20;
+   Bool_t          L1_Mu6_DoubleEG10;
+   Bool_t          L1_Mu6_DoubleEG17;
+   Bool_t          L1_Mu6_HTT200er;
    Bool_t          L1_Mu6_HTT240er;
    Bool_t          L1_Mu6_HTT250er;
-   Bool_t          L1_Mu7_EG23er2p5;
-   Bool_t          L1_Mu7_LooseIsoEG20er2p5;
-   Bool_t          L1_Mu7_LooseIsoEG23er2p5;
+   Bool_t          L1_Mu7_EG23;
+   Bool_t          L1_Mu7_LooseIsoEG20;
+   Bool_t          L1_Mu7_LooseIsoEG23;
+   Bool_t          L1_Mu8_HTT150er;
    Bool_t          L1_NotBptxOR;
-   Bool_t          L1_QuadJet36er2p5_IsoTau52er2p1;
-   Bool_t          L1_QuadJet60er2p5;
-   Bool_t          L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0;
+   Bool_t          L1_QuadJet36er2p7_IsoTau52er2p1;
+   Bool_t          L1_QuadJet36er2p7_Tau52;
+   Bool_t          L1_QuadJet40er2p7;
+   Bool_t          L1_QuadJet50er2p7;
+   Bool_t          L1_QuadJet60er2p7;
    Bool_t          L1_QuadMu0;
-   Bool_t          L1_QuadMu0_OQ;
-   Bool_t          L1_QuadMu0_SQ;
-   Bool_t          L1_SecondBunchInTrain;
-   Bool_t          L1_SecondLastBunchInTrain;
-   Bool_t          L1_SingleEG10er2p5;
-   Bool_t          L1_SingleEG15er2p5;
-   Bool_t          L1_SingleEG26er2p5;
-   Bool_t          L1_SingleEG34er2p5;
-   Bool_t          L1_SingleEG36er2p5;
-   Bool_t          L1_SingleEG38er2p5;
-   Bool_t          L1_SingleEG40er2p5;
-   Bool_t          L1_SingleEG42er2p5;
-   Bool_t          L1_SingleEG45er2p5;
+   Bool_t          L1_SingleEG10;
+   Bool_t          L1_SingleEG15;
+   Bool_t          L1_SingleEG18;
+   Bool_t          L1_SingleEG24;
+   Bool_t          L1_SingleEG26;
+   Bool_t          L1_SingleEG28;
+   Bool_t          L1_SingleEG2_BptxAND;
+   Bool_t          L1_SingleEG30;
+   Bool_t          L1_SingleEG32;
+   Bool_t          L1_SingleEG34;
+   Bool_t          L1_SingleEG34er2p1;
+   Bool_t          L1_SingleEG36;
+   Bool_t          L1_SingleEG36er2p1;
+   Bool_t          L1_SingleEG38;
+   Bool_t          L1_SingleEG38er2p1;
+   Bool_t          L1_SingleEG40;
+   Bool_t          L1_SingleEG42;
+   Bool_t          L1_SingleEG45;
+   Bool_t          L1_SingleEG5;
    Bool_t          L1_SingleEG50;
-   Bool_t          L1_SingleEG60;
-   Bool_t          L1_SingleEG8er2p5;
-   Bool_t          L1_SingleIsoEG24er1p5;
+   Bool_t          L1_SingleIsoEG18;
+   Bool_t          L1_SingleIsoEG18er2p1;
+   Bool_t          L1_SingleIsoEG20;
+   Bool_t          L1_SingleIsoEG20er2p1;
+   Bool_t          L1_SingleIsoEG22;
+   Bool_t          L1_SingleIsoEG22er2p1;
+   Bool_t          L1_SingleIsoEG24;
    Bool_t          L1_SingleIsoEG24er2p1;
-   Bool_t          L1_SingleIsoEG26er1p5;
+   Bool_t          L1_SingleIsoEG26;
    Bool_t          L1_SingleIsoEG26er2p1;
-   Bool_t          L1_SingleIsoEG26er2p5;
-   Bool_t          L1_SingleIsoEG28er1p5;
+   Bool_t          L1_SingleIsoEG28;
    Bool_t          L1_SingleIsoEG28er2p1;
-   Bool_t          L1_SingleIsoEG28er2p5;
+   Bool_t          L1_SingleIsoEG30;
    Bool_t          L1_SingleIsoEG30er2p1;
-   Bool_t          L1_SingleIsoEG30er2p5;
+   Bool_t          L1_SingleIsoEG32;
    Bool_t          L1_SingleIsoEG32er2p1;
-   Bool_t          L1_SingleIsoEG32er2p5;
-   Bool_t          L1_SingleIsoEG34er2p5;
-   Bool_t          L1_SingleJet10erHE;
+   Bool_t          L1_SingleIsoEG33er2p1;
+   Bool_t          L1_SingleIsoEG34;
+   Bool_t          L1_SingleIsoEG34er2p1;
+   Bool_t          L1_SingleIsoEG35;
+   Bool_t          L1_SingleIsoEG35er2p1;
+   Bool_t          L1_SingleIsoEG36;
+   Bool_t          L1_SingleIsoEG36er2p1;
+   Bool_t          L1_SingleIsoEG37;
+   Bool_t          L1_SingleIsoEG38;
+   Bool_t          L1_SingleIsoEG38er2p1;
+   Bool_t          L1_SingleIsoEG40;
+   Bool_t          L1_SingleIsoEG40er2p1;
    Bool_t          L1_SingleJet120;
-   Bool_t          L1_SingleJet120_FWD3p0;
-   Bool_t          L1_SingleJet120er2p5;
-   Bool_t          L1_SingleJet12erHE;
-   Bool_t          L1_SingleJet140er2p5;
-   Bool_t          L1_SingleJet140er2p5_ETMHF80;
-   Bool_t          L1_SingleJet140er2p5_ETMHF90;
-   Bool_t          L1_SingleJet160er2p5;
+   Bool_t          L1_SingleJet120_FWD;
+   Bool_t          L1_SingleJet12_BptxAND;
+   Bool_t          L1_SingleJet140;
+   Bool_t          L1_SingleJet150;
+   Bool_t          L1_SingleJet16;
+   Bool_t          L1_SingleJet160;
+   Bool_t          L1_SingleJet170;
    Bool_t          L1_SingleJet180;
-   Bool_t          L1_SingleJet180er2p5;
+   Bool_t          L1_SingleJet20;
    Bool_t          L1_SingleJet200;
-   Bool_t          L1_SingleJet20er2p5_NotBptxOR;
-   Bool_t          L1_SingleJet20er2p5_NotBptxOR_3BX;
+   Bool_t          L1_SingleJet20er2p7_NotBptxOR;
+   Bool_t          L1_SingleJet20er2p7_NotBptxOR_3BX;
    Bool_t          L1_SingleJet35;
-   Bool_t          L1_SingleJet35_FWD3p0;
-   Bool_t          L1_SingleJet35er2p5;
-   Bool_t          L1_SingleJet43er2p5_NotBptxOR_3BX;
-   Bool_t          L1_SingleJet46er2p5_NotBptxOR_3BX;
+   Bool_t          L1_SingleJet35_FWD;
+   Bool_t          L1_SingleJet35_HFm;
+   Bool_t          L1_SingleJet35_HFp;
+   Bool_t          L1_SingleJet43er2p7_NotBptxOR_3BX;
+   Bool_t          L1_SingleJet46er2p7_NotBptxOR_3BX;
    Bool_t          L1_SingleJet60;
-   Bool_t          L1_SingleJet60_FWD3p0;
-   Bool_t          L1_SingleJet60er2p5;
-   Bool_t          L1_SingleJet8erHE;
+   Bool_t          L1_SingleJet60_FWD;
+   Bool_t          L1_SingleJet60_HFm;
+   Bool_t          L1_SingleJet60_HFp;
    Bool_t          L1_SingleJet90;
-   Bool_t          L1_SingleJet90_FWD3p0;
-   Bool_t          L1_SingleJet90er2p5;
-   Bool_t          L1_SingleLooseIsoEG28er1p5;
-   Bool_t          L1_SingleLooseIsoEG30er1p5;
+   Bool_t          L1_SingleJet90_FWD;
    Bool_t          L1_SingleMu0_BMTF;
-   Bool_t          L1_SingleMu0_DQ;
    Bool_t          L1_SingleMu0_EMTF;
    Bool_t          L1_SingleMu0_OMTF;
-   Bool_t          L1_SingleMu10er1p5;
-   Bool_t          L1_SingleMu12_DQ_BMTF;
-   Bool_t          L1_SingleMu12_DQ_EMTF;
-   Bool_t          L1_SingleMu12_DQ_OMTF;
-   Bool_t          L1_SingleMu12er1p5;
-   Bool_t          L1_SingleMu14er1p5;
-   Bool_t          L1_SingleMu15_DQ;
-   Bool_t          L1_SingleMu16er1p5;
+   Bool_t          L1_SingleMu10_LowQ;
+   Bool_t          L1_SingleMu11_LowQ;
+   Bool_t          L1_SingleMu12_LowQ_BMTF;
+   Bool_t          L1_SingleMu12_LowQ_EMTF;
+   Bool_t          L1_SingleMu12_LowQ_OMTF;
+   Bool_t          L1_SingleMu14er2p1;
+   Bool_t          L1_SingleMu16;
+   Bool_t          L1_SingleMu16er2p1;
    Bool_t          L1_SingleMu18;
-   Bool_t          L1_SingleMu18er1p5;
+   Bool_t          L1_SingleMu18er2p1;
    Bool_t          L1_SingleMu20;
+   Bool_t          L1_SingleMu20er2p1;
    Bool_t          L1_SingleMu22;
    Bool_t          L1_SingleMu22_BMTF;
    Bool_t          L1_SingleMu22_EMTF;
    Bool_t          L1_SingleMu22_OMTF;
+   Bool_t          L1_SingleMu22er2p1;
    Bool_t          L1_SingleMu25;
    Bool_t          L1_SingleMu3;
+   Bool_t          L1_SingleMu30;
    Bool_t          L1_SingleMu5;
-   Bool_t          L1_SingleMu6er1p5;
    Bool_t          L1_SingleMu7;
-   Bool_t          L1_SingleMu7_DQ;
-   Bool_t          L1_SingleMu7er1p5;
-   Bool_t          L1_SingleMu8er1p5;
-   Bool_t          L1_SingleMu9er1p5;
    Bool_t          L1_SingleMuCosmics;
    Bool_t          L1_SingleMuCosmics_BMTF;
    Bool_t          L1_SingleMuCosmics_EMTF;
    Bool_t          L1_SingleMuCosmics_OMTF;
    Bool_t          L1_SingleMuOpen;
    Bool_t          L1_SingleMuOpen_NotBptxOR;
-   Bool_t          L1_SingleMuOpen_er1p1_NotBptxOR_3BX;
-   Bool_t          L1_SingleMuOpen_er1p4_NotBptxOR_3BX;
+   Bool_t          L1_SingleMuOpen_NotBptxOR_3BX;
+   Bool_t          L1_SingleTau100er2p1;
    Bool_t          L1_SingleTau120er2p1;
    Bool_t          L1_SingleTau130er2p1;
-   Bool_t          L1_TOTEM_1;
-   Bool_t          L1_TOTEM_2;
-   Bool_t          L1_TOTEM_3;
-   Bool_t          L1_TOTEM_4;
-   Bool_t          L1_TripleEG16er2p5;
-   Bool_t          L1_TripleEG_16_12_8_er2p5;
-   Bool_t          L1_TripleEG_16_15_8_er2p5;
-   Bool_t          L1_TripleEG_18_17_8_er2p5;
-   Bool_t          L1_TripleEG_18_18_12_er2p5;
-   Bool_t          L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5;
-   Bool_t          L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5;
-   Bool_t          L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5;
+   Bool_t          L1_SingleTau140er2p1;
+   Bool_t          L1_SingleTau20;
+   Bool_t          L1_SingleTau80er2p1;
+   Bool_t          L1_TripleEG_14_10_8;
+   Bool_t          L1_TripleEG_18_17_8;
+   Bool_t          L1_TripleEG_LooseIso20_10_5;
+   Bool_t          L1_TripleJet_100_85_72_VBF;
+   Bool_t          L1_TripleJet_105_85_76_VBF;
+   Bool_t          L1_TripleJet_84_68_48_VBF;
+   Bool_t          L1_TripleJet_88_72_56_VBF;
+   Bool_t          L1_TripleJet_92_76_64_VBF;
+   Bool_t          L1_TripleJet_98_83_71_VBF;
    Bool_t          L1_TripleMu0;
    Bool_t          L1_TripleMu0_OQ;
-   Bool_t          L1_TripleMu0_SQ;
    Bool_t          L1_TripleMu3;
    Bool_t          L1_TripleMu3_SQ;
+   Bool_t          L1_TripleMu_4_4_4;
+   Bool_t          L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17;
+   Bool_t          L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_8to14;
    Bool_t          L1_TripleMu_5SQ_3SQ_0OQ;
    Bool_t          L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9;
    Bool_t          L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9;
+   Bool_t          L1_TripleMu_5_0_0;
    Bool_t          L1_TripleMu_5_3_3;
-   Bool_t          L1_TripleMu_5_3_3_SQ;
    Bool_t          L1_TripleMu_5_3p5_2p5;
    Bool_t          L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17;
-   Bool_t          L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17;
    Bool_t          L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17;
    Bool_t          L1_TripleMu_5_5_3;
    Bool_t          L1_UnpairedBunchBptxMinus;
@@ -917,6 +1107,8 @@ public :
    Bool_t          Flag_muonBadTrackFilter;
    Bool_t          Flag_BadChargedCandidateFilter;
    Bool_t          Flag_BadPFMuonFilter;
+   Bool_t          Flag_BadPFMuonDzFilter;
+   Bool_t          Flag_hfNoisyHitsFilter;
    Bool_t          Flag_BadChargedCandidateSummer16Filter;
    Bool_t          Flag_BadPFMuonSummer16Filter;
    Bool_t          Flag_trkPOG_manystripclus53X;
@@ -935,10 +1127,7 @@ public :
    Bool_t          HLT_AK8PFHT900_TrimMass50;
    Bool_t          HLT_CaloJet500_NoJetID;
    Bool_t          HLT_CaloJet550_NoJetID;
-   Bool_t          HLT_DoubleMu5_Upsilon_DoubleEle3_CaloIdL_TrackIdL;
-   Bool_t          HLT_DoubleMu3_DoubleEle7p5_CaloIdL_TrackIdL_Upsilon;
    Bool_t          HLT_Trimuon5_3p5_2_Upsilon_Muon;
-   Bool_t          HLT_TrimuonOpen_5_3p5_2_Upsilon_Muon;
    Bool_t          HLT_DoubleEle25_CaloIdL_MW;
    Bool_t          HLT_DoubleEle27_CaloIdL_MW;
    Bool_t          HLT_DoubleEle33_CaloIdL_MW;
@@ -950,13 +1139,13 @@ public :
    Bool_t          HLT_Mu37_Ele27_CaloIdL_MW;
    Bool_t          HLT_Mu37_TkMu27;
    Bool_t          HLT_DoubleMu4_3_Bs;
-   Bool_t          HLT_DoubleMu4_3_Jpsi;
+   Bool_t          HLT_DoubleMu4_3_Jpsi_Displaced;
    Bool_t          HLT_DoubleMu4_JpsiTrk_Displaced;
    Bool_t          HLT_DoubleMu4_LowMassNonResonantTrk_Displaced;
    Bool_t          HLT_DoubleMu3_Trk_Tau3mu;
-   Bool_t          HLT_DoubleMu3_TkMu_DsTau3Mu;
    Bool_t          HLT_DoubleMu4_PsiPrimeTrk_Displaced;
-   Bool_t          HLT_DoubleMu4_Mass3p8_DZ_PFHT350;
+   Bool_t          HLT_DoubleMu4_Mass8_DZ_PFHT350;
+   Bool_t          HLT_DoubleMu8_Mass8_PFHT350;
    Bool_t          HLT_Mu3_PFJet40;
    Bool_t          HLT_Mu7p5_L2Mu2_Jpsi;
    Bool_t          HLT_Mu7p5_L2Mu2_Upsilon;
@@ -966,47 +1155,34 @@ public :
    Bool_t          HLT_Mu7p5_Track2_Upsilon;
    Bool_t          HLT_Mu7p5_Track3p5_Upsilon;
    Bool_t          HLT_Mu7p5_Track7_Upsilon;
-   Bool_t          HLT_Mu3_L1SingleMu5orSingleMu7;
    Bool_t          HLT_DoublePhoton33_CaloIdL;
    Bool_t          HLT_DoublePhoton70;
    Bool_t          HLT_DoublePhoton85;
    Bool_t          HLT_Ele20_WPTight_Gsf;
-   Bool_t          HLT_Ele15_WPLoose_Gsf;
-   Bool_t          HLT_Ele17_WPLoose_Gsf;
    Bool_t          HLT_Ele20_WPLoose_Gsf;
    Bool_t          HLT_Ele20_eta2p1_WPLoose_Gsf;
    Bool_t          HLT_DiEle27_WPTightCaloOnly_L1DoubleEG;
    Bool_t          HLT_Ele27_WPTight_Gsf;
-   Bool_t          HLT_Ele28_WPTight_Gsf;
-   Bool_t          HLT_Ele30_WPTight_Gsf;
    Bool_t          HLT_Ele32_WPTight_Gsf;
    Bool_t          HLT_Ele35_WPTight_Gsf;
    Bool_t          HLT_Ele35_WPTight_Gsf_L1EGMT;
    Bool_t          HLT_Ele38_WPTight_Gsf;
    Bool_t          HLT_Ele40_WPTight_Gsf;
    Bool_t          HLT_Ele32_WPTight_Gsf_L1DoubleEG;
-   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1;
-   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_CrossL1;
-   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_CrossL1;
-   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1;
-   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1;
-   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1;
    Bool_t          HLT_HT450_Beamspot;
    Bool_t          HLT_HT300_Beamspot;
-   Bool_t          HLT_ZeroBias_Beamspot;
-   Bool_t          HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1;
-   Bool_t          HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_CrossL1;
-   Bool_t          HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_CrossL1;
-   Bool_t          HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1;
-   Bool_t          HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1;
-   Bool_t          HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1;
-   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1;
-   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1;
-   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1;
-   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1;
-   Bool_t          HLT_IsoMu27_LooseChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1;
-   Bool_t          HLT_IsoMu27_MediumChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1;
-   Bool_t          HLT_IsoMu27_TightChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1;
+   Bool_t          HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1;
+   Bool_t          HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_CrossL1;
+   Bool_t          HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_CrossL1;
+   Bool_t          HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_TightID_CrossL1;
+   Bool_t          HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_TightID_CrossL1;
+   Bool_t          HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_TightID_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1;
+   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_SingleL1;
+   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_SingleL1;
+   Bool_t          HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_TightID_SingleL1;
+   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_TightID_SingleL1;
+   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1;
    Bool_t          HLT_IsoMu20;
    Bool_t          HLT_IsoMu24;
    Bool_t          HLT_IsoMu24_eta2p1;
@@ -1024,21 +1200,7 @@ public :
    Bool_t          HLT_L2Mu45_NoVertex_3Sta_NoBPTX3BX;
    Bool_t          HLT_L2Mu40_NoVertex_3Sta_NoBPTX3BX;
    Bool_t          HLT_L2Mu50;
-   Bool_t          HLT_L2Mu23NoVtx_2Cha;
-   Bool_t          HLT_L2Mu23NoVtx_2Cha_CosmicSeed;
-   Bool_t          HLT_DoubleL2Mu30NoVtx_2Cha_CosmicSeed_Eta2p4;
-   Bool_t          HLT_DoubleL2Mu30NoVtx_2Cha_Eta2p4;
    Bool_t          HLT_DoubleL2Mu50;
-   Bool_t          HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed;
-   Bool_t          HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched;
-   Bool_t          HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed;
-   Bool_t          HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_NoL2Matched;
-   Bool_t          HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_Eta2p4;
-   Bool_t          HLT_DoubleL2Mu23NoVtx_2Cha;
-   Bool_t          HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched;
-   Bool_t          HLT_DoubleL2Mu25NoVtx_2Cha;
-   Bool_t          HLT_DoubleL2Mu25NoVtx_2Cha_NoL2Matched;
-   Bool_t          HLT_DoubleL2Mu25NoVtx_2Cha_Eta2p4;
    Bool_t          HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL;
    Bool_t          HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL;
    Bool_t          HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
@@ -1048,18 +1210,19 @@ public :
    Bool_t          HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8;
    Bool_t          HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8;
    Bool_t          HLT_Mu25_TkMu0_Onia;
-   Bool_t          HLT_Mu30_TkMu0_Psi;
-   Bool_t          HLT_Mu30_TkMu0_Upsilon;
+   Bool_t          HLT_Mu30_TkMu0_Onia;
    Bool_t          HLT_Mu20_TkMu0_Phi;
    Bool_t          HLT_Mu25_TkMu0_Phi;
-   Bool_t          HLT_Mu12;
-   Bool_t          HLT_Mu15;
    Bool_t          HLT_Mu20;
    Bool_t          HLT_Mu27;
    Bool_t          HLT_Mu50;
    Bool_t          HLT_Mu55;
    Bool_t          HLT_OldMu100;
    Bool_t          HLT_TkMu100;
+   Bool_t          HLT_DiPFJet15_NoCaloMatched;
+   Bool_t          HLT_DiPFJet25_NoCaloMatched;
+   Bool_t          HLT_DiPFJet15_FBEta3_NoCaloMatched;
+   Bool_t          HLT_DiPFJet25_FBEta3_NoCaloMatched;
    Bool_t          HLT_DiPFJetAve40;
    Bool_t          HLT_DiPFJetAve60;
    Bool_t          HLT_DiPFJetAve80;
@@ -1069,14 +1232,15 @@ public :
    Bool_t          HLT_DiPFJetAve320;
    Bool_t          HLT_DiPFJetAve400;
    Bool_t          HLT_DiPFJetAve500;
+   Bool_t          HLT_DiPFJetAve15_HFJEC;
+   Bool_t          HLT_DiPFJetAve25_HFJEC;
+   Bool_t          HLT_DiPFJetAve35_HFJEC;
    Bool_t          HLT_DiPFJetAve60_HFJEC;
    Bool_t          HLT_DiPFJetAve80_HFJEC;
    Bool_t          HLT_DiPFJetAve100_HFJEC;
    Bool_t          HLT_DiPFJetAve160_HFJEC;
    Bool_t          HLT_DiPFJetAve220_HFJEC;
    Bool_t          HLT_DiPFJetAve300_HFJEC;
-   Bool_t          HLT_AK8PFJet15;
-   Bool_t          HLT_AK8PFJet25;
    Bool_t          HLT_AK8PFJet40;
    Bool_t          HLT_AK8PFJet60;
    Bool_t          HLT_AK8PFJet80;
@@ -1088,8 +1252,6 @@ public :
    Bool_t          HLT_AK8PFJet450;
    Bool_t          HLT_AK8PFJet500;
    Bool_t          HLT_AK8PFJet550;
-   Bool_t          HLT_PFJet15;
-   Bool_t          HLT_PFJet25;
    Bool_t          HLT_PFJet40;
    Bool_t          HLT_PFJet60;
    Bool_t          HLT_PFJet80;
@@ -1101,8 +1263,6 @@ public :
    Bool_t          HLT_PFJet450;
    Bool_t          HLT_PFJet500;
    Bool_t          HLT_PFJet550;
-   Bool_t          HLT_PFJetFwd15;
-   Bool_t          HLT_PFJetFwd25;
    Bool_t          HLT_PFJetFwd40;
    Bool_t          HLT_PFJetFwd60;
    Bool_t          HLT_PFJetFwd80;
@@ -1113,8 +1273,6 @@ public :
    Bool_t          HLT_PFJetFwd400;
    Bool_t          HLT_PFJetFwd450;
    Bool_t          HLT_PFJetFwd500;
-   Bool_t          HLT_AK8PFJetFwd15;
-   Bool_t          HLT_AK8PFJetFwd25;
    Bool_t          HLT_AK8PFJetFwd40;
    Bool_t          HLT_AK8PFJetFwd60;
    Bool_t          HLT_AK8PFJetFwd80;
@@ -1145,11 +1303,11 @@ public :
    Bool_t          HLT_PFMET120_PFMHT120_IDTight;
    Bool_t          HLT_PFMET130_PFMHT130_IDTight;
    Bool_t          HLT_PFMET140_PFMHT140_IDTight;
-   Bool_t          HLT_PFMET100_PFMHT100_IDTight_CaloBTagDeepCSV_3p1;
-   Bool_t          HLT_PFMET110_PFMHT110_IDTight_CaloBTagDeepCSV_3p1;
-   Bool_t          HLT_PFMET120_PFMHT120_IDTight_CaloBTagDeepCSV_3p1;
-   Bool_t          HLT_PFMET130_PFMHT130_IDTight_CaloBTagDeepCSV_3p1;
-   Bool_t          HLT_PFMET140_PFMHT140_IDTight_CaloBTagDeepCSV_3p1;
+   Bool_t          HLT_PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1;
+   Bool_t          HLT_PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1;
+   Bool_t          HLT_PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1;
+   Bool_t          HLT_PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1;
+   Bool_t          HLT_PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1;
    Bool_t          HLT_PFMET120_PFMHT120_IDTight_PFHT60;
    Bool_t          HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60;
    Bool_t          HLT_PFMETTypeOne120_PFMHT120_IDTight_PFHT60;
@@ -1188,19 +1346,20 @@ public :
    Bool_t          HLT_MET105_IsoTrk50;
    Bool_t          HLT_MET120_IsoTrk50;
    Bool_t          HLT_SingleJet30_Mu12_SinglePFJet40;
-   Bool_t          HLT_Mu12_DoublePFJets40_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_Mu12_DoublePFJets100_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_Mu12_DoublePFJets200_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_Mu12_DoublePFJets350_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;
-   Bool_t          HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;
-   Bool_t          HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;
-   Bool_t          HLT_DoublePFJets40_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_DoublePFJets100_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_DoublePFJets200_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_DoublePFJets350_CaloBTagDeepCSV_p71;
-   Bool_t          HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;
-   Bool_t          HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;
+   Bool_t          HLT_Mu12_DoublePFJets40_CaloBTagCSV_p33;
+   Bool_t          HLT_Mu12_DoublePFJets100_CaloBTagCSV_p33;
+   Bool_t          HLT_Mu12_DoublePFJets200_CaloBTagCSV_p33;
+   Bool_t          HLT_Mu12_DoublePFJets350_CaloBTagCSV_p33;
+   Bool_t          HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagCSV_p33;
+   Bool_t          HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagCSV_p33;
+   Bool_t          HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets40_CaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets100_CaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets200_CaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets350_CaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets100MaxDeta1p6_DoubleCaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagCSV_p33;
+   Bool_t          HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagCSV_p33;
    Bool_t          HLT_Photon300_NoHE;
    Bool_t          HLT_Mu8_TrkIsoVVL;
    Bool_t          HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ;
@@ -1208,10 +1367,6 @@ public :
    Bool_t          HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350_DZ;
    Bool_t          HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350;
    Bool_t          HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
-   Bool_t          HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30;
-   Bool_t          HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30;
-   Bool_t          HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30_PFBtagDeepCSV_1p5;
-   Bool_t          HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30_CaloBtagDeepCSV_1p5;
    Bool_t          HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;
    Bool_t          HLT_Mu17_TrkIsoVVL;
    Bool_t          HLT_Mu19_TrkIsoVVL;
@@ -1222,18 +1377,7 @@ public :
    Bool_t          HLT_BTagMu_AK4DiJet170_Mu5;
    Bool_t          HLT_BTagMu_AK4Jet300_Mu5;
    Bool_t          HLT_BTagMu_AK8DiJet170_Mu5;
-   Bool_t          HLT_BTagMu_AK8Jet170_DoubleMu5;
    Bool_t          HLT_BTagMu_AK8Jet300_Mu5;
-   Bool_t          HLT_BTagMu_AK4DiJet20_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK4DiJet40_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK4DiJet70_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK4DiJet110_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK4DiJet170_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK4Jet300_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK8DiJet170_Mu5_noalgo;
-   Bool_t          HLT_BTagMu_AK8Jet170_DoubleMu5_noalgo;
-   Bool_t          HLT_BTagMu_AK8Jet300_Mu5_noalgo;
-   Bool_t          HLT_Ele15_Ele8_CaloIdL_TrackIdL_IsoVL;
    Bool_t          HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
    Bool_t          HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
    Bool_t          HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
@@ -1246,7 +1390,7 @@ public :
    Bool_t          HLT_TriplePhoton_30_30_10_CaloIdLV2;
    Bool_t          HLT_TriplePhoton_30_30_10_CaloIdLV2_R9IdVL;
    Bool_t          HLT_TriplePhoton_35_35_5_CaloIdLV2_R9IdVL;
-   Bool_t          HLT_Photon20;
+   Bool_t          HLT_Photon25;
    Bool_t          HLT_Photon33;
    Bool_t          HLT_Photon50;
    Bool_t          HLT_Photon75;
@@ -1255,16 +1399,8 @@ public :
    Bool_t          HLT_Photon150;
    Bool_t          HLT_Photon175;
    Bool_t          HLT_Photon200;
-   Bool_t          HLT_Photon100EB_TightID_TightIso;
-   Bool_t          HLT_Photon110EB_TightID_TightIso;
-   Bool_t          HLT_Photon120EB_TightID_TightIso;
-   Bool_t          HLT_Photon100EBHE10;
-   Bool_t          HLT_Photon100EEHE10;
-   Bool_t          HLT_Photon100EE_TightID_TightIso;
    Bool_t          HLT_Photon50_R9Id90_HE10_IsoM;
    Bool_t          HLT_Photon75_R9Id90_HE10_IsoM;
-   Bool_t          HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ300_PFJetsMJJ400DEta3;
-   Bool_t          HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ400_PFJetsMJJ600DEta3;
    Bool_t          HLT_Photon90_R9Id90_HE10_IsoM;
    Bool_t          HLT_Photon120_R9Id90_HE10_IsoM;
    Bool_t          HLT_Photon165_R9Id90_HE10_IsoM;
@@ -1273,8 +1409,8 @@ public :
    Bool_t          HLT_Diphoton30_22_R9Id_OR_IsoCaloId_AND_HE_R9Id_Mass95;
    Bool_t          HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55;
    Bool_t          HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55;
-   Bool_t          HLT_Photon35_TwoProngs35;
-   Bool_t          HLT_IsoMu24_TwoProngs35;
+   Bool_t          HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55;
+   Bool_t          HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55;
    Bool_t          HLT_Dimuon0_Jpsi_L1_NoOS;
    Bool_t          HLT_Dimuon0_Jpsi_NoVertexing_NoOS;
    Bool_t          HLT_Dimuon0_Jpsi;
@@ -1297,7 +1433,7 @@ public :
    Bool_t          HLT_Dimuon0_LowMass_L1_TM530;
    Bool_t          HLT_Dimuon0_Upsilon_Muon_L1_TM0;
    Bool_t          HLT_Dimuon0_Upsilon_Muon_NoL1Mass;
-   Bool_t          HLT_TripleMu_5_3_3_Mass3p8_DZ;
+   Bool_t          HLT_TripleMu_5_3_3_Mass3p8to60_DZ;
    Bool_t          HLT_TripleMu_10_5_5_DZ;
    Bool_t          HLT_TripleMu_12_10_5;
    Bool_t          HLT_Tau3Mu_Mu7_Mu1_TkMu1_Tau15;
@@ -1315,53 +1451,47 @@ public :
    Bool_t          HLT_DoubleMu48NoFiltersNoVtx;
    Bool_t          HLT_Mu43NoFiltersNoVtx_Photon43_CaloIdL;
    Bool_t          HLT_Mu48NoFiltersNoVtx_Photon48_CaloIdL;
-   Bool_t          HLT_Mu38NoFiltersNoVtxDisplaced_Photon38_CaloIdL;
-   Bool_t          HLT_Mu43NoFiltersNoVtxDisplaced_Photon43_CaloIdL;
-   Bool_t          HLT_DoubleMu33NoFiltersNoVtxDisplaced;
-   Bool_t          HLT_DoubleMu40NoFiltersNoVtxDisplaced;
    Bool_t          HLT_DoubleMu20_7_Mass0to30_L1_DM4;
    Bool_t          HLT_DoubleMu20_7_Mass0to30_L1_DM4EG;
    Bool_t          HLT_HT425;
    Bool_t          HLT_HT430_DisplacedDijet40_DisplacedTrack;
-   Bool_t          HLT_HT500_DisplacedDijet40_DisplacedTrack;
    Bool_t          HLT_HT430_DisplacedDijet60_DisplacedTrack;
+   Bool_t          HLT_HT430_DisplacedDijet80_DisplacedTrack;
    Bool_t          HLT_HT400_DisplacedDijet40_DisplacedTrack;
    Bool_t          HLT_HT650_DisplacedDijet60_Inclusive;
+   Bool_t          HLT_HT550_DisplacedDijet80_Inclusive;
    Bool_t          HLT_HT550_DisplacedDijet60_Inclusive;
+   Bool_t          HLT_HT650_DisplacedDijet80_Inclusive;
+   Bool_t          HLT_HT750_DisplacedDijet80_Inclusive;
    Bool_t          HLT_DiJet110_35_Mjj650_PFMET110;
    Bool_t          HLT_DiJet110_35_Mjj650_PFMET120;
    Bool_t          HLT_DiJet110_35_Mjj650_PFMET130;
    Bool_t          HLT_TripleJet110_35_35_Mjj650_PFMET110;
    Bool_t          HLT_TripleJet110_35_35_Mjj650_PFMET120;
    Bool_t          HLT_TripleJet110_35_35_Mjj650_PFMET130;
+   Bool_t          HLT_VBF_DoubleLooseChargedIsoPFTau20_Trk1_eta2p1_Reg;
+   Bool_t          HLT_VBF_DoubleMediumChargedIsoPFTau20_Trk1_eta2p1_Reg;
+   Bool_t          HLT_VBF_DoubleTightChargedIsoPFTau20_Trk1_eta2p1_Reg;
    Bool_t          HLT_Ele30_eta2p1_WPTight_Gsf_CentralPFJet35_EleCleaned;
    Bool_t          HLT_Ele28_eta2p1_WPTight_Gsf_HT150;
    Bool_t          HLT_Ele28_HighEta_SC20_Mass55;
    Bool_t          HLT_DoubleMu20_7_Mass0to30_Photon23;
-   Bool_t          HLT_Ele15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5;
+   Bool_t          HLT_Ele15_IsoVVVL_PFHT450_CaloBTagCSV_4p5;
    Bool_t          HLT_Ele15_IsoVVVL_PFHT450_PFMET50;
    Bool_t          HLT_Ele15_IsoVVVL_PFHT450;
    Bool_t          HLT_Ele50_IsoVVVL_PFHT450;
    Bool_t          HLT_Ele15_IsoVVVL_PFHT600;
-   Bool_t          HLT_Mu4_TrkIsoVVL_DiPFJet90_40_DEta3p5_MJJ750_HTT300_PFMETNoMu60;
    Bool_t          HLT_Mu8_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT300_PFMETNoMu60;
    Bool_t          HLT_Mu10_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT350_PFMETNoMu60;
-   Bool_t          HLT_Mu15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5;
+   Bool_t          HLT_Mu15_IsoVVVL_PFHT450_CaloBTagCSV_4p5;
    Bool_t          HLT_Mu15_IsoVVVL_PFHT450_PFMET50;
    Bool_t          HLT_Mu15_IsoVVVL_PFHT450;
    Bool_t          HLT_Mu50_IsoVVVL_PFHT450;
    Bool_t          HLT_Mu15_IsoVVVL_PFHT600;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMET70_PFMHT70_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMET80_PFMHT80_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMET90_PFMHT90_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMET100_PFMHT100_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu70_PFMHTNoMu70_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu80_PFMHTNoMu80_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu90_PFMHTNoMu90_IDTight;
-   Bool_t          HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu100_PFMHTNoMu100_IDTight;
    Bool_t          HLT_Dimuon10_PsiPrime_Barrel_Seagulls;
    Bool_t          HLT_Dimuon20_Jpsi_Barrel_Seagulls;
-   Bool_t          HLT_Dimuon12_Upsilon_y1p4;
+   Bool_t          HLT_Dimuon10_Upsilon_Barrel_Seagulls;
+   Bool_t          HLT_Dimuon12_Upsilon_eta1p5;
    Bool_t          HLT_Dimuon14_Phi_Barrel_Seagulls;
    Bool_t          HLT_Dimuon18_PsiPrime;
    Bool_t          HLT_Dimuon25_Jpsi;
@@ -1369,10 +1499,10 @@ public :
    Bool_t          HLT_Dimuon24_Upsilon_noCorrL1;
    Bool_t          HLT_Dimuon24_Phi_noCorrL1;
    Bool_t          HLT_Dimuon25_Jpsi_noCorrL1;
-   Bool_t          HLT_DiMu4_Ele9_CaloIdL_TrackIdL_DZ_Mass3p8;
    Bool_t          HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ;
    Bool_t          HLT_DiMu9_Ele9_CaloIdL_TrackIdL;
    Bool_t          HLT_DoubleIsoMu20_eta2p1;
+   Bool_t          HLT_DoubleIsoMu24_eta2p1;
    Bool_t          HLT_TrkMu12_DoubleTrkMu5NoFiltersNoVtx;
    Bool_t          HLT_TrkMu16_DoubleTrkMu6NoFiltersNoVtx;
    Bool_t          HLT_TrkMu17_DoubleTrkMu8NoFiltersNoVtx;
@@ -1382,7 +1512,6 @@ public :
    Bool_t          HLT_Mu17_Photon30_IsoCaloId;
    Bool_t          HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30;
    Bool_t          HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30;
-   Bool_t          HLT_Ele15_CaloIdL_TrackIdL_IsoVL_PFJet30;
    Bool_t          HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30;
    Bool_t          HLT_Ele8_CaloIdM_TrackIdM_PFJet30;
    Bool_t          HLT_Ele17_CaloIdM_TrackIdM_PFJet30;
@@ -1394,17 +1523,22 @@ public :
    Bool_t          HLT_Ele200_CaloIdVT_GsfTrkIdT;
    Bool_t          HLT_Ele250_CaloIdVT_GsfTrkIdT;
    Bool_t          HLT_Ele300_CaloIdVT_GsfTrkIdT;
-   Bool_t          HLT_PFHT330PT30_QuadPFJet_75_60_45_40_TriplePFBTagDeepCSV_4p5;
-   Bool_t          HLT_PFHT330PT30_QuadPFJet_75_60_45_40;
-   Bool_t          HLT_PFHT400_SixPFJet32_DoublePFBTagDeepCSV_2p94;
-   Bool_t          HLT_PFHT400_SixPFJet32;
-   Bool_t          HLT_PFHT450_SixPFJet36_PFBTagDeepCSV_1p59;
-   Bool_t          HLT_PFHT450_SixPFJet36;
+   Bool_t          HLT_PFHT300PT30_QuadPFJet_75_60_45_40;
+   Bool_t          HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0;
+   Bool_t          HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2;
+   Bool_t          HLT_PFHT380_SixPFJet32_DoublePFBTagDeepCSV_2p2;
+   Bool_t          HLT_PFHT380_SixPFJet32;
+   Bool_t          HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5;
+   Bool_t          HLT_PFHT430_SixPFJet40;
    Bool_t          HLT_PFHT350;
    Bool_t          HLT_PFHT350MinPFJet15;
    Bool_t          HLT_Photon60_R9Id90_CaloIdL_IsoL;
    Bool_t          HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL;
    Bool_t          HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL_PFHT350MinPFJet15;
+   Bool_t          HLT_FullTrack_Multiplicity85;
+   Bool_t          HLT_FullTrack_Multiplicity100;
+   Bool_t          HLT_FullTrack_Multiplicity130;
+   Bool_t          HLT_FullTrack_Multiplicity155;
    Bool_t          HLT_ECALHT800;
    Bool_t          HLT_DiSC30_18_EIso_AND_HE_Mass70;
    Bool_t          HLT_Physics;
@@ -1418,7 +1552,6 @@ public :
    Bool_t          HLT_Physics_part7;
    Bool_t          HLT_Random;
    Bool_t          HLT_ZeroBias;
-   Bool_t          HLT_ZeroBias_Alignment;
    Bool_t          HLT_ZeroBias_part0;
    Bool_t          HLT_ZeroBias_part1;
    Bool_t          HLT_ZeroBias_part2;
@@ -1438,19 +1571,25 @@ public :
    Bool_t          HLT_AK4PFJet80;
    Bool_t          HLT_AK4PFJet100;
    Bool_t          HLT_AK4PFJet120;
-   Bool_t          HLT_SinglePhoton10_Eta3p1ForPPRef;
-   Bool_t          HLT_SinglePhoton20_Eta3p1ForPPRef;
-   Bool_t          HLT_SinglePhoton30_Eta3p1ForPPRef;
+   Bool_t          HLT_HISinglePhoton10_Eta3p1ForPPRef;
+   Bool_t          HLT_HISinglePhoton20_Eta3p1ForPPRef;
+   Bool_t          HLT_HISinglePhoton30_Eta3p1ForPPRef;
+   Bool_t          HLT_HISinglePhoton40_Eta3p1ForPPRef;
+   Bool_t          HLT_HISinglePhoton50_Eta3p1ForPPRef;
+   Bool_t          HLT_HISinglePhoton60_Eta3p1ForPPRef;
    Bool_t          HLT_Photon20_HoverELoose;
    Bool_t          HLT_Photon30_HoverELoose;
+   Bool_t          HLT_Photon40_HoverELoose;
+   Bool_t          HLT_Photon50_HoverELoose;
+   Bool_t          HLT_Photon60_HoverELoose;
    Bool_t          HLT_EcalCalibration;
    Bool_t          HLT_HcalCalibration;
    Bool_t          HLT_L1UnpairedBunchBptxMinus;
    Bool_t          HLT_L1UnpairedBunchBptxPlus;
    Bool_t          HLT_L1NotBptxOR;
+   Bool_t          HLT_L1MinimumBiasHF_OR;
+   Bool_t          HLT_L1MinimumBiasHF0OR;
    Bool_t          HLT_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142;
-   Bool_t          HLT_CDC_L2cosmic_5_er1p0;
-   Bool_t          HLT_CDC_L2cosmic_5p5_er1p0;
    Bool_t          HLT_HcalNZS;
    Bool_t          HLT_HcalPhiSym;
    Bool_t          HLT_HcalIsolatedbunch;
@@ -1461,18 +1600,43 @@ public :
    Bool_t          HLT_ZeroBias_FirstCollisionInTrain;
    Bool_t          HLT_ZeroBias_LastCollisionInTrain;
    Bool_t          HLT_ZeroBias_FirstBXAfterTrain;
+   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1;
+   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_CrossL1;
+   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_CrossL1;
+   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_TightID_CrossL1;
+   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_TightID_CrossL1;
+   Bool_t          HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_TightID_CrossL1;
+   Bool_t          HLT_DoubleLooseChargedIsoPFTau35_Trk1_eta2p1_Reg;
+   Bool_t          HLT_DoubleLooseChargedIsoPFTau40_Trk1_eta2p1_Reg;
+   Bool_t          HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg;
+   Bool_t          HLT_DoubleMediumChargedIsoPFTau40_Trk1_eta2p1_Reg;
+   Bool_t          HLT_DoubleTightChargedIsoPFTau35_Trk1_eta2p1_Reg;
+   Bool_t          HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg;
+   Bool_t          HLT_DoubleLooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg;
+   Bool_t          HLT_DoubleLooseChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg;
+   Bool_t          HLT_DoubleMediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg;
+   Bool_t          HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg;
+   Bool_t          HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg;
+   Bool_t          HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg;
    Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr;
    Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET90;
    Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET100;
    Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET110;
    Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET120;
    Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET130;
-   Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET140;
    Bool_t          HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr;
    Bool_t          HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_1pr;
    Bool_t          HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1;
-   Bool_t          HLT_MediumChargedIsoPFTau200HighPtRelaxedIso_Trk50_eta2p1;
-   Bool_t          HLT_MediumChargedIsoPFTau220HighPtRelaxedIso_Trk50_eta2p1;
+   Bool_t          HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1;
+   Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1;
    Bool_t          HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL;
    Bool_t          HLT_Rsq0p35;
    Bool_t          HLT_Rsq0p40;
@@ -1480,18 +1644,10 @@ public :
    Bool_t          HLT_RsqMR320_Rsq0p09_MR200;
    Bool_t          HLT_RsqMR300_Rsq0p09_MR200_4jet;
    Bool_t          HLT_RsqMR320_Rsq0p09_MR200_4jet;
-   Bool_t          HLT_IsoMu27_MET90;
-   Bool_t          HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg;
-   Bool_t          HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg;
-   Bool_t          HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg;
-   Bool_t          HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg;
-   Bool_t          HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_eta2p1_Reg;
-   Bool_t          HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg;
-   Bool_t          HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg;
-   Bool_t          HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg;
-   Bool_t          HLT_VBF_DoubleLooseChargedIsoPFTauHPS20_Trk1_eta2p1;
-   Bool_t          HLT_VBF_DoubleMediumChargedIsoPFTauHPS20_Trk1_eta2p1;
-   Bool_t          HLT_VBF_DoubleTightChargedIsoPFTauHPS20_Trk1_eta2p1;
+   Bool_t          HLT_L1_DoubleJet30_Mass_Min400_Mu10;
+   Bool_t          HLT_IsoMu27_LooseChargedIsoPFTau20_SingleL1;
+   Bool_t          HLT_IsoMu27_MediumChargedIsoPFTau20_SingleL1;
+   Bool_t          HLT_IsoMu27_TightChargedIsoPFTau20_SingleL1;
    Bool_t          HLT_Photon50_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3_PFMET50;
    Bool_t          HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3;
    Bool_t          HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ600DEta3;
@@ -1510,128 +1666,82 @@ public :
    Bool_t          HLT_Mu23_Mu12_SameSign_DZ;
    Bool_t          HLT_Mu23_Mu12;
    Bool_t          HLT_Mu23_Mu12_DZ;
-   Bool_t          HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi1p05;
+   Bool_t          HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi;
    Bool_t          HLT_DoubleMu2_Jpsi_DoubleTkMu0_Phi;
    Bool_t          HLT_DoubleMu3_DCA_PFMET50_PFMHT60;
-   Bool_t          HLT_TripleMu_5_3_3_Mass3p8_DCA;
-   Bool_t          HLT_QuadPFJet98_83_71_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;
-   Bool_t          HLT_QuadPFJet103_88_75_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;
-   Bool_t          HLT_QuadPFJet111_90_80_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;
-   Bool_t          HLT_QuadPFJet98_83_71_15_PFBTagDeepCSV_1p3_VBF2;
-   Bool_t          HLT_QuadPFJet103_88_75_15_PFBTagDeepCSV_1p3_VBF2;
-   Bool_t          HLT_QuadPFJet105_88_76_15_PFBTagDeepCSV_1p3_VBF2;
-   Bool_t          HLT_QuadPFJet111_90_80_15_PFBTagDeepCSV_1p3_VBF2;
+   Bool_t          HLT_TripleMu_5_3_3_Mass3p8to60_DCA;
+   Bool_t          HLT_QuadPFJet98_83_71_15_DoubleBTagCSV_p013_p08_VBF1;
+   Bool_t          HLT_QuadPFJet103_88_75_15_DoubleBTagCSV_p013_p08_VBF1;
+   Bool_t          HLT_QuadPFJet105_90_76_15_DoubleBTagCSV_p013_p08_VBF1;
+   Bool_t          HLT_QuadPFJet111_90_80_15_DoubleBTagCSV_p013_p08_VBF1;
+   Bool_t          HLT_QuadPFJet98_83_71_15_BTagCSV_p013_VBF2;
+   Bool_t          HLT_QuadPFJet103_88_75_15_BTagCSV_p013_VBF2;
+   Bool_t          HLT_QuadPFJet105_88_76_15_BTagCSV_p013_VBF2;
+   Bool_t          HLT_QuadPFJet111_90_80_15_BTagCSV_p013_VBF2;
    Bool_t          HLT_QuadPFJet98_83_71_15;
    Bool_t          HLT_QuadPFJet103_88_75_15;
    Bool_t          HLT_QuadPFJet105_88_76_15;
    Bool_t          HLT_QuadPFJet111_90_80_15;
-   Bool_t          HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p17;
-   Bool_t          HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p1;
-   Bool_t          HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02;
-   Bool_t          HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2;
-   Bool_t          HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4;
-   Bool_t          HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto_Mass55;
-   Bool_t          HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto;
-   Bool_t          HLT_Mu12_IP6_part0;
-   Bool_t          HLT_Mu12_IP6_part1;
-   Bool_t          HLT_Mu12_IP6_part2;
-   Bool_t          HLT_Mu12_IP6_part3;
-   Bool_t          HLT_Mu12_IP6_part4;
-   Bool_t          HLT_Mu9_IP5_part0;
-   Bool_t          HLT_Mu9_IP5_part1;
-   Bool_t          HLT_Mu9_IP5_part2;
-   Bool_t          HLT_Mu9_IP5_part3;
-   Bool_t          HLT_Mu9_IP5_part4;
-   Bool_t          HLT_Mu7_IP4_part0;
-   Bool_t          HLT_Mu7_IP4_part1;
-   Bool_t          HLT_Mu7_IP4_part2;
-   Bool_t          HLT_Mu7_IP4_part3;
-   Bool_t          HLT_Mu7_IP4_part4;
-   Bool_t          HLT_Mu9_IP4_part0;
-   Bool_t          HLT_Mu9_IP4_part1;
-   Bool_t          HLT_Mu9_IP4_part2;
-   Bool_t          HLT_Mu9_IP4_part3;
-   Bool_t          HLT_Mu9_IP4_part4;
-   Bool_t          HLT_Mu8_IP5_part0;
-   Bool_t          HLT_Mu8_IP5_part1;
-   Bool_t          HLT_Mu8_IP5_part2;
-   Bool_t          HLT_Mu8_IP5_part3;
-   Bool_t          HLT_Mu8_IP5_part4;
-   Bool_t          HLT_Mu8_IP6_part0;
-   Bool_t          HLT_Mu8_IP6_part1;
-   Bool_t          HLT_Mu8_IP6_part2;
-   Bool_t          HLT_Mu8_IP6_part3;
-   Bool_t          HLT_Mu8_IP6_part4;
-   Bool_t          HLT_Mu9_IP6_part0;
-   Bool_t          HLT_Mu9_IP6_part1;
-   Bool_t          HLT_Mu9_IP6_part2;
-   Bool_t          HLT_Mu9_IP6_part3;
-   Bool_t          HLT_Mu9_IP6_part4;
-   Bool_t          HLT_Mu8_IP3_part0;
-   Bool_t          HLT_Mu8_IP3_part1;
-   Bool_t          HLT_Mu8_IP3_part2;
-   Bool_t          HLT_Mu8_IP3_part3;
-   Bool_t          HLT_Mu8_IP3_part4;
-   Bool_t          HLT_QuadPFJet105_88_76_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;
-   Bool_t          HLT_TrkMu6NoFiltersNoVtx;
-   Bool_t          HLT_TrkMu16NoFiltersNoVtx;
-   Bool_t          HLT_DoubleTrkMu_16_6_NoFiltersNoVtx;
+   Bool_t          HLT_AK8PFJet330_PFAK8BTagCSV_p17;
+   Bool_t          HLT_AK8PFJet330_PFAK8BTagCSV_p1;
+   Bool_t          HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55;
+   Bool_t          HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55;
    Bool_t          HLTriggerFinalPath;
    Bool_t          L1simulation_step;
-   Float_t         Jet_pt_raw[28];   //[nJet]
-   Float_t         Jet_pt_nom[28];   //[nJet]
-   Float_t         Jet_mass_raw[28];   //[nJet]
-   Float_t         Jet_mass_nom[28];   //[nJet]
-   Float_t         Jet_corr_JEC[28];   //[nJet]
-   Float_t         Jet_corr_JER[28];   //[nJet]
+   Float_t         Jet_pt_raw[30];   //[nJet]
+   Float_t         Jet_pt_nom[30];   //[nJet]
+   Float_t         Jet_mass_raw[30];   //[nJet]
+   Float_t         Jet_mass_nom[30];   //[nJet]
+   Float_t         Jet_corr_JEC[30];   //[nJet]
+   Float_t         Jet_corr_JER[30];   //[nJet]
    Float_t         PuppiMET_T1_pt;
    Float_t         PuppiMET_T1_phi;
    Float_t         PuppiMET_T1Smear_pt;
    Float_t         PuppiMET_T1Smear_phi;
-   Float_t         Jet_pt_jer0Up[28];   //[nJet]
-   Float_t         Jet_mass_jer0Up[28];   //[nJet]
+   Float_t         Jet_pt_jer0Up[30];   //[nJet]
+   Float_t         Jet_mass_jer0Up[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer0Up;
    Float_t         PuppiMET_T1_phi_jer0Up;
    Float_t         PuppiMET_T1Smear_pt_jer0Up;
    Float_t         PuppiMET_T1Smear_phi_jer0Up;
-   Float_t         Jet_pt_jer1Up[28];   //[nJet]
-   Float_t         Jet_mass_jer1Up[28];   //[nJet]
+   Float_t         Jet_pt_jer1Up[30];   //[nJet]
+   Float_t         Jet_mass_jer1Up[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer1Up;
    Float_t         PuppiMET_T1_phi_jer1Up;
    Float_t         PuppiMET_T1Smear_pt_jer1Up;
    Float_t         PuppiMET_T1Smear_phi_jer1Up;
-   Float_t         Jet_pt_jer2Up[28];   //[nJet]
-   Float_t         Jet_mass_jer2Up[28];   //[nJet]
+   Float_t         Jet_pt_jer2Up[30];   //[nJet]
+   Float_t         Jet_mass_jer2Up[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer2Up;
    Float_t         PuppiMET_T1_phi_jer2Up;
    Float_t         PuppiMET_T1Smear_pt_jer2Up;
    Float_t         PuppiMET_T1Smear_phi_jer2Up;
-   Float_t         Jet_pt_jer3Up[28];   //[nJet]
-   Float_t         Jet_mass_jer3Up[28];   //[nJet]
+   Float_t         Jet_pt_jer3Up[30];   //[nJet]
+   Float_t         Jet_mass_jer3Up[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer3Up;
    Float_t         PuppiMET_T1_phi_jer3Up;
    Float_t         PuppiMET_T1Smear_pt_jer3Up;
    Float_t         PuppiMET_T1Smear_phi_jer3Up;
-   Float_t         Jet_pt_jer4Up[28];   //[nJet]
-   Float_t         Jet_mass_jer4Up[28];   //[nJet]
+   Float_t         Jet_pt_jer4Up[30];   //[nJet]
+   Float_t         Jet_mass_jer4Up[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer4Up;
    Float_t         PuppiMET_T1_phi_jer4Up;
    Float_t         PuppiMET_T1Smear_pt_jer4Up;
    Float_t         PuppiMET_T1Smear_phi_jer4Up;
-   Float_t         Jet_pt_jer5Up[28];   //[nJet]
-   Float_t         Jet_mass_jer5Up[28];   //[nJet]
+   Float_t         Jet_pt_jer5Up[30];   //[nJet]
+   Float_t         Jet_mass_jer5Up[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer5Up;
    Float_t         PuppiMET_T1_phi_jer5Up;
    Float_t         PuppiMET_T1Smear_pt_jer5Up;
    Float_t         PuppiMET_T1Smear_phi_jer5Up;
-   Float_t         Jet_pt_jesTotalUp[28];   //[nJet]
-   Float_t         Jet_mass_jesTotalUp[28];   //[nJet]
+   Float_t         Jet_pt_jesTotalUp[30];   //[nJet]
+   Float_t         Jet_mass_jesTotalUp[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jesTotalUp;
    Float_t         PuppiMET_T1_phi_jesTotalUp;
    Float_t         PuppiMET_T1Smear_pt_jesTotalUp;
    Float_t         PuppiMET_T1Smear_phi_jesTotalUp;
-   Float_t         Jet_pt_jesHEMIssueUp[28];   //[nJet]
-   Float_t         Jet_mass_jesHEMIssueUp[28];   //[nJet]
+   Float_t         Jet_pt_jesHEMIssueUp[30];   //[nJet]
+   Float_t         Jet_mass_jesHEMIssueUp[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jesHEMIssueUp;
    Float_t         PuppiMET_T1_phi_jesHEMIssueUp;
    Float_t         PuppiMET_T1Smear_pt_jesHEMIssueUp;
@@ -1640,50 +1750,50 @@ public :
    Float_t         PuppiMET_T1_phi_unclustEnUp;
    Float_t         PuppiMET_T1Smear_pt_unclustEnUp;
    Float_t         PuppiMET_T1Smear_phi_unclustEnUp;
-   Float_t         Jet_pt_jer0Down[28];   //[nJet]
-   Float_t         Jet_mass_jer0Down[28];   //[nJet]
+   Float_t         Jet_pt_jer0Down[30];   //[nJet]
+   Float_t         Jet_mass_jer0Down[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer0Down;
    Float_t         PuppiMET_T1_phi_jer0Down;
    Float_t         PuppiMET_T1Smear_pt_jer0Down;
    Float_t         PuppiMET_T1Smear_phi_jer0Down;
-   Float_t         Jet_pt_jer1Down[28];   //[nJet]
-   Float_t         Jet_mass_jer1Down[28];   //[nJet]
+   Float_t         Jet_pt_jer1Down[30];   //[nJet]
+   Float_t         Jet_mass_jer1Down[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer1Down;
    Float_t         PuppiMET_T1_phi_jer1Down;
    Float_t         PuppiMET_T1Smear_pt_jer1Down;
    Float_t         PuppiMET_T1Smear_phi_jer1Down;
-   Float_t         Jet_pt_jer2Down[28];   //[nJet]
-   Float_t         Jet_mass_jer2Down[28];   //[nJet]
+   Float_t         Jet_pt_jer2Down[30];   //[nJet]
+   Float_t         Jet_mass_jer2Down[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer2Down;
    Float_t         PuppiMET_T1_phi_jer2Down;
    Float_t         PuppiMET_T1Smear_pt_jer2Down;
    Float_t         PuppiMET_T1Smear_phi_jer2Down;
-   Float_t         Jet_pt_jer3Down[28];   //[nJet]
-   Float_t         Jet_mass_jer3Down[28];   //[nJet]
+   Float_t         Jet_pt_jer3Down[30];   //[nJet]
+   Float_t         Jet_mass_jer3Down[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer3Down;
    Float_t         PuppiMET_T1_phi_jer3Down;
    Float_t         PuppiMET_T1Smear_pt_jer3Down;
    Float_t         PuppiMET_T1Smear_phi_jer3Down;
-   Float_t         Jet_pt_jer4Down[28];   //[nJet]
-   Float_t         Jet_mass_jer4Down[28];   //[nJet]
+   Float_t         Jet_pt_jer4Down[30];   //[nJet]
+   Float_t         Jet_mass_jer4Down[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer4Down;
    Float_t         PuppiMET_T1_phi_jer4Down;
    Float_t         PuppiMET_T1Smear_pt_jer4Down;
    Float_t         PuppiMET_T1Smear_phi_jer4Down;
-   Float_t         Jet_pt_jer5Down[28];   //[nJet]
-   Float_t         Jet_mass_jer5Down[28];   //[nJet]
+   Float_t         Jet_pt_jer5Down[30];   //[nJet]
+   Float_t         Jet_mass_jer5Down[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jer5Down;
    Float_t         PuppiMET_T1_phi_jer5Down;
    Float_t         PuppiMET_T1Smear_pt_jer5Down;
    Float_t         PuppiMET_T1Smear_phi_jer5Down;
-   Float_t         Jet_pt_jesTotalDown[28];   //[nJet]
-   Float_t         Jet_mass_jesTotalDown[28];   //[nJet]
+   Float_t         Jet_pt_jesTotalDown[30];   //[nJet]
+   Float_t         Jet_mass_jesTotalDown[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jesTotalDown;
    Float_t         PuppiMET_T1_phi_jesTotalDown;
    Float_t         PuppiMET_T1Smear_pt_jesTotalDown;
    Float_t         PuppiMET_T1Smear_phi_jesTotalDown;
-   Float_t         Jet_pt_jesHEMIssueDown[28];   //[nJet]
-   Float_t         Jet_mass_jesHEMIssueDown[28];   //[nJet]
+   Float_t         Jet_pt_jesHEMIssueDown[30];   //[nJet]
+   Float_t         Jet_mass_jesHEMIssueDown[30];   //[nJet]
    Float_t         PuppiMET_T1_pt_jesHEMIssueDown;
    Float_t         PuppiMET_T1_phi_jesHEMIssueDown;
    Float_t         PuppiMET_T1Smear_pt_jesHEMIssueDown;
@@ -1692,28 +1802,28 @@ public :
    Float_t         PuppiMET_T1_phi_unclustEnDown;
    Float_t         PuppiMET_T1Smear_pt_unclustEnDown;
    Float_t         PuppiMET_T1Smear_phi_unclustEnDown;
-   Float_t         Jet_btagSF_deepcsv_M_down[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_M[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_M_up[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_hf[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_cferr1[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_jes[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_cferr2[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_lf[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_lf[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_cferr1[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_lfstats1[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_lfstats2[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_hfstats1[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_hfstats2[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_lfstats2[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_hf[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_lfstats1[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_jes[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_hfstats2[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_down_hfstats1[28];   //[nJet]
-   Float_t         Jet_btagSF_deepcsv_shape_up_cferr2[28];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_M_down[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_M[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_M_up[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_hf[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_cferr1[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_jes[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_cferr2[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_lf[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_lf[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_cferr1[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_lfstats1[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_lfstats2[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_hfstats1[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_hfstats2[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_lfstats2[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_hf[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_lfstats1[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_jes[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_hfstats2[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_down_hfstats1[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_shape_up_cferr2[30];   //[nJet]
    Float_t         lumi;
    Char_t          pass_selection;
    Int_t           photon_selection;
@@ -1777,16 +1887,35 @@ public :
    Float_t         PrefireWeight;
    Float_t         PrefireWeight_Up;
    Float_t         PrefireWeight_Down;
-   Double_t        scalef;
-   Double_t        ele_id_scale;
-   Double_t        ele_reco_scale;
-   Double_t        muon_id_scale;
-   Double_t        muon_iso_scale;
-   Double_t        photon_id_scale;
-   Double_t        photon_veto_scale;
-   Double_t        btag_weight;
-   Double_t        btag_weight_up;
-   Double_t        btag_weight_down;
+   Float_t         scalef;
+   Float_t         ele_id_scale;
+   Float_t         ele_id_scale_Up;
+   Float_t         ele_id_scale_Down;
+   Float_t         ele_reco_scale;
+   Float_t         ele_reco_scale_Up;
+   Float_t         ele_reco_scale_Down;
+   Float_t         muon_id_scale;
+   Float_t         muon_id_scale_Up;
+   Float_t         muon_id_scale_Down;
+   Float_t         muon_iso_scale;
+   Float_t         muon_iso_scale_Up;
+   Float_t         muon_iso_scale_Down;
+   Float_t         photon_id_scale;
+   Float_t         photon_id_scale_Up;
+   Float_t         photon_id_scale_Down;
+   Float_t         photon_veto_scale;
+   Float_t         photon_veto_scale_Up;
+   Float_t         photon_veto_scale_Down;
+   Float_t         btag_weight;
+   Float_t         btag_weight_up;
+   Float_t         btag_weight_down;
+   Int_t           n_bjets_nom;
+   Int_t           njets20_nom;
+   Int_t           njets25_nom;
+   Int_t           njets30_nom;
+   Int_t           njets35_nom;
+   Int_t           njets40_nom;
+   Int_t           njets50_nom;
 
    // List of branches
    TBranch        *b_run;   //!
@@ -1807,6 +1936,33 @@ public :
    TBranch        *b_HTXS_stage_1_pTjet30;   //!
    TBranch        *b_HTXS_njets25;   //!
    TBranch        *b_HTXS_njets30;   //!
+   TBranch        *b_nboostedTau;   //!
+   TBranch        *b_boostedTau_chargedIso;   //!
+   TBranch        *b_boostedTau_eta;   //!
+   TBranch        *b_boostedTau_leadTkDeltaEta;   //!
+   TBranch        *b_boostedTau_leadTkDeltaPhi;   //!
+   TBranch        *b_boostedTau_leadTkPtOverTauPt;   //!
+   TBranch        *b_boostedTau_mass;   //!
+   TBranch        *b_boostedTau_neutralIso;   //!
+   TBranch        *b_boostedTau_phi;   //!
+   TBranch        *b_boostedTau_photonsOutsideSignalCone;   //!
+   TBranch        *b_boostedTau_pt;   //!
+   TBranch        *b_boostedTau_puCorr;   //!
+   TBranch        *b_boostedTau_rawAntiEle2018;   //!
+   TBranch        *b_boostedTau_rawIso;   //!
+   TBranch        *b_boostedTau_rawIsodR03;   //!
+   TBranch        *b_boostedTau_rawMVAnewDM2017v2;   //!
+   TBranch        *b_boostedTau_rawMVAoldDM2017v2;   //!
+   TBranch        *b_boostedTau_rawMVAoldDMdR032017v2;   //!
+   TBranch        *b_boostedTau_charge;   //!
+   TBranch        *b_boostedTau_decayMode;   //!
+   TBranch        *b_boostedTau_jetIdx;   //!
+   TBranch        *b_boostedTau_rawAntiEleCat2018;   //!
+   TBranch        *b_boostedTau_idAntiEle2018;   //!
+   TBranch        *b_boostedTau_idAntiMu;   //!
+   TBranch        *b_boostedTau_idMVAnewDM2017v2;   //!
+   TBranch        *b_boostedTau_idMVAoldDM2017v2;   //!
+   TBranch        *b_boostedTau_idMVAoldDMdR032017v2;   //!
    TBranch        *b_btagWeight_CSVV2;   //!
    TBranch        *b_btagWeight_DeepCSVB;   //!
    TBranch        *b_CaloMET_phi;   //!
@@ -1826,6 +1982,10 @@ public :
    TBranch        *b_DeepMETResponseTune_phi;   //!
    TBranch        *b_DeepMETResponseTune_pt;   //!
    TBranch        *b_nElectron;   //!
+   TBranch        *b_Electron_dEscaleDown;   //!
+   TBranch        *b_Electron_dEscaleUp;   //!
+   TBranch        *b_Electron_dEsigmaDown;   //!
+   TBranch        *b_Electron_dEsigmaUp;   //!
    TBranch        *b_Electron_deltaEtaSC;   //!
    TBranch        *b_Electron_dr03EcalRecHitSumEt;   //!
    TBranch        *b_Electron_dr03HcalDepth1TowerSumEt;   //!
@@ -1846,8 +2006,6 @@ public :
    TBranch        *b_Electron_mass;   //!
    TBranch        *b_Electron_miniPFRelIso_all;   //!
    TBranch        *b_Electron_miniPFRelIso_chg;   //!
-   TBranch        *b_Electron_mvaFall17V1Iso;   //!
-   TBranch        *b_Electron_mvaFall17V1noIso;   //!
    TBranch        *b_Electron_mvaFall17V2Iso;   //!
    TBranch        *b_Electron_mvaFall17V2noIso;   //!
    TBranch        *b_Electron_pfRelIso03_all;   //!
@@ -1861,7 +2019,6 @@ public :
    TBranch        *b_Electron_mvaTTH;   //!
    TBranch        *b_Electron_charge;   //!
    TBranch        *b_Electron_cutBased;   //!
-   TBranch        *b_Electron_cutBased_Fall17_V1;   //!
    TBranch        *b_Electron_jetIdx;   //!
    TBranch        *b_Electron_pdgId;   //!
    TBranch        *b_Electron_photonIdx;   //!
@@ -1873,12 +2030,6 @@ public :
    TBranch        *b_Electron_isPFcand;   //!
    TBranch        *b_Electron_jetNDauCharged;   //!
    TBranch        *b_Electron_lostHits;   //!
-   TBranch        *b_Electron_mvaFall17V1Iso_WP80;   //!
-   TBranch        *b_Electron_mvaFall17V1Iso_WP90;   //!
-   TBranch        *b_Electron_mvaFall17V1Iso_WPL;   //!
-   TBranch        *b_Electron_mvaFall17V1noIso_WP80;   //!
-   TBranch        *b_Electron_mvaFall17V1noIso_WP90;   //!
-   TBranch        *b_Electron_mvaFall17V1noIso_WPL;   //!
    TBranch        *b_Electron_mvaFall17V2Iso_WP80;   //!
    TBranch        *b_Electron_mvaFall17V2Iso_WP90;   //!
    TBranch        *b_Electron_mvaFall17V2Iso_WPL;   //!
@@ -1888,17 +2039,10 @@ public :
    TBranch        *b_Electron_seedGain;   //!
    TBranch        *b_nFatJet;   //!
    TBranch        *b_FatJet_area;   //!
-   TBranch        *b_FatJet_btagCMVA;   //!
    TBranch        *b_FatJet_btagCSVV2;   //!
-   TBranch        *b_FatJet_btagDDBvL;   //!
    TBranch        *b_FatJet_btagDDBvLV2;   //!
-   TBranch        *b_FatJet_btagDDBvL_noMD;   //!
-   TBranch        *b_FatJet_btagDDCvB;   //!
    TBranch        *b_FatJet_btagDDCvBV2;   //!
-   TBranch        *b_FatJet_btagDDCvB_noMD;   //!
-   TBranch        *b_FatJet_btagDDCvL;   //!
    TBranch        *b_FatJet_btagDDCvLV2;   //!
-   TBranch        *b_FatJet_btagDDCvL_noMD;   //!
    TBranch        *b_FatJet_btagDeepB;   //!
    TBranch        *b_FatJet_btagHbb;   //!
    TBranch        *b_FatJet_deepTagMD_H4qvsQCD;   //!
@@ -1933,6 +2077,7 @@ public :
    TBranch        *b_FatJet_particleNet_TvsQCD;   //!
    TBranch        *b_FatJet_particleNet_WvsQCD;   //!
    TBranch        *b_FatJet_particleNet_ZvsQCD;   //!
+   TBranch        *b_FatJet_particleNet_mass;   //!
    TBranch        *b_FatJet_phi;   //!
    TBranch        *b_FatJet_pt;   //!
    TBranch        *b_FatJet_rawFactor;   //!
@@ -1946,6 +2091,7 @@ public :
    TBranch        *b_FatJet_subJetIdx2;   //!
    TBranch        *b_FatJet_electronIdx3SJ;   //!
    TBranch        *b_FatJet_muonIdx3SJ;   //!
+   TBranch        *b_FatJet_nConstituents;   //!
    TBranch        *b_nFsrPhoton;   //!
    TBranch        *b_FsrPhoton_dROverEt2;   //!
    TBranch        *b_FsrPhoton_eta;   //!
@@ -1998,6 +2144,13 @@ public :
    TBranch        *b_GenVisTau_genPartIdxMother;   //!
    TBranch        *b_GenVisTau_status;   //!
    TBranch        *b_genWeight;   //!
+   TBranch        *b_LHEWeight_originalXWGTUP;   //!
+   TBranch        *b_nLHEPdfWeight;   //!
+   TBranch        *b_LHEPdfWeight;   //!
+   TBranch        *b_nLHEReweightingWeight;   //!
+   TBranch        *b_LHEReweightingWeight;   //!
+   TBranch        *b_nLHEScaleWeight;   //!
+   TBranch        *b_LHEScaleWeight;   //!
    TBranch        *b_nPSWeight;   //!
    TBranch        *b_PSWeight;   //!
    TBranch        *b_nIsoTrack;   //!
@@ -2010,6 +2163,7 @@ public :
    TBranch        *b_IsoTrack_pt;   //!
    TBranch        *b_IsoTrack_miniPFRelIso_all;   //!
    TBranch        *b_IsoTrack_miniPFRelIso_chg;   //!
+   TBranch        *b_IsoTrack_charge;   //!
    TBranch        *b_IsoTrack_fromPV;   //!
    TBranch        *b_IsoTrack_pdgId;   //!
    TBranch        *b_IsoTrack_isHighPurityTrack;   //!
@@ -2017,22 +2171,16 @@ public :
    TBranch        *b_IsoTrack_isFromLostTrack;   //!
    TBranch        *b_nJet;   //!
    TBranch        *b_Jet_area;   //!
-   TBranch        *b_Jet_btagCMVA;   //!
    TBranch        *b_Jet_btagCSVV2;   //!
    TBranch        *b_Jet_btagDeepB;   //!
-   TBranch        *b_Jet_btagDeepC;   //!
    TBranch        *b_Jet_btagDeepCvB;   //!
    TBranch        *b_Jet_btagDeepCvL;   //!
    TBranch        *b_Jet_btagDeepFlavB;   //!
-   TBranch        *b_Jet_btagDeepFlavC;   //!
    TBranch        *b_Jet_btagDeepFlavCvB;   //!
    TBranch        *b_Jet_btagDeepFlavCvL;   //!
    TBranch        *b_Jet_btagDeepFlavQG;   //!
    TBranch        *b_Jet_chEmEF;   //!
    TBranch        *b_Jet_chFPV0EF;   //!
-   TBranch        *b_Jet_chFPV1EF;   //!
-   TBranch        *b_Jet_chFPV2EF;   //!
-   TBranch        *b_Jet_chFPV3EF;   //!
    TBranch        *b_Jet_chHEF;   //!
    TBranch        *b_Jet_eta;   //!
    TBranch        *b_Jet_hfsigmaEtaEta;   //!
@@ -2058,10 +2206,69 @@ public :
    TBranch        *b_Jet_jetId;   //!
    TBranch        *b_Jet_muonIdx1;   //!
    TBranch        *b_Jet_muonIdx2;   //!
-   TBranch        *b_Jet_nConstituents;   //!
    TBranch        *b_Jet_nElectrons;   //!
    TBranch        *b_Jet_nMuons;   //!
    TBranch        *b_Jet_puId;   //!
+   TBranch        *b_Jet_nConstituents;   //!
+   TBranch        *b_L1PreFiringWeight_Dn;   //!
+   TBranch        *b_L1PreFiringWeight_ECAL_Dn;   //!
+   TBranch        *b_L1PreFiringWeight_ECAL_Nom;   //!
+   TBranch        *b_L1PreFiringWeight_ECAL_Up;   //!
+   TBranch        *b_L1PreFiringWeight_Muon_Nom;   //!
+   TBranch        *b_L1PreFiringWeight_Muon_StatDn;   //!
+   TBranch        *b_L1PreFiringWeight_Muon_StatUp;   //!
+   TBranch        *b_L1PreFiringWeight_Muon_SystDn;   //!
+   TBranch        *b_L1PreFiringWeight_Muon_SystUp;   //!
+   TBranch        *b_L1PreFiringWeight_Nom;   //!
+   TBranch        *b_L1PreFiringWeight_Up;   //!
+   TBranch        *b_LHE_HT;   //!
+   TBranch        *b_LHE_HTIncoming;   //!
+   TBranch        *b_LHE_Vpt;   //!
+   TBranch        *b_LHE_AlphaS;   //!
+   TBranch        *b_LHE_Njets;   //!
+   TBranch        *b_LHE_Nb;   //!
+   TBranch        *b_LHE_Nc;   //!
+   TBranch        *b_LHE_Nuds;   //!
+   TBranch        *b_LHE_Nglu;   //!
+   TBranch        *b_LHE_NpNLO;   //!
+   TBranch        *b_LHE_NpLO;   //!
+   TBranch        *b_nLHEPart;   //!
+   TBranch        *b_LHEPart_pt;   //!
+   TBranch        *b_LHEPart_eta;   //!
+   TBranch        *b_LHEPart_phi;   //!
+   TBranch        *b_LHEPart_mass;   //!
+   TBranch        *b_LHEPart_incomingpz;   //!
+   TBranch        *b_LHEPart_pdgId;   //!
+   TBranch        *b_LHEPart_status;   //!
+   TBranch        *b_LHEPart_spin;   //!
+   TBranch        *b_nLowPtElectron;   //!
+   TBranch        *b_LowPtElectron_ID;   //!
+   TBranch        *b_LowPtElectron_convVtxRadius;   //!
+   TBranch        *b_LowPtElectron_deltaEtaSC;   //!
+   TBranch        *b_LowPtElectron_dxy;   //!
+   TBranch        *b_LowPtElectron_dxyErr;   //!
+   TBranch        *b_LowPtElectron_dz;   //!
+   TBranch        *b_LowPtElectron_dzErr;   //!
+   TBranch        *b_LowPtElectron_eInvMinusPInv;   //!
+   TBranch        *b_LowPtElectron_embeddedID;   //!
+   TBranch        *b_LowPtElectron_energyErr;   //!
+   TBranch        *b_LowPtElectron_eta;   //!
+   TBranch        *b_LowPtElectron_hoe;   //!
+   TBranch        *b_LowPtElectron_mass;   //!
+   TBranch        *b_LowPtElectron_miniPFRelIso_all;   //!
+   TBranch        *b_LowPtElectron_miniPFRelIso_chg;   //!
+   TBranch        *b_LowPtElectron_phi;   //!
+   TBranch        *b_LowPtElectron_pt;   //!
+   TBranch        *b_LowPtElectron_ptbiased;   //!
+   TBranch        *b_LowPtElectron_r9;   //!
+   TBranch        *b_LowPtElectron_scEtOverPt;   //!
+   TBranch        *b_LowPtElectron_sieie;   //!
+   TBranch        *b_LowPtElectron_unbiased;   //!
+   TBranch        *b_LowPtElectron_charge;   //!
+   TBranch        *b_LowPtElectron_convWP;   //!
+   TBranch        *b_LowPtElectron_pdgId;   //!
+   TBranch        *b_LowPtElectron_convVeto;   //!
+   TBranch        *b_LowPtElectron_lostHits;   //!
    TBranch        *b_GenMET_phi;   //!
    TBranch        *b_GenMET_pt;   //!
    TBranch        *b_MET_MetUnclustEnUpDeltaX;   //!
@@ -2112,6 +2319,7 @@ public :
    TBranch        *b_Muon_inTimeMuon;   //!
    TBranch        *b_Muon_isGlobal;   //!
    TBranch        *b_Muon_isPFcand;   //!
+   TBranch        *b_Muon_isStandalone;   //!
    TBranch        *b_Muon_isTracker;   //!
    TBranch        *b_Muon_jetNDauCharged;   //!
    TBranch        *b_Muon_looseId;   //!
@@ -2129,6 +2337,10 @@ public :
    TBranch        *b_Muon_tkIsoId;   //!
    TBranch        *b_Muon_triggerIdLoose;   //!
    TBranch        *b_nPhoton;   //!
+   TBranch        *b_Photon_dEscaleDown;   //!
+   TBranch        *b_Photon_dEscaleUp;   //!
+   TBranch        *b_Photon_dEsigmaDown;   //!
+   TBranch        *b_Photon_dEsigmaUp;   //!
    TBranch        *b_Photon_eCorr;   //!
    TBranch        *b_Photon_energyErr;   //!
    TBranch        *b_Photon_eta;   //!
@@ -2212,7 +2424,6 @@ public :
    TBranch        *b_SoftActivityJetNjets2;   //!
    TBranch        *b_SoftActivityJetNjets5;   //!
    TBranch        *b_nSubJet;   //!
-   TBranch        *b_SubJet_btagCMVA;   //!
    TBranch        *b_SubJet_btagCSVV2;   //!
    TBranch        *b_SubJet_btagDeepB;   //!
    TBranch        *b_SubJet_eta;   //!
@@ -2240,37 +2451,20 @@ public :
    TBranch        *b_Tau_photonsOutsideSignalCone;   //!
    TBranch        *b_Tau_pt;   //!
    TBranch        *b_Tau_puCorr;   //!
-   TBranch        *b_Tau_rawAntiEle;   //!
-   TBranch        *b_Tau_rawAntiEle2018;   //!
    TBranch        *b_Tau_rawDeepTau2017v2p1VSe;   //!
    TBranch        *b_Tau_rawDeepTau2017v2p1VSjet;   //!
    TBranch        *b_Tau_rawDeepTau2017v2p1VSmu;   //!
    TBranch        *b_Tau_rawIso;   //!
    TBranch        *b_Tau_rawIsodR03;   //!
-   TBranch        *b_Tau_rawMVAnewDM2017v2;   //!
-   TBranch        *b_Tau_rawMVAoldDM;   //!
-   TBranch        *b_Tau_rawMVAoldDM2017v1;   //!
-   TBranch        *b_Tau_rawMVAoldDM2017v2;   //!
-   TBranch        *b_Tau_rawMVAoldDMdR032017v2;   //!
    TBranch        *b_Tau_charge;   //!
    TBranch        *b_Tau_decayMode;   //!
    TBranch        *b_Tau_jetIdx;   //!
-   TBranch        *b_Tau_rawAntiEleCat;   //!
-   TBranch        *b_Tau_rawAntiEleCat2018;   //!
-   TBranch        *b_Tau_idAntiEle;   //!
-   TBranch        *b_Tau_idAntiEle2018;   //!
    TBranch        *b_Tau_idAntiEleDeadECal;   //!
    TBranch        *b_Tau_idAntiMu;   //!
-   TBranch        *b_Tau_idDecayMode;   //!
-   TBranch        *b_Tau_idDecayModeNewDMs;   //!
+   TBranch        *b_Tau_idDecayModeOldDMs;   //!
    TBranch        *b_Tau_idDeepTau2017v2p1VSe;   //!
    TBranch        *b_Tau_idDeepTau2017v2p1VSjet;   //!
    TBranch        *b_Tau_idDeepTau2017v2p1VSmu;   //!
-   TBranch        *b_Tau_idMVAnewDM2017v2;   //!
-   TBranch        *b_Tau_idMVAoldDM;   //!
-   TBranch        *b_Tau_idMVAoldDM2017v1;   //!
-   TBranch        *b_Tau_idMVAoldDM2017v2;   //!
-   TBranch        *b_Tau_idMVAoldDMdR032017v2;   //!
    TBranch        *b_TkMET_phi;   //!
    TBranch        *b_TkMET_pt;   //!
    TBranch        *b_TkMET_sumEt;   //!
@@ -2302,6 +2496,9 @@ public :
    TBranch        *b_SV_dxy;   //!
    TBranch        *b_SV_dxySig;   //!
    TBranch        *b_SV_pAngle;   //!
+   TBranch        *b_SV_charge;   //!
+   TBranch        *b_boostedTau_genPartIdx;   //!
+   TBranch        *b_boostedTau_genPartFlav;   //!
    TBranch        *b_Electron_genPartIdx;   //!
    TBranch        *b_Electron_genPartFlav;   //!
    TBranch        *b_FatJet_genJetAK8Idx;   //!
@@ -2316,6 +2513,8 @@ public :
    TBranch        *b_Jet_genJetIdx;   //!
    TBranch        *b_Jet_hadronFlavour;   //!
    TBranch        *b_Jet_partonFlavour;   //!
+   TBranch        *b_LowPtElectron_genPartIdx;   //!
+   TBranch        *b_LowPtElectron_genPartFlav;   //!
    TBranch        *b_Muon_genPartIdx;   //!
    TBranch        *b_Muon_genPartFlav;   //!
    TBranch        *b_Photon_genPartIdx;   //!
@@ -2359,304 +2558,424 @@ public :
    TBranch        *b_L1_BptxPlus;   //!
    TBranch        *b_L1_BptxXOR;   //!
    TBranch        *b_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142;   //!
-   TBranch        *b_L1_DoubleEG8er2p5_HTT260er;   //!
-   TBranch        *b_L1_DoubleEG8er2p5_HTT280er;   //!
-   TBranch        *b_L1_DoubleEG8er2p5_HTT300er;   //!
-   TBranch        *b_L1_DoubleEG8er2p5_HTT320er;   //!
-   TBranch        *b_L1_DoubleEG8er2p5_HTT340er;   //!
-   TBranch        *b_L1_DoubleEG_15_10_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_20_10_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_22_10_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_25_12_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_25_14_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_27_14_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_LooseIso20_10_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_LooseIso22_10_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_LooseIso22_12_er2p5;   //!
-   TBranch        *b_L1_DoubleEG_LooseIso25_12_er2p5;   //!
+   TBranch        *b_L1_DoubleEG6_HTT240er;   //!
+   TBranch        *b_L1_DoubleEG6_HTT250er;   //!
+   TBranch        *b_L1_DoubleEG6_HTT255er;   //!
+   TBranch        *b_L1_DoubleEG6_HTT270er;   //!
+   TBranch        *b_L1_DoubleEG6_HTT300er;   //!
+   TBranch        *b_L1_DoubleEG8er2p6_HTT255er;   //!
+   TBranch        *b_L1_DoubleEG8er2p6_HTT270er;   //!
+   TBranch        *b_L1_DoubleEG8er2p6_HTT300er;   //!
+   TBranch        *b_L1_DoubleEG_15_10;   //!
+   TBranch        *b_L1_DoubleEG_18_17;   //!
+   TBranch        *b_L1_DoubleEG_20_18;   //!
+   TBranch        *b_L1_DoubleEG_22_10;   //!
+   TBranch        *b_L1_DoubleEG_22_12;   //!
+   TBranch        *b_L1_DoubleEG_22_15;   //!
+   TBranch        *b_L1_DoubleEG_23_10;   //!
+   TBranch        *b_L1_DoubleEG_24_17;   //!
+   TBranch        *b_L1_DoubleEG_25_12;   //!
+   TBranch        *b_L1_DoubleEG_25_13;   //!
+   TBranch        *b_L1_DoubleEG_25_14;   //!
+   TBranch        *b_L1_DoubleEG_LooseIso23_10;   //!
+   TBranch        *b_L1_DoubleEG_LooseIso24_10;   //!
+   TBranch        *b_L1_DoubleIsoTau28er2p1;   //!
+   TBranch        *b_L1_DoubleIsoTau30er2p1;   //!
    TBranch        *b_L1_DoubleIsoTau32er2p1;   //!
+   TBranch        *b_L1_DoubleIsoTau33er2p1;   //!
    TBranch        *b_L1_DoubleIsoTau34er2p1;   //!
+   TBranch        *b_L1_DoubleIsoTau35er2p1;   //!
    TBranch        *b_L1_DoubleIsoTau36er2p1;   //!
+   TBranch        *b_L1_DoubleIsoTau38er2p1;   //!
    TBranch        *b_L1_DoubleJet100er2p3_dEta_Max1p6;   //!
-   TBranch        *b_L1_DoubleJet100er2p5;   //!
+   TBranch        *b_L1_DoubleJet100er2p7;   //!
    TBranch        *b_L1_DoubleJet112er2p3_dEta_Max1p6;   //!
-   TBranch        *b_L1_DoubleJet120er2p5;   //!
-   TBranch        *b_L1_DoubleJet150er2p5;   //!
-   TBranch        *b_L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5;   //!
-   TBranch        *b_L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5;   //!
-   TBranch        *b_L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5;   //!
-   TBranch        *b_L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5;   //!
-   TBranch        *b_L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5;   //!
-   TBranch        *b_L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5;   //!
-   TBranch        *b_L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp;   //!
-   TBranch        *b_L1_DoubleJet40er2p5;   //!
+   TBranch        *b_L1_DoubleJet112er2p7;   //!
+   TBranch        *b_L1_DoubleJet120er2p7;   //!
+   TBranch        *b_L1_DoubleJet150er2p7;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min300_dEta_Max1p5;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min320_dEta_Max1p5;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min340_dEta_Max1p5;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min360_dEta_Max1p5;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min380_dEta_Max1p5;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min400_Mu10;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min400_Mu6;   //!
+   TBranch        *b_L1_DoubleJet30_Mass_Min400_dEta_Max1p5;   //!
+   TBranch        *b_L1_DoubleJet35_rmovlp_IsoTau45_Mass_Min450;   //!
+   TBranch        *b_L1_DoubleJet40er2p7;   //!
+   TBranch        *b_L1_DoubleJet50er2p7;   //!
+   TBranch        *b_L1_DoubleJet60er2p7;   //!
+   TBranch        *b_L1_DoubleJet60er2p7_ETM100;   //!
+   TBranch        *b_L1_DoubleJet60er2p7_ETM60;   //!
+   TBranch        *b_L1_DoubleJet60er2p7_ETM70;   //!
+   TBranch        *b_L1_DoubleJet60er2p7_ETM80;   //!
+   TBranch        *b_L1_DoubleJet60er2p7_ETM90;   //!
+   TBranch        *b_L1_DoubleJet80er2p7;   //!
    TBranch        *b_L1_DoubleJet_100_30_DoubleJet30_Mass_Min620;   //!
+   TBranch        *b_L1_DoubleJet_100_35_DoubleJet35_Mass_Min620;   //!
    TBranch        *b_L1_DoubleJet_110_35_DoubleJet35_Mass_Min620;   //!
+   TBranch        *b_L1_DoubleJet_110_40_DoubleJet40_Mass_Min620;   //!
+   TBranch        *b_L1_DoubleJet_115_35_DoubleJet35_Mass_Min620;   //!
    TBranch        *b_L1_DoubleJet_115_40_DoubleJet40_Mass_Min620;   //!
-   TBranch        *b_L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28;   //!
-   TBranch        *b_L1_DoubleJet_120_45_DoubleJet45_Mass_Min620;   //!
-   TBranch        *b_L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28;   //!
-   TBranch        *b_L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ;   //!
-   TBranch        *b_L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp;   //!
-   TBranch        *b_L1_DoubleJet_80_30_Mass_Min420_Mu8;   //!
    TBranch        *b_L1_DoubleJet_90_30_DoubleJet30_Mass_Min620;   //!
    TBranch        *b_L1_DoubleLooseIsoEG22er2p1;   //!
    TBranch        *b_L1_DoubleLooseIsoEG24er2p1;   //!
    TBranch        *b_L1_DoubleMu0;   //!
-   TBranch        *b_L1_DoubleMu0_Mass_Min1;   //!
-   TBranch        *b_L1_DoubleMu0_OQ;   //!
+   TBranch        *b_L1_DoubleMu0_ETM40;   //!
+   TBranch        *b_L1_DoubleMu0_ETM55;   //!
+   TBranch        *b_L1_DoubleMu0_ETM60;   //!
+   TBranch        *b_L1_DoubleMu0_ETM65;   //!
+   TBranch        *b_L1_DoubleMu0_ETM70;   //!
    TBranch        *b_L1_DoubleMu0_SQ;   //!
    TBranch        *b_L1_DoubleMu0_SQ_OS;   //!
-   TBranch        *b_L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8;   //!
    TBranch        *b_L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4;   //!
-   TBranch        *b_L1_DoubleMu0er1p5_SQ;   //!
+   TBranch        *b_L1_DoubleMu0er1p4_dEta_Max1p8_OS;   //!
    TBranch        *b_L1_DoubleMu0er1p5_SQ_OS;   //!
    TBranch        *b_L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4;   //!
    TBranch        *b_L1_DoubleMu0er1p5_SQ_dR_Max1p4;   //!
-   TBranch        *b_L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4;   //!
-   TBranch        *b_L1_DoubleMu0er2p0_SQ_dR_Max1p4;   //!
-   TBranch        *b_L1_DoubleMu10_SQ;   //!
+   TBranch        *b_L1_DoubleMu0er2_SQ_dR_Max1p4;   //!
    TBranch        *b_L1_DoubleMu18er2p1;   //!
+   TBranch        *b_L1_DoubleMu22er2p1;   //!
    TBranch        *b_L1_DoubleMu3_OS_DoubleEG7p5Upsilon;   //!
-   TBranch        *b_L1_DoubleMu3_SQ_ETMHF50_HTT60er;   //!
-   TBranch        *b_L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5;   //!
-   TBranch        *b_L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5;   //!
-   TBranch        *b_L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_ETMHF40_Jet60_OR_DoubleJet30;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_ETMHF50_Jet60_OR_DoubleJet30;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_ETMHF60_Jet60_OR_DoubleJet30;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_ETMHF70_Jet60_OR_DoubleJet30;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_ETMHF80_Jet60_OR_DoubleJet30;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_HTT100er;   //!
+   TBranch        *b_L1_DoubleMu3_SQ_HTT200er;   //!
    TBranch        *b_L1_DoubleMu3_SQ_HTT220er;   //!
    TBranch        *b_L1_DoubleMu3_SQ_HTT240er;   //!
-   TBranch        *b_L1_DoubleMu3_SQ_HTT260er;   //!
-   TBranch        *b_L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8;   //!
-   TBranch        *b_L1_DoubleMu4_SQ_EG9er2p5;   //!
+   TBranch        *b_L1_DoubleMu4_OS_EG12;   //!
    TBranch        *b_L1_DoubleMu4_SQ_OS;   //!
    TBranch        *b_L1_DoubleMu4_SQ_OS_dR_Max1p2;   //!
+   TBranch        *b_L1_DoubleMu4p5_SQ;   //!
    TBranch        *b_L1_DoubleMu4p5_SQ_OS;   //!
    TBranch        *b_L1_DoubleMu4p5_SQ_OS_dR_Max1p2;   //!
    TBranch        *b_L1_DoubleMu4p5er2p0_SQ_OS;   //!
    TBranch        *b_L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18;   //!
    TBranch        *b_L1_DoubleMu5Upsilon_OS_DoubleEG3;   //!
-   TBranch        *b_L1_DoubleMu5_SQ_EG9er2p5;   //!
-   TBranch        *b_L1_DoubleMu9_SQ;   //!
+   TBranch        *b_L1_DoubleMu5_OS_EG12;   //!
+   TBranch        *b_L1_DoubleMu5_SQ_OS;   //!
+   TBranch        *b_L1_DoubleMu5_SQ_OS_Mass7to18;   //!
+   TBranch        *b_L1_DoubleMu6_SQ_OS;   //!
+   TBranch        *b_L1_DoubleMu7_EG7;   //!
+   TBranch        *b_L1_DoubleMu7_SQ_EG7;   //!
+   TBranch        *b_L1_DoubleMu8_SQ;   //!
+   TBranch        *b_L1_DoubleMu_10_0_dEta_Max1p8;   //!
+   TBranch        *b_L1_DoubleMu_11_4;   //!
    TBranch        *b_L1_DoubleMu_12_5;   //!
+   TBranch        *b_L1_DoubleMu_12_8;   //!
+   TBranch        *b_L1_DoubleMu_13_6;   //!
+   TBranch        *b_L1_DoubleMu_15_5;   //!
    TBranch        *b_L1_DoubleMu_15_5_SQ;   //!
    TBranch        *b_L1_DoubleMu_15_7;   //!
-   TBranch        *b_L1_DoubleMu_15_7_Mass_Min1;   //!
    TBranch        *b_L1_DoubleMu_15_7_SQ;   //!
+   TBranch        *b_L1_DoubleMu_15_7_SQ_Mass_Min4;   //!
+   TBranch        *b_L1_DoubleMu_20_2_SQ_Mass_Max20;   //!
+   TBranch        *b_L1_DoubleTau50er2p1;   //!
    TBranch        *b_L1_DoubleTau70er2p1;   //!
+   TBranch        *b_L1_EG25er2p1_HTT125er;   //!
+   TBranch        *b_L1_EG27er2p1_HTT200er;   //!
+   TBranch        *b_L1_ETM100;   //!
+   TBranch        *b_L1_ETM100_Jet60_dPhi_Min0p4;   //!
+   TBranch        *b_L1_ETM105;   //!
+   TBranch        *b_L1_ETM110;   //!
+   TBranch        *b_L1_ETM110_Jet60_dPhi_Min0p4;   //!
+   TBranch        *b_L1_ETM115;   //!
    TBranch        *b_L1_ETM120;   //!
    TBranch        *b_L1_ETM150;   //!
+   TBranch        *b_L1_ETM30;   //!
+   TBranch        *b_L1_ETM40;   //!
+   TBranch        *b_L1_ETM50;   //!
+   TBranch        *b_L1_ETM60;   //!
+   TBranch        *b_L1_ETM70;   //!
+   TBranch        *b_L1_ETM75;   //!
+   TBranch        *b_L1_ETM75_Jet60_dPhi_Min0p4;   //!
+   TBranch        *b_L1_ETM80;   //!
+   TBranch        *b_L1_ETM80_Jet60_dPhi_Min0p4;   //!
+   TBranch        *b_L1_ETM85;   //!
+   TBranch        *b_L1_ETM90;   //!
+   TBranch        *b_L1_ETM90_Jet60_dPhi_Min0p4;   //!
+   TBranch        *b_L1_ETM95;   //!
    TBranch        *b_L1_ETMHF100;   //!
    TBranch        *b_L1_ETMHF100_HTT60er;   //!
+   TBranch        *b_L1_ETMHF100_Jet60_OR_DiJet30woTT28;   //!
+   TBranch        *b_L1_ETMHF100_Jet60_OR_DoubleJet30;   //!
+   TBranch        *b_L1_ETMHF100_Jet90_OR_DoubleJet45_OR_TripleJet30;   //!
    TBranch        *b_L1_ETMHF110;   //!
    TBranch        *b_L1_ETMHF110_HTT60er;   //!
-   TBranch        *b_L1_ETMHF110_HTT60er_NotSecondBunchInTrain;   //!
+   TBranch        *b_L1_ETMHF110_Jet60_OR_DiJet30woTT28;   //!
+   TBranch        *b_L1_ETMHF110_Jet90_OR_DoubleJet45_OR_TripleJet30;   //!
    TBranch        *b_L1_ETMHF120;   //!
    TBranch        *b_L1_ETMHF120_HTT60er;   //!
-   TBranch        *b_L1_ETMHF120_NotSecondBunchInTrain;   //!
-   TBranch        *b_L1_ETMHF130;   //!
-   TBranch        *b_L1_ETMHF130_HTT60er;   //!
-   TBranch        *b_L1_ETMHF140;   //!
+   TBranch        *b_L1_ETMHF120_Jet60_OR_DiJet30woTT28;   //!
    TBranch        *b_L1_ETMHF150;   //!
+   TBranch        *b_L1_ETMHF70;   //!
+   TBranch        *b_L1_ETMHF70_Jet90_OR_DoubleJet45_OR_TripleJet30;   //!
+   TBranch        *b_L1_ETMHF80;   //!
+   TBranch        *b_L1_ETMHF80_HTT60er;   //!
+   TBranch        *b_L1_ETMHF80_Jet90_OR_DoubleJet45_OR_TripleJet30;   //!
+   TBranch        *b_L1_ETMHF90;   //!
    TBranch        *b_L1_ETMHF90_HTT60er;   //!
-   TBranch        *b_L1_ETT1200;   //!
-   TBranch        *b_L1_ETT1600;   //!
-   TBranch        *b_L1_ETT2000;   //!
+   TBranch        *b_L1_ETMHF90_Jet90_OR_DoubleJet45_OR_TripleJet30;   //!
+   TBranch        *b_L1_ETT100_BptxAND;   //!
+   TBranch        *b_L1_ETT110_BptxAND;   //!
+   TBranch        *b_L1_ETT40_BptxAND;   //!
+   TBranch        *b_L1_ETT50_BptxAND;   //!
+   TBranch        *b_L1_ETT60_BptxAND;   //!
+   TBranch        *b_L1_ETT70_BptxAND;   //!
+   TBranch        *b_L1_ETT75_BptxAND;   //!
+   TBranch        *b_L1_ETT80_BptxAND;   //!
+   TBranch        *b_L1_ETT85_BptxAND;   //!
+   TBranch        *b_L1_ETT90_BptxAND;   //!
+   TBranch        *b_L1_ETT95_BptxAND;   //!
    TBranch        *b_L1_FirstBunchAfterTrain;   //!
-   TBranch        *b_L1_FirstBunchBeforeTrain;   //!
    TBranch        *b_L1_FirstBunchInTrain;   //!
    TBranch        *b_L1_FirstCollisionInOrbit;   //!
    TBranch        *b_L1_FirstCollisionInTrain;   //!
-   TBranch        *b_L1_HCAL_LaserMon_Trig;   //!
-   TBranch        *b_L1_HCAL_LaserMon_Veto;   //!
    TBranch        *b_L1_HTT120er;   //!
    TBranch        *b_L1_HTT160er;   //!
    TBranch        *b_L1_HTT200er;   //!
+   TBranch        *b_L1_HTT220er;   //!
+   TBranch        *b_L1_HTT240er;   //!
+   TBranch        *b_L1_HTT250er_QuadJet_70_55_40_35_er2p5;   //!
    TBranch        *b_L1_HTT255er;   //!
+   TBranch        *b_L1_HTT270er;   //!
    TBranch        *b_L1_HTT280er;   //!
-   TBranch        *b_L1_HTT280er_QuadJet_70_55_40_35_er2p4;   //!
+   TBranch        *b_L1_HTT280er_QuadJet_70_55_40_35_er2p5;   //!
+   TBranch        *b_L1_HTT300er;   //!
+   TBranch        *b_L1_HTT300er_QuadJet_70_55_40_35_er2p5;   //!
    TBranch        *b_L1_HTT320er;   //!
    TBranch        *b_L1_HTT320er_QuadJet_70_55_40_40_er2p4;   //!
-   TBranch        *b_L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3;   //!
-   TBranch        *b_L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3;   //!
-   TBranch        *b_L1_HTT360er;   //!
+   TBranch        *b_L1_HTT320er_QuadJet_70_55_40_40_er2p5;   //!
+   TBranch        *b_L1_HTT320er_QuadJet_70_55_45_45_er2p5;   //!
+   TBranch        *b_L1_HTT340er;   //!
+   TBranch        *b_L1_HTT340er_QuadJet_70_55_40_40_er2p5;   //!
+   TBranch        *b_L1_HTT340er_QuadJet_70_55_45_45_er2p5;   //!
+   TBranch        *b_L1_HTT380er;   //!
    TBranch        *b_L1_HTT400er;   //!
    TBranch        *b_L1_HTT450er;   //!
-   TBranch        *b_L1_IsoEG32er2p5_Mt40;   //!
-   TBranch        *b_L1_IsoEG32er2p5_Mt44;   //!
-   TBranch        *b_L1_IsoEG32er2p5_Mt48;   //!
-   TBranch        *b_L1_IsoTau40er2p1_ETMHF100;   //!
-   TBranch        *b_L1_IsoTau40er2p1_ETMHF110;   //!
-   TBranch        *b_L1_IsoTau40er2p1_ETMHF120;   //!
-   TBranch        *b_L1_IsoTau40er2p1_ETMHF90;   //!
+   TBranch        *b_L1_HTT500er;   //!
+   TBranch        *b_L1_IsoEG33_Mt40;   //!
+   TBranch        *b_L1_IsoEG33_Mt44;   //!
+   TBranch        *b_L1_IsoEG33_Mt48;   //!
+   TBranch        *b_L1_IsoTau40er_ETM100;   //!
+   TBranch        *b_L1_IsoTau40er_ETM105;   //!
+   TBranch        *b_L1_IsoTau40er_ETM110;   //!
+   TBranch        *b_L1_IsoTau40er_ETM115;   //!
+   TBranch        *b_L1_IsoTau40er_ETM120;   //!
+   TBranch        *b_L1_IsoTau40er_ETM80;   //!
+   TBranch        *b_L1_IsoTau40er_ETM85;   //!
+   TBranch        *b_L1_IsoTau40er_ETM90;   //!
+   TBranch        *b_L1_IsoTau40er_ETM95;   //!
+   TBranch        *b_L1_IsoTau40er_ETMHF100;   //!
+   TBranch        *b_L1_IsoTau40er_ETMHF110;   //!
+   TBranch        *b_L1_IsoTau40er_ETMHF120;   //!
+   TBranch        *b_L1_IsoTau40er_ETMHF80;   //!
+   TBranch        *b_L1_IsoTau40er_ETMHF90;   //!
    TBranch        *b_L1_IsolatedBunch;   //!
-   TBranch        *b_L1_LastBunchInTrain;   //!
    TBranch        *b_L1_LastCollisionInTrain;   //!
    TBranch        *b_L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3;   //!
-   TBranch        *b_L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3;   //!
    TBranch        *b_L1_LooseIsoEG24er2p1_HTT100er;   //!
    TBranch        *b_L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3;   //!
+   TBranch        *b_L1_LooseIsoEG24er2p1_Jet26er2p7_dR_Min0p3;   //!
+   TBranch        *b_L1_LooseIsoEG24er2p1_TripleJet_26er2p7_26_26er2p7;   //!
    TBranch        *b_L1_LooseIsoEG26er2p1_HTT100er;   //!
-   TBranch        *b_L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3;   //!
+   TBranch        *b_L1_LooseIsoEG26er2p1_Jet34er2p7_dR_Min0p3;   //!
    TBranch        *b_L1_LooseIsoEG28er2p1_HTT100er;   //!
-   TBranch        *b_L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3;   //!
-   TBranch        *b_L1_LooseIsoEG30er2p1_HTT100er;   //!
-   TBranch        *b_L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3;   //!
+   TBranch        *b_L1_LooseIsoEG28er2p1_Jet34er2p7_dR_Min0p3;   //!
+   TBranch        *b_L1_LooseIsoEG30er2p1_Jet34er2p7_dR_Min0p3;   //!
+   TBranch        *b_L1_MU20_EG15;   //!
    TBranch        *b_L1_MinimumBiasHF0_AND_BptxAND;   //!
+   TBranch        *b_L1_MinimumBiasHF0_OR_BptxAND;   //!
+   TBranch        *b_L1_Mu10er2p1_ETM30;   //!
    TBranch        *b_L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6;   //!
-   TBranch        *b_L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6;   //!
+   TBranch        *b_L1_Mu12_EG10;   //!
    TBranch        *b_L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6;   //!
+   TBranch        *b_L1_Mu14er2p1_ETM30;   //!
+   TBranch        *b_L1_Mu15_HTT100er;   //!
+   TBranch        *b_L1_Mu18_HTT100er;   //!
+   TBranch        *b_L1_Mu18_Jet24er2p7;   //!
+   TBranch        *b_L1_Mu18er2p1_IsoTau26er2p1;   //!
    TBranch        *b_L1_Mu18er2p1_Tau24er2p1;   //!
-   TBranch        *b_L1_Mu18er2p1_Tau26er2p1;   //!
-   TBranch        *b_L1_Mu20_EG10er2p5;   //!
+   TBranch        *b_L1_Mu20_EG10;   //!
+   TBranch        *b_L1_Mu20_EG17;   //!
+   TBranch        *b_L1_Mu20_LooseIsoEG6;   //!
+   TBranch        *b_L1_Mu20er2p1_IsoTau26er2p1;   //!
+   TBranch        *b_L1_Mu20er2p1_IsoTau27er2p1;   //!
+   TBranch        *b_L1_Mu22er2p1_IsoTau28er2p1;   //!
+   TBranch        *b_L1_Mu22er2p1_IsoTau30er2p1;   //!
    TBranch        *b_L1_Mu22er2p1_IsoTau32er2p1;   //!
+   TBranch        *b_L1_Mu22er2p1_IsoTau33er2p1;   //!
    TBranch        *b_L1_Mu22er2p1_IsoTau34er2p1;   //!
+   TBranch        *b_L1_Mu22er2p1_IsoTau35er2p1;   //!
    TBranch        *b_L1_Mu22er2p1_IsoTau36er2p1;   //!
+   TBranch        *b_L1_Mu22er2p1_IsoTau38er2p1;   //!
    TBranch        *b_L1_Mu22er2p1_IsoTau40er2p1;   //!
+   TBranch        *b_L1_Mu22er2p1_Tau50er2p1;   //!
    TBranch        *b_L1_Mu22er2p1_Tau70er2p1;   //!
-   TBranch        *b_L1_Mu3_Jet120er2p5_dR_Max0p4;   //!
-   TBranch        *b_L1_Mu3_Jet120er2p5_dR_Max0p8;   //!
-   TBranch        *b_L1_Mu3_Jet16er2p5_dR_Max0p4;   //!
+   TBranch        *b_L1_Mu23_EG10;   //!
+   TBranch        *b_L1_Mu23_LooseIsoEG10;   //!
+   TBranch        *b_L1_Mu3_Jet120er2p7_dEta_Max0p4_dPhi_Max0p4;   //!
+   TBranch        *b_L1_Mu3_Jet16er2p7_dEta_Max0p4_dPhi_Max0p4;   //!
    TBranch        *b_L1_Mu3_Jet30er2p5;   //!
-   TBranch        *b_L1_Mu3_Jet35er2p5_dR_Max0p4;   //!
-   TBranch        *b_L1_Mu3_Jet60er2p5_dR_Max0p4;   //!
-   TBranch        *b_L1_Mu3_Jet80er2p5_dR_Max0p4;   //!
-   TBranch        *b_L1_Mu3er1p5_Jet100er2p5_ETMHF40;   //!
-   TBranch        *b_L1_Mu3er1p5_Jet100er2p5_ETMHF50;   //!
-   TBranch        *b_L1_Mu5_EG23er2p5;   //!
-   TBranch        *b_L1_Mu5_LooseIsoEG20er2p5;   //!
-   TBranch        *b_L1_Mu6_DoubleEG10er2p5;   //!
-   TBranch        *b_L1_Mu6_DoubleEG12er2p5;   //!
-   TBranch        *b_L1_Mu6_DoubleEG15er2p5;   //!
-   TBranch        *b_L1_Mu6_DoubleEG17er2p5;   //!
+   TBranch        *b_L1_Mu3_Jet60er2p7_dEta_Max0p4_dPhi_Max0p4;   //!
+   TBranch        *b_L1_Mu5_EG15;   //!
+   TBranch        *b_L1_Mu5_EG20;   //!
+   TBranch        *b_L1_Mu5_EG23;   //!
+   TBranch        *b_L1_Mu5_LooseIsoEG18;   //!
+   TBranch        *b_L1_Mu5_LooseIsoEG20;   //!
+   TBranch        *b_L1_Mu6_DoubleEG10;   //!
+   TBranch        *b_L1_Mu6_DoubleEG17;   //!
+   TBranch        *b_L1_Mu6_HTT200er;   //!
    TBranch        *b_L1_Mu6_HTT240er;   //!
    TBranch        *b_L1_Mu6_HTT250er;   //!
-   TBranch        *b_L1_Mu7_EG23er2p5;   //!
-   TBranch        *b_L1_Mu7_LooseIsoEG20er2p5;   //!
-   TBranch        *b_L1_Mu7_LooseIsoEG23er2p5;   //!
+   TBranch        *b_L1_Mu7_EG23;   //!
+   TBranch        *b_L1_Mu7_LooseIsoEG20;   //!
+   TBranch        *b_L1_Mu7_LooseIsoEG23;   //!
+   TBranch        *b_L1_Mu8_HTT150er;   //!
    TBranch        *b_L1_NotBptxOR;   //!
-   TBranch        *b_L1_QuadJet36er2p5_IsoTau52er2p1;   //!
-   TBranch        *b_L1_QuadJet60er2p5;   //!
-   TBranch        *b_L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0;   //!
+   TBranch        *b_L1_QuadJet36er2p7_IsoTau52er2p1;   //!
+   TBranch        *b_L1_QuadJet36er2p7_Tau52;   //!
+   TBranch        *b_L1_QuadJet40er2p7;   //!
+   TBranch        *b_L1_QuadJet50er2p7;   //!
+   TBranch        *b_L1_QuadJet60er2p7;   //!
    TBranch        *b_L1_QuadMu0;   //!
-   TBranch        *b_L1_QuadMu0_OQ;   //!
-   TBranch        *b_L1_QuadMu0_SQ;   //!
-   TBranch        *b_L1_SecondBunchInTrain;   //!
-   TBranch        *b_L1_SecondLastBunchInTrain;   //!
-   TBranch        *b_L1_SingleEG10er2p5;   //!
-   TBranch        *b_L1_SingleEG15er2p5;   //!
-   TBranch        *b_L1_SingleEG26er2p5;   //!
-   TBranch        *b_L1_SingleEG34er2p5;   //!
-   TBranch        *b_L1_SingleEG36er2p5;   //!
-   TBranch        *b_L1_SingleEG38er2p5;   //!
-   TBranch        *b_L1_SingleEG40er2p5;   //!
-   TBranch        *b_L1_SingleEG42er2p5;   //!
-   TBranch        *b_L1_SingleEG45er2p5;   //!
+   TBranch        *b_L1_SingleEG10;   //!
+   TBranch        *b_L1_SingleEG15;   //!
+   TBranch        *b_L1_SingleEG18;   //!
+   TBranch        *b_L1_SingleEG24;   //!
+   TBranch        *b_L1_SingleEG26;   //!
+   TBranch        *b_L1_SingleEG28;   //!
+   TBranch        *b_L1_SingleEG2_BptxAND;   //!
+   TBranch        *b_L1_SingleEG30;   //!
+   TBranch        *b_L1_SingleEG32;   //!
+   TBranch        *b_L1_SingleEG34;   //!
+   TBranch        *b_L1_SingleEG34er2p1;   //!
+   TBranch        *b_L1_SingleEG36;   //!
+   TBranch        *b_L1_SingleEG36er2p1;   //!
+   TBranch        *b_L1_SingleEG38;   //!
+   TBranch        *b_L1_SingleEG38er2p1;   //!
+   TBranch        *b_L1_SingleEG40;   //!
+   TBranch        *b_L1_SingleEG42;   //!
+   TBranch        *b_L1_SingleEG45;   //!
+   TBranch        *b_L1_SingleEG5;   //!
    TBranch        *b_L1_SingleEG50;   //!
-   TBranch        *b_L1_SingleEG60;   //!
-   TBranch        *b_L1_SingleEG8er2p5;   //!
-   TBranch        *b_L1_SingleIsoEG24er1p5;   //!
+   TBranch        *b_L1_SingleIsoEG18;   //!
+   TBranch        *b_L1_SingleIsoEG18er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG20;   //!
+   TBranch        *b_L1_SingleIsoEG20er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG22;   //!
+   TBranch        *b_L1_SingleIsoEG22er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG24;   //!
    TBranch        *b_L1_SingleIsoEG24er2p1;   //!
-   TBranch        *b_L1_SingleIsoEG26er1p5;   //!
+   TBranch        *b_L1_SingleIsoEG26;   //!
    TBranch        *b_L1_SingleIsoEG26er2p1;   //!
-   TBranch        *b_L1_SingleIsoEG26er2p5;   //!
-   TBranch        *b_L1_SingleIsoEG28er1p5;   //!
+   TBranch        *b_L1_SingleIsoEG28;   //!
    TBranch        *b_L1_SingleIsoEG28er2p1;   //!
-   TBranch        *b_L1_SingleIsoEG28er2p5;   //!
+   TBranch        *b_L1_SingleIsoEG30;   //!
    TBranch        *b_L1_SingleIsoEG30er2p1;   //!
-   TBranch        *b_L1_SingleIsoEG30er2p5;   //!
+   TBranch        *b_L1_SingleIsoEG32;   //!
    TBranch        *b_L1_SingleIsoEG32er2p1;   //!
-   TBranch        *b_L1_SingleIsoEG32er2p5;   //!
-   TBranch        *b_L1_SingleIsoEG34er2p5;   //!
-   TBranch        *b_L1_SingleJet10erHE;   //!
+   TBranch        *b_L1_SingleIsoEG33er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG34;   //!
+   TBranch        *b_L1_SingleIsoEG34er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG35;   //!
+   TBranch        *b_L1_SingleIsoEG35er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG36;   //!
+   TBranch        *b_L1_SingleIsoEG36er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG37;   //!
+   TBranch        *b_L1_SingleIsoEG38;   //!
+   TBranch        *b_L1_SingleIsoEG38er2p1;   //!
+   TBranch        *b_L1_SingleIsoEG40;   //!
+   TBranch        *b_L1_SingleIsoEG40er2p1;   //!
    TBranch        *b_L1_SingleJet120;   //!
-   TBranch        *b_L1_SingleJet120_FWD3p0;   //!
-   TBranch        *b_L1_SingleJet120er2p5;   //!
-   TBranch        *b_L1_SingleJet12erHE;   //!
-   TBranch        *b_L1_SingleJet140er2p5;   //!
-   TBranch        *b_L1_SingleJet140er2p5_ETMHF80;   //!
-   TBranch        *b_L1_SingleJet140er2p5_ETMHF90;   //!
-   TBranch        *b_L1_SingleJet160er2p5;   //!
+   TBranch        *b_L1_SingleJet120_FWD;   //!
+   TBranch        *b_L1_SingleJet12_BptxAND;   //!
+   TBranch        *b_L1_SingleJet140;   //!
+   TBranch        *b_L1_SingleJet150;   //!
+   TBranch        *b_L1_SingleJet16;   //!
+   TBranch        *b_L1_SingleJet160;   //!
+   TBranch        *b_L1_SingleJet170;   //!
    TBranch        *b_L1_SingleJet180;   //!
-   TBranch        *b_L1_SingleJet180er2p5;   //!
+   TBranch        *b_L1_SingleJet20;   //!
    TBranch        *b_L1_SingleJet200;   //!
-   TBranch        *b_L1_SingleJet20er2p5_NotBptxOR;   //!
-   TBranch        *b_L1_SingleJet20er2p5_NotBptxOR_3BX;   //!
+   TBranch        *b_L1_SingleJet20er2p7_NotBptxOR;   //!
+   TBranch        *b_L1_SingleJet20er2p7_NotBptxOR_3BX;   //!
    TBranch        *b_L1_SingleJet35;   //!
-   TBranch        *b_L1_SingleJet35_FWD3p0;   //!
-   TBranch        *b_L1_SingleJet35er2p5;   //!
-   TBranch        *b_L1_SingleJet43er2p5_NotBptxOR_3BX;   //!
-   TBranch        *b_L1_SingleJet46er2p5_NotBptxOR_3BX;   //!
+   TBranch        *b_L1_SingleJet35_FWD;   //!
+   TBranch        *b_L1_SingleJet35_HFm;   //!
+   TBranch        *b_L1_SingleJet35_HFp;   //!
+   TBranch        *b_L1_SingleJet43er2p7_NotBptxOR_3BX;   //!
+   TBranch        *b_L1_SingleJet46er2p7_NotBptxOR_3BX;   //!
    TBranch        *b_L1_SingleJet60;   //!
-   TBranch        *b_L1_SingleJet60_FWD3p0;   //!
-   TBranch        *b_L1_SingleJet60er2p5;   //!
-   TBranch        *b_L1_SingleJet8erHE;   //!
+   TBranch        *b_L1_SingleJet60_FWD;   //!
+   TBranch        *b_L1_SingleJet60_HFm;   //!
+   TBranch        *b_L1_SingleJet60_HFp;   //!
    TBranch        *b_L1_SingleJet90;   //!
-   TBranch        *b_L1_SingleJet90_FWD3p0;   //!
-   TBranch        *b_L1_SingleJet90er2p5;   //!
-   TBranch        *b_L1_SingleLooseIsoEG28er1p5;   //!
-   TBranch        *b_L1_SingleLooseIsoEG30er1p5;   //!
+   TBranch        *b_L1_SingleJet90_FWD;   //!
    TBranch        *b_L1_SingleMu0_BMTF;   //!
-   TBranch        *b_L1_SingleMu0_DQ;   //!
    TBranch        *b_L1_SingleMu0_EMTF;   //!
    TBranch        *b_L1_SingleMu0_OMTF;   //!
-   TBranch        *b_L1_SingleMu10er1p5;   //!
-   TBranch        *b_L1_SingleMu12_DQ_BMTF;   //!
-   TBranch        *b_L1_SingleMu12_DQ_EMTF;   //!
-   TBranch        *b_L1_SingleMu12_DQ_OMTF;   //!
-   TBranch        *b_L1_SingleMu12er1p5;   //!
-   TBranch        *b_L1_SingleMu14er1p5;   //!
-   TBranch        *b_L1_SingleMu15_DQ;   //!
-   TBranch        *b_L1_SingleMu16er1p5;   //!
+   TBranch        *b_L1_SingleMu10_LowQ;   //!
+   TBranch        *b_L1_SingleMu11_LowQ;   //!
+   TBranch        *b_L1_SingleMu12_LowQ_BMTF;   //!
+   TBranch        *b_L1_SingleMu12_LowQ_EMTF;   //!
+   TBranch        *b_L1_SingleMu12_LowQ_OMTF;   //!
+   TBranch        *b_L1_SingleMu14er2p1;   //!
+   TBranch        *b_L1_SingleMu16;   //!
+   TBranch        *b_L1_SingleMu16er2p1;   //!
    TBranch        *b_L1_SingleMu18;   //!
-   TBranch        *b_L1_SingleMu18er1p5;   //!
+   TBranch        *b_L1_SingleMu18er2p1;   //!
    TBranch        *b_L1_SingleMu20;   //!
+   TBranch        *b_L1_SingleMu20er2p1;   //!
    TBranch        *b_L1_SingleMu22;   //!
    TBranch        *b_L1_SingleMu22_BMTF;   //!
    TBranch        *b_L1_SingleMu22_EMTF;   //!
    TBranch        *b_L1_SingleMu22_OMTF;   //!
+   TBranch        *b_L1_SingleMu22er2p1;   //!
    TBranch        *b_L1_SingleMu25;   //!
    TBranch        *b_L1_SingleMu3;   //!
+   TBranch        *b_L1_SingleMu30;   //!
    TBranch        *b_L1_SingleMu5;   //!
-   TBranch        *b_L1_SingleMu6er1p5;   //!
    TBranch        *b_L1_SingleMu7;   //!
-   TBranch        *b_L1_SingleMu7_DQ;   //!
-   TBranch        *b_L1_SingleMu7er1p5;   //!
-   TBranch        *b_L1_SingleMu8er1p5;   //!
-   TBranch        *b_L1_SingleMu9er1p5;   //!
    TBranch        *b_L1_SingleMuCosmics;   //!
    TBranch        *b_L1_SingleMuCosmics_BMTF;   //!
    TBranch        *b_L1_SingleMuCosmics_EMTF;   //!
    TBranch        *b_L1_SingleMuCosmics_OMTF;   //!
    TBranch        *b_L1_SingleMuOpen;   //!
    TBranch        *b_L1_SingleMuOpen_NotBptxOR;   //!
-   TBranch        *b_L1_SingleMuOpen_er1p1_NotBptxOR_3BX;   //!
-   TBranch        *b_L1_SingleMuOpen_er1p4_NotBptxOR_3BX;   //!
+   TBranch        *b_L1_SingleMuOpen_NotBptxOR_3BX;   //!
+   TBranch        *b_L1_SingleTau100er2p1;   //!
    TBranch        *b_L1_SingleTau120er2p1;   //!
    TBranch        *b_L1_SingleTau130er2p1;   //!
-   TBranch        *b_L1_TOTEM_1;   //!
-   TBranch        *b_L1_TOTEM_2;   //!
-   TBranch        *b_L1_TOTEM_3;   //!
-   TBranch        *b_L1_TOTEM_4;   //!
-   TBranch        *b_L1_TripleEG16er2p5;   //!
-   TBranch        *b_L1_TripleEG_16_12_8_er2p5;   //!
-   TBranch        *b_L1_TripleEG_16_15_8_er2p5;   //!
-   TBranch        *b_L1_TripleEG_18_17_8_er2p5;   //!
-   TBranch        *b_L1_TripleEG_18_18_12_er2p5;   //!
-   TBranch        *b_L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5;   //!
-   TBranch        *b_L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5;   //!
-   TBranch        *b_L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5;   //!
+   TBranch        *b_L1_SingleTau140er2p1;   //!
+   TBranch        *b_L1_SingleTau20;   //!
+   TBranch        *b_L1_SingleTau80er2p1;   //!
+   TBranch        *b_L1_TripleEG_14_10_8;   //!
+   TBranch        *b_L1_TripleEG_18_17_8;   //!
+   TBranch        *b_L1_TripleEG_LooseIso20_10_5;   //!
+   TBranch        *b_L1_TripleJet_100_85_72_VBF;   //!
+   TBranch        *b_L1_TripleJet_105_85_76_VBF;   //!
+   TBranch        *b_L1_TripleJet_84_68_48_VBF;   //!
+   TBranch        *b_L1_TripleJet_88_72_56_VBF;   //!
+   TBranch        *b_L1_TripleJet_92_76_64_VBF;   //!
+   TBranch        *b_L1_TripleJet_98_83_71_VBF;   //!
    TBranch        *b_L1_TripleMu0;   //!
    TBranch        *b_L1_TripleMu0_OQ;   //!
-   TBranch        *b_L1_TripleMu0_SQ;   //!
    TBranch        *b_L1_TripleMu3;   //!
    TBranch        *b_L1_TripleMu3_SQ;   //!
+   TBranch        *b_L1_TripleMu_4_4_4;   //!
+   TBranch        *b_L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17;   //!
+   TBranch        *b_L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_8to14;   //!
    TBranch        *b_L1_TripleMu_5SQ_3SQ_0OQ;   //!
    TBranch        *b_L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9;   //!
    TBranch        *b_L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9;   //!
+   TBranch        *b_L1_TripleMu_5_0_0;   //!
    TBranch        *b_L1_TripleMu_5_3_3;   //!
-   TBranch        *b_L1_TripleMu_5_3_3_SQ;   //!
    TBranch        *b_L1_TripleMu_5_3p5_2p5;   //!
    TBranch        *b_L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17;   //!
-   TBranch        *b_L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17;   //!
    TBranch        *b_L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17;   //!
    TBranch        *b_L1_TripleMu_5_5_3;   //!
    TBranch        *b_L1_UnpairedBunchBptxMinus;   //!
@@ -2684,6 +3003,8 @@ public :
    TBranch        *b_Flag_muonBadTrackFilter;   //!
    TBranch        *b_Flag_BadChargedCandidateFilter;   //!
    TBranch        *b_Flag_BadPFMuonFilter;   //!
+   TBranch        *b_Flag_BadPFMuonDzFilter;   //!
+   TBranch        *b_Flag_hfNoisyHitsFilter;   //!
    TBranch        *b_Flag_BadChargedCandidateSummer16Filter;   //!
    TBranch        *b_Flag_BadPFMuonSummer16Filter;   //!
    TBranch        *b_Flag_trkPOG_manystripclus53X;   //!
@@ -2702,10 +3023,7 @@ public :
    TBranch        *b_HLT_AK8PFHT900_TrimMass50;   //!
    TBranch        *b_HLT_CaloJet500_NoJetID;   //!
    TBranch        *b_HLT_CaloJet550_NoJetID;   //!
-   TBranch        *b_HLT_DoubleMu5_Upsilon_DoubleEle3_CaloIdL_TrackIdL;   //!
-   TBranch        *b_HLT_DoubleMu3_DoubleEle7p5_CaloIdL_TrackIdL_Upsilon;   //!
    TBranch        *b_HLT_Trimuon5_3p5_2_Upsilon_Muon;   //!
-   TBranch        *b_HLT_TrimuonOpen_5_3p5_2_Upsilon_Muon;   //!
    TBranch        *b_HLT_DoubleEle25_CaloIdL_MW;   //!
    TBranch        *b_HLT_DoubleEle27_CaloIdL_MW;   //!
    TBranch        *b_HLT_DoubleEle33_CaloIdL_MW;   //!
@@ -2717,13 +3035,13 @@ public :
    TBranch        *b_HLT_Mu37_Ele27_CaloIdL_MW;   //!
    TBranch        *b_HLT_Mu37_TkMu27;   //!
    TBranch        *b_HLT_DoubleMu4_3_Bs;   //!
-   TBranch        *b_HLT_DoubleMu4_3_Jpsi;   //!
+   TBranch        *b_HLT_DoubleMu4_3_Jpsi_Displaced;   //!
    TBranch        *b_HLT_DoubleMu4_JpsiTrk_Displaced;   //!
    TBranch        *b_HLT_DoubleMu4_LowMassNonResonantTrk_Displaced;   //!
    TBranch        *b_HLT_DoubleMu3_Trk_Tau3mu;   //!
-   TBranch        *b_HLT_DoubleMu3_TkMu_DsTau3Mu;   //!
    TBranch        *b_HLT_DoubleMu4_PsiPrimeTrk_Displaced;   //!
-   TBranch        *b_HLT_DoubleMu4_Mass3p8_DZ_PFHT350;   //!
+   TBranch        *b_HLT_DoubleMu4_Mass8_DZ_PFHT350;   //!
+   TBranch        *b_HLT_DoubleMu8_Mass8_PFHT350;   //!
    TBranch        *b_HLT_Mu3_PFJet40;   //!
    TBranch        *b_HLT_Mu7p5_L2Mu2_Jpsi;   //!
    TBranch        *b_HLT_Mu7p5_L2Mu2_Upsilon;   //!
@@ -2733,47 +3051,34 @@ public :
    TBranch        *b_HLT_Mu7p5_Track2_Upsilon;   //!
    TBranch        *b_HLT_Mu7p5_Track3p5_Upsilon;   //!
    TBranch        *b_HLT_Mu7p5_Track7_Upsilon;   //!
-   TBranch        *b_HLT_Mu3_L1SingleMu5orSingleMu7;   //!
    TBranch        *b_HLT_DoublePhoton33_CaloIdL;   //!
    TBranch        *b_HLT_DoublePhoton70;   //!
    TBranch        *b_HLT_DoublePhoton85;   //!
    TBranch        *b_HLT_Ele20_WPTight_Gsf;   //!
-   TBranch        *b_HLT_Ele15_WPLoose_Gsf;   //!
-   TBranch        *b_HLT_Ele17_WPLoose_Gsf;   //!
    TBranch        *b_HLT_Ele20_WPLoose_Gsf;   //!
    TBranch        *b_HLT_Ele20_eta2p1_WPLoose_Gsf;   //!
    TBranch        *b_HLT_DiEle27_WPTightCaloOnly_L1DoubleEG;   //!
    TBranch        *b_HLT_Ele27_WPTight_Gsf;   //!
-   TBranch        *b_HLT_Ele28_WPTight_Gsf;   //!
-   TBranch        *b_HLT_Ele30_WPTight_Gsf;   //!
    TBranch        *b_HLT_Ele32_WPTight_Gsf;   //!
    TBranch        *b_HLT_Ele35_WPTight_Gsf;   //!
    TBranch        *b_HLT_Ele35_WPTight_Gsf_L1EGMT;   //!
    TBranch        *b_HLT_Ele38_WPTight_Gsf;   //!
    TBranch        *b_HLT_Ele40_WPTight_Gsf;   //!
    TBranch        *b_HLT_Ele32_WPTight_Gsf_L1DoubleEG;   //!
-   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1;   //!
-   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_CrossL1;   //!
-   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_CrossL1;   //!
-   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1;   //!
-   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1;   //!
-   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1;   //!
    TBranch        *b_HLT_HT450_Beamspot;   //!
    TBranch        *b_HLT_HT300_Beamspot;   //!
-   TBranch        *b_HLT_ZeroBias_Beamspot;   //!
-   TBranch        *b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1;   //!
-   TBranch        *b_HLT_IsoMu27_LooseChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1;   //!
-   TBranch        *b_HLT_IsoMu27_MediumChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1;   //!
-   TBranch        *b_HLT_IsoMu27_TightChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_TightID_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_TightID_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_TightID_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_TightID_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_TightID_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1;   //!
    TBranch        *b_HLT_IsoMu20;   //!
    TBranch        *b_HLT_IsoMu24;   //!
    TBranch        *b_HLT_IsoMu24_eta2p1;   //!
@@ -2791,21 +3096,7 @@ public :
    TBranch        *b_HLT_L2Mu45_NoVertex_3Sta_NoBPTX3BX;   //!
    TBranch        *b_HLT_L2Mu40_NoVertex_3Sta_NoBPTX3BX;   //!
    TBranch        *b_HLT_L2Mu50;   //!
-   TBranch        *b_HLT_L2Mu23NoVtx_2Cha;   //!
-   TBranch        *b_HLT_L2Mu23NoVtx_2Cha_CosmicSeed;   //!
-   TBranch        *b_HLT_DoubleL2Mu30NoVtx_2Cha_CosmicSeed_Eta2p4;   //!
-   TBranch        *b_HLT_DoubleL2Mu30NoVtx_2Cha_Eta2p4;   //!
    TBranch        *b_HLT_DoubleL2Mu50;   //!
-   TBranch        *b_HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed;   //!
-   TBranch        *b_HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched;   //!
-   TBranch        *b_HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed;   //!
-   TBranch        *b_HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_NoL2Matched;   //!
-   TBranch        *b_HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_Eta2p4;   //!
-   TBranch        *b_HLT_DoubleL2Mu23NoVtx_2Cha;   //!
-   TBranch        *b_HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched;   //!
-   TBranch        *b_HLT_DoubleL2Mu25NoVtx_2Cha;   //!
-   TBranch        *b_HLT_DoubleL2Mu25NoVtx_2Cha_NoL2Matched;   //!
-   TBranch        *b_HLT_DoubleL2Mu25NoVtx_2Cha_Eta2p4;   //!
    TBranch        *b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL;   //!
    TBranch        *b_HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL;   //!
    TBranch        *b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;   //!
@@ -2815,18 +3106,19 @@ public :
    TBranch        *b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8;   //!
    TBranch        *b_HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8;   //!
    TBranch        *b_HLT_Mu25_TkMu0_Onia;   //!
-   TBranch        *b_HLT_Mu30_TkMu0_Psi;   //!
-   TBranch        *b_HLT_Mu30_TkMu0_Upsilon;   //!
+   TBranch        *b_HLT_Mu30_TkMu0_Onia;   //!
    TBranch        *b_HLT_Mu20_TkMu0_Phi;   //!
    TBranch        *b_HLT_Mu25_TkMu0_Phi;   //!
-   TBranch        *b_HLT_Mu12;   //!
-   TBranch        *b_HLT_Mu15;   //!
    TBranch        *b_HLT_Mu20;   //!
    TBranch        *b_HLT_Mu27;   //!
    TBranch        *b_HLT_Mu50;   //!
    TBranch        *b_HLT_Mu55;   //!
    TBranch        *b_HLT_OldMu100;   //!
    TBranch        *b_HLT_TkMu100;   //!
+   TBranch        *b_HLT_DiPFJet15_NoCaloMatched;   //!
+   TBranch        *b_HLT_DiPFJet25_NoCaloMatched;   //!
+   TBranch        *b_HLT_DiPFJet15_FBEta3_NoCaloMatched;   //!
+   TBranch        *b_HLT_DiPFJet25_FBEta3_NoCaloMatched;   //!
    TBranch        *b_HLT_DiPFJetAve40;   //!
    TBranch        *b_HLT_DiPFJetAve60;   //!
    TBranch        *b_HLT_DiPFJetAve80;   //!
@@ -2836,14 +3128,15 @@ public :
    TBranch        *b_HLT_DiPFJetAve320;   //!
    TBranch        *b_HLT_DiPFJetAve400;   //!
    TBranch        *b_HLT_DiPFJetAve500;   //!
+   TBranch        *b_HLT_DiPFJetAve15_HFJEC;   //!
+   TBranch        *b_HLT_DiPFJetAve25_HFJEC;   //!
+   TBranch        *b_HLT_DiPFJetAve35_HFJEC;   //!
    TBranch        *b_HLT_DiPFJetAve60_HFJEC;   //!
    TBranch        *b_HLT_DiPFJetAve80_HFJEC;   //!
    TBranch        *b_HLT_DiPFJetAve100_HFJEC;   //!
    TBranch        *b_HLT_DiPFJetAve160_HFJEC;   //!
    TBranch        *b_HLT_DiPFJetAve220_HFJEC;   //!
    TBranch        *b_HLT_DiPFJetAve300_HFJEC;   //!
-   TBranch        *b_HLT_AK8PFJet15;   //!
-   TBranch        *b_HLT_AK8PFJet25;   //!
    TBranch        *b_HLT_AK8PFJet40;   //!
    TBranch        *b_HLT_AK8PFJet60;   //!
    TBranch        *b_HLT_AK8PFJet80;   //!
@@ -2855,8 +3148,6 @@ public :
    TBranch        *b_HLT_AK8PFJet450;   //!
    TBranch        *b_HLT_AK8PFJet500;   //!
    TBranch        *b_HLT_AK8PFJet550;   //!
-   TBranch        *b_HLT_PFJet15;   //!
-   TBranch        *b_HLT_PFJet25;   //!
    TBranch        *b_HLT_PFJet40;   //!
    TBranch        *b_HLT_PFJet60;   //!
    TBranch        *b_HLT_PFJet80;   //!
@@ -2868,8 +3159,6 @@ public :
    TBranch        *b_HLT_PFJet450;   //!
    TBranch        *b_HLT_PFJet500;   //!
    TBranch        *b_HLT_PFJet550;   //!
-   TBranch        *b_HLT_PFJetFwd15;   //!
-   TBranch        *b_HLT_PFJetFwd25;   //!
    TBranch        *b_HLT_PFJetFwd40;   //!
    TBranch        *b_HLT_PFJetFwd60;   //!
    TBranch        *b_HLT_PFJetFwd80;   //!
@@ -2880,8 +3169,6 @@ public :
    TBranch        *b_HLT_PFJetFwd400;   //!
    TBranch        *b_HLT_PFJetFwd450;   //!
    TBranch        *b_HLT_PFJetFwd500;   //!
-   TBranch        *b_HLT_AK8PFJetFwd15;   //!
-   TBranch        *b_HLT_AK8PFJetFwd25;   //!
    TBranch        *b_HLT_AK8PFJetFwd40;   //!
    TBranch        *b_HLT_AK8PFJetFwd60;   //!
    TBranch        *b_HLT_AK8PFJetFwd80;   //!
@@ -2912,11 +3199,11 @@ public :
    TBranch        *b_HLT_PFMET120_PFMHT120_IDTight;   //!
    TBranch        *b_HLT_PFMET130_PFMHT130_IDTight;   //!
    TBranch        *b_HLT_PFMET140_PFMHT140_IDTight;   //!
-   TBranch        *b_HLT_PFMET100_PFMHT100_IDTight_CaloBTagDeepCSV_3p1;   //!
-   TBranch        *b_HLT_PFMET110_PFMHT110_IDTight_CaloBTagDeepCSV_3p1;   //!
-   TBranch        *b_HLT_PFMET120_PFMHT120_IDTight_CaloBTagDeepCSV_3p1;   //!
-   TBranch        *b_HLT_PFMET130_PFMHT130_IDTight_CaloBTagDeepCSV_3p1;   //!
-   TBranch        *b_HLT_PFMET140_PFMHT140_IDTight_CaloBTagDeepCSV_3p1;   //!
+   TBranch        *b_HLT_PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1;   //!
+   TBranch        *b_HLT_PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1;   //!
+   TBranch        *b_HLT_PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1;   //!
+   TBranch        *b_HLT_PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1;   //!
+   TBranch        *b_HLT_PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1;   //!
    TBranch        *b_HLT_PFMET120_PFMHT120_IDTight_PFHT60;   //!
    TBranch        *b_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60;   //!
    TBranch        *b_HLT_PFMETTypeOne120_PFMHT120_IDTight_PFHT60;   //!
@@ -2955,19 +3242,20 @@ public :
    TBranch        *b_HLT_MET105_IsoTrk50;   //!
    TBranch        *b_HLT_MET120_IsoTrk50;   //!
    TBranch        *b_HLT_SingleJet30_Mu12_SinglePFJet40;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets40_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets100_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets200_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets350_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_DoublePFJets40_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_DoublePFJets100_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_DoublePFJets200_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_DoublePFJets350_CaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;   //!
-   TBranch        *b_HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagDeepCSV_p71;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets40_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets100_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets200_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets350_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets40_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets100_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets200_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets350_CaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets100MaxDeta1p6_DoubleCaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagCSV_p33;   //!
+   TBranch        *b_HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagCSV_p33;   //!
    TBranch        *b_HLT_Photon300_NoHE;   //!
    TBranch        *b_HLT_Mu8_TrkIsoVVL;   //!
    TBranch        *b_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ;   //!
@@ -2975,10 +3263,6 @@ public :
    TBranch        *b_HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350_DZ;   //!
    TBranch        *b_HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350;   //!
    TBranch        *b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;   //!
-   TBranch        *b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30;   //!
-   TBranch        *b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30;   //!
-   TBranch        *b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30_PFBtagDeepCSV_1p5;   //!
-   TBranch        *b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30_CaloBtagDeepCSV_1p5;   //!
    TBranch        *b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;   //!
    TBranch        *b_HLT_Mu17_TrkIsoVVL;   //!
    TBranch        *b_HLT_Mu19_TrkIsoVVL;   //!
@@ -2989,18 +3273,7 @@ public :
    TBranch        *b_HLT_BTagMu_AK4DiJet170_Mu5;   //!
    TBranch        *b_HLT_BTagMu_AK4Jet300_Mu5;   //!
    TBranch        *b_HLT_BTagMu_AK8DiJet170_Mu5;   //!
-   TBranch        *b_HLT_BTagMu_AK8Jet170_DoubleMu5;   //!
    TBranch        *b_HLT_BTagMu_AK8Jet300_Mu5;   //!
-   TBranch        *b_HLT_BTagMu_AK4DiJet20_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK4DiJet40_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK4DiJet70_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK4DiJet110_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK4DiJet170_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK4Jet300_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK8DiJet170_Mu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK8Jet170_DoubleMu5_noalgo;   //!
-   TBranch        *b_HLT_BTagMu_AK8Jet300_Mu5_noalgo;   //!
-   TBranch        *b_HLT_Ele15_Ele8_CaloIdL_TrackIdL_IsoVL;   //!
    TBranch        *b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;   //!
    TBranch        *b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;   //!
    TBranch        *b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;   //!
@@ -3013,7 +3286,7 @@ public :
    TBranch        *b_HLT_TriplePhoton_30_30_10_CaloIdLV2;   //!
    TBranch        *b_HLT_TriplePhoton_30_30_10_CaloIdLV2_R9IdVL;   //!
    TBranch        *b_HLT_TriplePhoton_35_35_5_CaloIdLV2_R9IdVL;   //!
-   TBranch        *b_HLT_Photon20;   //!
+   TBranch        *b_HLT_Photon25;   //!
    TBranch        *b_HLT_Photon33;   //!
    TBranch        *b_HLT_Photon50;   //!
    TBranch        *b_HLT_Photon75;   //!
@@ -3022,16 +3295,8 @@ public :
    TBranch        *b_HLT_Photon150;   //!
    TBranch        *b_HLT_Photon175;   //!
    TBranch        *b_HLT_Photon200;   //!
-   TBranch        *b_HLT_Photon100EB_TightID_TightIso;   //!
-   TBranch        *b_HLT_Photon110EB_TightID_TightIso;   //!
-   TBranch        *b_HLT_Photon120EB_TightID_TightIso;   //!
-   TBranch        *b_HLT_Photon100EBHE10;   //!
-   TBranch        *b_HLT_Photon100EEHE10;   //!
-   TBranch        *b_HLT_Photon100EE_TightID_TightIso;   //!
    TBranch        *b_HLT_Photon50_R9Id90_HE10_IsoM;   //!
    TBranch        *b_HLT_Photon75_R9Id90_HE10_IsoM;   //!
-   TBranch        *b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ300_PFJetsMJJ400DEta3;   //!
-   TBranch        *b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ400_PFJetsMJJ600DEta3;   //!
    TBranch        *b_HLT_Photon90_R9Id90_HE10_IsoM;   //!
    TBranch        *b_HLT_Photon120_R9Id90_HE10_IsoM;   //!
    TBranch        *b_HLT_Photon165_R9Id90_HE10_IsoM;   //!
@@ -3040,8 +3305,8 @@ public :
    TBranch        *b_HLT_Diphoton30_22_R9Id_OR_IsoCaloId_AND_HE_R9Id_Mass95;   //!
    TBranch        *b_HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55;   //!
    TBranch        *b_HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55;   //!
-   TBranch        *b_HLT_Photon35_TwoProngs35;   //!
-   TBranch        *b_HLT_IsoMu24_TwoProngs35;   //!
+   TBranch        *b_HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55;   //!
+   TBranch        *b_HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55;   //!
    TBranch        *b_HLT_Dimuon0_Jpsi_L1_NoOS;   //!
    TBranch        *b_HLT_Dimuon0_Jpsi_NoVertexing_NoOS;   //!
    TBranch        *b_HLT_Dimuon0_Jpsi;   //!
@@ -3064,7 +3329,7 @@ public :
    TBranch        *b_HLT_Dimuon0_LowMass_L1_TM530;   //!
    TBranch        *b_HLT_Dimuon0_Upsilon_Muon_L1_TM0;   //!
    TBranch        *b_HLT_Dimuon0_Upsilon_Muon_NoL1Mass;   //!
-   TBranch        *b_HLT_TripleMu_5_3_3_Mass3p8_DZ;   //!
+   TBranch        *b_HLT_TripleMu_5_3_3_Mass3p8to60_DZ;   //!
    TBranch        *b_HLT_TripleMu_10_5_5_DZ;   //!
    TBranch        *b_HLT_TripleMu_12_10_5;   //!
    TBranch        *b_HLT_Tau3Mu_Mu7_Mu1_TkMu1_Tau15;   //!
@@ -3082,53 +3347,47 @@ public :
    TBranch        *b_HLT_DoubleMu48NoFiltersNoVtx;   //!
    TBranch        *b_HLT_Mu43NoFiltersNoVtx_Photon43_CaloIdL;   //!
    TBranch        *b_HLT_Mu48NoFiltersNoVtx_Photon48_CaloIdL;   //!
-   TBranch        *b_HLT_Mu38NoFiltersNoVtxDisplaced_Photon38_CaloIdL;   //!
-   TBranch        *b_HLT_Mu43NoFiltersNoVtxDisplaced_Photon43_CaloIdL;   //!
-   TBranch        *b_HLT_DoubleMu33NoFiltersNoVtxDisplaced;   //!
-   TBranch        *b_HLT_DoubleMu40NoFiltersNoVtxDisplaced;   //!
    TBranch        *b_HLT_DoubleMu20_7_Mass0to30_L1_DM4;   //!
    TBranch        *b_HLT_DoubleMu20_7_Mass0to30_L1_DM4EG;   //!
    TBranch        *b_HLT_HT425;   //!
    TBranch        *b_HLT_HT430_DisplacedDijet40_DisplacedTrack;   //!
-   TBranch        *b_HLT_HT500_DisplacedDijet40_DisplacedTrack;   //!
    TBranch        *b_HLT_HT430_DisplacedDijet60_DisplacedTrack;   //!
+   TBranch        *b_HLT_HT430_DisplacedDijet80_DisplacedTrack;   //!
    TBranch        *b_HLT_HT400_DisplacedDijet40_DisplacedTrack;   //!
    TBranch        *b_HLT_HT650_DisplacedDijet60_Inclusive;   //!
+   TBranch        *b_HLT_HT550_DisplacedDijet80_Inclusive;   //!
    TBranch        *b_HLT_HT550_DisplacedDijet60_Inclusive;   //!
+   TBranch        *b_HLT_HT650_DisplacedDijet80_Inclusive;   //!
+   TBranch        *b_HLT_HT750_DisplacedDijet80_Inclusive;   //!
    TBranch        *b_HLT_DiJet110_35_Mjj650_PFMET110;   //!
    TBranch        *b_HLT_DiJet110_35_Mjj650_PFMET120;   //!
    TBranch        *b_HLT_DiJet110_35_Mjj650_PFMET130;   //!
    TBranch        *b_HLT_TripleJet110_35_35_Mjj650_PFMET110;   //!
    TBranch        *b_HLT_TripleJet110_35_35_Mjj650_PFMET120;   //!
    TBranch        *b_HLT_TripleJet110_35_35_Mjj650_PFMET130;   //!
+   TBranch        *b_HLT_VBF_DoubleLooseChargedIsoPFTau20_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_VBF_DoubleMediumChargedIsoPFTau20_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_VBF_DoubleTightChargedIsoPFTau20_Trk1_eta2p1_Reg;   //!
    TBranch        *b_HLT_Ele30_eta2p1_WPTight_Gsf_CentralPFJet35_EleCleaned;   //!
    TBranch        *b_HLT_Ele28_eta2p1_WPTight_Gsf_HT150;   //!
    TBranch        *b_HLT_Ele28_HighEta_SC20_Mass55;   //!
    TBranch        *b_HLT_DoubleMu20_7_Mass0to30_Photon23;   //!
-   TBranch        *b_HLT_Ele15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5;   //!
+   TBranch        *b_HLT_Ele15_IsoVVVL_PFHT450_CaloBTagCSV_4p5;   //!
    TBranch        *b_HLT_Ele15_IsoVVVL_PFHT450_PFMET50;   //!
    TBranch        *b_HLT_Ele15_IsoVVVL_PFHT450;   //!
    TBranch        *b_HLT_Ele50_IsoVVVL_PFHT450;   //!
    TBranch        *b_HLT_Ele15_IsoVVVL_PFHT600;   //!
-   TBranch        *b_HLT_Mu4_TrkIsoVVL_DiPFJet90_40_DEta3p5_MJJ750_HTT300_PFMETNoMu60;   //!
    TBranch        *b_HLT_Mu8_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT300_PFMETNoMu60;   //!
    TBranch        *b_HLT_Mu10_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT350_PFMETNoMu60;   //!
-   TBranch        *b_HLT_Mu15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5;   //!
+   TBranch        *b_HLT_Mu15_IsoVVVL_PFHT450_CaloBTagCSV_4p5;   //!
    TBranch        *b_HLT_Mu15_IsoVVVL_PFHT450_PFMET50;   //!
    TBranch        *b_HLT_Mu15_IsoVVVL_PFHT450;   //!
    TBranch        *b_HLT_Mu50_IsoVVVL_PFHT450;   //!
    TBranch        *b_HLT_Mu15_IsoVVVL_PFHT600;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMET70_PFMHT70_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMET80_PFMHT80_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMET90_PFMHT90_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMET100_PFMHT100_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu70_PFMHTNoMu70_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu80_PFMHTNoMu80_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu90_PFMHTNoMu90_IDTight;   //!
-   TBranch        *b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu100_PFMHTNoMu100_IDTight;   //!
    TBranch        *b_HLT_Dimuon10_PsiPrime_Barrel_Seagulls;   //!
    TBranch        *b_HLT_Dimuon20_Jpsi_Barrel_Seagulls;   //!
-   TBranch        *b_HLT_Dimuon12_Upsilon_y1p4;   //!
+   TBranch        *b_HLT_Dimuon10_Upsilon_Barrel_Seagulls;   //!
+   TBranch        *b_HLT_Dimuon12_Upsilon_eta1p5;   //!
    TBranch        *b_HLT_Dimuon14_Phi_Barrel_Seagulls;   //!
    TBranch        *b_HLT_Dimuon18_PsiPrime;   //!
    TBranch        *b_HLT_Dimuon25_Jpsi;   //!
@@ -3136,10 +3395,10 @@ public :
    TBranch        *b_HLT_Dimuon24_Upsilon_noCorrL1;   //!
    TBranch        *b_HLT_Dimuon24_Phi_noCorrL1;   //!
    TBranch        *b_HLT_Dimuon25_Jpsi_noCorrL1;   //!
-   TBranch        *b_HLT_DiMu4_Ele9_CaloIdL_TrackIdL_DZ_Mass3p8;   //!
    TBranch        *b_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ;   //!
    TBranch        *b_HLT_DiMu9_Ele9_CaloIdL_TrackIdL;   //!
    TBranch        *b_HLT_DoubleIsoMu20_eta2p1;   //!
+   TBranch        *b_HLT_DoubleIsoMu24_eta2p1;   //!
    TBranch        *b_HLT_TrkMu12_DoubleTrkMu5NoFiltersNoVtx;   //!
    TBranch        *b_HLT_TrkMu16_DoubleTrkMu6NoFiltersNoVtx;   //!
    TBranch        *b_HLT_TrkMu17_DoubleTrkMu8NoFiltersNoVtx;   //!
@@ -3149,7 +3408,6 @@ public :
    TBranch        *b_HLT_Mu17_Photon30_IsoCaloId;   //!
    TBranch        *b_HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30;   //!
    TBranch        *b_HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30;   //!
-   TBranch        *b_HLT_Ele15_CaloIdL_TrackIdL_IsoVL_PFJet30;   //!
    TBranch        *b_HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30;   //!
    TBranch        *b_HLT_Ele8_CaloIdM_TrackIdM_PFJet30;   //!
    TBranch        *b_HLT_Ele17_CaloIdM_TrackIdM_PFJet30;   //!
@@ -3161,17 +3419,22 @@ public :
    TBranch        *b_HLT_Ele200_CaloIdVT_GsfTrkIdT;   //!
    TBranch        *b_HLT_Ele250_CaloIdVT_GsfTrkIdT;   //!
    TBranch        *b_HLT_Ele300_CaloIdVT_GsfTrkIdT;   //!
-   TBranch        *b_HLT_PFHT330PT30_QuadPFJet_75_60_45_40_TriplePFBTagDeepCSV_4p5;   //!
-   TBranch        *b_HLT_PFHT330PT30_QuadPFJet_75_60_45_40;   //!
-   TBranch        *b_HLT_PFHT400_SixPFJet32_DoublePFBTagDeepCSV_2p94;   //!
-   TBranch        *b_HLT_PFHT400_SixPFJet32;   //!
-   TBranch        *b_HLT_PFHT450_SixPFJet36_PFBTagDeepCSV_1p59;   //!
-   TBranch        *b_HLT_PFHT450_SixPFJet36;   //!
+   TBranch        *b_HLT_PFHT300PT30_QuadPFJet_75_60_45_40;   //!
+   TBranch        *b_HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0;   //!
+   TBranch        *b_HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2;   //!
+   TBranch        *b_HLT_PFHT380_SixPFJet32_DoublePFBTagDeepCSV_2p2;   //!
+   TBranch        *b_HLT_PFHT380_SixPFJet32;   //!
+   TBranch        *b_HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5;   //!
+   TBranch        *b_HLT_PFHT430_SixPFJet40;   //!
    TBranch        *b_HLT_PFHT350;   //!
    TBranch        *b_HLT_PFHT350MinPFJet15;   //!
    TBranch        *b_HLT_Photon60_R9Id90_CaloIdL_IsoL;   //!
    TBranch        *b_HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL;   //!
    TBranch        *b_HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL_PFHT350MinPFJet15;   //!
+   TBranch        *b_HLT_FullTrack_Multiplicity85;   //!
+   TBranch        *b_HLT_FullTrack_Multiplicity100;   //!
+   TBranch        *b_HLT_FullTrack_Multiplicity130;   //!
+   TBranch        *b_HLT_FullTrack_Multiplicity155;   //!
    TBranch        *b_HLT_ECALHT800;   //!
    TBranch        *b_HLT_DiSC30_18_EIso_AND_HE_Mass70;   //!
    TBranch        *b_HLT_Physics;   //!
@@ -3185,7 +3448,6 @@ public :
    TBranch        *b_HLT_Physics_part7;   //!
    TBranch        *b_HLT_Random;   //!
    TBranch        *b_HLT_ZeroBias;   //!
-   TBranch        *b_HLT_ZeroBias_Alignment;   //!
    TBranch        *b_HLT_ZeroBias_part0;   //!
    TBranch        *b_HLT_ZeroBias_part1;   //!
    TBranch        *b_HLT_ZeroBias_part2;   //!
@@ -3205,19 +3467,25 @@ public :
    TBranch        *b_HLT_AK4PFJet80;   //!
    TBranch        *b_HLT_AK4PFJet100;   //!
    TBranch        *b_HLT_AK4PFJet120;   //!
-   TBranch        *b_HLT_SinglePhoton10_Eta3p1ForPPRef;   //!
-   TBranch        *b_HLT_SinglePhoton20_Eta3p1ForPPRef;   //!
-   TBranch        *b_HLT_SinglePhoton30_Eta3p1ForPPRef;   //!
+   TBranch        *b_HLT_HISinglePhoton10_Eta3p1ForPPRef;   //!
+   TBranch        *b_HLT_HISinglePhoton20_Eta3p1ForPPRef;   //!
+   TBranch        *b_HLT_HISinglePhoton30_Eta3p1ForPPRef;   //!
+   TBranch        *b_HLT_HISinglePhoton40_Eta3p1ForPPRef;   //!
+   TBranch        *b_HLT_HISinglePhoton50_Eta3p1ForPPRef;   //!
+   TBranch        *b_HLT_HISinglePhoton60_Eta3p1ForPPRef;   //!
    TBranch        *b_HLT_Photon20_HoverELoose;   //!
    TBranch        *b_HLT_Photon30_HoverELoose;   //!
+   TBranch        *b_HLT_Photon40_HoverELoose;   //!
+   TBranch        *b_HLT_Photon50_HoverELoose;   //!
+   TBranch        *b_HLT_Photon60_HoverELoose;   //!
    TBranch        *b_HLT_EcalCalibration;   //!
    TBranch        *b_HLT_HcalCalibration;   //!
    TBranch        *b_HLT_L1UnpairedBunchBptxMinus;   //!
    TBranch        *b_HLT_L1UnpairedBunchBptxPlus;   //!
    TBranch        *b_HLT_L1NotBptxOR;   //!
+   TBranch        *b_HLT_L1MinimumBiasHF_OR;   //!
+   TBranch        *b_HLT_L1MinimumBiasHF0OR;   //!
    TBranch        *b_HLT_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142;   //!
-   TBranch        *b_HLT_CDC_L2cosmic_5_er1p0;   //!
-   TBranch        *b_HLT_CDC_L2cosmic_5p5_er1p0;   //!
    TBranch        *b_HLT_HcalNZS;   //!
    TBranch        *b_HLT_HcalPhiSym;   //!
    TBranch        *b_HLT_HcalIsolatedbunch;   //!
@@ -3228,18 +3496,43 @@ public :
    TBranch        *b_HLT_ZeroBias_FirstCollisionInTrain;   //!
    TBranch        *b_HLT_ZeroBias_LastCollisionInTrain;   //!
    TBranch        *b_HLT_ZeroBias_FirstBXAfterTrain;   //!
+   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1;   //!
+   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_CrossL1;   //!
+   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_CrossL1;   //!
+   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_TightID_CrossL1;   //!
+   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_TightID_CrossL1;   //!
+   TBranch        *b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_TightID_CrossL1;   //!
+   TBranch        *b_HLT_DoubleLooseChargedIsoPFTau35_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleLooseChargedIsoPFTau40_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleMediumChargedIsoPFTau40_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleTightChargedIsoPFTau35_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleLooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleLooseChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleMediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg;   //!
+   TBranch        *b_HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg;   //!
    TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET90;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET100;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET110;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET120;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET130;   //!
-   TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET140;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_1pr;   //!
    TBranch        *b_HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1;   //!
-   TBranch        *b_HLT_MediumChargedIsoPFTau200HighPtRelaxedIso_Trk50_eta2p1;   //!
-   TBranch        *b_HLT_MediumChargedIsoPFTau220HighPtRelaxedIso_Trk50_eta2p1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1;   //!
+   TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1;   //!
    TBranch        *b_HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL;   //!
    TBranch        *b_HLT_Rsq0p35;   //!
    TBranch        *b_HLT_Rsq0p40;   //!
@@ -3247,18 +3540,10 @@ public :
    TBranch        *b_HLT_RsqMR320_Rsq0p09_MR200;   //!
    TBranch        *b_HLT_RsqMR300_Rsq0p09_MR200_4jet;   //!
    TBranch        *b_HLT_RsqMR320_Rsq0p09_MR200_4jet;   //!
-   TBranch        *b_HLT_IsoMu27_MET90;   //!
-   TBranch        *b_HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg;   //!
-   TBranch        *b_HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg;   //!
-   TBranch        *b_HLT_VBF_DoubleLooseChargedIsoPFTauHPS20_Trk1_eta2p1;   //!
-   TBranch        *b_HLT_VBF_DoubleMediumChargedIsoPFTauHPS20_Trk1_eta2p1;   //!
-   TBranch        *b_HLT_VBF_DoubleTightChargedIsoPFTauHPS20_Trk1_eta2p1;   //!
+   TBranch        *b_HLT_L1_DoubleJet30_Mass_Min400_Mu10;   //!
+   TBranch        *b_HLT_IsoMu27_LooseChargedIsoPFTau20_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu27_MediumChargedIsoPFTau20_SingleL1;   //!
+   TBranch        *b_HLT_IsoMu27_TightChargedIsoPFTau20_SingleL1;   //!
    TBranch        *b_HLT_Photon50_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3_PFMET50;   //!
    TBranch        *b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3;   //!
    TBranch        *b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ600DEta3;   //!
@@ -3277,72 +3562,26 @@ public :
    TBranch        *b_HLT_Mu23_Mu12_SameSign_DZ;   //!
    TBranch        *b_HLT_Mu23_Mu12;   //!
    TBranch        *b_HLT_Mu23_Mu12_DZ;   //!
-   TBranch        *b_HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi1p05;   //!
+   TBranch        *b_HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi;   //!
    TBranch        *b_HLT_DoubleMu2_Jpsi_DoubleTkMu0_Phi;   //!
    TBranch        *b_HLT_DoubleMu3_DCA_PFMET50_PFMHT60;   //!
-   TBranch        *b_HLT_TripleMu_5_3_3_Mass3p8_DCA;   //!
-   TBranch        *b_HLT_QuadPFJet98_83_71_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;   //!
-   TBranch        *b_HLT_QuadPFJet103_88_75_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;   //!
-   TBranch        *b_HLT_QuadPFJet111_90_80_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;   //!
-   TBranch        *b_HLT_QuadPFJet98_83_71_15_PFBTagDeepCSV_1p3_VBF2;   //!
-   TBranch        *b_HLT_QuadPFJet103_88_75_15_PFBTagDeepCSV_1p3_VBF2;   //!
-   TBranch        *b_HLT_QuadPFJet105_88_76_15_PFBTagDeepCSV_1p3_VBF2;   //!
-   TBranch        *b_HLT_QuadPFJet111_90_80_15_PFBTagDeepCSV_1p3_VBF2;   //!
+   TBranch        *b_HLT_TripleMu_5_3_3_Mass3p8to60_DCA;   //!
+   TBranch        *b_HLT_QuadPFJet98_83_71_15_DoubleBTagCSV_p013_p08_VBF1;   //!
+   TBranch        *b_HLT_QuadPFJet103_88_75_15_DoubleBTagCSV_p013_p08_VBF1;   //!
+   TBranch        *b_HLT_QuadPFJet105_90_76_15_DoubleBTagCSV_p013_p08_VBF1;   //!
+   TBranch        *b_HLT_QuadPFJet111_90_80_15_DoubleBTagCSV_p013_p08_VBF1;   //!
+   TBranch        *b_HLT_QuadPFJet98_83_71_15_BTagCSV_p013_VBF2;   //!
+   TBranch        *b_HLT_QuadPFJet103_88_75_15_BTagCSV_p013_VBF2;   //!
+   TBranch        *b_HLT_QuadPFJet105_88_76_15_BTagCSV_p013_VBF2;   //!
+   TBranch        *b_HLT_QuadPFJet111_90_80_15_BTagCSV_p013_VBF2;   //!
    TBranch        *b_HLT_QuadPFJet98_83_71_15;   //!
    TBranch        *b_HLT_QuadPFJet103_88_75_15;   //!
    TBranch        *b_HLT_QuadPFJet105_88_76_15;   //!
    TBranch        *b_HLT_QuadPFJet111_90_80_15;   //!
-   TBranch        *b_HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p17;   //!
-   TBranch        *b_HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p1;   //!
-   TBranch        *b_HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02;   //!
-   TBranch        *b_HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2;   //!
-   TBranch        *b_HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4;   //!
-   TBranch        *b_HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto_Mass55;   //!
-   TBranch        *b_HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto;   //!
-   TBranch        *b_HLT_Mu12_IP6_part0;   //!
-   TBranch        *b_HLT_Mu12_IP6_part1;   //!
-   TBranch        *b_HLT_Mu12_IP6_part2;   //!
-   TBranch        *b_HLT_Mu12_IP6_part3;   //!
-   TBranch        *b_HLT_Mu12_IP6_part4;   //!
-   TBranch        *b_HLT_Mu9_IP5_part0;   //!
-   TBranch        *b_HLT_Mu9_IP5_part1;   //!
-   TBranch        *b_HLT_Mu9_IP5_part2;   //!
-   TBranch        *b_HLT_Mu9_IP5_part3;   //!
-   TBranch        *b_HLT_Mu9_IP5_part4;   //!
-   TBranch        *b_HLT_Mu7_IP4_part0;   //!
-   TBranch        *b_HLT_Mu7_IP4_part1;   //!
-   TBranch        *b_HLT_Mu7_IP4_part2;   //!
-   TBranch        *b_HLT_Mu7_IP4_part3;   //!
-   TBranch        *b_HLT_Mu7_IP4_part4;   //!
-   TBranch        *b_HLT_Mu9_IP4_part0;   //!
-   TBranch        *b_HLT_Mu9_IP4_part1;   //!
-   TBranch        *b_HLT_Mu9_IP4_part2;   //!
-   TBranch        *b_HLT_Mu9_IP4_part3;   //!
-   TBranch        *b_HLT_Mu9_IP4_part4;   //!
-   TBranch        *b_HLT_Mu8_IP5_part0;   //!
-   TBranch        *b_HLT_Mu8_IP5_part1;   //!
-   TBranch        *b_HLT_Mu8_IP5_part2;   //!
-   TBranch        *b_HLT_Mu8_IP5_part3;   //!
-   TBranch        *b_HLT_Mu8_IP5_part4;   //!
-   TBranch        *b_HLT_Mu8_IP6_part0;   //!
-   TBranch        *b_HLT_Mu8_IP6_part1;   //!
-   TBranch        *b_HLT_Mu8_IP6_part2;   //!
-   TBranch        *b_HLT_Mu8_IP6_part3;   //!
-   TBranch        *b_HLT_Mu8_IP6_part4;   //!
-   TBranch        *b_HLT_Mu9_IP6_part0;   //!
-   TBranch        *b_HLT_Mu9_IP6_part1;   //!
-   TBranch        *b_HLT_Mu9_IP6_part2;   //!
-   TBranch        *b_HLT_Mu9_IP6_part3;   //!
-   TBranch        *b_HLT_Mu9_IP6_part4;   //!
-   TBranch        *b_HLT_Mu8_IP3_part0;   //!
-   TBranch        *b_HLT_Mu8_IP3_part1;   //!
-   TBranch        *b_HLT_Mu8_IP3_part2;   //!
-   TBranch        *b_HLT_Mu8_IP3_part3;   //!
-   TBranch        *b_HLT_Mu8_IP3_part4;   //!
-   TBranch        *b_HLT_QuadPFJet105_88_76_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1;   //!
-   TBranch        *b_HLT_TrkMu6NoFiltersNoVtx;   //!
-   TBranch        *b_HLT_TrkMu16NoFiltersNoVtx;   //!
-   TBranch        *b_HLT_DoubleTrkMu_16_6_NoFiltersNoVtx;   //!
+   TBranch        *b_HLT_AK8PFJet330_PFAK8BTagCSV_p17;   //!
+   TBranch        *b_HLT_AK8PFJet330_PFAK8BTagCSV_p1;   //!
+   TBranch        *b_HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55;   //!
+   TBranch        *b_HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55;   //!
    TBranch        *b_HLTriggerFinalPath;   //!
    TBranch        *b_L1simulation_step;   //!
    TBranch        *b_Jet_pt_raw;   //!
@@ -3546,15 +3785,35 @@ public :
    TBranch        *b_PrefireWeight_Down;   //!
    TBranch        *b_scalef;   //!
    TBranch        *b_ele_id_scale;   //!
+   TBranch        *b_ele_id_scale_Up;   //!
+   TBranch        *b_ele_id_scale_Down;   //!
    TBranch        *b_ele_reco_scale;   //!
+   TBranch        *b_ele_reco_scale_Up;   //!
+   TBranch        *b_ele_reco_scale_Down;   //!
    TBranch        *b_muon_id_scale;   //!
+   TBranch        *b_muon_id_scale_Up;   //!
+   TBranch        *b_muon_id_scale_Down;   //!
    TBranch        *b_muon_iso_scale;   //!
+   TBranch        *b_muon_iso_scale_Up;   //!
+   TBranch        *b_muon_iso_scale_Down;   //!
    TBranch        *b_photon_id_scale;   //!
+   TBranch        *b_photon_id_scale_Up;   //!
+   TBranch        *b_photon_id_scale_Down;   //!
    TBranch        *b_photon_veto_scale;   //!
+   TBranch        *b_photon_veto_scale_Up;   //!
+   TBranch        *b_photon_veto_scale_Down;   //!
    TBranch        *b_btag_weight;   //!
    TBranch        *b_btag_weight_up;   //!
    TBranch        *b_btag_weight_down;   //!
-
+   TBranch        *b_n_bjets_nom;   //!
+   TBranch        *b_njets20_nom;   //!
+   TBranch        *b_njets25_nom;   //!
+   TBranch        *b_njets30_nom;   //!
+   TBranch        *b_njets35_nom;   //!
+   TBranch        *b_njets40_nom;   //!
+   TBranch        *b_njets50_nom;   //!
+   
+   
    TString m_dataset;
    WWg(TTree *tree=0,TString dataset="");
    virtual ~WWg();
@@ -3563,25 +3822,27 @@ public :
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString name,TString year);
+   virtual void     endJob();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
-   virtual void     endJob();
-private:
+
+ private:
      TTree *ExTree;
      TFile *fout;
+     float mT,mT2;
 };
 
 #endif
 
 #ifdef WWg_cxx
-WWg::WWg(TTree *tree,TString dataset) : fChain(0) 
+WWg::WWg(TTree *tree,TString dataset) : fChain(0)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("cutlep-outWZ18.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("cutlep1-outTTGJets17.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("cutlep-outWZ18.root");
+         f = new TFile("cutlep1-outTTGJets17.root");
       }
       f->GetObject("Events",tree);
 
@@ -3630,8 +3891,11 @@ void WWg::Init(TTree *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fout = new TFile("./"+m_dataset, "RECREATE");
+
+   fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
+   ExTree->Branch("mT",&mT,"mT/F");
+   ExTree->Branch("mT2",&mT2,"mT2/F");
 
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
@@ -3651,6 +3915,33 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HTXS_stage_1_pTjet30", &HTXS_stage_1_pTjet30, &b_HTXS_stage_1_pTjet30);
    fChain->SetBranchAddress("HTXS_njets25", &HTXS_njets25, &b_HTXS_njets25);
    fChain->SetBranchAddress("HTXS_njets30", &HTXS_njets30, &b_HTXS_njets30);
+   fChain->SetBranchAddress("nboostedTau", &nboostedTau, &b_nboostedTau);
+   fChain->SetBranchAddress("boostedTau_chargedIso", boostedTau_chargedIso, &b_boostedTau_chargedIso);
+   fChain->SetBranchAddress("boostedTau_eta", boostedTau_eta, &b_boostedTau_eta);
+   fChain->SetBranchAddress("boostedTau_leadTkDeltaEta", boostedTau_leadTkDeltaEta, &b_boostedTau_leadTkDeltaEta);
+   fChain->SetBranchAddress("boostedTau_leadTkDeltaPhi", boostedTau_leadTkDeltaPhi, &b_boostedTau_leadTkDeltaPhi);
+   fChain->SetBranchAddress("boostedTau_leadTkPtOverTauPt", boostedTau_leadTkPtOverTauPt, &b_boostedTau_leadTkPtOverTauPt);
+   fChain->SetBranchAddress("boostedTau_mass", boostedTau_mass, &b_boostedTau_mass);
+   fChain->SetBranchAddress("boostedTau_neutralIso", boostedTau_neutralIso, &b_boostedTau_neutralIso);
+   fChain->SetBranchAddress("boostedTau_phi", boostedTau_phi, &b_boostedTau_phi);
+   fChain->SetBranchAddress("boostedTau_photonsOutsideSignalCone", boostedTau_photonsOutsideSignalCone, &b_boostedTau_photonsOutsideSignalCone);
+   fChain->SetBranchAddress("boostedTau_pt", boostedTau_pt, &b_boostedTau_pt);
+   fChain->SetBranchAddress("boostedTau_puCorr", boostedTau_puCorr, &b_boostedTau_puCorr);
+   fChain->SetBranchAddress("boostedTau_rawAntiEle2018", boostedTau_rawAntiEle2018, &b_boostedTau_rawAntiEle2018);
+   fChain->SetBranchAddress("boostedTau_rawIso", boostedTau_rawIso, &b_boostedTau_rawIso);
+   fChain->SetBranchAddress("boostedTau_rawIsodR03", boostedTau_rawIsodR03, &b_boostedTau_rawIsodR03);
+   fChain->SetBranchAddress("boostedTau_rawMVAnewDM2017v2", boostedTau_rawMVAnewDM2017v2, &b_boostedTau_rawMVAnewDM2017v2);
+   fChain->SetBranchAddress("boostedTau_rawMVAoldDM2017v2", boostedTau_rawMVAoldDM2017v2, &b_boostedTau_rawMVAoldDM2017v2);
+   fChain->SetBranchAddress("boostedTau_rawMVAoldDMdR032017v2", boostedTau_rawMVAoldDMdR032017v2, &b_boostedTau_rawMVAoldDMdR032017v2);
+   fChain->SetBranchAddress("boostedTau_charge", boostedTau_charge, &b_boostedTau_charge);
+   fChain->SetBranchAddress("boostedTau_decayMode", boostedTau_decayMode, &b_boostedTau_decayMode);
+   fChain->SetBranchAddress("boostedTau_jetIdx", boostedTau_jetIdx, &b_boostedTau_jetIdx);
+   fChain->SetBranchAddress("boostedTau_rawAntiEleCat2018", boostedTau_rawAntiEleCat2018, &b_boostedTau_rawAntiEleCat2018);
+   fChain->SetBranchAddress("boostedTau_idAntiEle2018", boostedTau_idAntiEle2018, &b_boostedTau_idAntiEle2018);
+   fChain->SetBranchAddress("boostedTau_idAntiMu", boostedTau_idAntiMu, &b_boostedTau_idAntiMu);
+   fChain->SetBranchAddress("boostedTau_idMVAnewDM2017v2", boostedTau_idMVAnewDM2017v2, &b_boostedTau_idMVAnewDM2017v2);
+   fChain->SetBranchAddress("boostedTau_idMVAoldDM2017v2", boostedTau_idMVAoldDM2017v2, &b_boostedTau_idMVAoldDM2017v2);
+   fChain->SetBranchAddress("boostedTau_idMVAoldDMdR032017v2", boostedTau_idMVAoldDMdR032017v2, &b_boostedTau_idMVAoldDMdR032017v2);
    fChain->SetBranchAddress("btagWeight_CSVV2", &btagWeight_CSVV2, &b_btagWeight_CSVV2);
    fChain->SetBranchAddress("btagWeight_DeepCSVB", &btagWeight_DeepCSVB, &b_btagWeight_DeepCSVB);
    fChain->SetBranchAddress("CaloMET_phi", &CaloMET_phi, &b_CaloMET_phi);
@@ -3670,6 +3961,10 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("DeepMETResponseTune_phi", &DeepMETResponseTune_phi, &b_DeepMETResponseTune_phi);
    fChain->SetBranchAddress("DeepMETResponseTune_pt", &DeepMETResponseTune_pt, &b_DeepMETResponseTune_pt);
    fChain->SetBranchAddress("nElectron", &nElectron, &b_nElectron);
+   fChain->SetBranchAddress("Electron_dEscaleDown", Electron_dEscaleDown, &b_Electron_dEscaleDown);
+   fChain->SetBranchAddress("Electron_dEscaleUp", Electron_dEscaleUp, &b_Electron_dEscaleUp);
+   fChain->SetBranchAddress("Electron_dEsigmaDown", Electron_dEsigmaDown, &b_Electron_dEsigmaDown);
+   fChain->SetBranchAddress("Electron_dEsigmaUp", Electron_dEsigmaUp, &b_Electron_dEsigmaUp);
    fChain->SetBranchAddress("Electron_deltaEtaSC", Electron_deltaEtaSC, &b_Electron_deltaEtaSC);
    fChain->SetBranchAddress("Electron_dr03EcalRecHitSumEt", Electron_dr03EcalRecHitSumEt, &b_Electron_dr03EcalRecHitSumEt);
    fChain->SetBranchAddress("Electron_dr03HcalDepth1TowerSumEt", Electron_dr03HcalDepth1TowerSumEt, &b_Electron_dr03HcalDepth1TowerSumEt);
@@ -3690,8 +3985,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Electron_mass", Electron_mass, &b_Electron_mass);
    fChain->SetBranchAddress("Electron_miniPFRelIso_all", Electron_miniPFRelIso_all, &b_Electron_miniPFRelIso_all);
    fChain->SetBranchAddress("Electron_miniPFRelIso_chg", Electron_miniPFRelIso_chg, &b_Electron_miniPFRelIso_chg);
-   fChain->SetBranchAddress("Electron_mvaFall17V1Iso", Electron_mvaFall17V1Iso, &b_Electron_mvaFall17V1Iso);
-   fChain->SetBranchAddress("Electron_mvaFall17V1noIso", Electron_mvaFall17V1noIso, &b_Electron_mvaFall17V1noIso);
    fChain->SetBranchAddress("Electron_mvaFall17V2Iso", Electron_mvaFall17V2Iso, &b_Electron_mvaFall17V2Iso);
    fChain->SetBranchAddress("Electron_mvaFall17V2noIso", Electron_mvaFall17V2noIso, &b_Electron_mvaFall17V2noIso);
    fChain->SetBranchAddress("Electron_pfRelIso03_all", Electron_pfRelIso03_all, &b_Electron_pfRelIso03_all);
@@ -3705,7 +3998,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Electron_mvaTTH", Electron_mvaTTH, &b_Electron_mvaTTH);
    fChain->SetBranchAddress("Electron_charge", Electron_charge, &b_Electron_charge);
    fChain->SetBranchAddress("Electron_cutBased", Electron_cutBased, &b_Electron_cutBased);
-   fChain->SetBranchAddress("Electron_cutBased_Fall17_V1", Electron_cutBased_Fall17_V1, &b_Electron_cutBased_Fall17_V1);
    fChain->SetBranchAddress("Electron_jetIdx", Electron_jetIdx, &b_Electron_jetIdx);
    fChain->SetBranchAddress("Electron_pdgId", Electron_pdgId, &b_Electron_pdgId);
    fChain->SetBranchAddress("Electron_photonIdx", Electron_photonIdx, &b_Electron_photonIdx);
@@ -3717,12 +4009,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Electron_isPFcand", Electron_isPFcand, &b_Electron_isPFcand);
    fChain->SetBranchAddress("Electron_jetNDauCharged", Electron_jetNDauCharged, &b_Electron_jetNDauCharged);
    fChain->SetBranchAddress("Electron_lostHits", Electron_lostHits, &b_Electron_lostHits);
-   fChain->SetBranchAddress("Electron_mvaFall17V1Iso_WP80", Electron_mvaFall17V1Iso_WP80, &b_Electron_mvaFall17V1Iso_WP80);
-   fChain->SetBranchAddress("Electron_mvaFall17V1Iso_WP90", Electron_mvaFall17V1Iso_WP90, &b_Electron_mvaFall17V1Iso_WP90);
-   fChain->SetBranchAddress("Electron_mvaFall17V1Iso_WPL", Electron_mvaFall17V1Iso_WPL, &b_Electron_mvaFall17V1Iso_WPL);
-   fChain->SetBranchAddress("Electron_mvaFall17V1noIso_WP80", Electron_mvaFall17V1noIso_WP80, &b_Electron_mvaFall17V1noIso_WP80);
-   fChain->SetBranchAddress("Electron_mvaFall17V1noIso_WP90", Electron_mvaFall17V1noIso_WP90, &b_Electron_mvaFall17V1noIso_WP90);
-   fChain->SetBranchAddress("Electron_mvaFall17V1noIso_WPL", Electron_mvaFall17V1noIso_WPL, &b_Electron_mvaFall17V1noIso_WPL);
    fChain->SetBranchAddress("Electron_mvaFall17V2Iso_WP80", Electron_mvaFall17V2Iso_WP80, &b_Electron_mvaFall17V2Iso_WP80);
    fChain->SetBranchAddress("Electron_mvaFall17V2Iso_WP90", Electron_mvaFall17V2Iso_WP90, &b_Electron_mvaFall17V2Iso_WP90);
    fChain->SetBranchAddress("Electron_mvaFall17V2Iso_WPL", Electron_mvaFall17V2Iso_WPL, &b_Electron_mvaFall17V2Iso_WPL);
@@ -3732,17 +4018,10 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Electron_seedGain", Electron_seedGain, &b_Electron_seedGain);
    fChain->SetBranchAddress("nFatJet", &nFatJet, &b_nFatJet);
    fChain->SetBranchAddress("FatJet_area", FatJet_area, &b_FatJet_area);
-   fChain->SetBranchAddress("FatJet_btagCMVA", FatJet_btagCMVA, &b_FatJet_btagCMVA);
    fChain->SetBranchAddress("FatJet_btagCSVV2", FatJet_btagCSVV2, &b_FatJet_btagCSVV2);
-   fChain->SetBranchAddress("FatJet_btagDDBvL", FatJet_btagDDBvL, &b_FatJet_btagDDBvL);
    fChain->SetBranchAddress("FatJet_btagDDBvLV2", FatJet_btagDDBvLV2, &b_FatJet_btagDDBvLV2);
-   fChain->SetBranchAddress("FatJet_btagDDBvL_noMD", FatJet_btagDDBvL_noMD, &b_FatJet_btagDDBvL_noMD);
-   fChain->SetBranchAddress("FatJet_btagDDCvB", FatJet_btagDDCvB, &b_FatJet_btagDDCvB);
    fChain->SetBranchAddress("FatJet_btagDDCvBV2", FatJet_btagDDCvBV2, &b_FatJet_btagDDCvBV2);
-   fChain->SetBranchAddress("FatJet_btagDDCvB_noMD", FatJet_btagDDCvB_noMD, &b_FatJet_btagDDCvB_noMD);
-   fChain->SetBranchAddress("FatJet_btagDDCvL", FatJet_btagDDCvL, &b_FatJet_btagDDCvL);
    fChain->SetBranchAddress("FatJet_btagDDCvLV2", FatJet_btagDDCvLV2, &b_FatJet_btagDDCvLV2);
-   fChain->SetBranchAddress("FatJet_btagDDCvL_noMD", FatJet_btagDDCvL_noMD, &b_FatJet_btagDDCvL_noMD);
    fChain->SetBranchAddress("FatJet_btagDeepB", FatJet_btagDeepB, &b_FatJet_btagDeepB);
    fChain->SetBranchAddress("FatJet_btagHbb", FatJet_btagHbb, &b_FatJet_btagHbb);
    fChain->SetBranchAddress("FatJet_deepTagMD_H4qvsQCD", FatJet_deepTagMD_H4qvsQCD, &b_FatJet_deepTagMD_H4qvsQCD);
@@ -3777,6 +4056,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("FatJet_particleNet_TvsQCD", FatJet_particleNet_TvsQCD, &b_FatJet_particleNet_TvsQCD);
    fChain->SetBranchAddress("FatJet_particleNet_WvsQCD", FatJet_particleNet_WvsQCD, &b_FatJet_particleNet_WvsQCD);
    fChain->SetBranchAddress("FatJet_particleNet_ZvsQCD", FatJet_particleNet_ZvsQCD, &b_FatJet_particleNet_ZvsQCD);
+   fChain->SetBranchAddress("FatJet_particleNet_mass", FatJet_particleNet_mass, &b_FatJet_particleNet_mass);
    fChain->SetBranchAddress("FatJet_phi", FatJet_phi, &b_FatJet_phi);
    fChain->SetBranchAddress("FatJet_pt", FatJet_pt, &b_FatJet_pt);
    fChain->SetBranchAddress("FatJet_rawFactor", FatJet_rawFactor, &b_FatJet_rawFactor);
@@ -3790,6 +4070,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("FatJet_subJetIdx2", FatJet_subJetIdx2, &b_FatJet_subJetIdx2);
    fChain->SetBranchAddress("FatJet_electronIdx3SJ", FatJet_electronIdx3SJ, &b_FatJet_electronIdx3SJ);
    fChain->SetBranchAddress("FatJet_muonIdx3SJ", FatJet_muonIdx3SJ, &b_FatJet_muonIdx3SJ);
+   fChain->SetBranchAddress("FatJet_nConstituents", FatJet_nConstituents, &b_FatJet_nConstituents);
    fChain->SetBranchAddress("nFsrPhoton", &nFsrPhoton, &b_nFsrPhoton);
    fChain->SetBranchAddress("FsrPhoton_dROverEt2", FsrPhoton_dROverEt2, &b_FsrPhoton_dROverEt2);
    fChain->SetBranchAddress("FsrPhoton_eta", FsrPhoton_eta, &b_FsrPhoton_eta);
@@ -3842,6 +4123,13 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("GenVisTau_genPartIdxMother", GenVisTau_genPartIdxMother, &b_GenVisTau_genPartIdxMother);
    fChain->SetBranchAddress("GenVisTau_status", GenVisTau_status, &b_GenVisTau_status);
    fChain->SetBranchAddress("genWeight", &genWeight, &b_genWeight);
+   fChain->SetBranchAddress("LHEWeight_originalXWGTUP", &LHEWeight_originalXWGTUP, &b_LHEWeight_originalXWGTUP);
+   fChain->SetBranchAddress("nLHEPdfWeight", &nLHEPdfWeight, &b_nLHEPdfWeight);
+   fChain->SetBranchAddress("LHEPdfWeight", LHEPdfWeight, &b_LHEPdfWeight);
+   fChain->SetBranchAddress("nLHEReweightingWeight", &nLHEReweightingWeight, &b_nLHEReweightingWeight);
+   fChain->SetBranchAddress("LHEReweightingWeight", &LHEReweightingWeight, &b_LHEReweightingWeight);
+   fChain->SetBranchAddress("nLHEScaleWeight", &nLHEScaleWeight, &b_nLHEScaleWeight);
+   fChain->SetBranchAddress("LHEScaleWeight", LHEScaleWeight, &b_LHEScaleWeight);
    fChain->SetBranchAddress("nPSWeight", &nPSWeight, &b_nPSWeight);
    fChain->SetBranchAddress("PSWeight", PSWeight, &b_PSWeight);
    fChain->SetBranchAddress("nIsoTrack", &nIsoTrack, &b_nIsoTrack);
@@ -3854,6 +4142,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("IsoTrack_pt", IsoTrack_pt, &b_IsoTrack_pt);
    fChain->SetBranchAddress("IsoTrack_miniPFRelIso_all", IsoTrack_miniPFRelIso_all, &b_IsoTrack_miniPFRelIso_all);
    fChain->SetBranchAddress("IsoTrack_miniPFRelIso_chg", IsoTrack_miniPFRelIso_chg, &b_IsoTrack_miniPFRelIso_chg);
+   fChain->SetBranchAddress("IsoTrack_charge", IsoTrack_charge, &b_IsoTrack_charge);
    fChain->SetBranchAddress("IsoTrack_fromPV", IsoTrack_fromPV, &b_IsoTrack_fromPV);
    fChain->SetBranchAddress("IsoTrack_pdgId", IsoTrack_pdgId, &b_IsoTrack_pdgId);
    fChain->SetBranchAddress("IsoTrack_isHighPurityTrack", IsoTrack_isHighPurityTrack, &b_IsoTrack_isHighPurityTrack);
@@ -3861,22 +4150,16 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("IsoTrack_isFromLostTrack", IsoTrack_isFromLostTrack, &b_IsoTrack_isFromLostTrack);
    fChain->SetBranchAddress("nJet", &nJet, &b_nJet);
    fChain->SetBranchAddress("Jet_area", Jet_area, &b_Jet_area);
-   fChain->SetBranchAddress("Jet_btagCMVA", Jet_btagCMVA, &b_Jet_btagCMVA);
    fChain->SetBranchAddress("Jet_btagCSVV2", Jet_btagCSVV2, &b_Jet_btagCSVV2);
    fChain->SetBranchAddress("Jet_btagDeepB", Jet_btagDeepB, &b_Jet_btagDeepB);
-   fChain->SetBranchAddress("Jet_btagDeepC", Jet_btagDeepC, &b_Jet_btagDeepC);
    fChain->SetBranchAddress("Jet_btagDeepCvB", Jet_btagDeepCvB, &b_Jet_btagDeepCvB);
    fChain->SetBranchAddress("Jet_btagDeepCvL", Jet_btagDeepCvL, &b_Jet_btagDeepCvL);
    fChain->SetBranchAddress("Jet_btagDeepFlavB", Jet_btagDeepFlavB, &b_Jet_btagDeepFlavB);
-   fChain->SetBranchAddress("Jet_btagDeepFlavC", Jet_btagDeepFlavC, &b_Jet_btagDeepFlavC);
    fChain->SetBranchAddress("Jet_btagDeepFlavCvB", Jet_btagDeepFlavCvB, &b_Jet_btagDeepFlavCvB);
    fChain->SetBranchAddress("Jet_btagDeepFlavCvL", Jet_btagDeepFlavCvL, &b_Jet_btagDeepFlavCvL);
    fChain->SetBranchAddress("Jet_btagDeepFlavQG", Jet_btagDeepFlavQG, &b_Jet_btagDeepFlavQG);
    fChain->SetBranchAddress("Jet_chEmEF", Jet_chEmEF, &b_Jet_chEmEF);
    fChain->SetBranchAddress("Jet_chFPV0EF", Jet_chFPV0EF, &b_Jet_chFPV0EF);
-   fChain->SetBranchAddress("Jet_chFPV1EF", Jet_chFPV1EF, &b_Jet_chFPV1EF);
-   fChain->SetBranchAddress("Jet_chFPV2EF", Jet_chFPV2EF, &b_Jet_chFPV2EF);
-   fChain->SetBranchAddress("Jet_chFPV3EF", Jet_chFPV3EF, &b_Jet_chFPV3EF);
    fChain->SetBranchAddress("Jet_chHEF", Jet_chHEF, &b_Jet_chHEF);
    fChain->SetBranchAddress("Jet_eta", Jet_eta, &b_Jet_eta);
    fChain->SetBranchAddress("Jet_hfsigmaEtaEta", Jet_hfsigmaEtaEta, &b_Jet_hfsigmaEtaEta);
@@ -3902,10 +4185,69 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Jet_jetId", Jet_jetId, &b_Jet_jetId);
    fChain->SetBranchAddress("Jet_muonIdx1", Jet_muonIdx1, &b_Jet_muonIdx1);
    fChain->SetBranchAddress("Jet_muonIdx2", Jet_muonIdx2, &b_Jet_muonIdx2);
-   fChain->SetBranchAddress("Jet_nConstituents", Jet_nConstituents, &b_Jet_nConstituents);
    fChain->SetBranchAddress("Jet_nElectrons", Jet_nElectrons, &b_Jet_nElectrons);
    fChain->SetBranchAddress("Jet_nMuons", Jet_nMuons, &b_Jet_nMuons);
    fChain->SetBranchAddress("Jet_puId", Jet_puId, &b_Jet_puId);
+   fChain->SetBranchAddress("Jet_nConstituents", Jet_nConstituents, &b_Jet_nConstituents);
+   fChain->SetBranchAddress("L1PreFiringWeight_Dn", &L1PreFiringWeight_Dn, &b_L1PreFiringWeight_Dn);
+   fChain->SetBranchAddress("L1PreFiringWeight_ECAL_Dn", &L1PreFiringWeight_ECAL_Dn, &b_L1PreFiringWeight_ECAL_Dn);
+   fChain->SetBranchAddress("L1PreFiringWeight_ECAL_Nom", &L1PreFiringWeight_ECAL_Nom, &b_L1PreFiringWeight_ECAL_Nom);
+   fChain->SetBranchAddress("L1PreFiringWeight_ECAL_Up", &L1PreFiringWeight_ECAL_Up, &b_L1PreFiringWeight_ECAL_Up);
+   fChain->SetBranchAddress("L1PreFiringWeight_Muon_Nom", &L1PreFiringWeight_Muon_Nom, &b_L1PreFiringWeight_Muon_Nom);
+   fChain->SetBranchAddress("L1PreFiringWeight_Muon_StatDn", &L1PreFiringWeight_Muon_StatDn, &b_L1PreFiringWeight_Muon_StatDn);
+   fChain->SetBranchAddress("L1PreFiringWeight_Muon_StatUp", &L1PreFiringWeight_Muon_StatUp, &b_L1PreFiringWeight_Muon_StatUp);
+   fChain->SetBranchAddress("L1PreFiringWeight_Muon_SystDn", &L1PreFiringWeight_Muon_SystDn, &b_L1PreFiringWeight_Muon_SystDn);
+   fChain->SetBranchAddress("L1PreFiringWeight_Muon_SystUp", &L1PreFiringWeight_Muon_SystUp, &b_L1PreFiringWeight_Muon_SystUp);
+   fChain->SetBranchAddress("L1PreFiringWeight_Nom", &L1PreFiringWeight_Nom, &b_L1PreFiringWeight_Nom);
+   fChain->SetBranchAddress("L1PreFiringWeight_Up", &L1PreFiringWeight_Up, &b_L1PreFiringWeight_Up);
+   fChain->SetBranchAddress("LHE_HT", &LHE_HT, &b_LHE_HT);
+   fChain->SetBranchAddress("LHE_HTIncoming", &LHE_HTIncoming, &b_LHE_HTIncoming);
+   fChain->SetBranchAddress("LHE_Vpt", &LHE_Vpt, &b_LHE_Vpt);
+   fChain->SetBranchAddress("LHE_AlphaS", &LHE_AlphaS, &b_LHE_AlphaS);
+   fChain->SetBranchAddress("LHE_Njets", &LHE_Njets, &b_LHE_Njets);
+   fChain->SetBranchAddress("LHE_Nb", &LHE_Nb, &b_LHE_Nb);
+   fChain->SetBranchAddress("LHE_Nc", &LHE_Nc, &b_LHE_Nc);
+   fChain->SetBranchAddress("LHE_Nuds", &LHE_Nuds, &b_LHE_Nuds);
+   fChain->SetBranchAddress("LHE_Nglu", &LHE_Nglu, &b_LHE_Nglu);
+   fChain->SetBranchAddress("LHE_NpNLO", &LHE_NpNLO, &b_LHE_NpNLO);
+   fChain->SetBranchAddress("LHE_NpLO", &LHE_NpLO, &b_LHE_NpLO);
+   fChain->SetBranchAddress("nLHEPart", &nLHEPart, &b_nLHEPart);
+   fChain->SetBranchAddress("LHEPart_pt", LHEPart_pt, &b_LHEPart_pt);
+   fChain->SetBranchAddress("LHEPart_eta", LHEPart_eta, &b_LHEPart_eta);
+   fChain->SetBranchAddress("LHEPart_phi", LHEPart_phi, &b_LHEPart_phi);
+   fChain->SetBranchAddress("LHEPart_mass", LHEPart_mass, &b_LHEPart_mass);
+   fChain->SetBranchAddress("LHEPart_incomingpz", LHEPart_incomingpz, &b_LHEPart_incomingpz);
+   fChain->SetBranchAddress("LHEPart_pdgId", LHEPart_pdgId, &b_LHEPart_pdgId);
+   fChain->SetBranchAddress("LHEPart_status", LHEPart_status, &b_LHEPart_status);
+   fChain->SetBranchAddress("LHEPart_spin", LHEPart_spin, &b_LHEPart_spin);
+   fChain->SetBranchAddress("nLowPtElectron", &nLowPtElectron, &b_nLowPtElectron);
+   fChain->SetBranchAddress("LowPtElectron_ID", LowPtElectron_ID, &b_LowPtElectron_ID);
+   fChain->SetBranchAddress("LowPtElectron_convVtxRadius", LowPtElectron_convVtxRadius, &b_LowPtElectron_convVtxRadius);
+   fChain->SetBranchAddress("LowPtElectron_deltaEtaSC", LowPtElectron_deltaEtaSC, &b_LowPtElectron_deltaEtaSC);
+   fChain->SetBranchAddress("LowPtElectron_dxy", LowPtElectron_dxy, &b_LowPtElectron_dxy);
+   fChain->SetBranchAddress("LowPtElectron_dxyErr", LowPtElectron_dxyErr, &b_LowPtElectron_dxyErr);
+   fChain->SetBranchAddress("LowPtElectron_dz", LowPtElectron_dz, &b_LowPtElectron_dz);
+   fChain->SetBranchAddress("LowPtElectron_dzErr", LowPtElectron_dzErr, &b_LowPtElectron_dzErr);
+   fChain->SetBranchAddress("LowPtElectron_eInvMinusPInv", LowPtElectron_eInvMinusPInv, &b_LowPtElectron_eInvMinusPInv);
+   fChain->SetBranchAddress("LowPtElectron_embeddedID", LowPtElectron_embeddedID, &b_LowPtElectron_embeddedID);
+   fChain->SetBranchAddress("LowPtElectron_energyErr", LowPtElectron_energyErr, &b_LowPtElectron_energyErr);
+   fChain->SetBranchAddress("LowPtElectron_eta", LowPtElectron_eta, &b_LowPtElectron_eta);
+   fChain->SetBranchAddress("LowPtElectron_hoe", LowPtElectron_hoe, &b_LowPtElectron_hoe);
+   fChain->SetBranchAddress("LowPtElectron_mass", LowPtElectron_mass, &b_LowPtElectron_mass);
+   fChain->SetBranchAddress("LowPtElectron_miniPFRelIso_all", LowPtElectron_miniPFRelIso_all, &b_LowPtElectron_miniPFRelIso_all);
+   fChain->SetBranchAddress("LowPtElectron_miniPFRelIso_chg", LowPtElectron_miniPFRelIso_chg, &b_LowPtElectron_miniPFRelIso_chg);
+   fChain->SetBranchAddress("LowPtElectron_phi", LowPtElectron_phi, &b_LowPtElectron_phi);
+   fChain->SetBranchAddress("LowPtElectron_pt", LowPtElectron_pt, &b_LowPtElectron_pt);
+   fChain->SetBranchAddress("LowPtElectron_ptbiased", LowPtElectron_ptbiased, &b_LowPtElectron_ptbiased);
+   fChain->SetBranchAddress("LowPtElectron_r9", LowPtElectron_r9, &b_LowPtElectron_r9);
+   fChain->SetBranchAddress("LowPtElectron_scEtOverPt", LowPtElectron_scEtOverPt, &b_LowPtElectron_scEtOverPt);
+   fChain->SetBranchAddress("LowPtElectron_sieie", LowPtElectron_sieie, &b_LowPtElectron_sieie);
+   fChain->SetBranchAddress("LowPtElectron_unbiased", LowPtElectron_unbiased, &b_LowPtElectron_unbiased);
+   fChain->SetBranchAddress("LowPtElectron_charge", LowPtElectron_charge, &b_LowPtElectron_charge);
+   fChain->SetBranchAddress("LowPtElectron_convWP", LowPtElectron_convWP, &b_LowPtElectron_convWP);
+   fChain->SetBranchAddress("LowPtElectron_pdgId", LowPtElectron_pdgId, &b_LowPtElectron_pdgId);
+   fChain->SetBranchAddress("LowPtElectron_convVeto", LowPtElectron_convVeto, &b_LowPtElectron_convVeto);
+   fChain->SetBranchAddress("LowPtElectron_lostHits", LowPtElectron_lostHits, &b_LowPtElectron_lostHits);
    fChain->SetBranchAddress("GenMET_phi", &GenMET_phi, &b_GenMET_phi);
    fChain->SetBranchAddress("GenMET_pt", &GenMET_pt, &b_GenMET_pt);
    fChain->SetBranchAddress("MET_MetUnclustEnUpDeltaX", &MET_MetUnclustEnUpDeltaX, &b_MET_MetUnclustEnUpDeltaX);
@@ -3956,6 +4298,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Muon_inTimeMuon", Muon_inTimeMuon, &b_Muon_inTimeMuon);
    fChain->SetBranchAddress("Muon_isGlobal", Muon_isGlobal, &b_Muon_isGlobal);
    fChain->SetBranchAddress("Muon_isPFcand", Muon_isPFcand, &b_Muon_isPFcand);
+   fChain->SetBranchAddress("Muon_isStandalone", Muon_isStandalone, &b_Muon_isStandalone);
    fChain->SetBranchAddress("Muon_isTracker", Muon_isTracker, &b_Muon_isTracker);
    fChain->SetBranchAddress("Muon_jetNDauCharged", Muon_jetNDauCharged, &b_Muon_jetNDauCharged);
    fChain->SetBranchAddress("Muon_looseId", Muon_looseId, &b_Muon_looseId);
@@ -3973,6 +4316,10 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Muon_tkIsoId", Muon_tkIsoId, &b_Muon_tkIsoId);
    fChain->SetBranchAddress("Muon_triggerIdLoose", Muon_triggerIdLoose, &b_Muon_triggerIdLoose);
    fChain->SetBranchAddress("nPhoton", &nPhoton, &b_nPhoton);
+   fChain->SetBranchAddress("Photon_dEscaleDown", Photon_dEscaleDown, &b_Photon_dEscaleDown);
+   fChain->SetBranchAddress("Photon_dEscaleUp", Photon_dEscaleUp, &b_Photon_dEscaleUp);
+   fChain->SetBranchAddress("Photon_dEsigmaDown", Photon_dEsigmaDown, &b_Photon_dEsigmaDown);
+   fChain->SetBranchAddress("Photon_dEsigmaUp", Photon_dEsigmaUp, &b_Photon_dEsigmaUp);
    fChain->SetBranchAddress("Photon_eCorr", Photon_eCorr, &b_Photon_eCorr);
    fChain->SetBranchAddress("Photon_energyErr", Photon_energyErr, &b_Photon_energyErr);
    fChain->SetBranchAddress("Photon_eta", Photon_eta, &b_Photon_eta);
@@ -4056,7 +4403,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("SoftActivityJetNjets2", &SoftActivityJetNjets2, &b_SoftActivityJetNjets2);
    fChain->SetBranchAddress("SoftActivityJetNjets5", &SoftActivityJetNjets5, &b_SoftActivityJetNjets5);
    fChain->SetBranchAddress("nSubJet", &nSubJet, &b_nSubJet);
-   fChain->SetBranchAddress("SubJet_btagCMVA", SubJet_btagCMVA, &b_SubJet_btagCMVA);
    fChain->SetBranchAddress("SubJet_btagCSVV2", SubJet_btagCSVV2, &b_SubJet_btagCSVV2);
    fChain->SetBranchAddress("SubJet_btagDeepB", SubJet_btagDeepB, &b_SubJet_btagDeepB);
    fChain->SetBranchAddress("SubJet_eta", SubJet_eta, &b_SubJet_eta);
@@ -4084,37 +4430,20 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Tau_photonsOutsideSignalCone", Tau_photonsOutsideSignalCone, &b_Tau_photonsOutsideSignalCone);
    fChain->SetBranchAddress("Tau_pt", Tau_pt, &b_Tau_pt);
    fChain->SetBranchAddress("Tau_puCorr", Tau_puCorr, &b_Tau_puCorr);
-   fChain->SetBranchAddress("Tau_rawAntiEle", Tau_rawAntiEle, &b_Tau_rawAntiEle);
-   fChain->SetBranchAddress("Tau_rawAntiEle2018", Tau_rawAntiEle2018, &b_Tau_rawAntiEle2018);
    fChain->SetBranchAddress("Tau_rawDeepTau2017v2p1VSe", Tau_rawDeepTau2017v2p1VSe, &b_Tau_rawDeepTau2017v2p1VSe);
    fChain->SetBranchAddress("Tau_rawDeepTau2017v2p1VSjet", Tau_rawDeepTau2017v2p1VSjet, &b_Tau_rawDeepTau2017v2p1VSjet);
    fChain->SetBranchAddress("Tau_rawDeepTau2017v2p1VSmu", Tau_rawDeepTau2017v2p1VSmu, &b_Tau_rawDeepTau2017v2p1VSmu);
    fChain->SetBranchAddress("Tau_rawIso", Tau_rawIso, &b_Tau_rawIso);
    fChain->SetBranchAddress("Tau_rawIsodR03", Tau_rawIsodR03, &b_Tau_rawIsodR03);
-   fChain->SetBranchAddress("Tau_rawMVAnewDM2017v2", Tau_rawMVAnewDM2017v2, &b_Tau_rawMVAnewDM2017v2);
-   fChain->SetBranchAddress("Tau_rawMVAoldDM", Tau_rawMVAoldDM, &b_Tau_rawMVAoldDM);
-   fChain->SetBranchAddress("Tau_rawMVAoldDM2017v1", Tau_rawMVAoldDM2017v1, &b_Tau_rawMVAoldDM2017v1);
-   fChain->SetBranchAddress("Tau_rawMVAoldDM2017v2", Tau_rawMVAoldDM2017v2, &b_Tau_rawMVAoldDM2017v2);
-   fChain->SetBranchAddress("Tau_rawMVAoldDMdR032017v2", Tau_rawMVAoldDMdR032017v2, &b_Tau_rawMVAoldDMdR032017v2);
    fChain->SetBranchAddress("Tau_charge", Tau_charge, &b_Tau_charge);
    fChain->SetBranchAddress("Tau_decayMode", Tau_decayMode, &b_Tau_decayMode);
    fChain->SetBranchAddress("Tau_jetIdx", Tau_jetIdx, &b_Tau_jetIdx);
-   fChain->SetBranchAddress("Tau_rawAntiEleCat", Tau_rawAntiEleCat, &b_Tau_rawAntiEleCat);
-   fChain->SetBranchAddress("Tau_rawAntiEleCat2018", Tau_rawAntiEleCat2018, &b_Tau_rawAntiEleCat2018);
-   fChain->SetBranchAddress("Tau_idAntiEle", Tau_idAntiEle, &b_Tau_idAntiEle);
-   fChain->SetBranchAddress("Tau_idAntiEle2018", Tau_idAntiEle2018, &b_Tau_idAntiEle2018);
    fChain->SetBranchAddress("Tau_idAntiEleDeadECal", Tau_idAntiEleDeadECal, &b_Tau_idAntiEleDeadECal);
    fChain->SetBranchAddress("Tau_idAntiMu", Tau_idAntiMu, &b_Tau_idAntiMu);
-   fChain->SetBranchAddress("Tau_idDecayMode", Tau_idDecayMode, &b_Tau_idDecayMode);
-   fChain->SetBranchAddress("Tau_idDecayModeNewDMs", Tau_idDecayModeNewDMs, &b_Tau_idDecayModeNewDMs);
+   fChain->SetBranchAddress("Tau_idDecayModeOldDMs", Tau_idDecayModeOldDMs, &b_Tau_idDecayModeOldDMs);
    fChain->SetBranchAddress("Tau_idDeepTau2017v2p1VSe", Tau_idDeepTau2017v2p1VSe, &b_Tau_idDeepTau2017v2p1VSe);
    fChain->SetBranchAddress("Tau_idDeepTau2017v2p1VSjet", Tau_idDeepTau2017v2p1VSjet, &b_Tau_idDeepTau2017v2p1VSjet);
    fChain->SetBranchAddress("Tau_idDeepTau2017v2p1VSmu", Tau_idDeepTau2017v2p1VSmu, &b_Tau_idDeepTau2017v2p1VSmu);
-   fChain->SetBranchAddress("Tau_idMVAnewDM2017v2", Tau_idMVAnewDM2017v2, &b_Tau_idMVAnewDM2017v2);
-   fChain->SetBranchAddress("Tau_idMVAoldDM", Tau_idMVAoldDM, &b_Tau_idMVAoldDM);
-   fChain->SetBranchAddress("Tau_idMVAoldDM2017v1", Tau_idMVAoldDM2017v1, &b_Tau_idMVAoldDM2017v1);
-   fChain->SetBranchAddress("Tau_idMVAoldDM2017v2", Tau_idMVAoldDM2017v2, &b_Tau_idMVAoldDM2017v2);
-   fChain->SetBranchAddress("Tau_idMVAoldDMdR032017v2", Tau_idMVAoldDMdR032017v2, &b_Tau_idMVAoldDMdR032017v2);
    fChain->SetBranchAddress("TkMET_phi", &TkMET_phi, &b_TkMET_phi);
    fChain->SetBranchAddress("TkMET_pt", &TkMET_pt, &b_TkMET_pt);
    fChain->SetBranchAddress("TkMET_sumEt", &TkMET_sumEt, &b_TkMET_sumEt);
@@ -4146,6 +4475,9 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("SV_dxy", SV_dxy, &b_SV_dxy);
    fChain->SetBranchAddress("SV_dxySig", SV_dxySig, &b_SV_dxySig);
    fChain->SetBranchAddress("SV_pAngle", SV_pAngle, &b_SV_pAngle);
+   fChain->SetBranchAddress("SV_charge", SV_charge, &b_SV_charge);
+   fChain->SetBranchAddress("boostedTau_genPartIdx", boostedTau_genPartIdx, &b_boostedTau_genPartIdx);
+   fChain->SetBranchAddress("boostedTau_genPartFlav", boostedTau_genPartFlav, &b_boostedTau_genPartFlav);
    fChain->SetBranchAddress("Electron_genPartIdx", Electron_genPartIdx, &b_Electron_genPartIdx);
    fChain->SetBranchAddress("Electron_genPartFlav", Electron_genPartFlav, &b_Electron_genPartFlav);
    fChain->SetBranchAddress("FatJet_genJetAK8Idx", FatJet_genJetAK8Idx, &b_FatJet_genJetAK8Idx);
@@ -4160,6 +4492,8 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Jet_genJetIdx", Jet_genJetIdx, &b_Jet_genJetIdx);
    fChain->SetBranchAddress("Jet_hadronFlavour", Jet_hadronFlavour, &b_Jet_hadronFlavour);
    fChain->SetBranchAddress("Jet_partonFlavour", Jet_partonFlavour, &b_Jet_partonFlavour);
+   fChain->SetBranchAddress("LowPtElectron_genPartIdx", LowPtElectron_genPartIdx, &b_LowPtElectron_genPartIdx);
+   fChain->SetBranchAddress("LowPtElectron_genPartFlav", LowPtElectron_genPartFlav, &b_LowPtElectron_genPartFlav);
    fChain->SetBranchAddress("Muon_genPartIdx", Muon_genPartIdx, &b_Muon_genPartIdx);
    fChain->SetBranchAddress("Muon_genPartFlav", Muon_genPartFlav, &b_Muon_genPartFlav);
    fChain->SetBranchAddress("Photon_genPartIdx", Photon_genPartIdx, &b_Photon_genPartIdx);
@@ -4203,304 +4537,424 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("L1_BptxPlus", &L1_BptxPlus, &b_L1_BptxPlus);
    fChain->SetBranchAddress("L1_BptxXOR", &L1_BptxXOR, &b_L1_BptxXOR);
    fChain->SetBranchAddress("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142, &b_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142);
-   fChain->SetBranchAddress("L1_DoubleEG8er2p5_HTT260er", &L1_DoubleEG8er2p5_HTT260er, &b_L1_DoubleEG8er2p5_HTT260er);
-   fChain->SetBranchAddress("L1_DoubleEG8er2p5_HTT280er", &L1_DoubleEG8er2p5_HTT280er, &b_L1_DoubleEG8er2p5_HTT280er);
-   fChain->SetBranchAddress("L1_DoubleEG8er2p5_HTT300er", &L1_DoubleEG8er2p5_HTT300er, &b_L1_DoubleEG8er2p5_HTT300er);
-   fChain->SetBranchAddress("L1_DoubleEG8er2p5_HTT320er", &L1_DoubleEG8er2p5_HTT320er, &b_L1_DoubleEG8er2p5_HTT320er);
-   fChain->SetBranchAddress("L1_DoubleEG8er2p5_HTT340er", &L1_DoubleEG8er2p5_HTT340er, &b_L1_DoubleEG8er2p5_HTT340er);
-   fChain->SetBranchAddress("L1_DoubleEG_15_10_er2p5", &L1_DoubleEG_15_10_er2p5, &b_L1_DoubleEG_15_10_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_20_10_er2p5", &L1_DoubleEG_20_10_er2p5, &b_L1_DoubleEG_20_10_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_22_10_er2p5", &L1_DoubleEG_22_10_er2p5, &b_L1_DoubleEG_22_10_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_25_12_er2p5", &L1_DoubleEG_25_12_er2p5, &b_L1_DoubleEG_25_12_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_25_14_er2p5", &L1_DoubleEG_25_14_er2p5, &b_L1_DoubleEG_25_14_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_27_14_er2p5", &L1_DoubleEG_27_14_er2p5, &b_L1_DoubleEG_27_14_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_LooseIso20_10_er2p5", &L1_DoubleEG_LooseIso20_10_er2p5, &b_L1_DoubleEG_LooseIso20_10_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_LooseIso22_10_er2p5", &L1_DoubleEG_LooseIso22_10_er2p5, &b_L1_DoubleEG_LooseIso22_10_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_LooseIso22_12_er2p5", &L1_DoubleEG_LooseIso22_12_er2p5, &b_L1_DoubleEG_LooseIso22_12_er2p5);
-   fChain->SetBranchAddress("L1_DoubleEG_LooseIso25_12_er2p5", &L1_DoubleEG_LooseIso25_12_er2p5, &b_L1_DoubleEG_LooseIso25_12_er2p5);
+   fChain->SetBranchAddress("L1_DoubleEG6_HTT240er", &L1_DoubleEG6_HTT240er, &b_L1_DoubleEG6_HTT240er);
+   fChain->SetBranchAddress("L1_DoubleEG6_HTT250er", &L1_DoubleEG6_HTT250er, &b_L1_DoubleEG6_HTT250er);
+   fChain->SetBranchAddress("L1_DoubleEG6_HTT255er", &L1_DoubleEG6_HTT255er, &b_L1_DoubleEG6_HTT255er);
+   fChain->SetBranchAddress("L1_DoubleEG6_HTT270er", &L1_DoubleEG6_HTT270er, &b_L1_DoubleEG6_HTT270er);
+   fChain->SetBranchAddress("L1_DoubleEG6_HTT300er", &L1_DoubleEG6_HTT300er, &b_L1_DoubleEG6_HTT300er);
+   fChain->SetBranchAddress("L1_DoubleEG8er2p6_HTT255er", &L1_DoubleEG8er2p6_HTT255er, &b_L1_DoubleEG8er2p6_HTT255er);
+   fChain->SetBranchAddress("L1_DoubleEG8er2p6_HTT270er", &L1_DoubleEG8er2p6_HTT270er, &b_L1_DoubleEG8er2p6_HTT270er);
+   fChain->SetBranchAddress("L1_DoubleEG8er2p6_HTT300er", &L1_DoubleEG8er2p6_HTT300er, &b_L1_DoubleEG8er2p6_HTT300er);
+   fChain->SetBranchAddress("L1_DoubleEG_15_10", &L1_DoubleEG_15_10, &b_L1_DoubleEG_15_10);
+   fChain->SetBranchAddress("L1_DoubleEG_18_17", &L1_DoubleEG_18_17, &b_L1_DoubleEG_18_17);
+   fChain->SetBranchAddress("L1_DoubleEG_20_18", &L1_DoubleEG_20_18, &b_L1_DoubleEG_20_18);
+   fChain->SetBranchAddress("L1_DoubleEG_22_10", &L1_DoubleEG_22_10, &b_L1_DoubleEG_22_10);
+   fChain->SetBranchAddress("L1_DoubleEG_22_12", &L1_DoubleEG_22_12, &b_L1_DoubleEG_22_12);
+   fChain->SetBranchAddress("L1_DoubleEG_22_15", &L1_DoubleEG_22_15, &b_L1_DoubleEG_22_15);
+   fChain->SetBranchAddress("L1_DoubleEG_23_10", &L1_DoubleEG_23_10, &b_L1_DoubleEG_23_10);
+   fChain->SetBranchAddress("L1_DoubleEG_24_17", &L1_DoubleEG_24_17, &b_L1_DoubleEG_24_17);
+   fChain->SetBranchAddress("L1_DoubleEG_25_12", &L1_DoubleEG_25_12, &b_L1_DoubleEG_25_12);
+   fChain->SetBranchAddress("L1_DoubleEG_25_13", &L1_DoubleEG_25_13, &b_L1_DoubleEG_25_13);
+   fChain->SetBranchAddress("L1_DoubleEG_25_14", &L1_DoubleEG_25_14, &b_L1_DoubleEG_25_14);
+   fChain->SetBranchAddress("L1_DoubleEG_LooseIso23_10", &L1_DoubleEG_LooseIso23_10, &b_L1_DoubleEG_LooseIso23_10);
+   fChain->SetBranchAddress("L1_DoubleEG_LooseIso24_10", &L1_DoubleEG_LooseIso24_10, &b_L1_DoubleEG_LooseIso24_10);
+   fChain->SetBranchAddress("L1_DoubleIsoTau28er2p1", &L1_DoubleIsoTau28er2p1, &b_L1_DoubleIsoTau28er2p1);
+   fChain->SetBranchAddress("L1_DoubleIsoTau30er2p1", &L1_DoubleIsoTau30er2p1, &b_L1_DoubleIsoTau30er2p1);
    fChain->SetBranchAddress("L1_DoubleIsoTau32er2p1", &L1_DoubleIsoTau32er2p1, &b_L1_DoubleIsoTau32er2p1);
+   fChain->SetBranchAddress("L1_DoubleIsoTau33er2p1", &L1_DoubleIsoTau33er2p1, &b_L1_DoubleIsoTau33er2p1);
    fChain->SetBranchAddress("L1_DoubleIsoTau34er2p1", &L1_DoubleIsoTau34er2p1, &b_L1_DoubleIsoTau34er2p1);
+   fChain->SetBranchAddress("L1_DoubleIsoTau35er2p1", &L1_DoubleIsoTau35er2p1, &b_L1_DoubleIsoTau35er2p1);
    fChain->SetBranchAddress("L1_DoubleIsoTau36er2p1", &L1_DoubleIsoTau36er2p1, &b_L1_DoubleIsoTau36er2p1);
+   fChain->SetBranchAddress("L1_DoubleIsoTau38er2p1", &L1_DoubleIsoTau38er2p1, &b_L1_DoubleIsoTau38er2p1);
    fChain->SetBranchAddress("L1_DoubleJet100er2p3_dEta_Max1p6", &L1_DoubleJet100er2p3_dEta_Max1p6, &b_L1_DoubleJet100er2p3_dEta_Max1p6);
-   fChain->SetBranchAddress("L1_DoubleJet100er2p5", &L1_DoubleJet100er2p5, &b_L1_DoubleJet100er2p5);
+   fChain->SetBranchAddress("L1_DoubleJet100er2p7", &L1_DoubleJet100er2p7, &b_L1_DoubleJet100er2p7);
    fChain->SetBranchAddress("L1_DoubleJet112er2p3_dEta_Max1p6", &L1_DoubleJet112er2p3_dEta_Max1p6, &b_L1_DoubleJet112er2p3_dEta_Max1p6);
-   fChain->SetBranchAddress("L1_DoubleJet120er2p5", &L1_DoubleJet120er2p5, &b_L1_DoubleJet120er2p5);
-   fChain->SetBranchAddress("L1_DoubleJet150er2p5", &L1_DoubleJet150er2p5, &b_L1_DoubleJet150er2p5);
-   fChain->SetBranchAddress("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5, &b_L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5);
-   fChain->SetBranchAddress("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5, &b_L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5);
-   fChain->SetBranchAddress("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5, &b_L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5);
-   fChain->SetBranchAddress("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5, &b_L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5);
-   fChain->SetBranchAddress("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5, &b_L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5);
-   fChain->SetBranchAddress("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5, &b_L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5);
-   fChain->SetBranchAddress("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp, &b_L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp);
-   fChain->SetBranchAddress("L1_DoubleJet40er2p5", &L1_DoubleJet40er2p5, &b_L1_DoubleJet40er2p5);
+   fChain->SetBranchAddress("L1_DoubleJet112er2p7", &L1_DoubleJet112er2p7, &b_L1_DoubleJet112er2p7);
+   fChain->SetBranchAddress("L1_DoubleJet120er2p7", &L1_DoubleJet120er2p7, &b_L1_DoubleJet120er2p7);
+   fChain->SetBranchAddress("L1_DoubleJet150er2p7", &L1_DoubleJet150er2p7, &b_L1_DoubleJet150er2p7);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min300_dEta_Max1p5", &L1_DoubleJet30_Mass_Min300_dEta_Max1p5, &b_L1_DoubleJet30_Mass_Min300_dEta_Max1p5);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min320_dEta_Max1p5", &L1_DoubleJet30_Mass_Min320_dEta_Max1p5, &b_L1_DoubleJet30_Mass_Min320_dEta_Max1p5);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min340_dEta_Max1p5", &L1_DoubleJet30_Mass_Min340_dEta_Max1p5, &b_L1_DoubleJet30_Mass_Min340_dEta_Max1p5);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min360_dEta_Max1p5", &L1_DoubleJet30_Mass_Min360_dEta_Max1p5, &b_L1_DoubleJet30_Mass_Min360_dEta_Max1p5);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min380_dEta_Max1p5", &L1_DoubleJet30_Mass_Min380_dEta_Max1p5, &b_L1_DoubleJet30_Mass_Min380_dEta_Max1p5);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min400_Mu10", &L1_DoubleJet30_Mass_Min400_Mu10, &b_L1_DoubleJet30_Mass_Min400_Mu10);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min400_Mu6", &L1_DoubleJet30_Mass_Min400_Mu6, &b_L1_DoubleJet30_Mass_Min400_Mu6);
+   fChain->SetBranchAddress("L1_DoubleJet30_Mass_Min400_dEta_Max1p5", &L1_DoubleJet30_Mass_Min400_dEta_Max1p5, &b_L1_DoubleJet30_Mass_Min400_dEta_Max1p5);
+   fChain->SetBranchAddress("L1_DoubleJet35_rmovlp_IsoTau45_Mass_Min450", &L1_DoubleJet35_rmovlp_IsoTau45_Mass_Min450, &b_L1_DoubleJet35_rmovlp_IsoTau45_Mass_Min450);
+   fChain->SetBranchAddress("L1_DoubleJet40er2p7", &L1_DoubleJet40er2p7, &b_L1_DoubleJet40er2p7);
+   fChain->SetBranchAddress("L1_DoubleJet50er2p7", &L1_DoubleJet50er2p7, &b_L1_DoubleJet50er2p7);
+   fChain->SetBranchAddress("L1_DoubleJet60er2p7", &L1_DoubleJet60er2p7, &b_L1_DoubleJet60er2p7);
+   fChain->SetBranchAddress("L1_DoubleJet60er2p7_ETM100", &L1_DoubleJet60er2p7_ETM100, &b_L1_DoubleJet60er2p7_ETM100);
+   fChain->SetBranchAddress("L1_DoubleJet60er2p7_ETM60", &L1_DoubleJet60er2p7_ETM60, &b_L1_DoubleJet60er2p7_ETM60);
+   fChain->SetBranchAddress("L1_DoubleJet60er2p7_ETM70", &L1_DoubleJet60er2p7_ETM70, &b_L1_DoubleJet60er2p7_ETM70);
+   fChain->SetBranchAddress("L1_DoubleJet60er2p7_ETM80", &L1_DoubleJet60er2p7_ETM80, &b_L1_DoubleJet60er2p7_ETM80);
+   fChain->SetBranchAddress("L1_DoubleJet60er2p7_ETM90", &L1_DoubleJet60er2p7_ETM90, &b_L1_DoubleJet60er2p7_ETM90);
+   fChain->SetBranchAddress("L1_DoubleJet80er2p7", &L1_DoubleJet80er2p7, &b_L1_DoubleJet80er2p7);
    fChain->SetBranchAddress("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620, &b_L1_DoubleJet_100_30_DoubleJet30_Mass_Min620);
+   fChain->SetBranchAddress("L1_DoubleJet_100_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_100_35_DoubleJet35_Mass_Min620, &b_L1_DoubleJet_100_35_DoubleJet35_Mass_Min620);
    fChain->SetBranchAddress("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620, &b_L1_DoubleJet_110_35_DoubleJet35_Mass_Min620);
+   fChain->SetBranchAddress("L1_DoubleJet_110_40_DoubleJet40_Mass_Min620", &L1_DoubleJet_110_40_DoubleJet40_Mass_Min620, &b_L1_DoubleJet_110_40_DoubleJet40_Mass_Min620);
+   fChain->SetBranchAddress("L1_DoubleJet_115_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_115_35_DoubleJet35_Mass_Min620, &b_L1_DoubleJet_115_35_DoubleJet35_Mass_Min620);
    fChain->SetBranchAddress("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620, &b_L1_DoubleJet_115_40_DoubleJet40_Mass_Min620);
-   fChain->SetBranchAddress("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28, &b_L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28);
-   fChain->SetBranchAddress("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620, &b_L1_DoubleJet_120_45_DoubleJet45_Mass_Min620);
-   fChain->SetBranchAddress("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28, &b_L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28);
-   fChain->SetBranchAddress("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ, &b_L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ);
-   fChain->SetBranchAddress("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp, &b_L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp);
-   fChain->SetBranchAddress("L1_DoubleJet_80_30_Mass_Min420_Mu8", &L1_DoubleJet_80_30_Mass_Min420_Mu8, &b_L1_DoubleJet_80_30_Mass_Min420_Mu8);
    fChain->SetBranchAddress("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620, &b_L1_DoubleJet_90_30_DoubleJet30_Mass_Min620);
    fChain->SetBranchAddress("L1_DoubleLooseIsoEG22er2p1", &L1_DoubleLooseIsoEG22er2p1, &b_L1_DoubleLooseIsoEG22er2p1);
    fChain->SetBranchAddress("L1_DoubleLooseIsoEG24er2p1", &L1_DoubleLooseIsoEG24er2p1, &b_L1_DoubleLooseIsoEG24er2p1);
    fChain->SetBranchAddress("L1_DoubleMu0", &L1_DoubleMu0, &b_L1_DoubleMu0);
-   fChain->SetBranchAddress("L1_DoubleMu0_Mass_Min1", &L1_DoubleMu0_Mass_Min1, &b_L1_DoubleMu0_Mass_Min1);
-   fChain->SetBranchAddress("L1_DoubleMu0_OQ", &L1_DoubleMu0_OQ, &b_L1_DoubleMu0_OQ);
+   fChain->SetBranchAddress("L1_DoubleMu0_ETM40", &L1_DoubleMu0_ETM40, &b_L1_DoubleMu0_ETM40);
+   fChain->SetBranchAddress("L1_DoubleMu0_ETM55", &L1_DoubleMu0_ETM55, &b_L1_DoubleMu0_ETM55);
+   fChain->SetBranchAddress("L1_DoubleMu0_ETM60", &L1_DoubleMu0_ETM60, &b_L1_DoubleMu0_ETM60);
+   fChain->SetBranchAddress("L1_DoubleMu0_ETM65", &L1_DoubleMu0_ETM65, &b_L1_DoubleMu0_ETM65);
+   fChain->SetBranchAddress("L1_DoubleMu0_ETM70", &L1_DoubleMu0_ETM70, &b_L1_DoubleMu0_ETM70);
    fChain->SetBranchAddress("L1_DoubleMu0_SQ", &L1_DoubleMu0_SQ, &b_L1_DoubleMu0_SQ);
    fChain->SetBranchAddress("L1_DoubleMu0_SQ_OS", &L1_DoubleMu0_SQ_OS, &b_L1_DoubleMu0_SQ_OS);
-   fChain->SetBranchAddress("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8, &b_L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8);
    fChain->SetBranchAddress("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4, &b_L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4);
-   fChain->SetBranchAddress("L1_DoubleMu0er1p5_SQ", &L1_DoubleMu0er1p5_SQ, &b_L1_DoubleMu0er1p5_SQ);
+   fChain->SetBranchAddress("L1_DoubleMu0er1p4_dEta_Max1p8_OS", &L1_DoubleMu0er1p4_dEta_Max1p8_OS, &b_L1_DoubleMu0er1p4_dEta_Max1p8_OS);
    fChain->SetBranchAddress("L1_DoubleMu0er1p5_SQ_OS", &L1_DoubleMu0er1p5_SQ_OS, &b_L1_DoubleMu0er1p5_SQ_OS);
    fChain->SetBranchAddress("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4, &b_L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4);
    fChain->SetBranchAddress("L1_DoubleMu0er1p5_SQ_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_dR_Max1p4, &b_L1_DoubleMu0er1p5_SQ_dR_Max1p4);
-   fChain->SetBranchAddress("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4, &b_L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4);
-   fChain->SetBranchAddress("L1_DoubleMu0er2p0_SQ_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_dR_Max1p4, &b_L1_DoubleMu0er2p0_SQ_dR_Max1p4);
-   fChain->SetBranchAddress("L1_DoubleMu10_SQ", &L1_DoubleMu10_SQ, &b_L1_DoubleMu10_SQ);
+   fChain->SetBranchAddress("L1_DoubleMu0er2_SQ_dR_Max1p4", &L1_DoubleMu0er2_SQ_dR_Max1p4, &b_L1_DoubleMu0er2_SQ_dR_Max1p4);
    fChain->SetBranchAddress("L1_DoubleMu18er2p1", &L1_DoubleMu18er2p1, &b_L1_DoubleMu18er2p1);
+   fChain->SetBranchAddress("L1_DoubleMu22er2p1", &L1_DoubleMu22er2p1, &b_L1_DoubleMu22er2p1);
    fChain->SetBranchAddress("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", &L1_DoubleMu3_OS_DoubleEG7p5Upsilon, &b_L1_DoubleMu3_OS_DoubleEG7p5Upsilon);
-   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF50_HTT60er", &L1_DoubleMu3_SQ_ETMHF50_HTT60er, &b_L1_DoubleMu3_SQ_ETMHF50_HTT60er);
-   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5, &b_L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5);
-   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5, &b_L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5);
-   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5, &b_L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF40_Jet60_OR_DoubleJet30", &L1_DoubleMu3_SQ_ETMHF40_Jet60_OR_DoubleJet30, &b_L1_DoubleMu3_SQ_ETMHF40_Jet60_OR_DoubleJet30);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF50_Jet60_OR_DoubleJet30", &L1_DoubleMu3_SQ_ETMHF50_Jet60_OR_DoubleJet30, &b_L1_DoubleMu3_SQ_ETMHF50_Jet60_OR_DoubleJet30);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF60_Jet60_OR_DoubleJet30", &L1_DoubleMu3_SQ_ETMHF60_Jet60_OR_DoubleJet30, &b_L1_DoubleMu3_SQ_ETMHF60_Jet60_OR_DoubleJet30);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF70_Jet60_OR_DoubleJet30", &L1_DoubleMu3_SQ_ETMHF70_Jet60_OR_DoubleJet30, &b_L1_DoubleMu3_SQ_ETMHF70_Jet60_OR_DoubleJet30);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_ETMHF80_Jet60_OR_DoubleJet30", &L1_DoubleMu3_SQ_ETMHF80_Jet60_OR_DoubleJet30, &b_L1_DoubleMu3_SQ_ETMHF80_Jet60_OR_DoubleJet30);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_HTT100er", &L1_DoubleMu3_SQ_HTT100er, &b_L1_DoubleMu3_SQ_HTT100er);
+   fChain->SetBranchAddress("L1_DoubleMu3_SQ_HTT200er", &L1_DoubleMu3_SQ_HTT200er, &b_L1_DoubleMu3_SQ_HTT200er);
    fChain->SetBranchAddress("L1_DoubleMu3_SQ_HTT220er", &L1_DoubleMu3_SQ_HTT220er, &b_L1_DoubleMu3_SQ_HTT220er);
    fChain->SetBranchAddress("L1_DoubleMu3_SQ_HTT240er", &L1_DoubleMu3_SQ_HTT240er, &b_L1_DoubleMu3_SQ_HTT240er);
-   fChain->SetBranchAddress("L1_DoubleMu3_SQ_HTT260er", &L1_DoubleMu3_SQ_HTT260er, &b_L1_DoubleMu3_SQ_HTT260er);
-   fChain->SetBranchAddress("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8, &b_L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8);
-   fChain->SetBranchAddress("L1_DoubleMu4_SQ_EG9er2p5", &L1_DoubleMu4_SQ_EG9er2p5, &b_L1_DoubleMu4_SQ_EG9er2p5);
+   fChain->SetBranchAddress("L1_DoubleMu4_OS_EG12", &L1_DoubleMu4_OS_EG12, &b_L1_DoubleMu4_OS_EG12);
    fChain->SetBranchAddress("L1_DoubleMu4_SQ_OS", &L1_DoubleMu4_SQ_OS, &b_L1_DoubleMu4_SQ_OS);
    fChain->SetBranchAddress("L1_DoubleMu4_SQ_OS_dR_Max1p2", &L1_DoubleMu4_SQ_OS_dR_Max1p2, &b_L1_DoubleMu4_SQ_OS_dR_Max1p2);
+   fChain->SetBranchAddress("L1_DoubleMu4p5_SQ", &L1_DoubleMu4p5_SQ, &b_L1_DoubleMu4p5_SQ);
    fChain->SetBranchAddress("L1_DoubleMu4p5_SQ_OS", &L1_DoubleMu4p5_SQ_OS, &b_L1_DoubleMu4p5_SQ_OS);
    fChain->SetBranchAddress("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", &L1_DoubleMu4p5_SQ_OS_dR_Max1p2, &b_L1_DoubleMu4p5_SQ_OS_dR_Max1p2);
    fChain->SetBranchAddress("L1_DoubleMu4p5er2p0_SQ_OS", &L1_DoubleMu4p5er2p0_SQ_OS, &b_L1_DoubleMu4p5er2p0_SQ_OS);
    fChain->SetBranchAddress("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18, &b_L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18);
    fChain->SetBranchAddress("L1_DoubleMu5Upsilon_OS_DoubleEG3", &L1_DoubleMu5Upsilon_OS_DoubleEG3, &b_L1_DoubleMu5Upsilon_OS_DoubleEG3);
-   fChain->SetBranchAddress("L1_DoubleMu5_SQ_EG9er2p5", &L1_DoubleMu5_SQ_EG9er2p5, &b_L1_DoubleMu5_SQ_EG9er2p5);
-   fChain->SetBranchAddress("L1_DoubleMu9_SQ", &L1_DoubleMu9_SQ, &b_L1_DoubleMu9_SQ);
+   fChain->SetBranchAddress("L1_DoubleMu5_OS_EG12", &L1_DoubleMu5_OS_EG12, &b_L1_DoubleMu5_OS_EG12);
+   fChain->SetBranchAddress("L1_DoubleMu5_SQ_OS", &L1_DoubleMu5_SQ_OS, &b_L1_DoubleMu5_SQ_OS);
+   fChain->SetBranchAddress("L1_DoubleMu5_SQ_OS_Mass7to18", &L1_DoubleMu5_SQ_OS_Mass7to18, &b_L1_DoubleMu5_SQ_OS_Mass7to18);
+   fChain->SetBranchAddress("L1_DoubleMu6_SQ_OS", &L1_DoubleMu6_SQ_OS, &b_L1_DoubleMu6_SQ_OS);
+   fChain->SetBranchAddress("L1_DoubleMu7_EG7", &L1_DoubleMu7_EG7, &b_L1_DoubleMu7_EG7);
+   fChain->SetBranchAddress("L1_DoubleMu7_SQ_EG7", &L1_DoubleMu7_SQ_EG7, &b_L1_DoubleMu7_SQ_EG7);
+   fChain->SetBranchAddress("L1_DoubleMu8_SQ", &L1_DoubleMu8_SQ, &b_L1_DoubleMu8_SQ);
+   fChain->SetBranchAddress("L1_DoubleMu_10_0_dEta_Max1p8", &L1_DoubleMu_10_0_dEta_Max1p8, &b_L1_DoubleMu_10_0_dEta_Max1p8);
+   fChain->SetBranchAddress("L1_DoubleMu_11_4", &L1_DoubleMu_11_4, &b_L1_DoubleMu_11_4);
    fChain->SetBranchAddress("L1_DoubleMu_12_5", &L1_DoubleMu_12_5, &b_L1_DoubleMu_12_5);
+   fChain->SetBranchAddress("L1_DoubleMu_12_8", &L1_DoubleMu_12_8, &b_L1_DoubleMu_12_8);
+   fChain->SetBranchAddress("L1_DoubleMu_13_6", &L1_DoubleMu_13_6, &b_L1_DoubleMu_13_6);
+   fChain->SetBranchAddress("L1_DoubleMu_15_5", &L1_DoubleMu_15_5, &b_L1_DoubleMu_15_5);
    fChain->SetBranchAddress("L1_DoubleMu_15_5_SQ", &L1_DoubleMu_15_5_SQ, &b_L1_DoubleMu_15_5_SQ);
    fChain->SetBranchAddress("L1_DoubleMu_15_7", &L1_DoubleMu_15_7, &b_L1_DoubleMu_15_7);
-   fChain->SetBranchAddress("L1_DoubleMu_15_7_Mass_Min1", &L1_DoubleMu_15_7_Mass_Min1, &b_L1_DoubleMu_15_7_Mass_Min1);
    fChain->SetBranchAddress("L1_DoubleMu_15_7_SQ", &L1_DoubleMu_15_7_SQ, &b_L1_DoubleMu_15_7_SQ);
+   fChain->SetBranchAddress("L1_DoubleMu_15_7_SQ_Mass_Min4", &L1_DoubleMu_15_7_SQ_Mass_Min4, &b_L1_DoubleMu_15_7_SQ_Mass_Min4);
+   fChain->SetBranchAddress("L1_DoubleMu_20_2_SQ_Mass_Max20", &L1_DoubleMu_20_2_SQ_Mass_Max20, &b_L1_DoubleMu_20_2_SQ_Mass_Max20);
+   fChain->SetBranchAddress("L1_DoubleTau50er2p1", &L1_DoubleTau50er2p1, &b_L1_DoubleTau50er2p1);
    fChain->SetBranchAddress("L1_DoubleTau70er2p1", &L1_DoubleTau70er2p1, &b_L1_DoubleTau70er2p1);
+   fChain->SetBranchAddress("L1_EG25er2p1_HTT125er", &L1_EG25er2p1_HTT125er, &b_L1_EG25er2p1_HTT125er);
+   fChain->SetBranchAddress("L1_EG27er2p1_HTT200er", &L1_EG27er2p1_HTT200er, &b_L1_EG27er2p1_HTT200er);
+   fChain->SetBranchAddress("L1_ETM100", &L1_ETM100, &b_L1_ETM100);
+   fChain->SetBranchAddress("L1_ETM100_Jet60_dPhi_Min0p4", &L1_ETM100_Jet60_dPhi_Min0p4, &b_L1_ETM100_Jet60_dPhi_Min0p4);
+   fChain->SetBranchAddress("L1_ETM105", &L1_ETM105, &b_L1_ETM105);
+   fChain->SetBranchAddress("L1_ETM110", &L1_ETM110, &b_L1_ETM110);
+   fChain->SetBranchAddress("L1_ETM110_Jet60_dPhi_Min0p4", &L1_ETM110_Jet60_dPhi_Min0p4, &b_L1_ETM110_Jet60_dPhi_Min0p4);
+   fChain->SetBranchAddress("L1_ETM115", &L1_ETM115, &b_L1_ETM115);
    fChain->SetBranchAddress("L1_ETM120", &L1_ETM120, &b_L1_ETM120);
    fChain->SetBranchAddress("L1_ETM150", &L1_ETM150, &b_L1_ETM150);
+   fChain->SetBranchAddress("L1_ETM30", &L1_ETM30, &b_L1_ETM30);
+   fChain->SetBranchAddress("L1_ETM40", &L1_ETM40, &b_L1_ETM40);
+   fChain->SetBranchAddress("L1_ETM50", &L1_ETM50, &b_L1_ETM50);
+   fChain->SetBranchAddress("L1_ETM60", &L1_ETM60, &b_L1_ETM60);
+   fChain->SetBranchAddress("L1_ETM70", &L1_ETM70, &b_L1_ETM70);
+   fChain->SetBranchAddress("L1_ETM75", &L1_ETM75, &b_L1_ETM75);
+   fChain->SetBranchAddress("L1_ETM75_Jet60_dPhi_Min0p4", &L1_ETM75_Jet60_dPhi_Min0p4, &b_L1_ETM75_Jet60_dPhi_Min0p4);
+   fChain->SetBranchAddress("L1_ETM80", &L1_ETM80, &b_L1_ETM80);
+   fChain->SetBranchAddress("L1_ETM80_Jet60_dPhi_Min0p4", &L1_ETM80_Jet60_dPhi_Min0p4, &b_L1_ETM80_Jet60_dPhi_Min0p4);
+   fChain->SetBranchAddress("L1_ETM85", &L1_ETM85, &b_L1_ETM85);
+   fChain->SetBranchAddress("L1_ETM90", &L1_ETM90, &b_L1_ETM90);
+   fChain->SetBranchAddress("L1_ETM90_Jet60_dPhi_Min0p4", &L1_ETM90_Jet60_dPhi_Min0p4, &b_L1_ETM90_Jet60_dPhi_Min0p4);
+   fChain->SetBranchAddress("L1_ETM95", &L1_ETM95, &b_L1_ETM95);
    fChain->SetBranchAddress("L1_ETMHF100", &L1_ETMHF100, &b_L1_ETMHF100);
    fChain->SetBranchAddress("L1_ETMHF100_HTT60er", &L1_ETMHF100_HTT60er, &b_L1_ETMHF100_HTT60er);
+   fChain->SetBranchAddress("L1_ETMHF100_Jet60_OR_DiJet30woTT28", &L1_ETMHF100_Jet60_OR_DiJet30woTT28, &b_L1_ETMHF100_Jet60_OR_DiJet30woTT28);
+   fChain->SetBranchAddress("L1_ETMHF100_Jet60_OR_DoubleJet30", &L1_ETMHF100_Jet60_OR_DoubleJet30, &b_L1_ETMHF100_Jet60_OR_DoubleJet30);
+   fChain->SetBranchAddress("L1_ETMHF100_Jet90_OR_DoubleJet45_OR_TripleJet30", &L1_ETMHF100_Jet90_OR_DoubleJet45_OR_TripleJet30, &b_L1_ETMHF100_Jet90_OR_DoubleJet45_OR_TripleJet30);
    fChain->SetBranchAddress("L1_ETMHF110", &L1_ETMHF110, &b_L1_ETMHF110);
    fChain->SetBranchAddress("L1_ETMHF110_HTT60er", &L1_ETMHF110_HTT60er, &b_L1_ETMHF110_HTT60er);
-   fChain->SetBranchAddress("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", &L1_ETMHF110_HTT60er_NotSecondBunchInTrain, &b_L1_ETMHF110_HTT60er_NotSecondBunchInTrain);
+   fChain->SetBranchAddress("L1_ETMHF110_Jet60_OR_DiJet30woTT28", &L1_ETMHF110_Jet60_OR_DiJet30woTT28, &b_L1_ETMHF110_Jet60_OR_DiJet30woTT28);
+   fChain->SetBranchAddress("L1_ETMHF110_Jet90_OR_DoubleJet45_OR_TripleJet30", &L1_ETMHF110_Jet90_OR_DoubleJet45_OR_TripleJet30, &b_L1_ETMHF110_Jet90_OR_DoubleJet45_OR_TripleJet30);
    fChain->SetBranchAddress("L1_ETMHF120", &L1_ETMHF120, &b_L1_ETMHF120);
    fChain->SetBranchAddress("L1_ETMHF120_HTT60er", &L1_ETMHF120_HTT60er, &b_L1_ETMHF120_HTT60er);
-   fChain->SetBranchAddress("L1_ETMHF120_NotSecondBunchInTrain", &L1_ETMHF120_NotSecondBunchInTrain, &b_L1_ETMHF120_NotSecondBunchInTrain);
-   fChain->SetBranchAddress("L1_ETMHF130", &L1_ETMHF130, &b_L1_ETMHF130);
-   fChain->SetBranchAddress("L1_ETMHF130_HTT60er", &L1_ETMHF130_HTT60er, &b_L1_ETMHF130_HTT60er);
-   fChain->SetBranchAddress("L1_ETMHF140", &L1_ETMHF140, &b_L1_ETMHF140);
+   fChain->SetBranchAddress("L1_ETMHF120_Jet60_OR_DiJet30woTT28", &L1_ETMHF120_Jet60_OR_DiJet30woTT28, &b_L1_ETMHF120_Jet60_OR_DiJet30woTT28);
    fChain->SetBranchAddress("L1_ETMHF150", &L1_ETMHF150, &b_L1_ETMHF150);
+   fChain->SetBranchAddress("L1_ETMHF70", &L1_ETMHF70, &b_L1_ETMHF70);
+   fChain->SetBranchAddress("L1_ETMHF70_Jet90_OR_DoubleJet45_OR_TripleJet30", &L1_ETMHF70_Jet90_OR_DoubleJet45_OR_TripleJet30, &b_L1_ETMHF70_Jet90_OR_DoubleJet45_OR_TripleJet30);
+   fChain->SetBranchAddress("L1_ETMHF80", &L1_ETMHF80, &b_L1_ETMHF80);
+   fChain->SetBranchAddress("L1_ETMHF80_HTT60er", &L1_ETMHF80_HTT60er, &b_L1_ETMHF80_HTT60er);
+   fChain->SetBranchAddress("L1_ETMHF80_Jet90_OR_DoubleJet45_OR_TripleJet30", &L1_ETMHF80_Jet90_OR_DoubleJet45_OR_TripleJet30, &b_L1_ETMHF80_Jet90_OR_DoubleJet45_OR_TripleJet30);
+   fChain->SetBranchAddress("L1_ETMHF90", &L1_ETMHF90, &b_L1_ETMHF90);
    fChain->SetBranchAddress("L1_ETMHF90_HTT60er", &L1_ETMHF90_HTT60er, &b_L1_ETMHF90_HTT60er);
-   fChain->SetBranchAddress("L1_ETT1200", &L1_ETT1200, &b_L1_ETT1200);
-   fChain->SetBranchAddress("L1_ETT1600", &L1_ETT1600, &b_L1_ETT1600);
-   fChain->SetBranchAddress("L1_ETT2000", &L1_ETT2000, &b_L1_ETT2000);
+   fChain->SetBranchAddress("L1_ETMHF90_Jet90_OR_DoubleJet45_OR_TripleJet30", &L1_ETMHF90_Jet90_OR_DoubleJet45_OR_TripleJet30, &b_L1_ETMHF90_Jet90_OR_DoubleJet45_OR_TripleJet30);
+   fChain->SetBranchAddress("L1_ETT100_BptxAND", &L1_ETT100_BptxAND, &b_L1_ETT100_BptxAND);
+   fChain->SetBranchAddress("L1_ETT110_BptxAND", &L1_ETT110_BptxAND, &b_L1_ETT110_BptxAND);
+   fChain->SetBranchAddress("L1_ETT40_BptxAND", &L1_ETT40_BptxAND, &b_L1_ETT40_BptxAND);
+   fChain->SetBranchAddress("L1_ETT50_BptxAND", &L1_ETT50_BptxAND, &b_L1_ETT50_BptxAND);
+   fChain->SetBranchAddress("L1_ETT60_BptxAND", &L1_ETT60_BptxAND, &b_L1_ETT60_BptxAND);
+   fChain->SetBranchAddress("L1_ETT70_BptxAND", &L1_ETT70_BptxAND, &b_L1_ETT70_BptxAND);
+   fChain->SetBranchAddress("L1_ETT75_BptxAND", &L1_ETT75_BptxAND, &b_L1_ETT75_BptxAND);
+   fChain->SetBranchAddress("L1_ETT80_BptxAND", &L1_ETT80_BptxAND, &b_L1_ETT80_BptxAND);
+   fChain->SetBranchAddress("L1_ETT85_BptxAND", &L1_ETT85_BptxAND, &b_L1_ETT85_BptxAND);
+   fChain->SetBranchAddress("L1_ETT90_BptxAND", &L1_ETT90_BptxAND, &b_L1_ETT90_BptxAND);
+   fChain->SetBranchAddress("L1_ETT95_BptxAND", &L1_ETT95_BptxAND, &b_L1_ETT95_BptxAND);
    fChain->SetBranchAddress("L1_FirstBunchAfterTrain", &L1_FirstBunchAfterTrain, &b_L1_FirstBunchAfterTrain);
-   fChain->SetBranchAddress("L1_FirstBunchBeforeTrain", &L1_FirstBunchBeforeTrain, &b_L1_FirstBunchBeforeTrain);
    fChain->SetBranchAddress("L1_FirstBunchInTrain", &L1_FirstBunchInTrain, &b_L1_FirstBunchInTrain);
    fChain->SetBranchAddress("L1_FirstCollisionInOrbit", &L1_FirstCollisionInOrbit, &b_L1_FirstCollisionInOrbit);
    fChain->SetBranchAddress("L1_FirstCollisionInTrain", &L1_FirstCollisionInTrain, &b_L1_FirstCollisionInTrain);
-   fChain->SetBranchAddress("L1_HCAL_LaserMon_Trig", &L1_HCAL_LaserMon_Trig, &b_L1_HCAL_LaserMon_Trig);
-   fChain->SetBranchAddress("L1_HCAL_LaserMon_Veto", &L1_HCAL_LaserMon_Veto, &b_L1_HCAL_LaserMon_Veto);
    fChain->SetBranchAddress("L1_HTT120er", &L1_HTT120er, &b_L1_HTT120er);
    fChain->SetBranchAddress("L1_HTT160er", &L1_HTT160er, &b_L1_HTT160er);
    fChain->SetBranchAddress("L1_HTT200er", &L1_HTT200er, &b_L1_HTT200er);
+   fChain->SetBranchAddress("L1_HTT220er", &L1_HTT220er, &b_L1_HTT220er);
+   fChain->SetBranchAddress("L1_HTT240er", &L1_HTT240er, &b_L1_HTT240er);
+   fChain->SetBranchAddress("L1_HTT250er_QuadJet_70_55_40_35_er2p5", &L1_HTT250er_QuadJet_70_55_40_35_er2p5, &b_L1_HTT250er_QuadJet_70_55_40_35_er2p5);
    fChain->SetBranchAddress("L1_HTT255er", &L1_HTT255er, &b_L1_HTT255er);
+   fChain->SetBranchAddress("L1_HTT270er", &L1_HTT270er, &b_L1_HTT270er);
    fChain->SetBranchAddress("L1_HTT280er", &L1_HTT280er, &b_L1_HTT280er);
-   fChain->SetBranchAddress("L1_HTT280er_QuadJet_70_55_40_35_er2p4", &L1_HTT280er_QuadJet_70_55_40_35_er2p4, &b_L1_HTT280er_QuadJet_70_55_40_35_er2p4);
+   fChain->SetBranchAddress("L1_HTT280er_QuadJet_70_55_40_35_er2p5", &L1_HTT280er_QuadJet_70_55_40_35_er2p5, &b_L1_HTT280er_QuadJet_70_55_40_35_er2p5);
+   fChain->SetBranchAddress("L1_HTT300er", &L1_HTT300er, &b_L1_HTT300er);
+   fChain->SetBranchAddress("L1_HTT300er_QuadJet_70_55_40_35_er2p5", &L1_HTT300er_QuadJet_70_55_40_35_er2p5, &b_L1_HTT300er_QuadJet_70_55_40_35_er2p5);
    fChain->SetBranchAddress("L1_HTT320er", &L1_HTT320er, &b_L1_HTT320er);
    fChain->SetBranchAddress("L1_HTT320er_QuadJet_70_55_40_40_er2p4", &L1_HTT320er_QuadJet_70_55_40_40_er2p4, &b_L1_HTT320er_QuadJet_70_55_40_40_er2p4);
-   fChain->SetBranchAddress("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3, &b_L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3);
-   fChain->SetBranchAddress("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3, &b_L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3);
-   fChain->SetBranchAddress("L1_HTT360er", &L1_HTT360er, &b_L1_HTT360er);
+   fChain->SetBranchAddress("L1_HTT320er_QuadJet_70_55_40_40_er2p5", &L1_HTT320er_QuadJet_70_55_40_40_er2p5, &b_L1_HTT320er_QuadJet_70_55_40_40_er2p5);
+   fChain->SetBranchAddress("L1_HTT320er_QuadJet_70_55_45_45_er2p5", &L1_HTT320er_QuadJet_70_55_45_45_er2p5, &b_L1_HTT320er_QuadJet_70_55_45_45_er2p5);
+   fChain->SetBranchAddress("L1_HTT340er", &L1_HTT340er, &b_L1_HTT340er);
+   fChain->SetBranchAddress("L1_HTT340er_QuadJet_70_55_40_40_er2p5", &L1_HTT340er_QuadJet_70_55_40_40_er2p5, &b_L1_HTT340er_QuadJet_70_55_40_40_er2p5);
+   fChain->SetBranchAddress("L1_HTT340er_QuadJet_70_55_45_45_er2p5", &L1_HTT340er_QuadJet_70_55_45_45_er2p5, &b_L1_HTT340er_QuadJet_70_55_45_45_er2p5);
+   fChain->SetBranchAddress("L1_HTT380er", &L1_HTT380er, &b_L1_HTT380er);
    fChain->SetBranchAddress("L1_HTT400er", &L1_HTT400er, &b_L1_HTT400er);
    fChain->SetBranchAddress("L1_HTT450er", &L1_HTT450er, &b_L1_HTT450er);
-   fChain->SetBranchAddress("L1_IsoEG32er2p5_Mt40", &L1_IsoEG32er2p5_Mt40, &b_L1_IsoEG32er2p5_Mt40);
-   fChain->SetBranchAddress("L1_IsoEG32er2p5_Mt44", &L1_IsoEG32er2p5_Mt44, &b_L1_IsoEG32er2p5_Mt44);
-   fChain->SetBranchAddress("L1_IsoEG32er2p5_Mt48", &L1_IsoEG32er2p5_Mt48, &b_L1_IsoEG32er2p5_Mt48);
-   fChain->SetBranchAddress("L1_IsoTau40er2p1_ETMHF100", &L1_IsoTau40er2p1_ETMHF100, &b_L1_IsoTau40er2p1_ETMHF100);
-   fChain->SetBranchAddress("L1_IsoTau40er2p1_ETMHF110", &L1_IsoTau40er2p1_ETMHF110, &b_L1_IsoTau40er2p1_ETMHF110);
-   fChain->SetBranchAddress("L1_IsoTau40er2p1_ETMHF120", &L1_IsoTau40er2p1_ETMHF120, &b_L1_IsoTau40er2p1_ETMHF120);
-   fChain->SetBranchAddress("L1_IsoTau40er2p1_ETMHF90", &L1_IsoTau40er2p1_ETMHF90, &b_L1_IsoTau40er2p1_ETMHF90);
+   fChain->SetBranchAddress("L1_HTT500er", &L1_HTT500er, &b_L1_HTT500er);
+   fChain->SetBranchAddress("L1_IsoEG33_Mt40", &L1_IsoEG33_Mt40, &b_L1_IsoEG33_Mt40);
+   fChain->SetBranchAddress("L1_IsoEG33_Mt44", &L1_IsoEG33_Mt44, &b_L1_IsoEG33_Mt44);
+   fChain->SetBranchAddress("L1_IsoEG33_Mt48", &L1_IsoEG33_Mt48, &b_L1_IsoEG33_Mt48);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM100", &L1_IsoTau40er_ETM100, &b_L1_IsoTau40er_ETM100);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM105", &L1_IsoTau40er_ETM105, &b_L1_IsoTau40er_ETM105);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM110", &L1_IsoTau40er_ETM110, &b_L1_IsoTau40er_ETM110);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM115", &L1_IsoTau40er_ETM115, &b_L1_IsoTau40er_ETM115);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM120", &L1_IsoTau40er_ETM120, &b_L1_IsoTau40er_ETM120);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM80", &L1_IsoTau40er_ETM80, &b_L1_IsoTau40er_ETM80);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM85", &L1_IsoTau40er_ETM85, &b_L1_IsoTau40er_ETM85);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM90", &L1_IsoTau40er_ETM90, &b_L1_IsoTau40er_ETM90);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETM95", &L1_IsoTau40er_ETM95, &b_L1_IsoTau40er_ETM95);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETMHF100", &L1_IsoTau40er_ETMHF100, &b_L1_IsoTau40er_ETMHF100);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETMHF110", &L1_IsoTau40er_ETMHF110, &b_L1_IsoTau40er_ETMHF110);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETMHF120", &L1_IsoTau40er_ETMHF120, &b_L1_IsoTau40er_ETMHF120);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETMHF80", &L1_IsoTau40er_ETMHF80, &b_L1_IsoTau40er_ETMHF80);
+   fChain->SetBranchAddress("L1_IsoTau40er_ETMHF90", &L1_IsoTau40er_ETMHF90, &b_L1_IsoTau40er_ETMHF90);
    fChain->SetBranchAddress("L1_IsolatedBunch", &L1_IsolatedBunch, &b_L1_IsolatedBunch);
-   fChain->SetBranchAddress("L1_LastBunchInTrain", &L1_LastBunchInTrain, &b_L1_LastBunchInTrain);
    fChain->SetBranchAddress("L1_LastCollisionInTrain", &L1_LastCollisionInTrain, &b_L1_LastCollisionInTrain);
    fChain->SetBranchAddress("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3, &b_L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3);
-   fChain->SetBranchAddress("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3, &b_L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3);
    fChain->SetBranchAddress("L1_LooseIsoEG24er2p1_HTT100er", &L1_LooseIsoEG24er2p1_HTT100er, &b_L1_LooseIsoEG24er2p1_HTT100er);
    fChain->SetBranchAddress("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3, &b_L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3);
+   fChain->SetBranchAddress("L1_LooseIsoEG24er2p1_Jet26er2p7_dR_Min0p3", &L1_LooseIsoEG24er2p1_Jet26er2p7_dR_Min0p3, &b_L1_LooseIsoEG24er2p1_Jet26er2p7_dR_Min0p3);
+   fChain->SetBranchAddress("L1_LooseIsoEG24er2p1_TripleJet_26er2p7_26_26er2p7", &L1_LooseIsoEG24er2p1_TripleJet_26er2p7_26_26er2p7, &b_L1_LooseIsoEG24er2p1_TripleJet_26er2p7_26_26er2p7);
    fChain->SetBranchAddress("L1_LooseIsoEG26er2p1_HTT100er", &L1_LooseIsoEG26er2p1_HTT100er, &b_L1_LooseIsoEG26er2p1_HTT100er);
-   fChain->SetBranchAddress("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3, &b_L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3);
+   fChain->SetBranchAddress("L1_LooseIsoEG26er2p1_Jet34er2p7_dR_Min0p3", &L1_LooseIsoEG26er2p1_Jet34er2p7_dR_Min0p3, &b_L1_LooseIsoEG26er2p1_Jet34er2p7_dR_Min0p3);
    fChain->SetBranchAddress("L1_LooseIsoEG28er2p1_HTT100er", &L1_LooseIsoEG28er2p1_HTT100er, &b_L1_LooseIsoEG28er2p1_HTT100er);
-   fChain->SetBranchAddress("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3, &b_L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3);
-   fChain->SetBranchAddress("L1_LooseIsoEG30er2p1_HTT100er", &L1_LooseIsoEG30er2p1_HTT100er, &b_L1_LooseIsoEG30er2p1_HTT100er);
-   fChain->SetBranchAddress("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3, &b_L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3);
+   fChain->SetBranchAddress("L1_LooseIsoEG28er2p1_Jet34er2p7_dR_Min0p3", &L1_LooseIsoEG28er2p1_Jet34er2p7_dR_Min0p3, &b_L1_LooseIsoEG28er2p1_Jet34er2p7_dR_Min0p3);
+   fChain->SetBranchAddress("L1_LooseIsoEG30er2p1_Jet34er2p7_dR_Min0p3", &L1_LooseIsoEG30er2p1_Jet34er2p7_dR_Min0p3, &b_L1_LooseIsoEG30er2p1_Jet34er2p7_dR_Min0p3);
+   fChain->SetBranchAddress("L1_MU20_EG15", &L1_MU20_EG15, &b_L1_MU20_EG15);
    fChain->SetBranchAddress("L1_MinimumBiasHF0_AND_BptxAND", &L1_MinimumBiasHF0_AND_BptxAND, &b_L1_MinimumBiasHF0_AND_BptxAND);
+   fChain->SetBranchAddress("L1_MinimumBiasHF0_OR_BptxAND", &L1_MinimumBiasHF0_OR_BptxAND, &b_L1_MinimumBiasHF0_OR_BptxAND);
+   fChain->SetBranchAddress("L1_Mu10er2p1_ETM30", &L1_Mu10er2p1_ETM30, &b_L1_Mu10er2p1_ETM30);
    fChain->SetBranchAddress("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6, &b_L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6);
-   fChain->SetBranchAddress("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6, &b_L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6);
+   fChain->SetBranchAddress("L1_Mu12_EG10", &L1_Mu12_EG10, &b_L1_Mu12_EG10);
    fChain->SetBranchAddress("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6, &b_L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6);
+   fChain->SetBranchAddress("L1_Mu14er2p1_ETM30", &L1_Mu14er2p1_ETM30, &b_L1_Mu14er2p1_ETM30);
+   fChain->SetBranchAddress("L1_Mu15_HTT100er", &L1_Mu15_HTT100er, &b_L1_Mu15_HTT100er);
+   fChain->SetBranchAddress("L1_Mu18_HTT100er", &L1_Mu18_HTT100er, &b_L1_Mu18_HTT100er);
+   fChain->SetBranchAddress("L1_Mu18_Jet24er2p7", &L1_Mu18_Jet24er2p7, &b_L1_Mu18_Jet24er2p7);
+   fChain->SetBranchAddress("L1_Mu18er2p1_IsoTau26er2p1", &L1_Mu18er2p1_IsoTau26er2p1, &b_L1_Mu18er2p1_IsoTau26er2p1);
    fChain->SetBranchAddress("L1_Mu18er2p1_Tau24er2p1", &L1_Mu18er2p1_Tau24er2p1, &b_L1_Mu18er2p1_Tau24er2p1);
-   fChain->SetBranchAddress("L1_Mu18er2p1_Tau26er2p1", &L1_Mu18er2p1_Tau26er2p1, &b_L1_Mu18er2p1_Tau26er2p1);
-   fChain->SetBranchAddress("L1_Mu20_EG10er2p5", &L1_Mu20_EG10er2p5, &b_L1_Mu20_EG10er2p5);
+   fChain->SetBranchAddress("L1_Mu20_EG10", &L1_Mu20_EG10, &b_L1_Mu20_EG10);
+   fChain->SetBranchAddress("L1_Mu20_EG17", &L1_Mu20_EG17, &b_L1_Mu20_EG17);
+   fChain->SetBranchAddress("L1_Mu20_LooseIsoEG6", &L1_Mu20_LooseIsoEG6, &b_L1_Mu20_LooseIsoEG6);
+   fChain->SetBranchAddress("L1_Mu20er2p1_IsoTau26er2p1", &L1_Mu20er2p1_IsoTau26er2p1, &b_L1_Mu20er2p1_IsoTau26er2p1);
+   fChain->SetBranchAddress("L1_Mu20er2p1_IsoTau27er2p1", &L1_Mu20er2p1_IsoTau27er2p1, &b_L1_Mu20er2p1_IsoTau27er2p1);
+   fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau28er2p1", &L1_Mu22er2p1_IsoTau28er2p1, &b_L1_Mu22er2p1_IsoTau28er2p1);
+   fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau30er2p1", &L1_Mu22er2p1_IsoTau30er2p1, &b_L1_Mu22er2p1_IsoTau30er2p1);
    fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau32er2p1", &L1_Mu22er2p1_IsoTau32er2p1, &b_L1_Mu22er2p1_IsoTau32er2p1);
+   fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau33er2p1", &L1_Mu22er2p1_IsoTau33er2p1, &b_L1_Mu22er2p1_IsoTau33er2p1);
    fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau34er2p1", &L1_Mu22er2p1_IsoTau34er2p1, &b_L1_Mu22er2p1_IsoTau34er2p1);
+   fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau35er2p1", &L1_Mu22er2p1_IsoTau35er2p1, &b_L1_Mu22er2p1_IsoTau35er2p1);
    fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau36er2p1", &L1_Mu22er2p1_IsoTau36er2p1, &b_L1_Mu22er2p1_IsoTau36er2p1);
+   fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau38er2p1", &L1_Mu22er2p1_IsoTau38er2p1, &b_L1_Mu22er2p1_IsoTau38er2p1);
    fChain->SetBranchAddress("L1_Mu22er2p1_IsoTau40er2p1", &L1_Mu22er2p1_IsoTau40er2p1, &b_L1_Mu22er2p1_IsoTau40er2p1);
+   fChain->SetBranchAddress("L1_Mu22er2p1_Tau50er2p1", &L1_Mu22er2p1_Tau50er2p1, &b_L1_Mu22er2p1_Tau50er2p1);
    fChain->SetBranchAddress("L1_Mu22er2p1_Tau70er2p1", &L1_Mu22er2p1_Tau70er2p1, &b_L1_Mu22er2p1_Tau70er2p1);
-   fChain->SetBranchAddress("L1_Mu3_Jet120er2p5_dR_Max0p4", &L1_Mu3_Jet120er2p5_dR_Max0p4, &b_L1_Mu3_Jet120er2p5_dR_Max0p4);
-   fChain->SetBranchAddress("L1_Mu3_Jet120er2p5_dR_Max0p8", &L1_Mu3_Jet120er2p5_dR_Max0p8, &b_L1_Mu3_Jet120er2p5_dR_Max0p8);
-   fChain->SetBranchAddress("L1_Mu3_Jet16er2p5_dR_Max0p4", &L1_Mu3_Jet16er2p5_dR_Max0p4, &b_L1_Mu3_Jet16er2p5_dR_Max0p4);
+   fChain->SetBranchAddress("L1_Mu23_EG10", &L1_Mu23_EG10, &b_L1_Mu23_EG10);
+   fChain->SetBranchAddress("L1_Mu23_LooseIsoEG10", &L1_Mu23_LooseIsoEG10, &b_L1_Mu23_LooseIsoEG10);
+   fChain->SetBranchAddress("L1_Mu3_Jet120er2p7_dEta_Max0p4_dPhi_Max0p4", &L1_Mu3_Jet120er2p7_dEta_Max0p4_dPhi_Max0p4, &b_L1_Mu3_Jet120er2p7_dEta_Max0p4_dPhi_Max0p4);
+   fChain->SetBranchAddress("L1_Mu3_Jet16er2p7_dEta_Max0p4_dPhi_Max0p4", &L1_Mu3_Jet16er2p7_dEta_Max0p4_dPhi_Max0p4, &b_L1_Mu3_Jet16er2p7_dEta_Max0p4_dPhi_Max0p4);
    fChain->SetBranchAddress("L1_Mu3_Jet30er2p5", &L1_Mu3_Jet30er2p5, &b_L1_Mu3_Jet30er2p5);
-   fChain->SetBranchAddress("L1_Mu3_Jet35er2p5_dR_Max0p4", &L1_Mu3_Jet35er2p5_dR_Max0p4, &b_L1_Mu3_Jet35er2p5_dR_Max0p4);
-   fChain->SetBranchAddress("L1_Mu3_Jet60er2p5_dR_Max0p4", &L1_Mu3_Jet60er2p5_dR_Max0p4, &b_L1_Mu3_Jet60er2p5_dR_Max0p4);
-   fChain->SetBranchAddress("L1_Mu3_Jet80er2p5_dR_Max0p4", &L1_Mu3_Jet80er2p5_dR_Max0p4, &b_L1_Mu3_Jet80er2p5_dR_Max0p4);
-   fChain->SetBranchAddress("L1_Mu3er1p5_Jet100er2p5_ETMHF40", &L1_Mu3er1p5_Jet100er2p5_ETMHF40, &b_L1_Mu3er1p5_Jet100er2p5_ETMHF40);
-   fChain->SetBranchAddress("L1_Mu3er1p5_Jet100er2p5_ETMHF50", &L1_Mu3er1p5_Jet100er2p5_ETMHF50, &b_L1_Mu3er1p5_Jet100er2p5_ETMHF50);
-   fChain->SetBranchAddress("L1_Mu5_EG23er2p5", &L1_Mu5_EG23er2p5, &b_L1_Mu5_EG23er2p5);
-   fChain->SetBranchAddress("L1_Mu5_LooseIsoEG20er2p5", &L1_Mu5_LooseIsoEG20er2p5, &b_L1_Mu5_LooseIsoEG20er2p5);
-   fChain->SetBranchAddress("L1_Mu6_DoubleEG10er2p5", &L1_Mu6_DoubleEG10er2p5, &b_L1_Mu6_DoubleEG10er2p5);
-   fChain->SetBranchAddress("L1_Mu6_DoubleEG12er2p5", &L1_Mu6_DoubleEG12er2p5, &b_L1_Mu6_DoubleEG12er2p5);
-   fChain->SetBranchAddress("L1_Mu6_DoubleEG15er2p5", &L1_Mu6_DoubleEG15er2p5, &b_L1_Mu6_DoubleEG15er2p5);
-   fChain->SetBranchAddress("L1_Mu6_DoubleEG17er2p5", &L1_Mu6_DoubleEG17er2p5, &b_L1_Mu6_DoubleEG17er2p5);
+   fChain->SetBranchAddress("L1_Mu3_Jet60er2p7_dEta_Max0p4_dPhi_Max0p4", &L1_Mu3_Jet60er2p7_dEta_Max0p4_dPhi_Max0p4, &b_L1_Mu3_Jet60er2p7_dEta_Max0p4_dPhi_Max0p4);
+   fChain->SetBranchAddress("L1_Mu5_EG15", &L1_Mu5_EG15, &b_L1_Mu5_EG15);
+   fChain->SetBranchAddress("L1_Mu5_EG20", &L1_Mu5_EG20, &b_L1_Mu5_EG20);
+   fChain->SetBranchAddress("L1_Mu5_EG23", &L1_Mu5_EG23, &b_L1_Mu5_EG23);
+   fChain->SetBranchAddress("L1_Mu5_LooseIsoEG18", &L1_Mu5_LooseIsoEG18, &b_L1_Mu5_LooseIsoEG18);
+   fChain->SetBranchAddress("L1_Mu5_LooseIsoEG20", &L1_Mu5_LooseIsoEG20, &b_L1_Mu5_LooseIsoEG20);
+   fChain->SetBranchAddress("L1_Mu6_DoubleEG10", &L1_Mu6_DoubleEG10, &b_L1_Mu6_DoubleEG10);
+   fChain->SetBranchAddress("L1_Mu6_DoubleEG17", &L1_Mu6_DoubleEG17, &b_L1_Mu6_DoubleEG17);
+   fChain->SetBranchAddress("L1_Mu6_HTT200er", &L1_Mu6_HTT200er, &b_L1_Mu6_HTT200er);
    fChain->SetBranchAddress("L1_Mu6_HTT240er", &L1_Mu6_HTT240er, &b_L1_Mu6_HTT240er);
    fChain->SetBranchAddress("L1_Mu6_HTT250er", &L1_Mu6_HTT250er, &b_L1_Mu6_HTT250er);
-   fChain->SetBranchAddress("L1_Mu7_EG23er2p5", &L1_Mu7_EG23er2p5, &b_L1_Mu7_EG23er2p5);
-   fChain->SetBranchAddress("L1_Mu7_LooseIsoEG20er2p5", &L1_Mu7_LooseIsoEG20er2p5, &b_L1_Mu7_LooseIsoEG20er2p5);
-   fChain->SetBranchAddress("L1_Mu7_LooseIsoEG23er2p5", &L1_Mu7_LooseIsoEG23er2p5, &b_L1_Mu7_LooseIsoEG23er2p5);
+   fChain->SetBranchAddress("L1_Mu7_EG23", &L1_Mu7_EG23, &b_L1_Mu7_EG23);
+   fChain->SetBranchAddress("L1_Mu7_LooseIsoEG20", &L1_Mu7_LooseIsoEG20, &b_L1_Mu7_LooseIsoEG20);
+   fChain->SetBranchAddress("L1_Mu7_LooseIsoEG23", &L1_Mu7_LooseIsoEG23, &b_L1_Mu7_LooseIsoEG23);
+   fChain->SetBranchAddress("L1_Mu8_HTT150er", &L1_Mu8_HTT150er, &b_L1_Mu8_HTT150er);
    fChain->SetBranchAddress("L1_NotBptxOR", &L1_NotBptxOR, &b_L1_NotBptxOR);
-   fChain->SetBranchAddress("L1_QuadJet36er2p5_IsoTau52er2p1", &L1_QuadJet36er2p5_IsoTau52er2p1, &b_L1_QuadJet36er2p5_IsoTau52er2p1);
-   fChain->SetBranchAddress("L1_QuadJet60er2p5", &L1_QuadJet60er2p5, &b_L1_QuadJet60er2p5);
-   fChain->SetBranchAddress("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0, &b_L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0);
+   fChain->SetBranchAddress("L1_QuadJet36er2p7_IsoTau52er2p1", &L1_QuadJet36er2p7_IsoTau52er2p1, &b_L1_QuadJet36er2p7_IsoTau52er2p1);
+   fChain->SetBranchAddress("L1_QuadJet36er2p7_Tau52", &L1_QuadJet36er2p7_Tau52, &b_L1_QuadJet36er2p7_Tau52);
+   fChain->SetBranchAddress("L1_QuadJet40er2p7", &L1_QuadJet40er2p7, &b_L1_QuadJet40er2p7);
+   fChain->SetBranchAddress("L1_QuadJet50er2p7", &L1_QuadJet50er2p7, &b_L1_QuadJet50er2p7);
+   fChain->SetBranchAddress("L1_QuadJet60er2p7", &L1_QuadJet60er2p7, &b_L1_QuadJet60er2p7);
    fChain->SetBranchAddress("L1_QuadMu0", &L1_QuadMu0, &b_L1_QuadMu0);
-   fChain->SetBranchAddress("L1_QuadMu0_OQ", &L1_QuadMu0_OQ, &b_L1_QuadMu0_OQ);
-   fChain->SetBranchAddress("L1_QuadMu0_SQ", &L1_QuadMu0_SQ, &b_L1_QuadMu0_SQ);
-   fChain->SetBranchAddress("L1_SecondBunchInTrain", &L1_SecondBunchInTrain, &b_L1_SecondBunchInTrain);
-   fChain->SetBranchAddress("L1_SecondLastBunchInTrain", &L1_SecondLastBunchInTrain, &b_L1_SecondLastBunchInTrain);
-   fChain->SetBranchAddress("L1_SingleEG10er2p5", &L1_SingleEG10er2p5, &b_L1_SingleEG10er2p5);
-   fChain->SetBranchAddress("L1_SingleEG15er2p5", &L1_SingleEG15er2p5, &b_L1_SingleEG15er2p5);
-   fChain->SetBranchAddress("L1_SingleEG26er2p5", &L1_SingleEG26er2p5, &b_L1_SingleEG26er2p5);
-   fChain->SetBranchAddress("L1_SingleEG34er2p5", &L1_SingleEG34er2p5, &b_L1_SingleEG34er2p5);
-   fChain->SetBranchAddress("L1_SingleEG36er2p5", &L1_SingleEG36er2p5, &b_L1_SingleEG36er2p5);
-   fChain->SetBranchAddress("L1_SingleEG38er2p5", &L1_SingleEG38er2p5, &b_L1_SingleEG38er2p5);
-   fChain->SetBranchAddress("L1_SingleEG40er2p5", &L1_SingleEG40er2p5, &b_L1_SingleEG40er2p5);
-   fChain->SetBranchAddress("L1_SingleEG42er2p5", &L1_SingleEG42er2p5, &b_L1_SingleEG42er2p5);
-   fChain->SetBranchAddress("L1_SingleEG45er2p5", &L1_SingleEG45er2p5, &b_L1_SingleEG45er2p5);
+   fChain->SetBranchAddress("L1_SingleEG10", &L1_SingleEG10, &b_L1_SingleEG10);
+   fChain->SetBranchAddress("L1_SingleEG15", &L1_SingleEG15, &b_L1_SingleEG15);
+   fChain->SetBranchAddress("L1_SingleEG18", &L1_SingleEG18, &b_L1_SingleEG18);
+   fChain->SetBranchAddress("L1_SingleEG24", &L1_SingleEG24, &b_L1_SingleEG24);
+   fChain->SetBranchAddress("L1_SingleEG26", &L1_SingleEG26, &b_L1_SingleEG26);
+   fChain->SetBranchAddress("L1_SingleEG28", &L1_SingleEG28, &b_L1_SingleEG28);
+   fChain->SetBranchAddress("L1_SingleEG2_BptxAND", &L1_SingleEG2_BptxAND, &b_L1_SingleEG2_BptxAND);
+   fChain->SetBranchAddress("L1_SingleEG30", &L1_SingleEG30, &b_L1_SingleEG30);
+   fChain->SetBranchAddress("L1_SingleEG32", &L1_SingleEG32, &b_L1_SingleEG32);
+   fChain->SetBranchAddress("L1_SingleEG34", &L1_SingleEG34, &b_L1_SingleEG34);
+   fChain->SetBranchAddress("L1_SingleEG34er2p1", &L1_SingleEG34er2p1, &b_L1_SingleEG34er2p1);
+   fChain->SetBranchAddress("L1_SingleEG36", &L1_SingleEG36, &b_L1_SingleEG36);
+   fChain->SetBranchAddress("L1_SingleEG36er2p1", &L1_SingleEG36er2p1, &b_L1_SingleEG36er2p1);
+   fChain->SetBranchAddress("L1_SingleEG38", &L1_SingleEG38, &b_L1_SingleEG38);
+   fChain->SetBranchAddress("L1_SingleEG38er2p1", &L1_SingleEG38er2p1, &b_L1_SingleEG38er2p1);
+   fChain->SetBranchAddress("L1_SingleEG40", &L1_SingleEG40, &b_L1_SingleEG40);
+   fChain->SetBranchAddress("L1_SingleEG42", &L1_SingleEG42, &b_L1_SingleEG42);
+   fChain->SetBranchAddress("L1_SingleEG45", &L1_SingleEG45, &b_L1_SingleEG45);
+   fChain->SetBranchAddress("L1_SingleEG5", &L1_SingleEG5, &b_L1_SingleEG5);
    fChain->SetBranchAddress("L1_SingleEG50", &L1_SingleEG50, &b_L1_SingleEG50);
-   fChain->SetBranchAddress("L1_SingleEG60", &L1_SingleEG60, &b_L1_SingleEG60);
-   fChain->SetBranchAddress("L1_SingleEG8er2p5", &L1_SingleEG8er2p5, &b_L1_SingleEG8er2p5);
-   fChain->SetBranchAddress("L1_SingleIsoEG24er1p5", &L1_SingleIsoEG24er1p5, &b_L1_SingleIsoEG24er1p5);
+   fChain->SetBranchAddress("L1_SingleIsoEG18", &L1_SingleIsoEG18, &b_L1_SingleIsoEG18);
+   fChain->SetBranchAddress("L1_SingleIsoEG18er2p1", &L1_SingleIsoEG18er2p1, &b_L1_SingleIsoEG18er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG20", &L1_SingleIsoEG20, &b_L1_SingleIsoEG20);
+   fChain->SetBranchAddress("L1_SingleIsoEG20er2p1", &L1_SingleIsoEG20er2p1, &b_L1_SingleIsoEG20er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG22", &L1_SingleIsoEG22, &b_L1_SingleIsoEG22);
+   fChain->SetBranchAddress("L1_SingleIsoEG22er2p1", &L1_SingleIsoEG22er2p1, &b_L1_SingleIsoEG22er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG24", &L1_SingleIsoEG24, &b_L1_SingleIsoEG24);
    fChain->SetBranchAddress("L1_SingleIsoEG24er2p1", &L1_SingleIsoEG24er2p1, &b_L1_SingleIsoEG24er2p1);
-   fChain->SetBranchAddress("L1_SingleIsoEG26er1p5", &L1_SingleIsoEG26er1p5, &b_L1_SingleIsoEG26er1p5);
+   fChain->SetBranchAddress("L1_SingleIsoEG26", &L1_SingleIsoEG26, &b_L1_SingleIsoEG26);
    fChain->SetBranchAddress("L1_SingleIsoEG26er2p1", &L1_SingleIsoEG26er2p1, &b_L1_SingleIsoEG26er2p1);
-   fChain->SetBranchAddress("L1_SingleIsoEG26er2p5", &L1_SingleIsoEG26er2p5, &b_L1_SingleIsoEG26er2p5);
-   fChain->SetBranchAddress("L1_SingleIsoEG28er1p5", &L1_SingleIsoEG28er1p5, &b_L1_SingleIsoEG28er1p5);
+   fChain->SetBranchAddress("L1_SingleIsoEG28", &L1_SingleIsoEG28, &b_L1_SingleIsoEG28);
    fChain->SetBranchAddress("L1_SingleIsoEG28er2p1", &L1_SingleIsoEG28er2p1, &b_L1_SingleIsoEG28er2p1);
-   fChain->SetBranchAddress("L1_SingleIsoEG28er2p5", &L1_SingleIsoEG28er2p5, &b_L1_SingleIsoEG28er2p5);
+   fChain->SetBranchAddress("L1_SingleIsoEG30", &L1_SingleIsoEG30, &b_L1_SingleIsoEG30);
    fChain->SetBranchAddress("L1_SingleIsoEG30er2p1", &L1_SingleIsoEG30er2p1, &b_L1_SingleIsoEG30er2p1);
-   fChain->SetBranchAddress("L1_SingleIsoEG30er2p5", &L1_SingleIsoEG30er2p5, &b_L1_SingleIsoEG30er2p5);
+   fChain->SetBranchAddress("L1_SingleIsoEG32", &L1_SingleIsoEG32, &b_L1_SingleIsoEG32);
    fChain->SetBranchAddress("L1_SingleIsoEG32er2p1", &L1_SingleIsoEG32er2p1, &b_L1_SingleIsoEG32er2p1);
-   fChain->SetBranchAddress("L1_SingleIsoEG32er2p5", &L1_SingleIsoEG32er2p5, &b_L1_SingleIsoEG32er2p5);
-   fChain->SetBranchAddress("L1_SingleIsoEG34er2p5", &L1_SingleIsoEG34er2p5, &b_L1_SingleIsoEG34er2p5);
-   fChain->SetBranchAddress("L1_SingleJet10erHE", &L1_SingleJet10erHE, &b_L1_SingleJet10erHE);
+   fChain->SetBranchAddress("L1_SingleIsoEG33er2p1", &L1_SingleIsoEG33er2p1, &b_L1_SingleIsoEG33er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG34", &L1_SingleIsoEG34, &b_L1_SingleIsoEG34);
+   fChain->SetBranchAddress("L1_SingleIsoEG34er2p1", &L1_SingleIsoEG34er2p1, &b_L1_SingleIsoEG34er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG35", &L1_SingleIsoEG35, &b_L1_SingleIsoEG35);
+   fChain->SetBranchAddress("L1_SingleIsoEG35er2p1", &L1_SingleIsoEG35er2p1, &b_L1_SingleIsoEG35er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG36", &L1_SingleIsoEG36, &b_L1_SingleIsoEG36);
+   fChain->SetBranchAddress("L1_SingleIsoEG36er2p1", &L1_SingleIsoEG36er2p1, &b_L1_SingleIsoEG36er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG37", &L1_SingleIsoEG37, &b_L1_SingleIsoEG37);
+   fChain->SetBranchAddress("L1_SingleIsoEG38", &L1_SingleIsoEG38, &b_L1_SingleIsoEG38);
+   fChain->SetBranchAddress("L1_SingleIsoEG38er2p1", &L1_SingleIsoEG38er2p1, &b_L1_SingleIsoEG38er2p1);
+   fChain->SetBranchAddress("L1_SingleIsoEG40", &L1_SingleIsoEG40, &b_L1_SingleIsoEG40);
+   fChain->SetBranchAddress("L1_SingleIsoEG40er2p1", &L1_SingleIsoEG40er2p1, &b_L1_SingleIsoEG40er2p1);
    fChain->SetBranchAddress("L1_SingleJet120", &L1_SingleJet120, &b_L1_SingleJet120);
-   fChain->SetBranchAddress("L1_SingleJet120_FWD3p0", &L1_SingleJet120_FWD3p0, &b_L1_SingleJet120_FWD3p0);
-   fChain->SetBranchAddress("L1_SingleJet120er2p5", &L1_SingleJet120er2p5, &b_L1_SingleJet120er2p5);
-   fChain->SetBranchAddress("L1_SingleJet12erHE", &L1_SingleJet12erHE, &b_L1_SingleJet12erHE);
-   fChain->SetBranchAddress("L1_SingleJet140er2p5", &L1_SingleJet140er2p5, &b_L1_SingleJet140er2p5);
-   fChain->SetBranchAddress("L1_SingleJet140er2p5_ETMHF80", &L1_SingleJet140er2p5_ETMHF80, &b_L1_SingleJet140er2p5_ETMHF80);
-   fChain->SetBranchAddress("L1_SingleJet140er2p5_ETMHF90", &L1_SingleJet140er2p5_ETMHF90, &b_L1_SingleJet140er2p5_ETMHF90);
-   fChain->SetBranchAddress("L1_SingleJet160er2p5", &L1_SingleJet160er2p5, &b_L1_SingleJet160er2p5);
+   fChain->SetBranchAddress("L1_SingleJet120_FWD", &L1_SingleJet120_FWD, &b_L1_SingleJet120_FWD);
+   fChain->SetBranchAddress("L1_SingleJet12_BptxAND", &L1_SingleJet12_BptxAND, &b_L1_SingleJet12_BptxAND);
+   fChain->SetBranchAddress("L1_SingleJet140", &L1_SingleJet140, &b_L1_SingleJet140);
+   fChain->SetBranchAddress("L1_SingleJet150", &L1_SingleJet150, &b_L1_SingleJet150);
+   fChain->SetBranchAddress("L1_SingleJet16", &L1_SingleJet16, &b_L1_SingleJet16);
+   fChain->SetBranchAddress("L1_SingleJet160", &L1_SingleJet160, &b_L1_SingleJet160);
+   fChain->SetBranchAddress("L1_SingleJet170", &L1_SingleJet170, &b_L1_SingleJet170);
    fChain->SetBranchAddress("L1_SingleJet180", &L1_SingleJet180, &b_L1_SingleJet180);
-   fChain->SetBranchAddress("L1_SingleJet180er2p5", &L1_SingleJet180er2p5, &b_L1_SingleJet180er2p5);
+   fChain->SetBranchAddress("L1_SingleJet20", &L1_SingleJet20, &b_L1_SingleJet20);
    fChain->SetBranchAddress("L1_SingleJet200", &L1_SingleJet200, &b_L1_SingleJet200);
-   fChain->SetBranchAddress("L1_SingleJet20er2p5_NotBptxOR", &L1_SingleJet20er2p5_NotBptxOR, &b_L1_SingleJet20er2p5_NotBptxOR);
-   fChain->SetBranchAddress("L1_SingleJet20er2p5_NotBptxOR_3BX", &L1_SingleJet20er2p5_NotBptxOR_3BX, &b_L1_SingleJet20er2p5_NotBptxOR_3BX);
+   fChain->SetBranchAddress("L1_SingleJet20er2p7_NotBptxOR", &L1_SingleJet20er2p7_NotBptxOR, &b_L1_SingleJet20er2p7_NotBptxOR);
+   fChain->SetBranchAddress("L1_SingleJet20er2p7_NotBptxOR_3BX", &L1_SingleJet20er2p7_NotBptxOR_3BX, &b_L1_SingleJet20er2p7_NotBptxOR_3BX);
    fChain->SetBranchAddress("L1_SingleJet35", &L1_SingleJet35, &b_L1_SingleJet35);
-   fChain->SetBranchAddress("L1_SingleJet35_FWD3p0", &L1_SingleJet35_FWD3p0, &b_L1_SingleJet35_FWD3p0);
-   fChain->SetBranchAddress("L1_SingleJet35er2p5", &L1_SingleJet35er2p5, &b_L1_SingleJet35er2p5);
-   fChain->SetBranchAddress("L1_SingleJet43er2p5_NotBptxOR_3BX", &L1_SingleJet43er2p5_NotBptxOR_3BX, &b_L1_SingleJet43er2p5_NotBptxOR_3BX);
-   fChain->SetBranchAddress("L1_SingleJet46er2p5_NotBptxOR_3BX", &L1_SingleJet46er2p5_NotBptxOR_3BX, &b_L1_SingleJet46er2p5_NotBptxOR_3BX);
+   fChain->SetBranchAddress("L1_SingleJet35_FWD", &L1_SingleJet35_FWD, &b_L1_SingleJet35_FWD);
+   fChain->SetBranchAddress("L1_SingleJet35_HFm", &L1_SingleJet35_HFm, &b_L1_SingleJet35_HFm);
+   fChain->SetBranchAddress("L1_SingleJet35_HFp", &L1_SingleJet35_HFp, &b_L1_SingleJet35_HFp);
+   fChain->SetBranchAddress("L1_SingleJet43er2p7_NotBptxOR_3BX", &L1_SingleJet43er2p7_NotBptxOR_3BX, &b_L1_SingleJet43er2p7_NotBptxOR_3BX);
+   fChain->SetBranchAddress("L1_SingleJet46er2p7_NotBptxOR_3BX", &L1_SingleJet46er2p7_NotBptxOR_3BX, &b_L1_SingleJet46er2p7_NotBptxOR_3BX);
    fChain->SetBranchAddress("L1_SingleJet60", &L1_SingleJet60, &b_L1_SingleJet60);
-   fChain->SetBranchAddress("L1_SingleJet60_FWD3p0", &L1_SingleJet60_FWD3p0, &b_L1_SingleJet60_FWD3p0);
-   fChain->SetBranchAddress("L1_SingleJet60er2p5", &L1_SingleJet60er2p5, &b_L1_SingleJet60er2p5);
-   fChain->SetBranchAddress("L1_SingleJet8erHE", &L1_SingleJet8erHE, &b_L1_SingleJet8erHE);
+   fChain->SetBranchAddress("L1_SingleJet60_FWD", &L1_SingleJet60_FWD, &b_L1_SingleJet60_FWD);
+   fChain->SetBranchAddress("L1_SingleJet60_HFm", &L1_SingleJet60_HFm, &b_L1_SingleJet60_HFm);
+   fChain->SetBranchAddress("L1_SingleJet60_HFp", &L1_SingleJet60_HFp, &b_L1_SingleJet60_HFp);
    fChain->SetBranchAddress("L1_SingleJet90", &L1_SingleJet90, &b_L1_SingleJet90);
-   fChain->SetBranchAddress("L1_SingleJet90_FWD3p0", &L1_SingleJet90_FWD3p0, &b_L1_SingleJet90_FWD3p0);
-   fChain->SetBranchAddress("L1_SingleJet90er2p5", &L1_SingleJet90er2p5, &b_L1_SingleJet90er2p5);
-   fChain->SetBranchAddress("L1_SingleLooseIsoEG28er1p5", &L1_SingleLooseIsoEG28er1p5, &b_L1_SingleLooseIsoEG28er1p5);
-   fChain->SetBranchAddress("L1_SingleLooseIsoEG30er1p5", &L1_SingleLooseIsoEG30er1p5, &b_L1_SingleLooseIsoEG30er1p5);
+   fChain->SetBranchAddress("L1_SingleJet90_FWD", &L1_SingleJet90_FWD, &b_L1_SingleJet90_FWD);
    fChain->SetBranchAddress("L1_SingleMu0_BMTF", &L1_SingleMu0_BMTF, &b_L1_SingleMu0_BMTF);
-   fChain->SetBranchAddress("L1_SingleMu0_DQ", &L1_SingleMu0_DQ, &b_L1_SingleMu0_DQ);
    fChain->SetBranchAddress("L1_SingleMu0_EMTF", &L1_SingleMu0_EMTF, &b_L1_SingleMu0_EMTF);
    fChain->SetBranchAddress("L1_SingleMu0_OMTF", &L1_SingleMu0_OMTF, &b_L1_SingleMu0_OMTF);
-   fChain->SetBranchAddress("L1_SingleMu10er1p5", &L1_SingleMu10er1p5, &b_L1_SingleMu10er1p5);
-   fChain->SetBranchAddress("L1_SingleMu12_DQ_BMTF", &L1_SingleMu12_DQ_BMTF, &b_L1_SingleMu12_DQ_BMTF);
-   fChain->SetBranchAddress("L1_SingleMu12_DQ_EMTF", &L1_SingleMu12_DQ_EMTF, &b_L1_SingleMu12_DQ_EMTF);
-   fChain->SetBranchAddress("L1_SingleMu12_DQ_OMTF", &L1_SingleMu12_DQ_OMTF, &b_L1_SingleMu12_DQ_OMTF);
-   fChain->SetBranchAddress("L1_SingleMu12er1p5", &L1_SingleMu12er1p5, &b_L1_SingleMu12er1p5);
-   fChain->SetBranchAddress("L1_SingleMu14er1p5", &L1_SingleMu14er1p5, &b_L1_SingleMu14er1p5);
-   fChain->SetBranchAddress("L1_SingleMu15_DQ", &L1_SingleMu15_DQ, &b_L1_SingleMu15_DQ);
-   fChain->SetBranchAddress("L1_SingleMu16er1p5", &L1_SingleMu16er1p5, &b_L1_SingleMu16er1p5);
+   fChain->SetBranchAddress("L1_SingleMu10_LowQ", &L1_SingleMu10_LowQ, &b_L1_SingleMu10_LowQ);
+   fChain->SetBranchAddress("L1_SingleMu11_LowQ", &L1_SingleMu11_LowQ, &b_L1_SingleMu11_LowQ);
+   fChain->SetBranchAddress("L1_SingleMu12_LowQ_BMTF", &L1_SingleMu12_LowQ_BMTF, &b_L1_SingleMu12_LowQ_BMTF);
+   fChain->SetBranchAddress("L1_SingleMu12_LowQ_EMTF", &L1_SingleMu12_LowQ_EMTF, &b_L1_SingleMu12_LowQ_EMTF);
+   fChain->SetBranchAddress("L1_SingleMu12_LowQ_OMTF", &L1_SingleMu12_LowQ_OMTF, &b_L1_SingleMu12_LowQ_OMTF);
+   fChain->SetBranchAddress("L1_SingleMu14er2p1", &L1_SingleMu14er2p1, &b_L1_SingleMu14er2p1);
+   fChain->SetBranchAddress("L1_SingleMu16", &L1_SingleMu16, &b_L1_SingleMu16);
+   fChain->SetBranchAddress("L1_SingleMu16er2p1", &L1_SingleMu16er2p1, &b_L1_SingleMu16er2p1);
    fChain->SetBranchAddress("L1_SingleMu18", &L1_SingleMu18, &b_L1_SingleMu18);
-   fChain->SetBranchAddress("L1_SingleMu18er1p5", &L1_SingleMu18er1p5, &b_L1_SingleMu18er1p5);
+   fChain->SetBranchAddress("L1_SingleMu18er2p1", &L1_SingleMu18er2p1, &b_L1_SingleMu18er2p1);
    fChain->SetBranchAddress("L1_SingleMu20", &L1_SingleMu20, &b_L1_SingleMu20);
+   fChain->SetBranchAddress("L1_SingleMu20er2p1", &L1_SingleMu20er2p1, &b_L1_SingleMu20er2p1);
    fChain->SetBranchAddress("L1_SingleMu22", &L1_SingleMu22, &b_L1_SingleMu22);
    fChain->SetBranchAddress("L1_SingleMu22_BMTF", &L1_SingleMu22_BMTF, &b_L1_SingleMu22_BMTF);
    fChain->SetBranchAddress("L1_SingleMu22_EMTF", &L1_SingleMu22_EMTF, &b_L1_SingleMu22_EMTF);
    fChain->SetBranchAddress("L1_SingleMu22_OMTF", &L1_SingleMu22_OMTF, &b_L1_SingleMu22_OMTF);
+   fChain->SetBranchAddress("L1_SingleMu22er2p1", &L1_SingleMu22er2p1, &b_L1_SingleMu22er2p1);
    fChain->SetBranchAddress("L1_SingleMu25", &L1_SingleMu25, &b_L1_SingleMu25);
    fChain->SetBranchAddress("L1_SingleMu3", &L1_SingleMu3, &b_L1_SingleMu3);
+   fChain->SetBranchAddress("L1_SingleMu30", &L1_SingleMu30, &b_L1_SingleMu30);
    fChain->SetBranchAddress("L1_SingleMu5", &L1_SingleMu5, &b_L1_SingleMu5);
-   fChain->SetBranchAddress("L1_SingleMu6er1p5", &L1_SingleMu6er1p5, &b_L1_SingleMu6er1p5);
    fChain->SetBranchAddress("L1_SingleMu7", &L1_SingleMu7, &b_L1_SingleMu7);
-   fChain->SetBranchAddress("L1_SingleMu7_DQ", &L1_SingleMu7_DQ, &b_L1_SingleMu7_DQ);
-   fChain->SetBranchAddress("L1_SingleMu7er1p5", &L1_SingleMu7er1p5, &b_L1_SingleMu7er1p5);
-   fChain->SetBranchAddress("L1_SingleMu8er1p5", &L1_SingleMu8er1p5, &b_L1_SingleMu8er1p5);
-   fChain->SetBranchAddress("L1_SingleMu9er1p5", &L1_SingleMu9er1p5, &b_L1_SingleMu9er1p5);
    fChain->SetBranchAddress("L1_SingleMuCosmics", &L1_SingleMuCosmics, &b_L1_SingleMuCosmics);
    fChain->SetBranchAddress("L1_SingleMuCosmics_BMTF", &L1_SingleMuCosmics_BMTF, &b_L1_SingleMuCosmics_BMTF);
    fChain->SetBranchAddress("L1_SingleMuCosmics_EMTF", &L1_SingleMuCosmics_EMTF, &b_L1_SingleMuCosmics_EMTF);
    fChain->SetBranchAddress("L1_SingleMuCosmics_OMTF", &L1_SingleMuCosmics_OMTF, &b_L1_SingleMuCosmics_OMTF);
    fChain->SetBranchAddress("L1_SingleMuOpen", &L1_SingleMuOpen, &b_L1_SingleMuOpen);
    fChain->SetBranchAddress("L1_SingleMuOpen_NotBptxOR", &L1_SingleMuOpen_NotBptxOR, &b_L1_SingleMuOpen_NotBptxOR);
-   fChain->SetBranchAddress("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", &L1_SingleMuOpen_er1p1_NotBptxOR_3BX, &b_L1_SingleMuOpen_er1p1_NotBptxOR_3BX);
-   fChain->SetBranchAddress("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", &L1_SingleMuOpen_er1p4_NotBptxOR_3BX, &b_L1_SingleMuOpen_er1p4_NotBptxOR_3BX);
+   fChain->SetBranchAddress("L1_SingleMuOpen_NotBptxOR_3BX", &L1_SingleMuOpen_NotBptxOR_3BX, &b_L1_SingleMuOpen_NotBptxOR_3BX);
+   fChain->SetBranchAddress("L1_SingleTau100er2p1", &L1_SingleTau100er2p1, &b_L1_SingleTau100er2p1);
    fChain->SetBranchAddress("L1_SingleTau120er2p1", &L1_SingleTau120er2p1, &b_L1_SingleTau120er2p1);
    fChain->SetBranchAddress("L1_SingleTau130er2p1", &L1_SingleTau130er2p1, &b_L1_SingleTau130er2p1);
-   fChain->SetBranchAddress("L1_TOTEM_1", &L1_TOTEM_1, &b_L1_TOTEM_1);
-   fChain->SetBranchAddress("L1_TOTEM_2", &L1_TOTEM_2, &b_L1_TOTEM_2);
-   fChain->SetBranchAddress("L1_TOTEM_3", &L1_TOTEM_3, &b_L1_TOTEM_3);
-   fChain->SetBranchAddress("L1_TOTEM_4", &L1_TOTEM_4, &b_L1_TOTEM_4);
-   fChain->SetBranchAddress("L1_TripleEG16er2p5", &L1_TripleEG16er2p5, &b_L1_TripleEG16er2p5);
-   fChain->SetBranchAddress("L1_TripleEG_16_12_8_er2p5", &L1_TripleEG_16_12_8_er2p5, &b_L1_TripleEG_16_12_8_er2p5);
-   fChain->SetBranchAddress("L1_TripleEG_16_15_8_er2p5", &L1_TripleEG_16_15_8_er2p5, &b_L1_TripleEG_16_15_8_er2p5);
-   fChain->SetBranchAddress("L1_TripleEG_18_17_8_er2p5", &L1_TripleEG_18_17_8_er2p5, &b_L1_TripleEG_18_17_8_er2p5);
-   fChain->SetBranchAddress("L1_TripleEG_18_18_12_er2p5", &L1_TripleEG_18_18_12_er2p5, &b_L1_TripleEG_18_18_12_er2p5);
-   fChain->SetBranchAddress("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5, &b_L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5);
-   fChain->SetBranchAddress("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5, &b_L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5);
-   fChain->SetBranchAddress("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5, &b_L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5);
+   fChain->SetBranchAddress("L1_SingleTau140er2p1", &L1_SingleTau140er2p1, &b_L1_SingleTau140er2p1);
+   fChain->SetBranchAddress("L1_SingleTau20", &L1_SingleTau20, &b_L1_SingleTau20);
+   fChain->SetBranchAddress("L1_SingleTau80er2p1", &L1_SingleTau80er2p1, &b_L1_SingleTau80er2p1);
+   fChain->SetBranchAddress("L1_TripleEG_14_10_8", &L1_TripleEG_14_10_8, &b_L1_TripleEG_14_10_8);
+   fChain->SetBranchAddress("L1_TripleEG_18_17_8", &L1_TripleEG_18_17_8, &b_L1_TripleEG_18_17_8);
+   fChain->SetBranchAddress("L1_TripleEG_LooseIso20_10_5", &L1_TripleEG_LooseIso20_10_5, &b_L1_TripleEG_LooseIso20_10_5);
+   fChain->SetBranchAddress("L1_TripleJet_100_85_72_VBF", &L1_TripleJet_100_85_72_VBF, &b_L1_TripleJet_100_85_72_VBF);
+   fChain->SetBranchAddress("L1_TripleJet_105_85_76_VBF", &L1_TripleJet_105_85_76_VBF, &b_L1_TripleJet_105_85_76_VBF);
+   fChain->SetBranchAddress("L1_TripleJet_84_68_48_VBF", &L1_TripleJet_84_68_48_VBF, &b_L1_TripleJet_84_68_48_VBF);
+   fChain->SetBranchAddress("L1_TripleJet_88_72_56_VBF", &L1_TripleJet_88_72_56_VBF, &b_L1_TripleJet_88_72_56_VBF);
+   fChain->SetBranchAddress("L1_TripleJet_92_76_64_VBF", &L1_TripleJet_92_76_64_VBF, &b_L1_TripleJet_92_76_64_VBF);
+   fChain->SetBranchAddress("L1_TripleJet_98_83_71_VBF", &L1_TripleJet_98_83_71_VBF, &b_L1_TripleJet_98_83_71_VBF);
    fChain->SetBranchAddress("L1_TripleMu0", &L1_TripleMu0, &b_L1_TripleMu0);
    fChain->SetBranchAddress("L1_TripleMu0_OQ", &L1_TripleMu0_OQ, &b_L1_TripleMu0_OQ);
-   fChain->SetBranchAddress("L1_TripleMu0_SQ", &L1_TripleMu0_SQ, &b_L1_TripleMu0_SQ);
    fChain->SetBranchAddress("L1_TripleMu3", &L1_TripleMu3, &b_L1_TripleMu3);
    fChain->SetBranchAddress("L1_TripleMu3_SQ", &L1_TripleMu3_SQ, &b_L1_TripleMu3_SQ);
+   fChain->SetBranchAddress("L1_TripleMu_4_4_4", &L1_TripleMu_4_4_4, &b_L1_TripleMu_4_4_4);
+   fChain->SetBranchAddress("L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", &L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17, &b_L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17);
+   fChain->SetBranchAddress("L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_8to14", &L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_8to14, &b_L1_TripleMu_5OQ_3p5OQ_2p5OQ_DoubleMu_5_2p5_OQ_OS_Mass_8to14);
    fChain->SetBranchAddress("L1_TripleMu_5SQ_3SQ_0OQ", &L1_TripleMu_5SQ_3SQ_0OQ, &b_L1_TripleMu_5SQ_3SQ_0OQ);
    fChain->SetBranchAddress("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9, &b_L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9);
    fChain->SetBranchAddress("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9, &b_L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9);
+   fChain->SetBranchAddress("L1_TripleMu_5_0_0", &L1_TripleMu_5_0_0, &b_L1_TripleMu_5_0_0);
    fChain->SetBranchAddress("L1_TripleMu_5_3_3", &L1_TripleMu_5_3_3, &b_L1_TripleMu_5_3_3);
-   fChain->SetBranchAddress("L1_TripleMu_5_3_3_SQ", &L1_TripleMu_5_3_3_SQ, &b_L1_TripleMu_5_3_3_SQ);
    fChain->SetBranchAddress("L1_TripleMu_5_3p5_2p5", &L1_TripleMu_5_3p5_2p5, &b_L1_TripleMu_5_3p5_2p5);
    fChain->SetBranchAddress("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17, &b_L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17);
-   fChain->SetBranchAddress("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17, &b_L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17);
    fChain->SetBranchAddress("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17, &b_L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17);
    fChain->SetBranchAddress("L1_TripleMu_5_5_3", &L1_TripleMu_5_5_3, &b_L1_TripleMu_5_5_3);
    fChain->SetBranchAddress("L1_UnpairedBunchBptxMinus", &L1_UnpairedBunchBptxMinus, &b_L1_UnpairedBunchBptxMinus);
@@ -4528,6 +4982,8 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Flag_muonBadTrackFilter", &Flag_muonBadTrackFilter, &b_Flag_muonBadTrackFilter);
    fChain->SetBranchAddress("Flag_BadChargedCandidateFilter", &Flag_BadChargedCandidateFilter, &b_Flag_BadChargedCandidateFilter);
    fChain->SetBranchAddress("Flag_BadPFMuonFilter", &Flag_BadPFMuonFilter, &b_Flag_BadPFMuonFilter);
+   fChain->SetBranchAddress("Flag_BadPFMuonDzFilter", &Flag_BadPFMuonDzFilter, &b_Flag_BadPFMuonDzFilter);
+   fChain->SetBranchAddress("Flag_hfNoisyHitsFilter", &Flag_hfNoisyHitsFilter, &b_Flag_hfNoisyHitsFilter);
    fChain->SetBranchAddress("Flag_BadChargedCandidateSummer16Filter", &Flag_BadChargedCandidateSummer16Filter, &b_Flag_BadChargedCandidateSummer16Filter);
    fChain->SetBranchAddress("Flag_BadPFMuonSummer16Filter", &Flag_BadPFMuonSummer16Filter, &b_Flag_BadPFMuonSummer16Filter);
    fChain->SetBranchAddress("Flag_trkPOG_manystripclus53X", &Flag_trkPOG_manystripclus53X, &b_Flag_trkPOG_manystripclus53X);
@@ -4546,10 +5002,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_AK8PFHT900_TrimMass50", &HLT_AK8PFHT900_TrimMass50, &b_HLT_AK8PFHT900_TrimMass50);
    fChain->SetBranchAddress("HLT_CaloJet500_NoJetID", &HLT_CaloJet500_NoJetID, &b_HLT_CaloJet500_NoJetID);
    fChain->SetBranchAddress("HLT_CaloJet550_NoJetID", &HLT_CaloJet550_NoJetID, &b_HLT_CaloJet550_NoJetID);
-   fChain->SetBranchAddress("HLT_DoubleMu5_Upsilon_DoubleEle3_CaloIdL_TrackIdL", &HLT_DoubleMu5_Upsilon_DoubleEle3_CaloIdL_TrackIdL, &b_HLT_DoubleMu5_Upsilon_DoubleEle3_CaloIdL_TrackIdL);
-   fChain->SetBranchAddress("HLT_DoubleMu3_DoubleEle7p5_CaloIdL_TrackIdL_Upsilon", &HLT_DoubleMu3_DoubleEle7p5_CaloIdL_TrackIdL_Upsilon, &b_HLT_DoubleMu3_DoubleEle7p5_CaloIdL_TrackIdL_Upsilon);
    fChain->SetBranchAddress("HLT_Trimuon5_3p5_2_Upsilon_Muon", &HLT_Trimuon5_3p5_2_Upsilon_Muon, &b_HLT_Trimuon5_3p5_2_Upsilon_Muon);
-   fChain->SetBranchAddress("HLT_TrimuonOpen_5_3p5_2_Upsilon_Muon", &HLT_TrimuonOpen_5_3p5_2_Upsilon_Muon, &b_HLT_TrimuonOpen_5_3p5_2_Upsilon_Muon);
    fChain->SetBranchAddress("HLT_DoubleEle25_CaloIdL_MW", &HLT_DoubleEle25_CaloIdL_MW, &b_HLT_DoubleEle25_CaloIdL_MW);
    fChain->SetBranchAddress("HLT_DoubleEle27_CaloIdL_MW", &HLT_DoubleEle27_CaloIdL_MW, &b_HLT_DoubleEle27_CaloIdL_MW);
    fChain->SetBranchAddress("HLT_DoubleEle33_CaloIdL_MW", &HLT_DoubleEle33_CaloIdL_MW, &b_HLT_DoubleEle33_CaloIdL_MW);
@@ -4561,13 +5014,13 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu37_Ele27_CaloIdL_MW", &HLT_Mu37_Ele27_CaloIdL_MW, &b_HLT_Mu37_Ele27_CaloIdL_MW);
    fChain->SetBranchAddress("HLT_Mu37_TkMu27", &HLT_Mu37_TkMu27, &b_HLT_Mu37_TkMu27);
    fChain->SetBranchAddress("HLT_DoubleMu4_3_Bs", &HLT_DoubleMu4_3_Bs, &b_HLT_DoubleMu4_3_Bs);
-   fChain->SetBranchAddress("HLT_DoubleMu4_3_Jpsi", &HLT_DoubleMu4_3_Jpsi, &b_HLT_DoubleMu4_3_Jpsi);
+   fChain->SetBranchAddress("HLT_DoubleMu4_3_Jpsi_Displaced", &HLT_DoubleMu4_3_Jpsi_Displaced, &b_HLT_DoubleMu4_3_Jpsi_Displaced);
    fChain->SetBranchAddress("HLT_DoubleMu4_JpsiTrk_Displaced", &HLT_DoubleMu4_JpsiTrk_Displaced, &b_HLT_DoubleMu4_JpsiTrk_Displaced);
    fChain->SetBranchAddress("HLT_DoubleMu4_LowMassNonResonantTrk_Displaced", &HLT_DoubleMu4_LowMassNonResonantTrk_Displaced, &b_HLT_DoubleMu4_LowMassNonResonantTrk_Displaced);
    fChain->SetBranchAddress("HLT_DoubleMu3_Trk_Tau3mu", &HLT_DoubleMu3_Trk_Tau3mu, &b_HLT_DoubleMu3_Trk_Tau3mu);
-   fChain->SetBranchAddress("HLT_DoubleMu3_TkMu_DsTau3Mu", &HLT_DoubleMu3_TkMu_DsTau3Mu, &b_HLT_DoubleMu3_TkMu_DsTau3Mu);
    fChain->SetBranchAddress("HLT_DoubleMu4_PsiPrimeTrk_Displaced", &HLT_DoubleMu4_PsiPrimeTrk_Displaced, &b_HLT_DoubleMu4_PsiPrimeTrk_Displaced);
-   fChain->SetBranchAddress("HLT_DoubleMu4_Mass3p8_DZ_PFHT350", &HLT_DoubleMu4_Mass3p8_DZ_PFHT350, &b_HLT_DoubleMu4_Mass3p8_DZ_PFHT350);
+   fChain->SetBranchAddress("HLT_DoubleMu4_Mass8_DZ_PFHT350", &HLT_DoubleMu4_Mass8_DZ_PFHT350, &b_HLT_DoubleMu4_Mass8_DZ_PFHT350);
+   fChain->SetBranchAddress("HLT_DoubleMu8_Mass8_PFHT350", &HLT_DoubleMu8_Mass8_PFHT350, &b_HLT_DoubleMu8_Mass8_PFHT350);
    fChain->SetBranchAddress("HLT_Mu3_PFJet40", &HLT_Mu3_PFJet40, &b_HLT_Mu3_PFJet40);
    fChain->SetBranchAddress("HLT_Mu7p5_L2Mu2_Jpsi", &HLT_Mu7p5_L2Mu2_Jpsi, &b_HLT_Mu7p5_L2Mu2_Jpsi);
    fChain->SetBranchAddress("HLT_Mu7p5_L2Mu2_Upsilon", &HLT_Mu7p5_L2Mu2_Upsilon, &b_HLT_Mu7p5_L2Mu2_Upsilon);
@@ -4577,47 +5030,34 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu7p5_Track2_Upsilon", &HLT_Mu7p5_Track2_Upsilon, &b_HLT_Mu7p5_Track2_Upsilon);
    fChain->SetBranchAddress("HLT_Mu7p5_Track3p5_Upsilon", &HLT_Mu7p5_Track3p5_Upsilon, &b_HLT_Mu7p5_Track3p5_Upsilon);
    fChain->SetBranchAddress("HLT_Mu7p5_Track7_Upsilon", &HLT_Mu7p5_Track7_Upsilon, &b_HLT_Mu7p5_Track7_Upsilon);
-   fChain->SetBranchAddress("HLT_Mu3_L1SingleMu5orSingleMu7", &HLT_Mu3_L1SingleMu5orSingleMu7, &b_HLT_Mu3_L1SingleMu5orSingleMu7);
    fChain->SetBranchAddress("HLT_DoublePhoton33_CaloIdL", &HLT_DoublePhoton33_CaloIdL, &b_HLT_DoublePhoton33_CaloIdL);
    fChain->SetBranchAddress("HLT_DoublePhoton70", &HLT_DoublePhoton70, &b_HLT_DoublePhoton70);
    fChain->SetBranchAddress("HLT_DoublePhoton85", &HLT_DoublePhoton85, &b_HLT_DoublePhoton85);
    fChain->SetBranchAddress("HLT_Ele20_WPTight_Gsf", &HLT_Ele20_WPTight_Gsf, &b_HLT_Ele20_WPTight_Gsf);
-   fChain->SetBranchAddress("HLT_Ele15_WPLoose_Gsf", &HLT_Ele15_WPLoose_Gsf, &b_HLT_Ele15_WPLoose_Gsf);
-   fChain->SetBranchAddress("HLT_Ele17_WPLoose_Gsf", &HLT_Ele17_WPLoose_Gsf, &b_HLT_Ele17_WPLoose_Gsf);
    fChain->SetBranchAddress("HLT_Ele20_WPLoose_Gsf", &HLT_Ele20_WPLoose_Gsf, &b_HLT_Ele20_WPLoose_Gsf);
    fChain->SetBranchAddress("HLT_Ele20_eta2p1_WPLoose_Gsf", &HLT_Ele20_eta2p1_WPLoose_Gsf, &b_HLT_Ele20_eta2p1_WPLoose_Gsf);
    fChain->SetBranchAddress("HLT_DiEle27_WPTightCaloOnly_L1DoubleEG", &HLT_DiEle27_WPTightCaloOnly_L1DoubleEG, &b_HLT_DiEle27_WPTightCaloOnly_L1DoubleEG);
    fChain->SetBranchAddress("HLT_Ele27_WPTight_Gsf", &HLT_Ele27_WPTight_Gsf, &b_HLT_Ele27_WPTight_Gsf);
-   fChain->SetBranchAddress("HLT_Ele28_WPTight_Gsf", &HLT_Ele28_WPTight_Gsf, &b_HLT_Ele28_WPTight_Gsf);
-   fChain->SetBranchAddress("HLT_Ele30_WPTight_Gsf", &HLT_Ele30_WPTight_Gsf, &b_HLT_Ele30_WPTight_Gsf);
    fChain->SetBranchAddress("HLT_Ele32_WPTight_Gsf", &HLT_Ele32_WPTight_Gsf, &b_HLT_Ele32_WPTight_Gsf);
    fChain->SetBranchAddress("HLT_Ele35_WPTight_Gsf", &HLT_Ele35_WPTight_Gsf, &b_HLT_Ele35_WPTight_Gsf);
    fChain->SetBranchAddress("HLT_Ele35_WPTight_Gsf_L1EGMT", &HLT_Ele35_WPTight_Gsf_L1EGMT, &b_HLT_Ele35_WPTight_Gsf_L1EGMT);
    fChain->SetBranchAddress("HLT_Ele38_WPTight_Gsf", &HLT_Ele38_WPTight_Gsf, &b_HLT_Ele38_WPTight_Gsf);
    fChain->SetBranchAddress("HLT_Ele40_WPTight_Gsf", &HLT_Ele40_WPTight_Gsf, &b_HLT_Ele40_WPTight_Gsf);
    fChain->SetBranchAddress("HLT_Ele32_WPTight_Gsf_L1DoubleEG", &HLT_Ele32_WPTight_Gsf_L1DoubleEG, &b_HLT_Ele32_WPTight_Gsf_L1DoubleEG);
-   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1);
-   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_CrossL1);
-   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_CrossL1);
-   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1);
-   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1);
-   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTauHPS30_eta2p1_TightID_CrossL1);
    fChain->SetBranchAddress("HLT_HT450_Beamspot", &HLT_HT450_Beamspot, &b_HLT_HT450_Beamspot);
    fChain->SetBranchAddress("HLT_HT300_Beamspot", &HLT_HT300_Beamspot, &b_HLT_HT300_Beamspot);
-   fChain->SetBranchAddress("HLT_ZeroBias_Beamspot", &HLT_ZeroBias_Beamspot, &b_HLT_ZeroBias_Beamspot);
-   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1", &HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1, &b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_CrossL1", &HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_CrossL1, &b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_CrossL1", &HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_CrossL1, &b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1", &HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1, &b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1", &HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1, &b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1", &HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1, &b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTauHPS27_eta2p1_TightID_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_CrossL1);
-   fChain->SetBranchAddress("HLT_IsoMu27_LooseChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1", &HLT_IsoMu27_LooseChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1, &b_HLT_IsoMu27_LooseChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1);
-   fChain->SetBranchAddress("HLT_IsoMu27_MediumChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1", &HLT_IsoMu27_MediumChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1, &b_HLT_IsoMu27_MediumChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1);
-   fChain->SetBranchAddress("HLT_IsoMu27_TightChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1", &HLT_IsoMu27_TightChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1, &b_HLT_IsoMu27_TightChargedIsoPFTauHPS20_Trk1_eta2p1_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1", &HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1, &b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_CrossL1", &HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_CrossL1, &b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_CrossL1", &HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_CrossL1, &b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_TightID_CrossL1", &HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_TightID_CrossL1, &b_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_TightID_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_TightID_CrossL1", &HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_TightID_CrossL1, &b_HLT_IsoMu20_eta2p1_MediumChargedIsoPFTau27_eta2p1_TightID_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_TightID_CrossL1", &HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_TightID_CrossL1, &b_HLT_IsoMu20_eta2p1_TightChargedIsoPFTau27_eta2p1_TightID_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1", &HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1, &b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_SingleL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_SingleL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_SingleL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_SingleL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_TightID_SingleL1", &HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_TightID_SingleL1, &b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_TightID_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_TightID_SingleL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_TightID_SingleL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_TightID_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1);
    fChain->SetBranchAddress("HLT_IsoMu20", &HLT_IsoMu20, &b_HLT_IsoMu20);
    fChain->SetBranchAddress("HLT_IsoMu24", &HLT_IsoMu24, &b_HLT_IsoMu24);
    fChain->SetBranchAddress("HLT_IsoMu24_eta2p1", &HLT_IsoMu24_eta2p1, &b_HLT_IsoMu24_eta2p1);
@@ -4635,21 +5075,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_L2Mu45_NoVertex_3Sta_NoBPTX3BX", &HLT_L2Mu45_NoVertex_3Sta_NoBPTX3BX, &b_HLT_L2Mu45_NoVertex_3Sta_NoBPTX3BX);
    fChain->SetBranchAddress("HLT_L2Mu40_NoVertex_3Sta_NoBPTX3BX", &HLT_L2Mu40_NoVertex_3Sta_NoBPTX3BX, &b_HLT_L2Mu40_NoVertex_3Sta_NoBPTX3BX);
    fChain->SetBranchAddress("HLT_L2Mu50", &HLT_L2Mu50, &b_HLT_L2Mu50);
-   fChain->SetBranchAddress("HLT_L2Mu23NoVtx_2Cha", &HLT_L2Mu23NoVtx_2Cha, &b_HLT_L2Mu23NoVtx_2Cha);
-   fChain->SetBranchAddress("HLT_L2Mu23NoVtx_2Cha_CosmicSeed", &HLT_L2Mu23NoVtx_2Cha_CosmicSeed, &b_HLT_L2Mu23NoVtx_2Cha_CosmicSeed);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu30NoVtx_2Cha_CosmicSeed_Eta2p4", &HLT_DoubleL2Mu30NoVtx_2Cha_CosmicSeed_Eta2p4, &b_HLT_DoubleL2Mu30NoVtx_2Cha_CosmicSeed_Eta2p4);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu30NoVtx_2Cha_Eta2p4", &HLT_DoubleL2Mu30NoVtx_2Cha_Eta2p4, &b_HLT_DoubleL2Mu30NoVtx_2Cha_Eta2p4);
    fChain->SetBranchAddress("HLT_DoubleL2Mu50", &HLT_DoubleL2Mu50, &b_HLT_DoubleL2Mu50);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed", &HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed, &b_HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched", &HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched, &b_HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed", &HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed, &b_HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_NoL2Matched", &HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_NoL2Matched, &b_HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_NoL2Matched);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_Eta2p4", &HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_Eta2p4, &b_HLT_DoubleL2Mu25NoVtx_2Cha_CosmicSeed_Eta2p4);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu23NoVtx_2Cha", &HLT_DoubleL2Mu23NoVtx_2Cha, &b_HLT_DoubleL2Mu23NoVtx_2Cha);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched", &HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched, &b_HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu25NoVtx_2Cha", &HLT_DoubleL2Mu25NoVtx_2Cha, &b_HLT_DoubleL2Mu25NoVtx_2Cha);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu25NoVtx_2Cha_NoL2Matched", &HLT_DoubleL2Mu25NoVtx_2Cha_NoL2Matched, &b_HLT_DoubleL2Mu25NoVtx_2Cha_NoL2Matched);
-   fChain->SetBranchAddress("HLT_DoubleL2Mu25NoVtx_2Cha_Eta2p4", &HLT_DoubleL2Mu25NoVtx_2Cha_Eta2p4, &b_HLT_DoubleL2Mu25NoVtx_2Cha_Eta2p4);
    fChain->SetBranchAddress("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL", &HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL, &b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL);
    fChain->SetBranchAddress("HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL", &HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL, &b_HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL);
    fChain->SetBranchAddress("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ", &HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ, &b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ);
@@ -4659,18 +5085,19 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8", &HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8, &b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8);
    fChain->SetBranchAddress("HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8", &HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8, &b_HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8);
    fChain->SetBranchAddress("HLT_Mu25_TkMu0_Onia", &HLT_Mu25_TkMu0_Onia, &b_HLT_Mu25_TkMu0_Onia);
-   fChain->SetBranchAddress("HLT_Mu30_TkMu0_Psi", &HLT_Mu30_TkMu0_Psi, &b_HLT_Mu30_TkMu0_Psi);
-   fChain->SetBranchAddress("HLT_Mu30_TkMu0_Upsilon", &HLT_Mu30_TkMu0_Upsilon, &b_HLT_Mu30_TkMu0_Upsilon);
+   fChain->SetBranchAddress("HLT_Mu30_TkMu0_Onia", &HLT_Mu30_TkMu0_Onia, &b_HLT_Mu30_TkMu0_Onia);
    fChain->SetBranchAddress("HLT_Mu20_TkMu0_Phi", &HLT_Mu20_TkMu0_Phi, &b_HLT_Mu20_TkMu0_Phi);
    fChain->SetBranchAddress("HLT_Mu25_TkMu0_Phi", &HLT_Mu25_TkMu0_Phi, &b_HLT_Mu25_TkMu0_Phi);
-   fChain->SetBranchAddress("HLT_Mu12", &HLT_Mu12, &b_HLT_Mu12);
-   fChain->SetBranchAddress("HLT_Mu15", &HLT_Mu15, &b_HLT_Mu15);
    fChain->SetBranchAddress("HLT_Mu20", &HLT_Mu20, &b_HLT_Mu20);
    fChain->SetBranchAddress("HLT_Mu27", &HLT_Mu27, &b_HLT_Mu27);
    fChain->SetBranchAddress("HLT_Mu50", &HLT_Mu50, &b_HLT_Mu50);
    fChain->SetBranchAddress("HLT_Mu55", &HLT_Mu55, &b_HLT_Mu55);
    fChain->SetBranchAddress("HLT_OldMu100", &HLT_OldMu100, &b_HLT_OldMu100);
    fChain->SetBranchAddress("HLT_TkMu100", &HLT_TkMu100, &b_HLT_TkMu100);
+   fChain->SetBranchAddress("HLT_DiPFJet15_NoCaloMatched", &HLT_DiPFJet15_NoCaloMatched, &b_HLT_DiPFJet15_NoCaloMatched);
+   fChain->SetBranchAddress("HLT_DiPFJet25_NoCaloMatched", &HLT_DiPFJet25_NoCaloMatched, &b_HLT_DiPFJet25_NoCaloMatched);
+   fChain->SetBranchAddress("HLT_DiPFJet15_FBEta3_NoCaloMatched", &HLT_DiPFJet15_FBEta3_NoCaloMatched, &b_HLT_DiPFJet15_FBEta3_NoCaloMatched);
+   fChain->SetBranchAddress("HLT_DiPFJet25_FBEta3_NoCaloMatched", &HLT_DiPFJet25_FBEta3_NoCaloMatched, &b_HLT_DiPFJet25_FBEta3_NoCaloMatched);
    fChain->SetBranchAddress("HLT_DiPFJetAve40", &HLT_DiPFJetAve40, &b_HLT_DiPFJetAve40);
    fChain->SetBranchAddress("HLT_DiPFJetAve60", &HLT_DiPFJetAve60, &b_HLT_DiPFJetAve60);
    fChain->SetBranchAddress("HLT_DiPFJetAve80", &HLT_DiPFJetAve80, &b_HLT_DiPFJetAve80);
@@ -4680,14 +5107,15 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_DiPFJetAve320", &HLT_DiPFJetAve320, &b_HLT_DiPFJetAve320);
    fChain->SetBranchAddress("HLT_DiPFJetAve400", &HLT_DiPFJetAve400, &b_HLT_DiPFJetAve400);
    fChain->SetBranchAddress("HLT_DiPFJetAve500", &HLT_DiPFJetAve500, &b_HLT_DiPFJetAve500);
+   fChain->SetBranchAddress("HLT_DiPFJetAve15_HFJEC", &HLT_DiPFJetAve15_HFJEC, &b_HLT_DiPFJetAve15_HFJEC);
+   fChain->SetBranchAddress("HLT_DiPFJetAve25_HFJEC", &HLT_DiPFJetAve25_HFJEC, &b_HLT_DiPFJetAve25_HFJEC);
+   fChain->SetBranchAddress("HLT_DiPFJetAve35_HFJEC", &HLT_DiPFJetAve35_HFJEC, &b_HLT_DiPFJetAve35_HFJEC);
    fChain->SetBranchAddress("HLT_DiPFJetAve60_HFJEC", &HLT_DiPFJetAve60_HFJEC, &b_HLT_DiPFJetAve60_HFJEC);
    fChain->SetBranchAddress("HLT_DiPFJetAve80_HFJEC", &HLT_DiPFJetAve80_HFJEC, &b_HLT_DiPFJetAve80_HFJEC);
    fChain->SetBranchAddress("HLT_DiPFJetAve100_HFJEC", &HLT_DiPFJetAve100_HFJEC, &b_HLT_DiPFJetAve100_HFJEC);
    fChain->SetBranchAddress("HLT_DiPFJetAve160_HFJEC", &HLT_DiPFJetAve160_HFJEC, &b_HLT_DiPFJetAve160_HFJEC);
    fChain->SetBranchAddress("HLT_DiPFJetAve220_HFJEC", &HLT_DiPFJetAve220_HFJEC, &b_HLT_DiPFJetAve220_HFJEC);
    fChain->SetBranchAddress("HLT_DiPFJetAve300_HFJEC", &HLT_DiPFJetAve300_HFJEC, &b_HLT_DiPFJetAve300_HFJEC);
-   fChain->SetBranchAddress("HLT_AK8PFJet15", &HLT_AK8PFJet15, &b_HLT_AK8PFJet15);
-   fChain->SetBranchAddress("HLT_AK8PFJet25", &HLT_AK8PFJet25, &b_HLT_AK8PFJet25);
    fChain->SetBranchAddress("HLT_AK8PFJet40", &HLT_AK8PFJet40, &b_HLT_AK8PFJet40);
    fChain->SetBranchAddress("HLT_AK8PFJet60", &HLT_AK8PFJet60, &b_HLT_AK8PFJet60);
    fChain->SetBranchAddress("HLT_AK8PFJet80", &HLT_AK8PFJet80, &b_HLT_AK8PFJet80);
@@ -4699,8 +5127,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_AK8PFJet450", &HLT_AK8PFJet450, &b_HLT_AK8PFJet450);
    fChain->SetBranchAddress("HLT_AK8PFJet500", &HLT_AK8PFJet500, &b_HLT_AK8PFJet500);
    fChain->SetBranchAddress("HLT_AK8PFJet550", &HLT_AK8PFJet550, &b_HLT_AK8PFJet550);
-   fChain->SetBranchAddress("HLT_PFJet15", &HLT_PFJet15, &b_HLT_PFJet15);
-   fChain->SetBranchAddress("HLT_PFJet25", &HLT_PFJet25, &b_HLT_PFJet25);
    fChain->SetBranchAddress("HLT_PFJet40", &HLT_PFJet40, &b_HLT_PFJet40);
    fChain->SetBranchAddress("HLT_PFJet60", &HLT_PFJet60, &b_HLT_PFJet60);
    fChain->SetBranchAddress("HLT_PFJet80", &HLT_PFJet80, &b_HLT_PFJet80);
@@ -4712,8 +5138,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_PFJet450", &HLT_PFJet450, &b_HLT_PFJet450);
    fChain->SetBranchAddress("HLT_PFJet500", &HLT_PFJet500, &b_HLT_PFJet500);
    fChain->SetBranchAddress("HLT_PFJet550", &HLT_PFJet550, &b_HLT_PFJet550);
-   fChain->SetBranchAddress("HLT_PFJetFwd15", &HLT_PFJetFwd15, &b_HLT_PFJetFwd15);
-   fChain->SetBranchAddress("HLT_PFJetFwd25", &HLT_PFJetFwd25, &b_HLT_PFJetFwd25);
    fChain->SetBranchAddress("HLT_PFJetFwd40", &HLT_PFJetFwd40, &b_HLT_PFJetFwd40);
    fChain->SetBranchAddress("HLT_PFJetFwd60", &HLT_PFJetFwd60, &b_HLT_PFJetFwd60);
    fChain->SetBranchAddress("HLT_PFJetFwd80", &HLT_PFJetFwd80, &b_HLT_PFJetFwd80);
@@ -4724,8 +5148,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_PFJetFwd400", &HLT_PFJetFwd400, &b_HLT_PFJetFwd400);
    fChain->SetBranchAddress("HLT_PFJetFwd450", &HLT_PFJetFwd450, &b_HLT_PFJetFwd450);
    fChain->SetBranchAddress("HLT_PFJetFwd500", &HLT_PFJetFwd500, &b_HLT_PFJetFwd500);
-   fChain->SetBranchAddress("HLT_AK8PFJetFwd15", &HLT_AK8PFJetFwd15, &b_HLT_AK8PFJetFwd15);
-   fChain->SetBranchAddress("HLT_AK8PFJetFwd25", &HLT_AK8PFJetFwd25, &b_HLT_AK8PFJetFwd25);
    fChain->SetBranchAddress("HLT_AK8PFJetFwd40", &HLT_AK8PFJetFwd40, &b_HLT_AK8PFJetFwd40);
    fChain->SetBranchAddress("HLT_AK8PFJetFwd60", &HLT_AK8PFJetFwd60, &b_HLT_AK8PFJetFwd60);
    fChain->SetBranchAddress("HLT_AK8PFJetFwd80", &HLT_AK8PFJetFwd80, &b_HLT_AK8PFJetFwd80);
@@ -4756,11 +5178,11 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_PFMET120_PFMHT120_IDTight", &HLT_PFMET120_PFMHT120_IDTight, &b_HLT_PFMET120_PFMHT120_IDTight);
    fChain->SetBranchAddress("HLT_PFMET130_PFMHT130_IDTight", &HLT_PFMET130_PFMHT130_IDTight, &b_HLT_PFMET130_PFMHT130_IDTight);
    fChain->SetBranchAddress("HLT_PFMET140_PFMHT140_IDTight", &HLT_PFMET140_PFMHT140_IDTight, &b_HLT_PFMET140_PFMHT140_IDTight);
-   fChain->SetBranchAddress("HLT_PFMET100_PFMHT100_IDTight_CaloBTagDeepCSV_3p1", &HLT_PFMET100_PFMHT100_IDTight_CaloBTagDeepCSV_3p1, &b_HLT_PFMET100_PFMHT100_IDTight_CaloBTagDeepCSV_3p1);
-   fChain->SetBranchAddress("HLT_PFMET110_PFMHT110_IDTight_CaloBTagDeepCSV_3p1", &HLT_PFMET110_PFMHT110_IDTight_CaloBTagDeepCSV_3p1, &b_HLT_PFMET110_PFMHT110_IDTight_CaloBTagDeepCSV_3p1);
-   fChain->SetBranchAddress("HLT_PFMET120_PFMHT120_IDTight_CaloBTagDeepCSV_3p1", &HLT_PFMET120_PFMHT120_IDTight_CaloBTagDeepCSV_3p1, &b_HLT_PFMET120_PFMHT120_IDTight_CaloBTagDeepCSV_3p1);
-   fChain->SetBranchAddress("HLT_PFMET130_PFMHT130_IDTight_CaloBTagDeepCSV_3p1", &HLT_PFMET130_PFMHT130_IDTight_CaloBTagDeepCSV_3p1, &b_HLT_PFMET130_PFMHT130_IDTight_CaloBTagDeepCSV_3p1);
-   fChain->SetBranchAddress("HLT_PFMET140_PFMHT140_IDTight_CaloBTagDeepCSV_3p1", &HLT_PFMET140_PFMHT140_IDTight_CaloBTagDeepCSV_3p1, &b_HLT_PFMET140_PFMHT140_IDTight_CaloBTagDeepCSV_3p1);
+   fChain->SetBranchAddress("HLT_PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1", &HLT_PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1, &b_HLT_PFMET100_PFMHT100_IDTight_CaloBTagCSV_3p1);
+   fChain->SetBranchAddress("HLT_PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1", &HLT_PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1, &b_HLT_PFMET110_PFMHT110_IDTight_CaloBTagCSV_3p1);
+   fChain->SetBranchAddress("HLT_PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1", &HLT_PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1, &b_HLT_PFMET120_PFMHT120_IDTight_CaloBTagCSV_3p1);
+   fChain->SetBranchAddress("HLT_PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1", &HLT_PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1, &b_HLT_PFMET130_PFMHT130_IDTight_CaloBTagCSV_3p1);
+   fChain->SetBranchAddress("HLT_PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1", &HLT_PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1, &b_HLT_PFMET140_PFMHT140_IDTight_CaloBTagCSV_3p1);
    fChain->SetBranchAddress("HLT_PFMET120_PFMHT120_IDTight_PFHT60", &HLT_PFMET120_PFMHT120_IDTight_PFHT60, &b_HLT_PFMET120_PFMHT120_IDTight_PFHT60);
    fChain->SetBranchAddress("HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60", &HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60, &b_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60);
    fChain->SetBranchAddress("HLT_PFMETTypeOne120_PFMHT120_IDTight_PFHT60", &HLT_PFMETTypeOne120_PFMHT120_IDTight_PFHT60, &b_HLT_PFMETTypeOne120_PFMHT120_IDTight_PFHT60);
@@ -4799,19 +5221,20 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_MET105_IsoTrk50", &HLT_MET105_IsoTrk50, &b_HLT_MET105_IsoTrk50);
    fChain->SetBranchAddress("HLT_MET120_IsoTrk50", &HLT_MET120_IsoTrk50, &b_HLT_MET120_IsoTrk50);
    fChain->SetBranchAddress("HLT_SingleJet30_Mu12_SinglePFJet40", &HLT_SingleJet30_Mu12_SinglePFJet40, &b_HLT_SingleJet30_Mu12_SinglePFJet40);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets40_CaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets40_CaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets40_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets100_CaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets100_CaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets100_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets200_CaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets200_CaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets200_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets350_CaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets350_CaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets350_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagDeepCSV_p71", &HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagDeepCSV_p71, &b_HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_DoublePFJets40_CaloBTagDeepCSV_p71", &HLT_DoublePFJets40_CaloBTagDeepCSV_p71, &b_HLT_DoublePFJets40_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_DoublePFJets100_CaloBTagDeepCSV_p71", &HLT_DoublePFJets100_CaloBTagDeepCSV_p71, &b_HLT_DoublePFJets100_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_DoublePFJets200_CaloBTagDeepCSV_p71", &HLT_DoublePFJets200_CaloBTagDeepCSV_p71, &b_HLT_DoublePFJets200_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_DoublePFJets350_CaloBTagDeepCSV_p71", &HLT_DoublePFJets350_CaloBTagDeepCSV_p71, &b_HLT_DoublePFJets350_CaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagDeepCSV_p71", &HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagDeepCSV_p71, &b_HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagDeepCSV_p71);
-   fChain->SetBranchAddress("HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagDeepCSV_p71", &HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagDeepCSV_p71, &b_HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagDeepCSV_p71);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets40_CaloBTagCSV_p33", &HLT_Mu12_DoublePFJets40_CaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets40_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets100_CaloBTagCSV_p33", &HLT_Mu12_DoublePFJets100_CaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets100_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets200_CaloBTagCSV_p33", &HLT_Mu12_DoublePFJets200_CaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets200_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets350_CaloBTagCSV_p33", &HLT_Mu12_DoublePFJets350_CaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets350_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagCSV_p33", &HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets40MaxDeta1p6_DoubleCaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagCSV_p33", &HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets54MaxDeta1p6_DoubleCaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagCSV_p33", &HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagCSV_p33, &b_HLT_Mu12_DoublePFJets62MaxDeta1p6_DoubleCaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets40_CaloBTagCSV_p33", &HLT_DoublePFJets40_CaloBTagCSV_p33, &b_HLT_DoublePFJets40_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets100_CaloBTagCSV_p33", &HLT_DoublePFJets100_CaloBTagCSV_p33, &b_HLT_DoublePFJets100_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets200_CaloBTagCSV_p33", &HLT_DoublePFJets200_CaloBTagCSV_p33, &b_HLT_DoublePFJets200_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets350_CaloBTagCSV_p33", &HLT_DoublePFJets350_CaloBTagCSV_p33, &b_HLT_DoublePFJets350_CaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets100MaxDeta1p6_DoubleCaloBTagCSV_p33", &HLT_DoublePFJets100MaxDeta1p6_DoubleCaloBTagCSV_p33, &b_HLT_DoublePFJets100MaxDeta1p6_DoubleCaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagCSV_p33", &HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagCSV_p33, &b_HLT_DoublePFJets116MaxDeta1p6_DoubleCaloBTagCSV_p33);
+   fChain->SetBranchAddress("HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagCSV_p33", &HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagCSV_p33, &b_HLT_DoublePFJets128MaxDeta1p6_DoubleCaloBTagCSV_p33);
    fChain->SetBranchAddress("HLT_Photon300_NoHE", &HLT_Photon300_NoHE, &b_HLT_Photon300_NoHE);
    fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL", &HLT_Mu8_TrkIsoVVL, &b_HLT_Mu8_TrkIsoVVL);
    fChain->SetBranchAddress("HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ", &HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ, &b_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ);
@@ -4819,10 +5242,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350_DZ", &HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350_DZ, &b_HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350_DZ);
    fChain->SetBranchAddress("HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350", &HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350, &b_HLT_Mu8_Ele8_CaloIdM_TrackIdM_Mass8_PFHT350);
    fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ);
-   fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30", &HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30, &b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30);
-   fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30", &HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30, &b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30);
-   fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30_PFBtagDeepCSV_1p5", &HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30_PFBtagDeepCSV_1p5, &b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_PFDiJet30_PFBtagDeepCSV_1p5);
-   fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30_CaloBtagDeepCSV_1p5", &HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30_CaloBtagDeepCSV_1p5, &b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_CaloDiJet30_CaloBtagDeepCSV_1p5);
    fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL", &HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL, &b_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Mu17_TrkIsoVVL", &HLT_Mu17_TrkIsoVVL, &b_HLT_Mu17_TrkIsoVVL);
    fChain->SetBranchAddress("HLT_Mu19_TrkIsoVVL", &HLT_Mu19_TrkIsoVVL, &b_HLT_Mu19_TrkIsoVVL);
@@ -4833,18 +5252,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_BTagMu_AK4DiJet170_Mu5", &HLT_BTagMu_AK4DiJet170_Mu5, &b_HLT_BTagMu_AK4DiJet170_Mu5);
    fChain->SetBranchAddress("HLT_BTagMu_AK4Jet300_Mu5", &HLT_BTagMu_AK4Jet300_Mu5, &b_HLT_BTagMu_AK4Jet300_Mu5);
    fChain->SetBranchAddress("HLT_BTagMu_AK8DiJet170_Mu5", &HLT_BTagMu_AK8DiJet170_Mu5, &b_HLT_BTagMu_AK8DiJet170_Mu5);
-   fChain->SetBranchAddress("HLT_BTagMu_AK8Jet170_DoubleMu5", &HLT_BTagMu_AK8Jet170_DoubleMu5, &b_HLT_BTagMu_AK8Jet170_DoubleMu5);
    fChain->SetBranchAddress("HLT_BTagMu_AK8Jet300_Mu5", &HLT_BTagMu_AK8Jet300_Mu5, &b_HLT_BTagMu_AK8Jet300_Mu5);
-   fChain->SetBranchAddress("HLT_BTagMu_AK4DiJet20_Mu5_noalgo", &HLT_BTagMu_AK4DiJet20_Mu5_noalgo, &b_HLT_BTagMu_AK4DiJet20_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK4DiJet40_Mu5_noalgo", &HLT_BTagMu_AK4DiJet40_Mu5_noalgo, &b_HLT_BTagMu_AK4DiJet40_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK4DiJet70_Mu5_noalgo", &HLT_BTagMu_AK4DiJet70_Mu5_noalgo, &b_HLT_BTagMu_AK4DiJet70_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK4DiJet110_Mu5_noalgo", &HLT_BTagMu_AK4DiJet110_Mu5_noalgo, &b_HLT_BTagMu_AK4DiJet110_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK4DiJet170_Mu5_noalgo", &HLT_BTagMu_AK4DiJet170_Mu5_noalgo, &b_HLT_BTagMu_AK4DiJet170_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK4Jet300_Mu5_noalgo", &HLT_BTagMu_AK4Jet300_Mu5_noalgo, &b_HLT_BTagMu_AK4Jet300_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK8DiJet170_Mu5_noalgo", &HLT_BTagMu_AK8DiJet170_Mu5_noalgo, &b_HLT_BTagMu_AK8DiJet170_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK8Jet170_DoubleMu5_noalgo", &HLT_BTagMu_AK8Jet170_DoubleMu5_noalgo, &b_HLT_BTagMu_AK8Jet170_DoubleMu5_noalgo);
-   fChain->SetBranchAddress("HLT_BTagMu_AK8Jet300_Mu5_noalgo", &HLT_BTagMu_AK8Jet300_Mu5_noalgo, &b_HLT_BTagMu_AK8Jet300_Mu5_noalgo);
-   fChain->SetBranchAddress("HLT_Ele15_Ele8_CaloIdL_TrackIdL_IsoVL", &HLT_Ele15_Ele8_CaloIdL_TrackIdL_IsoVL, &b_HLT_Ele15_Ele8_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);
    fChain->SetBranchAddress("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, &b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);
@@ -4857,7 +5265,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_TriplePhoton_30_30_10_CaloIdLV2", &HLT_TriplePhoton_30_30_10_CaloIdLV2, &b_HLT_TriplePhoton_30_30_10_CaloIdLV2);
    fChain->SetBranchAddress("HLT_TriplePhoton_30_30_10_CaloIdLV2_R9IdVL", &HLT_TriplePhoton_30_30_10_CaloIdLV2_R9IdVL, &b_HLT_TriplePhoton_30_30_10_CaloIdLV2_R9IdVL);
    fChain->SetBranchAddress("HLT_TriplePhoton_35_35_5_CaloIdLV2_R9IdVL", &HLT_TriplePhoton_35_35_5_CaloIdLV2_R9IdVL, &b_HLT_TriplePhoton_35_35_5_CaloIdLV2_R9IdVL);
-   fChain->SetBranchAddress("HLT_Photon20", &HLT_Photon20, &b_HLT_Photon20);
+   fChain->SetBranchAddress("HLT_Photon25", &HLT_Photon25, &b_HLT_Photon25);
    fChain->SetBranchAddress("HLT_Photon33", &HLT_Photon33, &b_HLT_Photon33);
    fChain->SetBranchAddress("HLT_Photon50", &HLT_Photon50, &b_HLT_Photon50);
    fChain->SetBranchAddress("HLT_Photon75", &HLT_Photon75, &b_HLT_Photon75);
@@ -4866,16 +5274,8 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Photon150", &HLT_Photon150, &b_HLT_Photon150);
    fChain->SetBranchAddress("HLT_Photon175", &HLT_Photon175, &b_HLT_Photon175);
    fChain->SetBranchAddress("HLT_Photon200", &HLT_Photon200, &b_HLT_Photon200);
-   fChain->SetBranchAddress("HLT_Photon100EB_TightID_TightIso", &HLT_Photon100EB_TightID_TightIso, &b_HLT_Photon100EB_TightID_TightIso);
-   fChain->SetBranchAddress("HLT_Photon110EB_TightID_TightIso", &HLT_Photon110EB_TightID_TightIso, &b_HLT_Photon110EB_TightID_TightIso);
-   fChain->SetBranchAddress("HLT_Photon120EB_TightID_TightIso", &HLT_Photon120EB_TightID_TightIso, &b_HLT_Photon120EB_TightID_TightIso);
-   fChain->SetBranchAddress("HLT_Photon100EBHE10", &HLT_Photon100EBHE10, &b_HLT_Photon100EBHE10);
-   fChain->SetBranchAddress("HLT_Photon100EEHE10", &HLT_Photon100EEHE10, &b_HLT_Photon100EEHE10);
-   fChain->SetBranchAddress("HLT_Photon100EE_TightID_TightIso", &HLT_Photon100EE_TightID_TightIso, &b_HLT_Photon100EE_TightID_TightIso);
    fChain->SetBranchAddress("HLT_Photon50_R9Id90_HE10_IsoM", &HLT_Photon50_R9Id90_HE10_IsoM, &b_HLT_Photon50_R9Id90_HE10_IsoM);
    fChain->SetBranchAddress("HLT_Photon75_R9Id90_HE10_IsoM", &HLT_Photon75_R9Id90_HE10_IsoM, &b_HLT_Photon75_R9Id90_HE10_IsoM);
-   fChain->SetBranchAddress("HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ300_PFJetsMJJ400DEta3", &HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ300_PFJetsMJJ400DEta3, &b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ300_PFJetsMJJ400DEta3);
-   fChain->SetBranchAddress("HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ400_PFJetsMJJ600DEta3", &HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ400_PFJetsMJJ600DEta3, &b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_CaloMJJ400_PFJetsMJJ600DEta3);
    fChain->SetBranchAddress("HLT_Photon90_R9Id90_HE10_IsoM", &HLT_Photon90_R9Id90_HE10_IsoM, &b_HLT_Photon90_R9Id90_HE10_IsoM);
    fChain->SetBranchAddress("HLT_Photon120_R9Id90_HE10_IsoM", &HLT_Photon120_R9Id90_HE10_IsoM, &b_HLT_Photon120_R9Id90_HE10_IsoM);
    fChain->SetBranchAddress("HLT_Photon165_R9Id90_HE10_IsoM", &HLT_Photon165_R9Id90_HE10_IsoM, &b_HLT_Photon165_R9Id90_HE10_IsoM);
@@ -4884,8 +5284,8 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Diphoton30_22_R9Id_OR_IsoCaloId_AND_HE_R9Id_Mass95", &HLT_Diphoton30_22_R9Id_OR_IsoCaloId_AND_HE_R9Id_Mass95, &b_HLT_Diphoton30_22_R9Id_OR_IsoCaloId_AND_HE_R9Id_Mass95);
    fChain->SetBranchAddress("HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55", &HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55, &b_HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55);
    fChain->SetBranchAddress("HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55", &HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55, &b_HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55);
-   fChain->SetBranchAddress("HLT_Photon35_TwoProngs35", &HLT_Photon35_TwoProngs35, &b_HLT_Photon35_TwoProngs35);
-   fChain->SetBranchAddress("HLT_IsoMu24_TwoProngs35", &HLT_IsoMu24_TwoProngs35, &b_HLT_IsoMu24_TwoProngs35);
+   fChain->SetBranchAddress("HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55", &HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55, &b_HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55);
+   fChain->SetBranchAddress("HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55", &HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55, &b_HLT_Diphoton30EB_18EB_R9Id_OR_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55);
    fChain->SetBranchAddress("HLT_Dimuon0_Jpsi_L1_NoOS", &HLT_Dimuon0_Jpsi_L1_NoOS, &b_HLT_Dimuon0_Jpsi_L1_NoOS);
    fChain->SetBranchAddress("HLT_Dimuon0_Jpsi_NoVertexing_NoOS", &HLT_Dimuon0_Jpsi_NoVertexing_NoOS, &b_HLT_Dimuon0_Jpsi_NoVertexing_NoOS);
    fChain->SetBranchAddress("HLT_Dimuon0_Jpsi", &HLT_Dimuon0_Jpsi, &b_HLT_Dimuon0_Jpsi);
@@ -4908,7 +5308,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Dimuon0_LowMass_L1_TM530", &HLT_Dimuon0_LowMass_L1_TM530, &b_HLT_Dimuon0_LowMass_L1_TM530);
    fChain->SetBranchAddress("HLT_Dimuon0_Upsilon_Muon_L1_TM0", &HLT_Dimuon0_Upsilon_Muon_L1_TM0, &b_HLT_Dimuon0_Upsilon_Muon_L1_TM0);
    fChain->SetBranchAddress("HLT_Dimuon0_Upsilon_Muon_NoL1Mass", &HLT_Dimuon0_Upsilon_Muon_NoL1Mass, &b_HLT_Dimuon0_Upsilon_Muon_NoL1Mass);
-   fChain->SetBranchAddress("HLT_TripleMu_5_3_3_Mass3p8_DZ", &HLT_TripleMu_5_3_3_Mass3p8_DZ, &b_HLT_TripleMu_5_3_3_Mass3p8_DZ);
+   fChain->SetBranchAddress("HLT_TripleMu_5_3_3_Mass3p8to60_DZ", &HLT_TripleMu_5_3_3_Mass3p8to60_DZ, &b_HLT_TripleMu_5_3_3_Mass3p8to60_DZ);
    fChain->SetBranchAddress("HLT_TripleMu_10_5_5_DZ", &HLT_TripleMu_10_5_5_DZ, &b_HLT_TripleMu_10_5_5_DZ);
    fChain->SetBranchAddress("HLT_TripleMu_12_10_5", &HLT_TripleMu_12_10_5, &b_HLT_TripleMu_12_10_5);
    fChain->SetBranchAddress("HLT_Tau3Mu_Mu7_Mu1_TkMu1_Tau15", &HLT_Tau3Mu_Mu7_Mu1_TkMu1_Tau15, &b_HLT_Tau3Mu_Mu7_Mu1_TkMu1_Tau15);
@@ -4926,53 +5326,47 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_DoubleMu48NoFiltersNoVtx", &HLT_DoubleMu48NoFiltersNoVtx, &b_HLT_DoubleMu48NoFiltersNoVtx);
    fChain->SetBranchAddress("HLT_Mu43NoFiltersNoVtx_Photon43_CaloIdL", &HLT_Mu43NoFiltersNoVtx_Photon43_CaloIdL, &b_HLT_Mu43NoFiltersNoVtx_Photon43_CaloIdL);
    fChain->SetBranchAddress("HLT_Mu48NoFiltersNoVtx_Photon48_CaloIdL", &HLT_Mu48NoFiltersNoVtx_Photon48_CaloIdL, &b_HLT_Mu48NoFiltersNoVtx_Photon48_CaloIdL);
-   fChain->SetBranchAddress("HLT_Mu38NoFiltersNoVtxDisplaced_Photon38_CaloIdL", &HLT_Mu38NoFiltersNoVtxDisplaced_Photon38_CaloIdL, &b_HLT_Mu38NoFiltersNoVtxDisplaced_Photon38_CaloIdL);
-   fChain->SetBranchAddress("HLT_Mu43NoFiltersNoVtxDisplaced_Photon43_CaloIdL", &HLT_Mu43NoFiltersNoVtxDisplaced_Photon43_CaloIdL, &b_HLT_Mu43NoFiltersNoVtxDisplaced_Photon43_CaloIdL);
-   fChain->SetBranchAddress("HLT_DoubleMu33NoFiltersNoVtxDisplaced", &HLT_DoubleMu33NoFiltersNoVtxDisplaced, &b_HLT_DoubleMu33NoFiltersNoVtxDisplaced);
-   fChain->SetBranchAddress("HLT_DoubleMu40NoFiltersNoVtxDisplaced", &HLT_DoubleMu40NoFiltersNoVtxDisplaced, &b_HLT_DoubleMu40NoFiltersNoVtxDisplaced);
    fChain->SetBranchAddress("HLT_DoubleMu20_7_Mass0to30_L1_DM4", &HLT_DoubleMu20_7_Mass0to30_L1_DM4, &b_HLT_DoubleMu20_7_Mass0to30_L1_DM4);
    fChain->SetBranchAddress("HLT_DoubleMu20_7_Mass0to30_L1_DM4EG", &HLT_DoubleMu20_7_Mass0to30_L1_DM4EG, &b_HLT_DoubleMu20_7_Mass0to30_L1_DM4EG);
    fChain->SetBranchAddress("HLT_HT425", &HLT_HT425, &b_HLT_HT425);
    fChain->SetBranchAddress("HLT_HT430_DisplacedDijet40_DisplacedTrack", &HLT_HT430_DisplacedDijet40_DisplacedTrack, &b_HLT_HT430_DisplacedDijet40_DisplacedTrack);
-   fChain->SetBranchAddress("HLT_HT500_DisplacedDijet40_DisplacedTrack", &HLT_HT500_DisplacedDijet40_DisplacedTrack, &b_HLT_HT500_DisplacedDijet40_DisplacedTrack);
    fChain->SetBranchAddress("HLT_HT430_DisplacedDijet60_DisplacedTrack", &HLT_HT430_DisplacedDijet60_DisplacedTrack, &b_HLT_HT430_DisplacedDijet60_DisplacedTrack);
+   fChain->SetBranchAddress("HLT_HT430_DisplacedDijet80_DisplacedTrack", &HLT_HT430_DisplacedDijet80_DisplacedTrack, &b_HLT_HT430_DisplacedDijet80_DisplacedTrack);
    fChain->SetBranchAddress("HLT_HT400_DisplacedDijet40_DisplacedTrack", &HLT_HT400_DisplacedDijet40_DisplacedTrack, &b_HLT_HT400_DisplacedDijet40_DisplacedTrack);
    fChain->SetBranchAddress("HLT_HT650_DisplacedDijet60_Inclusive", &HLT_HT650_DisplacedDijet60_Inclusive, &b_HLT_HT650_DisplacedDijet60_Inclusive);
+   fChain->SetBranchAddress("HLT_HT550_DisplacedDijet80_Inclusive", &HLT_HT550_DisplacedDijet80_Inclusive, &b_HLT_HT550_DisplacedDijet80_Inclusive);
    fChain->SetBranchAddress("HLT_HT550_DisplacedDijet60_Inclusive", &HLT_HT550_DisplacedDijet60_Inclusive, &b_HLT_HT550_DisplacedDijet60_Inclusive);
+   fChain->SetBranchAddress("HLT_HT650_DisplacedDijet80_Inclusive", &HLT_HT650_DisplacedDijet80_Inclusive, &b_HLT_HT650_DisplacedDijet80_Inclusive);
+   fChain->SetBranchAddress("HLT_HT750_DisplacedDijet80_Inclusive", &HLT_HT750_DisplacedDijet80_Inclusive, &b_HLT_HT750_DisplacedDijet80_Inclusive);
    fChain->SetBranchAddress("HLT_DiJet110_35_Mjj650_PFMET110", &HLT_DiJet110_35_Mjj650_PFMET110, &b_HLT_DiJet110_35_Mjj650_PFMET110);
    fChain->SetBranchAddress("HLT_DiJet110_35_Mjj650_PFMET120", &HLT_DiJet110_35_Mjj650_PFMET120, &b_HLT_DiJet110_35_Mjj650_PFMET120);
    fChain->SetBranchAddress("HLT_DiJet110_35_Mjj650_PFMET130", &HLT_DiJet110_35_Mjj650_PFMET130, &b_HLT_DiJet110_35_Mjj650_PFMET130);
    fChain->SetBranchAddress("HLT_TripleJet110_35_35_Mjj650_PFMET110", &HLT_TripleJet110_35_35_Mjj650_PFMET110, &b_HLT_TripleJet110_35_35_Mjj650_PFMET110);
    fChain->SetBranchAddress("HLT_TripleJet110_35_35_Mjj650_PFMET120", &HLT_TripleJet110_35_35_Mjj650_PFMET120, &b_HLT_TripleJet110_35_35_Mjj650_PFMET120);
    fChain->SetBranchAddress("HLT_TripleJet110_35_35_Mjj650_PFMET130", &HLT_TripleJet110_35_35_Mjj650_PFMET130, &b_HLT_TripleJet110_35_35_Mjj650_PFMET130);
+   fChain->SetBranchAddress("HLT_VBF_DoubleLooseChargedIsoPFTau20_Trk1_eta2p1_Reg", &HLT_VBF_DoubleLooseChargedIsoPFTau20_Trk1_eta2p1_Reg, &b_HLT_VBF_DoubleLooseChargedIsoPFTau20_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_VBF_DoubleMediumChargedIsoPFTau20_Trk1_eta2p1_Reg", &HLT_VBF_DoubleMediumChargedIsoPFTau20_Trk1_eta2p1_Reg, &b_HLT_VBF_DoubleMediumChargedIsoPFTau20_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_VBF_DoubleTightChargedIsoPFTau20_Trk1_eta2p1_Reg", &HLT_VBF_DoubleTightChargedIsoPFTau20_Trk1_eta2p1_Reg, &b_HLT_VBF_DoubleTightChargedIsoPFTau20_Trk1_eta2p1_Reg);
    fChain->SetBranchAddress("HLT_Ele30_eta2p1_WPTight_Gsf_CentralPFJet35_EleCleaned", &HLT_Ele30_eta2p1_WPTight_Gsf_CentralPFJet35_EleCleaned, &b_HLT_Ele30_eta2p1_WPTight_Gsf_CentralPFJet35_EleCleaned);
    fChain->SetBranchAddress("HLT_Ele28_eta2p1_WPTight_Gsf_HT150", &HLT_Ele28_eta2p1_WPTight_Gsf_HT150, &b_HLT_Ele28_eta2p1_WPTight_Gsf_HT150);
    fChain->SetBranchAddress("HLT_Ele28_HighEta_SC20_Mass55", &HLT_Ele28_HighEta_SC20_Mass55, &b_HLT_Ele28_HighEta_SC20_Mass55);
    fChain->SetBranchAddress("HLT_DoubleMu20_7_Mass0to30_Photon23", &HLT_DoubleMu20_7_Mass0to30_Photon23, &b_HLT_DoubleMu20_7_Mass0to30_Photon23);
-   fChain->SetBranchAddress("HLT_Ele15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5", &HLT_Ele15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5, &b_HLT_Ele15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5);
+   fChain->SetBranchAddress("HLT_Ele15_IsoVVVL_PFHT450_CaloBTagCSV_4p5", &HLT_Ele15_IsoVVVL_PFHT450_CaloBTagCSV_4p5, &b_HLT_Ele15_IsoVVVL_PFHT450_CaloBTagCSV_4p5);
    fChain->SetBranchAddress("HLT_Ele15_IsoVVVL_PFHT450_PFMET50", &HLT_Ele15_IsoVVVL_PFHT450_PFMET50, &b_HLT_Ele15_IsoVVVL_PFHT450_PFMET50);
    fChain->SetBranchAddress("HLT_Ele15_IsoVVVL_PFHT450", &HLT_Ele15_IsoVVVL_PFHT450, &b_HLT_Ele15_IsoVVVL_PFHT450);
    fChain->SetBranchAddress("HLT_Ele50_IsoVVVL_PFHT450", &HLT_Ele50_IsoVVVL_PFHT450, &b_HLT_Ele50_IsoVVVL_PFHT450);
    fChain->SetBranchAddress("HLT_Ele15_IsoVVVL_PFHT600", &HLT_Ele15_IsoVVVL_PFHT600, &b_HLT_Ele15_IsoVVVL_PFHT600);
-   fChain->SetBranchAddress("HLT_Mu4_TrkIsoVVL_DiPFJet90_40_DEta3p5_MJJ750_HTT300_PFMETNoMu60", &HLT_Mu4_TrkIsoVVL_DiPFJet90_40_DEta3p5_MJJ750_HTT300_PFMETNoMu60, &b_HLT_Mu4_TrkIsoVVL_DiPFJet90_40_DEta3p5_MJJ750_HTT300_PFMETNoMu60);
    fChain->SetBranchAddress("HLT_Mu8_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT300_PFMETNoMu60", &HLT_Mu8_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT300_PFMETNoMu60, &b_HLT_Mu8_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT300_PFMETNoMu60);
    fChain->SetBranchAddress("HLT_Mu10_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT350_PFMETNoMu60", &HLT_Mu10_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT350_PFMETNoMu60, &b_HLT_Mu10_TrkIsoVVL_DiPFJet40_DEta3p5_MJJ750_HTT350_PFMETNoMu60);
-   fChain->SetBranchAddress("HLT_Mu15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5", &HLT_Mu15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5, &b_HLT_Mu15_IsoVVVL_PFHT450_CaloBTagDeepCSV_4p5);
+   fChain->SetBranchAddress("HLT_Mu15_IsoVVVL_PFHT450_CaloBTagCSV_4p5", &HLT_Mu15_IsoVVVL_PFHT450_CaloBTagCSV_4p5, &b_HLT_Mu15_IsoVVVL_PFHT450_CaloBTagCSV_4p5);
    fChain->SetBranchAddress("HLT_Mu15_IsoVVVL_PFHT450_PFMET50", &HLT_Mu15_IsoVVVL_PFHT450_PFMET50, &b_HLT_Mu15_IsoVVVL_PFHT450_PFMET50);
    fChain->SetBranchAddress("HLT_Mu15_IsoVVVL_PFHT450", &HLT_Mu15_IsoVVVL_PFHT450, &b_HLT_Mu15_IsoVVVL_PFHT450);
    fChain->SetBranchAddress("HLT_Mu50_IsoVVVL_PFHT450", &HLT_Mu50_IsoVVVL_PFHT450, &b_HLT_Mu50_IsoVVVL_PFHT450);
    fChain->SetBranchAddress("HLT_Mu15_IsoVVVL_PFHT600", &HLT_Mu15_IsoVVVL_PFHT600, &b_HLT_Mu15_IsoVVVL_PFHT600);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMET70_PFMHT70_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMET70_PFMHT70_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMET70_PFMHT70_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMET80_PFMHT80_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMET80_PFMHT80_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMET80_PFMHT80_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMET90_PFMHT90_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMET90_PFMHT90_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMET90_PFMHT90_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMET100_PFMHT100_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMET100_PFMHT100_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMET100_PFMHT100_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu70_PFMHTNoMu70_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu70_PFMHTNoMu70_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu70_PFMHTNoMu70_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu80_PFMHTNoMu80_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu80_PFMHTNoMu80_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu80_PFMHTNoMu80_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu90_PFMHTNoMu90_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu90_PFMHTNoMu90_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu90_PFMHTNoMu90_IDTight);
-   fChain->SetBranchAddress("HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu100_PFMHTNoMu100_IDTight", &HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu100_PFMHTNoMu100_IDTight, &b_HLT_Mu3er1p5_PFJet100er2p5_PFMETNoMu100_PFMHTNoMu100_IDTight);
    fChain->SetBranchAddress("HLT_Dimuon10_PsiPrime_Barrel_Seagulls", &HLT_Dimuon10_PsiPrime_Barrel_Seagulls, &b_HLT_Dimuon10_PsiPrime_Barrel_Seagulls);
    fChain->SetBranchAddress("HLT_Dimuon20_Jpsi_Barrel_Seagulls", &HLT_Dimuon20_Jpsi_Barrel_Seagulls, &b_HLT_Dimuon20_Jpsi_Barrel_Seagulls);
-   fChain->SetBranchAddress("HLT_Dimuon12_Upsilon_y1p4", &HLT_Dimuon12_Upsilon_y1p4, &b_HLT_Dimuon12_Upsilon_y1p4);
+   fChain->SetBranchAddress("HLT_Dimuon10_Upsilon_Barrel_Seagulls", &HLT_Dimuon10_Upsilon_Barrel_Seagulls, &b_HLT_Dimuon10_Upsilon_Barrel_Seagulls);
+   fChain->SetBranchAddress("HLT_Dimuon12_Upsilon_eta1p5", &HLT_Dimuon12_Upsilon_eta1p5, &b_HLT_Dimuon12_Upsilon_eta1p5);
    fChain->SetBranchAddress("HLT_Dimuon14_Phi_Barrel_Seagulls", &HLT_Dimuon14_Phi_Barrel_Seagulls, &b_HLT_Dimuon14_Phi_Barrel_Seagulls);
    fChain->SetBranchAddress("HLT_Dimuon18_PsiPrime", &HLT_Dimuon18_PsiPrime, &b_HLT_Dimuon18_PsiPrime);
    fChain->SetBranchAddress("HLT_Dimuon25_Jpsi", &HLT_Dimuon25_Jpsi, &b_HLT_Dimuon25_Jpsi);
@@ -4980,10 +5374,10 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Dimuon24_Upsilon_noCorrL1", &HLT_Dimuon24_Upsilon_noCorrL1, &b_HLT_Dimuon24_Upsilon_noCorrL1);
    fChain->SetBranchAddress("HLT_Dimuon24_Phi_noCorrL1", &HLT_Dimuon24_Phi_noCorrL1, &b_HLT_Dimuon24_Phi_noCorrL1);
    fChain->SetBranchAddress("HLT_Dimuon25_Jpsi_noCorrL1", &HLT_Dimuon25_Jpsi_noCorrL1, &b_HLT_Dimuon25_Jpsi_noCorrL1);
-   fChain->SetBranchAddress("HLT_DiMu4_Ele9_CaloIdL_TrackIdL_DZ_Mass3p8", &HLT_DiMu4_Ele9_CaloIdL_TrackIdL_DZ_Mass3p8, &b_HLT_DiMu4_Ele9_CaloIdL_TrackIdL_DZ_Mass3p8);
    fChain->SetBranchAddress("HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ", &HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ, &b_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ);
    fChain->SetBranchAddress("HLT_DiMu9_Ele9_CaloIdL_TrackIdL", &HLT_DiMu9_Ele9_CaloIdL_TrackIdL, &b_HLT_DiMu9_Ele9_CaloIdL_TrackIdL);
    fChain->SetBranchAddress("HLT_DoubleIsoMu20_eta2p1", &HLT_DoubleIsoMu20_eta2p1, &b_HLT_DoubleIsoMu20_eta2p1);
+   fChain->SetBranchAddress("HLT_DoubleIsoMu24_eta2p1", &HLT_DoubleIsoMu24_eta2p1, &b_HLT_DoubleIsoMu24_eta2p1);
    fChain->SetBranchAddress("HLT_TrkMu12_DoubleTrkMu5NoFiltersNoVtx", &HLT_TrkMu12_DoubleTrkMu5NoFiltersNoVtx, &b_HLT_TrkMu12_DoubleTrkMu5NoFiltersNoVtx);
    fChain->SetBranchAddress("HLT_TrkMu16_DoubleTrkMu6NoFiltersNoVtx", &HLT_TrkMu16_DoubleTrkMu6NoFiltersNoVtx, &b_HLT_TrkMu16_DoubleTrkMu6NoFiltersNoVtx);
    fChain->SetBranchAddress("HLT_TrkMu17_DoubleTrkMu8NoFiltersNoVtx", &HLT_TrkMu17_DoubleTrkMu8NoFiltersNoVtx, &b_HLT_TrkMu17_DoubleTrkMu8NoFiltersNoVtx);
@@ -4993,7 +5387,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu17_Photon30_IsoCaloId", &HLT_Mu17_Photon30_IsoCaloId, &b_HLT_Mu17_Photon30_IsoCaloId);
    fChain->SetBranchAddress("HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30", &HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30, &b_HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30);
    fChain->SetBranchAddress("HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30", &HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30, &b_HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30);
-   fChain->SetBranchAddress("HLT_Ele15_CaloIdL_TrackIdL_IsoVL_PFJet30", &HLT_Ele15_CaloIdL_TrackIdL_IsoVL_PFJet30, &b_HLT_Ele15_CaloIdL_TrackIdL_IsoVL_PFJet30);
    fChain->SetBranchAddress("HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30", &HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30, &b_HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30);
    fChain->SetBranchAddress("HLT_Ele8_CaloIdM_TrackIdM_PFJet30", &HLT_Ele8_CaloIdM_TrackIdM_PFJet30, &b_HLT_Ele8_CaloIdM_TrackIdM_PFJet30);
    fChain->SetBranchAddress("HLT_Ele17_CaloIdM_TrackIdM_PFJet30", &HLT_Ele17_CaloIdM_TrackIdM_PFJet30, &b_HLT_Ele17_CaloIdM_TrackIdM_PFJet30);
@@ -5005,17 +5398,22 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Ele200_CaloIdVT_GsfTrkIdT", &HLT_Ele200_CaloIdVT_GsfTrkIdT, &b_HLT_Ele200_CaloIdVT_GsfTrkIdT);
    fChain->SetBranchAddress("HLT_Ele250_CaloIdVT_GsfTrkIdT", &HLT_Ele250_CaloIdVT_GsfTrkIdT, &b_HLT_Ele250_CaloIdVT_GsfTrkIdT);
    fChain->SetBranchAddress("HLT_Ele300_CaloIdVT_GsfTrkIdT", &HLT_Ele300_CaloIdVT_GsfTrkIdT, &b_HLT_Ele300_CaloIdVT_GsfTrkIdT);
-   fChain->SetBranchAddress("HLT_PFHT330PT30_QuadPFJet_75_60_45_40_TriplePFBTagDeepCSV_4p5", &HLT_PFHT330PT30_QuadPFJet_75_60_45_40_TriplePFBTagDeepCSV_4p5, &b_HLT_PFHT330PT30_QuadPFJet_75_60_45_40_TriplePFBTagDeepCSV_4p5);
-   fChain->SetBranchAddress("HLT_PFHT330PT30_QuadPFJet_75_60_45_40", &HLT_PFHT330PT30_QuadPFJet_75_60_45_40, &b_HLT_PFHT330PT30_QuadPFJet_75_60_45_40);
-   fChain->SetBranchAddress("HLT_PFHT400_SixPFJet32_DoublePFBTagDeepCSV_2p94", &HLT_PFHT400_SixPFJet32_DoublePFBTagDeepCSV_2p94, &b_HLT_PFHT400_SixPFJet32_DoublePFBTagDeepCSV_2p94);
-   fChain->SetBranchAddress("HLT_PFHT400_SixPFJet32", &HLT_PFHT400_SixPFJet32, &b_HLT_PFHT400_SixPFJet32);
-   fChain->SetBranchAddress("HLT_PFHT450_SixPFJet36_PFBTagDeepCSV_1p59", &HLT_PFHT450_SixPFJet36_PFBTagDeepCSV_1p59, &b_HLT_PFHT450_SixPFJet36_PFBTagDeepCSV_1p59);
-   fChain->SetBranchAddress("HLT_PFHT450_SixPFJet36", &HLT_PFHT450_SixPFJet36, &b_HLT_PFHT450_SixPFJet36);
+   fChain->SetBranchAddress("HLT_PFHT300PT30_QuadPFJet_75_60_45_40", &HLT_PFHT300PT30_QuadPFJet_75_60_45_40, &b_HLT_PFHT300PT30_QuadPFJet_75_60_45_40);
+   fChain->SetBranchAddress("HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0", &HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0, &b_HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0);
+   fChain->SetBranchAddress("HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2", &HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2, &b_HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2);
+   fChain->SetBranchAddress("HLT_PFHT380_SixPFJet32_DoublePFBTagDeepCSV_2p2", &HLT_PFHT380_SixPFJet32_DoublePFBTagDeepCSV_2p2, &b_HLT_PFHT380_SixPFJet32_DoublePFBTagDeepCSV_2p2);
+   fChain->SetBranchAddress("HLT_PFHT380_SixPFJet32", &HLT_PFHT380_SixPFJet32, &b_HLT_PFHT380_SixPFJet32);
+   fChain->SetBranchAddress("HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5", &HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5, &b_HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5);
+   fChain->SetBranchAddress("HLT_PFHT430_SixPFJet40", &HLT_PFHT430_SixPFJet40, &b_HLT_PFHT430_SixPFJet40);
    fChain->SetBranchAddress("HLT_PFHT350", &HLT_PFHT350, &b_HLT_PFHT350);
    fChain->SetBranchAddress("HLT_PFHT350MinPFJet15", &HLT_PFHT350MinPFJet15, &b_HLT_PFHT350MinPFJet15);
    fChain->SetBranchAddress("HLT_Photon60_R9Id90_CaloIdL_IsoL", &HLT_Photon60_R9Id90_CaloIdL_IsoL, &b_HLT_Photon60_R9Id90_CaloIdL_IsoL);
    fChain->SetBranchAddress("HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL", &HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL, &b_HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL);
    fChain->SetBranchAddress("HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL_PFHT350MinPFJet15", &HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL_PFHT350MinPFJet15, &b_HLT_Photon60_R9Id90_CaloIdL_IsoL_DisplacedIdL_PFHT350MinPFJet15);
+   fChain->SetBranchAddress("HLT_FullTrack_Multiplicity85", &HLT_FullTrack_Multiplicity85, &b_HLT_FullTrack_Multiplicity85);
+   fChain->SetBranchAddress("HLT_FullTrack_Multiplicity100", &HLT_FullTrack_Multiplicity100, &b_HLT_FullTrack_Multiplicity100);
+   fChain->SetBranchAddress("HLT_FullTrack_Multiplicity130", &HLT_FullTrack_Multiplicity130, &b_HLT_FullTrack_Multiplicity130);
+   fChain->SetBranchAddress("HLT_FullTrack_Multiplicity155", &HLT_FullTrack_Multiplicity155, &b_HLT_FullTrack_Multiplicity155);
    fChain->SetBranchAddress("HLT_ECALHT800", &HLT_ECALHT800, &b_HLT_ECALHT800);
    fChain->SetBranchAddress("HLT_DiSC30_18_EIso_AND_HE_Mass70", &HLT_DiSC30_18_EIso_AND_HE_Mass70, &b_HLT_DiSC30_18_EIso_AND_HE_Mass70);
    fChain->SetBranchAddress("HLT_Physics", &HLT_Physics, &b_HLT_Physics);
@@ -5029,7 +5427,6 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Physics_part7", &HLT_Physics_part7, &b_HLT_Physics_part7);
    fChain->SetBranchAddress("HLT_Random", &HLT_Random, &b_HLT_Random);
    fChain->SetBranchAddress("HLT_ZeroBias", &HLT_ZeroBias, &b_HLT_ZeroBias);
-   fChain->SetBranchAddress("HLT_ZeroBias_Alignment", &HLT_ZeroBias_Alignment, &b_HLT_ZeroBias_Alignment);
    fChain->SetBranchAddress("HLT_ZeroBias_part0", &HLT_ZeroBias_part0, &b_HLT_ZeroBias_part0);
    fChain->SetBranchAddress("HLT_ZeroBias_part1", &HLT_ZeroBias_part1, &b_HLT_ZeroBias_part1);
    fChain->SetBranchAddress("HLT_ZeroBias_part2", &HLT_ZeroBias_part2, &b_HLT_ZeroBias_part2);
@@ -5049,19 +5446,25 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_AK4PFJet80", &HLT_AK4PFJet80, &b_HLT_AK4PFJet80);
    fChain->SetBranchAddress("HLT_AK4PFJet100", &HLT_AK4PFJet100, &b_HLT_AK4PFJet100);
    fChain->SetBranchAddress("HLT_AK4PFJet120", &HLT_AK4PFJet120, &b_HLT_AK4PFJet120);
-   fChain->SetBranchAddress("HLT_SinglePhoton10_Eta3p1ForPPRef", &HLT_SinglePhoton10_Eta3p1ForPPRef, &b_HLT_SinglePhoton10_Eta3p1ForPPRef);
-   fChain->SetBranchAddress("HLT_SinglePhoton20_Eta3p1ForPPRef", &HLT_SinglePhoton20_Eta3p1ForPPRef, &b_HLT_SinglePhoton20_Eta3p1ForPPRef);
-   fChain->SetBranchAddress("HLT_SinglePhoton30_Eta3p1ForPPRef", &HLT_SinglePhoton30_Eta3p1ForPPRef, &b_HLT_SinglePhoton30_Eta3p1ForPPRef);
+   fChain->SetBranchAddress("HLT_HISinglePhoton10_Eta3p1ForPPRef", &HLT_HISinglePhoton10_Eta3p1ForPPRef, &b_HLT_HISinglePhoton10_Eta3p1ForPPRef);
+   fChain->SetBranchAddress("HLT_HISinglePhoton20_Eta3p1ForPPRef", &HLT_HISinglePhoton20_Eta3p1ForPPRef, &b_HLT_HISinglePhoton20_Eta3p1ForPPRef);
+   fChain->SetBranchAddress("HLT_HISinglePhoton30_Eta3p1ForPPRef", &HLT_HISinglePhoton30_Eta3p1ForPPRef, &b_HLT_HISinglePhoton30_Eta3p1ForPPRef);
+   fChain->SetBranchAddress("HLT_HISinglePhoton40_Eta3p1ForPPRef", &HLT_HISinglePhoton40_Eta3p1ForPPRef, &b_HLT_HISinglePhoton40_Eta3p1ForPPRef);
+   fChain->SetBranchAddress("HLT_HISinglePhoton50_Eta3p1ForPPRef", &HLT_HISinglePhoton50_Eta3p1ForPPRef, &b_HLT_HISinglePhoton50_Eta3p1ForPPRef);
+   fChain->SetBranchAddress("HLT_HISinglePhoton60_Eta3p1ForPPRef", &HLT_HISinglePhoton60_Eta3p1ForPPRef, &b_HLT_HISinglePhoton60_Eta3p1ForPPRef);
    fChain->SetBranchAddress("HLT_Photon20_HoverELoose", &HLT_Photon20_HoverELoose, &b_HLT_Photon20_HoverELoose);
    fChain->SetBranchAddress("HLT_Photon30_HoverELoose", &HLT_Photon30_HoverELoose, &b_HLT_Photon30_HoverELoose);
+   fChain->SetBranchAddress("HLT_Photon40_HoverELoose", &HLT_Photon40_HoverELoose, &b_HLT_Photon40_HoverELoose);
+   fChain->SetBranchAddress("HLT_Photon50_HoverELoose", &HLT_Photon50_HoverELoose, &b_HLT_Photon50_HoverELoose);
+   fChain->SetBranchAddress("HLT_Photon60_HoverELoose", &HLT_Photon60_HoverELoose, &b_HLT_Photon60_HoverELoose);
    fChain->SetBranchAddress("HLT_EcalCalibration", &HLT_EcalCalibration, &b_HLT_EcalCalibration);
    fChain->SetBranchAddress("HLT_HcalCalibration", &HLT_HcalCalibration, &b_HLT_HcalCalibration);
    fChain->SetBranchAddress("HLT_L1UnpairedBunchBptxMinus", &HLT_L1UnpairedBunchBptxMinus, &b_HLT_L1UnpairedBunchBptxMinus);
    fChain->SetBranchAddress("HLT_L1UnpairedBunchBptxPlus", &HLT_L1UnpairedBunchBptxPlus, &b_HLT_L1UnpairedBunchBptxPlus);
    fChain->SetBranchAddress("HLT_L1NotBptxOR", &HLT_L1NotBptxOR, &b_HLT_L1NotBptxOR);
+   fChain->SetBranchAddress("HLT_L1MinimumBiasHF_OR", &HLT_L1MinimumBiasHF_OR, &b_HLT_L1MinimumBiasHF_OR);
+   fChain->SetBranchAddress("HLT_L1MinimumBiasHF0OR", &HLT_L1MinimumBiasHF0OR, &b_HLT_L1MinimumBiasHF0OR);
    fChain->SetBranchAddress("HLT_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", &HLT_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142, &b_HLT_L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142);
-   fChain->SetBranchAddress("HLT_CDC_L2cosmic_5_er1p0", &HLT_CDC_L2cosmic_5_er1p0, &b_HLT_CDC_L2cosmic_5_er1p0);
-   fChain->SetBranchAddress("HLT_CDC_L2cosmic_5p5_er1p0", &HLT_CDC_L2cosmic_5p5_er1p0, &b_HLT_CDC_L2cosmic_5p5_er1p0);
    fChain->SetBranchAddress("HLT_HcalNZS", &HLT_HcalNZS, &b_HLT_HcalNZS);
    fChain->SetBranchAddress("HLT_HcalPhiSym", &HLT_HcalPhiSym, &b_HLT_HcalPhiSym);
    fChain->SetBranchAddress("HLT_HcalIsolatedbunch", &HLT_HcalIsolatedbunch, &b_HLT_HcalIsolatedbunch);
@@ -5072,18 +5475,43 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_ZeroBias_FirstCollisionInTrain", &HLT_ZeroBias_FirstCollisionInTrain, &b_HLT_ZeroBias_FirstCollisionInTrain);
    fChain->SetBranchAddress("HLT_ZeroBias_LastCollisionInTrain", &HLT_ZeroBias_LastCollisionInTrain, &b_HLT_ZeroBias_LastCollisionInTrain);
    fChain->SetBranchAddress("HLT_ZeroBias_FirstBXAfterTrain", &HLT_ZeroBias_FirstBXAfterTrain, &b_HLT_ZeroBias_FirstBXAfterTrain);
+   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1);
+   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_CrossL1);
+   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_CrossL1);
+   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_TightID_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_TightID_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_TightID_CrossL1);
+   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_TightID_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_TightID_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_MediumChargedIsoPFTau30_eta2p1_TightID_CrossL1);
+   fChain->SetBranchAddress("HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_TightID_CrossL1", &HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_TightID_CrossL1, &b_HLT_Ele24_eta2p1_WPTight_Gsf_TightChargedIsoPFTau30_eta2p1_TightID_CrossL1);
+   fChain->SetBranchAddress("HLT_DoubleLooseChargedIsoPFTau35_Trk1_eta2p1_Reg", &HLT_DoubleLooseChargedIsoPFTau35_Trk1_eta2p1_Reg, &b_HLT_DoubleLooseChargedIsoPFTau35_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleLooseChargedIsoPFTau40_Trk1_eta2p1_Reg", &HLT_DoubleLooseChargedIsoPFTau40_Trk1_eta2p1_Reg, &b_HLT_DoubleLooseChargedIsoPFTau40_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTau40_Trk1_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTau40_Trk1_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTau40_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTau35_Trk1_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTau35_Trk1_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTau35_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleLooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg", &HLT_DoubleLooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleLooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleLooseChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg", &HLT_DoubleLooseChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleLooseChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg);
+   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg);
    fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET90", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET90, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET90);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET100", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET100, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET100);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET110", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET110, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET110);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET120", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET120, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET120);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET130", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET130, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET130);
-   fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET140", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET140, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr_MET140);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr", &HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr, &b_HLT_MediumChargedIsoPFTau50_Trk30_eta2p1_1pr);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_1pr", &HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_1pr, &b_HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_1pr);
    fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1", &HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1, &b_HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1);
-   fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau200HighPtRelaxedIso_Trk50_eta2p1", &HLT_MediumChargedIsoPFTau200HighPtRelaxedIso_Trk50_eta2p1, &b_HLT_MediumChargedIsoPFTau200HighPtRelaxedIso_Trk50_eta2p1);
-   fChain->SetBranchAddress("HLT_MediumChargedIsoPFTau220HighPtRelaxedIso_Trk50_eta2p1", &HLT_MediumChargedIsoPFTau220HighPtRelaxedIso_Trk50_eta2p1, &b_HLT_MediumChargedIsoPFTau220HighPtRelaxedIso_Trk50_eta2p1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_eta2p1_Reg_CrossL1);
+   fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_CrossL1);
    fChain->SetBranchAddress("HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL", &HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL, &b_HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL);
    fChain->SetBranchAddress("HLT_Rsq0p35", &HLT_Rsq0p35, &b_HLT_Rsq0p35);
    fChain->SetBranchAddress("HLT_Rsq0p40", &HLT_Rsq0p40, &b_HLT_Rsq0p40);
@@ -5091,18 +5519,10 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_RsqMR320_Rsq0p09_MR200", &HLT_RsqMR320_Rsq0p09_MR200, &b_HLT_RsqMR320_Rsq0p09_MR200);
    fChain->SetBranchAddress("HLT_RsqMR300_Rsq0p09_MR200_4jet", &HLT_RsqMR300_Rsq0p09_MR200_4jet, &b_HLT_RsqMR300_Rsq0p09_MR200_4jet);
    fChain->SetBranchAddress("HLT_RsqMR320_Rsq0p09_MR200_4jet", &HLT_RsqMR320_Rsq0p09_MR200_4jet, &b_HLT_RsqMR320_Rsq0p09_MR200_4jet);
-   fChain->SetBranchAddress("HLT_IsoMu27_MET90", &HLT_IsoMu27_MET90, &b_HLT_IsoMu27_MET90);
-   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg", &HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg", &HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg, &b_HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg);
-   fChain->SetBranchAddress("HLT_VBF_DoubleLooseChargedIsoPFTauHPS20_Trk1_eta2p1", &HLT_VBF_DoubleLooseChargedIsoPFTauHPS20_Trk1_eta2p1, &b_HLT_VBF_DoubleLooseChargedIsoPFTauHPS20_Trk1_eta2p1);
-   fChain->SetBranchAddress("HLT_VBF_DoubleMediumChargedIsoPFTauHPS20_Trk1_eta2p1", &HLT_VBF_DoubleMediumChargedIsoPFTauHPS20_Trk1_eta2p1, &b_HLT_VBF_DoubleMediumChargedIsoPFTauHPS20_Trk1_eta2p1);
-   fChain->SetBranchAddress("HLT_VBF_DoubleTightChargedIsoPFTauHPS20_Trk1_eta2p1", &HLT_VBF_DoubleTightChargedIsoPFTauHPS20_Trk1_eta2p1, &b_HLT_VBF_DoubleTightChargedIsoPFTauHPS20_Trk1_eta2p1);
+   fChain->SetBranchAddress("HLT_L1_DoubleJet30_Mass_Min400_Mu10", &HLT_L1_DoubleJet30_Mass_Min400_Mu10, &b_HLT_L1_DoubleJet30_Mass_Min400_Mu10);
+   fChain->SetBranchAddress("HLT_IsoMu27_LooseChargedIsoPFTau20_SingleL1", &HLT_IsoMu27_LooseChargedIsoPFTau20_SingleL1, &b_HLT_IsoMu27_LooseChargedIsoPFTau20_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu27_MediumChargedIsoPFTau20_SingleL1", &HLT_IsoMu27_MediumChargedIsoPFTau20_SingleL1, &b_HLT_IsoMu27_MediumChargedIsoPFTau20_SingleL1);
+   fChain->SetBranchAddress("HLT_IsoMu27_TightChargedIsoPFTau20_SingleL1", &HLT_IsoMu27_TightChargedIsoPFTau20_SingleL1, &b_HLT_IsoMu27_TightChargedIsoPFTau20_SingleL1);
    fChain->SetBranchAddress("HLT_Photon50_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3_PFMET50", &HLT_Photon50_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3_PFMET50, &b_HLT_Photon50_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3_PFMET50);
    fChain->SetBranchAddress("HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3", &HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3, &b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3);
    fChain->SetBranchAddress("HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ600DEta3", &HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ600DEta3, &b_HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ600DEta3);
@@ -5121,72 +5541,26 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Mu23_Mu12_SameSign_DZ", &HLT_Mu23_Mu12_SameSign_DZ, &b_HLT_Mu23_Mu12_SameSign_DZ);
    fChain->SetBranchAddress("HLT_Mu23_Mu12", &HLT_Mu23_Mu12, &b_HLT_Mu23_Mu12);
    fChain->SetBranchAddress("HLT_Mu23_Mu12_DZ", &HLT_Mu23_Mu12_DZ, &b_HLT_Mu23_Mu12_DZ);
-   fChain->SetBranchAddress("HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi1p05", &HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi1p05, &b_HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi1p05);
+   fChain->SetBranchAddress("HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi", &HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi, &b_HLT_DoubleMu2_Jpsi_DoubleTrk1_Phi);
    fChain->SetBranchAddress("HLT_DoubleMu2_Jpsi_DoubleTkMu0_Phi", &HLT_DoubleMu2_Jpsi_DoubleTkMu0_Phi, &b_HLT_DoubleMu2_Jpsi_DoubleTkMu0_Phi);
    fChain->SetBranchAddress("HLT_DoubleMu3_DCA_PFMET50_PFMHT60", &HLT_DoubleMu3_DCA_PFMET50_PFMHT60, &b_HLT_DoubleMu3_DCA_PFMET50_PFMHT60);
-   fChain->SetBranchAddress("HLT_TripleMu_5_3_3_Mass3p8_DCA", &HLT_TripleMu_5_3_3_Mass3p8_DCA, &b_HLT_TripleMu_5_3_3_Mass3p8_DCA);
-   fChain->SetBranchAddress("HLT_QuadPFJet98_83_71_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1", &HLT_QuadPFJet98_83_71_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1, &b_HLT_QuadPFJet98_83_71_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1);
-   fChain->SetBranchAddress("HLT_QuadPFJet103_88_75_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1", &HLT_QuadPFJet103_88_75_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1, &b_HLT_QuadPFJet103_88_75_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1);
-   fChain->SetBranchAddress("HLT_QuadPFJet111_90_80_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1", &HLT_QuadPFJet111_90_80_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1, &b_HLT_QuadPFJet111_90_80_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1);
-   fChain->SetBranchAddress("HLT_QuadPFJet98_83_71_15_PFBTagDeepCSV_1p3_VBF2", &HLT_QuadPFJet98_83_71_15_PFBTagDeepCSV_1p3_VBF2, &b_HLT_QuadPFJet98_83_71_15_PFBTagDeepCSV_1p3_VBF2);
-   fChain->SetBranchAddress("HLT_QuadPFJet103_88_75_15_PFBTagDeepCSV_1p3_VBF2", &HLT_QuadPFJet103_88_75_15_PFBTagDeepCSV_1p3_VBF2, &b_HLT_QuadPFJet103_88_75_15_PFBTagDeepCSV_1p3_VBF2);
-   fChain->SetBranchAddress("HLT_QuadPFJet105_88_76_15_PFBTagDeepCSV_1p3_VBF2", &HLT_QuadPFJet105_88_76_15_PFBTagDeepCSV_1p3_VBF2, &b_HLT_QuadPFJet105_88_76_15_PFBTagDeepCSV_1p3_VBF2);
-   fChain->SetBranchAddress("HLT_QuadPFJet111_90_80_15_PFBTagDeepCSV_1p3_VBF2", &HLT_QuadPFJet111_90_80_15_PFBTagDeepCSV_1p3_VBF2, &b_HLT_QuadPFJet111_90_80_15_PFBTagDeepCSV_1p3_VBF2);
+   fChain->SetBranchAddress("HLT_TripleMu_5_3_3_Mass3p8to60_DCA", &HLT_TripleMu_5_3_3_Mass3p8to60_DCA, &b_HLT_TripleMu_5_3_3_Mass3p8to60_DCA);
+   fChain->SetBranchAddress("HLT_QuadPFJet98_83_71_15_DoubleBTagCSV_p013_p08_VBF1", &HLT_QuadPFJet98_83_71_15_DoubleBTagCSV_p013_p08_VBF1, &b_HLT_QuadPFJet98_83_71_15_DoubleBTagCSV_p013_p08_VBF1);
+   fChain->SetBranchAddress("HLT_QuadPFJet103_88_75_15_DoubleBTagCSV_p013_p08_VBF1", &HLT_QuadPFJet103_88_75_15_DoubleBTagCSV_p013_p08_VBF1, &b_HLT_QuadPFJet103_88_75_15_DoubleBTagCSV_p013_p08_VBF1);
+   fChain->SetBranchAddress("HLT_QuadPFJet105_90_76_15_DoubleBTagCSV_p013_p08_VBF1", &HLT_QuadPFJet105_90_76_15_DoubleBTagCSV_p013_p08_VBF1, &b_HLT_QuadPFJet105_90_76_15_DoubleBTagCSV_p013_p08_VBF1);
+   fChain->SetBranchAddress("HLT_QuadPFJet111_90_80_15_DoubleBTagCSV_p013_p08_VBF1", &HLT_QuadPFJet111_90_80_15_DoubleBTagCSV_p013_p08_VBF1, &b_HLT_QuadPFJet111_90_80_15_DoubleBTagCSV_p013_p08_VBF1);
+   fChain->SetBranchAddress("HLT_QuadPFJet98_83_71_15_BTagCSV_p013_VBF2", &HLT_QuadPFJet98_83_71_15_BTagCSV_p013_VBF2, &b_HLT_QuadPFJet98_83_71_15_BTagCSV_p013_VBF2);
+   fChain->SetBranchAddress("HLT_QuadPFJet103_88_75_15_BTagCSV_p013_VBF2", &HLT_QuadPFJet103_88_75_15_BTagCSV_p013_VBF2, &b_HLT_QuadPFJet103_88_75_15_BTagCSV_p013_VBF2);
+   fChain->SetBranchAddress("HLT_QuadPFJet105_88_76_15_BTagCSV_p013_VBF2", &HLT_QuadPFJet105_88_76_15_BTagCSV_p013_VBF2, &b_HLT_QuadPFJet105_88_76_15_BTagCSV_p013_VBF2);
+   fChain->SetBranchAddress("HLT_QuadPFJet111_90_80_15_BTagCSV_p013_VBF2", &HLT_QuadPFJet111_90_80_15_BTagCSV_p013_VBF2, &b_HLT_QuadPFJet111_90_80_15_BTagCSV_p013_VBF2);
    fChain->SetBranchAddress("HLT_QuadPFJet98_83_71_15", &HLT_QuadPFJet98_83_71_15, &b_HLT_QuadPFJet98_83_71_15);
    fChain->SetBranchAddress("HLT_QuadPFJet103_88_75_15", &HLT_QuadPFJet103_88_75_15, &b_HLT_QuadPFJet103_88_75_15);
    fChain->SetBranchAddress("HLT_QuadPFJet105_88_76_15", &HLT_QuadPFJet105_88_76_15, &b_HLT_QuadPFJet105_88_76_15);
    fChain->SetBranchAddress("HLT_QuadPFJet111_90_80_15", &HLT_QuadPFJet111_90_80_15, &b_HLT_QuadPFJet111_90_80_15);
-   fChain->SetBranchAddress("HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p17", &HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p17, &b_HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p17);
-   fChain->SetBranchAddress("HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p1", &HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p1, &b_HLT_AK8PFJet330_TrimMass30_PFAK8BTagDeepCSV_p1);
-   fChain->SetBranchAddress("HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02", &HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02, &b_HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02);
-   fChain->SetBranchAddress("HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2", &HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2, &b_HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2);
-   fChain->SetBranchAddress("HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4", &HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4, &b_HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4);
-   fChain->SetBranchAddress("HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto_Mass55", &HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto_Mass55, &b_HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto_Mass55);
-   fChain->SetBranchAddress("HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto", &HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto, &b_HLT_Diphoton30_18_R9IdL_AND_HE_AND_IsoCaloId_NoPixelVeto);
-   fChain->SetBranchAddress("HLT_Mu12_IP6_part0", &HLT_Mu12_IP6_part0, &b_HLT_Mu12_IP6_part0);
-   fChain->SetBranchAddress("HLT_Mu12_IP6_part1", &HLT_Mu12_IP6_part1, &b_HLT_Mu12_IP6_part1);
-   fChain->SetBranchAddress("HLT_Mu12_IP6_part2", &HLT_Mu12_IP6_part2, &b_HLT_Mu12_IP6_part2);
-   fChain->SetBranchAddress("HLT_Mu12_IP6_part3", &HLT_Mu12_IP6_part3, &b_HLT_Mu12_IP6_part3);
-   fChain->SetBranchAddress("HLT_Mu12_IP6_part4", &HLT_Mu12_IP6_part4, &b_HLT_Mu12_IP6_part4);
-   fChain->SetBranchAddress("HLT_Mu9_IP5_part0", &HLT_Mu9_IP5_part0, &b_HLT_Mu9_IP5_part0);
-   fChain->SetBranchAddress("HLT_Mu9_IP5_part1", &HLT_Mu9_IP5_part1, &b_HLT_Mu9_IP5_part1);
-   fChain->SetBranchAddress("HLT_Mu9_IP5_part2", &HLT_Mu9_IP5_part2, &b_HLT_Mu9_IP5_part2);
-   fChain->SetBranchAddress("HLT_Mu9_IP5_part3", &HLT_Mu9_IP5_part3, &b_HLT_Mu9_IP5_part3);
-   fChain->SetBranchAddress("HLT_Mu9_IP5_part4", &HLT_Mu9_IP5_part4, &b_HLT_Mu9_IP5_part4);
-   fChain->SetBranchAddress("HLT_Mu7_IP4_part0", &HLT_Mu7_IP4_part0, &b_HLT_Mu7_IP4_part0);
-   fChain->SetBranchAddress("HLT_Mu7_IP4_part1", &HLT_Mu7_IP4_part1, &b_HLT_Mu7_IP4_part1);
-   fChain->SetBranchAddress("HLT_Mu7_IP4_part2", &HLT_Mu7_IP4_part2, &b_HLT_Mu7_IP4_part2);
-   fChain->SetBranchAddress("HLT_Mu7_IP4_part3", &HLT_Mu7_IP4_part3, &b_HLT_Mu7_IP4_part3);
-   fChain->SetBranchAddress("HLT_Mu7_IP4_part4", &HLT_Mu7_IP4_part4, &b_HLT_Mu7_IP4_part4);
-   fChain->SetBranchAddress("HLT_Mu9_IP4_part0", &HLT_Mu9_IP4_part0, &b_HLT_Mu9_IP4_part0);
-   fChain->SetBranchAddress("HLT_Mu9_IP4_part1", &HLT_Mu9_IP4_part1, &b_HLT_Mu9_IP4_part1);
-   fChain->SetBranchAddress("HLT_Mu9_IP4_part2", &HLT_Mu9_IP4_part2, &b_HLT_Mu9_IP4_part2);
-   fChain->SetBranchAddress("HLT_Mu9_IP4_part3", &HLT_Mu9_IP4_part3, &b_HLT_Mu9_IP4_part3);
-   fChain->SetBranchAddress("HLT_Mu9_IP4_part4", &HLT_Mu9_IP4_part4, &b_HLT_Mu9_IP4_part4);
-   fChain->SetBranchAddress("HLT_Mu8_IP5_part0", &HLT_Mu8_IP5_part0, &b_HLT_Mu8_IP5_part0);
-   fChain->SetBranchAddress("HLT_Mu8_IP5_part1", &HLT_Mu8_IP5_part1, &b_HLT_Mu8_IP5_part1);
-   fChain->SetBranchAddress("HLT_Mu8_IP5_part2", &HLT_Mu8_IP5_part2, &b_HLT_Mu8_IP5_part2);
-   fChain->SetBranchAddress("HLT_Mu8_IP5_part3", &HLT_Mu8_IP5_part3, &b_HLT_Mu8_IP5_part3);
-   fChain->SetBranchAddress("HLT_Mu8_IP5_part4", &HLT_Mu8_IP5_part4, &b_HLT_Mu8_IP5_part4);
-   fChain->SetBranchAddress("HLT_Mu8_IP6_part0", &HLT_Mu8_IP6_part0, &b_HLT_Mu8_IP6_part0);
-   fChain->SetBranchAddress("HLT_Mu8_IP6_part1", &HLT_Mu8_IP6_part1, &b_HLT_Mu8_IP6_part1);
-   fChain->SetBranchAddress("HLT_Mu8_IP6_part2", &HLT_Mu8_IP6_part2, &b_HLT_Mu8_IP6_part2);
-   fChain->SetBranchAddress("HLT_Mu8_IP6_part3", &HLT_Mu8_IP6_part3, &b_HLT_Mu8_IP6_part3);
-   fChain->SetBranchAddress("HLT_Mu8_IP6_part4", &HLT_Mu8_IP6_part4, &b_HLT_Mu8_IP6_part4);
-   fChain->SetBranchAddress("HLT_Mu9_IP6_part0", &HLT_Mu9_IP6_part0, &b_HLT_Mu9_IP6_part0);
-   fChain->SetBranchAddress("HLT_Mu9_IP6_part1", &HLT_Mu9_IP6_part1, &b_HLT_Mu9_IP6_part1);
-   fChain->SetBranchAddress("HLT_Mu9_IP6_part2", &HLT_Mu9_IP6_part2, &b_HLT_Mu9_IP6_part2);
-   fChain->SetBranchAddress("HLT_Mu9_IP6_part3", &HLT_Mu9_IP6_part3, &b_HLT_Mu9_IP6_part3);
-   fChain->SetBranchAddress("HLT_Mu9_IP6_part4", &HLT_Mu9_IP6_part4, &b_HLT_Mu9_IP6_part4);
-   fChain->SetBranchAddress("HLT_Mu8_IP3_part0", &HLT_Mu8_IP3_part0, &b_HLT_Mu8_IP3_part0);
-   fChain->SetBranchAddress("HLT_Mu8_IP3_part1", &HLT_Mu8_IP3_part1, &b_HLT_Mu8_IP3_part1);
-   fChain->SetBranchAddress("HLT_Mu8_IP3_part2", &HLT_Mu8_IP3_part2, &b_HLT_Mu8_IP3_part2);
-   fChain->SetBranchAddress("HLT_Mu8_IP3_part3", &HLT_Mu8_IP3_part3, &b_HLT_Mu8_IP3_part3);
-   fChain->SetBranchAddress("HLT_Mu8_IP3_part4", &HLT_Mu8_IP3_part4, &b_HLT_Mu8_IP3_part4);
-   fChain->SetBranchAddress("HLT_QuadPFJet105_88_76_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1", &HLT_QuadPFJet105_88_76_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1, &b_HLT_QuadPFJet105_88_76_15_DoublePFBTagDeepCSV_1p3_7p7_VBF1);
-   fChain->SetBranchAddress("HLT_TrkMu6NoFiltersNoVtx", &HLT_TrkMu6NoFiltersNoVtx, &b_HLT_TrkMu6NoFiltersNoVtx);
-   fChain->SetBranchAddress("HLT_TrkMu16NoFiltersNoVtx", &HLT_TrkMu16NoFiltersNoVtx, &b_HLT_TrkMu16NoFiltersNoVtx);
-   fChain->SetBranchAddress("HLT_DoubleTrkMu_16_6_NoFiltersNoVtx", &HLT_DoubleTrkMu_16_6_NoFiltersNoVtx, &b_HLT_DoubleTrkMu_16_6_NoFiltersNoVtx);
+   fChain->SetBranchAddress("HLT_AK8PFJet330_PFAK8BTagCSV_p17", &HLT_AK8PFJet330_PFAK8BTagCSV_p17, &b_HLT_AK8PFJet330_PFAK8BTagCSV_p17);
+   fChain->SetBranchAddress("HLT_AK8PFJet330_PFAK8BTagCSV_p1", &HLT_AK8PFJet330_PFAK8BTagCSV_p1, &b_HLT_AK8PFJet330_PFAK8BTagCSV_p1);
+   fChain->SetBranchAddress("HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55", &HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55, &b_HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_PixelVeto_Mass55);
+   fChain->SetBranchAddress("HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55", &HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55, &b_HLT_Diphoton30_18_PVrealAND_R9Id_AND_IsoCaloId_AND_HE_R9Id_NoPixelVeto_Mass55);
    fChain->SetBranchAddress("HLTriggerFinalPath", &HLTriggerFinalPath, &b_HLTriggerFinalPath);
    fChain->SetBranchAddress("L1simulation_step", &L1simulation_step, &b_L1simulation_step);
    fChain->SetBranchAddress("Jet_pt_raw", Jet_pt_raw, &b_Jet_pt_raw);
@@ -5389,15 +5763,34 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("PrefireWeight_Up", &PrefireWeight_Up, &b_PrefireWeight_Up);
    fChain->SetBranchAddress("PrefireWeight_Down", &PrefireWeight_Down, &b_PrefireWeight_Down);
    fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+   fChain->SetBranchAddress("ele_id_scale", &ele_id_scale, &b_ele_id_scale);
+   fChain->SetBranchAddress("ele_id_scale_Up", &ele_id_scale_Up, &b_ele_id_scale_Up);
+   fChain->SetBranchAddress("ele_id_scale_Down", &ele_id_scale_Down, &b_ele_id_scale_Down);
+   fChain->SetBranchAddress("ele_reco_scale", &ele_reco_scale, &b_ele_reco_scale);
+   fChain->SetBranchAddress("ele_reco_scale_Up", &ele_reco_scale_Up, &b_ele_reco_scale_Up);
+   fChain->SetBranchAddress("ele_reco_scale_Down", &ele_reco_scale_Down, &b_ele_reco_scale_Down);
+   fChain->SetBranchAddress("muon_id_scale", &muon_id_scale, &b_muon_id_scale);
+   fChain->SetBranchAddress("muon_id_scale_Up", &muon_id_scale_Up, &b_muon_id_scale_Up);
+   fChain->SetBranchAddress("muon_id_scale_Down", &muon_id_scale_Down, &b_muon_id_scale_Down);
+   fChain->SetBranchAddress("muon_iso_scale", &muon_iso_scale, &b_muon_iso_scale);
+   fChain->SetBranchAddress("muon_iso_scale_Up", &muon_iso_scale_Up, &b_muon_iso_scale_Up);
+   fChain->SetBranchAddress("muon_iso_scale_Down", &muon_iso_scale_Down, &b_muon_iso_scale_Down);
+   fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+   fChain->SetBranchAddress("photon_id_scale_Up", &photon_id_scale_Up, &b_photon_id_scale_Up);
+   fChain->SetBranchAddress("photon_id_scale_Down", &photon_id_scale_Down, &b_photon_id_scale_Down);
+   fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
+   fChain->SetBranchAddress("photon_veto_scale_Up", &photon_veto_scale_Up, &b_photon_veto_scale_Up);
+   fChain->SetBranchAddress("photon_veto_scale_Down", &photon_veto_scale_Down, &b_photon_veto_scale_Down);
    fChain->SetBranchAddress("btag_weight", &btag_weight, &b_btag_weight);
    fChain->SetBranchAddress("btag_weight_up", &btag_weight_up, &b_btag_weight_up);
    fChain->SetBranchAddress("btag_weight_down", &btag_weight_down, &b_btag_weight_down);
-   fChain->SetBranchAddress("ele_id_scale", &ele_id_scale, &b_ele_id_scale);
-   fChain->SetBranchAddress("ele_reco_scale", &ele_reco_scale, &b_ele_reco_scale);
-   fChain->SetBranchAddress("muon_id_scale", &muon_id_scale, &b_muon_id_scale);
-   fChain->SetBranchAddress("muon_iso_scale", &muon_iso_scale, &b_muon_iso_scale);
-   fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
-   fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
+   fChain->SetBranchAddress("n_bjets_nom", &n_bjets_nom, &b_n_bjets_nom);
+   fChain->SetBranchAddress("njets20_nom", &njets20_nom, &b_njets20_nom);
+   fChain->SetBranchAddress("njets25_nom", &njets25_nom, &b_njets25_nom);
+   fChain->SetBranchAddress("njets30_nom", &njets30_nom, &b_njets30_nom);
+   fChain->SetBranchAddress("njets35_nom", &njets35_nom, &b_njets35_nom);
+   fChain->SetBranchAddress("njets40_nom", &njets40_nom, &b_njets40_nom);
+   fChain->SetBranchAddress("njets50_nom", &njets50_nom, &b_njets50_nom);
    Notify();
 }
 
@@ -5419,6 +5812,7 @@ void WWg::Show(Long64_t entry)
    if (!fChain) return;
    fChain->Show(entry);
 }
+
 void WWg::endJob() {
         fout->cd();
         ExTree->Write();
@@ -5426,6 +5820,7 @@ void WWg::endJob() {
         fout->Close();
         delete fout;
 }
+
 Int_t WWg::Cut(Long64_t entry)
 {
 // This function may be called from Loop.

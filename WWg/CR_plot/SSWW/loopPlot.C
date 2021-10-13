@@ -64,19 +64,19 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	std::string dataLabels[kk] = { "MuonEG"};
 	cout<<"Data size "<<fData.size()<<endl;
 	// set mc imformation
-	const int nMC = 7;//
+	const int nMC = 9;//
 	std::cout << "set data imformation, we have " << nMC << "mc file"
 		<< std::endl;
-        std::string mc[nMC] ={"fakeL_Jets","WW","VV","ST","DYJets","TTJets","tZq"};
+        std::string mc[nMC] ={"fakeL_Jets","WW","VV","ST","DYJets","TTJets","tZq","ZGJets","WGJets"};
 	std::vector< TString > fMC;
 	for (int ii = 0; ii < nMC; ii++) {
 		fMC.push_back(pathToTrees[0] +"cutlep1-out"+ mc[ii] +year+ ".root");
 		cout<<pathToTrees[0]<<"cutlep1-out"<<mc[ii] <<year<<".root"<<endl;
 	}
 	const int nmc=fMC.size();
-	std::string bkgLabels[nmc] ={"fakeL","WW","VV","tW","DY","t#bar{t}","tZq"};
-	std::string mcLabels[nmc] ={"fakeL","WW","VV","ST","DYJets","TTJets","tZq"};
-	double kFactorsMC_array[nmc] ={1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
+	std::string bkgLabels[nmc]={"fakeL","WW","VV","tW","DY","t#bar{t}","tZq","QCD Z#gamma","QCD W#gamma"};
+	std::string mcLabels[nmc] ={"fakeL","WW","VV","ST","DYJets","TTJets","tZq","ZGJets","WGJets"};
+	double kFactorsMC_array[nmc] ={1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1,lumiValue1};
 
 	cout<<"MC size "<<fMC.size()<<endl;
 	std::vector<double> kFactorsMC;
@@ -88,14 +88,14 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	const int nMCSig = 1;
 	std::cout << "set data imformation, we have " << nMCSig << "mcsig file"
 		<< std::endl;
-	std::string mcSig[nMCSig] = { "WWG"};
+	std::string mcSig[nMCSig] = { "WWG_emu"};
 	std::vector < TString > fMCSig;
 	for (int ii = 0; ii < nMCSig; ii++) {
 		fMCSig.push_back(pathToTrees[0] + "cutlep1-out" + mcSig[ii] + year+".root");
 	}
 	cout<<"MC Sig size "<<fMCSig.size()<<endl;
 	const int nmcsig=fMCSig.size();
-	std::string mcLabelsSig[nmcsig] = { "WWG"};
+	std::string mcLabelsSig[nmcsig] = { "WWG_emu"};
 	double kFactorsSig_array[nmcsig] = {lumiValue1};
 	std::vector<double> kFactorsMCSig;
 	for (int index = 0; index < nmcsig; index++) {
@@ -107,7 +107,7 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
-        std::vector < TString > histName={"m_{#font[12]{ll}}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{#font[12]{l}_{1}}","#eta_{#font[12]{l}_{1}}","#phi_{#font[12]{l}_{1}}","p_{T}^{#font[12]{l}_{2}}","#eta_{#font[12]{l}_{2}}","#phi_{#font[12]{l}_{2}}","m_{#font[12]{ll}#gamma}","p_{T}^{#font[12]{ll}}","#phi_{#font[12]{ll}}","#eta_{#font[12]{ll}}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}","N_{jets}"};
+        std::vector < TString > histName={"m_{#font[12]{ll}}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{#font[12]{l}_{1}}","#eta_{#font[12]{l}_{1}}","#phi_{#font[12]{l}_{1}}","p_{T}^{#font[12]{l}_{2}}","#eta_{#font[12]{l}_{2}}","#phi_{#font[12]{l}_{2}}","m_{#font[12]{ll}#gamma}","p_{T}^{#font[12]{ll}}","#phi_{#font[12]{ll}}","#eta_{#font[12]{ll}}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}","N_{jets}","N_{jets15}","N_{jets20}","N_{jets30}","N_{jets40}","N_{jets50}"};
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
 

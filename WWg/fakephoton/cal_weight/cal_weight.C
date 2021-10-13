@@ -3,7 +3,7 @@ TH1D* run(TString cut,TString file,TString channel,TString isBarrel,TString year
 	if(isBarrel.Contains("barrel"))
 		ptbins={20,25,30,35,40,50,60,100,400};
 	else    ptbins={20,25,30,40,50,60,400};
-	TFile*f1=new TFile("/home/pku/anying/cms/rootfiles/WWg/20"+year+"/cutlep-"+file+".root");
+	TFile*f1=new TFile("/home/pku/anying/cms/rootfiles/WWg/20"+year+"/cutlep1-"+file+".root");
 	TTree*tree=(TTree*)f1->Get("Events");
         TString histname=file+"_"+channel+"_"+isBarrel;
         TH1D*h1 = new TH1D(histname,"",ptbins.size()-1,&ptbins[0]);
@@ -43,13 +43,15 @@ int cal_weight(){
 				TH1D*h3=run(cut3,"outVV"+year[ik],channel[i],isBarrel[k],year[ik]);
 				TH1D*h4=run(cut3,"outTTGJets"+year[ik],channel[i],isBarrel[k],year[ik]);
 				TH1D*h5=run(cut3,"outZGJets"+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h8=run(cut3,"outWGJets"+year[ik],channel[i],isBarrel[k],year[ik]);
 				TH1D*h6=run(cut3,"outST"+year[ik],channel[i],isBarrel[k],year[ik]);
-				TH1D*h7=run(cut3,"outWWG"+year[ik],channel[i],isBarrel[k],year[ik]);
+				TH1D*h7=run(cut3,"outWWG_emu"+year[ik],channel[i],isBarrel[k],year[ik]);
 				h3->Scale(lumi);
 				h4->Scale(lumi);
 				h5->Scale(lumi);
 				h6->Scale(lumi);
 				h7->Scale(lumi);
+				h8->Scale(lumi);
 				fhist->cd();
 				h1->Write();
                                 TString name=h2->GetName();
@@ -59,6 +61,7 @@ int cal_weight(){
 				h5->Write();
 				h6->Write();
 				h7->Write();
+				h8->Write();
 				TCanvas*c1=new TCanvas("c1","",900,600);
 //				c1->SetLogy();
 				TLegend*l1=new TLegend(0.6,0.6,0.9,0.9);
@@ -70,6 +73,7 @@ int cal_weight(){
 				h5->Draw("same");
 				h6->Draw("same");
 				h7->Draw("same");
+				h8->Draw("same");
 				h1->SetLineColor(2);
 				h2->SetLineColor(3);
 				h3->SetLineColor(4);
@@ -77,12 +81,14 @@ int cal_weight(){
 				h5->SetLineColor(6);
 				h6->SetLineColor(7);
 				h7->SetLineColor(8);
+				h8->SetLineColor(9);
 				l1->AddEntry(h1,"data");
 				l1->AddEntry(h2,"plj");
 				l1->AddEntry(h3,"VV");
 				l1->AddEntry(h4,"TTGJets");
 				l1->AddEntry(h5,"ZGJets");
 				l1->AddEntry(h6,"ST");
+				l1->AddEntry(h8,"WGJets");
 				l1->AddEntry(h7,"WWG");
 				l1->Draw();
 				c1->Print("hist_com_"+channel[i]+"_"+isBarrel[k]+year[ik]+".pdf");
@@ -106,16 +112,21 @@ int cal_weight(){
                                         cat[1]="Endcap";
 				}
 				else{
-                                       cat[0]=isBarrel[0]; 
-                                       cat[1]=isBarrel[1]; 
+					cat[0]="Barrel";
+					cat[1]="Endcap";
+//					cat[0]=isBarrel[0]; 
+//					cat[1]=isBarrel[1]; 
 				}
 				for(int j=0;j<ptbins.size()-1;j++){
-//					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
-					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/"+cat[k]+"Muon/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
-					if(!f1.is_open())  cout<<Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1])<<endl;
+					if(year[ik]=="18")
+						f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
+
+					else if(year[ik]=="17")
+						f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/"+cat[k]+"Muon/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
+					if(!f1.is_open())  cout<<Form("can not open /data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1])<<endl;
 					f1>>fakerate[j];
 					plj_weight[j]=h1->GetBinContent(j+1)/(h2->GetBinContent(j+1)-h3->GetBinContent(j+1)-h4->GetBinContent(j+1)-h5->GetBinContent(j+1)-h6->GetBinContent(j+1)-h7->GetBinContent(j+1))*fakerate[j];
-					cout<<" pt "<<ptbins[j]<<"~"<<ptbins[j+1]<<", fake photon fraction "<<fakerate[j]<<", data yields "<<h1->GetBinContent(j+1)<<", plj yields "<<h2->GetBinContent(j+1)<<", prompt contribution from MC "<<h3->GetBinContent(j+1)+h4->GetBinContent(j+1)+h5->GetBinContent(j+1)+h6->GetBinContent(j+1)+h7->GetBinContent(j+1)<<", event weight "<<plj_weight[j]<<endl;
+					cout<<" pt "<<ptbins[j]<<"~"<<ptbins[j+1]<<", fake photon fraction "<<fakerate[j]<<", data yields "<<h1->GetBinContent(j+1)<<", plj yields "<<h2->GetBinContent(j+1)<<", prompt contribution from MC "<<h3->GetBinContent(j+1)+h4->GetBinContent(j+1)+h5->GetBinContent(j+1)+h6->GetBinContent(j+1)+h7->GetBinContent(j+1)+h8->GetBinContent(j+1)<<", event weight "<<plj_weight[j]<<endl;
 
 					ftxt<<fixed<<setprecision(2)<<plj_weight[j]<<endl;
 					f1.close();

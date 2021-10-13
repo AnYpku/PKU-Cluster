@@ -13,8 +13,6 @@ void WWg::Loop(TString name)
    Long64_t nentries = fChain->GetEntriesFast();
 
    Long64_t nbytes = 0, nb = 0;
-   Long64_t npp = fChain->GetEntries("gen_weight>0.");
-   Long64_t nmm = fChain->GetEntries("gen_weight<0.");
    Bool_t HLT_mm=0,HLT_ee=0,HLT_emu=0;
    Bool_t BSL=0,LEP=0,PHOTON=0,missET=0;
    int tot=0;double met_tmp,metphi_tmp,phiVlep;
@@ -35,7 +33,7 @@ void WWg::Loop(TString name)
       lep2p4.SetPtEtaPhiM(lep2pt, lep2eta, lep2phi, 0.000511);
       phiVlep=(lep1p4+lep2p4).Phi();
 
-      if(name.Contains("Muon")||name.Contains("plj")){ met_tmp=PuppiMET_T1_pt;metphi_tmp=PuppiMET_T1_phi;}
+      if(name.Contains("Muon")||name.Contains("plj")||name.Contains("fake")){ met_tmp=PuppiMET_T1_pt;metphi_tmp=PuppiMET_T1_phi;}
       else{ met_tmp=PuppiMET_T1Smear_pt;metphi_tmp=PuppiMET_T1Smear_phi;}
       mT=sqrt(2*(ptll*met_tmp*(1-cos(phiVlep-metphi_tmp) ) ) );
       if(lep1pt>lep2pt){

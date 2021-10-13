@@ -121,6 +121,9 @@ class EDBRHistoMaker {
 		Bool_t          HLT_Ele32_WPTight_Gsf;
 		Bool_t          HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		Double_t        scalef;
+                Float_t         PrefireWeight;
+                Float_t         PrefireWeight_Up;
+                Float_t         PrefireWeight_Down;
                 Double_t        btag_weight;
                 Double_t        btag_weight_up;
                 Double_t        btag_weight_down;
@@ -219,6 +222,9 @@ class EDBRHistoMaker {
 		TBranch        *b_HLT_Ele32_WPTight_Gsf;
 		TBranch        *b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		TBranch        *b_scalef;   //!
+                TBranch        *b_PrefireWeight;   //!
+                TBranch        *b_PrefireWeight_Up;   //!
+                TBranch        *b_PrefireWeight_Down;   //!
 		TBranch        *b_actualWeight;   //!
                 TBranch        *b_btag_weight;   //!
                 TBranch        *b_btag_weight_up;   //!
@@ -379,6 +385,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("HLT_Ele1", &HLT_Ele32_WPTight_Gsf, "HLT_Ele1/B");
 	treename->Branch("HLT_Ele2", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, "HLT_Ele2/B");
 	treename->Branch("scalef", &scalef, "scalef/D");
+        treename->Branch("PrefireWeight", &PrefireWeight, "PrefireWeight/F");
+        treename->Branch("PrefireWeight_Up", &PrefireWeight_Up, "PrefireWeight_Up/F");
+        treename->Branch("PrefireWeight_Down", &PrefireWeight_Down, "PrefireWeight_Down/F");
         treename->Branch("btag_weight", &btag_weight, "btag_weight/D");
         treename->Branch("btag_weight_up", &btag_weight_up, "btag_weight_up/D");
         treename->Branch("btag_weight_down", &btag_weight_down, "btag_weight_down/D");
@@ -449,6 +458,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("puWeightUp", &puWeightUp, &b_puWeightUp);
 	fChain->SetBranchAddress("puWeightDown", &puWeightDown, &b_puWeightDown);
 	fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+        fChain->SetBranchAddress("PrefireWeight", &PrefireWeight, &b_PrefireWeight);
+        fChain->SetBranchAddress("PrefireWeight_Up", &PrefireWeight_Up, &b_PrefireWeight_Up);
+        fChain->SetBranchAddress("PrefireWeight_Down", &PrefireWeight_Down, &b_PrefireWeight_Down);
         fChain->SetBranchAddress("btag_weight", &btag_weight, &b_btag_weight);
         fChain->SetBranchAddress("btag_weight_up", &btag_weight_up, &b_btag_weight_up);
         fChain->SetBranchAddress("btag_weight_down", &btag_weight_down, &b_btag_weight_down);
@@ -551,6 +563,11 @@ void EDBRHistoMaker::createAllHistos(TString isChannel) {
         hs.setHisto("PuppiMET_T1_pt", 12,20, 260);
         hs.setHisto("PuppiMET_T1_phi", 12,-3.2, 3.2);
 	hs.setHisto("njets", 14,0, 14);
+	hs.setHisto("njets15", 14,0, 14);
+	hs.setHisto("njets20", 14,0, 14);
+	hs.setHisto("njets30", 14,0, 14);
+	hs.setHisto("njets40", 14,0, 14);
+	hs.setHisto("njets50", 14,0, 14);
 	char buffer[256];
 	char buffer2[256];
 
@@ -714,6 +731,11 @@ void EDBRHistoMaker::Loop(std::string outFileName,double luminosity,int isBarrel
                 (theHistograms["PuppiMET_T1_pt"])->Fill(PuppiMET_T1_pt, actualWeight);
                 (theHistograms["PuppiMET_T1_phi"])->Fill(PuppiMET_T1_phi, actualWeight);
                 (theHistograms["njets"])->Fill(njets, actualWeight);
+                (theHistograms["njets15"])->Fill(njets15, actualWeight);
+                (theHistograms["njets20"])->Fill(njets20, actualWeight);
+                (theHistograms["njets30"])->Fill(njets30, actualWeight);
+                (theHistograms["njets40"])->Fill(njets40, actualWeight);
+                (theHistograms["njets50"])->Fill(njets50, actualWeight);
 
 	}     //end loop over entries
 	cout << "after cut: " << numbe_out << "*actualweight " << actualWeight
@@ -796,7 +818,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double luminosity,int i
 			nn = 1;
 		else
 			nn = -1;
-		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale/*photon_id_scale*photon_veto_scale*/*puWeight*btag_weight;//mc
+                if(filename.Contains("18")) PrefireWeight=1;
+		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale/*photon_id_scale*photon_veto_scale*/*puWeight*btag_weight*PrefireWeight;//mc
 
 		if (fabs(lep1phi-lep2phi)>Pi) drll = sqrt((lep1eta-lep2eta)*(lep1eta-lep2eta)+(2*Pi-fabs(lep1phi-lep2phi))*(2*Pi-fabs(lep1phi-lep2phi)));
 		else drll = sqrt((lep1eta-lep2eta)*(lep1eta-lep2eta)+(fabs(lep1phi-lep2phi))*(fabs(lep1phi-lep2phi)));
@@ -888,6 +911,11 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,double luminosity,int i
                 (theHistograms["PuppiMET_T1_pt"])->Fill(PuppiMET_T1Smear_pt, actualWeight);
                 (theHistograms["PuppiMET_T1_phi"])->Fill(PuppiMET_T1Smear_phi, actualWeight);
                 (theHistograms["njets"])->Fill(njets, actualWeight);
+                (theHistograms["njets15"])->Fill(njets15, actualWeight);
+                (theHistograms["njets20"])->Fill(njets20, actualWeight);
+                (theHistograms["njets30"])->Fill(njets30, actualWeight);
+                (theHistograms["njets40"])->Fill(njets40, actualWeight);
+                (theHistograms["njets50"])->Fill(njets50, actualWeight);
 	}
 	cout << "after cut: " << numbe_out << "; actualweight" << actualWeight<<endl;
 	cout<< " total events: " << sum <<"; yields "<<sum*luminosity<<endl;

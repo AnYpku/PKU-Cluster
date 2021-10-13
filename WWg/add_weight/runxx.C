@@ -3,8 +3,7 @@
 #include <fstream>
 using namespace std;
 
-void runxx(TString year) {
-	TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/";
+void runxx(TString year,TString dir) {
 	ifstream infile("file"+year);
 	string buffer; 
 	TString infilename;
@@ -34,8 +33,10 @@ void runxx(TString year) {
 }
 
 int main(){
-//	runxx("18");
-	runxx("17");
+	TString dir18 ="/home/pku/anying/cms/rootfiles/WWg/2018/";
+	TString dir17 ="/home/pku/anying/cms/rootfiles/WWg/2017/";
+//	runxx("18",dir18);
+	runxx("17",dir17);
 	return 1;
 }
 

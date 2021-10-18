@@ -3829,7 +3829,6 @@ public :
  private:
      TTree *ExTree;
      TFile *fout;
-     float mT,mT2;
 };
 
 #endif
@@ -3894,8 +3893,6 @@ void WWg::Init(TTree *tree)
 
    fout = new TFile("/home/pku/anying/cms/rootfiles/"+m_dataset, "RECREATE");
    ExTree = fChain->CloneTree(0);
-   ExTree->Branch("mT",&mT,"mT/F");
-   ExTree->Branch("mT2",&mT2,"mT2/F");
 
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);

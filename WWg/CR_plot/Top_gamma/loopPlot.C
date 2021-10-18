@@ -103,7 +103,7 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 	std::vector < std::string > fHistosData;
 	std::vector < std::string > fHistosMC;
 	std::vector < std::string > fHistosMCSig;
-        std::vector < TString > histName={"m_{#font[12]{ll}}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{#font[12]{l}_{1}}","#eta_{#font[12]{l}_{1}}","#phi_{#font[12]{l}_{1}}","p_{T}^{#font[12]{l}_{2}}","#eta_{#font[12]{l}_{2}}","#phi_{#font[12]{l}_{2}}","m_{#font[12]{ll}#gamma}","m_{#font[12]{l_{1}}#gamma}","m_{#font[12]{l_{2}}#gamma}","p_{T}^{#font[12]{ll}}","#phi_{#font[12]{ll}}","#eta_{#font[12]{ll}}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}","N_{jets}","N_{jets15}","N_{jets20}","N_{jets30}","N_{jets40}","N_{jets50}"};
+        std::vector < TString > histName={"m_{#font[12]{ll}}","p_{T}^{#gamma}","#eta_{#gamma}","#phi_{#gamma}","p_{T}^{#font[12]{l}_{#mu}}","#eta_{#font[12]{l}_{#mu}}","#phi_{#font[12]{l}_{#mu}}","p_{T}^{#font[12]{l}_{e}}","#eta_{#font[12]{l}_{e}}","#phi_{#font[12]{l}_{e}}","m_{#font[12]{ll}#gamma}","m_{#font[12]{l_{1}}#gamma}","m_{#font[12]{l_{2}}#gamma}","p_{T}^{#font[12]{ll}}","#phi_{#font[12]{ll}}","#eta_{#font[12]{ll}}","PuppiMET","#phi_{PuppiMET}","npvs","N_{bjets}","m_{T_{WW}}","m_{T_{W_{2}}}","PuppiMET_T1","#phi_{PuppiMET_T1}","N_{jets}","N_{jets15}","N_{jets20}","N_{jets30}","N_{jets40}","N_{jets50}"};
 	char buffer[256], out_buffer[256];
 	printf("All strings set\n");
 
@@ -278,7 +278,7 @@ void loopPlot(int isBarrel,TString isChannel,std::string year) {
 }
 
 int main() {
-//	loopPlot(2,"emu","18");
+	loopPlot(2,"emu","18");
 	loopPlot(2,"emu","17");
 	return 0;
 }

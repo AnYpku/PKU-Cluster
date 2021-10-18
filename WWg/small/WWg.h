@@ -3829,7 +3829,7 @@ public :
  private:
      TTree *ExTree;
      TFile *fout;
-     float mT,mT2;
+     float mT,mT2,ml1g,ml2g;
 };
 
 #endif
@@ -3896,6 +3896,8 @@ void WWg::Init(TTree *tree)
    ExTree = fChain->CloneTree(0);
    ExTree->Branch("mT",&mT,"mT/F");
    ExTree->Branch("mT2",&mT2,"mT2/F");
+   ExTree->Branch("ml1g",&ml1g,"ml1g/F");
+   ExTree->Branch("ml2g",&ml2g,"ml2g/F");
 
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);

@@ -42,7 +42,7 @@ void WWg::Loop(TString name,TString year)
 	      PuppiMET_T1_pt=PuppiMET_T1Smear_pt;
 	      PuppiMET_T1_phi=PuppiMET_T1Smear_phi;
       }
-      cout<<jentry<<" test1"<<weight_b->GetBinContent(weight_b->FindBin(0.5,photonet))<<endl;
+//      cout<<jentry<<" test1"<<weight_b->GetBinContent(weight_b->FindBin(0.5,photonet))<<endl;
       if(cut){
               if(fabs(photoneta)<1.4442){
                       double weight=weight_b->GetBinContent(weight_b->FindBin(0.5,photonet));
@@ -66,7 +66,7 @@ void WWg::Loop(TString name,TString year)
       }
       if(name.Contains("Muon")==0 && name.Contains("WWG")==0) scalef=scalef*(-1);
       ExTree->Fill();
-      cout<<jentry<<" test2"<<endl;
+//      cout<<jentry<<" test2"<<endl;
    }
    fin->Close();
    cout<<hb->GetEntries()<<" "<<he->GetEntries()<<endl;

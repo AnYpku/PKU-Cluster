@@ -35,8 +35,8 @@ void runxx(TString year,TString dir) {
 int main(){
 	TString dir18 ="/home/pku/anying/cms/rootfiles/WWg/2018/";
 	TString dir17 ="/home/pku/anying/cms/rootfiles/WWg/2017/";
-//	runxx("18",dir18);
-	runxx("17",dir17);
+	runxx("18",dir18);
+//	runxx("17",dir17);
 	return 1;
 }
 

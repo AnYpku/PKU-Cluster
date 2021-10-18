@@ -380,10 +380,10 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("ml2g", &ml2g, "ml2g/F");
 	treename->Branch("ptll", &ptll, "ptll/F");
 	treename->Branch("mt", &mt, "mt/F");
-	treename->Branch("mT", &mT, "mT/D");
-	treename->Branch("mT1", &mT1, "mT1/D");
-	treename->Branch("mT2", &mT2, "mT2/D");
-	treename->Branch("met", &met, "met/D");
+	treename->Branch("mT", &mT, "mT/F");
+	treename->Branch("mT1", &mT1, "mT1/F");
+	treename->Branch("mT2", &mT2, "mT2/F");
+	treename->Branch("met", &met, "met/F");
 	treename->Branch("metup", &metup, "metup/F");
 	treename->Branch("puppimet", &puppimet, "puppimet/F");
 	treename->Branch("puppimetphi", &puppimetphi, "puppimetphi/F");
@@ -428,14 +428,14 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("HLT_emu4", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ, "HLT_emu4/B");
 	treename->Branch("HLT_Ele1", &HLT_Ele32_WPTight_Gsf, "HLT_Ele1/B");
 	treename->Branch("HLT_Ele2", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, "HLT_Ele2/B");
-	treename->Branch("scalef", &scalef, "scalef/D");
+	treename->Branch("scalef", &scalef, "scalef/F");
         treename->Branch("PrefireWeight", &PrefireWeight, "PrefireWeight/F");
         treename->Branch("PrefireWeight_Up", &PrefireWeight_Up, "PrefireWeight_Up/F");
         treename->Branch("PrefireWeight_Down", &PrefireWeight_Down, "PrefireWeight_Down/F");
-        treename->Branch("btag_weight", &btag_weight, "btag_weight/D");
-        treename->Branch("btag_weight_up", &btag_weight_up, "btag_weight_up/D");
-        treename->Branch("btag_weight_down", &btag_weight_down, "btag_weight_down/D");
-	treename->Branch("actualWeight", &actualWeight, "actualWeight/D");
+        treename->Branch("btag_weight", &btag_weight, "btag_weight/F");
+        treename->Branch("btag_weight_up", &btag_weight_up, "btag_weight_up/F");
+        treename->Branch("btag_weight_down", &btag_weight_down, "btag_weight_down/F");
+	treename->Branch("actualWeight", &actualWeight, "actualWeight/F");
 	cout<<"make outfile tree end"<<endl;
 
 	fChain->SetBranchAddress("channel", &channel, &b_channel);
@@ -766,14 +766,14 @@ void EDBRHistoMaker::Loop(std::string outFileName,float luminosity,int isBarrel,
                 HLT_Ele1=HLT_Ele32_WPTight_Gsf;HLT_Ele2=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		//data
 		actualWeight=0;
-		if(njets30>1)actualWeight=1;
+//		if(njets30>1)actualWeight=1;
                 bool photon_channel=false,lepton_channel=false;
                 if(isChannel=="emu") 
 			lepton_channel= ((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5) && lep1_charge*lep2_charge<0 && drll>0.5;
                 if(isBarrel==1)  photon_channel=( (fabs(photoneta) < 1.4442) );
                 else if(isBarrel==0) photon_channel= ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 );
                 else photon_channel=( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ));
-	        if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && lep1_is_tight==1 && lep2_is_tight==1 && mll >20 && ptll > 30 && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_selection==1 && PuppiMET_T1_pt > 20 && mT2>30 && mT>60 && n_bjets_nom==0 ){
+	        if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && lep1_is_tight==1 && lep2_is_tight==1 && mll >20 && ptll > 30 && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_selection==1 && PuppiMET_T1_pt > 20 && mT2>30 && mT>60 && n_bjets_nom==0 && njets30<=1 ){
 			sum = sum + actualWeight;
 			numbe_out++;
 			treename->Fill();
@@ -945,7 +945,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
                 if(isBarrel==1)  photon_channel=( (fabs(photoneta) < 1.4442) );
                 else if(isBarrel==0) photon_channel= ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 );
                 else photon_channel=( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ));
-		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && mll >20 && ptll > 30 && lepton_flag && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_flag==1 && PuppiMET_T1Smear_pt > 20 && mT2>30&& mT>60 && n_bjets_nom==0){
+		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && mll >20 && ptll > 30 && lepton_flag && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_flag==1 && PuppiMET_T1Smear_pt > 20 && mT2>30&& mT>60 && n_bjets_nom==0 && njets30<=1){
 			if(gen_weight>0) npp++;
 			if(gen_weight<0) nmm++;
 			numbe_out++;

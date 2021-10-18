@@ -693,9 +693,17 @@ void EDBRHistoMaker::Loop(std::string outFileName,float luminosity,int isBarrel,
 
 		Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, mll);
                 photonp4.SetPtEtaPhiM(photonet, photoneta, photonphi,0);               
-                ml1g=(lep1p4+photonp4).M();
-                ml2g=(lep2p4+photonp4).M();
                 mllg=(Zp4+photonp4).M();
+
+                if(lep1pt>lep2pt){
+                        ml1g=(lep1p4+photonp4).M();
+                        ml2g=(lep2p4+photonp4).M();
+                }
+                else{
+                        ml1g=(lep2p4+photonp4).M();
+                        ml2g=(lep1p4+photonp4).M();
+                }
+
                 mT=sqrt(2*(ptll*PuppiMET_T1_pt*(1-cos(phiVlep-PuppiMET_T1_phi) ) ) );
 		if(lep1pt>lep2pt){
 			mT2=sqrt(2*(lep2pt*PuppiMET_T1_pt*(1-cos(lep2phi-PuppiMET_T1_phi) ) ) );
@@ -822,9 +830,16 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 
                 Zp4.SetPtEtaPhiM(ptVlep, yVlep, phiVlep, mll);
                 photonp4.SetPtEtaPhiM(photonet, photoneta, photonphi,0);        
-                ml2g=(lep2p4+photonp4).M();
-                ml1g=(lep1p4+photonp4).M();
                 mllg=(Zp4+photonp4).M();
+
+                if(lep1pt>lep2pt){
+                        ml1g=(lep1p4+photonp4).M();
+                        ml2g=(lep2p4+photonp4).M();
+                }
+                else{
+                        ml1g=(lep2p4+photonp4).M();
+                        ml2g=(lep1p4+photonp4).M();
+                }
 
 		if(filename.Contains("plj") || filename.Contains("fake")){
                         PuppiMET_T1Smear_pt=PuppiMET_T1_pt; 

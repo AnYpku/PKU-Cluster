@@ -39,70 +39,94 @@ TGraphAsymmErrors*run_data(TFile*file,TString tag,int index,int num){
 }
 int Draw_fit(){
 	vector<TString> tag={"16","17","18"};
-	vector<TString>njets={"0","1","2"};
+	vector<TString>njets={"0","1"};
+	vector<TString>vars={"ml1g","ml2g","mllg"};
 	TFile*fout;TFile*fout1;TFile*fout2;
-	for(int j=1;j<tag.size();j++){
-		for(int i=0;i<njets.size()-1;i++){
-			TFile*file=new TFile("./fitDiagnostics"+tag[j]+"_"+njets[i]+"jets.root");
-			fout=new TFile("hist_full_fit"+tag[j]+"_"+njets[i]+"jets.root","recreate");
-			int index;index=1;
-			cout<<tag[j]<<endl;
-			TH1F*h_Top        =run(file,tag[j],"Top",index,"full",24);
-			TH1F*h_VV        =run(file,tag[j],"VV",index,"full",24);
-			TH1F*h_QCD       =run(file,tag[j],"VA",index,"full",24);
-			TH1F*h_Sig       =run(file,tag[j],"Sig",index,"full",24);
-			TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index,"full",24);
-			TH1F*h_Nonprompt_lepton=run(file,tag[j],"Nonprompt_lepton",index,"full",24);
-			TH1F*h_total     =run(file,tag[j],"total",index,"full",24);
-			TGraphAsymmErrors*data=run_data(file,tag[j],index,24);
-			fout->cd();
-			h_Top->Write();h_QCD->Write();h_Sig->Write();
-			h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
-			h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
-			file->Close();
+	int binCR,binSR,num;
+	for(int k=0;k<vars.size();k++){
+		for(int j=1;j<tag.size();j++){
+			for(int i=0;i<njets.size();i++){
+				TFile*file=new TFile("./fitDiagnostics"+tag[j]+"_"+njets[i]+"jets_"+vars[k]+".root");
+				fout=new TFile("hist_full_fit"+tag[j]+"_"+njets[i]+"jets_"+vars[k]+".root","recreate");
+				int index;index=1;
+				if(njets[i]=="0"){
+					if(tag[j]=="17" && vars[k].Contains("mllg"))  {binCR=8; binSR=12;}
+					else  {binCR=9; binSR=12;}
+				}
+				else{ binCR=12;binSR=9;}
+				num=binCR+binSR;
+				cout<<tag[j]<<endl;
+				TH1F*h_Top        =run(file,tag[j],"Top",index,"full",num);
+				TH1F*h_VV        =run(file,tag[j],"VV",index,"full",num);
+				TH1F*h_QCD       =run(file,tag[j],"VA",index,"full",num);
+				TH1F*h_Sig       =run(file,tag[j],"Sig",index,"full",num);
+				TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index,"full",num);
+				TH1F*h_Nonprompt_lepton=run(file,tag[j],"Nonprompt_lepton",index,"full",num);
+				TH1F*h_total     =run(file,tag[j],"total",index,"full",num);
+				TGraphAsymmErrors*data=run_data(file,tag[j],index,num);
+				fout->cd();
+				h_Top->Write();h_QCD->Write();h_Sig->Write();
+				h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
+				h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
+				file->Close();
+			}
 		}
 	}
-	for(int j=1;j<tag.size();j++){
-		for(int i=0;i<njets.size()-1;i++){
-			TFile*file=new TFile("./fitDiagnostics"+tag[j]+"_"+njets[i]+"jets.root");
-			fout1=new TFile("hist_SR_fit"+tag[j]+"_"+njets[i]+"jets.root","recreate");
-			int index;index=13;
-			cout<<tag[j]<<endl;
-			TH1F*h_Top        =run(file,tag[j],"Top",index,"SR",12);
-			TH1F*h_VV        =run(file,tag[j],"VV",index,"SR",12);
-			TH1F*h_QCD       =run(file,tag[j],"VA",index,"SR",12);
-			TH1F*h_Sig       =run(file,tag[j],"Sig",index,"SR",12);
-			TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index,"SR",12);
-			TH1F*h_Nonprompt_lepton=run(file,tag[j],"Nonprompt_lepton",index,"SR",12);
-			TH1F*h_total     =run(file,tag[j],"total",index,"SR",12);
-			TGraphAsymmErrors*data=run_data(file,tag[j],index,12);
-			fout1->cd();
-			h_Top->Write();h_QCD->Write();h_Sig->Write();
-			h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
-			h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
-			file->Close();
+	for(int k=0;k<vars.size();k++){
+		for(int j=1;j<tag.size();j++){
+			for(int i=0;i<njets.size();i++){
+				TFile*file=new TFile("./fitDiagnostics"+tag[j]+"_"+njets[i]+"jets_"+vars[k]+".root");
+				fout1=new TFile("hist_SR_fit"+tag[j]+"_"+njets[i]+"jets_"+vars[k]+".root","recreate");
+				if(njets[i]=="0"){
+                                        if(tag[j]=="17" && vars[k].Contains("mllg"))  {binCR=8; binSR=12;}
+                                        else  {binCR=9; binSR=12;}
+				}
+				else{ binCR=12;binSR=9;}
+				int index;index=binCR+1;
+				cout<<tag[j]<<endl;
+				TH1F*h_Top        =run(file,tag[j],"Top",index,"SR",binSR);
+				TH1F*h_VV        =run(file,tag[j],"VV",index,"SR",binSR);
+				TH1F*h_QCD       =run(file,tag[j],"VA",index,"SR",binSR);
+				TH1F*h_Sig       =run(file,tag[j],"Sig",index,"SR",binSR);
+				TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index,"SR",binSR);
+				TH1F*h_Nonprompt_lepton=run(file,tag[j],"Nonprompt_lepton",index,"SR",binSR);
+				TH1F*h_total     =run(file,tag[j],"total",index,"SR",binSR);
+				TGraphAsymmErrors*data=run_data(file,tag[j],index,binSR);
+				fout1->cd();
+				h_Top->Write();h_QCD->Write();h_Sig->Write();
+				h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
+				h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
+				file->Close();
+			}
 		}
 	}
 
-	for(int j=1;j<tag.size();j++){
-		for(int i=0;i<njets.size()-1;i++){
-			TFile*file=new TFile("./fitDiagnostics"+tag[j]+"_"+njets[i]+"jets.root");
-			fout2=new TFile("hist_CR_fit"+tag[j]+"_"+njets[i]+"jets.root","recreate");
-			int index;index=1;
-			cout<<tag[j]<<endl;
-			TH1F*h_Top        =run(file,tag[j],"Top",index,"CR",12);
-			TH1F*h_VV        =run(file,tag[j],"VV",index,"CR",12);
-			TH1F*h_QCD       =run(file,tag[j],"VA",index,"CR",12);
-			TH1F*h_Sig       =run(file,tag[j],"Sig",index,"CR",12);
-			TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index,"CR",12);
-			TH1F*h_Nonprompt_lepton=run(file,tag[j],"Nonprompt_lepton",index,"CR",12);
-			TH1F*h_total     =run(file,tag[j],"total",index,"CR",12);
-			TGraphAsymmErrors*data=run_data(file,tag[j],index,12);
-			fout2->cd();
-			h_Top->Write();h_QCD->Write();h_Sig->Write();
-			h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
-			h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
-			file->Close();
+	for(int k=0;k<vars.size();k++){
+		for(int j=1;j<tag.size();j++){
+			for(int i=0;i<njets.size();i++){
+				TFile*file=new TFile("./fitDiagnostics"+tag[j]+"_"+njets[i]+"jets_"+vars[k]+".root");
+				fout2=new TFile("hist_CR_fit"+tag[j]+"_"+njets[i]+"jets_"+vars[k]+".root","recreate");
+				if(njets[i]=="0"){
+                                        if(tag[j]=="17" && vars[k].Contains("mllg"))  {binCR=8; binSR=12;}
+                                        else  {binCR=9; binSR=12;}
+				}
+				else{ binCR=12;binSR=9;}
+				int index;index=1;
+				cout<<tag[j]<<endl;
+				TH1F*h_Top        =run(file,tag[j],"Top",index,"CR",binCR);
+				TH1F*h_VV        =run(file,tag[j],"VV",index,"CR",binCR);
+				TH1F*h_QCD       =run(file,tag[j],"VA",index,"CR",binCR);
+				TH1F*h_Sig       =run(file,tag[j],"Sig",index,"CR",binCR);
+				TH1F*h_Nonprompt_photon=run(file,tag[j],"Nonprompt_photon",index,"CR",binCR);
+				TH1F*h_Nonprompt_lepton=run(file,tag[j],"Nonprompt_lepton",index,"CR",binCR);
+				TH1F*h_total     =run(file,tag[j],"total",index,"CR",binCR);
+				TGraphAsymmErrors*data=run_data(file,tag[j],index,binCR);
+				fout2->cd();
+				h_Top->Write();h_QCD->Write();h_Sig->Write();
+				h_Nonprompt_photon->Write(); h_Nonprompt_lepton->Write();
+				h_VV->Write();h_total->Write();data->Write("data_"+tag[j]);
+				file->Close();
+			}
 		}
 	}
 

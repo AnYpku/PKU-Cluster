@@ -51,6 +51,12 @@ void run(TString dir,TString name,TString cut,TString tag,TString njets,TString 
 	     tree->SetBranchAddress("LHEPdfWeight", weight);
      if(type.Contains("scale"))
 	     tree->SetBranchAddress("LHEScaleWeight", weight);
+     if(type.Contains("id")||type.Contains("reco")||type.Contains("iso")||type.Contains("veto")){
+             tree->SetBranchAddress(type+"_scale",&weight[0]);
+             tree->SetBranchAddress(type+"_scale_Up",&weight[1]);
+             tree->SetBranchAddress(type+"_scale_Down",&weight[2]);
+     }
+
      tree->SetBranchAddress("actualWeight", &actualWeight);
      tree->SetBranchAddress("mT", &mT);
      TString th2name,th2name_out;
@@ -104,7 +110,7 @@ int Build_Hist(){
 	vector<TString> tags={"17","18"};
 	TString dir1;
 	TString Reco;
-	vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton"};
+	vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton","ele_id","ele_reco","muon_id","muon_iso","photon_id","photon_veto"};
 	vector<TString> names;
 	vector<TString> vars={"ml1g","ml2g","mllg"};
 	vector<vector<Double_t>> bins2;
@@ -137,6 +143,8 @@ int Build_Hist(){
                         if(types[ik].Contains("scale")) num=9;
                         else if(types[ik].Contains("pdf")) num=103;
 			else num=3;
+//                      if( !(types[ik].Contains("id")||types[ik].Contains("iso")||types[ik].Contains("reco")||types[ik].Contains("veto")))
+//				continue;
 			for(int j=0;j<names.size();j++){     
 //				if(names[j].Contains("WWG_emu")==0) continue;
 				if(names[j].Contains("Muon")==0 && names[j].Contains("plj")==0 )

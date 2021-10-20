@@ -31,6 +31,12 @@ int Print_Uncer_all(){
 				TString f_pdf         ="./batch/pdf_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
 				TString f_pref        ="./batch/l1pref_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
 				TString f_btag        ="./batch/btag_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
+                                TString f_ele_id      ="./batch/ele_id_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
+                                TString f_ele_reco    ="./batch/ele_reco_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
+                                TString f_muon_id     ="./batch/muon_id_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
+                                TString f_muon_iso    ="./batch/muon_iso_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
+                                TString f_photon_id   ="./batch/photon_id_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
+                                TString f_photon_veto ="./batch/photon_veto_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
 				run(tag[j],f_fake,vars[n],njets[i]);
 				run(tag[j],f_jes,vars[n],njets[i]);
 				run(tag[j],f_jer,vars[n],njets[i]);
@@ -39,6 +45,12 @@ int Print_Uncer_all(){
 				run(tag[j],f_pdf,vars[n],njets[i]);
 				run(tag[j],f_pref,vars[n],njets[i]);
 				run(tag[j],f_btag,vars[n],njets[i]);
+                                run(tag[j],f_ele_id,vars[n],njets[i]);
+                                run(tag[j],f_ele_reco,vars[n],njets[i]);
+                                run(tag[j],f_muon_id,vars[n],njets[i]);
+                                run(tag[j],f_muon_iso,vars[n],njets[i]);
+                                run(tag[j],f_photon_id,vars[n],njets[i]);
+                                run(tag[j],f_photon_veto,vars[n],njets[i]);
 			}
 		}
 	}

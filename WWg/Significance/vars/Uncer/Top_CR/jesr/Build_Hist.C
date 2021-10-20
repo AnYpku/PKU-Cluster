@@ -109,9 +109,9 @@ int Build_Hist(){
         vector<TString> vars={"ml1g","ml2g","mllg"};
         vector<vector<Double_t>> bins2;
         vector<Double_t> mT_bins;
-        vector<Double_t> ml1g_bins={5,60,90,200};
-        vector<Double_t> ml2g_bins={5,60,90,200};
-        vector<Double_t> mllg_bins={40,120,200,300};
+        vector<Double_t> ml1g_bins={10,80,140,200};
+        vector<Double_t> ml2g_bins={10,50,90,200};
+        vector<Double_t> mllg_bins={15,155,315,500};
         bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
 	vector<TString> tags={"17","18"};
 	TString dir1;
@@ -120,7 +120,7 @@ int Build_Hist(){
         vector<TString>njets={"0","1"};
         TString jet_cut;
 	for(int ij=0;ij<njets.size();ij++){
-		if(ij==0) mT_bins={0,80,110,150,200};
+		if(ij==0) mT_bins={0,90,130,200};
 		if(ij==1) mT_bins={0,80,110,150,200};
 		jet_cut="(njets30=="+njets[ij]+")";
 		met="(n_bjets_nom>=1 && "+jet_cut+")";

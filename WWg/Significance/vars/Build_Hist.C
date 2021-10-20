@@ -4,7 +4,7 @@ TH1D*unroll(TH2D*h2){
 	TH1D*h1=new TH1D("hist_"+histname,"",h2->GetNbinsX()*h2->GetNbinsY()+0,0,h2->GetNbinsX()*h2->GetNbinsY()+0);
 	for(int iy=1;iy<=h2->GetNbinsY();iy++){
 		for(int ix=1;ix<=h2->GetNbinsX();ix++){
-                   int i=ix+4*(iy-1);
+                   int i=ix+h2->GetNbinsX()*(iy-1);
                    cout<<iy<<" "<<ix<<" "<<i<<endl;
                    h1->SetBinContent(i,h2->GetBinContent(ix,iy));
                    h1->SetBinError(i,h2->GetBinError(ix,iy));

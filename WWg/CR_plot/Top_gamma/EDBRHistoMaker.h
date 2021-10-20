@@ -138,12 +138,24 @@ class EDBRHistoMaker {
                 Float_t         btag_weight;
                 Float_t         btag_weight_up;
                 Float_t         btag_weight_down;
-                Float_t         ele_id_scale;
-                Float_t         ele_reco_scale;
-                Float_t         muon_id_scale;
-                Float_t         muon_iso_scale;
-                Float_t         photon_id_scale;
-                Float_t         photon_veto_scale;
+                Float_t        ele_id_scale;
+                Float_t        ele_id_scale_Up;
+                Float_t        ele_id_scale_Down;
+                Float_t        ele_reco_scale;
+                Float_t        ele_reco_scale_Up;
+                Float_t        ele_reco_scale_Down;
+                Float_t        muon_id_scale;
+                Float_t        muon_id_scale_Up;
+                Float_t        muon_id_scale_Down;
+                Float_t        muon_iso_scale;
+                Float_t        muon_iso_scale_Up;
+                Float_t        muon_iso_scale_Down;
+                Float_t        photon_id_scale;
+                Float_t        photon_id_scale_Up;
+                Float_t        photon_id_scale_Down;
+                Float_t        photon_veto_scale;
+                Float_t        photon_veto_scale_Up;
+                Float_t        photon_veto_scale_Down;
 		Float_t         actualWeight;
                 Float_t         drll;
                 Float_t         drl1a;
@@ -250,12 +262,24 @@ class EDBRHistoMaker {
 		TBranch        *b_btag_weight;   //!
 		TBranch        *b_btag_weight_up;   //!
 		TBranch        *b_btag_weight_down;   //!
-		TBranch        *b_ele_id_scale;   //!
-		TBranch        *b_ele_reco_scale;   //!
-		TBranch        *b_muon_id_scale;   //!
-		TBranch        *b_muon_iso_scale;   //!
-		TBranch        *b_photon_id_scale;   //!
-		TBranch        *b_photon_veto_scale;   //!
+                TBranch        *b_ele_id_scale;   //!
+                TBranch        *b_ele_id_scale_Up;   //!
+                TBranch        *b_ele_id_scale_Down;   //!
+                TBranch        *b_ele_reco_scale;   //!
+                TBranch        *b_ele_reco_scale_Up;   //!
+                TBranch        *b_ele_reco_scale_Down;   //!
+                TBranch        *b_muon_id_scale;   //!
+                TBranch        *b_muon_id_scale_Up;   //!
+                TBranch        *b_muon_id_scale_Down;   //!
+                TBranch        *b_muon_iso_scale;   //!
+                TBranch        *b_muon_iso_scale_Up;   //!
+                TBranch        *b_muon_iso_scale_Down;   //!
+                TBranch        *b_photon_id_scale;   //!
+                TBranch        *b_photon_id_scale_Up;   //!
+                TBranch        *b_photon_id_scale_Down;   //!
+                TBranch        *b_photon_veto_scale;   //!
+                TBranch        *b_photon_veto_scale_Up;   //!
+                TBranch        *b_photon_veto_scale_Down;   //!
 
 		// Basic functions directly from MakeClass
 		Int_t GetEntry(Long64_t entry);
@@ -424,6 +448,24 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("btag_weight_up", &btag_weight_up, "btag_weight_up/F");
 	treename->Branch("btag_weight_down", &btag_weight_down, "btag_weight_down/F");
 	treename->Branch("actualWeight", &actualWeight, "actualWeight/F");
+        treename->Branch("ele_id_scale",&ele_id_scale,"ele_id_scale/F");
+        treename->Branch("ele_id_scale_Up",&ele_id_scale_Up,"ele_id_scale_Up/F");
+        treename->Branch("ele_id_scale_Down",&ele_id_scale_Down,"ele_id_scale_Down/F");
+        treename->Branch("ele_reco_scale",&ele_reco_scale,"ele_reco_scale/F");
+        treename->Branch("ele_reco_scale_Up",&ele_reco_scale_Up,"ele_reco_scale_Up/F");
+        treename->Branch("ele_reco_scale_Down",&ele_reco_scale_Down,"ele_reco_scale_Down/F");
+        treename->Branch("muon_id_scale",&muon_id_scale,"muon_id_scale/F");
+        treename->Branch("muon_id_scale_Up",&muon_id_scale_Up,"muon_id_scale_Up/F");
+        treename->Branch("muon_id_scale_Down",&muon_id_scale_Down,"muon_id_scale_Down/F");
+        treename->Branch("muon_iso_scale",&muon_iso_scale,"muon_iso_scale/F");
+        treename->Branch("muon_iso_scale_Up",&muon_iso_scale_Up,"muon_iso_scale_Up/F");
+        treename->Branch("muon_iso_scale_Down",&muon_iso_scale_Down,"muon_iso_scale_Down/F");
+        treename->Branch("photon_id_scale",&photon_id_scale,"photon_id_scale/F");
+        treename->Branch("photon_id_scale_Up",&photon_id_scale_Up,"photon_id_scale_Up/F");
+        treename->Branch("photon_id_scale_Down",&photon_id_scale_Down,"photon_id_scale_Down/F");
+        treename->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/F");
+        treename->Branch("photon_veto_scale_Up",&photon_veto_scale_Up,"photon_veto_scale_Up/F");
+        treename->Branch("photon_veto_scale_Down",&photon_veto_scale_Down,"photon_veto_scale_Down/F");
 	cout<<"make outfile tree end"<<endl;
 
 	fChain->SetBranchAddress("channel", &channel, &b_channel);
@@ -504,12 +546,24 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("btag_weight", &btag_weight, &b_btag_weight);
 	fChain->SetBranchAddress("btag_weight_up", &btag_weight_up, &b_btag_weight_up);
 	fChain->SetBranchAddress("btag_weight_down", &btag_weight_down, &b_btag_weight_down);
-	fChain->SetBranchAddress("ele_id_scale", &ele_id_scale, &b_ele_id_scale);
-	fChain->SetBranchAddress("ele_reco_scale", &ele_reco_scale, &b_ele_reco_scale);
-	fChain->SetBranchAddress("muon_id_scale", &muon_id_scale, &b_muon_id_scale);
-	fChain->SetBranchAddress("muon_iso_scale", &muon_iso_scale, &b_muon_iso_scale);
-	fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
-	fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
+        fChain->SetBranchAddress("ele_id_scale", &ele_id_scale, &b_ele_id_scale);
+        fChain->SetBranchAddress("ele_id_scale_Up", &ele_id_scale_Up, &b_ele_id_scale_Up);
+        fChain->SetBranchAddress("ele_id_scale_Down", &ele_id_scale_Down, &b_ele_id_scale_Down);
+        fChain->SetBranchAddress("ele_reco_scale", &ele_reco_scale, &b_ele_reco_scale);
+        fChain->SetBranchAddress("ele_reco_scale_Up", &ele_reco_scale_Up, &b_ele_reco_scale_Up);
+        fChain->SetBranchAddress("ele_reco_scale_Down", &ele_reco_scale_Down, &b_ele_reco_scale_Down);
+        fChain->SetBranchAddress("muon_id_scale", &muon_id_scale, &b_muon_id_scale);
+        fChain->SetBranchAddress("muon_id_scale_Up", &muon_id_scale_Up, &b_muon_id_scale_Up);
+        fChain->SetBranchAddress("muon_id_scale_Down", &muon_id_scale_Down, &b_muon_id_scale_Down);
+        fChain->SetBranchAddress("muon_iso_scale", &muon_iso_scale, &b_muon_iso_scale);
+        fChain->SetBranchAddress("muon_iso_scale_Up", &muon_iso_scale_Up, &b_muon_iso_scale_Up);
+        fChain->SetBranchAddress("muon_iso_scale_Down", &muon_iso_scale_Down, &b_muon_iso_scale_Down);
+        fChain->SetBranchAddress("photon_id_scale", &photon_id_scale, &b_photon_id_scale);
+        fChain->SetBranchAddress("photon_id_scale_Up", &photon_id_scale_Up, &b_photon_id_scale_Up);
+        fChain->SetBranchAddress("photon_id_scale_Down", &photon_id_scale_Down, &b_photon_id_scale_Down);
+        fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
+        fChain->SetBranchAddress("photon_veto_scale_Up", &photon_veto_scale_Up, &b_photon_veto_scale_Up);
+        fChain->SetBranchAddress("photon_veto_scale_Down", &photon_veto_scale_Down, &b_photon_veto_scale_Down);
 	fChain->SetBranchAddress("HLT_IsoMu24", &HLT_IsoMu24, &b_HLT_IsoMu24);
 	fChain->SetBranchAddress("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8", &HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8, &b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8);
 	fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);

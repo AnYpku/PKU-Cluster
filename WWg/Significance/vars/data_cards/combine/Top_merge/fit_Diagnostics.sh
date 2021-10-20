@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#16
-#17
 years="\
 17
 18
@@ -10,13 +8,48 @@ jetbins="\
 0jets
 1jets
 "
+vars="\
+ml1g
+ml2g
+mllg
+"
 
-for y in $years
+for var in $vars
 do
   for njets in $jetbins
   do
-    combineCards.py emu_${y}_${njets}_CR_bin1.txt emu_${y}_${njets}_CR_bin2.txt  emu_${y}_${njets}_CR_bin3.txt  emu_${y}_${njets}_CR_bin4.txt  emu_${y}_${njets}_CR_bin5.txt  emu_${y}_${njets}_CR_bin6.txt  emu_${y}_${njets}_CR_bin7.txt  emu_${y}_${njets}_CR_bin8.txt  emu_${y}_${njets}_CR_bin9.txt  emu_${y}_${njets}_CR_bin10.txt  emu_${y}_${njets}_CR_bin11.txt  emu_${y}_${njets}_CR_bin12.txt emu_${y}_${njets}_bin1.txt emu_${y}_${njets}_bin2.txt  emu_${y}_${njets}_bin3.txt  emu_${y}_${njets}_bin4.txt  emu_${y}_${njets}_bin5.txt  emu_${y}_${njets}_bin6.txt emu_${y}_${njets}_bin7.txt  emu_${y}_${njets}_bin8.txt  emu_${y}_${njets}_bin9.txt  emu_${y}_${njets}_bin10.txt  emu_${y}_${njets}_bin11.txt emu_${y}_${njets}_bin12.txt -S > shape_${njets}_${y}.txt
-    combine -M FitDiagnostics shape_${njets}_${y}.txt --saveShapes -t -1 --expectSignal=1 --saveWithUncertainties -n ${y}_${njets}
+    for y in $years
+    do
+       if [[ -f file_CR_${y}_${njets}_${var} ]];then
+          rm file_CR_${y}_${njets}_${var}
+       fi
+       if [[ -f file_SR_${y}_${njets}_${var} ]];then
+          rm file_SR_${y}_${njets}_${var}
+       fi
+       for (( i = 0 ; i < 14 ; i++ ))
+       do
+           file_CR="emu_${y}_${njets}_${var}_CR_bin${i}.txt"
+           file_SR="emu_${y}_${njets}_${var}_bin${i}.txt"
+           if [[ -f $file_CR  ]];then
+              echo "${file_CR}" >> file_CR_${y}_${njets}_${var}
+           fi
+           if [[ -f $file_SR  ]];then
+              echo "${file_SR}" >> file_SR_${y}_${njets}_${var}
+           fi
+       done
+       sed -i ':label;N;s/\n/ /;t label' file_SR_${y}_${njets}_${var}
+       sed -i ':label;N;s/\n/ /;t label' file_CR_${y}_${njets}_${var}
+       f_CR=`cat file_CR_${y}_${njets}_${var}`
+       f_SR=`cat file_SR_${y}_${njets}_${var}`
+       combineCards.py $f_CR $f_SR -S > shape_${y}_${njets}_${var}.txt
+       combine -M FitDiagnostics shape_${y}_${njets}_${var}.txt --saveShapes -t -1 --expectSignal=1 --saveWithUncertainties -n ${y}_${njets}_${var}
+    done
   done
+  f17=`cat file_CR_17_0jets_${var} file_CR_17_1jets_${var} file_SR_17_0jets_${var} file_SR_17_1jets_${var}`
+  f18=`cat file_CR_18_0jets_${var} file_CR_18_1jets_${var} file_SR_18_0jets_${var} file_SR_18_1jets_${var}`
+  combineCards.py $f17 -S > shape_17_${var}.txt
+  combineCards.py $f18 -S > shape_18_${var}.txt
+  combine -M FitDiagnostics shape_17_${var}.txt --saveShapes -t -1 --expectSignal=1 --saveWithUncertainties -n ${var}
+  combine -M FitDiagnostics shape_18_${var}.txt --saveShapes -t -1 --expectSignal=1 --saveWithUncertainties -n ${var}
 done
 

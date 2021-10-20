@@ -43,13 +43,13 @@ TH1D* unroll(TH1D* h1,TString hname){
 }
 
 
-void unroll_run(TString tag,TString njets){
+void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vector<double> bins2){
 	setTDRStyle();
-	TFile* f_ZA=TFile::Open("../root/hist_ZGJets_"+njets+"_"+tag+".root");
+	TFile* f_ZA=TFile::Open("../root/hist_ZGJets_"+var+"_"+njets+"_"+tag+".root");
 	TH1D* th2_ZA16=(TH1D*)f_ZA->Get("hist_bkg");
         TH1D* th2_ZA= unroll(th2_ZA16,"t_ZA");
 
-	TFile* f_WA=TFile::Open("../root/hist_WGJets_"+njets+"_"+tag+".root");
+	TFile* f_WA=TFile::Open("../root/hist_WGJets_"+var+"_"+njets+"_"+tag+".root");
 	TH1D* th2_WA16=(TH1D*)f_WA->Get("hist_bkg");
         TH1D* th2_WA= unroll(th2_WA16,"t_WA");
 
@@ -62,9 +62,21 @@ void unroll_run(TString tag,TString njets){
 	th2_ZA->SetFillColor(kYellow-7);
 	th2_ZA->SetMarkerColor(kYellow-7);
 	th2_ZA->SetLineColor(kYellow-7);
-	const char *name[16]={"0-80","80-110","110-150","150-#infty","0-80","80-110","110-150","150-#infty","0-80","80-110","110-150","150-#infty","0-80","80-110","110-150","150-#infty"};
+	const int n=bins1.size()*bins2.size();
+	const char *name[n];
+	for(int i=0;i<(bins1.size()-1)*(bins2.size()-1);i++){
+		if(i<bins1.size()-1){
+			if(i<bins1.size()-2) name[i]=Form("%.0f-%.0f",bins1[i],bins1[i+1]);
+			else  name[i]=Form("%.0f-#infty",bins1[i]);
+		}
+		else{
+			name[i]=name[i-(bins1.size()-1)];
+		}
+		cout<<i<<" "<<name[i]<<endl;
+	}
+//	const char *name[16]={"60-100","100-115","115-135","135-#infty","60-100","100-115","115-135","135-#infty","60-100","100-115","115-135","135-#infty","60-100","100-115","115-135","135-#infty"};
 
-	TFile* f_ZA_sig=TFile::Open("../root/hist_WWG_emu_"+njets+"_"+tag+".root");
+	TFile* f_ZA_sig=TFile::Open("../root/hist_WWG_emu_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_ZA_sig16=(TH1D*)f_ZA_sig->Get("hist_sig");
         TH1D* th2_ZA_sig= unroll(th2_ZA_sig16,"t_ZA_sig");
 
@@ -74,14 +86,14 @@ void unroll_run(TString tag,TString njets){
 	th2_ZA_sig->SetMarkerStyle(21);
 
 
-	TFile* f_VV=TFile::Open("../root/hist_VV_"+njets+"_"+tag+".root");
+	TFile* f_VV=TFile::Open("../root/hist_VV_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_VV16=(TH1D*)f_VV->Get("hist_bkg");
         TH1D* th2_VV= unroll(th2_VV16,"t_VV");
 	th2_VV->SetFillColor(kCyan);
 	th2_VV->SetMarkerColor(kCyan);
         th2_VV->SetLineColor(kCyan);
 
-	TFile* f_TTA=TFile::Open("../root/hist_TTGJets_"+njets+"_"+tag+".root");
+	TFile* f_TTA=TFile::Open("../root/hist_TTGJets_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_TTA16=(TH1D*)f_TTA->Get("hist_bkg");
 
         TH1D* th2_TTA= unroll(th2_TTA16,"t_TTA");
@@ -89,7 +101,7 @@ void unroll_run(TString tag,TString njets){
 	th2_TTA->SetMarkerColor(kBlue);
         th2_TTA->SetLineColor(kBlue);
 
-	TFile* f_ST=TFile::Open("../root/hist_ST_"+njets+"_"+tag+".root");
+	TFile* f_ST=TFile::Open("../root/hist_ST_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_ST16=(TH1D*)f_ST->Get("hist_bkg");
         TH1D* th2_ST= unroll(th2_ST16,"t_ST");
 	th2_ST->SetFillColor(40);
@@ -97,14 +109,14 @@ void unroll_run(TString tag,TString njets){
         th2_ST->SetLineColor(40);
 	for(Int_t i=1;i<=th2_ST->GetNbinsX();i++){ th2_ST->GetXaxis()->SetBinLabel(i,name[i-1]);}
 
-	TFile* f_plj=TFile::Open("../root/hist_plj_"+njets+"_"+tag+".root");
+	TFile* f_plj=TFile::Open("../root/hist_plj_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_plj16=(TH1D*)f_plj->Get("hist_bkg");
         TH1D* th2_plj= unroll(th2_plj16,"t_plj");
 	th2_plj->SetFillColor(kGreen+2);
 	th2_plj->SetMarkerColor(kGreen+2);
         th2_plj->SetLineColor(kGreen+2);
 
-	TFile* f_fakeL=TFile::Open("../root/hist_fakeL_"+njets+"_"+tag+".root");
+	TFile* f_fakeL=TFile::Open("../root/hist_fakeL_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_fakeL16=(TH1D*)f_fakeL->Get("hist_bkg");
         TH1D* th2_fakeL= unroll(th2_fakeL16,"t_fakeL");
 	th2_fakeL->SetFillColor(kGreen-3);
@@ -199,13 +211,19 @@ void unroll_run(TString tag,TString njets){
         TLatex latex;
         latex.SetTextSize(0.06);
         latex.SetLineWidth(2);
-        latex.DrawLatex(0.5,1.4*max,"5<m_{#font[12]{l_{1}#gamma}}<60");
-        latex.DrawLatex(4.5,1.4*max,"60<m_{#font[12]{l_{1}#gamma}}<90");
-        latex.DrawLatex(8.5,1.4*max,"m_{#font[12]{l_{1}#gamma}}>90");
-        latex.DrawLatex(13, 1.4*max,"m_{#font[12]{ll}}>160");
-        TLine* vline1 = new TLine(htot->GetBinLowEdge(5),0,htot->GetBinLowEdge(5),max*1.5);
-        TLine* vline2 = new TLine(htot->GetBinLowEdge(9),0,htot->GetBinLowEdge(9),max*1.5);
-        TLine* vline3 = new TLine(htot->GetBinLowEdge(13),0,htot->GetBinLowEdge(13),max*1.5);
+        TString l_var;
+	if(var=="ml1g") l_var="m_{#font[12]{l_{1}#gamma}}";
+	if(var=="ml2g") l_var="m_{#font[12]{l_{2}#gamma}}";
+	if(var=="mllg") l_var="m_{#font[12]{ll#gamma}}";
+	for(int i=0;i<bins2.size()-1;i++){
+		if(i<bins2.size()-2)
+			latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form("%.0f<"+l_var+"<%.0f",bins2[i],bins2[i+1]));
+		else
+			latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form(l_var+">%.0f",bins2[i]));
+	}
+        TLine* vline1 = new TLine(htot->GetBinLowEdge(bins1.size()-1+1),0,htot->GetBinLowEdge(bins1.size()-1+1),max*1.5);
+        TLine* vline2 = new TLine(htot->GetBinLowEdge(2*(bins1.size()-1)+1),0,htot->GetBinLowEdge(2*(bins1.size()-1)+1),max*1.5);
+        TLine* vline3 = new TLine(htot->GetBinLowEdge(3*(bins1.size()-1)+1),0,htot->GetBinLowEdge(3*(bins1.size()-1)+1),max*1.5);
         vline1->SetLineStyle(2);
         vline2->SetLineStyle(2);
         vline3->SetLineStyle(2);
@@ -230,7 +248,7 @@ void unroll_run(TString tag,TString njets){
         TH1D*nomNoErr=(TH1D*)nominal->Clone("nomNoErr");
         for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
         TH1D*h_up=(TH1D*)htot->Clone();
-        h_up->Divide(nominal);
+        h_up->Divide(nomNoErr);
         nominal->Divide(nomNoErr);
         nominal->GetYaxis()->SetRangeUser(0.4,1.9);
         nominal->SetLineColor(2);
@@ -252,18 +270,31 @@ void unroll_run(TString tag,TString njets){
         h_up->Draw("EP same");
         fPads2->Update();
 
-	c1->Print("aa_"+njets+"_"+tag+".pdf");
+	c1->Print("aa_CR_"+var+"_"+njets+"_"+tag+".pdf");
 }
 int unroll_test(){
        vector<TString> tags={"16","17","18"};
-       for(int j=0;j<3;j++){
-//	       unroll_run(tags[j]);
+       vector<TString> var={"ml1g","ml2g","mllg"};
+       vector<TString> njets={"0jets","1jets"};
+       vector<Double_t> mT_bins;
+       vector<vector<Double_t>> bins2;
+       vector<Double_t> ml1g_bins={10,80,140,200};
+       vector<Double_t> ml2g_bins={10,50,90,200};
+       vector<Double_t> mllg_bins={15,155,315,500};
+       bins2.push_back(ml1g_bins);
+       bins2.push_back(ml2g_bins);
+       bins2.push_back(mllg_bins);
+
+       for(int j=1;j<tags.size();j++){
+	       for(int i=0;i<var.size();i++){
+		       for(int k=0;k<njets.size();k++){
+			       if(njets[k]=="0jets") mT_bins={0,90,130,200};
+			       else if(njets[k]=="1jets") mT_bins={0,80,110,150,200};
+			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
+			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
+		       }
+	       }
        }
-	       unroll_run("17","0jets");
-	       unroll_run("17","1jets");
-	       unroll_run("18","0jets");
-	       unroll_run("18","1jets");
-	       unroll_run("18","2jets");
        return 0;
 
 }

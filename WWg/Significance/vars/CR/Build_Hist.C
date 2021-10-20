@@ -4,7 +4,7 @@ TH1D*unroll(TH2D*h2){
 	TH1D*h1=new TH1D("hist_"+histname,"",h2->GetNbinsX()*h2->GetNbinsY()+0,0,h2->GetNbinsX()*h2->GetNbinsY()+0);
 	for(int iy=1;iy<=h2->GetNbinsY();iy++){
 		for(int ix=1;ix<=h2->GetNbinsX();ix++){
-                   int i=ix+4*(iy-1);
+                   int i=ix+h2->GetNbinsX()*(iy-1);
                    cout<<iy<<" "<<ix<<" "<<i<<endl;
                    h1->SetBinContent(i,h2->GetBinContent(ix,iy));
                    h1->SetBinError(i,h2->GetBinError(ix,iy));
@@ -67,9 +67,9 @@ int Build_Hist(){
         vector<TString> vars={"ml1g","ml2g","mllg"};
 	vector<vector<Double_t>> bins2;
 	vector<Double_t> mT_bins;
-	vector<Double_t> ml1g_bins={5,60,90,200};
-	vector<Double_t> ml2g_bins={5,60,90,200};
-	vector<Double_t> mllg_bins={40,120,200,300};
+	vector<Double_t> ml1g_bins={10,80,140,200};
+	vector<Double_t> ml2g_bins={10,50,90,200};
+	vector<Double_t> mllg_bins={15,155,315,500};
         bins2.push_back(ml1g_bins);
         bins2.push_back(ml2g_bins);
         bins2.push_back(mllg_bins);
@@ -80,8 +80,8 @@ int Build_Hist(){
 	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeL","tZq","TGJets","WGJets","WWG_emu","MuonEG"};
         vector<TString>njets={"0","1"};
 	TString jet_cut;
-	for(int ij=0;ij<njets.size();ij++){
-		if(ij==0) mT_bins={0,80,110,150,200};
+	for(int ij=0;ij<njets.size()-1;ij++){
+		if(ij==0) mT_bins={0,90,130,200};
 		if(ij==1) mT_bins={0,80,110,150,200};
 		if(ij!=2)
 			jet_cut="(njets30=="+njets[ij]+")";

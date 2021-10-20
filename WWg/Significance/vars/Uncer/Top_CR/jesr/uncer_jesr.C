@@ -25,7 +25,7 @@ void run(TString tag,TString sample,TString type,TString vars,TString njets){
 	Double_t bincontent_new[num],bincontent_up[num],bincontent_down[num];
 	Double_t uncer[num];
 		f1<<type<<tag<<"=[";
-		ftxt<<type<<"_"<<sample<<"=[";
+		ftxt<<type<<"_"<<sample<<"_"<<vars<<"_"<<njets<<"=[";
 	cout<<tag<<" "<<" "<<sample<<" "<<type<<" uncertainty ";
 		 for(Int_t i=0;i<num;i++){
 			 bincontent_new[i] = h1->GetBinContent(i+1);

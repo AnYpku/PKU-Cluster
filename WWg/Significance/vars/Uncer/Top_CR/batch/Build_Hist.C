@@ -51,6 +51,13 @@ void run(TString dir,TString name,TString cut,TString tag,TString njets,TString 
 	     tree->SetBranchAddress("LHEPdfWeight", weight);
      if(type.Contains("scale"))
 	     tree->SetBranchAddress("LHEScaleWeight", weight);
+
+     if(type.Contains("id")||type.Contains("reco")||type.Contains("iso")||type.Contains("veto")){
+             tree->SetBranchAddress(type+"_scale",&weight[0]);
+             tree->SetBranchAddress(type+"_scale_Up",&weight[1]);
+             tree->SetBranchAddress(type+"_scale_Down",&weight[2]);
+     }
+
      tree->SetBranchAddress("actualWeight", &actualWeight);
      tree->SetBranchAddress("mT", &mT);
      TString th2name,th2name_out;
@@ -104,21 +111,21 @@ int Build_Hist(){
 	vector<TString> tags={"17","18"};
 	TString dir1;
 	TString Reco;
-	vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton"};
+	vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton","ele_id","ele_reco","muon_id","muon_iso","photon_id","photon_veto"};
 	vector<TString> names;
 	vector<TString> vars={"ml1g","ml2g","mllg"};
 	vector<vector<Double_t>> bins2;
 	vector<Double_t> mT_bins;
-	vector<Double_t> ml1g_bins={5,60,90,200};
-	vector<Double_t> ml2g_bins={5,60,90,200};
-	vector<Double_t> mllg_bins={40,120,200,300};
+        vector<Double_t> ml1g_bins={10,80,140,200};
+        vector<Double_t> ml2g_bins={10,50,90,200};
+        vector<Double_t> mllg_bins={15,155,315,500};
 	bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
 
 	vector<TString>njets={"0","1"};
 	TString jet_cut;
 	int num;
 	for(int ij=0;ij<njets.size();ij++){
-		if(ij==0) mT_bins={0,80,110,150,200};
+		if(ij==0) mT_bins={0,90,130,200};
 		if(ij==1) mT_bins={0,80,110,150,200};
 		jet_cut="(njets30=="+njets[ij]+")";
 		for(int ik=0;ik<types.size();ik++){

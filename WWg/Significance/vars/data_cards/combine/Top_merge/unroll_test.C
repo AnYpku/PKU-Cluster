@@ -9,14 +9,14 @@
 #include "CMSTDRStyle.h"
 #include "CMS_lumi.C"
 using namespace std;
-
-void run(TString tag,TString type,TString njets){
+vector<vector<double>> get_vector(vector<double> v1,vector<double> v2,vector<double> v3);
+void run(TString tag,TString type,TString njets,TString var,vector<double> bins1,vector<double> bins2){
 	setTDRStyle();
-	TFile* fout = new TFile("aa_"+tag+"_"+njets+".root","RECREATE");
+	TFile* fout = new TFile("aa_"+tag+"_"+njets+"_"+var+".root","RECREATE");
 	std::ostringstream strs;
 	Double_t lumi=137.1;
 
-        TFile*f1=new TFile("./hist_"+type+"_fit"+tag+"_"+njets+".root");
+        TFile*f1=new TFile("./hist_"+type+"_fit"+tag+"_"+njets+"_"+var+".root");
 
         TH1F*th2_ZA  =(TH1F*)f1->Get("hist_VA_"+tag+"_"+type);
 	cout<<th2_ZA->GetSum()<<endl;
@@ -25,6 +25,18 @@ void run(TString tag,TString type,TString njets){
 	th2_ZA->SetMarkerColor(kYellow-7);
 	th2_ZA->SetLineColor(kYellow-7);
 
+        const int n1=bins1.size()*bins2.size();
+        const char *name[n1];
+        for(int i=0;i<(bins1.size()-1)*(bins2.size()-1);i++){
+                if(i<bins1.size()-1){
+                        if(i<bins1.size()-2) name[i]=Form("%.0f-%.0f",bins1[i],bins1[i+1]);
+                        else  name[i]=Form("%.0f-#infty",bins1[i]);
+                }
+                else{
+                        name[i]=name[i-(bins1.size()-1)];
+                }
+                cout<<i<<" "<<name[i]<<endl;
+        }
 //        const char *name[28]={"50-100","100-150","150-#infty","50-100","100-150","150-#infty","50-100","100-150","150-#infty","50-100","100-150","150-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty","20-80","80-120","120-160","160-#infty"};
 
         TH1F*th2_ZA_sig  =(TH1F*)f1->Get("hist_Sig_"+tag+"_"+type);
@@ -162,36 +174,45 @@ void run(TString tag,TString type,TString njets){
 //
         TLatex latex;
         latex.SetLineWidth(2);
+        TString l_var;
+        if(var=="ml1g") l_var="m_{#font[12]{l_{1}#gamma}}";
+        if(var=="ml2g") l_var="m_{#font[12]{l_{2}#gamma}}";
+        if(var=="mllg") l_var="m_{#font[12]{ll#gamma}}";
 	if(type=="full"){
 		latex.SetTextSize(0.04);
-		latex.DrawLatex(0.4,1.2*max,"50<m_{#font[12]{ll}}<100");
-		latex.DrawLatex(4.2,1.2*max,"100<m_{#font[12]{ll}}<150");
-		latex.DrawLatex(8.2,1.2*max,"150<m_{#font[12]{ll}}<200");
-		latex.DrawLatex(12.3,1.2*max,"20<m_{#font[12]{ll}}<80");
-		latex.DrawLatex(16.3,1.2*max,"80<m_{#font[12]{ll}}<140");
-		latex.DrawLatex(20.2,1.2*max,"m_{#font[12]{ll}}>140");
-//		latex.DrawLatex(24.5, 1.2*max,"m_{#font[12]{ll}}>160");
+		for(int i=0;i<bins2.size()-1;i++){
+			if(i<bins2.size()-2)
+				latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form("%.0f<"+l_var+"<%.0f",bins2[i],bins2[i+1]));
+			else
+				latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form(l_var+">%.0f",bins2[i]));
+		}
 	}
 	else if(type=="SR"){
 		latex.SetTextSize(0.07);
-		latex.DrawLatex(0.5,1.6*max,"10<m_{#font[12]{l_{1}#gamma}}<50");
-		latex.DrawLatex(4.2,1.6*max,"50<m_{#font[12]{l_{1}#gamma}}<120");
-		latex.DrawLatex(8.6,1.6*max,"m_{#font[12]{l_{1}#gamma}}>120");
-//		latex.DrawLatex(12.5, 1.2*max,"m_{#font[12]{ll}}>160");
+		cout<<"bins2 size "<<bins2.size()<<endl;
+		for(int i=0;i<bins2.size()-1;i++){
+			if(i<bins2.size()-2)
+				latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form("%.0f<"+l_var+"<%.0f",bins2[i],bins2[i+1]));
+			else
+				latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form(l_var+">%.0f",bins2[i]));
+		}
 	}
 	else{
 		latex.SetTextSize(0.07);
-		latex.DrawLatex(0.8,1.2*max,"50<m_{#font[12]{ll}}<100");
-		latex.DrawLatex(4.5,1.2*max,"100<m_{#font[12]{ll}}<150");
-		latex.DrawLatex(8.5,1.2*max,"150<m_{#font[12]{ll}}<200");
+		for(int i=0;i<bins2.size()-1;i++){
+			if(i<bins2.size()-2)
+				latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form("%.0f<"+l_var+"<%.0f",bins2[i],bins2[i+1]));
+			else
+				latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form(l_var+">%.0f",bins2[i]));
+		}
 	}
 
-	TLine* vline1 = new TLine(htot->GetBinLowEdge(13),0,htot->GetBinLowEdge(13),max*1.8);
-	TLine* vline2 = new TLine(htot->GetBinLowEdge(17),0,htot->GetBinLowEdge(17),max*1.8);
-	TLine* vline3 = new TLine(htot->GetBinLowEdge(21),0,htot->GetBinLowEdge(21),max*1.8);
-	TLine* vline4 = new TLine(htot->GetBinLowEdge(25),0,htot->GetBinLowEdge(25),max*1.8);
-	TLine* vline5 = new TLine(htot->GetBinLowEdge(5),0,htot->GetBinLowEdge(5),max*1.8);
-	TLine* vline6 = new TLine(htot->GetBinLowEdge(9),0,htot->GetBinLowEdge(9),max*1.8);
+        TLine* vline1 = new TLine(htot->GetBinLowEdge(bins1.size()-1+1),0,htot->GetBinLowEdge(bins1.size()-1+1),max*1.5);
+        TLine* vline2 = new TLine(htot->GetBinLowEdge(2*(bins1.size()-1)+1),0,htot->GetBinLowEdge(2*(bins1.size()-1)+1),max*1.5);
+        TLine* vline3 = new TLine(htot->GetBinLowEdge(3*(bins1.size()-1)+1),0,htot->GetBinLowEdge(3*(bins1.size()-1)+1),max*1.5);
+        TLine* vline4 = new TLine(htot->GetBinLowEdge(4*(bins1.size()-1)+1),0,htot->GetBinLowEdge(4*(bins1.size()-1)+1),max*1.5);
+        TLine* vline5 = new TLine(htot->GetBinLowEdge(5*(bins1.size()-1)+1),0,htot->GetBinLowEdge(5*(bins1.size()-1)+1),max*1.5);
+        TLine* vline6 = new TLine(htot->GetBinLowEdge(6*(bins1.size()-1)+1),0,htot->GetBinLowEdge(6*(bins1.size()-1)+1),max*1.5);
 	vline1->SetLineStyle(2);
 	vline2->SetLineStyle(2);
 	vline3->SetLineStyle(2);
@@ -282,7 +303,7 @@ void run(TString tag,TString type,TString njets){
 	gr->Draw("EP same");
 	cout<<"draw data/MC"<<endl;
 	fPads2->Update();
-	c1->SaveAs("aa_"+type+tag+"_"+njets+".pdf");
+	c1->SaveAs("aa_"+type+tag+"_"+njets+"_"+var+".pdf");
 
 	fout->cd();
 	hs->Write();
@@ -294,13 +315,54 @@ void run(TString tag,TString type,TString njets){
 int unroll_test(){
 	vector<TString> tag={"16","17","18"};
         vector<TString>njets={"0jets","1jets","2jets"};
+        vector<TString>vars={"ml1g","ml2g","mllg"};
+	vector<TString>types={"CR","SR","full"};
+        vector<Double_t> ml1g_bins={10,80,140,200};
+        vector<Double_t> ml2g_bins={10,50,90,200};
+        vector<Double_t> mllg_bins={15,155,315,500};
+        vector<vector<Double_t>> bins2;
+        bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
+	vector<Double_t> mT_bins;
 	for(int j=1;j<tag.size();j++){
 		for(int i=0;i<njets.size()-1;i++){
-			run(tag[j],"SR",njets[i]);
-			run(tag[j],"CR",njets[i]);
-			run(tag[j],"full",njets[i]);
+			for(int ik=0;ik<types.size();ik++){
+				if(types[ik]=="SR"){
+					ml1g_bins={10,80,140,200};
+					ml2g_bins={10,50,90,200};
+					mllg_bins={15,155,315,500};
+					bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
+					if(njets[i].Contains("0")) mT_bins={60,95,120,140,200};
+					else mT_bins={60,105,150,200};
+				}
+				else if(types[ik]=="CR"){
+					ml1g_bins={10,80,140,200};
+					ml2g_bins={10,50,90,200};
+					mllg_bins={15,155,315,500};
+					bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
+					if(njets[i].Contains("0")) mT_bins={0,90,130,200};
+					else mT_bins={0,80,110,150,200};
+				}
+				else{
+                                    ml1g_bins={10,80,140,200,10,80,140,200};
+				    ml2g_bins={10,50,90,200,10,50,90,200};
+				    mllg_bins={15,155,315,500,15,155,315,500};
+				    bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
+                                    if(njets[i].Contains("0")) mT_bins={0,90,130,200,60,95,120,140,200};
+				    else mT_bins={0,80,110,150,200,60,105,150,200};
+				}
+				for(int k=0;k<vars.size();k++){
+					run(tag[j],types[ik],njets[i],vars[k],mT_bins,bins2[k]);
+				}
+			}
 		}
 	}
 	return 0;
 
+}
+vector<vector<double>> get_vector(vector<double> v1,vector<double> v2,vector<double> v3){
+	vector<vector<double>> bins;
+	bins.push_back(v1);
+	bins.push_back(v2);
+	bins.push_back(v3);
+	return bins;
 }

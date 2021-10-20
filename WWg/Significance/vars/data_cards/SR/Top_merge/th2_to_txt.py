@@ -15,17 +15,18 @@ def merge_bin(th1):
            th1.SetBinError(nbins-2,0);
 
 print '-----begin to transfer TH2D to txt for Higgs-combine tool----- \n'
+#sys.argv[1] year; sys.argv[2] njets, sys.argv[3] var
 fdir = '/home/pku/anying/cms/PKU-Cluster/WWg/Significance/vars/root/'
-f_Data=TFile.Open(fdir+'hist_MuonEG_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_WWg = TFile.Open(fdir+'hist_WWG_emu_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_ZA = TFile.Open(fdir+'hist_ZGJets_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_fakeL = TFile.Open(fdir+'hist_fakeL_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_TTA = TFile.Open(fdir+'hist_TTGJets_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_WA = TFile.Open(fdir+'hist_WGJets_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
-f_tZq = TFile.Open(fdir+'hist_tZq_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_Data=TFile.Open(fdir+'hist_MuonEG_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_WWg = TFile.Open(fdir+'hist_WWG_emu_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_ZA = TFile.Open(fdir+'hist_ZGJets_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_plj = TFile.Open(fdir+'hist_plj_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_fakeL = TFile.Open(fdir+'hist_fakeL_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_TTA = TFile.Open(fdir+'hist_TTGJets_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_WA = TFile.Open(fdir+'hist_WGJets_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_VV = TFile.Open(fdir+'hist_VV_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_ST = TFile.Open(fdir+'hist_ST_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
+f_tZq = TFile.Open(fdir+'hist_tZq_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.root')
 
 th1_Data=f_Data.Get('hist_bkg')
 th1_WWg=f_WWg.Get('hist_sig')
@@ -44,7 +45,7 @@ th1_ZA.Add(th1_WA)
 genbincontent=[]
 genbinerror=[]
 arr={}
-f=open('/home/pku/anying/cms/PKU-Cluster/WWg/Significance/ml1g/Uncer/SR/summary_uncer_'+sys.argv[1]+'.txt')
+f=open('/home/pku/anying/cms/PKU-Cluster/WWg/Significance/vars/Uncer/SR/summary_uncer_'+sys.argv[3]+'_'+sys.argv[2]+'_'+sys.argv[1]+'.txt')
 import re
 import numpy as np
 for line in f:
@@ -72,7 +73,7 @@ print 'nbins', nbins
 nbins=th1_WWg.GetNbinsX()+1
 print 'range in for loop 1 to', nbins
 for i in range(1,nbins):
-   f = open('./txt/emu_%s_%s_bin%i.txt'%(sys.argv[1],sys.argv[2],i),'w')
+   f = open('./txt/emu_%s_%s_%s_bin%i.txt'%(sys.argv[1],sys.argv[2],sys.argv[3],i),'w')
    f.write('imax 1   number of channels\n')
    f.write('jmax *   number of processes-1\n')
    f.write('kmax *  number of nuisance parameters (sources of systematical uncertainties)\n')
@@ -119,7 +120,6 @@ for i in range(1,nbins):
    WWg_binerror = WWg_binerror+1
 
    data= WWg_bincontent + ZA_bincontent+non_prompt_bincontent+fakeL_bincontent+TTA_bincontent+VV_bincontent+ST_bincontent
-   data=th1_Data.GetBinContent(i)
    f.write('observation %0.3f\n'%(data))
    f.write('------------\n')
    f.write('# now we list the expected events for signal and all backgrounds in that bin\n')
@@ -138,21 +138,21 @@ for i in range(1,nbins):
    f.write('lumi\tlnN\t')
    f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(1.016,1.016,1.016,1.016))
 
-   f.write('WWG_Stat_bin%d_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2]))
+   f.write('WWG_Stat_bin%d_%s_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2],sys.argv[3]))
    f.write('%0.3f\t-\t-\t-\t-\t-\n'%(WWg_binerror))
-   f.write('VA_Stat_bin%d_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2]))
+   f.write('VA_Stat_bin%d_%s_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2],sys.argv[3]))
    f.write('-\t%0.3f\t-\t-\t-\t-\n'%(ZA_binerror))
 
-   f.write('Nonprompt_photon_Stat_bin%d_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2]))
+   f.write('Nonprompt_photon_Stat_bin%d_%s_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2],sys.argv[3]))
    f.write('-\t-\t%0.3f\t-\t-\t-\n'%(non_prompt_binerror))
 
-   f.write('Nonprompt_lepton_Stat_bin%d_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2]))
+   f.write('Nonprompt_lepton_Stat_bin%d_%s_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2],sys.argv[3]))
    f.write('-\t-\t-\t%0.3f\t-\t-\t-\n'%(fakeL_binerror))
 
-   f.write('VV_Stat_bin%d_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2]))
+   f.write('VV_Stat_bin%d_%s_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2],sys.argv[3]))
    f.write('-\t-\t-\t-\t%0.3f\t-\n'%(VV_binerror))
 
-   f.write('Top_Stat_bin%d_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2]))
+   f.write('Top_Stat_bin%d_%s_%s_%s\tlnN\t'%(i,sys.argv[1],sys.argv[2],sys.argv[3]))
    f.write('-\t-\t-\t-\t-\t%0.3f\n'%(ST_binerror))
 
    f.write('fakelepton_unc_%s\tlnN\t'%(sys.argv[1]))
@@ -165,77 +165,50 @@ for i in range(1,nbins):
    if non_prompt_bincontent==0:
        f.write('-\t-\t-\t-\t-\t-\n')
    else: 
-        f.write('-\t-\t%0.3f\t-\t-\t-\n'%(arr['fakephoton'+sys.argv[1]][i-1]))
+        f.write('-\t-\t%0.3f\t-\t-\t-\n'%(arr['fakephoton_'+sys.argv[3]+'_'+sys.argv[2]+'_plj_unc'][i-1]))
 
    f.write('JES_%s\tlnN\t'%(sys.argv[1]))
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['jesTotal'+'_WWG_emu'][i-1],arr['jesTotal'+'_ZGJets'][i-1],arr['jesTotal'+'_VV'][i-1],arr['jesTotal'+'_Top'][i-1]))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['jesTotal'+'_WWG_emu_'+sys.argv[3]+'_'+sys.argv[2]][i-1],arr['jesTotal'+'_ZGJets_'+sys.argv[3]+'_'+sys.argv[2]][i-1],arr['jesTotal'+'_VV_'+sys.argv[3]+'_'+sys.argv[2]][i-1],arr['jesTotal'+'_Top_'+sys.argv[3]+'_'+sys.argv[2]][i-1]))
 
    f.write('JER_%s\tlnN\t'%(sys.argv[1]))
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['jer1'+'_WWG_emu'][i-1],arr['jer1'+'_ZGJets'][i-1],arr['jer1'+'_VV'][i-1],arr['jer1'+'_Top'][i-1]))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['jer1'+'_WWG_emu_'+sys.argv[3]+'_'+sys.argv[2]][i-1],arr['jer1'+'_ZGJets_'+sys.argv[3]+'_'+sys.argv[2]][i-1],arr['jer1'+'_VV_'+sys.argv[3]+'_'+sys.argv[2]][i-1],arr['jer1'+'_Top_'+sys.argv[3]+'_'+sys.argv[2]][i-1]))
 
    f.write('pileup\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['pu'+'_WWG_emu'][i-1],arr['pu'+'_ZGJets'][i-1],arr['pu'+'_VV'][i-1],arr['pu'+'_Top'][i-1]))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['pileup'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['pileup'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['pileup'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['pileup'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('btag\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['btag'+'_WWG_emu'][i-1],arr['btag'+'_ZGJets'][i-1],arr['btag'+'_VV'][i-1],arr['btag'+'_Top'][i-1]))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['btag'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['btag'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['btag'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['btag'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    if sys.argv[1].find("18") == -1:
       f.write('l1pref\tlnN\t')
-      f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['pref'+'_WWG_emu'][i-1],arr['pref'+'_ZGJets'][i-1],arr['pref'+'_VV'][i-1],arr['pref'+'_Top'][i-1]))
+      f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['l1pref'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['l1pref'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['l1pref'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['l1pref'+'_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('pdf_Top\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['Top_pdf'][i-1]))
+   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['pdf_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
-   f.write('Scale_muR_Top\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['Top_scale_muR1'][i-1]))
-
-   f.write('Scale_muF_Top\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['Top_scale_muF1'][i-1]))
-
-   f.write('Scale_muFmuR_Top\tlnN\t')
-   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['Top_scale_muFmuR'][i-1]))
+   f.write('scale_Top\tlnN\t')
+   f.write('-\t-\t-\t-\t-\t%0.3f\n'%(arr['scale_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('pdf_Sig\tlnN\t')
-   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['WWG_emu_pdf'][i-1]))
+   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['pdf_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1]))
 
-   f.write('Scale_muR_Sig\tlnN\t')
-   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['WWG_emu_scale_muR1'][i-1]))
+   f.write('scale_sig\tlnN\t')
+   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['scale_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1]))
 
-   f.write('Scale_muF_Sig\tlnN\t')
-   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['WWG_emu_scale_muF1'][i-1]))
+   f.write('mu_id\tlnN\t')
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['muon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['muon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['muon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['muon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
-   f.write('Scale_muFmuR_Sig\tlnN\t')
-   f.write('%0.3f\t-\t-\t-\t-\t-\n'%(arr['WWG_emu_scale_muFmuR'][i-1]))
-
-   f.write('mu_trigger\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(1.01,1.01,1.01,1.01))
-
-   f.write('mu_eff\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(1.01,1.01,1.01,1.01))
+   f.write('mu_iso\tlnN\t')
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['muon_iso_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['muon_iso_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['muon_iso_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['muon_iso_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('ele_reco\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(1.01,1.01,1.01,1.01))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['ele_reco_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['ele_reco_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['ele_reco_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['ele_reco_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('ele_ID\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(1.016,1.016,1.016,1.016))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['ele_id_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['ele_id_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['ele_id_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['ele_id_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('photon_ID\tlnN\t')
-   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(1.02,1.02,1.02,1.02))
-
-#   f.write('mu_trigger\tlnN\t')
-#   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['muon_ZA-EWK_'+'trigger'][i-1],arr['muon_ZA_'+'trigger'][i-1],arr['muon_TTA_'+'trigger'][i-1],arr['muon_VV_'+'trigger'][i-1],arr['muon_ST_'+'trigger'][i-1]))
-#
-#   f.write('mu_eff\tlnN\t')
-#   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['muon_ZA-EWK_all'][i-1],arr['muon_ZA_all'][i-1],arr['muon_TTA_all'][i-1],arr['muon_VV_all'][i-1],arr['muon_ST_all'][i-1]))
-#
-#   f.write('ele_reco\tlnN\t')
-#   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ele_ZA-EWK_reco'][i-1],arr['ele_ZA_reco'][i-1],arr['ele_TTA_reco'][i-1],arr['ele_VV_reco'][i-1],arr['ele_ST_reco'][i-1]))
-#
-#   f.write('ele_ID\tlnN\t')
-#   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['ele_ZA-EWK_ID'][i-1],arr['ele_ZA_ID'][i-1],arr['ele_TTA_ID'][i-1],arr['ele_VV_ID'][i-1],arr['ele_ST_ID'][i-1]))
-#
-#   f.write('photon_id\tlnN\t')
-#   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\t%0.3f\n'%(arr['photon_ZA-EWK_ID'][i-1],arr['photon_ZA_ID'][i-1],arr['photon_TTA_ID'][i-1],arr['photon_VV_ID'][i-1],arr['photon_ST_ID'][i-1]))
+   f.write('%0.3f\t%0.3f\t-\t-\t%0.3f\t%0.3f\n'%(arr['photon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_WWG_emu'][i-1],arr['photon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_ZGJets'][i-1],arr['photon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_VV'][i-1],arr['photon_id_'+sys.argv[3]+'_'+sys.argv[2]+'_Top'][i-1]))
 
    f.write('ttgamma_xs\tlnN\t')
    f.write('-\t-\t-\t-\t1.1\t-\t-\n')

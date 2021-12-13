@@ -4,7 +4,10 @@
 using namespace std;
 
 void runxx(TString year) {
-	TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+year+"/";
+	TString y;
+	if(year.Contains("pre")) y="16";
+	else y=year;
+	TString dir ="/home/pku/anying/cms/rootfiles/WWg/20"+y+"/";
 	ifstream infile("file"+year);
 	string buffer; 
 	TString infilename,filename;
@@ -28,6 +31,8 @@ void runxx(TString year) {
 int main(){
 	runxx("18");
 	runxx("17");
+	runxx("_pre16");
+	runxx("16");
 	return 1;
 }
 

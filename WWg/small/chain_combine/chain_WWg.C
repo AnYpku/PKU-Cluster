@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-void chain_WWg::Loop()
+void chain_WWg::Loop(TString name)
 {
 //by  b_branchname->GetEntry(ientry); //read only this branch
    if (fChain == 0) return;
@@ -20,8 +20,10 @@ void chain_WWg::Loop()
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
+      if(name.Contains("MET")) scalef=1;
       if(jentry%10000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<endl;
-      LEP = channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 /*&& lep1_charge*lep2_charge<0*/ && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20;
+ 
+      LEP = channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 /*&& lep1_charge*lep2_charge<0*/ && drll>0.5 && lep1pt>15 && lep2pt>15 && fabs(lep1eta) < 2.4 && fabs(lep2eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20;
       PHOTON = n_photon>0 && photonet > 20. && ( (fabs(photoneta) < 1.4442) || ( fabs(photoneta)<2.5 && fabs(photoneta)>1.566 ) ) && drl1a>0.5 && drl2a>0.5;
       if( !( LEP /*&& PHOTON*/ ) )
               continue;

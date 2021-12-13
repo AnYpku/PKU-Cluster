@@ -11,6 +11,8 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <TH1.h>
+using namespace std;
 
 // Header file for the classes stored in the TTree if any.
 
@@ -1185,6 +1187,7 @@ public :
    Bool_t          HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1;
    Bool_t          HLT_IsoMu20;
    Bool_t          HLT_IsoMu24;
+   Bool_t          HLT_IsoTkMu24;
    Bool_t          HLT_IsoMu24_eta2p1;
    Bool_t          HLT_IsoMu27;
    Bool_t          HLT_IsoMu30;
@@ -1384,6 +1387,7 @@ public :
    Bool_t          HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL;
    Bool_t          HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;
    Bool_t          HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
+   Bool_t          HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL;
    Bool_t          HLT_Mu12_DoublePhoton20;
    Bool_t          HLT_TriplePhoton_20_20_20_CaloIdLV2;
    Bool_t          HLT_TriplePhoton_20_20_20_CaloIdLV2_R9IdVL;
@@ -1805,6 +1809,9 @@ public :
    Float_t         Jet_btagSF_deepcsv_M_down[30];   //[nJet]
    Float_t         Jet_btagSF_deepcsv_M[30];   //[nJet]
    Float_t         Jet_btagSF_deepcsv_M_up[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_L_down[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_L[30];   //[nJet]
+   Float_t         Jet_btagSF_deepcsv_L_up[30];   //[nJet]
    Float_t         Jet_btagSF_deepcsv_shape_down_hf[30];   //[nJet]
    Float_t         Jet_btagSF_deepcsv_shape[30];   //[nJet]
    Float_t         Jet_btagSF_deepcsv_shape_up_cferr1[30];   //[nJet]
@@ -1874,13 +1881,24 @@ public :
    Int_t           n_num;
    Int_t           MET_pass;
    Int_t           npvs;
-   Int_t           n_bjets;
-   Int_t           njets;
+   Int_t           n_bjets_loose;
+   Int_t           n_bjets_medium;
+   Int_t           n_bjets20_loose;
+   Int_t           n_bjets20_medium;
+   Int_t           n_bjets_loose_tightId;
+   Int_t           n_bjets_medium_tightId;
+   Int_t           n_bjets20_loose_tightId;
+   Int_t           n_bjets20_medium_tightId;
    Int_t           njets50;
    Int_t           njets40;
    Int_t           njets30;
    Int_t           njets20;
    Int_t           njets15;
+   Int_t           njets50_tightId;
+   Int_t           njets40_tightId;
+   Int_t           njets30_tightId;
+   Int_t           njets20_tightId;
+   Int_t           njets15_tightId;
    Float_t         puWeight;
    Float_t         puWeightUp;
    Float_t         puWeightDown;
@@ -3052,6 +3070,7 @@ public :
    TBranch        *b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1;   //!
    TBranch        *b_HLT_IsoMu20;   //!
    TBranch        *b_HLT_IsoMu24;   //!
+   TBranch        *b_HLT_IsoTkMu24;   //!
    TBranch        *b_HLT_IsoMu24_eta2p1;   //!
    TBranch        *b_HLT_IsoMu27;   //!
    TBranch        *b_HLT_IsoMu30;   //!
@@ -3251,6 +3270,7 @@ public :
    TBranch        *b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL;   //!
    TBranch        *b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;   //!
    TBranch        *b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;   //!
+   TBranch        *b_HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL;
    TBranch        *b_HLT_Mu12_DoublePhoton20;   //!
    TBranch        *b_HLT_TriplePhoton_20_20_20_CaloIdLV2;   //!
    TBranch        *b_HLT_TriplePhoton_20_20_20_CaloIdLV2_R9IdVL;   //!
@@ -3672,6 +3692,9 @@ public :
    TBranch        *b_Jet_btagSF_deepcsv_M_down;   //!
    TBranch        *b_Jet_btagSF_deepcsv_M;   //!
    TBranch        *b_Jet_btagSF_deepcsv_M_up;   //!
+   TBranch        *b_Jet_btagSF_deepcsv_L_down;   //!
+   TBranch        *b_Jet_btagSF_deepcsv_L;   //!
+   TBranch        *b_Jet_btagSF_deepcsv_L_up;
    TBranch        *b_Jet_btagSF_deepcsv_shape_down_hf;   //!
    TBranch        *b_Jet_btagSF_deepcsv_shape;   //!
    TBranch        *b_Jet_btagSF_deepcsv_shape_up_cferr1;   //!
@@ -3741,13 +3764,24 @@ public :
    TBranch        *b_n_num;   //!
    TBranch        *b_MET_pass;   //!
    TBranch        *b_npvs;   //!
-   TBranch        *b_n_bjets;   //!
-   TBranch        *b_njets;   //!
+   TBranch        *b_n_bjets_loose;   //!
+   TBranch        *b_n_bjets_medium;   //!
+   TBranch        *b_n_bjets20_loose;   //!
+   TBranch        *b_n_bjets20_medium;   //!
+   TBranch        *b_n_bjets_loose_tightId;   //!
+   TBranch        *b_n_bjets_medium_tightId;   //!
+   TBranch        *b_n_bjets20_loose_tightId;   //!
+   TBranch        *b_n_bjets20_medium_tightId;   //!
    TBranch        *b_njets50;   //!
    TBranch        *b_njets40;   //!
    TBranch        *b_njets30;   //!
    TBranch        *b_njets20;   //!
    TBranch        *b_njets15;   //!
+   TBranch        *b_njets50_tightId;   //!
+   TBranch        *b_njets40_tightId;   //!
+   TBranch        *b_njets30_tightId;   //!
+   TBranch        *b_njets20_tightId;   //!
+   TBranch        *b_njets15_tightId;   //!
    TBranch        *b_puWeight;   //!
    TBranch        *b_puWeightUp;   //!
    TBranch        *b_puWeightDown;   //!
@@ -3762,8 +3796,9 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString name,double nevents,TString year);
-   virtual Float_t   delta_R(Float_t eta1, Float_t phi1, Float_t eta2, Float_t phi2);
+   virtual void     Loop(TString name,double nevents,TString year,bool flag);
+   virtual float    get_btag_scale(TH1D*hbeff,TH1D*hceff,TH1D*hleff,double value,int nJet, float Jet_btagDeepB[30],int Jet_partonFlavour[30], float Jet_btagSF_deepcsv[30],float Jet_btagSF_deepcsv_up[30],float Jet_btagSF_deepcsv_down[30],float Jet_pt[30], TString type);
+   virtual Float_t  delta_R(Float_t eta1, Float_t phi1, Float_t eta2, Float_t phi2);
    virtual void     Init();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
@@ -3776,8 +3811,9 @@ public :
      float ele_id_scale,ele_reco_scale,muon_id_scale,muon_iso_scale,photon_id_scale,photon_veto_scale;
      float ele_id_scale_Up,ele_reco_scale_Up,muon_id_scale_Up,muon_iso_scale_Up,photon_id_scale_Up,photon_veto_scale_Up;
      float ele_id_scale_Down,ele_reco_scale_Down,muon_id_scale_Down,muon_iso_scale_Down,photon_id_scale_Down,photon_veto_scale_Down;
-     float btag_weight,btag_weight_up,btag_weight_down;
-     int n_bjets_nom,njets20_nom,njets25_nom,njets30_nom,njets35_nom,njets40_nom,njets50_nom;
+     float btag_weight_medium,btag_weight_medium_up,btag_weight_medium_down;
+     float btag_weight_loose,btag_weight_loose_up,btag_weight_loose_down;
+     Bool_t HLT_ee,HLT_mm,HLT_emu;
 };
 
 #endif
@@ -3861,16 +3897,15 @@ void WWg::Init(TTree *tree)
    ExTree->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/F");
    ExTree->Branch("photon_veto_scale_Up",&photon_veto_scale_Up,"photon_veto_scale_Up/F");
    ExTree->Branch("photon_veto_scale_Down",&photon_veto_scale_Down,"photon_veto_scale_Down/F");
-   ExTree->Branch("btag_weight",&btag_weight,"btag_weight/F");
-   ExTree->Branch("btag_weight_up",&btag_weight_up,"btag_weight_up/F");
-   ExTree->Branch("btag_weight_down",&btag_weight_down,"btag_weight_down/F");
-   ExTree->Branch("n_bjets_nom",&n_bjets_nom,"n_bjets_nom/I");
-   ExTree->Branch("njets20_nom",&njets20_nom,"njets20_nom/I");
-   ExTree->Branch("njets25_nom",&njets25_nom,"njets25_nom/I");
-   ExTree->Branch("njets30_nom",&njets30_nom,"njets30_nom/I");
-   ExTree->Branch("njets35_nom",&njets35_nom,"njets35_nom/I");
-   ExTree->Branch("njets40_nom",&njets40_nom,"njets40_nom/I");
-   ExTree->Branch("njets50_nom",&njets50_nom,"njets50_nom/I");
+   ExTree->Branch("btag_weight_medium",&btag_weight_medium,"btag_weight_medium/F");
+   ExTree->Branch("btag_weight_medium_up",&btag_weight_medium_up,"btag_weight_medium_up/F");
+   ExTree->Branch("btag_weight_medium_down",&btag_weight_medium_down,"btag_weight_medium_down/F");
+   ExTree->Branch("btag_weight_loose",&btag_weight_loose,"btag_weight_loose/F");
+   ExTree->Branch("btag_weight_loose_up",&btag_weight_loose_up,"btag_weight_loose_up/F");
+   ExTree->Branch("btag_weight_loose_down",&btag_weight_loose_down,"btag_weight_loose_down/F");
+   ExTree->Branch("HLT_ee",&HLT_ee,"HLT_ee/B");
+   ExTree->Branch("HLT_mm",&HLT_mm,"HLT_mm/B");
+   ExTree->Branch("HLT_emu",&HLT_emu,"HLT_emu/B");
 
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
@@ -5035,6 +5070,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1", &HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1, &b_HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1);
    fChain->SetBranchAddress("HLT_IsoMu20", &HLT_IsoMu20, &b_HLT_IsoMu20);
    fChain->SetBranchAddress("HLT_IsoMu24", &HLT_IsoMu24, &b_HLT_IsoMu24);
+   fChain->SetBranchAddress("HLT_IsoTkMu24", &HLT_IsoTkMu24, &b_HLT_IsoTkMu24);
    fChain->SetBranchAddress("HLT_IsoMu24_eta2p1", &HLT_IsoMu24_eta2p1, &b_HLT_IsoMu24_eta2p1);
    fChain->SetBranchAddress("HLT_IsoMu27", &HLT_IsoMu27, &b_HLT_IsoMu27);
    fChain->SetBranchAddress("HLT_IsoMu30", &HLT_IsoMu30, &b_HLT_IsoMu30);
@@ -5231,6 +5267,7 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);
    fChain->SetBranchAddress("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, &b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);
+   fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL", &HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL, &b_HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL, &b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL, &b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL);
    fChain->SetBranchAddress("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ);
@@ -5655,6 +5692,9 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("Jet_btagSF_deepcsv_M_down", Jet_btagSF_deepcsv_M_down, &b_Jet_btagSF_deepcsv_M_down);
    fChain->SetBranchAddress("Jet_btagSF_deepcsv_M", Jet_btagSF_deepcsv_M, &b_Jet_btagSF_deepcsv_M);
    fChain->SetBranchAddress("Jet_btagSF_deepcsv_M_up", Jet_btagSF_deepcsv_M_up, &b_Jet_btagSF_deepcsv_M_up);
+   fChain->SetBranchAddress("Jet_btagSF_deepcsv_L_down", Jet_btagSF_deepcsv_L_down, &b_Jet_btagSF_deepcsv_L_down);
+   fChain->SetBranchAddress("Jet_btagSF_deepcsv_L", Jet_btagSF_deepcsv_L, &b_Jet_btagSF_deepcsv_L);
+   fChain->SetBranchAddress("Jet_btagSF_deepcsv_L_up", Jet_btagSF_deepcsv_L_up, &b_Jet_btagSF_deepcsv_L_up);
    fChain->SetBranchAddress("Jet_btagSF_deepcsv_shape_down_hf", Jet_btagSF_deepcsv_shape_down_hf, &b_Jet_btagSF_deepcsv_shape_down_hf);
    fChain->SetBranchAddress("Jet_btagSF_deepcsv_shape", Jet_btagSF_deepcsv_shape, &b_Jet_btagSF_deepcsv_shape);
    fChain->SetBranchAddress("Jet_btagSF_deepcsv_shape_up_cferr1", Jet_btagSF_deepcsv_shape_up_cferr1, &b_Jet_btagSF_deepcsv_shape_up_cferr1);
@@ -5724,13 +5764,24 @@ void WWg::Init(TTree *tree)
    fChain->SetBranchAddress("n_num", &n_num, &b_n_num);
    fChain->SetBranchAddress("MET_pass", &MET_pass, &b_MET_pass);
    fChain->SetBranchAddress("npvs", &npvs, &b_npvs);
-   fChain->SetBranchAddress("n_bjets", &n_bjets, &b_n_bjets);
-   fChain->SetBranchAddress("njets", &njets, &b_njets);
+   fChain->SetBranchAddress("n_bjets_loose", &n_bjets_loose, &b_n_bjets_loose);
+   fChain->SetBranchAddress("n_bjets_medium", &n_bjets_medium, &b_n_bjets_medium);
+   fChain->SetBranchAddress("n_bjets20_loose", &n_bjets20_loose, &b_n_bjets20_loose);
+   fChain->SetBranchAddress("n_bjets20_medium", &n_bjets20_medium, &b_n_bjets20_medium);
+   fChain->SetBranchAddress("n_bjets_loose_tightId", &n_bjets_loose_tightId, &b_n_bjets_loose_tightId);
+   fChain->SetBranchAddress("n_bjets_medium_tightId", &n_bjets_medium_tightId, &b_n_bjets_medium_tightId);
+   fChain->SetBranchAddress("n_bjets20_loose_tightId", &n_bjets20_loose_tightId, &b_n_bjets20_loose_tightId);
+   fChain->SetBranchAddress("n_bjets20_medium_tightId", &n_bjets20_medium_tightId, &b_n_bjets20_medium_tightId);
    fChain->SetBranchAddress("njets50", &njets50, &b_njets50);
    fChain->SetBranchAddress("njets40", &njets40, &b_njets40);
    fChain->SetBranchAddress("njets30", &njets30, &b_njets30);
    fChain->SetBranchAddress("njets20", &njets20, &b_njets20);
    fChain->SetBranchAddress("njets15", &njets15, &b_njets15);
+   fChain->SetBranchAddress("njets50_tightId", &njets50_tightId, &b_njets50_tightId);
+   fChain->SetBranchAddress("njets40_tightId", &njets40_tightId, &b_njets40_tightId);
+   fChain->SetBranchAddress("njets30_tightId", &njets30_tightId, &b_njets30_tightId);
+   fChain->SetBranchAddress("njets20_tightId", &njets20_tightId, &b_njets20_tightId);
+   fChain->SetBranchAddress("njets15_tightId", &njets15_tightId, &b_njets15_tightId);
    fChain->SetBranchAddress("puWeight", &puWeight, &b_puWeight);
    fChain->SetBranchAddress("puWeightUp", &puWeightUp, &b_puWeightUp);
    fChain->SetBranchAddress("puWeightDown", &puWeightDown, &b_puWeightDown);

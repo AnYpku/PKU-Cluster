@@ -47,6 +47,9 @@ class EDBRHistoMaker {
 		bool setUnitaryWeights_;
 
 		// Declaration of leaf types
+                Int_t run;
+                Int_t event;
+                Int_t ls;
 		Double_t scalef;
 		Double_t        prefWeight;
 		Double_t        prefWeightUp;
@@ -178,6 +181,9 @@ class EDBRHistoMaker {
 		TBranch *b_muon_hlt_scale;   //!
 		TBranch *b_ele_hlt_scale;   //!
 		TBranch *b_scalef;   //!
+		TBranch *b_run;   //!
+		TBranch *b_ls;   //!
+		TBranch *b_event;   //!
 		TBranch        *b_prefWeight;   //!
 		TBranch        *b_prefWeightUp;   //!
 		TBranch        *b_prefWeightDown;   //!
@@ -329,7 +335,10 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fout = new TFile(out_name.c_str(), "RECREATE");
 	treename = new TTree("outtree","outtree");
 	cout<<"begin make outfile tree"<<endl;
-	treename->Branch("scalef", &scalef, "scalef/D");
+	treename->Branch("scalef", &scalef, "scalef/I");
+	treename->Branch("run", &run, "run/I");
+	treename->Branch("event", &event, "event/I");
+	treename->Branch("ls", &ls, "ls/I");
 	treename->Branch("actualWeight", &actualWeight, "actualWeight/D");
 	treename->Branch("pweight", &pweight, "pweight[703]/D");
 	treename->Branch("nVtx", &nVtx, "nVtx/I");
@@ -446,6 +455,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
         fChain->SetBranchAddress("muon_hlt_scale", &muon_hlt_scale, &b_muon_hlt_scale);
         fChain->SetBranchAddress("ele_hlt_scale", &ele_hlt_scale, &b_ele_hlt_scale);
 	fChain->SetBranchAddress("scalef", &scalef, &b_scalef);
+	fChain->SetBranchAddress("run", &run, &b_run);
+	fChain->SetBranchAddress("event", &event, &b_event);
+	fChain->SetBranchAddress("ls", &ls, &b_ls);
 	fChain->SetBranchAddress("prefWeight", &prefWeight, &b_prefWeight);
 	fChain->SetBranchAddress("prefWeightUp", &prefWeightUp, &b_prefWeightUp);
 	fChain->SetBranchAddress("prefWeightDown", &prefWeightDown, &b_prefWeightDown);

@@ -55,6 +55,7 @@ class EDBRHistoMaker {
                 float mT;
                 float mT1;
                 float mT2;
+		float meg;
                 float muon1_rochester;
                 Float_t         LHEScaleWeight[9];
                 Float_t         LHEPdfWeight[103];
@@ -111,33 +112,35 @@ class EDBRHistoMaker {
 		Int_t           n_num;
 		Int_t           MET_pass;
 		Int_t           npvs;
-		Int_t           n_bjets;
-		Int_t           n_bjets_nom;
-		Int_t           njets20_nom;
-		Int_t           njets25_nom;
-		Int_t           njets30_nom;
-		Int_t           njets35_nom;
-		Int_t           njets40_nom;
-		Int_t           njets50_nom;
-		Int_t           njets;
-		Int_t           njets_fake;
-		Int_t           njets50;
-		Int_t           njets40;
-		Int_t           njets30;
-		Int_t           njets20;
-		Int_t           njets15;
+                Float_t         btag_weight_medium;
+                Float_t         btag_weight_medium_up;
+                Float_t         btag_weight_medium_down;
+                Float_t         btag_weight_loose;
+                Float_t         btag_weight_loose_up;
+                Float_t         btag_weight_loose_down;
+                Int_t           n_bjets_loose;
+                Int_t           n_bjets_medium;
+                Int_t           n_bjets20_loose;
+                Int_t           n_bjets20_medium;
+                Int_t           n_bjets_loose_tightId;
+                Int_t           n_bjets_medium_tightId;
+                Int_t           n_bjets20_loose_tightId;
+                Int_t           n_bjets20_medium_tightId;
+                Int_t           njets50;
+                Int_t           njets40;
+                Int_t           njets30;
+                Int_t           njets20;
+                Int_t           njets15;
+                Int_t           njets50_tightId;
+                Int_t           njets40_tightId;
+                Int_t           njets30_tightId;
+                Int_t           njets20_tightId;
+                Int_t           njets15_tightId;
 		Float_t         puWeight;
 		Float_t         puWeightUp;
 		Float_t         puWeightDown;
-		Bool_t          HLT_IsoMu24;
-		Bool_t          HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8;
-		Bool_t          HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
-		Bool_t          HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL;
-		Bool_t          HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
-		Bool_t          HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;
-		Bool_t          HLT_Ele32_WPTight_Gsf;
-		Bool_t          HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
-		Float_t        scalef;
+		Float_t         scalef;
+                Int_t          isSignal;
 		Float_t         PrefireWeight;
                 Float_t         PrefireWeight_Up;
                 Float_t         PrefireWeight_Down;
@@ -163,20 +166,15 @@ class EDBRHistoMaker {
 		Float_t        photon_veto_scale_Up;
 		Float_t        photon_veto_scale_Down;
 		Float_t        actualWeight;
-                Float_t         drll;
-                Float_t         drl1a;
-                Float_t         drl2a;
-                Float_t         yVlep;
-                Float_t         phiVlep;
-                Float_t         ptVlep;
-                Bool_t          HLT_Mu1;
-                Bool_t          HLT_Mu2;
-                Bool_t          HLT_emu1;
-                Bool_t          HLT_emu2;
-                Bool_t          HLT_emu3;
-                Bool_t          HLT_emu4;
-                Bool_t          HLT_Ele1;
-                Bool_t          HLT_Ele2;
+                Float_t        drll;
+                Float_t        drl1a;
+                Float_t        drl2a;
+                Float_t        yVlep;
+                Float_t        phiVlep;
+                Float_t        ptVlep;
+                Char_t         HLT_ee;
+                Char_t         HLT_mm;
+                Char_t         HLT_emu;
 
 		// List of branches
 		TBranch        *b_lumi;   //!
@@ -240,32 +238,33 @@ class EDBRHistoMaker {
 		TBranch        *b_n_num;   //!
 		TBranch        *b_MET_pass;   //!
 		TBranch        *b_npvs;   //!
-		TBranch        *b_n_bjets;   //!
-		TBranch        *b_n_bjets_nom;   //!
-		TBranch        *b_njets20_nom;   //!
-		TBranch        *b_njets25_nom;   //!
-		TBranch        *b_njets30_nom;   //!
-		TBranch        *b_njets35_nom;   //!
-		TBranch        *b_njets40_nom;   //!
-		TBranch        *b_njets50_nom;   //!
-		TBranch        *b_njets;   //!
-		TBranch        *b_njets_fake;   //!
-		TBranch        *b_njets50;   //!
-		TBranch        *b_njets40;   //!
-		TBranch        *b_njets30;   //!
-		TBranch        *b_njets20;   //!
-		TBranch        *b_njets15;   //!
+                TBranch        *b_btag_weight_medium;   //!
+                TBranch        *b_btag_weight_medium_up;   //!
+                TBranch        *b_btag_weight_medium_down;   //!
+                TBranch        *b_btag_weight_loose;   //!
+                TBranch        *b_btag_weight_loose_up;   //!
+                TBranch        *b_btag_weight_loose_down;   //!
+                TBranch        *b_n_bjets_loose;   //!
+                TBranch        *b_n_bjets_medium;   //!
+                TBranch        *b_n_bjets20_loose;   //!
+                TBranch        *b_n_bjets20_medium;   //!
+                TBranch        *b_n_bjets_loose_tightId;   //!
+                TBranch        *b_n_bjets_medium_tightId;   //!
+                TBranch        *b_n_bjets20_loose_tightId;   //!
+                TBranch        *b_n_bjets20_medium_tightId;   //!
+                TBranch        *b_njets50;   //!
+                TBranch        *b_njets40;   //!
+                TBranch        *b_njets30;   //!
+                TBranch        *b_njets20;   //!
+                TBranch        *b_njets15;   //!
+                TBranch        *b_njets50_tightId;   //!
+                TBranch        *b_njets40_tightId;   //!
+                TBranch        *b_njets30_tightId;   //!
+                TBranch        *b_njets20_tightId;   //!
+                TBranch        *b_njets15_tightId;   //!
 		TBranch        *b_puWeight;   //!
 		TBranch        *b_puWeightUp;   //!
 		TBranch        *b_puWeightDown;   //!
-		TBranch        *b_HLT_IsoMu24;
-		TBranch        *b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8;
-		TBranch        *b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
-		TBranch        *b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL;
-		TBranch        *b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
-		TBranch        *b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;
-		TBranch        *b_HLT_Ele32_WPTight_Gsf;
-		TBranch        *b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		TBranch        *b_scalef;   //!
                 TBranch        *b_PrefireWeight;   //!
                 TBranch        *b_PrefireWeight_Up;   //!
@@ -291,6 +290,9 @@ class EDBRHistoMaker {
 		TBranch        *b_photon_veto_scale;   //!
 		TBranch        *b_photon_veto_scale_Up;   //!
 		TBranch        *b_photon_veto_scale_Down;   //!
+                TBranch        *b_HLT_ee;//!
+                TBranch        *b_HLT_mm;//!
+                TBranch        *b_HLT_emu;//!
 
 		// Basic functions directly from MakeClass
 		Int_t GetEntry(Long64_t entry);
@@ -426,33 +428,34 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("n_num", &n_num, "n_num/I");
 	treename->Branch("MET_pass", &MET_pass, "MET_pass/I");
 	treename->Branch("npvs", &npvs, "npvs/I");
-	treename->Branch("n_bjets", &n_bjets, "n_bjets/I");
-	treename->Branch("n_bjets_nom", &n_bjets_nom, "n_bjets_nom/I");
-	treename->Branch("njets50_nom", &njets50_nom, "njets50_nom/I");
-	treename->Branch("njets40_nom", &njets40_nom, "njets40_nom/I");
-	treename->Branch("njets35_nom", &njets35_nom, "njets35_nom/I");
-	treename->Branch("njets30_nom", &njets30_nom, "njets30_nom/I");
-	treename->Branch("njets25_nom", &njets25_nom, "njets25_nom/I");
-	treename->Branch("njets20_nom", &njets20_nom, "njets20_nom/I");
-	treename->Branch("njets", &njets, "njets/I");
-	treename->Branch("njets_fake", &njets_fake, "njets_fake/I");
-	treename->Branch("njets50", &njets50, "njets50/I");
-	treename->Branch("njets40", &njets40, "njets40/I");
-	treename->Branch("njets30", &njets30, "njets30/I");
-	treename->Branch("njets20", &njets20, "njets20/I");
-	treename->Branch("njets15", &njets15, "njets15/I");
+        treename->Branch("btag_weight_medium",&btag_weight_medium,"btag_weight_medium/F");
+        treename->Branch("btag_weight_medium_up",&btag_weight_medium_up,"btag_weight_medium_up/F");
+        treename->Branch("btag_weight_medium_down",&btag_weight_medium_down,"btag_weight_medium_down/F");
+        treename->Branch("btag_weight_loose",&btag_weight_loose,"btag_weight_loose/F");
+        treename->Branch("btag_weight_loose_up",&btag_weight_loose_up,"btag_weight_loose_up/F");
+        treename->Branch("btag_weight_loose_down",&btag_weight_loose_down,"btag_weight_loose_down/F");
+        treename->Branch("n_bjets_loose", &n_bjets_loose, "n_bjets_loose/I");
+        treename->Branch("n_bjets_medium", &n_bjets_medium, "n_bjets_medium/I");
+        treename->Branch("n_bjets20_loose",  &n_bjets20_loose,  "n_bjets20_loose/I");
+        treename->Branch("n_bjets20_medium", &n_bjets20_medium, "n_bjets20_medium/I");
+        treename->Branch("n_bjets_loose_tightId", &n_bjets_loose_tightId, "n_bjets_loose_tightId/I");
+        treename->Branch("n_bjets_medium_tightId", &n_bjets_medium_tightId, "n_bjets_medium_tightId/I");
+        treename->Branch("n_bjets20_loose_tightId",  &n_bjets20_loose_tightId,  "n_bjets20_loose_tightId/I");
+        treename->Branch("n_bjets20_medium_tightId", &n_bjets20_medium_tightId, "n_bjets20_medium_tightId/I");
+        treename->Branch("njets20", &njets20, "njets20/I");
+        treename->Branch("njets30", &njets30, "njets30/I");
+        treename->Branch("njets40", &njets40, "njets40/I");
+        treename->Branch("njets50", &njets50, "njets50/I");
+        treename->Branch("njets15_tightId", &njets15_tightId, "njets15_tightId/I");
+        treename->Branch("njets20_tightId", &njets20_tightId, "njets20_tightId/I");
+        treename->Branch("njets30_tightId", &njets30_tightId, "njets30_tightId/I");
+        treename->Branch("njets40_tightId", &njets40_tightId, "njets40_tightId/I");
+        treename->Branch("njets50_tightId", &njets50_tightId, "njets50_tightId/I");
 	treename->Branch("puWeight", &puWeight, "puWeight/F");
 	treename->Branch("puWeightUp", &puWeightUp, "puWeightUp/F");
 	treename->Branch("puWeightDown", &puWeightDown, "puWeightDown/F");
-	treename->Branch("HLT_Mu1", &HLT_IsoMu24, "HLT_Mu1/B");
-	treename->Branch("HLT_Mu2", &HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8, "HLT_Mu2/B");
-	treename->Branch("HLT_emu1", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, "HLT_emu1/B");
-	treename->Branch("HLT_emu2", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL, "HLT_emu2/B");
-	treename->Branch("HLT_emu3", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL, "HLT_emu3/B");
-	treename->Branch("HLT_emu4", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ, "HLT_emu4/B");
-	treename->Branch("HLT_Ele1", &HLT_Ele32_WPTight_Gsf, "HLT_Ele1/B");
-	treename->Branch("HLT_Ele2", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, "HLT_Ele2/B");
 	treename->Branch("scalef", &scalef, "scalef/F");
+	treename->Branch("isSignal", &isSignal, "isSignal/I");
 	treename->Branch("PrefireWeight", &PrefireWeight, "PrefireWeight/F");
 	treename->Branch("PrefireWeight_Up", &PrefireWeight_Up, "PrefireWeight_Up/F");
 	treename->Branch("PrefireWeight_Down", &PrefireWeight_Down, "PrefireWeight_Down/F");
@@ -478,6 +481,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	treename->Branch("photon_veto_scale",&photon_veto_scale,"photon_veto_scale/F");
 	treename->Branch("photon_veto_scale_Up",&photon_veto_scale_Up,"photon_veto_scale_Up/F");
 	treename->Branch("photon_veto_scale_Down",&photon_veto_scale_Down,"photon_veto_scale_Down/F");
+        treename->Branch("HLT_ee",&HLT_ee,"HLT_ee/F");
+        treename->Branch("HLT_mm",&HLT_mm,"HLT_mm/F");
+        treename->Branch("HLT_emu",&HLT_emu,"HLT_emu/F");
 	cout<<"make outfile tree end"<<endl;
 
 	fChain->SetBranchAddress("channel", &channel, &b_channel);
@@ -538,21 +544,30 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("n_num", &n_num, &b_n_num);
 	fChain->SetBranchAddress("MET_pass", &MET_pass, &b_MET_pass);
 	fChain->SetBranchAddress("npvs", &npvs, &b_npvs);
-	//	fChain->SetBranchAddress("n_bjets", &n_bjets, &b_n_bjets);
-	fChain->SetBranchAddress("n_bjets_nom", &n_bjets_nom, &b_n_bjets_nom);
-	fChain->SetBranchAddress("njets20_nom", &njets20_nom, &b_njets20_nom);
-	fChain->SetBranchAddress("njets25_nom", &njets25_nom, &b_njets25_nom);
-	fChain->SetBranchAddress("njets30_nom", &njets30_nom, &b_njets30_nom);
-	fChain->SetBranchAddress("njets35_nom", &njets35_nom, &b_njets35_nom);
-	fChain->SetBranchAddress("njets40_nom", &njets40_nom, &b_njets40_nom);
-	fChain->SetBranchAddress("njets50_nom", &njets50_nom, &b_njets50_nom);
-	fChain->SetBranchAddress("njets", &njets, &b_njets);
-	fChain->SetBranchAddress("njets_fake", &njets_fake, &b_njets_fake);
-	fChain->SetBranchAddress("njets50", &njets50, &b_njets50);
-	fChain->SetBranchAddress("njets40", &njets40, &b_njets40);
-	fChain->SetBranchAddress("njets30", &njets30, &b_njets30);
-	fChain->SetBranchAddress("njets20", &njets20, &b_njets20);
-	fChain->SetBranchAddress("njets15", &njets15, &b_njets15);
+        fChain->SetBranchAddress("btag_weight_medium", &btag_weight_medium, &b_btag_weight_medium);
+        fChain->SetBranchAddress("btag_weight_medium_up", &btag_weight_medium_up, &b_btag_weight_medium_up);
+        fChain->SetBranchAddress("btag_weight_medium_down", &btag_weight_medium_down, &b_btag_weight_medium_down);
+        fChain->SetBranchAddress("btag_weight_loose", &btag_weight_loose, &b_btag_weight_loose);
+        fChain->SetBranchAddress("btag_weight_loose_up", &btag_weight_loose_up, &b_btag_weight_loose_up);
+        fChain->SetBranchAddress("btag_weight_loose_down", &btag_weight_loose_down, &b_btag_weight_loose_down);
+        fChain->SetBranchAddress("n_bjets_loose", &n_bjets_loose, &b_n_bjets_loose);
+        fChain->SetBranchAddress("n_bjets_medium", &n_bjets_medium, &b_n_bjets_medium);
+        fChain->SetBranchAddress("n_bjets20_loose", &n_bjets20_loose, &b_n_bjets20_loose);
+        fChain->SetBranchAddress("n_bjets20_medium", &n_bjets20_medium, &b_n_bjets20_medium);
+        fChain->SetBranchAddress("n_bjets_loose_tightId", &n_bjets_loose_tightId, &b_n_bjets_loose_tightId);
+        fChain->SetBranchAddress("n_bjets_medium_tightId", &n_bjets_medium_tightId, &b_n_bjets_medium_tightId);
+        fChain->SetBranchAddress("n_bjets20_loose_tightId", &n_bjets20_loose_tightId, &b_n_bjets20_loose_tightId);
+        fChain->SetBranchAddress("n_bjets20_medium_tightId", &n_bjets20_medium_tightId, &b_n_bjets20_medium_tightId);
+        fChain->SetBranchAddress("njets50", &njets50, &b_njets50);
+        fChain->SetBranchAddress("njets40", &njets40, &b_njets40);
+        fChain->SetBranchAddress("njets30", &njets30, &b_njets30);
+        fChain->SetBranchAddress("njets20", &njets20, &b_njets20);
+        fChain->SetBranchAddress("njets15", &njets15, &b_njets15);
+        fChain->SetBranchAddress("njets50_tightId", &njets50_tightId, &b_njets50_tightId);
+        fChain->SetBranchAddress("njets40_tightId", &njets40_tightId, &b_njets40_tightId);
+        fChain->SetBranchAddress("njets30_tightId", &njets30_tightId, &b_njets30_tightId);
+        fChain->SetBranchAddress("njets20_tightId", &njets20_tightId, &b_njets20_tightId);
+        fChain->SetBranchAddress("njets15_tightId", &njets15_tightId, &b_njets15_tightId);
 	fChain->SetBranchAddress("puWeight", &puWeight, &b_puWeight);
 	fChain->SetBranchAddress("puWeightUp", &puWeightUp, &b_puWeightUp);
 	fChain->SetBranchAddress("puWeightDown", &puWeightDown, &b_puWeightDown);
@@ -581,14 +596,9 @@ void EDBRHistoMaker::Init(TTree *tree) {
 	fChain->SetBranchAddress("photon_veto_scale", &photon_veto_scale, &b_photon_veto_scale);
 	fChain->SetBranchAddress("photon_veto_scale_Up", &photon_veto_scale_Up, &b_photon_veto_scale_Up);
 	fChain->SetBranchAddress("photon_veto_scale_Down", &photon_veto_scale_Down, &b_photon_veto_scale_Down);
-	fChain->SetBranchAddress("HLT_IsoMu24", &HLT_IsoMu24, &b_HLT_IsoMu24);
-	fChain->SetBranchAddress("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8", &HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8, &b_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8);
-	fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);
-	fChain->SetBranchAddress("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL", &HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL, &b_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL);
-	fChain->SetBranchAddress("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL, &b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL);
-	fChain->SetBranchAddress("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ", &HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ, &b_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ);
-	fChain->SetBranchAddress("HLT_Ele32_WPTight_Gsf", &HLT_Ele32_WPTight_Gsf, &b_HLT_Ele32_WPTight_Gsf);
-	fChain->SetBranchAddress("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL", &HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL, &b_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL);
+        fChain->SetBranchAddress("HLT_ee", &HLT_ee, &b_HLT_ee);
+        fChain->SetBranchAddress("HLT_mm", &HLT_mm, &b_HLT_mm);
+        fChain->SetBranchAddress("HLT_emu", &HLT_emu, &b_HLT_emu);
 
 }
 
@@ -673,7 +683,7 @@ void EDBRHistoMaker::createAllHistos(TString isChannel) {
 	hs.setHisto("lep2pt", 15, 20, 180);
 	hs.setHisto("lep2eta", 12, -2.4, 2.4);
 	hs.setHisto("lep2phi", 16, -3.14, 3.14);
-	hs.setHisto("mllg", 12, 30, 500);
+	hs.setHisto("mllg", 10, 50, 300);
 	hs.setHisto("ml1g", 10, 10, 200);
 	hs.setHisto("ml2g", 10, 10, 200);
 	hs.setHisto("ptll", 12, 30, 250);
@@ -682,17 +692,22 @@ void EDBRHistoMaker::createAllHistos(TString isChannel) {
 	hs.setHisto("puppimet", 12,20, 260);
 	hs.setHisto("puppimetphi", 12,-3.2,3.2);
 	hs.setHisto("npvs", 15, 5, 65);
-	hs.setHisto("n_bjets", 6, 1, 7);
-	hs.setHisto("mT", 10, 60, 250);
-	hs.setHisto("mT2", 8, 30, 200);
-	hs.setHisto("PuppiMET_T1_pt", 12,20, 260);
+	hs.setHisto("mT", 10, 50, 250);
+	hs.setHisto("mT2", 15, 20, 200);
+	hs.setHisto("PuppiMET_T1_pt", 24,20, 260);
 	hs.setHisto("PuppiMET_T1_phi", 12,-3.2, 3.2);
-	hs.setHisto("njets", 14,0, 14);
 	hs.setHisto("njets15", 14,0, 14);
 	hs.setHisto("njets20", 14,0, 14);
 	hs.setHisto("njets30", 14,0, 14);
 	hs.setHisto("njets40", 14,0, 14);
 	hs.setHisto("njets50", 14,0, 14);
+        hs.setHisto("drl1a", 20,0, 5);
+        hs.setHisto("drl2a", 20,0, 5);
+        hs.setHisto("drll", 20,0, 5);
+        hs.setHisto("meg", 14,10, 150);
+        hs.setHisto("njets30_tightId", 14,0, 14);
+        hs.setHisto("njets40_tightId", 14,0, 14);
+        hs.setHisto("njets50_tightId", 14,0, 14);
 	char buffer[256];
 	char buffer2[256];
 
@@ -787,7 +802,7 @@ void EDBRHistoMaker::Loop(std::string outFileName,float luminosity,int isBarrel,
 			ml1g=(lep2p4+photonp4).M();
 			ml2g=(lep1p4+photonp4).M();
 		}
-
+                meg=(lep2p4+photonp4).M();
 		mT=sqrt(2*(ptll*PuppiMET_T1_pt*(1-cos(phiVlep-PuppiMET_T1_phi) ) ) );
 		if(lep1pt>lep2pt){
 			mT2=sqrt(2*(lep2pt*PuppiMET_T1_pt*(1-cos(lep2phi-PuppiMET_T1_phi) ) ) );
@@ -812,22 +827,25 @@ void EDBRHistoMaker::Loop(std::string outFileName,float luminosity,int isBarrel,
 		}
 
 		TString filename = fileTMP_->GetName();
-		HLT_Mu1=HLT_IsoMu24;HLT_Mu2=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8;
-		HLT_emu1=HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL;
-		HLT_emu2=HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
-		HLT_emu3=HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;
-		HLT_emu4=HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
-		HLT_Ele1=HLT_Ele32_WPTight_Gsf;HLT_Ele2=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 		//data
-		actualWeight=0;
-		//		if(njets30>1)actualWeight=1;
+		actualWeight=1;
+		//if(njets30>1)actualWeight=1;
 		bool photon_channel=false,lepton_channel=false;
-		if(isChannel=="emu") 
-			lepton_channel= ((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5) && lep1_charge*lep2_charge<0 && drll>0.5;
+                Bool_t HLT;
+                if(filename.Contains("MuonEG"))
+                        HLT=HLT_emu;
+                else if(filename.Contains("Muon"))
+                        HLT= !(HLT_emu) && HLT_mm;
+                else if(filename.Contains("Ele"))
+                        HLT= !(HLT_emu) && !(HLT_mm) && HLT_ee;
+		if(isChannel=="emu"){ 
+			lepton_channel= ( HLT && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5) && lep1_charge*lep2_charge<0 && drll>0.5;
+		}
 		if(isBarrel==1)  photon_channel=( (fabs(photoneta) < 1.4442) );
 		else if(isBarrel==0) photon_channel= ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 );
 		else photon_channel=( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ));
-		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && lep1_is_tight==1 && lep2_is_tight==1 && mll >20 && ptll > 30 && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_selection==1 && PuppiMET_T1_pt > 20 && mT2>30 && mT>60 && n_bjets_nom==0 && njets30<=1 ){
+		isSignal=0;
+		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && lep1_is_tight==1 && lep2_is_tight==1 && mll >20 && ptll > 30 && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_selection==1 && PuppiMET_T1_pt > 20 && n_bjets20_medium==0 &&  mT> 50 && mT2>20 && njets30<=1){
 			sum = sum + actualWeight;
 			numbe_out++;
 			treename->Fill();
@@ -854,17 +872,22 @@ void EDBRHistoMaker::Loop(std::string outFileName,float luminosity,int isBarrel,
 		(theHistograms["puppimet"])->Fill(puppimet, actualWeight);
 		(theHistograms["puppimetphi"])->Fill(puppimetphi, actualWeight);
 		(theHistograms["npvs"])->Fill(npvs, actualWeight);
-		(theHistograms["n_bjets"])->Fill(n_bjets, actualWeight);
 		(theHistograms["mT"])->Fill(mT, actualWeight);
 		(theHistograms["mT2"])->Fill(mT2, actualWeight);
 		(theHistograms["PuppiMET_T1_pt"])->Fill(PuppiMET_T1_pt, actualWeight);
 		(theHistograms["PuppiMET_T1_phi"])->Fill(PuppiMET_T1_phi, actualWeight);
-		(theHistograms["njets"])->Fill(njets, actualWeight);
 		(theHistograms["njets15"])->Fill(njets15, actualWeight);
 		(theHistograms["njets20"])->Fill(njets20, actualWeight);
 		(theHistograms["njets30"])->Fill(njets30, actualWeight);
 		(theHistograms["njets40"])->Fill(njets40, actualWeight);
 		(theHistograms["njets50"])->Fill(njets50, actualWeight);
+                (theHistograms["drl1a"])->Fill(drl1a, actualWeight);
+                (theHistograms["drl2a"])->Fill(drl2a, actualWeight);
+                (theHistograms["drll"])->Fill(drll, actualWeight);
+                (theHistograms["meg"])->Fill(meg, actualWeight);
+		(theHistograms["njets30_tightId"])->Fill(njets30_tightId, actualWeight);
+                (theHistograms["njets40_tightId"])->Fill(njets40_tightId, actualWeight);
+                (theHistograms["njets50_tightId"])->Fill(njets50_tightId, actualWeight);
 	}     //end loop over entries
 	cout << "after cut: " << numbe_out << "*actualweight " << actualWeight
 		<< " result " << sum <<"; yields "<<sum<< endl;
@@ -924,7 +947,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 			ml1g=(lep2p4+photonp4).M();
 			ml2g=(lep1p4+photonp4).M();
 		}
-
+                meg=(lep2p4+photonp4).M();
 		if(filename.Contains("plj") || filename.Contains("fake")){
 			PuppiMET_T1Smear_pt=PuppiMET_T1_pt;
 			PuppiMET_T1Smear_phi=PuppiMET_T1_phi;
@@ -946,7 +969,8 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 		else
 			nn = -1;
 		if(filename.Contains("18")) PrefireWeight=1;
-		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*btag_weight*PrefireWeight;//mc
+		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*btag_weight_medium*PrefireWeight;//mc
+//		actualWeight = scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*btag_weight_loose*PrefireWeight;//mc
 
 		if (fabs(lep1phi-lep2phi)>Pi) drll = sqrt((lep1eta-lep2eta)*(lep1eta-lep2eta)+(2*Pi-fabs(lep1phi-lep2phi))*(2*Pi-fabs(lep1phi-lep2phi)));
 		else drll = sqrt((lep1eta-lep2eta)*(lep1eta-lep2eta)+(fabs(lep1phi-lep2phi))*(fabs(lep1phi-lep2phi)));
@@ -956,13 +980,6 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 				printf("Unitary weights set!\n");
 			actualWeight = 1;
 		}
-
-		HLT_Mu1=HLT_IsoMu24;HLT_Mu2=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8;
-		HLT_emu1=HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL;
-		HLT_emu2=HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
-		HLT_emu3=HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL;
-		HLT_emu4=HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ;
-		HLT_Ele1=HLT_Ele32_WPTight_Gsf;HLT_Ele2=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
 
 		if(filename.Contains("plj") || filename.Contains("fake")){
 			actualWeight = scalef;
@@ -976,7 +993,7 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 				lepton_flag=1;
 		}
 		else if(filename.Contains("plj")){//fake photon
-			if(photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection==5)
+			if( (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection==5) )
 				photon_flag=1;
 			if(lep1_is_tight==1 && lep2_is_tight==1)
 				lepton_flag=1;
@@ -984,7 +1001,17 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 		else if(filename.Contains("fake")){//fake lepton
 			if(photon_selection==1)
 				photon_flag=1;
-			if( ! (lep1_is_tight==1 && lep2_is_tight==1) && njets>0 )
+			if( ! (lep1_is_tight==1 && lep2_is_tight==1)  )
+				lepton_flag=1;
+		}
+		else if(filename.Contains("WWG_emu_tot")){ //signal
+			if(photon_selection==1 && photon_isprompt==1)
+				photon_flag=1;
+			else if( (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection==5) && photon_isprompt==1 )
+				photon_flag=1;
+			if(lep1_is_tight==1 && lep2_is_tight==1 && lep1_isprompt==1 && lep2_isprompt==1) 
+				lepton_flag=1;
+			else if( ! (lep1_is_tight==1 && lep2_is_tight==1) && lep1_isprompt==1 && lep2_isprompt==1 )
 				lepton_flag=1;
 		}
 		else{//MC
@@ -993,17 +1020,22 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 			if(lep1_is_tight==1 && lep2_is_tight==1 && lep1_isprompt==1 && lep2_isprompt==1) 
 				lepton_flag=1;
 		}
+		if(filename.Contains("WWG_emu")) isSignal=1;
+		else isSignal=0;
 		bool photon_channel=false,lepton_channel=false;
+                Bool_t HLT;
+                if(filename.Contains("plj") || filename.Contains("fake")) HLT=1;
+                else HLT = (HLT_ee || HLT_mm || HLT_emu);
 		if(isChannel=="emu") 
-			lepton_channel= ((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5) && lep1_charge*lep2_charge<0 && drll>0.5;
+			lepton_channel= ( HLT && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5) && lep1_charge*lep2_charge<0 && drll>0.5;
 		if(isBarrel==1)  photon_channel=( (fabs(photoneta) < 1.4442) );
 		else if(isBarrel==0) photon_channel= ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 );
 		else photon_channel=( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 ));
-		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && mll >20 && ptll > 30 && lepton_flag && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_flag==1 && PuppiMET_T1Smear_pt > 20 && mT2>30&& mT>60 && n_bjets_nom==0 && njets30<=1){
+		if( lepton_channel && n_loose_ele==1 && n_loose_mu==1 && mll >20 && ptll > 30 && lepton_flag && n_photon>0  && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_channel && photon_flag==1 && PuppiMET_T1Smear_pt > 20 && n_bjets20_medium==0 && mT > 50 && mT2>20 && njets30<=1 ){
 			if(gen_weight>0) npp++;
 			if(gen_weight<0) nmm++;
 			numbe_out++;
-			//                        cout<<actualWeight<<endl;
+			//cout<<actualWeight<<endl;
 			treename->Fill();
 		}
 		else
@@ -1030,17 +1062,22 @@ void EDBRHistoMaker::Loop_SFs_mc(std::string outFileName,float luminosity,int is
 		(theHistograms["puppimet"])->Fill(puppimet, actualWeight);
 		(theHistograms["puppimetphi"])->Fill(puppimetphi, actualWeight);
 		(theHistograms["npvs"])->Fill(npvs, actualWeight);
-		(theHistograms["n_bjets"])->Fill(n_bjets, actualWeight);
 		(theHistograms["mT"])->Fill(mT, actualWeight);
 		(theHistograms["mT2"])->Fill(mT2, actualWeight);
 		(theHistograms["PuppiMET_T1_pt"])->Fill(PuppiMET_T1Smear_pt, actualWeight);
 		(theHistograms["PuppiMET_T1_phi"])->Fill(PuppiMET_T1Smear_phi, actualWeight);
-		(theHistograms["njets"])->Fill(njets, actualWeight);
 		(theHistograms["njets15"])->Fill(njets15, actualWeight);
 		(theHistograms["njets20"])->Fill(njets20, actualWeight);
 		(theHistograms["njets30"])->Fill(njets30, actualWeight);
 		(theHistograms["njets40"])->Fill(njets40, actualWeight);
 		(theHistograms["njets50"])->Fill(njets50, actualWeight);
+                (theHistograms["drl1a"])->Fill(drl1a, actualWeight);
+                (theHistograms["drl2a"])->Fill(drl2a, actualWeight);
+                (theHistograms["drll"])->Fill(drll, actualWeight);
+                (theHistograms["meg"])->Fill(meg, actualWeight);
+		(theHistograms["njets30_tightId"])->Fill(njets30_tightId, actualWeight);
+                (theHistograms["njets40_tightId"])->Fill(njets40_tightId, actualWeight);
+                (theHistograms["njets50_tightId"])->Fill(njets50_tightId, actualWeight);
 	}
 	cout << "after cut: " << numbe_out << "; actualweight" << actualWeight<<endl;
 	cout<< " total events: " << sum <<"; yields "<<sum*luminosity<<endl;

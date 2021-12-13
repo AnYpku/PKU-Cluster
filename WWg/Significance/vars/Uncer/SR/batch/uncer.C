@@ -53,7 +53,9 @@ void run(TString tag,TString sample,TString type,TString var,TString njets,int n
 			if(type.Contains("scale")==0&&type.Contains("pdf")==0) 
 				uncer[i] =fabs( h1[1]->GetBinContent(i+1)-h1[2]->GetBinContent(i+1))/2/bincontent_new[i];
 			else if(type.Contains("scale"))uncer[i] = (*biggest - *smallest)/2/bincontent_new[i];
-			else uncer[i] = sqrt(sum/(num-1))/h1[0]->GetBinContent(i+1);
+			else{ uncer[i] = sqrt(sum/(num-1))/h1[0]->GetBinContent(i+1);
+				cout<<sample<<" pdf: bin "<<i<<"; sum "<<sum<<"; center "<<h1[0]->GetBinContent(i+1)<<" uncer "<<uncer[i]<<endl;
+			}
 		}
 		cout<<fixed<<"bin"<<i<<" "<<setprecision(3)<<*biggest<<" "<<*smallest<<" "<<bincontent_new[i]<<" "<<1+uncer[i]<<",";
 		if(i<kk-1){
@@ -73,25 +75,25 @@ int uncer(){
         vector<TString> vars={"ml1g","ml2g","mllg"};
         vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton","ele_id","ele_reco","muon_id","muon_iso","photon_id","photon_veto"};
 	vector<TString> names;
-        vector<TString> tags={"17","18"};
-	vector<TString> njets={"0jets","1jets"};
+        vector<TString> tags={"16","_pre16","17","18"};
+	vector<TString> njets={"0jets","1jets","2jets"};
 	int num;
-        for(int i=0;i<njets.size();i++){
+        for(int i=1;i<njets.size()-1;i++){
 		for(int ik=0;ik<types.size();ik++){
-//                      if(types[ik].Contains("pdf")==0)continue;
-			if(types[ik].Contains("fakephoton")) names={"plj_unc"};
+			if(types[ik].Contains("fakephoton")) {names={"plj_unc"};continue;}
 			else if(types[ik].Contains("scale") || types[ik].Contains("pdf"))
 				names={"TTGJets","ST","WWG_emu","Top"};
 			else
-				names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG_emu","Top"};
+				names={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu","Top"};
                         if(types[ik].Contains("scale")) num=9;
                         else if(types[ik].Contains("pdf")) num=101;
                         else num=3;
 			for(int j=0;j<names.size();j++){
+//                                if(names[j].Contains("ST")==0) continue;
 				for(int k=0;k<tags.size();k++){
 					if(types[ik].Contains("l1pref") && tags[k].Contains("18"))
                                                 continue;
-					for(int n=0;n<vars.size();n++){
+					for(int n=2;n<vars.size();n++){
                                                 run(tags[k],names[j],types[ik],vars[n],njets[i],num);
 					}
                                 }

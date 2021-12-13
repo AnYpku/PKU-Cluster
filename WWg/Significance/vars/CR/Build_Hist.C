@@ -36,7 +36,7 @@ void run(TString dir,TString name,TString cut,TString vec_branchname,vector<doub
              
      TH2D* h2=new TH2D(th2name,"",bins1.size()-1,&bins1[0],bins2.size()-1,&bins2[0]);
      double lumi;
-     if(tag.Contains("16"))lumi=35.86;else if(tag.Contains("17"))lumi=41.52;else if(tag.Contains("18"))lumi=59.7;
+     if(tag.Contains("pre16"))lumi=19.5;else if(tag.Contains("16")) lumi=16.8;else if(tag.Contains("17"))lumi=41.52;else if(tag.Contains("18"))lumi=59.7;
      TTreeFormula *tformula1=new TTreeFormula("formula1", cut, tree);
      for(int i=0;i<tree->GetEntries();i++){
 	     tree->GetEntry(i);
@@ -60,39 +60,38 @@ void run(TString dir,TString name,TString cut,TString vec_branchname,vector<doub
      fout->Close();
 }
 int Build_Hist(){
-	TString LEP = "((HLT_emu1||HLT_emu2||HLT_emu3||HLT_emu4) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && lep1_charge*lep2_charge<0 && drll>0.5)";
+	TString LEP = "( channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>50 && lep1_charge*lep2_charge<0 && drll>0.5)";
 	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 )";
 	TString met;
-	vector<TString> tags={"18","17"};
-        vector<TString> vars={"ml1g","ml2g","mllg"};
+	vector<TString> tags={"16","_pre16","18","17"};
+        vector<TString> vars={"mllg"};
 	vector<vector<Double_t>> bins2;
 	vector<Double_t> mT_bins;
 	vector<Double_t> ml1g_bins={10,80,140,200};
 	vector<Double_t> ml2g_bins={10,50,90,200};
 	vector<Double_t> mllg_bins={15,155,315,500};
-        bins2.push_back(ml1g_bins);
-        bins2.push_back(ml2g_bins);
         bins2.push_back(mllg_bins);
         
 	TString dir1;
 	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/Top_gamma/output-slimmed-rootfiles/optimal_emua_";
 	TString Reco;
-	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeL","tZq","TGJets","WGJets","WWG_emu","MuonEG"};
-        vector<TString>njets={"0","1"};
+	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeL","tZq","WGJets","WWG_emu","MuonEG","Ele","Muon"};
+        vector<TString>njets={"0","1","2"};
 	TString jet_cut;
-	for(int ij=0;ij<njets.size()-1;ij++){
+	for(int ij=0;ij<njets.size();ij++){
 		if(ij==0) mT_bins={0,90,130,200};
-		if(ij==1) mT_bins={0,80,110,150,200};
+		else if(ij==1) mT_bins={0,80,110,150,200};
+		else  mT_bins={0,80,110,150,200};
 		if(ij!=2)
 			jet_cut="(njets30=="+njets[ij]+")";
 		else
-			jet_cut="(njets30>="+njets[ij]+")";
+			jet_cut="(njets30<=1)";
 		for(int k=0;k<tags.size();k++){
 			for(int j=0;j<names.size();j++){     
-				if(names[j].Contains("Muon")==0)
-					met="(n_bjets_nom>=1 && PuppiMET_T1Smear_pt > 20 && mT2>30 &&"+jet_cut+")";
+				if(names[j].Contains("Muon")==0 && names[j].Contains("Ele")==0)
+					met="(n_bjets20_medium>=1 && PuppiMET_T1Smear_pt > 20 && mT2 > 20 &&"+jet_cut+")";
 				else
-					met="(n_bjets_nom>=1 && PuppiMET_T1_pt > 20 && mT2>30 &&"+jet_cut+")";
+					met="(n_bjets20_medium>=1 && PuppiMET_T1_pt > 20 && mT2 > 20 &&"+jet_cut+")";
 				Reco= LEP+"&&"+photon+"&&"+met;
 				for(int i=0;i<vars.size();i++){     
 

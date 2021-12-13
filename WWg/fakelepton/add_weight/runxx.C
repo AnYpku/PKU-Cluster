@@ -31,8 +31,9 @@ void runxx(TString year) {
 }
 
 int main(){
-	runxx("18");
+//	runxx("18");
 	runxx("17");
+//	runxx("16");
 	return 1;
 }
 

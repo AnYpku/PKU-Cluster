@@ -81,11 +81,11 @@ void run(TString dir,TString name,TString cut,TString tag,TString type,TString n
 	     if(variables[vec_branchname]>=bins2[bins2.size()-1])
 		     variables[vec_branchname]=bins2[bins2.size()-1]-1;
 
-	     if(PuppiMET_T1Smear_pt>20 && mT>60 && mT2>30)    
+	     if(PuppiMET_T1Smear_pt>20 && mT>50 && mT2>20)    
 		     h2[0]->Fill(mT,variables[vec_branchname],actualWeight);
-	     if(variables["PuppiMET_T1Smear_pt_"+type+"Up"]>20 && mT_Up>60 && mT2_Up>30)
+	     if(variables["PuppiMET_T1Smear_pt_"+type+"Up"]>20 && mT_Up>50 && mT2_Up>20)
 		     h2[1]->Fill(mT_Up,variables[vec_branchname],actualWeight);
-	     if(variables["PuppiMET_T1Smear_pt_"+type+"Down"]>20 && mT_Down>60 && mT2_Down>30)
+	     if(variables["PuppiMET_T1Smear_pt_"+type+"Down"]>20 && mT_Down>50 && mT2_Down>20)
 		     h2[2]->Fill(mT_Down,variables[vec_branchname],actualWeight);
 
      }
@@ -100,37 +100,43 @@ void run(TString dir,TString name,TString cut,TString tag,TString type,TString n
 	     h2[i]->Write();
      }
      fout->Close();
+     file->Close();
 }
 int Build_Hist(){
-	TString LEP = "( ( (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL) ) && channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && lep1_charge*lep2_charge<0 && drll>0.5 && lep1_is_tight==1 && lep2_is_tight==1 && lep1_isprompt==1 && lep2_isprompt==1)";
+	TString LEP = "( channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && lep1_charge*lep2_charge<0 && drll>0.5 && lep1_is_tight==1 && lep2_is_tight==1 && lep1_isprompt==1 && lep2_isprompt==1)";
 	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && photon_selection==1 && photon_isprompt==1 )";
 	TString met;
         vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton"};
-        vector<TString> vars={"ml1g","ml2g","mllg"};
+        vector<TString> vars={"mllg"};
         vector<vector<Double_t>> bins2;
         vector<Double_t> mT_bins;
         vector<Double_t> ml1g_bins={10,80,140,200};
         vector<Double_t> ml2g_bins={10,50,90,200};
         vector<Double_t> mllg_bins={15,155,315,500};
         bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
-	vector<TString> tags={"17","18"};
+	vector<TString> tags={"16","_pre16","17","18"};
 	TString dir1;
 	TString Reco;
-	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG_emu"};
-        vector<TString>njets={"0","1"};
+	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu"};
+        vector<TString>njets={"0","1","2"};
         TString jet_cut;
-	for(int ij=0;ij<njets.size();ij++){
-		if(ij==0) mT_bins={60,95,120,140,200};
-		if(ij==1) mT_bins={60,105,150,200};
-		jet_cut="(njets30=="+njets[ij]+")";
-		met="(n_bjets_nom==0 && "+jet_cut+")";
+	for(int ij=1;ij<njets.size()-1;ij++){
+		if(ij==0) mT_bins={50,95,130,200};
+		else if(ij==1) mT_bins={50,105,150,200};
+		else if(ij==2) mT_bins={50,95,150,200};
+		if(ij!=2)jet_cut="(njets30=="+njets[ij]+")";
+		else jet_cut="(njets30<=1"+njets[ij]+")";
+		met="(n_bjets20_medium==0 && "+jet_cut+")";
 		Reco= LEP+"&&"+photon+"&&"+met;
 		for(int j=0;j<names.size();j++){
 //                      if(names[j].Contains("WWG_emu")==0) continue;
 			for(int k=0;k<tags.size();k++){
-				dir1="/home/pku/anying/cms/rootfiles/WWg/20"+tags[k]+"/cutla-out";
+				TString y;
+				if(tags[k].Contains("pre")) y="16";
+				else y=tags[k];
+				dir1="/home/pku/anying/cms/rootfiles/WWg/20"+y+"/cutla-out";
 				for(int i=0;i<vars.size();i++){
-					run(dir1,names[j],Reco,tags[k],"jer1",njets[ij],vars[i],mT_bins,bins2[i]);
+					run(dir1,names[j],Reco,tags[k],"jer1",njets[ij],vars[i],mT_bins,mllg_bins);
 					run(dir1,names[j],Reco,tags[k],"jesTotal",njets[ij],vars[i],mT_bins,bins2[i]);
 				}
 			}

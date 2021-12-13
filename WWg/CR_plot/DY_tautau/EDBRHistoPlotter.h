@@ -457,7 +457,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 	///-----------------------------------
 	//hs->SetBinErrorOption(TH1::kPoisson);
 	double max=hs->GetMaximum();
-	hs->SetMaximum(max*70);
+	hs->SetMaximum(max*50);
 	hs->Draw("HIST ");
 	hs->GetYaxis()->SetTitle("Events/bin");  //40.24pb-1");
 //	hs->GetYaxis()->SetNdivisions(404);
@@ -495,7 +495,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 	gr->SetFillStyle(3005);
 	gr->Draw("SAME 2");
 
-	double maximumMC = 4 * sumMC->GetMaximum();
+	double maximumMC = 3.5 * sumMC->GetMaximum();
 	double maximumDATA = -100;
 	if (isDataPresent_)
 		maximumDATA = 1.15 * sumDATA->GetMaximum();
@@ -595,7 +595,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		}
 	}
 	cout<<"test"<<endl;
-	int num;
+	int num=0;
 	for(size_t i = 0; i != histosMC.size(); ++i){
 		mcTotalLabels.push_back(bkgLegend.at(i));
                 double y_tmp=histosMC.at(i)->GetSumOfWeights();

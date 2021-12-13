@@ -4,9 +4,12 @@ void cal(TString year,TString channel){
         TString file;
 	if(channel=="mu") file="DMuon";
 	else{
-		if(year=="18")	file="DEle";
+		if(year=="18")	file="EGamma";
 		else if(year=="17") file="SingleEle";
+		else if(year.Contains("16")) file="DEle";
 	}
+	bool pre=0;
+	if(year.Contains("pre")){ year="16"; pre=1;}
         TH2D*h_mu_T=(TH2D*)f1->Get("hist_"+channel+"_"+file+year+"_tight");
         TH2D*h_mu_L=(TH2D*)f1->Get("hist_"+channel+"_"+file+year+"_loose_not_tight");
 	cout<<"hist_"+channel+"_"+file+year+"_loose_not_tight"<<endl;
@@ -17,8 +20,8 @@ void cal(TString year,TString channel){
         TH2D*h_dy_L=(TH2D*)f1->Get("hist_"+channel+"_DYJets"+year+"_loose_not_tight");
         TH2D*h_ttjets_T=(TH2D*)f1->Get("hist_"+channel+"_TTJets"+year+"_tight");
         TH2D*h_ttjets_L=(TH2D*)f1->Get("hist_"+channel+"_TTJets"+year+"_loose_not_tight");
-        TH2D*h_ttwjets_T=(TH2D*)f1->Get("hist_"+channel+"_TTWJets"+year+"_tight");
-        TH2D*h_ttwjets_L=(TH2D*)f1->Get("hist_"+channel+"_TTWJets"+year+"_loose_not_tight");
+//        TH2D*h_ttwjets_T=(TH2D*)f1->Get("hist_"+channel+"_TTWJets"+year+"_tight");
+//        TH2D*h_ttwjets_L=(TH2D*)f1->Get("hist_"+channel+"_TTWJets"+year+"_loose_not_tight");
 
 //        h_mu_L->Add(h_wjets_L,-1);
 //        h_mu_L->Add(h_dy_L,-1);
@@ -28,7 +31,7 @@ void cal(TString year,TString channel){
         h_mu_T->Add(h_wjets_T,-1);
         h_mu_T->Add(h_dy_T,-1);
         h_mu_T->Add(h_ttjets_T,-1);
-        h_mu_T->Add(h_ttwjets_T,-1);
+//        h_mu_T->Add(h_ttwjets_T,-1);
 
 	for(int i=0;i<h_mu_T->GetNbinsX();i++){
 		h_mu_T->SetBinContent(i+1,h_mu_T->GetNbinsY(),h_mu_T->GetBinContent(i+1,h_mu_T->GetNbinsY())+h_mu_T->GetBinContent(i+1,h_mu_T->GetNbinsY()+1));
@@ -44,7 +47,8 @@ void cal(TString year,TString channel){
         TCanvas*c1=new TCanvas(channel,"",800,600);
         h1->Draw("colztext");
         h1->SetMarkerSize(2);
-        h1->SetTitle(channel+" fake rate "+year);
+	if(pre) year="pre"+year;
+        h1->SetTitle(channel+" fake rate "+year+";|#eta|;p_{T}");
         c1->Print(channel+"_fakerate"+year+".pdf");
         TFile*fout=new TFile(channel+year+"_fakerate.root","recreate");
         h_mu_T->Write("T");
@@ -54,8 +58,13 @@ void cal(TString year,TString channel){
 }
 int cal_weight(){
 
+cal("16","ele");
+cal("16","mu");
+//cal("16pre","mu");
+//cal("16pre","ele");
+//cal("16","mu");
 //cal("17","ele");
-cal("17","mu");
+//cal("17","mu");
 //cal("18","ele");
 //cal("18","mu");
 return 0;

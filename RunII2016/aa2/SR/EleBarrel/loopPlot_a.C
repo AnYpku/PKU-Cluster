@@ -36,7 +36,7 @@ void loopPlot() {
 
 	/// Path to wherever the files with the trees are. 
 	//std::string pathToTrees = "./output-slimmed-rootfiles/root/";
-	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/2016/";
+	std::string pathToTrees = "/home/pku/anying/cms/rootfiles/Zgamma/2016/";
 	std::string outputDir = "./fig-output/";
 	
 	RoccoR  rc("./RoccoR2016.txt");

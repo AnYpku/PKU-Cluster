@@ -70,20 +70,20 @@ void run(TString tag,TString sample,TString type,TString var,TString njets,int n
 	file->Close();
 }
 int uncer(){
-        vector<TString> vars={"ml1g","ml2g","mllg"};
+        vector<TString> vars={"mllg"};
         vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton","ele_id","ele_reco","muon_id","muon_iso","photon_id","photon_veto"};
 	vector<TString> names;
-        vector<TString> tags={"17","18"};
-	vector<TString> njets={"0jets","1jets"};
+        vector<TString> tags={"16","_pre16","17","18"};
+	vector<TString> njets={"0jets","1jets","2jets"};
 	int num;
         for(int i=0;i<njets.size();i++){
 		for(int ik=0;ik<types.size();ik++){
 //                      if(types[ik].Contains("scale")==0)continue;
-			if(types[ik].Contains("fakephoton")) names={"plj_unc"};
+			if(types[ik].Contains("fakephoton")) {names={"plj_unc"};continue;}
 			else if(types[ik].Contains("scale") || types[ik].Contains("pdf"))
 				names={"TTGJets","ST","WWG_emu","Top"};
 			else
-				names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG_emu","Top"};
+				names={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu","Top"};
                         if(types[ik].Contains("scale")) num=9;
                         else if(types[ik].Contains("pdf")) num=101;
                         else num=3;

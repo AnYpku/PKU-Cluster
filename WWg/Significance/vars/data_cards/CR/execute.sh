@@ -1,14 +1,14 @@
 #!/bin/bash
-# "genMjj" "genZGmass")
-channel=("mubarrel" "muendcap" "elebarrel" "eleendcap")
-# "Mjj" "Mva")
-year=("16" "17" "18")
-#year=("16" "18")
+vars=("ml1g" "ml2g" "mllg")
+year=("16" "_pre16" "17" "18")
+njets=("0jets" "1jets" "2jets")
 for (( j = 0 ; j < ${#year[@]} ; j++ ))
 do
-    for (( i = 0 ; i < ${#channel[@]} ; i++ ))
+    for (( i = 2 ; i < ${#vars[@]} ; i++ ))
     do
-        python th2_to_txt.py ${year[$j]} ${channel[$i]}
-#        python th2_to_txt_loose.py ${year[$j]} ${channel[$i]}
+        for  (( k = 0 ; k < ${#njets[@]} ; k++ ))
+        do
+          python th2_to_txt.py ${year[$j]} ${njets[$k]} ${vars[$i]}
+        done
     done
 done

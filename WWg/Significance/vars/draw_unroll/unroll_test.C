@@ -174,6 +174,22 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         htot->SetFillStyle(3005);
         htot->Draw("E2 same");
         TH1D*h1_clone=(TH1D*)htot->Clone();
+//        TH1D*h1_clone=(TH1D*)th2_data->Clone();
+        TFile* f_data2=TFile::Open("../root/hist_MuonEG_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th2_data16=(TH1D*)f_data2->Get("hist_bkg");
+        TH1D* th2_data= unroll(th2_data16,"t2_data");
+
+        TFile* f_data3=TFile::Open("../root/hist_Muon_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th3_data16=(TH1D*)f_data3->Get("hist_bkg");
+        TH1D* th3_data= unroll(th3_data16,"t3_data");
+
+        TFile* f_data1=TFile::Open("../root/hist_Ele_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th1_data16=(TH1D*)f_data1->Get("hist_bkg");
+        TH1D* th1_data= unroll(th1_data16,"t1_data");
+
+        th2_data->Add(th1_data);th2_data->Add(th3_data);  
+
+
         h1_clone->SetMarkerColor(1);
         h1_clone->SetLineColor(1);
         h1_clone->SetMarkerStyle(20);
@@ -196,6 +212,7 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	leg1->AddEntry(th2_VV, Form("VV [%.1f]", th2_VV->GetSum() ) );
 	leg1->AddEntry(th2_TTA, Form("t#bar{t}#gamma [%.1f]",th2_TTA->GetSum()) );
 	leg1->AddEntry(th2_ST, Form("tW  [%.1f]",th2_ST->GetSum() ) );
+//	leg1->AddEntry(h1_clone, Form("Data  [%.1f]",th2_data->GetSum() ) );
 //	leg->AddEntry(th2_ZA_sig,"WWG");
 //	leg->AddEntry(th2_ZA,"QCD Z#gamma");
 //	leg->AddEntry(th2_plj,"Nonprompt #gamma");
@@ -204,7 +221,7 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 //	leg1->AddEntry(th2_TTA,"t#bar{t}#gamma");
 //	leg1->AddEntry(th2_ST,"tW");
        
-        leg1->AddEntry(htot," MC stat.");
+	leg1->AddEntry(h1_clone, Form("MC Stat.  [%.1f]",h1_clone->GetSum() ) );
         leg->SetTextSize(0.07);
         leg1->SetTextSize(0.07);
 ////
@@ -238,7 +255,8 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 //	
 //	cmsLumi(tag);
         string lumivalue;
-        if(tag.Contains("16")) lumivalue="35.86";
+        if(tag.Contains("pre16")) lumivalue="19.5";
+        else if(tag.Contains("16")) lumivalue="16.8";
         if(tag.Contains("17")) lumivalue="41.52";
         if(tag.Contains("18")) lumivalue="59.7";
         CMS_lumi(fPads1, 4, 0, lumivalue);
@@ -249,6 +267,8 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
         TH1D*h_up=(TH1D*)htot->Clone();
         h_up->Divide(nomNoErr);
+        TH1D*h_clone=(TH1D*)h1_clone->Clone();
+        h_clone->Divide(nomNoErr);
         nominal->Divide(nomNoErr);
         nominal->GetYaxis()->SetRangeUser(0.4,1.9);
         nominal->SetLineColor(2);
@@ -268,30 +288,31 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         h_up->SetLineColor(1);
         h_up->SetMarkerSize(1.2);
         h_up->Draw("EP same");
+//        h_clone->Draw("EP same");
         fPads2->Update();
 
 	c1->Print("aa_"+var+"_"+njets+"_"+tag+".pdf");
 }
 int unroll_test(){
-       vector<TString> tags={"16","17","18"};
-       vector<TString> var={"ml1g","ml2g","mllg"};
-       vector<TString> njets={"0jets","1jets"};
+       vector<TString> tags={"16","_pre16","17","18"};
+       vector<TString> var={"ml1g","mllg"};
+       vector<TString> njets={"0jets","1jets","2jets"};
        vector<Double_t> mT_bins;
        vector<vector<Double_t>> bins2;
        vector<Double_t> ml1g_bins={10,80,140,200};
        vector<Double_t> ml2g_bins={10,50,90,200};
-       vector<Double_t> mllg_bins={15,155,315,500};
+       vector<Double_t> mllg_bins={50,125,200,500};
        bins2.push_back(ml1g_bins);
-       bins2.push_back(ml2g_bins);
        bins2.push_back(mllg_bins);
 
-       for(int j=1;j<tags.size();j++){
-	       for(int i=0;i<var.size();i++){
+       for(int j=0;j<tags.size();j++){
+	       for(int i=1;i<var.size();i++){
 		       for(int k=0;k<njets.size();k++){
-			       if(njets[k]=="0jets") mT_bins={60,95,120,140,200};
-			       else if(njets[k]=="1jets") mT_bins={60,105,150,200};
-			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
-			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
+			       if(njets[k]=="0jets"){ mT_bins={50,95,130,200};mllg_bins={15,155,255,500};}
+			       else if(njets[k]=="1jets"){ mT_bins={50,105,150,200};mllg_bins={15,155,315,500}; }
+			       else mT_bins={50,90,130,200};
+			       unroll_run(tags[j],var[i],njets[k],mT_bins,mllg_bins);
+			       unroll_run(tags[j],var[i],njets[k],mT_bins,mllg_bins);
 		       }
 	       }
        }

@@ -3,7 +3,7 @@
 #include <fstream>
 using namespace std;
 
-void runxx(TString year,TString dir) {
+void runxx(TString year,TString dir,bool flag) {
 	ifstream infile("file"+year);
 	string buffer; 
 	TString infilename;
@@ -16,7 +16,7 @@ void runxx(TString year,TString dir) {
 		if(infilename.Contains("root")==0) {k=-2; continue;}
 		if(infilename.Contains("end")==1) {k=-2; break;}
 		infilename = infilename;
-		TString outname="cutlep1-out"+infilename;
+		TString outname="cutlep-out"+infilename;
 
 		TFile *file1 =new TFile(dir+infilename);
 		TTree *tree1 = (TTree*) file1->Get("Events");
@@ -26,7 +26,7 @@ void runxx(TString year,TString dir) {
 		double nevents=0;
 		nevents=h1->GetSum();
 		cout<<dir<<infilename<<" -> "<<outname<<endl;
-		m1.Loop(outname,nevents,year);
+		m1.Loop(outname,nevents,year,flag);
 		m1.endJob();
 
 	}
@@ -35,8 +35,10 @@ void runxx(TString year,TString dir) {
 int main(){
 	TString dir18 ="/home/pku/anying/cms/rootfiles/WWg/2018/";
 	TString dir17 ="/home/pku/anying/cms/rootfiles/WWg/2017/";
-	runxx("18",dir18);
-//	runxx("17",dir17);
+	TString dir16 ="/home/pku/anying/cms/rootfiles/WWg/2016/";
+//	runxx("18",dir18,0);
+//	runxx("17",dir17,0);
+	runxx("16",dir16,1);
 	return 1;
 }
 

@@ -53,7 +53,7 @@ for l_num, l in enumerate(input_file_m):
 	a2_m = float(ll[0])
 	a1_m = float(ll[1])
 	for bin_x in range(1,nGridPointsForNewF+1):
-        	par1_value=hists[l_num].GetXaxis().GetBinCenter(bin_x)#200 ponits from a range, get every point value which is the oprator value
+        	par1_value=hists[l_num].GetXaxis().GetBinCenter(bin_x)#200 ponits from a range, get every point value which is the operator value
 	        yield_bin=1+a1_m*par1_value+a2_m*par1_value*par1_value#get aQGC/SM ratio
 	        hists[l_num].SetBinContent(bin_x,yield_bin)
 	hists[l_num].Write()#the first five histos are muon channel ZGmass bins

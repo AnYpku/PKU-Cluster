@@ -1,9 +1,9 @@
-void run(TString tag,TString name,vector<double> ptbins,vector<double> eff){
+void run(TString tag,TString name,vector<double> ptbins,vector<double> eff,TString type){
    TH1D*h1=new TH1D(name+"_eff"+tag,"",ptbins.size()-1,&ptbins[0]);
    for(int i=0;i<h1->GetNbinsX();i++){
 	   h1->SetBinContent(i+1,eff[i]);
    }
-   TFile*fout=new TFile("eff_"+name+tag+".root","recreate");
+   TFile*fout=new TFile("eff_"+type+"_"+name+tag+".root","recreate");
    fout->cd();
    h1->Write();
    fout->Close();
@@ -12,23 +12,44 @@ int get_jet_eff(){
 	vector<Double_t> eff_b_jet_medium; 
 	vector<Double_t> eff_c_jet_medium;
 	vector<Double_t> eff_l_jet_medium;
-        vector<TString> tag={"17","18"};
+	vector<Double_t> eff_b_jet_loose; 
+	vector<Double_t> eff_c_jet_loose;
+	vector<Double_t> eff_l_jet_loose;
+        vector<TString> tag={"16","17","18"};
 	vector<double> pt_bin = {20, 30, 50, 70, 100, 140, 200, 300, 600, 1000, 1500};
-	for(int i=0;i<tag.size()-1;i++){
+	for(int i=0;i<tag.size();i++){
 		if(tag[i].Contains("17")){
 			eff_b_jet_medium= {0.550703, 0.655257, 0.708018, 0.733123, 0.743445, 0.73445, 0.685051, 0.559069, 0.337587, 0.156085};
 			eff_c_jet_medium= {0.100341, 0.111135, 0.115312, 0.123547, 0.132176, 0.137718, 0.12915, 0.102925, 0.0532662, 0.022082};
 			eff_l_jet_medium= {0.0073096, 0.00782829, 0.00801778, 0.00894073, 0.0105117, 0.0122973, 0.0130844, 0.0131463, 0.00887536, 0.00256148};
+			eff_b_jet_loose =  {0.747759, 0.817121, 0.85459, 0.876767, 0.891093, 0.894935, 0.880487, 0.835978, 0.761482, 0.655203};
+			eff_c_jet_loose =  {0.382709, 0.419236, 0.431463, 0.44594, 0.460301, 0.46941, 0.454488, 0.433304, 0.384656, 0.274448};
+			eff_l_jet_loose =  {0.0951708, 0.0892728, 0.0866658, 0.0965049, 0.112411, 0.131063, 0.15024, 0.173086, 0.179398, 0.170082};
 
 		}
 		else if(tag[i].Contains("18")){
 			eff_b_jet_medium = {0.565127, 0.663282, 0.714194, 0.737916, 0.750325, 0.745599, 0.701239, 0.590619, 0.390365, 0.216667};
 			eff_c_jet_medium = {0.120439, 0.128175, 0.130494, 0.13781, 0.14765, 0.154195, 0.146221, 0.120963, 0.0666874, 0.0311927};
 			eff_l_jet_medium = {0.00904002, 0.00806116, 0.00810405, 0.00924306, 0.0113922, 0.0137251, 0.0159489, 0.0189461, 0.0130992, 0.004265};
+			eff_b_jet_medium = {0.565127, 0.663282, 0.714194, 0.737916, 0.750325, 0.745599, 0.701239, 0.590619, 0.390365, 0.216667};
+			eff_b_jet_loose =  {0.753404, 0.813243, 0.850107, 0.87129, 0.88806, 0.89424, 0.881965, 0.846197, 0.798682, 0.70404};
+			eff_c_jet_loose =  {0.392685, 0.415126, 0.42917, 0.445494, 0.462387, 0.473021, 0.461477, 0.451609, 0.421237, 0.348624};
+			eff_l_jet_loose =  {0.125149, 0.0924003, 0.0847756, 0.0946918, 0.113998, 0.134914, 0.15921, 0.19733, 0.229773, 0.206426};
 		}
-		run(tag[i],"b_jet",pt_bin,eff_b_jet_medium);
-		run(tag[i],"c_jet",pt_bin,eff_c_jet_medium);
-		run(tag[i],"l_jet",pt_bin,eff_l_jet_medium);
+		else if(tag[i].Contains("16")){
+			eff_b_jet_medium ={ 0.494944, 0.604301, 0.655748, 0.680486, 0.693248, 0.693765, 0.667501, 0.616062, 0.535007, 0.505137};
+			eff_c_jet_medium ={ 0.106603, 0.119726, 0.114486, 0.114447, 0.118432, 0.12676, 0.128575, 0.138768, 0.151776, 0.189189};
+			eff_l_jet_medium ={ 0.0130506, 0.0120923, 0.00997784, 0.00970286, 0.0105707, 0.0128526, 0.0161229, 0.0244205, 0.0325238, 0.0340532};
+			eff_b_jet_loose ={ 0.686011, 0.764027, 0.805729, 0.831279, 0.849252, 0.860238, 0.858505, 0.849354, 0.843092, 0.849315};
+			eff_c_jet_loose ={ 0.354013, 0.383178, 0.384509, 0.389559, 0.39991, 0.416174, 0.426847, 0.467101, 0.51934, 0.617117};
+			eff_l_jet_loose ={ 0.113448, 0.109686, 0.0945654, 0.0941139, 0.102728, 0.122753, 0.15118, 0.205856, 0.277138, 0.35299};
+		}
+		run(tag[i],"b_jet",pt_bin,eff_b_jet_medium,"medium");
+		run(tag[i],"c_jet",pt_bin,eff_c_jet_medium,"medium");
+		run(tag[i],"l_jet",pt_bin,eff_l_jet_medium,"medium");
+		run(tag[i],"b_jet",pt_bin,eff_b_jet_loose,"loose");
+		run(tag[i],"c_jet",pt_bin,eff_c_jet_loose,"loose");
+		run(tag[i],"l_jet",pt_bin,eff_l_jet_loose,"loose");
 	}
 	return 1;
 }

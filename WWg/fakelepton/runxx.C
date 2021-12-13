@@ -22,8 +22,6 @@ void runxx(TString year) {
 		cout<<dir<<infilename<<" -> "<<outname<<endl;
 
 		TFile *file1 =new TFile(dir+infilename);
-		//TDirectory * dir1 = (TDirectory*)file1->Get("treeDumper");
-		//TTree *tree1 = (TTree*) dir1->Get("ZPKUCandidates");
 		TTree *tree1 = (TTree*) file1->Get("Events");
 		TH1D*h1=(TH1D*)file1->Get("nEventsGenWeighted");
 		double nevents=0;
@@ -37,7 +35,7 @@ void runxx(TString year) {
 }
 
 int main(){
-	runxx("17");
+	runxx("18");
 	return 1;
 }
 

@@ -23,40 +23,55 @@ void WWg::Loop(TString name,TString year)
    double lumi;
    if(name.Contains("18")) lumi=59.7;
    else if(name.Contains("17")) lumi=41.52;
+   else if(year.Contains("16") && name.Contains("pre"))
+           lumi=19.52;
+   else
+           lumi=16.81;
    cout<<lumi<<endl;
    Bool_t cut,cut1;
    double actualWeight;
+   Bool_t HLT;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
-      // if (Cut(ientry) < 0) continue;
       if(jentry%10000==0)cout<<jentry<<" "<<nentries<<endl;
       if(photonet>=400) photonet=399;
-      if(name.Contains("Muon")){scalef=1;photon_isprompt=1;lep1_isprompt=1;lep2_isprompt=1;}
-      cut=(channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11&&lep1_is_tight==1&&lep2_is_tight==1 &&lep1_charge*lep2_charge<0&&drll>0.5&& lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5&&n_loose_ele==1&&n_loose_mu==1&&ptll>30 && mll>20) && ( n_photon>0 && photonet > 20. && ( (fabs(photoneta)<1.4442) || (fabs(photoneta)<2.5&&fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection ==5 ) && photon_isprompt==1 && lep1_isprompt==1 && lep2_isprompt==1 ) && ((HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ) || (HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL)) ;//selection of fake photon enriched sample 
+      if(name.Contains("Muon")||name.Contains("Ele")){scalef=1;photon_isprompt=1;lep1_isprompt=1;lep2_isprompt=1;}
+
+      if(name.Contains("MuonEG")) HLT = (HLT_emu);
+      else if(name.Contains("Muon")) HLT = ( !(HLT_emu) && HLT_mm);
+      else if(name.Contains("Ele")) HLT = ( !(HLT_emu) && !(HLT_mm) && HLT_ee);
+      else HLT = (HLT_ee || HLT_emu || HLT_mm);
+
+      cut= ( channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1_is_tight==1 && lep2_is_tight==1 &&lep1_charge*lep2_charge<0 && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep2eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 ) && ( n_photon>0 && photonet > 20. && ( (fabs(photoneta)<1.4442) || ( fabs(photoneta)<2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection ==5 ) && photon_isprompt==1 && lep1_isprompt==1 && lep2_isprompt==1 ) && (HLT)  ;//selection of fake photon enriched sample 
+
       if(year.Contains("18")) PrefireWeight=1;
-      actualWeight=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*btag_weight*PrefireWeight*lumi;
-      if(name.Contains("Muon")) actualWeight=1;
-      if(name.Contains("Muon")==0){
+      actualWeight=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*PrefireWeight*lumi*btag_weight_medium;
+      if(name.Contains("Muon") || name.Contains("Ele")) actualWeight=1;
+      if(name.Contains("Muon")==0 && name.Contains("Ele")==0){
 	      PuppiMET_T1_pt=PuppiMET_T1Smear_pt;
 	      PuppiMET_T1_phi=PuppiMET_T1Smear_phi;
       }
-//      cout<<jentry<<" test1"<<weight_b->GetBinContent(weight_b->FindBin(0.5,photonet))<<endl;
+//    cout<<jentry<<" test1"<<weight_b->GetBinContent(weight_b->FindBin(0.5,photonet))<<endl;
       if(cut){
               if(fabs(photoneta)<1.4442){
                       double weight=weight_b->GetBinContent(weight_b->FindBin(0.5,photonet));
 		      hb->Fill(photonet,actualWeight*weight);          
-		      if(name.Contains("WWG"))
+		      if(name.Contains("WWG")){
 			      scalef=scalef*weight*(-1);
+			      cout<<scalef<<" "<<weight<<endl;
+		      }
 		      else
 			      scalef=actualWeight*weight;
 	      }
 	      else if( (fabs(photoneta)<2.5 && fabs(photoneta)>1.566) ){
                       double weight=weight_e->GetBinContent(weight_e->FindBin(0.5,photonet));
 		      he->Fill(photonet,actualWeight*weight);          
-		      if(name.Contains("WWG"))
+		      if(name.Contains("WWG")){
 			      scalef=scalef*weight*(-1);
+			      cout<<scalef<<" "<<weight<<endl;
+		      }
 		      else
 			      scalef=actualWeight*weight;
 	      }
@@ -64,9 +79,10 @@ void WWg::Loop(TString name,TString year)
       else{ 
 	      if(name.Contains("WWG")==0) continue;
       }
-      if(name.Contains("Muon")==0 && name.Contains("WWG")==0) scalef=scalef*(-1);
+      if(name.Contains("Muon")==0 && name.Contains("Ele")==0 && name.Contains("WWG")==0) 
+	      scalef=scalef*(-1);
       ExTree->Fill();
-//      cout<<jentry<<" test2"<<endl;
+//    cout<<jentry<<" test2"<<endl;
    }
    fin->Close();
    cout<<hb->GetEntries()<<" "<<he->GetEntries()<<endl;

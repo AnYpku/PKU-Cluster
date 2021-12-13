@@ -49,12 +49,12 @@ void run(TString tag,TString sample,TString type,TString vars,TString njets){
 }
 int uncer_jesr(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
-	vector<TString> tag={"16","17","18"};
-	vector<TString> vars={"ml1g","ml2g","mllg"};
-	vector<TString> sample={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG_emu","Top"};
-	vector<TString> njets={"0jets","1jets"};
-	for(int i=0;i<njets.size();i++){
-		for(int j=1;j<tag.size();j++){
+	vector<TString> tag={"16","_pre16","17","18"};
+	vector<TString> vars={"mllg"};
+	vector<TString> sample={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu","Top"};
+	vector<TString> njets={"0jets","1jets","2jets"};
+	for(int i=1;i<njets.size()-1;i++){
+		for(int j=0;j<tag.size();j++){
 			for(int k=0;k<sample.size();k++){
 				for(int n=0;n<vars.size();n++){
 					run(tag[j],sample[k],"jer1",vars[n],njets[i]);

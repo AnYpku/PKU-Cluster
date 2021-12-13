@@ -561,7 +561,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		char yMC[100];sprintf(yMC,"%0.f",yieldsMC);
 		char yMCerr[100];sprintf(yMCerr,"%0.f",yieldsMCerr);
 		TString samplesMC = "Pred. #oplus stat.";
-	      TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
+	        TString LabelMC = samplesMC +" ["+ yMC+ "#pm"+yMCerr+" ]";
 //		TString LabelMC = samplesMC ;
 		ftxt<<samplesMC<<" "<<yMC<< "$pm$"<<yMCerr<<""<<endl;
 		leg1->AddEntry(sumMC, LabelMC);
@@ -571,26 +571,20 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 			for (size_t i = 0; i != histosMCSig.size(); ++i) {
 				sprintf(rescalingLabel, " (x%g)", kFactorsSig_.at(i));
 				std::string rescalingStr(rescalingLabel);
-				TH1D* h1;
-				if (kFactorsSig_.at(i) != 2.0) {
-					if (i == 0){
-						h1=(TH1D*)histosMCSig.at(i)->Clone();
-						//h1->Add(histosMCSig.at(i+1),1);
-						//h1->Add(histosMCSig.at(i+2),1);
-						double yieldsMCSigErr;
-						double yieldsMCSig= h1->IntegralAndError(0,h1->GetNbinsX(),yieldsMCSigErr);
-						yieldsMCSig = h1->GetSumOfWeights();
-						char ySig[100];sprintf(ySig,"%.1f",yieldsMCSig);
-						char ySigErr[100];sprintf(ySigErr,"%.1f",yieldsMCSigErr);
-						TString samplesMCSig = "WW#gamma";
-					        TString LabelSig = samplesMCSig +" ["+ ySig + "#pm"+ySigErr +"]";
-//						TString LabelSig = samplesMCSig;
-						ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
-						leg1->AddEntry(histosMCSig.at(i), LabelSig, "lf");
-					}
-				} else
-					leg1->AddEntry(histosMCSig.at(i), (labelsSig.at(i)).c_str(),
-							"lf");
+				TH1D* h1=(TH1D*)histosMCSig.at(i)->Clone();
+				//h1->Add(histosMCSig.at(i+1),1);
+				//h1->Add(histosMCSig.at(i+2),1);
+				double yieldsMCSigErr;
+				double yieldsMCSig= h1->IntegralAndError(0,h1->GetNbinsX(),yieldsMCSigErr);
+				yieldsMCSig = h1->GetSumOfWeights();
+				char ySig[100];sprintf(ySig,"%.1f",yieldsMCSig);
+				char ySigErr[100];sprintf(ySigErr,"%.1f",yieldsMCSigErr);
+				TString samplesMCSig ;
+				if(i==0) samplesMCSig = "WW#gamma";
+				if(i==1) samplesMCSig = "H#gamma";
+				TString LabelSig = samplesMCSig +" ["+ ySig + "#pm"+ySigErr +"]";
+				ftxt<<samplesMCSig<<" "<<ySig<< "$pm$"<<ySigErr<<""<<endl;
+				leg1->AddEntry(histosMCSig.at(i), LabelSig, "lf");
 			}
 		}
 	}
@@ -608,7 +602,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		double yerr;
 		double yields=h1->IntegralAndError(0,histosMC.at(i)->GetNbinsX(),yerr);
 		yields = h1->GetSumOfWeights();
-                if(yields<0.049){yields=0;yerr=0;}
+                if(yields<0){yields=0;yerr=0;}
 		char y[100];sprintf(y,"%.1f",yields);
 		char ye[100];sprintf(ye,"%.1f",yerr);
 		TString samples ;
@@ -619,7 +613,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		else    samples= mcTotalLabels.at(i).c_str();
 		TString LabelMC = samples +" ["+ y+ "#pm"+ye+"]";
 //		TString LabelMC = samples ;
-                if(yields>0){
+                if(yields>0.1){
 			if(i<num)leg1->AddEntry(h1, LabelMC, "f");
 			else   leg2->AddEntry(h1, LabelMC, "f");
 		}

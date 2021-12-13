@@ -595,7 +595,7 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		}
 	}
 	cout<<"test"<<endl;
-	int num;
+	int num=0;
 	for(size_t i = 0; i != histosMC.size(); ++i){
 		mcTotalLabels.push_back(bkgLegend.at(i));
                 double y_tmp=histosMC.at(i)->GetSumOfWeights();

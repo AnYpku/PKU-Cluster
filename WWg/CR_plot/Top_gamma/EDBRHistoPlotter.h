@@ -648,8 +648,8 @@ void EDBRHistoPlotter::makeStackPlots(std::string histoName,TString histTitle,in
 		fPads2->SetGridx();
 		fPads2->SetGridy();
 
-		double thisYmin = 0.5;
-		double thisYmax = 1.8;
+		double thisYmin = 0.1;
+		double thisYmax = 3.1;
 
 		TVectorD nsigma_x(sumDATA->GetNbinsX());
 		TVectorD nsigma_y(sumDATA->GetNbinsX());

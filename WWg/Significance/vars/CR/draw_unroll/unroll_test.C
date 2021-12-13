@@ -273,9 +273,9 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	c1->Print("aa_CR_"+var+"_"+njets+"_"+tag+".pdf");
 }
 int unroll_test(){
-       vector<TString> tags={"16","17","18"};
+       vector<TString> tags={"16","_pre16","17","18"};
        vector<TString> var={"ml1g","ml2g","mllg"};
-       vector<TString> njets={"0jets","1jets"};
+       vector<TString> njets={"0jets","1jets","2jets"};
        vector<Double_t> mT_bins;
        vector<vector<Double_t>> bins2;
        vector<Double_t> ml1g_bins={10,80,140,200};
@@ -285,11 +285,12 @@ int unroll_test(){
        bins2.push_back(ml2g_bins);
        bins2.push_back(mllg_bins);
 
-       for(int j=1;j<tags.size();j++){
-	       for(int i=0;i<var.size();i++){
-		       for(int k=0;k<njets.size();k++){
+       for(int j=0;j<tags.size();j++){
+	       for(int i=2;i<var.size();i++){
+		       for(int k=0;k<njets.size()-1;k++){
 			       if(njets[k]=="0jets") mT_bins={0,90,130,200};
 			       else if(njets[k]=="1jets") mT_bins={0,80,110,150,200};
+			       else  mT_bins={0,80,110,150,200};
 			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
 			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
 		       }

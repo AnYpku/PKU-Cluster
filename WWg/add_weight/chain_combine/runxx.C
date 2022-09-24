@@ -24,8 +24,8 @@ void runxx(TString year,bool flag,double n){
 }
 int main(){
 //	runxx("18",false,3907000);
-//	runxx("16",true,1);
-//	runxx("17",false,1);
+	runxx("16",true,1);
+	runxx("17",false,1);
 	runxx("18",false,1);
 	return 1;
 }

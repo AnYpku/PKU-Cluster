@@ -1,16 +1,14 @@
-#define chain_WWg_cxx
+#define WWg_cxx
+#define Pi 3.1415926
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <iostream>
-#include "chain_WWg.h"
-#include "TLorentzVector.h"
+#include "get_btag_scale.C"
 #include "ele_channel_scale.C"
 #include "muon_channel_scale.C"
-#include "TRandom.h"
-#define Pi 3.1415926
 using namespace std;
-void chain_WWg::Loop(TString name,double nevents,TString year,bool flag)
+void WWg::Loop(TString name,double nevents,TString year,bool flag)
 {
    if (fChain == 0) return;
 
@@ -68,42 +66,48 @@ void chain_WWg::Loop(TString name,double nevents,TString year,bool flag)
    else
 	   photon_model=(TH1F*)f_pix->Get("MediumID/PUunc_HasPix_MediumID");
 
-   if(name.Contains("pre") && year.Contains("16"))
-	   rc.init("roccor/RoccoR2016aUL.txt"); 
-   else if(year.Contains("16")) 
-	   rc.init("roccor/RoccoR2016bUL.txt");
-   else if(year.Contains("17"))
-	   rc.init("roccor/RoccoR2017UL.txt");
-   else if(year.Contains("18"))
-	   rc.init("roccor/RoccoR2018UL.txt");
+   TFile*fbtag=new TFile("btag_eff/eff_medium_b_jet"+year+".root");
+   TH1D*hbeff=(TH1D*)fbtag->Get("b_jet_eff"+year);
+   TFile*fctag=new TFile("btag_eff/eff_medium_c_jet"+year+".root");
+   TH1D*hceff=(TH1D*)fctag->Get("c_jet_eff"+year);
+   TFile*fltag=new TFile("btag_eff/eff_medium_l_jet"+year+".root");
+   TH1D*hleff=(TH1D*)fltag->Get("l_jet_eff"+year);
+
+   TFile*fbtag1=new TFile("btag_eff/eff_loose_b_jet"+year+".root");
+   TH1D*hbeff1=(TH1D*)fbtag->Get("b_jet_eff"+year);
+   TFile*fctag1=new TFile("btag_eff/eff_loose_c_jet"+year+".root");
+   TH1D*hceff1=(TH1D*)fctag->Get("c_jet_eff"+year);
+   TFile*fltag1=new TFile("btag_eff/eff_loose_l_jet"+year+".root");
+   TH1D*hleff1=(TH1D*)fltag->Get("l_jet_eff"+year);
 
    Long64_t nbytes = 0, nb = 0;
    Bool_t BSL=0;
    int tot=0;
-   TLorentzVector Zp4, photonp4, jet1p4, jet2p4,lep1p4,lep2p4;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
 	   Long64_t ientry = LoadTree(jentry);
 	   if (ientry < 0) break;
 	   nb = fChain->GetEntry(jentry);   nbytes += nb;
-	   float r1=gRandom->Rndm(jentry);
 	   Init();
            bool isdata=0,isMC=0;
 	   if(name.Contains("Muon")==0 && name.Contains("Ele")==0 && name.Contains("MET")==0 && name.Contains("EGamma")==0 ) isMC=1;
 	   else isdata=1;
 	   if(isdata) { scalef=1.0;}
-	   if(name.Contains("WZ")) { scalef=1000.*4.429/float(nevents)*fabs(gen_weight)/gen_weight;}
-	   if(name.Contains("ZZ")) { scalef=1000.*0.9738/float(nevents)*fabs(gen_weight)/gen_weight;}
-	   if(name.Contains("WW")) { scalef=1000.*12.178/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("WZ")) { scalef=1000.*47.13/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("ZZ")) { scalef=1000.*16.523/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("WW")) { scalef=1000.*75.8/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("TGJets")){ scalef=1000.*2.967/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("TTG")){ scalef=1000.*3.697/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("tZq")){ scalef=1000.*0.0758/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("ZGJets")){ scalef=1000.*55.49/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("WGJets")){ scalef=1000.*489/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("DYJets")){ scalef=1000.*6077.22/float(nevents)*fabs(gen_weight)/gen_weight;}
-	   if(name.Contains("HGC")){ scalef=1000.*0.00288*0.01055/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("HWW")){ scalef=1000.*21.47/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("HGC")){ scalef=1000.*0.002464*0.01055/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("HGC_NLO")){ scalef=1000.*0.00288*0.01055/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("HGS")){ scalef=1000.*5.875e-06*0.01055/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("HGD")){ scalef=1000.*4.371e-08*0.01055/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("HGU")){ scalef=1000.*6.409e-08*0.01055/float(nevents)*fabs(gen_weight)/gen_weight;}
-	   if(name.Contains("WJets")){ scalef=1000.*61526.7/float(nevents)*fabs(gen_weight)/gen_weight;}
+	   if(name.Contains("WJets") && name.Contains("TTW")==0 ){ scalef=1000.*61526.7/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("TTJets"))  { scalef=1000.*831.76/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("WWG_emu")) { scalef=1000*0.074721/float(nevents)*fabs(gen_weight)/gen_weight;}
 	   if(name.Contains("ST_tW"))   { scalef=1000.*34.91/float(nevents)*fabs(gen_weight)/gen_weight;}
@@ -133,47 +137,51 @@ void chain_WWg::Loop(TString name,double nevents,TString year,bool flag)
 		   }
 	   }
           
+
+           double value,value1;
+           if(year.Contains("18")){ value=0.4168;value1=0.1208;}
+           else if(year.Contains("17")){ value=0.4506;value1=0.1355;}
+           else if(year.Contains("16")){
+		   if(name.Contains("pre")){ value=0.6001;value1=0.2027;}
+		   else{value=0.5847;value1=0.1918;}
+	   }
+
+	   if( isMC ){
+		   btag_weight_medium      = get_btag_scale(hbeff,hceff,hleff,value,nJet,Jet_btagDeepB,Jet_partonFlavour,Jet_btagSF_deepcsv_M,Jet_btagSF_deepcsv_M_up,Jet_btagSF_deepcsv_M_down,Jet_pt,"nominal");
+		   btag_weight_medium_up   = get_btag_scale(hbeff,hceff,hleff,value,nJet,Jet_btagDeepB,Jet_partonFlavour,Jet_btagSF_deepcsv_M,Jet_btagSF_deepcsv_M_up,Jet_btagSF_deepcsv_M_down,Jet_pt,"up");
+		   btag_weight_medium_down = get_btag_scale(hbeff,hceff,hleff,value,nJet,Jet_btagDeepB,Jet_partonFlavour,Jet_btagSF_deepcsv_M,Jet_btagSF_deepcsv_M_up,Jet_btagSF_deepcsv_M_down,Jet_pt,"down");
+
+		   btag_weight_loose      = get_btag_scale(hbeff1,hceff1,hleff1,value1,nJet,Jet_btagDeepB,Jet_partonFlavour,Jet_btagSF_deepcsv_L,Jet_btagSF_deepcsv_L_up,Jet_btagSF_deepcsv_L_down,Jet_pt,"nominal");
+		   btag_weight_loose_up   = get_btag_scale(hbeff1,hceff1,hleff1,value1,nJet,Jet_btagDeepB,Jet_partonFlavour,Jet_btagSF_deepcsv_L,Jet_btagSF_deepcsv_L_up,Jet_btagSF_deepcsv_L_down,Jet_pt,"up");
+		   btag_weight_loose_down = get_btag_scale(hbeff1,hceff1,hleff1,value1,nJet,Jet_btagDeepB,Jet_partonFlavour,Jet_btagSF_deepcsv_L,Jet_btagSF_deepcsv_L_up,Jet_btagSF_deepcsv_L_down,Jet_pt,"down");
+	   }
+
+	   if(jentry%10000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<" "<<photon_id_scale<<" "<<photon_id_scale_Up<<" "<<photon_id_scale_Down<<" ; btag SFs "<<btag_weight_medium<<" "<<btag_weight_loose <<endl;
+
 	   if(year.Contains("16") ){
 		   HLT_ee = (HLT_Ele27_WPTight_Gsf) ;
 		   HLT_mm = (HLT_IsoMu24 || HLT_IsoTkMu24);
 		   if( isMC ){
 			   HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL || HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ );
 		   }
-		   else if(isdata){
-			   if(name.Contains("H")) //16 data era H
+		   else{
+			   if(name.Contains("H"))
 				   HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ );
 			   else
 				   HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL  );
 		   }
 	   }
 	   else if(year.Contains("17")){
-		   HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ );
-		   HLT_ee = ( HLT_Ele32_WPTight_Gsf_L1DoubleEG || HLT_Ele35_WPTight_Gsf);
-		   HLT_mm = (HLT_IsoMu27);
+                HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ );
+                HLT_ee = ( HLT_Ele32_WPTight_Gsf_L1DoubleEG || HLT_Ele35_WPTight_Gsf);
+                HLT_mm = (HLT_IsoMu27);
 	   }
 	   else if(year.Contains("18")){
-		   HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL);
-		   HLT_ee = ( HLT_Ele32_WPTight_Gsf );
-		   HLT_mm = (HLT_IsoMu27);
+                HLT_emu = ( HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL);
+		HLT_ee = ( HLT_Ele32_WPTight_Gsf );
+		HLT_mm = (HLT_IsoMu27);
 	   }
-	   int index=get_index(lep1pt);
-	   muon1_rochester=get_rochester_scale(isdata, lep1_charge, lep1pt,lep1eta, lep1phi, Muon_nTrackerLayers[index] , r1);
-           if(jentry%10000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<" "<<photon_id_scale<<" "<<photon_id_scale_Up<<" "<<photon_id_scale_Down<<" ; btag SFs "<<btag_weight_medium<<" "<<btag_weight_loose <<" rochester "<<muon1_rochester<<"; index "<<index<<" "<<lep1pt<<" "<<Muon_pt[index]<<" nMuon "<<nMuon<<endl;
-
-           lep1pt*=muon1_rochester;
-
-	   lep1p4.SetPtEtaPhiM(lep1pt, lep1eta, lep1phi, 0.105666);
-	   lep2p4.SetPtEtaPhiM(lep2pt, lep2eta, lep2phi, 0.000511);
-	   mll=(lep1p4+lep2p4).M();
-	   yVlep=(lep1p4+lep2p4).Eta();
-	   phiVlep=(lep1p4+lep2p4).Phi();
-	   ptll=(lep1p4+lep2p4).Pt();
-
-	   Zp4.SetPtEtaPhiM(ptll, yVlep, phiVlep, mll);
-	   photonp4.SetPtEtaPhiM(photonet, photoneta, photonphi,0);
-	   mllg=(Zp4+photonp4).M();
-
-	   BSL = (channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && drll>0.5 && lep1pt>10 && lep2pt>10 && fabs(lep1eta) < 2.4 && fabs(lep2eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20);
+	   BSL = (channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && drll>0.5 && lep1pt>15 && lep2pt>15 && fabs(lep1eta) < 2.4 && fabs(lep2eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20);
 	   if( !( BSL ) )
 		   continue;
 
@@ -187,9 +195,15 @@ void chain_WWg::Loop(TString name,double nevents,TString year,bool flag)
    f_eleReco->Close();
    f_photonID->Close();
    f_pix->Close();
+   fbtag->Close();
+   fctag->Close();
+   fltag->Close();
+   fbtag1->Close();
+   fctag1->Close();
+   fltag1->Close();
    cout<<nentries<<" "<<tot<<endl;
 }
-void chain_WWg::Init(){
+void WWg::Init(){
 	ele_id_scale=1;ele_id_scale_Up=1;ele_id_scale_Down=1;
 	ele_reco_scale=1;ele_reco_scale_Up=1;ele_reco_scale_Down=1;
 	muon_id_scale=1;muon_id_scale_Up=1;muon_id_scale_Down=1;
@@ -198,36 +212,11 @@ void chain_WWg::Init(){
 	photon_veto_scale=1;photon_veto_scale_Up=1;photon_veto_scale_Down=1;
 	btag_weight_medium=1;btag_weight_medium_up=1;btag_weight_medium_down=1;
 	btag_weight_loose=1;btag_weight_loose_up=1;btag_weight_loose_down=1;
-        muon1_rochester=1;
 }
-Float_t chain_WWg::delta_R(Float_t eta1, Float_t phi1, Float_t eta2, Float_t phi2)
+Float_t WWg::delta_R(Float_t eta1, Float_t phi1, Float_t eta2, Float_t phi2)
 {
 	Float_t dp = phi1-phi2;
 	if(std::fabs(dp) > Pi) dp = 2*Pi - std::fabs(dp);
 	Float_t dr = std::sqrt((eta1-eta2)*(eta1-eta2)+dp*dp);
 	return dr;
-}
-float chain_WWg::get_rochester_scale(bool isdata, float charge_temp, float pt, float eta, float phi, int nl, float r1)
-{
-        int charge = int(charge_temp/fabs(charge_temp));
-        // data correction
-        double corr;
-
-        if(isdata)
-           corr = rc.kScaleDT(charge, pt, eta, phi, 0, 0);
-
-        // MC without genPT avalible
-        if((!isdata))
-                corr = rc.kSmearMC(charge, pt, eta, phi, nl, r1, 0, 0);
-        return corr;
-}
-int chain_WWg::get_index(float lep1pt){
-	int index=0;
-	for(int i=0;i<nMuon;i++){
-		if(lep1pt-Muon_pt[i]==0){
-			index=i;
-			break;
-		}
-	}
-	return index;             
 }

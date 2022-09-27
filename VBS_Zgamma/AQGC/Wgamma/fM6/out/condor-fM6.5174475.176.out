@@ -1,0 +1,28 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed -600095759
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (703.43) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=2.59194, JER_muon=5.10454, JES_ele=-5.74404, JES_muon=-6.8502, QCD_stat_ele=4.68116, QCD_stat_muon=6.67098, VBS_stat_ele=2.9017, VBS_stat_muon=-6.91425, ele_efficiency=-2.4208, ele_trigger=-0.656965, fakephoton_ele=6.9945, fakephoton_muon=5.6578, interference=-1.73407, lumi=-5.84927, mu_efficiency=2.40562, mu_trigger=6.21685, non_prompt_stat_ele=5.67222, non_prompt_stat_muon=-6.86651, others_stat_ele=-6.44439, others_stat_muon=-5.78178, others_xs=-0.894238, param=8.84958, pdf_ele=1.78163, pdf_muon=-6.33085, photon_id=6.60552, pileup=0.266482, scale_ele=1.43372, scale_muon=-3.9704
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (703.43) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-5.94271, JER_muon=1.76513, JES_ele=6.99847, JES_muon=-6.84788, QCD_stat_ele=0.19357, QCD_stat_muon=0.410412, VBS_stat_ele=-3.048, VBS_stat_muon=3.73857, ele_efficiency=1.35646, ele_trigger=-2.61306, fakephoton_ele=5.75928, fakephoton_muon=0.349918, interference=-6.91634, lumi=2.22019, mu_efficiency=5.71443, mu_trigger=-2.25414, non_prompt_stat_ele=6.11204, non_prompt_stat_muon=-6.31311, others_stat_ele=-6.28998, others_stat_muon=-1.90113, others_xs=-6.93267, param=5.78689, pdf_ele=5.33195, pdf_muon=-5.88375, photon_id=-5.86423, pileup=0.267824, scale_ele=-5.03682, scale_muon=1.59937
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (703.43) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=-1.93807, JER_muon=6.0671, JES_ele=2.0707, JES_muon=6.84299, QCD_stat_ele=6.93322, QCD_stat_muon=-6.57043, VBS_stat_ele=-2.66978, VBS_stat_muon=6.76655, ele_efficiency=0.466811, ele_trigger=-0.214006, fakephoton_ele=6.58563, fakephoton_muon=3.9496, interference=6.23012, lumi=4.57723, mu_efficiency=-5.28769, mu_trigger=6.77067, non_prompt_stat_ele=5.73735, non_prompt_stat_muon=6.05171, others_stat_ele=1.01308, others_stat_muon=5.51817, others_xs=1.41207, param=5.03734, pdf_ele=5.13471, pdf_muon=6.53213, photon_id=6.60344, pileup=0.618505, scale_ele=6.02439, scale_muon=-6.93528
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.342342 +/- 0.025591
+Done in 20.92 min (cpu), 20.98 min (real)

@@ -1703,7 +1703,7 @@ public :
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
    virtual void     Loop(TString name,double nevents,TString year,bool flag);
-   virtual int      get_index(float lep1pt);
+   virtual int      get_index(float pt,const int npar, float pt_ori[16]);
    virtual float    get_rochester_scale(bool isdata, float charge_temp, float pt, float eta, float phi, int nl, float r1);
    virtual Float_t  delta_R(Float_t eta1, Float_t phi1, Float_t eta2, Float_t phi2);
    virtual void     Init();

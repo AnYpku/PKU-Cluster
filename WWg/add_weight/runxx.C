@@ -33,12 +33,12 @@ void runxx(TString year,TString dir,bool flag) {
 }
 
 int main(){
-	TString dir18 ="/home/pku/anying/cms/rootfiles/WWg/2018/";
+	TString dir18 ="/home/pku/guanz/cms/allPF/";
 	TString dir17 ="/home/pku/anying/cms/rootfiles/WWg/2017/";
 	TString dir16 ="/home/pku/anying/cms/rootfiles/WWg/2016/";
-//	runxx("18",dir18,0);
+	runxx("18",dir18,0);
 //	runxx("17",dir17,0);
-	runxx("16",dir16,1);
+//	runxx("16",dir16,1);
 	return 1;
 }
 

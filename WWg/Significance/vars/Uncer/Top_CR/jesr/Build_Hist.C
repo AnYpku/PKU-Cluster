@@ -18,19 +18,19 @@ void run(TString dir,TString name,TString cut,TString tag,TString type,TString n
      TFile*file;
      file=new TFile(dir+fname+".root") ;
      cout<<tag<<" "<<name<<" "<<endl;
-     TTree*tree=(TTree*)file->Get("Events");
+     TTree*tree=(TTree*)file->Get("outtree");
      float scalef,actualWeight;
      float mll,mllg,ptll;
-     float PuppiMET_T1Smear_phi,PuppiMET_T1Smear_pt;
+     float PuppiMET_phi,PuppiMET_pt;
      float lep1pt,lep2pt,lep1eta,lep2eta,lep1phi,lep2phi;
      map<TString, float> variables;
      tree->SetBranchAddress(vec_branchname, &variables[vec_branchname]);
-     tree->SetBranchAddress("PuppiMET_T1Smear_pt_"+type+"Up", &variables["PuppiMET_T1Smear_pt_"+type+"Up"]);
-     tree->SetBranchAddress("PuppiMET_T1Smear_pt_"+type+"Down", &variables["PuppiMET_T1Smear_pt_"+type+"Down"]);
-     tree->SetBranchAddress("PuppiMET_T1Smear_phi_"+type+"Up", &variables["PuppiMET_T1Smear_phi_"+type+"Up"]);
-     tree->SetBranchAddress("PuppiMET_T1Smear_phi_"+type+"Down", &variables["PuppiMET_T1Smear_phi_"+type+"Down"]);
-     tree->SetBranchAddress("PuppiMET_T1Smear_pt", &PuppiMET_T1Smear_pt);
-     tree->SetBranchAddress("PuppiMET_T1Smear_phi", &PuppiMET_T1Smear_phi);
+     tree->SetBranchAddress("PuppiMET_pt"+type+"Up", &variables["PuppiMET_pt"+type+"Up"]);
+     tree->SetBranchAddress("PuppiMET_pt"+type+"Down", &variables["PuppiMET_pt"+type+"Down"]);
+     tree->SetBranchAddress("PuppiMET_phi"+type+"Up", &variables["PuppiMET_phi"+type+"Up"]);
+     tree->SetBranchAddress("PuppiMET_phi"+type+"Down", &variables["PuppiMET_phi"+type+"Down"]);
+     tree->SetBranchAddress("PuppiMET_pt", &PuppiMET_pt);
+     tree->SetBranchAddress("PuppiMET_phi", &PuppiMET_phi);
      tree->SetBranchAddress("scalef", &scalef);
      tree->SetBranchAddress("ptll", &ptll);
      tree->SetBranchAddress("lep1pt", &lep1pt);
@@ -62,15 +62,15 @@ void run(TString dir,TString name,TString cut,TString tag,TString type,TString n
 	     lep1p4.SetPtEtaPhiM(lep1pt, lep1eta, lep1phi, 0.105666);
 	     lep2p4.SetPtEtaPhiM(lep2pt, lep2eta, lep2phi, 0.000511);
 	     float phiVlep=(lep1p4+lep2p4).Phi();    
-             float mT=sqrt(2*(ptll*PuppiMET_T1Smear_pt*(1-cos(phiVlep-PuppiMET_T1Smear_phi) ) ) );
-	     float mT_Up=sqrt(2*(ptll*variables["PuppiMET_T1Smear_pt_"+type+"Up"]*(1-cos(phiVlep-variables["PuppiMET_T1Smear_phi_"+type+"Up"]) ) ) );
-	     float mT_Down=sqrt(2*(ptll*variables["PuppiMET_T1Smear_pt_"+type+"Down"]*(1-cos(phiVlep-variables["PuppiMET_T1Smear_phi_"+type+"Down"]) ) ) );
+             float mT=sqrt(2*(ptll*PuppiMET_pt*(1-cos(phiVlep-PuppiMET_phi) ) ) );
+	     float mT_Up=sqrt(2*(ptll*variables["PuppiMET_pt"+type+"Up"]*(1-cos(phiVlep-variables["PuppiMET_phi"+type+"Up"]) ) ) );
+	     float mT_Down=sqrt(2*(ptll*variables["PuppiMET_pt"+type+"Down"]*(1-cos(phiVlep-variables["PuppiMET_phi"+type+"Down"]) ) ) );
              float lep_pt,lep_phi;
 	     if(lep1pt>lep2pt){lep_pt=lep2pt;lep_phi=lep2phi;}
 	     else{lep_pt=lep1pt;lep_phi=lep1phi;}
-             float mT2=sqrt(2*(lep_pt*PuppiMET_T1Smear_pt*(1-cos(lep_phi-PuppiMET_T1Smear_phi) ) ) );
-	     float mT2_Up=sqrt(2*(lep_pt*variables["PuppiMET_T1Smear_pt_"+type+"Up"]*(1-cos(lep_phi-variables["PuppiMET_T1Smear_phi_"+type+"Up"]) ) ) );
-	     float mT2_Down=sqrt(2*(lep_pt*variables["PuppiMET_T1Smear_pt_"+type+"Down"]*(1-cos(lep_phi-variables["PuppiMET_T1Smear_phi_"+type+"Down"]) ) ) );
+             float mT2=sqrt(2*(lep_pt*PuppiMET_pt*(1-cos(lep_phi-PuppiMET_phi) ) ) );
+	     float mT2_Up=sqrt(2*(lep_pt*variables["PuppiMET_pt"+type+"Up"]*(1-cos(lep_phi-variables["PuppiMET_phi"+type+"Up"]) ) ) );
+	     float mT2_Down=sqrt(2*(lep_pt*variables["PuppiMET_pt"+type+"Down"]*(1-cos(lep_phi-variables["PuppiMET_phi"+type+"Down"]) ) ) );
           
 	     if (  ! tformula1->EvalInstance() ) continue;
 
@@ -81,11 +81,11 @@ void run(TString dir,TString name,TString cut,TString tag,TString type,TString n
 	     if(variables[vec_branchname]>=bins2[bins2.size()-1])
 		     variables[vec_branchname]=bins2[bins2.size()-1]-1;
 
-	     if(PuppiMET_T1Smear_pt>20 && mT2>20)    
+	     if(PuppiMET_pt>20 )    
 		     h2[0]->Fill(mT,variables[vec_branchname],actualWeight);
-	     if(variables["PuppiMET_T1Smear_pt_"+type+"Up"]>20  && mT2_Up>20)
+	     if(variables["PuppiMET_pt"+type+"Up"]>20)
 		     h2[1]->Fill(mT_Up,variables[vec_branchname],actualWeight);
-	     if(variables["PuppiMET_T1Smear_pt_"+type+"Down"]>20  && mT2_Down>20)
+	     if(variables["PuppiMET_pt"+type+"Down"]>20)
 		     h2[2]->Fill(mT_Down,variables[vec_branchname],actualWeight);
 
      }
@@ -107,37 +107,41 @@ int Build_Hist(){
 	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && photon_selection==1 && photon_isprompt==1 )";
 	TString met;
         vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton"};
-        vector<TString> vars={"mllg"};
+        vector<TString> vars={"photonet","mllg","mll"};
         vector<vector<Double_t>> bins2;
         vector<Double_t> mT_bins;
-        vector<Double_t> ml1g_bins={10,80,140,200};
-        vector<Double_t> ml2g_bins={10,50,90,200};
-        vector<Double_t> mllg_bins={15,155,315,500};
-        bins2=get_vector(ml1g_bins,ml2g_bins,mllg_bins);
-	vector<TString> tags={"16","_pre16","17","18"};
+        vector<Double_t> vars_bins={20,30,60,400};
+	vector<TString> tags={"16","16pre","17","18"};
 	TString dir1;
 	TString Reco;
-	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu"};
-        vector<TString>njets={"0","1","2"};
+	vector<TString> names={"ZGJets","TTGJets","TTJets","VV","ST","tZq","WGJets","WWG_emu_tot"};
+        vector<TString>njets={"1","2"};
         TString jet_cut;
 	for(int ij=0;ij<njets.size();ij++){
-		if(ij==0) mT_bins={0,90,130,200};
-		else if(ij==1) mT_bins={0,80,110,150,200};
-		else if(ij==2) mT_bins={0,80,110,150,200};
-		if(ij!=2)jet_cut="(njets30=="+njets[ij]+")";
+		if(njets[ij]=="0") mT_bins={0,90,120,160,200};
+                else if(njets[ij]=="1") mT_bins={0,90,120,160,200};
+                else if(njets[ij]=="2") mT_bins={0,90,120,160,200};
+		if(njets[ij]!="2")jet_cut="(njets30_pc=="+njets[ij]+")";
 		else jet_cut="(njets30<=1)";
-		met="(n_bjets20_medium>=1 && "+jet_cut+")";
+		met="(n_bjets20_medium_deepFlavB_pc>=1 && "+jet_cut+")";
 		Reco= LEP+"&&"+photon+"&&"+met;
-		for(int j=0;j<names.size();j++){
-//                      if(names[j].Contains("WWG_emu")==0) continue;
-			for(int k=0;k<tags.size();k++){
-				TString y;
-				if(tags[k].Contains("pre")) y="16";
-				else y=tags[k];
-				dir1="/home/pku/anying/cms/rootfiles/WWg/20"+y+"/cutla-out";
-				for(int i=0;i<vars.size();i++){
-					run(dir1,names[j],Reco,tags[k],"jer1",njets[ij],vars[i],mT_bins,mllg_bins);
-					run(dir1,names[j],Reco,tags[k],"jesTotal",njets[ij],vars[i],mT_bins,mllg_bins);
+		for(int i=0;i<vars.size();i++){
+                        if(vars[i].Contains("mllg"))
+                                vars_bins={20,150,250,400};
+                        else if(vars[i].Contains("photonet"))
+                                vars_bins={20,30,50,400};
+                        else if(vars[i].Contains("ptllg"))
+                                vars_bins={0,55,80,400};
+                        else if(vars[i].Contains("mll"))
+                                vars_bins={20,80,140,400};
+			for(int j=0;j<names.size();j++){
+				for(int k=0;k<tags.size();k++){
+					TString y;
+					if(tags[k].Contains("pre")) y="16";
+					else y=tags[k];
+					dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/Top_gamma/rootfiles/optimal_emua_";
+					run(dir1,names[j],Reco,tags[k],"JER",njets[ij],vars[i],mT_bins,vars_bins);
+					run(dir1,names[j],Reco,tags[k],"JES",njets[ij],vars[i],mT_bins,vars_bins);
 				}
 			}
 		}
@@ -145,9 +149,9 @@ int Build_Hist(){
 	return 1;
 }
 vector<vector<double>> get_vector(vector<double> v1,vector<double> v2,vector<double> v3){
-        vector<vector<double>> bins;
-        bins.push_back(v1);
-        bins.push_back(v2);
-        bins.push_back(v3);
-        return bins;
+	vector<vector<double>> bins;
+	bins.push_back(v1);
+	bins.push_back(v2);
+	bins.push_back(v3);
+	return bins;
 }

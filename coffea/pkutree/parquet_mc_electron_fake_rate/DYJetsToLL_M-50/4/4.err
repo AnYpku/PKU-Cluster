@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/data/pubfs/tyyang99/jupyter_files/pkutree/fake_rate_parquet.py", line 290, in <module>
+    eve_dict['Generator_Weight'] = events['Generator_Weight'].array()[events_filter]
+  File "/home/pku/tyyang99/anaconda3/lib/python3.8/site-packages/uproot/behaviors/TBranch.py", line 1926, in __getitem__
+    raise uproot.KeyInFileError(
+uproot.exceptions.KeyInFileError: not found: 'Generator_Weight'
+
+    Available keys: 'Generator_weight', 'Generator_id1', 'Generator_id2', 'genWeight', 'Generator_x1', 'Generator_x2', 'GenJet_eta', 'Generator_binvar', 'GenJet_pt', 'GenPart_eta', 'Generator_xpdf1', 'Generator_xpdf2', 'nPSWeight'...
+
+in file /data/pubfs/pku_visitor/public_write/download/datasets/nanov7/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM/47B65D32-735E-C94C-B352-8F4E1A18B3A6.root
+in object /Events;1

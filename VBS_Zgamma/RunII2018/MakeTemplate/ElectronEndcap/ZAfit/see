@@ -1,0 +1,723 @@
+
+Processing runfit.C...
+8
+0.0641743
+1.61515
+121
+2.83009
+36.5363
+1279
+19.4897
+274.218
+797
+3.87613
+309.688
+518
+1.37975
+259.306
+582
+0.641743
+367.691
+107
+0.0770092
+94
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-36565.1 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.70200e+03   3.40400e+02   2.01358e-01  -1.70967e+02
+   2  true number   1.70200e+03   3.40400e+02   2.01358e-01   1.70958e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-36617.4 FROM MIGRAD    STATUS=CONVERGED      36 CALLS          37 TOTAL
+                     EDM=7.42312e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   2.22774e+03   6.39231e+01   4.39966e-03  -2.42541e-01
+   2  true number   1.17576e+03   5.51304e+01   3.82849e-03  -2.31505e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.088e+03 -1.861e+03 
+ -1.861e+03  3.041e+03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.52774   1.000 -0.528
+        2  0.52774  -0.528  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-36617.4 FROM HESSE     STATUS=ok             10 CALLS          47 TOTAL
+                     EDM=7.40382e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   2.22774e+03   6.40071e+01   8.79932e-04   3.14029e-01
+   2  true number   1.17576e+03   5.52027e+01   7.65697e-04  -3.14339e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.099e+03 -1.872e+03 
+ -1.872e+03  3.049e+03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.52953   1.000 -0.530
+        2  0.52953  -0.530  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+2
+0.0256697
+0
+67
+1.75196
+16.306
+646
+12.5012
+212.145
+315
+1.9894
+172.073
+225
+0.385046
+141.77
+233
+0.231028
+185.615
+40
+0.0385046
+26.2303
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-15242.3 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   7.63000e+02   1.52600e+02   2.01358e-01  -9.32606e+01
+   2  true number   7.63000e+02   1.52600e+02   2.01358e-01   9.32569e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-15276.6 FROM MIGRAD    STATUS=CONVERGED      46 CALLS          47 TOTAL
+                     EDM=3.61054e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.05177e+03   4.42280e+01   4.45870e-03  -2.41582e-03
+   2  true number   4.74220e+02   3.71757e+01   3.75015e-03  -4.27904e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.959e+03 -9.070e+02 
+ -9.070e+02  1.383e+03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.55100   1.000 -0.551
+        2  0.55100  -0.551  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-15276.6 FROM HESSE     STATUS=ok             10 CALLS          57 TOTAL
+                     EDM=3.6055e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   1.05177e+03   4.43079e+01   1.78348e-04   3.88144e-01
+   2  true number   4.74220e+02   3.72427e+01   1.50006e-04  -3.88153e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.966e+03 -9.140e+02 
+ -9.140e+02  1.388e+03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.55327   1.000 -0.553
+        2  0.55327  -0.553  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+2
+0.0320872
+0
+38
+1.09738
+10.6151
+412
+8.59936
+131.991
+170
+0.92411
+100.845
+102
+0.192523
+96.0757
+101
+0.0962615
+118.461
+20
+0
+11
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-8014.06 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   4.21500e+02   8.43000e+01   2.01358e-01  -2.73394e+01
+   2  true number   4.21500e+02   8.43000e+01   2.01358e-01   2.73374e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-8018.92 FROM MIGRAD    STATUS=CONVERGED      40 CALLS          41 TOTAL
+                     EDM=1.64537e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   4.97576e+02   3.00165e+01   3.89361e-03  -6.23220e-03
+   2  true number   3.45412e+02   2.73806e+01   3.56274e-03  -4.86183e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  9.026e+02 -4.047e+02 
+ -4.047e+02  7.508e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49159   1.000 -0.492
+        2  0.49159  -0.492  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-8018.92 FROM HESSE     STATUS=ok             10 CALLS          51 TOTAL
+                     EDM=1.64305e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   4.97576e+02   3.00518e+01   1.55745e-04   1.81484e-01
+   2  true number   3.45412e+02   2.74128e+01   1.42510e-04  -1.81512e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  9.047e+02 -4.071e+02 
+ -4.071e+02  7.526e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49340   1.000 -0.493
+        2  0.49340  -0.493  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+2
+0.0256697
+2
+33
+0.994702
+11.6151
+281
+6.07089
+76.0695
+102
+0.583986
+69.4606
+62
+0.128349
+66.8454
+56
+0.0641743
+54.2303
+5
+0
+8
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-4931.3 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   2.69500e+02   5.39000e+01   2.01358e-01  -4.98608e+00
+   2  true number   2.69500e+02   5.39000e+01   2.01358e-01   4.98119e+00
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-4931.54 FROM MIGRAD    STATUS=CONVERGED      28 CALLS          29 TOTAL
+                     EDM=5.56578e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   2.82862e+02   2.26626e+01   3.61934e-03  -1.28059e-02
+   2  true number   2.56144e+02   2.20713e+01   3.52640e-03   2.01894e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.148e+02 -2.317e+02 
+ -2.317e+02  4.882e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.46218   1.000 -0.462
+        2  0.46218  -0.462  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-4931.54 FROM HESSE     STATUS=ok             10 CALLS          39 TOTAL
+                     EDM=5.57847e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   2.82862e+02   2.26804e+01   7.23867e-04   4.96011e-02
+   2  true number   2.56144e+02   2.20886e+01   7.05280e-04  -4.95795e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.156e+02 -2.327e+02 
+ -2.327e+02  4.890e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.46351   1.000 -0.464
+        2  0.46351  -0.464  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+0
+0.0256697
+0
+18
+0.506977
+3.07573
+174
+4.44728
+39.0726
+46
+0.186106
+56.8454
+38
+0.0513394
+47.0757
+31
+0.0192523
+31
+5
+0
+4
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-2693.05 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.56000e+02   3.12000e+01   2.01358e-01   4.94754e+00
+   2  true number   1.56000e+02   3.12000e+01   2.01358e-01  -4.94970e+00
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-2693.35 FROM MIGRAD    STATUS=CONVERGED      32 CALLS          33 TOTAL
+                     EDM=1.18807e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.46851e+02   1.44842e+01   3.18723e-03  -2.21034e-03
+   2  true number   1.65150e+02   1.50990e+01   3.32394e-03   2.29897e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.104e+02 -6.344e+01 
+ -6.344e+01  2.287e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.28919   1.000 -0.289
+        2  0.28919  -0.289  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-2693.35 FROM HESSE     STATUS=ok             10 CALLS          43 TOTAL
+                     EDM=1.1896e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   1.46851e+02   1.44883e+01   1.27489e-04  -5.86833e-02
+   2  true number   1.65150e+02   1.51032e+01   1.32958e-04   5.86856e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.105e+02 -6.367e+01 
+ -6.367e+01  2.288e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.29008   1.000 -0.290
+        2  0.29008  -0.290  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+1
+0
+-0.384853
+11
+0.494142
+5
+143
+3.55526
+44.0726
+47
+0.134766
+41.6151
+12
+0.0256697
+31.6151
+25
+0.0128349
+24.6909
+2
+0
+6
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-2032.31 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.20000e+02   2.40000e+01   2.01358e-01   8.84716e-01
+   2  true number   1.20000e+02   2.40000e+01   2.01358e-01  -8.85233e-01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-2032.32 FROM MIGRAD    STATUS=CONVERGED      24 CALLS          25 TOTAL
+                     EDM=7.58621e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.17923e+02   1.39527e+01   3.37948e-03  -2.42707e-02
+   2  true number   1.22035e+02   1.40983e+01   3.34479e-03  -1.70974e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.956e+02 -7.755e+01 
+ -7.755e+01  1.997e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.39244   1.000 -0.392
+        2  0.39244  -0.392  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-2032.32 FROM HESSE     STATUS=ok             10 CALLS          35 TOTAL
+                     EDM=7.57455e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   1.17923e+02   1.39595e+01   6.75897e-04  -1.73050e-02
+   2  true number   1.22035e+02   1.41051e+01   6.68958e-04   1.69615e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.958e+02 -7.783e+01 
+ -7.783e+01  1.999e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.39349   1.000 -0.393
+        2  0.39349  -0.393  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+0
+0.00641743
+1
+19
+0.628908
+1.46059
+200
+5.13394
+54.0695
+31
+0.115514
+36.6909
+23
+0.044922
+49
+15
+0.00641743
+41.3849
+3
+0
+5
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-2563.59 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.45500e+02   2.91000e+01   2.01358e-01   2.57809e+01
+   2  true number   1.45500e+02   2.91000e+01   2.01358e-01  -2.57816e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-2573.54 FROM MIGRAD    STATUS=CONVERGED      49 CALLS          50 TOTAL
+                     EDM=9.46303e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   9.25464e+01   1.21851e+01   3.01816e-03   1.86060e-03
+   2  true number   1.98452e+02   1.59228e+01   3.94159e-03  -1.81851e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.489e+02 -5.620e+01 
+ -5.620e+01  2.547e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.28859   1.000 -0.289
+        2  0.28859  -0.289  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-2573.54 FROM HESSE     STATUS=ok             10 CALLS          60 TOTAL
+                     EDM=9.47251e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   9.25464e+01   1.21887e+01   1.20726e-04  -3.72497e-01
+   2  true number   1.98452e+02   1.59275e+01   1.57664e-04   3.72487e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.490e+02 -5.641e+01 
+ -5.641e+01  2.549e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.28952   1.000 -0.290
+        2  0.28952  -0.290  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+0
+0
+0
+26
+0.962615
+2.15147
+256
+8.41325
+94.1453
+39
+0.160436
+60.0757
+29
+0.00641743
+40.3849
+12
+0
+28.2303
+5
+0.00641743
+0
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-3328.09 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.83500e+02   3.67000e+01   2.01358e-01   2.12299e+01
+   2  true number   1.83500e+02   3.67000e+01   2.01358e-01  -2.12307e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-3334.64 FROM MIGRAD    STATUS=CONVERGED      37 CALLS          38 TOTAL
+                     EDM=1.91593e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   1.29935e+02   1.53531e+01   3.25966e-03  -4.03465e-02
+   2  true number   2.36981e+02   1.84904e+01   3.88016e-03  -3.99590e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.363e+02 -1.062e+02 
+ -1.062e+02  3.432e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37285   1.000 -0.373
+        2  0.37285  -0.373  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-3334.64 FROM HESSE     STATUS=ok             10 CALLS          48 TOTAL
+                     EDM=1.91281e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   1.29935e+02   1.53598e+01   6.51931e-04  -2.96220e-01
+   2  true number   2.36981e+02   1.84985e+01   7.76032e-04   2.95743e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.365e+02 -1.066e+02 
+ -1.066e+02  3.435e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37385   1.000 -0.374
+        2  0.37385  -0.374  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+0
+0.0128349
+0
+6
+0.346541
+2.38485
+104
+3.98522
+22.3818
+12
+0.0128349
+24.3849
+4
+0.00641743
+4
+1
+0
+1.61515
+0
+0
+0
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(datahist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(truehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(fakehist): fit range of variable sieie expanded to nearest bin boundaries: [0.0172,0.0572] --> [0.0172,0.0572]
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (truepdf,fakepdf)
+[#1] INFO:Minization --  The following expressions will be evaluated in cache-and-track mode: (ntrue,nfake)
+ **********
+ **   13 **MIGRAD        1000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-1065.51 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   6.35000e+01   1.27000e+01   2.01358e-01   1.24504e+01
+   2  true number   6.35000e+01   1.27000e+01   2.01358e-01  -1.24506e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-1073.11 FROM MIGRAD    STATUS=CONVERGED      48 CALLS          49 TOTAL
+                     EDM=8.2931e-09    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  fake number   2.99614e+01   7.48825e+00   2.99395e-03  -4.56609e-04
+   2  true number   9.70375e+01   1.10329e+01   4.41208e-03  -4.28631e-04
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.644e+01 -2.641e+01 
+ -2.641e+01  1.235e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.31639   1.000 -0.316
+        2  0.31639  -0.316  1.000
+ **********
+ **   18 **HESSE        1000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-1073.11 FROM HESSE     STATUS=ok             10 CALLS          59 TOTAL
+                     EDM=8.27545e-09    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  fake number   2.99614e+01   7.49093e+00   1.19758e-04  -5.56440e-01
+   2  true number   9.70375e+01   1.10368e+01   1.76483e-04   5.56421e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.648e+01 -2.651e+01 
+ -2.651e+01  1.236e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.31741   1.000 -0.317
+        2  0.31741  -0.317  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (ntrue)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (truepdf)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) directly selected PDF components: (nfake)
+[#1] INFO:Plotting -- RooAbsPdf::plotOn(full_pdf) indirectly selected PDF components: (fakepdf)
+[#1] INFO:Eval -- RooRealVar::setRange(sieie) new range named 'window' created with bounds [0.0172,0.0272]
+(int) 0

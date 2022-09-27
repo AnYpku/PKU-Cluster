@@ -43,11 +43,12 @@ TH1D* unroll(TH1D* h1,TString hname){
 }
 
 
-void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vector<double> bins2){
+void unroll_run(TString tag,TString var,TString njets){
 	setTDRStyle();
 	TFile* f_ZA=TFile::Open("../root/hist_ZGJets_"+var+"_"+njets+"_"+tag+".root");
 	TH1D* th2_ZA16=(TH1D*)f_ZA->Get("hist_bkg");
         TH1D* th2_ZA= unroll(th2_ZA16,"t_ZA");
+        TH2D*h2 = (TH2D*)f_ZA->Get("bkg");
 
 	TFile* f_WA=TFile::Open("../root/hist_WGJets_"+var+"_"+njets+"_"+tag+".root");
 	TH1D* th2_WA16=(TH1D*)f_WA->Get("hist_bkg");
@@ -62,21 +63,21 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	th2_ZA->SetFillColor(kYellow-7);
 	th2_ZA->SetMarkerColor(kYellow-7);
 	th2_ZA->SetLineColor(kYellow-7);
-	const int n=bins1.size()*bins2.size();
+	const int n=(h2->GetNbinsX()+1)*(h2->GetNbinsY()+1);
 	const char *name[n];
-	for(int i=0;i<(bins1.size()-1)*(bins2.size()-1);i++){
-		if(i<bins1.size()-1){
-			if(i<bins1.size()-2) name[i]=Form("%.0f-%.0f",bins1[i],bins1[i+1]);
-			else  name[i]=Form("%.0f-#infty",bins1[i]);
+	for(int i=0;i<h2->GetNbinsX()*h2->GetNbinsY();i++){
+		if(i<h2->GetNbinsX()){
+			if(i<h2->GetNbinsX()-1) name[i]=Form("%.0f-%.0f",h2->GetXaxis()->GetBinLowEdge(i+1),h2->GetXaxis()->GetBinLowEdge(i+2));
+			else  name[i]=Form("%.0f-#infty",h2->GetXaxis()->GetBinLowEdge(i+1));
 		}
 		else{
-			name[i]=name[i-(bins1.size()-1)];
+			name[i]=name[i-h2->GetNbinsX()];
 		}
 		cout<<i<<" "<<name[i]<<endl;
 	}
 //	const char *name[16]={"60-100","100-115","115-135","135-#infty","60-100","100-115","115-135","135-#infty","60-100","100-115","115-135","135-#infty","60-100","100-115","115-135","135-#infty"};
 
-	TFile* f_ZA_sig=TFile::Open("../root/hist_WWG_emu_"+var+"_"+njets+"_"+tag+".root");
+	TFile* f_ZA_sig=TFile::Open("../root/hist_WWG_emu_tot_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_ZA_sig16=(TH1D*)f_ZA_sig->Get("hist_sig");
         TH1D* th2_ZA_sig= unroll(th2_ZA_sig16,"t_ZA_sig");
 
@@ -100,6 +101,14 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	th2_TTA->SetFillColor(kBlue);
 	th2_TTA->SetMarkerColor(kBlue);
         th2_TTA->SetLineColor(kBlue);
+
+	TFile* f_TT=TFile::Open("../root/hist_TTJets_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th2_TT16=(TH1D*)f_TT->Get("hist_bkg");
+
+        TH1D* th2_TT= unroll(th2_TT16,"t_TT");
+	th2_TT->SetFillColor(kBlue-7);
+	th2_TT->SetMarkerColor(kBlue-7);
+        th2_TT->SetLineColor(kBlue-7);
 
 	TFile* f_ST=TFile::Open("../root/hist_ST_"+var+"_"+njets+"_"+tag+".root");
         TH1D* th2_ST16=(TH1D*)f_ST->Get("hist_bkg");
@@ -126,6 +135,7 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	THStack* hs = new THStack("hs", "");
 	hs->Add(th2_ST);
 	hs->Add(th2_TTA);
+	hs->Add(th2_TT);
 	hs->Add(th2_VV);
 	hs->Add(th2_plj);
 	hs->Add(th2_fakeL);
@@ -133,15 +143,12 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	hs->Add(th2_ZA_sig);
         TH1D*htot=(TH1D*)th2_ST->Clone();
 	htot->Add(th2_TTA,1);
+	htot->Add(th2_TT,1);
 	htot->Add(th2_VV,1);
 	htot->Add(th2_plj,1);
 	htot->Add(th2_fakeL,1);
 	htot->Add(th2_ZA,1);
 	htot->Add(th2_ZA_sig,1);
-	for(int i=0;i<htot->GetNbinsX();i++){
-            htot->SetBinError(i+1,sqrt( th2_TTA->GetBinError(i+1)*th2_TTA->GetBinError(i+1)+th2_VV->GetBinError(i+1)*th2_VV->GetBinError(i+1)+th2_plj->GetBinError(i+1)*th2_plj->GetBinError(i+1)+th2_fakeL->GetBinError(i+1)*th2_fakeL->GetBinError(i+1)+th2_ZA->GetBinError(i+1)*th2_ZA->GetBinError(i+1)+th2_ZA_sig->GetBinError(i+1)*th2_ZA_sig->GetBinError(i+1) ));
-	    cout<<htot->GetBinError(i+1)<<endl;
-	}
         
 	cout<<"create THStack"<<endl;
 	gStyle->SetPadBorderMode(0);
@@ -173,7 +180,23 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         htot->SetMarkerSize(0);
         htot->SetFillStyle(3005);
         htot->Draw("E2 same");
+        TFile* f_data2=TFile::Open("../root/hist_MuonEG_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th2_data16=(TH1D*)f_data2->Get("hist_bkg");
+        TH1D* th2_data= unroll(th2_data16,"t2_data");
+
+        TFile* f_data3=TFile::Open("../root/hist_Muon_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th3_data16=(TH1D*)f_data3->Get("hist_bkg");
+        TH1D* th3_data= unroll(th3_data16,"t3_data");
+
+        TFile* f_data1=TFile::Open("../root/hist_Ele_"+var+"_"+njets+"_"+tag+".root");
+        TH1D* th1_data16=(TH1D*)f_data1->Get("hist_bkg");
+        TH1D* th1_data= unroll(th1_data16,"t1_data");
+
+        th2_data->Add(th1_data);th2_data->Add(th3_data);  
+
         TH1D*h1_clone=(TH1D*)htot->Clone();
+//        TH1D*h1_clone=(TH1D*)th2_data->Clone();
+
         h1_clone->SetMarkerColor(1);
         h1_clone->SetLineColor(1);
         h1_clone->SetMarkerStyle(20);
@@ -196,6 +219,7 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 	leg1->AddEntry(th2_VV, Form("VV [%.1f]", th2_VV->GetSum() ) );
 	leg1->AddEntry(th2_TTA, Form("t#bar{t}#gamma [%.1f]",th2_TTA->GetSum()) );
 	leg1->AddEntry(th2_ST, Form("tW  [%.1f]",th2_ST->GetSum() ) );
+//	leg1->AddEntry(h1_clone, Form("Data  [%.1f]",th2_data->GetSum() ) );
 //	leg->AddEntry(th2_ZA_sig,"WWG");
 //	leg->AddEntry(th2_ZA,"QCD Z#gamma");
 //	leg->AddEntry(th2_plj,"Nonprompt #gamma");
@@ -204,7 +228,7 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
 //	leg1->AddEntry(th2_TTA,"t#bar{t}#gamma");
 //	leg1->AddEntry(th2_ST,"tW");
        
-        leg1->AddEntry(htot," MC stat.");
+	leg1->AddEntry(h1_clone, Form("MC Stat.  [%.1f]",h1_clone->GetSum() ) );
         leg->SetTextSize(0.07);
         leg1->SetTextSize(0.07);
 ////
@@ -212,18 +236,18 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         latex.SetTextSize(0.06);
         latex.SetLineWidth(2);
         TString l_var;
-	if(var=="ml1g") l_var="m_{#font[12]{l_{1}#gamma}}";
-	if(var=="ml2g") l_var="m_{#font[12]{l_{2}#gamma}}";
 	if(var=="mllg") l_var="m_{#font[12]{ll#gamma}}";
-	for(int i=0;i<bins2.size()-1;i++){
-		if(i<bins2.size()-2)
-			latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form("%.0f<"+l_var+"<%.0f",bins2[i],bins2[i+1]));
+	if(var=="ptllg") l_var="p^{#font[12]{ll#gamma}}_{T}";
+	if(var=="photonet") l_var="p^{#gamma}_{T}";
+	for(int i=0;i<h2->GetNbinsY();i++){
+		if(i<h2->GetNbinsY()-1)
+			latex.DrawLatex(i*(h2->GetNbinsX())+0.5,1.4*max,Form("%.0f<"+l_var+"<%.0f",h2->GetYaxis()->GetBinLowEdge(i+1),h2->GetYaxis()->GetBinLowEdge(i+2)));
 		else
-			latex.DrawLatex(i*(bins1.size()-1)+0.5,1.4*max,Form(l_var+">%.0f",bins2[i]));
+			latex.DrawLatex(i*(h2->GetNbinsX())+0.5,1.4*max,Form(l_var+">%.0f",h2->GetYaxis()->GetBinLowEdge(i+1)));
 	}
-        TLine* vline1 = new TLine(htot->GetBinLowEdge(bins1.size()-1+1),0,htot->GetBinLowEdge(bins1.size()-1+1),max*1.5);
-        TLine* vline2 = new TLine(htot->GetBinLowEdge(2*(bins1.size()-1)+1),0,htot->GetBinLowEdge(2*(bins1.size()-1)+1),max*1.5);
-        TLine* vline3 = new TLine(htot->GetBinLowEdge(3*(bins1.size()-1)+1),0,htot->GetBinLowEdge(3*(bins1.size()-1)+1),max*1.5);
+        TLine* vline1 = new TLine(htot->GetBinLowEdge(h2->GetNbinsX()+1),0,htot->GetBinLowEdge(h2->GetNbinsX()+1),max*1.5);
+        TLine* vline2 = new TLine(htot->GetBinLowEdge(2*(h2->GetNbinsX())+1),0,htot->GetBinLowEdge(2*(h2->GetNbinsX())+1),max*1.5);
+        TLine* vline3 = new TLine(htot->GetBinLowEdge(3*(h2->GetNbinsX())+1),0,htot->GetBinLowEdge(3*(h2->GetNbinsX())+1),max*1.5);
         vline1->SetLineStyle(2);
         vline2->SetLineStyle(2);
         vline3->SetLineStyle(2);
@@ -235,10 +259,12 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         vline3->Draw();
 	leg->Draw();
         leg1->Draw();
+	cout<<"njets "<<njets<<"; sig yields "<<th2_ZA_sig->GetBinContent(8)<<" "<<th2_ZA_sig->GetBinContent(9)<<"; tot yiedls "<<htot->GetBinContent(8)<<" "<<htot->GetBinContent(9)<<endl;
 //	
 //	cmsLumi(tag);
         string lumivalue;
-        if(tag.Contains("16")) lumivalue="35.86";
+        if(tag.Contains("16pre")) lumivalue="19.5";
+        else if(tag.Contains("16")) lumivalue="16.8";
         if(tag.Contains("17")) lumivalue="41.52";
         if(tag.Contains("18")) lumivalue="59.7";
         CMS_lumi(fPads1, 4, 0, lumivalue);
@@ -249,6 +275,8 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         for (int i = 1; i<= nomNoErr->GetNbinsX(); ++i){nomNoErr->SetBinError(i,0);}
         TH1D*h_up=(TH1D*)htot->Clone();
         h_up->Divide(nomNoErr);
+        TH1D*h_clone=(TH1D*)h1_clone->Clone();
+        h_clone->Divide(nomNoErr);
         nominal->Divide(nomNoErr);
         nominal->GetYaxis()->SetRangeUser(0.4,1.9);
         nominal->SetLineColor(2);
@@ -267,32 +295,22 @@ void unroll_run(TString tag,TString var,TString njets,vector<double> bins1,vecto
         h_up->SetMarkerColor(1);
         h_up->SetLineColor(1);
         h_up->SetMarkerSize(1.2);
-        h_up->Draw("EP same");
+//        h_up->Draw("EP same");
+        h_clone->Draw("EP same");
         fPads2->Update();
 
 	c1->Print("aa_CR_"+var+"_"+njets+"_"+tag+".pdf");
 }
 int unroll_test(){
-       vector<TString> tags={"16","_pre16","17","18"};
-       vector<TString> var={"ml1g","ml2g","mllg"};
-       vector<TString> njets={"0jets","1jets","2jets"};
+       vector<TString> tags={"16","16pre","17","18"};
+       vector<TString> var={"mllg","photonet","mll"};
+       vector<TString> njets={"1jets","2jets"};
        vector<Double_t> mT_bins;
-       vector<vector<Double_t>> bins2;
-       vector<Double_t> ml1g_bins={10,80,140,200};
-       vector<Double_t> ml2g_bins={10,50,90,200};
-       vector<Double_t> mllg_bins={15,155,315,500};
-       bins2.push_back(ml1g_bins);
-       bins2.push_back(ml2g_bins);
-       bins2.push_back(mllg_bins);
 
        for(int j=0;j<tags.size();j++){
-	       for(int i=2;i<var.size();i++){
-		       for(int k=0;k<njets.size()-1;k++){
-			       if(njets[k]=="0jets") mT_bins={0,90,130,200};
-			       else if(njets[k]=="1jets") mT_bins={0,80,110,150,200};
-			       else  mT_bins={0,80,110,150,200};
-			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
-			       unroll_run(tags[j],var[i],njets[k],mT_bins,bins2[i]);
+	       for(int i=0;i<var.size();i++){
+		       for(int k=0;k<njets.size();k++){
+			       unroll_run(tags[j],var[i],njets[k]);
 		       }
 	       }
        }

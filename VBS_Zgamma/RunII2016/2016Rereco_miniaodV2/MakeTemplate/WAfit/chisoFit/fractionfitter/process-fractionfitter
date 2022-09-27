@@ -1,0 +1,3750 @@
+
+Processing runfitf.C...
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-587356 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -3.27888e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   1.33675e+02
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-587394 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.28312e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        6.40560e-01   2.16135e-02   9.21283e-03   4.28979e-02
+   2  frac1        3.59449e-01   1.81603e-02   1.61502e-02  -7.99580e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.671e-04 -2.321e-04 
+ -2.321e-04  3.300e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.59124   1.000 -0.591
+        2  0.59124  -0.591  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.641 +/- 0.022
+ Parameter 1: true , estim. 0.359 +/- 0.018
+fr = 0.559475
+fr error = 0.0319847
+D = 64877
+D1 = 43879
+D2/D1 = 0.478544
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    7 **SET PRINT           1
+ **********
+ **********
+ **    8 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    9 **SET ERR         0.5
+ **********
+ **********
+ **   10 **SET PRINT           1
+ **********
+ **********
+ **   11 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   12 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-350858 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.58303e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -2.18289e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-350859 FROM MIGRAD    STATUS=CONVERGED      52 CALLS          53 TOTAL
+                     EDM=9.42046e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.79010e-01   2.11358e-02   7.89064e-03   1.09716e-01
+   2  frac1        5.21054e-01   1.90934e-02   1.42866e-02   8.27691e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.467e-04 -1.642e-04 
+ -1.642e-04  3.647e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.40677   1.000 -0.407
+        2  0.40677  -0.407  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.479 +/- 0.021
+ Parameter 1: true , estim. 0.521 +/- 0.019
+fr = 0.331303
+fr error = 0.0307281
+D = 40524.1
+D1 = 28020
+D2/D1 = 0.446258
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   13 **SET PRINT           1
+ **********
+ **********
+ **   14 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   15 **SET ERR         0.5
+ **********
+ **********
+ **   16 **SET PRINT           1
+ **********
+ **********
+ **   17 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   18 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-221044 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   5.91441e-01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -9.36576e-01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-221044 FROM MIGRAD    STATUS=CONVERGED      45 CALLS          46 TOTAL
+                     EDM=2.35185e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.98803e-01   2.83216e-02   8.00219e-03   3.24101e-03
+   2  frac1        5.01195e-01   2.26762e-02   1.27991e-02  -9.54090e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.021e-04 -3.185e-04 
+ -3.185e-04  5.146e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49581   1.000 -0.496
+        2  0.49581  -0.496  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.499 +/- 0.028
+ Parameter 1: true , estim. 0.501 +/- 0.023
+fr = 0.361173
+fr error = 0.0410092
+D = 26464
+D1 = 18349
+D2/D1 = 0.442258
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   19 **SET PRINT           1
+ **********
+ **********
+ **   20 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   21 **SET ERR         0.5
+ **********
+ **********
+ **   22 **SET PRINT           1
+ **********
+ **********
+ **   23 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   24 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-143219 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.88679e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -5.83096e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-143226 FROM MIGRAD    STATUS=CONVERGED      59 CALLS          60 TOTAL
+                     EDM=5.70566e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.18770e-01   2.83953e-02   6.88630e-03   2.15818e-03
+   2  frac1        5.81235e-01   2.25188e-02   1.10644e-02   5.58435e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.063e-04 -2.398e-04 
+ -2.398e-04  5.074e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37483   1.000 -0.375
+        2  0.37483  -0.375  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.419 +/- 0.028
+ Parameter 1: true , estim. 0.581 +/- 0.023
+fr = 0.250565
+fr error = 0.0409796
+D = 17644
+D1 = 12339
+D2/D1 = 0.429938
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   25 **SET PRINT           1
+ **********
+ **********
+ **   26 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   27 **SET ERR         0.5
+ **********
+ **********
+ **   28 **SET PRINT           1
+ **********
+ **********
+ **   29 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   30 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-94381 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   8.07781e+00
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -2.31506e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-94382.4 FROM MIGRAD    STATUS=CONVERGED      44 CALLS          45 TOTAL
+                     EDM=4.62251e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.50248e-01   3.88448e-02   7.22098e-03   5.38709e-02
+   2  frac1        5.49804e-01   2.80697e-02   1.04926e-02  -2.02386e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.509e-03 -5.258e-04 
+ -5.258e-04  7.887e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.48200   1.000 -0.482
+        2  0.48200  -0.482  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.450 +/- 0.039
+ Parameter 1: true , estim. 0.550 +/- 0.028
+fr = 0.295869
+fr error = 0.0558622
+D = 11836
+D1 = 8282
+D2/D1 = 0.429126
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   31 **SET PRINT           1
+ **********
+ **********
+ **   32 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   33 **SET ERR         0.5
+ **********
+ **********
+ **   34 **SET PRINT           1
+ **********
+ **********
+ **   35 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   36 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-119398 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   4.19633e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.00246e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-119418 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=4.77394e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.61924e-01   2.58802e-02   5.95102e-03   8.60109e-02
+   2  frac1        6.38136e-01   2.17709e-02   1.04191e-02   2.23517e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  6.698e-04 -1.509e-04 
+ -1.509e-04  4.743e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.26768   1.000 -0.268
+        2  0.26768  -0.268  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.362 +/- 0.026
+ Parameter 1: true , estim. 0.638 +/- 0.022
+fr = 0.180049
+fr error = 0.0370185
+D = 14783.1
+D1 = 10515
+D2/D1 = 0.405902
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   37 **SET PRINT           1
+ **********
+ **********
+ **   38 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   39 **SET ERR         0.5
+ **********
+ **********
+ **   40 **SET PRINT           1
+ **********
+ **********
+ **   41 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   42 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-117080 FROM MIGRAD    STATUS=INITIATE       22 CALLS          23 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   0.00000e+00   1.22676e+02
+   2  frac1        7.40801e-01   1.00000e-02   5.02482e-01  -7.48380e+00
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-117104 FROM MIGRAD    STATUS=CONVERGED      81 CALLS          82 TOTAL
+                     EDM=6.05099e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.51795e-01   2.27425e-02   5.37404e-03   1.02425e-01
+   2  frac1        7.48242e-01   2.08313e-02   1.13457e-02  -1.63628e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.172e-04 -9.886e-07 
+ -9.886e-07  4.343e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00209   1.000 -0.002
+        2  0.00209  -0.002  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.252 +/- 0.023
+ Parameter 1: true , estim. 0.748 +/- 0.021
+fr = 0.0320546
+fr error = 0.0321741
+D = 14403
+D1 = 10626
+D2/D1 = 0.355449
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   43 **SET PRINT           1
+ **********
+ **********
+ **   44 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   45 **SET ERR         0.5
+ **********
+ **********
+ **   46 **SET PRINT           1
+ **********
+ **********
+ **   47 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   48 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-76017.9 FROM MIGRAD    STATUS=INITIATE       34 CALLS          35 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.40680e-01   1.00000e-02  -2.59320e-01   5.28485e+00
+   2  frac1        7.70262e-01   1.00000e-02   0.00000e+00   4.39517e+00
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-76018 FROM MIGRAD    STATUS=CONVERGED      80 CALLS          81 TOTAL
+                     EDM=9.23922e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.34870e-01   3.21584e-02   6.12247e-03   1.84161e-02
+   2  frac1        7.65133e-01   2.19284e-02   9.85283e-03  -1.46128e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.034e-03 -1.022e-06 
+ -1.022e-06  4.813e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00145   1.000 -0.001
+        2  0.00145  -0.001  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.235 +/- 0.032
+ Parameter 1: true , estim. 0.765 +/- 0.022
+fr = 0.0290148
+fr error = 0.0441097
+D = 9387.98
+D1 = 7090
+D2/D1 = 0.324115
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   49 **SET PRINT           1
+ **********
+ **********
+ **   50 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   51 **SET ERR         0.5
+ **********
+ **********
+ **   52 **SET PRINT           1
+ **********
+ **********
+ **   53 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   54 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-43965.3 FROM MIGRAD    STATUS=INITIATE       39 CALLS          40 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.31616e-01   1.00000e-02  -2.68384e-01   1.16635e+01
+   2  frac1        8.07861e-01   1.00000e-02   0.00000e+00   5.41260e-01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-43965.6 FROM MIGRAD    STATUS=CONVERGED      77 CALLS          78 TOTAL
+                     EDM=2.52294e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        1.93039e-01   4.78832e-02   6.95051e-03   3.04601e-02
+   2  frac1        8.07016e-01   2.44749e-02   8.99883e-03  -1.01109e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.293e-03 -1.235e-06 
+ -1.235e-06  5.998e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00105   1.000 -0.001
+        2  0.00105  -0.001  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.193 +/- 0.048
+ Parameter 1: true , estim. 0.807 +/- 0.024
+fr = 0.020089
+fr error = 0.0621561
+D = 5208.99
+D1 = 4149
+D2/D1 = 0.25548
+(int) 0
+
+Processing runfitf.C...
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-587356 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -3.27888e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   1.33675e+02
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-587394 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.28312e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        6.40560e-01   2.16135e-02   9.21283e-03   4.28979e-02
+   2  frac1        3.59449e-01   1.81603e-02   1.61502e-02  -7.99580e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.671e-04 -2.321e-04 
+ -2.321e-04  3.300e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.59124   1.000 -0.591
+        2  0.59124  -0.591  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.641 +/- 0.022
+ Parameter 1: true , estim. 0.359 +/- 0.018
+fr = 0.559475
+fr error = 0.0319847
+D = 64877
+D1 = 43879
+D2/D1 = 0.478544
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    7 **SET PRINT           1
+ **********
+ **********
+ **    8 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    9 **SET ERR         0.5
+ **********
+ **********
+ **   10 **SET PRINT           1
+ **********
+ **********
+ **   11 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   12 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-350858 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.58303e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -2.18289e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-350859 FROM MIGRAD    STATUS=CONVERGED      52 CALLS          53 TOTAL
+                     EDM=9.42046e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.79010e-01   2.11358e-02   7.89064e-03   1.09716e-01
+   2  frac1        5.21054e-01   1.90934e-02   1.42866e-02   8.27691e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.467e-04 -1.642e-04 
+ -1.642e-04  3.647e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.40677   1.000 -0.407
+        2  0.40677  -0.407  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.479 +/- 0.021
+ Parameter 1: true , estim. 0.521 +/- 0.019
+fr = 0.331303
+fr error = 0.0307281
+D = 40524.1
+D1 = 28020
+D2/D1 = 0.446258
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   13 **SET PRINT           1
+ **********
+ **********
+ **   14 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   15 **SET ERR         0.5
+ **********
+ **********
+ **   16 **SET PRINT           1
+ **********
+ **********
+ **   17 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   18 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-221044 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   5.91441e-01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -9.36576e-01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-221044 FROM MIGRAD    STATUS=CONVERGED      45 CALLS          46 TOTAL
+                     EDM=2.35185e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.98803e-01   2.83216e-02   8.00219e-03   3.24101e-03
+   2  frac1        5.01195e-01   2.26762e-02   1.27991e-02  -9.54090e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.021e-04 -3.185e-04 
+ -3.185e-04  5.146e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49581   1.000 -0.496
+        2  0.49581  -0.496  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.499 +/- 0.028
+ Parameter 1: true , estim. 0.501 +/- 0.023
+fr = 0.361173
+fr error = 0.0410092
+D = 26464
+D1 = 18349
+D2/D1 = 0.442258
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   19 **SET PRINT           1
+ **********
+ **********
+ **   20 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   21 **SET ERR         0.5
+ **********
+ **********
+ **   22 **SET PRINT           1
+ **********
+ **********
+ **   23 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   24 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-143219 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.88679e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -5.83096e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-143226 FROM MIGRAD    STATUS=CONVERGED      59 CALLS          60 TOTAL
+                     EDM=5.70566e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.18770e-01   2.83953e-02   6.88630e-03   2.15818e-03
+   2  frac1        5.81235e-01   2.25188e-02   1.10644e-02   5.58435e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.063e-04 -2.398e-04 
+ -2.398e-04  5.074e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37483   1.000 -0.375
+        2  0.37483  -0.375  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.419 +/- 0.028
+ Parameter 1: true , estim. 0.581 +/- 0.023
+fr = 0.250565
+fr error = 0.0409796
+D = 17644
+D1 = 12339
+D2/D1 = 0.429938
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   25 **SET PRINT           1
+ **********
+ **********
+ **   26 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   27 **SET ERR         0.5
+ **********
+ **********
+ **   28 **SET PRINT           1
+ **********
+ **********
+ **   29 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   30 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-94381 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   8.07781e+00
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -2.31506e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-94382.4 FROM MIGRAD    STATUS=CONVERGED      44 CALLS          45 TOTAL
+                     EDM=4.62251e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.50248e-01   3.88448e-02   7.22098e-03   5.38709e-02
+   2  frac1        5.49804e-01   2.80697e-02   1.04926e-02  -2.02386e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.509e-03 -5.258e-04 
+ -5.258e-04  7.887e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.48200   1.000 -0.482
+        2  0.48200  -0.482  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.450 +/- 0.039
+ Parameter 1: true , estim. 0.550 +/- 0.028
+fr = 0.295869
+fr error = 0.0558622
+D = 11836
+D1 = 8282
+D2/D1 = 0.429126
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   31 **SET PRINT           1
+ **********
+ **********
+ **   32 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   33 **SET ERR         0.5
+ **********
+ **********
+ **   34 **SET PRINT           1
+ **********
+ **********
+ **   35 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   36 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-119398 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   4.19633e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.00246e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-119418 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=4.77394e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.61924e-01   2.58802e-02   5.95102e-03   8.60109e-02
+   2  frac1        6.38136e-01   2.17709e-02   1.04191e-02   2.23517e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  6.698e-04 -1.509e-04 
+ -1.509e-04  4.743e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.26768   1.000 -0.268
+        2  0.26768  -0.268  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.362 +/- 0.026
+ Parameter 1: true , estim. 0.638 +/- 0.022
+fr = 0.180049
+fr error = 0.0370185
+D = 14783.1
+D1 = 10515
+D2/D1 = 0.405902
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   37 **SET PRINT           1
+ **********
+ **********
+ **   38 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   39 **SET ERR         0.5
+ **********
+ **********
+ **   40 **SET PRINT           1
+ **********
+ **********
+ **   41 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   42 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-117080 FROM MIGRAD    STATUS=INITIATE       22 CALLS          23 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   0.00000e+00   1.22676e+02
+   2  frac1        7.40801e-01   1.00000e-02   5.02482e-01  -7.48380e+00
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-117104 FROM MIGRAD    STATUS=CONVERGED      81 CALLS          82 TOTAL
+                     EDM=6.05099e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.51795e-01   2.27425e-02   5.37404e-03   1.02425e-01
+   2  frac1        7.48242e-01   2.08313e-02   1.13457e-02  -1.63628e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.172e-04 -9.886e-07 
+ -9.886e-07  4.343e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00209   1.000 -0.002
+        2  0.00209  -0.002  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.252 +/- 0.023
+ Parameter 1: true , estim. 0.748 +/- 0.021
+fr = 0.0533815
+fr error = 0.0319336
+D = 14403
+D1 = 10626
+D2/D1 = 0.355449
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   43 **SET PRINT           1
+ **********
+ **********
+ **   44 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   45 **SET ERR         0.5
+ **********
+ **********
+ **   46 **SET PRINT           1
+ **********
+ **********
+ **   47 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   48 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-76017.9 FROM MIGRAD    STATUS=INITIATE       34 CALLS          35 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.40680e-01   1.00000e-02  -2.59320e-01   5.28485e+00
+   2  frac1        7.70262e-01   1.00000e-02   0.00000e+00   4.39517e+00
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-76018 FROM MIGRAD    STATUS=CONVERGED      80 CALLS          81 TOTAL
+                     EDM=9.23922e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.34870e-01   3.21584e-02   6.12247e-03   1.84161e-02
+   2  frac1        7.65133e-01   2.19284e-02   9.85283e-03  -1.46128e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.034e-03 -1.022e-06 
+ -1.022e-06  4.813e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00145   1.000 -0.001
+        2  0.00145  -0.001  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.235 +/- 0.032
+ Parameter 1: true , estim. 0.765 +/- 0.022
+fr = 0.0484617
+fr error = 0.0438423
+D = 9387.98
+D1 = 7090
+D2/D1 = 0.324115
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   49 **SET PRINT           1
+ **********
+ **********
+ **   50 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   51 **SET ERR         0.5
+ **********
+ **********
+ **   52 **SET PRINT           1
+ **********
+ **********
+ **   53 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   54 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-43965.3 FROM MIGRAD    STATUS=INITIATE       39 CALLS          40 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.31616e-01   1.00000e-02  -2.68384e-01   1.16635e+01
+   2  frac1        8.07861e-01   1.00000e-02   0.00000e+00   5.41260e-01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-43965.6 FROM MIGRAD    STATUS=CONVERGED      77 CALLS          78 TOTAL
+                     EDM=2.52294e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        1.93039e-01   4.78832e-02   6.95051e-03   3.04601e-02
+   2  frac1        8.07016e-01   2.44749e-02   8.99883e-03  -1.01109e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.293e-03 -1.235e-06 
+ -1.235e-06  5.998e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00105   1.000 -0.001
+        2  0.00105  -0.001  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.193 +/- 0.048
+ Parameter 1: true , estim. 0.807 +/- 0.024
+fr = 0.0354178
+fr error = 0.0618181
+D = 5208.99
+D1 = 4149
+D2/D1 = 0.25548
+(int) 0
+
+Processing runfitf.C...
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-777879 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -9.65296e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   4.63559e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-778061 FROM MIGRAD    STATUS=CONVERGED      75 CALLS          76 TOTAL
+                     EDM=1.85306e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        7.23506e-01   9.44782e-03   4.72374e-03   1.58793e-01
+   2  frac1        2.76507e-01   1.06779e-02   1.19434e-02   6.02206e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.926e-05 -5.765e-05 
+ -5.765e-05  1.140e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.57137   1.000 -0.571
+        2  0.57137  -0.571  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.724 +/- 0.009
+ Parameter 1: true , estim. 0.277 +/- 0.011
+fr = 0.591191
+fr error = 0.0141228
+D = 64877.2
+D1 = 43879
+D2/D1 = 0.478547
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    7 **SET PRINT           1
+ **********
+ **********
+ **    8 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    9 **SET ERR         0.5
+ **********
+ **********
+ **   10 **SET PRINT           1
+ **********
+ **********
+ **   11 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   12 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-427456 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -7.30297e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   6.62892e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-427523 FROM MIGRAD    STATUS=CONVERGED      79 CALLS          80 TOTAL
+                     EDM=5.37632e-06    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   2.7 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        6.35076e-01   1.13517e-02  -0.00000e+00  -6.37162e-02
+   2  frac1        3.64923e-01   1.33763e-02   0.00000e+00  -1.20908e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.289e-04 -7.913e-05 
+ -7.913e-05  1.790e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.52109   1.000 -0.521
+        2  0.52109  -0.521  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.635 +/- 0.011
+ Parameter 1: true , estim. 0.365 +/- 0.013
+fr = 0.472228
+fr error = 0.0167678
+D = 40524
+D1 = 28020
+D2/D1 = 0.446252
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   13 **SET PRINT           1
+ **********
+ **********
+ **   14 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   15 **SET ERR         0.5
+ **********
+ **********
+ **   16 **SET PRINT           1
+ **********
+ **********
+ **   17 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   18 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-259341 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -3.94436e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   5.85318e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-259360 FROM MIGRAD    STATUS=CONVERGED      45 CALLS          46 TOTAL
+                     EDM=3.4106e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.75518e-01   1.31314e-02   4.01595e-03   4.16461e-03
+   2  frac1        4.24499e-01   1.54652e-02   9.57062e-03   5.98567e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.724e-04 -1.003e-04 
+ -1.003e-04  2.393e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49373   1.000 -0.494
+        2  0.49373  -0.494  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.576 +/- 0.013
+ Parameter 1: true , estim. 0.424 +/- 0.015
+fr = 0.387786
+fr error = 0.0195619
+D = 26464.1
+D1 = 18349
+D2/D1 = 0.442261
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   19 **SET PRINT           1
+ **********
+ **********
+ **   20 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   21 **SET ERR         0.5
+ **********
+ **********
+ **   22 **SET PRINT           1
+ **********
+ **********
+ **   23 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   24 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-164657 FROM MIGRAD    STATUS=INITIATE        4 CALLS           5 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -2.36508e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   5.32804e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-164666 FROM MIGRAD    STATUS=CONVERGED      36 CALLS          37 TOTAL
+                     EDM=1.80835e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.53313e-01   1.43592e-02   3.63338e-03   1.03373e-02
+   2  frac1        4.46702e-01   1.61470e-02   8.22857e-03   4.31447e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.062e-04 -9.921e-05 
+ -9.921e-05  2.608e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.42783   1.000 -0.428
+        2  0.42783  -0.428  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.553 +/- 0.014
+ Parameter 1: true , estim. 0.447 +/- 0.016
+fr = 0.361264
+fr error = 0.0214683
+D = 17644
+D1 = 12339
+D2/D1 = 0.429941
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   25 **SET PRINT           1
+ **********
+ **********
+ **   26 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   27 **SET ERR         0.5
+ **********
+ **********
+ **   28 **SET PRINT           1
+ **********
+ **********
+ **   29 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   30 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-108580 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -1.01942e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   3.07988e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-108583 FROM MIGRAD    STATUS=CONVERGED      37 CALLS          38 TOTAL
+                     EDM=8.92509e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.31717e-01   1.62781e-02   3.35170e-03  -1.45655e-02
+   2  frac1        4.68290e-01   1.76360e-02   7.28495e-03   2.31812e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.650e-04 -1.217e-04 
+ -1.217e-04  3.112e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.42401   1.000 -0.424
+        2  0.42401  -0.424  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.532 +/- 0.016
+ Parameter 1: true , estim. 0.468 +/- 0.018
+fr = 0.330765
+fr error = 0.0246071
+D = 11836
+D1 = 8282
+D2/D1 = 0.429125
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   31 **SET PRINT           1
+ **********
+ **********
+ **   32 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   33 **SET ERR         0.5
+ **********
+ **********
+ **   34 **SET PRINT           1
+ **********
+ **********
+ **   35 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   36 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-136944 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   5.64631e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.46337e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-136945 FROM MIGRAD    STATUS=CONVERGED      39 CALLS          40 TOTAL
+                     EDM=6.1504e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.86204e-01   1.38246e-02   3.27959e-03   5.98003e-02
+   2  frac1        5.13808e-01   1.74477e-02   8.28185e-03   1.34244e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.911e-04 -8.969e-05 
+ -8.969e-05  3.045e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37176   1.000 -0.372
+        2  0.37176  -0.372  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.486 +/- 0.014
+ Parameter 1: true , estim. 0.514 +/- 0.017
+fr = 0.277654
+fr error = 0.0209322
+D = 14783
+D1 = 10515
+D2/D1 = 0.4059
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   37 **SET PRINT           1
+ **********
+ **********
+ **   38 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   39 **SET ERR         0.5
+ **********
+ **********
+ **   40 **SET PRINT           1
+ **********
+ **********
+ **   41 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   42 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-132980 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   3.56116e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -9.82217e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-133007 FROM HESSE     STATUS=OK             14 CALLS          54 TOTAL
+                     EDM=1.68047e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.00409e-01   1.42777e-02   3.27843e-03  -2.39974e-01
+   2  frac1        5.99621e-01   2.00674e-02   9.36408e-03   8.44890e-02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-133007 FROM MIGRAD    STATUS=CONVERGED      58 CALLS          59 TOTAL
+                     EDM=3.82801e-08    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.1 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.00479e-01   1.40910e-02   6.95246e-05   8.81563e-03
+   2  frac1        5.99523e-01   1.96847e-02  -2.00325e-04  -4.86866e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.986e-04 -1.104e-04 
+ -1.104e-04  3.877e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.39777   1.000 -0.398
+        2  0.39777  -0.398  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.400 +/- 0.014
+ Parameter 1: true , estim. 0.600 +/- 0.020
+fr = 0.254915
+fr error = 0.0200599
+D = 14403
+D1 = 10626
+D2/D1 = 0.35545
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   43 **SET PRINT           1
+ **********
+ **********
+ **   44 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   45 **SET ERR         0.5
+ **********
+ **********
+ **   46 **SET PRINT           1
+ **********
+ **********
+ **   47 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   48 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-84657.3 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.65120e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.08581e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-84686.7 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.36368e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.82261e-01   1.69164e-02   3.04148e-03  -7.66744e-03
+   2  frac1        6.17738e-01   2.22106e-02   8.22026e-03  -9.82777e-04
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.862e-04 -1.679e-04 
+ -1.679e-04  4.937e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.44660   1.000 -0.447
+        2  0.44660  -0.447  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.382 +/- 0.017
+ Parameter 1: true , estim. 0.618 +/- 0.022
+fr = 0.243623
+fr error = 0.0237116
+D = 9388
+D1 = 7090
+D2/D1 = 0.324118
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   49 **SET PRINT           1
+ **********
+ **********
+ **   50 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   51 **SET ERR         0.5
+ **********
+ **********
+ **   52 **SET PRINT           1
+ **********
+ **********
+ **   53 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   54 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-46847.6 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   1.92925e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.45505e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-46904.3 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.08022e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.02982e-01   1.65799e-02   2.39268e-03   1.85244e-02
+   2  frac1        6.97020e-01   2.38388e-02   7.48822e-03  -1.18522e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.749e-04 -1.037e-04 
+ -1.037e-04  5.688e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.26222   1.000 -0.262
+        2  0.26222  -0.262  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.303 +/- 0.017
+ Parameter 1: true , estim. 0.697 +/- 0.024
+fr = 0.173447
+fr error = 0.0239502
+D = 5209
+D1 = 4149
+D2/D1 = 0.255484
+(int) 0
+
+Processing runfitf.C...
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-777879 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -9.65296e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   4.63559e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-778061 FROM MIGRAD    STATUS=CONVERGED      75 CALLS          76 TOTAL
+                     EDM=1.85306e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        7.23506e-01   9.44782e-03   4.72374e-03   1.58793e-01
+   2  frac1        2.76507e-01   1.06779e-02   1.19434e-02   6.02206e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.926e-05 -5.765e-05 
+ -5.765e-05  1.140e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.57137   1.000 -0.571
+        2  0.57137  -0.571  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.724 +/- 0.009
+ Parameter 1: true , estim. 0.277 +/- 0.011
+fr = 0.682115
+fr error = 0.0139909
+D = 64877.2
+D1 = 43879
+D2/D1 = 0.478547
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    7 **SET PRINT           1
+ **********
+ **********
+ **    8 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    9 **SET ERR         0.5
+ **********
+ **********
+ **   10 **SET PRINT           1
+ **********
+ **********
+ **   11 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   12 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-427456 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -7.30297e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   6.62892e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-427523 FROM MIGRAD    STATUS=CONVERGED      79 CALLS          80 TOTAL
+                     EDM=5.37632e-06    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   2.7 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        6.35076e-01   1.13517e-02  -0.00000e+00  -6.37162e-02
+   2  frac1        3.64923e-01   1.33763e-02   0.00000e+00  -1.20908e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.289e-04 -7.913e-05 
+ -7.913e-05  1.790e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.52109   1.000 -0.521
+        2  0.52109  -0.521  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.635 +/- 0.011
+ Parameter 1: true , estim. 0.365 +/- 0.013
+fr = 0.557016
+fr error = 0.0165064
+D = 40524
+D1 = 28020
+D2/D1 = 0.446252
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   13 **SET PRINT           1
+ **********
+ **********
+ **   14 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   15 **SET ERR         0.5
+ **********
+ **********
+ **   16 **SET PRINT           1
+ **********
+ **********
+ **   17 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   18 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-259341 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -3.94436e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   5.85318e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-259360 FROM MIGRAD    STATUS=CONVERGED      45 CALLS          46 TOTAL
+                     EDM=3.4106e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.75518e-01   1.31314e-02   4.01595e-03   4.16461e-03
+   2  frac1        4.24499e-01   1.54652e-02   9.57062e-03   5.98567e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.724e-04 -1.003e-04 
+ -1.003e-04  2.393e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49373   1.000 -0.494
+        2  0.49373  -0.494  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.576 +/- 0.013
+ Parameter 1: true , estim. 0.424 +/- 0.015
+fr = 0.471816
+fr error = 0.0191412
+D = 26464.1
+D1 = 18349
+D2/D1 = 0.442261
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   19 **SET PRINT           1
+ **********
+ **********
+ **   20 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   21 **SET ERR         0.5
+ **********
+ **********
+ **   22 **SET PRINT           1
+ **********
+ **********
+ **   23 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   24 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-164657 FROM MIGRAD    STATUS=INITIATE        4 CALLS           5 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -2.36508e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   5.32804e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-164666 FROM MIGRAD    STATUS=CONVERGED      36 CALLS          37 TOTAL
+                     EDM=1.80835e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.53313e-01   1.43592e-02   3.63338e-03   1.03373e-02
+   2  frac1        4.46702e-01   1.61470e-02   8.22857e-03   4.31447e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.062e-04 -9.921e-05 
+ -9.921e-05  2.608e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.42783   1.000 -0.428
+        2  0.42783  -0.428  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.553 +/- 0.014
+ Parameter 1: true , estim. 0.447 +/- 0.016
+fr = 0.442953
+fr error = 0.0208593
+D = 17644
+D1 = 12339
+D2/D1 = 0.429941
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   25 **SET PRINT           1
+ **********
+ **********
+ **   26 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   27 **SET ERR         0.5
+ **********
+ **********
+ **   28 **SET PRINT           1
+ **********
+ **********
+ **   29 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   30 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-108580 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -1.01942e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   3.07988e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-108583 FROM MIGRAD    STATUS=CONVERGED      37 CALLS          38 TOTAL
+                     EDM=8.92509e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.31717e-01   1.62781e-02   3.35170e-03  -1.45655e-02
+   2  frac1        4.68290e-01   1.76360e-02   7.28495e-03   2.31812e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.650e-04 -1.217e-04 
+ -1.217e-04  3.112e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.42401   1.000 -0.424
+        2  0.42401  -0.424  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.532 +/- 0.016
+ Parameter 1: true , estim. 0.468 +/- 0.018
+fr = 0.412299
+fr error = 0.0237636
+D = 11836
+D1 = 8282
+D2/D1 = 0.429125
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   31 **SET PRINT           1
+ **********
+ **********
+ **   32 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   33 **SET ERR         0.5
+ **********
+ **********
+ **   34 **SET PRINT           1
+ **********
+ **********
+ **   35 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   36 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-136944 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   5.64631e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.46337e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-136945 FROM MIGRAD    STATUS=CONVERGED      39 CALLS          40 TOTAL
+                     EDM=6.1504e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.86204e-01   1.38246e-02   3.27959e-03   5.98003e-02
+   2  frac1        5.13808e-01   1.74477e-02   8.28185e-03   1.34244e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.911e-04 -8.969e-05 
+ -8.969e-05  3.045e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37176   1.000 -0.372
+        2  0.37176  -0.372  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.486 +/- 0.014
+ Parameter 1: true , estim. 0.514 +/- 0.017
+fr = 0.354775
+fr error = 0.0200577
+D = 14783
+D1 = 10515
+D2/D1 = 0.4059
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   37 **SET PRINT           1
+ **********
+ **********
+ **   38 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   39 **SET ERR         0.5
+ **********
+ **********
+ **   40 **SET PRINT           1
+ **********
+ **********
+ **   41 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   42 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-132980 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   3.56116e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -9.82217e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-133007 FROM HESSE     STATUS=OK             14 CALLS          54 TOTAL
+                     EDM=1.68047e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.00409e-01   1.42777e-02   3.27843e-03  -2.39974e-01
+   2  frac1        5.99621e-01   2.00674e-02   9.36408e-03   8.44890e-02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-133007 FROM MIGRAD    STATUS=CONVERGED      58 CALLS          59 TOTAL
+                     EDM=3.82801e-08    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.1 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.00479e-01   1.40910e-02   6.95246e-05   8.81563e-03
+   2  frac1        5.99523e-01   1.96847e-02  -2.00325e-04  -4.86866e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.986e-04 -1.104e-04 
+ -1.104e-04  3.877e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.39777   1.000 -0.398
+        2  0.39777  -0.398  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.400 +/- 0.014
+ Parameter 1: true , estim. 0.600 +/- 0.020
+fr = 0.233588
+fr error = 0.0203436
+D = 14403
+D1 = 10626
+D2/D1 = 0.35545
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   43 **SET PRINT           1
+ **********
+ **********
+ **   44 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   45 **SET ERR         0.5
+ **********
+ **********
+ **   46 **SET PRINT           1
+ **********
+ **********
+ **   47 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   48 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-84657.3 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.65120e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.08581e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-84686.7 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.36368e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.82261e-01   1.69164e-02   3.04148e-03  -7.66744e-03
+   2  frac1        6.17738e-01   2.22106e-02   8.22026e-03  -9.82777e-04
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.862e-04 -1.679e-04 
+ -1.679e-04  4.937e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.44660   1.000 -0.447
+        2  0.44660  -0.447  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.382 +/- 0.017
+ Parameter 1: true , estim. 0.618 +/- 0.022
+fr = 0.224176
+fr error = 0.0240824
+D = 9388
+D1 = 7090
+D2/D1 = 0.324118
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   49 **SET PRINT           1
+ **********
+ **********
+ **   50 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   51 **SET ERR         0.5
+ **********
+ **********
+ **   52 **SET PRINT           1
+ **********
+ **********
+ **   53 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   54 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-46847.6 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   1.92925e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.45505e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-46904.3 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.08022e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.02982e-01   1.65799e-02   2.39268e-03   1.85244e-02
+   2  frac1        6.97020e-01   2.38388e-02   7.48822e-03  -1.18522e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.749e-04 -1.037e-04 
+ -1.037e-04  5.688e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.26222   1.000 -0.262
+        2  0.26222  -0.262  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.303 +/- 0.017
+ Parameter 1: true , estim. 0.697 +/- 0.024
+fr = 0.158118
+fr error = 0.0246646
+D = 5209
+D1 = 4149
+D2/D1 = 0.255484
+(int) 0
+
+Processing runfitf.C...
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-777879 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -9.65296e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   4.63559e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-778061 FROM MIGRAD    STATUS=CONVERGED      75 CALLS          76 TOTAL
+                     EDM=1.85306e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        7.23506e-01   9.44782e-03   4.72374e-03   1.58793e-01
+   2  frac1        2.76507e-01   1.06779e-02   1.19434e-02   6.02206e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.926e-05 -5.765e-05 
+ -5.765e-05  1.140e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.57137   1.000 -0.571
+        2  0.57137  -0.571  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.724 +/- 0.009
+ Parameter 1: true , estim. 0.277 +/- 0.011
+fr = 0.591191
+fr error = 0.0141228
+D = 64877.2
+D1 = 43879
+D2/D1 = 0.478547
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    7 **SET PRINT           1
+ **********
+ **********
+ **    8 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    9 **SET ERR         0.5
+ **********
+ **********
+ **   10 **SET PRINT           1
+ **********
+ **********
+ **   11 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   12 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-427456 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -7.30297e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   6.62892e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-427523 FROM MIGRAD    STATUS=CONVERGED      79 CALLS          80 TOTAL
+                     EDM=5.37632e-06    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   2.7 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        6.35076e-01   1.13517e-02  -0.00000e+00  -6.37162e-02
+   2  frac1        3.64923e-01   1.33763e-02   0.00000e+00  -1.20908e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.289e-04 -7.913e-05 
+ -7.913e-05  1.790e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.52109   1.000 -0.521
+        2  0.52109  -0.521  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.635 +/- 0.011
+ Parameter 1: true , estim. 0.365 +/- 0.013
+fr = 0.472228
+fr error = 0.0167678
+D = 40524
+D1 = 28020
+D2/D1 = 0.446252
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   13 **SET PRINT           1
+ **********
+ **********
+ **   14 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   15 **SET ERR         0.5
+ **********
+ **********
+ **   16 **SET PRINT           1
+ **********
+ **********
+ **   17 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   18 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-259341 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -3.94436e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   5.85318e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-259360 FROM MIGRAD    STATUS=CONVERGED      45 CALLS          46 TOTAL
+                     EDM=3.4106e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.75518e-01   1.31314e-02   4.01595e-03   4.16461e-03
+   2  frac1        4.24499e-01   1.54652e-02   9.57062e-03   5.98567e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.724e-04 -1.003e-04 
+ -1.003e-04  2.393e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49373   1.000 -0.494
+        2  0.49373  -0.494  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.576 +/- 0.013
+ Parameter 1: true , estim. 0.424 +/- 0.015
+fr = 0.387786
+fr error = 0.0195619
+D = 26464.1
+D1 = 18349
+D2/D1 = 0.442261
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   19 **SET PRINT           1
+ **********
+ **********
+ **   20 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   21 **SET ERR         0.5
+ **********
+ **********
+ **   22 **SET PRINT           1
+ **********
+ **********
+ **   23 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   24 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-164657 FROM MIGRAD    STATUS=INITIATE        4 CALLS           5 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -2.36508e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   5.32804e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-164666 FROM MIGRAD    STATUS=CONVERGED      36 CALLS          37 TOTAL
+                     EDM=1.80835e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.53313e-01   1.43592e-02   3.63338e-03   1.03373e-02
+   2  frac1        4.46702e-01   1.61470e-02   8.22857e-03   4.31447e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.062e-04 -9.921e-05 
+ -9.921e-05  2.608e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.42783   1.000 -0.428
+        2  0.42783  -0.428  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.553 +/- 0.014
+ Parameter 1: true , estim. 0.447 +/- 0.016
+fr = 0.361264
+fr error = 0.0214683
+D = 17644
+D1 = 12339
+D2/D1 = 0.429941
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   25 **SET PRINT           1
+ **********
+ **********
+ **   26 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   27 **SET ERR         0.5
+ **********
+ **********
+ **   28 **SET PRINT           1
+ **********
+ **********
+ **   29 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   30 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-108580 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -1.01942e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   3.07988e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-108583 FROM MIGRAD    STATUS=CONVERGED      37 CALLS          38 TOTAL
+                     EDM=8.92509e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.31717e-01   1.62781e-02   3.35170e-03  -1.45655e-02
+   2  frac1        4.68290e-01   1.76360e-02   7.28495e-03   2.31812e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.650e-04 -1.217e-04 
+ -1.217e-04  3.112e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.42401   1.000 -0.424
+        2  0.42401  -0.424  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.532 +/- 0.016
+ Parameter 1: true , estim. 0.468 +/- 0.018
+fr = 0.330765
+fr error = 0.0246071
+D = 11836
+D1 = 8282
+D2/D1 = 0.429125
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   31 **SET PRINT           1
+ **********
+ **********
+ **   32 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   33 **SET ERR         0.5
+ **********
+ **********
+ **   34 **SET PRINT           1
+ **********
+ **********
+ **   35 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   36 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-136944 FROM MIGRAD    STATUS=INITIATE        6 CALLS           7 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   5.64631e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.46337e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-136945 FROM MIGRAD    STATUS=CONVERGED      39 CALLS          40 TOTAL
+                     EDM=6.1504e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.86204e-01   1.38246e-02   3.27959e-03   5.98003e-02
+   2  frac1        5.13808e-01   1.74477e-02   8.28185e-03   1.34244e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.911e-04 -8.969e-05 
+ -8.969e-05  3.045e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37176   1.000 -0.372
+        2  0.37176  -0.372  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.486 +/- 0.014
+ Parameter 1: true , estim. 0.514 +/- 0.017
+fr = 0.277654
+fr error = 0.0209322
+D = 14783
+D1 = 10515
+D2/D1 = 0.4059
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   37 **SET PRINT           1
+ **********
+ **********
+ **   38 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   39 **SET ERR         0.5
+ **********
+ **********
+ **   40 **SET PRINT           1
+ **********
+ **********
+ **   41 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   42 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-132980 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   3.56116e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -9.82217e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-133007 FROM HESSE     STATUS=OK             14 CALLS          54 TOTAL
+                     EDM=1.68047e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.00409e-01   1.42777e-02   3.27843e-03  -2.39974e-01
+   2  frac1        5.99621e-01   2.00674e-02   9.36408e-03   8.44890e-02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ FCN=-133007 FROM MIGRAD    STATUS=CONVERGED      58 CALLS          59 TOTAL
+                     EDM=3.82801e-08    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.1 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.00479e-01   1.40910e-02   6.95246e-05   8.81563e-03
+   2  frac1        5.99523e-01   1.96847e-02  -2.00325e-04  -4.86866e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.986e-04 -1.104e-04 
+ -1.104e-04  3.877e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.39777   1.000 -0.398
+        2  0.39777  -0.398  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.400 +/- 0.014
+ Parameter 1: true , estim. 0.600 +/- 0.020
+fr = 0.187379
+fr error = 0.0210824
+D = 14403
+D1 = 10626
+D2/D1 = 0.35545
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   43 **SET PRINT           1
+ **********
+ **********
+ **   44 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   45 **SET ERR         0.5
+ **********
+ **********
+ **   46 **SET PRINT           1
+ **********
+ **********
+ **   47 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   48 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-84657.3 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.65120e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.08581e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-84686.7 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.36368e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.82261e-01   1.69164e-02   3.04148e-03  -7.66744e-03
+   2  frac1        6.17738e-01   2.22106e-02   8.22026e-03  -9.82777e-04
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.862e-04 -1.679e-04 
+ -1.679e-04  4.937e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.44660   1.000 -0.447
+        2  0.44660  -0.447  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.382 +/- 0.017
+ Parameter 1: true , estim. 0.618 +/- 0.022
+fr = 0.18204
+fr error = 0.0250364
+D = 9388
+D1 = 7090
+D2/D1 = 0.324118
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   49 **SET PRINT           1
+ **********
+ **********
+ **   50 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   51 **SET ERR         0.5
+ **********
+ **********
+ **   52 **SET PRINT           1
+ **********
+ **********
+ **   53 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   54 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-46847.6 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   1.92925e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.45505e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-46904.3 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.08022e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.02982e-01   1.65799e-02   2.39268e-03   1.85244e-02
+   2  frac1        6.97020e-01   2.38388e-02   7.48822e-03  -1.18522e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.749e-04 -1.037e-04 
+ -1.037e-04  5.688e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.26222   1.000 -0.262
+        2  0.26222  -0.262  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.303 +/- 0.017
+ Parameter 1: true , estim. 0.697 +/- 0.024
+fr = 0.124905
+fr error = 0.0264085
+D = 5209
+D1 = 4149
+D2/D1 = 0.255484
+(int) 0
+
+Processing runfitf.C...
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-587356 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02  -3.27888e+02
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02   1.33675e+02
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-587394 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=1.28312e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        6.40560e-01   2.16135e-02   9.21283e-03   4.28979e-02
+   2  frac1        3.59449e-01   1.81603e-02   1.61502e-02  -7.99580e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.671e-04 -2.321e-04 
+ -2.321e-04  3.300e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.59124   1.000 -0.591
+        2  0.59124  -0.591  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.641 +/- 0.022
+ Parameter 1: true , estim. 0.359 +/- 0.018
+fr = 0.468552
+fr error = 0.0320704
+D = 64877
+D1 = 43879
+D2/D1 = 0.478544
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **    7 **SET PRINT           1
+ **********
+ **********
+ **    8 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **    9 **SET ERR         0.5
+ **********
+ **********
+ **   10 **SET PRINT           1
+ **********
+ **********
+ **   11 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   12 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-350858 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.58303e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -2.18289e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-350859 FROM MIGRAD    STATUS=CONVERGED      52 CALLS          53 TOTAL
+                     EDM=9.42046e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.79010e-01   2.11358e-02   7.89064e-03   1.09716e-01
+   2  frac1        5.21054e-01   1.90934e-02   1.42866e-02   8.27691e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  4.467e-04 -1.642e-04 
+ -1.642e-04  3.647e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.40677   1.000 -0.407
+        2  0.40677  -0.407  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.479 +/- 0.021
+ Parameter 1: true , estim. 0.521 +/- 0.019
+fr = 0.246514
+fr error = 0.0309531
+D = 40524.1
+D1 = 28020
+D2/D1 = 0.446258
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   13 **SET PRINT           1
+ **********
+ **********
+ **   14 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   15 **SET ERR         0.5
+ **********
+ **********
+ **   16 **SET PRINT           1
+ **********
+ **********
+ **   17 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   18 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-221044 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   5.91441e-01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -9.36576e-01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-221044 FROM MIGRAD    STATUS=CONVERGED      45 CALLS          46 TOTAL
+                     EDM=2.35185e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.98803e-01   2.83216e-02   8.00219e-03   3.24101e-03
+   2  frac1        5.01195e-01   2.26762e-02   1.27991e-02  -9.54090e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.021e-04 -3.185e-04 
+ -3.185e-04  5.146e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.49581   1.000 -0.496
+        2  0.49581  -0.496  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.499 +/- 0.028
+ Parameter 1: true , estim. 0.501 +/- 0.023
+fr = 0.277144
+fr error = 0.0412542
+D = 26464
+D1 = 18349
+D2/D1 = 0.442258
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   19 **SET PRINT           1
+ **********
+ **********
+ **   20 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   21 **SET ERR         0.5
+ **********
+ **********
+ **   22 **SET PRINT           1
+ **********
+ **********
+ **   23 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   24 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-143219 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   2.88679e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -5.83096e+01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-143226 FROM MIGRAD    STATUS=CONVERGED      59 CALLS          60 TOTAL
+                     EDM=5.70566e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.18770e-01   2.83953e-02   6.88630e-03   2.15818e-03
+   2  frac1        5.81235e-01   2.25188e-02   1.10644e-02   5.58435e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  8.063e-04 -2.398e-04 
+ -2.398e-04  5.074e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.37483   1.000 -0.375
+        2  0.37483  -0.375  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.419 +/- 0.028
+ Parameter 1: true , estim. 0.581 +/- 0.023
+fr = 0.168877
+fr error = 0.0414146
+D = 17644
+D1 = 12339
+D2/D1 = 0.429938
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   25 **SET PRINT           1
+ **********
+ **********
+ **   26 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   27 **SET ERR         0.5
+ **********
+ **********
+ **   28 **SET PRINT           1
+ **********
+ **********
+ **   29 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   30 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-94381 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   8.07781e+00
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -2.31506e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-94382.4 FROM MIGRAD    STATUS=CONVERGED      44 CALLS          45 TOTAL
+                     EDM=4.62251e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        4.50248e-01   3.88448e-02   7.22098e-03   5.38709e-02
+   2  frac1        5.49804e-01   2.80697e-02   1.04926e-02  -2.02386e-03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.509e-03 -5.258e-04 
+ -5.258e-04  7.887e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.48200   1.000 -0.482
+        2  0.48200  -0.482  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.450 +/- 0.039
+ Parameter 1: true , estim. 0.550 +/- 0.028
+fr = 0.214335
+fr error = 0.0563069
+D = 11836
+D1 = 8282
+D2/D1 = 0.429126
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   31 **SET PRINT           1
+ **********
+ **********
+ **   32 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   33 **SET ERR         0.5
+ **********
+ **********
+ **   34 **SET PRINT           1
+ **********
+ **********
+ **   35 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   36 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-119398 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   1.00000e-02   4.19633e+01
+   2  frac1        5.00000e-01   1.00000e-02   2.00013e-02  -1.00246e+02
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-119418 FROM MIGRAD    STATUS=CONVERGED      54 CALLS          55 TOTAL
+                     EDM=4.77394e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        3.61924e-01   2.58802e-02   5.95102e-03   8.60109e-02
+   2  frac1        6.38136e-01   2.17709e-02   1.04191e-02   2.23517e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  6.698e-04 -1.509e-04 
+ -1.509e-04  4.743e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.26768   1.000 -0.268
+        2  0.26768  -0.268  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.362 +/- 0.026
+ Parameter 1: true , estim. 0.638 +/- 0.022
+fr = 0.102927
+fr error = 0.0376434
+D = 14783.1
+D1 = 10515
+D2/D1 = 0.405902
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   37 **SET PRINT           1
+ **********
+ **********
+ **   38 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   39 **SET ERR         0.5
+ **********
+ **********
+ **   40 **SET PRINT           1
+ **********
+ **********
+ **   41 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   42 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-117080 FROM MIGRAD    STATUS=INITIATE       22 CALLS          23 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        5.00000e-01   1.00000e-02   0.00000e+00   1.22676e+02
+   2  frac1        7.40801e-01   1.00000e-02   5.02482e-01  -7.48380e+00
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-117104 FROM MIGRAD    STATUS=CONVERGED      81 CALLS          82 TOTAL
+                     EDM=6.05099e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.51795e-01   2.27425e-02   5.37404e-03   1.02425e-01
+   2  frac1        7.48242e-01   2.08313e-02   1.13457e-02  -1.63628e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  5.172e-04 -9.886e-07 
+ -9.886e-07  4.343e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00209   1.000 -0.002
+        2  0.00209  -0.002  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.252 +/- 0.023
+ Parameter 1: true , estim. 0.748 +/- 0.021
+fr = -0.0141537
+fr error = 0.0327773
+D = 14403
+D1 = 10626
+D2/D1 = 0.355449
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   43 **SET PRINT           1
+ **********
+ **********
+ **   44 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   45 **SET ERR         0.5
+ **********
+ **********
+ **   46 **SET PRINT           1
+ **********
+ **********
+ **   47 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   48 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-76017.9 FROM MIGRAD    STATUS=INITIATE       34 CALLS          35 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.40680e-01   1.00000e-02  -2.59320e-01   5.28485e+00
+   2  frac1        7.70262e-01   1.00000e-02   0.00000e+00   4.39517e+00
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-76018 FROM MIGRAD    STATUS=CONVERGED      80 CALLS          81 TOTAL
+                     EDM=9.23922e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.34870e-01   3.21584e-02   6.12247e-03   1.84161e-02
+   2  frac1        7.65133e-01   2.19284e-02   9.85283e-03  -1.46128e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  1.034e-03 -1.022e-06 
+ -1.022e-06  4.813e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00145   1.000 -0.001
+        2  0.00145  -0.001  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.235 +/- 0.032
+ Parameter 1: true , estim. 0.765 +/- 0.022
+fr = -0.0131202
+fr error = 0.0447782
+D = 9387.98
+D1 = 7090
+D2/D1 = 0.324115
+bins[0] = 0
+bins[1] = 0.5
+bins[2] = 1
+bins[3] = 1.5
+bins[4] = 2
+bins[5] = 2.5
+bins[6] = 3
+bins[7] = 3.5
+bins[8] = 4
+bins[9] = 4.5
+bins[10] = 5
+ **********
+ **   49 **SET PRINT           1
+ **********
+ **********
+ **   50 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 frac0        5.00000e-01  1.00000e-02     no limits
+     2 frac1        5.00000e-01  1.00000e-02    0.00000e+00  1.00000e+00
+ **********
+ **   51 **SET ERR         0.5
+ **********
+ **********
+ **   52 **SET PRINT           1
+ **********
+ **********
+ **   53 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **   54 **MIGRAD        1220        0.01
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-05
+ FCN=-43965.3 FROM MIGRAD    STATUS=INITIATE       39 CALLS          40 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        2.31616e-01   1.00000e-02  -2.68384e-01   1.16635e+01
+   2  frac1        8.07861e-01   1.00000e-02   0.00000e+00   5.41260e-01
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-43965.6 FROM MIGRAD    STATUS=CONVERGED      77 CALLS          78 TOTAL
+                     EDM=2.52294e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  frac0        1.93039e-01   4.78832e-02   6.95051e-03   3.04601e-02
+   2  frac1        8.07016e-01   2.44749e-02   8.99883e-03  -1.01109e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=0.5
+  2.293e-03 -1.235e-06 
+ -1.235e-06  5.998e-04 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.00105   1.000 -0.001
+        2  0.00105  -0.001  1.000
+fit status: 0
+ Parameter 0: fake, estim. 0.193 +/- 0.048
+ Parameter 1: true , estim. 0.807 +/- 0.024
+fr = -0.0131233
+fr error = 0.0629919
+D = 5208.99
+D1 = 4149
+D2/D1 = 0.25548
+(int) 0

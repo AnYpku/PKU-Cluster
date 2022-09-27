@@ -16,15 +16,17 @@ void run(TString tag,TString filename,TString var,TString njets){
         f1.close();
 }
 int Print_Uncer_all(){
-        vector<TString> tag={"16","_pre16","17","18"};
-	vector<TString> vars={"mllg"};
+        vector<TString> tag={"16","17","18"};
+	vector<TString> vars={"photonet","mllg","mll","mT_puppi"};
 	vector<TString> njets={"0jets","1jets","2jets"};
         vector<TString> filename;
 	for(int i=0;i<njets.size();i++){
 		for(int j=0;j<tag.size();j++){
 			for(int n=0;n<vars.size();n++){
-				TString f_jer         ="./jesr/jesr_uncer_"+vars[n]+"_"+njets[i]+"_jer1"+tag[j]+".txt";
-				TString f_jes         ="./jesr/jesr_uncer_"+vars[n]+"_"+njets[i]+"_jesTotal"+tag[j]+".txt";
+				if(i==0 && vars[n].Contains("mT")==0) continue;
+				if(i>0 && vars[n].Contains("mT")) continue;
+				TString f_jer         ="./jesr/jesr_uncer_"+vars[n]+"_"+njets[i]+"_JER"+tag[j]+".txt";
+				TString f_jes         ="./jesr/jesr_uncer_"+vars[n]+"_"+njets[i]+"_JES"+tag[j]+".txt";
 				TString f_fake        ="./batch/fakephoton_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
 				TString f_pileup      ="./batch/pileup_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
 				TString f_scale       ="./batch/scale_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
@@ -37,7 +39,7 @@ int Print_Uncer_all(){
                                 TString f_muon_iso    ="./batch/muon_iso_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
                                 TString f_photon_id   ="./batch/photon_id_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
                                 TString f_photon_veto ="./batch/photon_veto_uncer_"+vars[n]+"_"+njets[i]+"_"+tag[j]+".txt";
-//				run(tag[j],f_fake,vars[n],njets[i]);
+				run(tag[j],f_fake,vars[n],njets[i]);
 				run(tag[j],f_jes,vars[n],njets[i]);
 				run(tag[j],f_jer,vars[n],njets[i]);
 				run(tag[j],f_pileup,vars[n],njets[i]);

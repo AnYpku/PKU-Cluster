@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed -2053723502
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (221.866) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=0.673502, JES_16=6.19166, QCDZA_pdf=-0.308472, QCDZA_scale=5.65667, QCD_stat_ele_16_bin_1=-1.17958, QCD_stat_ele_16_bin_2=0.122826, QCD_stat_ele_16_bin_3=-0.098066, QCD_stat_ele_16_bin_4=3.01457, QCD_stat_ele_16_bin_5=1.19646, QCD_stat_muon_16_bin_1=5.08544, QCD_stat_muon_16_bin_2=3.06021, QCD_stat_muon_16_bin_3=-5.90002, QCD_stat_muon_16_bin_4=-0.299119, QCD_stat_muon_16_bin_5=-0.442399, VBS_stat_ele_16_bin_1=-0.750288, VBS_stat_ele_16_bin_2=-0.620214, VBS_stat_ele_16_bin_3=0.618439, VBS_stat_ele_16_bin_4=1.61545, VBS_stat_ele_16_bin_5=0.483501, VBS_stat_muon_16_bin_1=1.24211, VBS_stat_muon_16_bin_2=1.58405, VBS_stat_muon_16_bin_3=0.910348, VBS_stat_muon_16_bin_4=-0.267867, VBS_stat_muon_16_bin_5=0.304538, ele16_efficiency=-1.68331, ele16_trigger=-1.38121, fake_ele_16=-1.4588, fake_muon_16=6.02856, interference=0.550242, l1prefiring=0.404396, lumi=0.129071, mu16_efficiency=1.30129, mu16_trigger=2.13025, non_prompt_stat_ele_16_bin_1=-1.57448, non_prompt_stat_ele_16_bin_2=-0.705378, non_prompt_stat_muon_16_bin_1=1.39962, non_prompt_stat_muon_16_bin_2=1.06213, others_stat_ele_16_bin_1=-0.752252, others_stat_ele_16_bin_2=-0.215731, others_stat_ele_16_bin_3=-0.292741, others_stat_muon_16_bin_1=2.69373, others_xs=-0.0223977, param=0.0132481, photon_id_16=1.38212, pileup=0.209487, signal_pdf=0.905555, signal_scale=1.57531
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.485955 +/- 0.0407052
+Done in 14.39 min (cpu), 14.41 min (real)

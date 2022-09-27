@@ -159,7 +159,9 @@ void WWg::Loop(TString name,double nevents,TString year,bool flag)
 		   HLT_ee = ( HLT_Ele32_WPTight_Gsf );
 		   HLT_mm = (HLT_IsoMu27);
 	   }
-	   int index=get_index(lep1pt);
+	   int index=get_index(lep1pt,nMuon,Muon_pt);
+           int pho_index=get_index(photonet,nPhoton,Photon_pt);
+           if(jentry%10000==0 && photonet>0) cout<<jentry<<" "<<nentries<<", nPhoton "<<pho_index<<" "<<photonet<<" "<<Photon_pt[pho_index]<<endl;
 	   muon1_rochester=get_rochester_scale(isdata, lep1_charge, lep1pt,lep1eta, lep1phi, Muon_nTrackerLayers[index] , r1);
            if(jentry%10000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<" "<<photon_id_scale<<" "<<photon_id_scale_Up<<" "<<photon_id_scale_Down<<" ; btag SFs "<<btag_weight_medium<<" "<<btag_weight_loose <<" rochester "<<muon1_rochester<<"; index "<<index<<" "<<lep1pt<<" "<<Muon_pt[index]<<" nMuon "<<nMuon<<endl;
 
@@ -224,10 +226,10 @@ float WWg::get_rochester_scale(bool isdata, float charge_temp, float pt, float e
                 corr = rc.kSmearMC(charge, pt, eta, phi, nl, r1, 0, 0);
         return corr;
 }
-int WWg::get_index(float lep1pt){
+int WWg::get_index(float pt,int npar, float pt_ori[16]){
 	int index=0;
-	for(int i=0;i<nMuon;i++){
-		if(lep1pt-Muon_pt[i]==0){
+	for(int i=0;i<npar;i++){
+		if(pt-pt_ori[i]==0){
 			index=i;
 			break;
 		}

@@ -1,0 +1,16 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics modified for upper limits (Q_LHC)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 971221847
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (281.362) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_16=3.53538, JES_16=5.75632, QCDZA_pdf=-0.604773, QCDZA_scale=3.54213, QCD_stat_ele_16_bin_1=0.753294, QCD_stat_ele_16_bin_2=-1.08198, QCD_stat_ele_16_bin_3=1.36108, QCD_stat_ele_16_bin_4=1.77602, QCD_stat_ele_16_bin_5=0.730201, QCD_stat_muon_16_bin_1=2.93631, QCD_stat_muon_16_bin_2=2.4875, QCD_stat_muon_16_bin_3=-0.65688, QCD_stat_muon_16_bin_4=1.80616, QCD_stat_muon_16_bin_5=-0.178879, VBS_stat_ele_16_bin_1=2.69185, VBS_stat_ele_16_bin_2=-0.166743, VBS_stat_ele_16_bin_3=0.954014, VBS_stat_ele_16_bin_4=1.3635, VBS_stat_ele_16_bin_5=-1.54601, VBS_stat_muon_16_bin_1=-3.51009, VBS_stat_muon_16_bin_2=-0.119977, VBS_stat_muon_16_bin_3=-1.04526, VBS_stat_muon_16_bin_4=0.190708, VBS_stat_muon_16_bin_5=0.802983, ele16_efficiency=-1.58896, ele16_trigger=-0.191047, fake_ele_16=2.17474, fake_muon_16=5.4087, interference=1.71595, l1prefiring=1.45483, lumi=-0.101131, mu16_efficiency=0.620095, mu16_trigger=-0.36475, non_prompt_stat_ele_16_bin_1=0.146937, non_prompt_stat_ele_16_bin_2=0.861113, non_prompt_stat_muon_16_bin_1=0.570896, non_prompt_stat_muon_16_bin_2=0.120302, others_stat_ele_16_bin_1=-2.39392, others_stat_ele_16_bin_2=0.545285, others_stat_ele_16_bin_3=3.32949, others_stat_muon_16_bin_1=1.5884, others_xs=-0.807872, param=0.250361, photon_id_16=1.34556, pileup=-1.88827, signal_pdf=1.13287, signal_scale=0.476816
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLs = 0.337209 +/- 0.0341375
+Done in 8.67 min (cpu), 8.67 min (real)

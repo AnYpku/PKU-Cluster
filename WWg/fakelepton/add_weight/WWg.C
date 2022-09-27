@@ -31,12 +31,17 @@ void WWg::Loop(TString name,TString year)
    else 
 	   lumi=16.81;
    double actualWeight;
+   bool isSignal=0,isBkg=0;
+   if(name.Contains("WWG_emu")||name.Contains("HGC") || name.Contains("HGS") || name.Contains("HGU") || name.Contains("HGD") )
+	   isSignal=1;
+   else isBkg=1;
+   cout<<name<<" "<<isSignal<<" "<<isBkg<<endl;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
-      if(year.Contains("18")) PrefireWeight=1;
-      actualWeight=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*puWeight*PrefireWeight*btag_weight_medium;
+      if(year.Contains("18")) {L1PreFiringWeight_Nom=1;L1PreFiringWeight_Muon_Nom=1;}
+      actualWeight=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*puWeight*L1PreFiringWeight_Nom*L1PreFiringWeight_Muon_Nom*btag_weight_medium;
       if(name.Contains("Ele")||name.Contains("Muon")){ scalef=1;photon_isprompt=1;lep1_isprompt=1;lep2_isprompt=1;}
       if(jentry%1000==0) cout<<jentry<<" "<<nentries<<" "<<scalef<<endl;
       if(name.Contains("MuonEG")) HLT = (HLT_emu);
@@ -48,8 +53,8 @@ void WWg::Loop(TString name,TString year)
       PHOTON = n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) || ( fabs(photoneta) < 2.5 && fabs(photoneta)>1.566 )) && drl1a>0.5 && drl2a>0.5 && photon_selection==1 /*&& photon_isprompt==1*/;
 
       if(name.Contains("Muon")==0 && name.Contains("Ele")==0){
-              PuppiMET_T1_pt=PuppiMET_T1Smear_pt;
-              PuppiMET_T1_phi=PuppiMET_T1Smear_phi;
+              MET_T1_pt =MET_T1Smear_pt;
+              MET_T1_phi=MET_T1Smear_phi;
       }
 
       double lep1pt_tmp,lep2pt_tmp;
@@ -60,7 +65,7 @@ void WWg::Loop(TString name,TString year)
 		      if(name.Contains("Muon")||name.Contains("Ele"))
 			      scalef=hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))/(1-hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))) * hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))) * (-1);
 		      else{
-			      if(name.Contains("WWG")||name.Contains("HGC"))
+			      if(isSignal)
 				      scalef=scalef * hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))/(1-hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))) * hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))) ;//MC loose+loose
 			      else
 				      scalef=actualWeight * lumi * hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))/(1-hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))) * hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))) ;//MC loose+loose
@@ -70,7 +75,7 @@ void WWg::Loop(TString name,TString year)
 		      if(name.Contains("Muon")||name.Contains("Ele"))
 			      scalef=hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))/(1-hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp)));
 		      else{
-			      if(name.Contains("WWG")||name.Contains("HGC"))
+			      if(isSignal)
 				      scalef = scalef * hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))/(1-hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))) * (-1);//MC tight+loose
 			      else
 				      scalef = actualWeight * lumi * hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))/(1-hmu->GetBinContent(hmu->FindBin(fabs(lep1eta),lep1pt_tmp))) * (-1);//MC tight+loose
@@ -81,7 +86,7 @@ void WWg::Loop(TString name,TString year)
 			      scalef=hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp)));
 		      }
 		      else{
-			      if(name.Contains("WWG")||name.Contains("HGC"))
+			      if(isSignal)
 				      scalef=scalef * hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))) * (-1); //MC tight+loose
 			      else
 				      scalef=actualWeight * lumi * hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))/(1-hele->GetBinContent(hele->FindBin(fabs(lep2eta),lep2pt_tmp))) * (-1); //MC tight+loose
@@ -89,8 +94,7 @@ void WWg::Loop(TString name,TString year)
 	      }
       }
       else{
-	      if(name.Contains("WWG")==0 && name.Contains("HGC")==0 )
-		      continue;
+	      if(isBkg) continue;
       }
 
       if(jentry%1000==0) cout<<jentry<<" after adding weight "<<nentries<<" "<<scalef<<" "<<lep1pt_tmp<<" "<<lep2pt_tmp<<endl;

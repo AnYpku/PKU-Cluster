@@ -1,23 +1,46 @@
 void run(TString tag,TString sample,TString type,TString vars,TString njets){
 	ofstream f1("./txt/jesr_uncer_"+sample+"_"+vars+"_"+njets+"_"+type+tag+".txt");
 	ofstream ftxt("./jesr_uncer_"+vars+"_"+njets+"_"+type+tag+".txt",ios::app);
-	TFile* file ;
-        if(sample.Contains("Top")==0)
+	TFile* file ;TString str;
+        if(sample.Contains("Top")==0){
                 file= new TFile("./root/hist_"+sample+"_"+vars+"_"+njets+"_"+type+tag+".root");
-        else
+		str=sample;
+	}
+        else{
                 file= new TFile("./root/hist_ST_"+vars+"_"+njets+"_"+type+tag+".root");
+		str="ST";
+	}
         TString mc;
         if(sample.Contains("WWG"))mc="sig";else mc="bkg";
 	cout<<type<<endl;
 	TH1D* h1 = (TH1D*)file->Get("hist_"+mc+"_0");
 	TH1D* h2 = (TH1D*)file->Get("hist_"+mc+"_1");
 	TH1D* h3 = (TH1D*)file->Get("hist_"+mc+"_2");
+        TFile*ff1;
+        if(tag.Contains("16") ){
+                ff1 = new TFile("./root/hist_"+str+"_"+vars+"_"+njets+"_"+type+"16pre.root");
+		TH1D* h_1 = (TH1D*)ff1->Get("hist_"+mc+"_0");
+		TH1D* h_2 = (TH1D*)ff1->Get("hist_"+mc+"_1");
+		TH1D* h_3 = (TH1D*)ff1->Get("hist_"+mc+"_2");
+		h1->Add(h_1);h2->Add(h_2);h3->Add(h_3);
+        }
         if(sample.Contains("Top")){
                 TFile* file1 = new TFile("./root/hist_TTGJets_"+vars+"_"+njets+"_"+type+tag+".root");
-                TH1D* hh1 = (TH1D*)file1->Get("hist_"+mc+"_0");
-                TH1D* hh2 = (TH1D*)file1->Get("hist_"+mc+"_1");
-                TH1D* hh3 = (TH1D*)file1->Get("hist_"+mc+"_2");
+                TFile* file2 = new TFile("./root/hist_TTJets_"+vars+"_"+njets+"_"+type+tag+".root");
+                TH1D* hh1 = (TH1D*)file1->Get("hist_"+mc+"_0");   TH1D* hhh1 = (TH1D*)file1->Get("hist_"+mc+"_0");
+                TH1D* hh2 = (TH1D*)file1->Get("hist_"+mc+"_1");   TH1D* hhh2 = (TH1D*)file1->Get("hist_"+mc+"_1");
+                TH1D* hh3 = (TH1D*)file1->Get("hist_"+mc+"_2");   TH1D* hhh3 = (TH1D*)file1->Get("hist_"+mc+"_2");
                 h1->Add(hh1);h2->Add(hh2);h3->Add(hh3);
+                h1->Add(hhh1);h2->Add(hhh2);h3->Add(hhh3);
+                if(tag.Contains("16")){
+                        TFile* ff2 = new TFile("./root/hist_TTGJets_"+vars+"_"+njets+"_"+type+"16pre.root");
+                        TFile* ff3 = new TFile("./root/hist_TTGJets_"+vars+"_"+njets+"_"+type+"16pre.root");
+                        TH1D* hh_1 = (TH1D*)ff2->Get("hist_"+mc+"_0");  TH1D* hhh_1 = (TH1D*)ff3->Get("hist_"+mc+"_0");
+                        TH1D* hh_2 = (TH1D*)ff2->Get("hist_"+mc+"_1");  TH1D* hhh_2 = (TH1D*)ff3->Get("hist_"+mc+"_1");
+                        TH1D* hh_3 = (TH1D*)ff2->Get("hist_"+mc+"_2");  TH1D* hhh_3 = (TH1D*)ff3->Get("hist_"+mc+"_2");
+                        h1->Add(hh_1);h2->Add(hh_2);h3->Add(hh_3);
+                        h1->Add(hhh_1);h2->Add(hhh_2);h3->Add(hhh_3);
+                }
         }
 
 	const int num =h1->GetNbinsX();
@@ -49,16 +72,18 @@ void run(TString tag,TString sample,TString type,TString vars,TString njets){
 }
 int uncer_jesr(){
 	vector<TString> channels={"mubarrel","muendcap","elebarrel","eleendcap"};
-	vector<TString> tag={"16","_pre16","17","18"};
-	vector<TString> vars={"mllg"};
-	vector<TString> sample={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu","Top"};
+	vector<TString> tag={"16","17","18"};
+	vector<TString> vars={"photonet","mllg","mll","mT_puppi"};
+	vector<TString> sample={"ZGJets","TTGJets","TTJets","VV","ST","tZq","WGJets","WWG_emu_tot","Top"};
 	vector<TString> njets={"0jets","1jets","2jets"};
 	for(int i=0;i<njets.size();i++){
 		for(int j=0;j<tag.size();j++){
 			for(int k=0;k<sample.size();k++){
 				for(int n=0;n<vars.size();n++){
-					run(tag[j],sample[k],"jer1",vars[n],njets[i]);
-					run(tag[j],sample[k],"jesTotal",vars[n],njets[i]);
+					if(i==0 && vars[n].Contains("mT")==0) continue;
+					if(i>0 && vars[n].Contains("mT")) continue;
+					run(tag[j],sample[k],"JER",vars[n],njets[i]);
+					run(tag[j],sample[k],"JES",vars[n],njets[i]);
 				}
 			}
 		}

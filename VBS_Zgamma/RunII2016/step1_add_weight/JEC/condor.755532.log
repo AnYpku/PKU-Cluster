@@ -1,0 +1,49 @@
+000 (755532.000.000) 11/02 01:16:14 Job submitted from host: <202.38.140.107:9618?addrs=202.38.140.107-9618&noUDP&sock=4282_1eca>
+...
+001 (755532.000.000) 11/02 01:16:15 Job executing on host: <192.168.1.4:9618?addrs=192.168.1.4-9618&noUDP&sock=4449_8958_3>
+...
+006 (755532.000.000) 11/02 01:16:24 Image size of job updated: 336844
+	262  -  MemoryUsage of job (MB)
+	267444  -  ResidentSetSize of job (KB)
+...
+006 (755532.000.000) 11/02 01:21:25 Image size of job updated: 1296772
+	1266  -  MemoryUsage of job (MB)
+	1296104  -  ResidentSetSize of job (KB)
+...
+006 (755532.000.000) 11/02 01:26:26 Image size of job updated: 1347916
+	1316  -  MemoryUsage of job (MB)
+	1347224  -  ResidentSetSize of job (KB)
+...
+006 (755532.000.000) 11/02 01:31:26 Image size of job updated: 1816420
+	1774  -  MemoryUsage of job (MB)
+	1815728  -  ResidentSetSize of job (KB)
+...
+006 (755532.000.000) 11/02 01:34:20 Image size of job updated: 2035500
+	1774  -  MemoryUsage of job (MB)
+	1815728  -  ResidentSetSize of job (KB)
+...
+012 (755532.000.000) 11/02 01:34:20 Job was held.
+	The job attribute OnExitHold expression '(ExitBySignal == true) || (ExitCode != 0)' evaluated to TRUE
+	Code 3 Subcode 0
+...
+013 (755532.000.000) 11/02 01:45:10 Job was released.
+	The job attribute PeriodicRelease expression '(NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 600)' evaluated to TRUE
+...
+001 (755532.000.000) 11/02 01:45:11 Job executing on host: <192.168.1.4:9618?addrs=192.168.1.4-9618&noUDP&sock=4449_8958_3>
+...
+012 (755532.000.000) 11/02 02:02:53 Job was held.
+	The job attribute OnExitHold expression '(ExitBySignal == true) || (ExitCode != 0)' evaluated to TRUE
+	Code 3 Subcode 0
+...
+013 (755532.000.000) 11/02 02:13:25 Job was released.
+	The job attribute PeriodicRelease expression '(NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 600)' evaluated to TRUE
+...
+001 (755532.000.000) 11/02 02:13:26 Job executing on host: <192.168.1.4:9618?addrs=192.168.1.4-9618&noUDP&sock=4449_8958_3>
+...
+012 (755532.000.000) 11/02 02:31:06 Job was held.
+	The job attribute OnExitHold expression '(ExitBySignal == true) || (ExitCode != 0)' evaluated to TRUE
+	Code 3 Subcode 0
+...
+009 (755532.000.000) 11/29 19:14:41 Job was aborted by the user.
+	via condor_rm (by user anying)
+...

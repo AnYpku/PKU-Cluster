@@ -1,0 +1,16 @@
+executable = condor_condor-fM6.sh
+arguments = $(state)
+should_transfer_files = YES
+transfer_input_files =/afs/cern.ch/user/y/yian/work/PKU-Cluster/AQGC/2016/run/combine/test/fM6/wpwp_fM6_scaling_refined.root
+output                = out/condor-fM6.$(ClusterId).$(ProcId).out
+error                 = err/condor-fM6.$(ClusterId).$(ProcId).err
+log                   = log/condor-fM6.$(ClusterId).log
+
+# Send the job to Held state on failure.
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+
+# Periodically retry the jobs every 10 minutes, up to a maximum of 5 retries.
+periodic_release =  (NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 600)
+
+queue state from list_point_fM6.txt
+

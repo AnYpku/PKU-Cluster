@@ -125,11 +125,11 @@ void unroll_name(TString filename,TString tag,TString type){
 }
 int unroll_test(){
 
-	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG_emu"};
+	vector<TString> names={"ZGJets","TTGJets","VV","ST","tZq","TGJets","WGJets","WWG_emu_tot"};
 	for(int i=0;i<names.size();i++){
-		unroll_name(names[i],"17","jer1");
+		unroll_name(names[i],"17","jer");
 		unroll_name(names[i],"17","jesTotal");
-		unroll_name(names[i],"18","jer1");
+		unroll_name(names[i],"18","jer");
 		unroll_name(names[i],"18","jesTotal");
 	}
 	return 0;

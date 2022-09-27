@@ -23,7 +23,7 @@ TH1D* run(TString cut,TString file,TString channel,TString isBarrel,TString year
 	if(file.Contains("Muon")||file.Contains("Ele"))
 		tree->Draw("photonet>>"+histname,cut+"*1","goff");
         else
-		tree->Draw("photonet>>"+histname,cut+"*scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*btag_weight_medium*puWeight","goff");
+		tree->Draw("photonet>>"+histname,cut+"*scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*btag_weight_medium*L1PreFiringWeight_Nom*puWeight","goff");
 
 	cout<<cut<<endl;
         cout<<channel<<" "<<" "<<file<<" "<<isBarrel<<" "<<h1->GetSum()<<" "<<h1->GetEntries()<<endl;
@@ -35,15 +35,15 @@ int cal_weight(){
 	TString cut1="( n_photon>0 && photonet > 20. && drl1a>0.5 && drl2a>0.5 && photon_selection==1  )";
 	TString cut2="( n_photon>0 && photonet > 20. && drl1a>0.5 && drl2a>0.5 && (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection ==5 ) )";
 	TString cut3="( n_photon>0 && photonet > 20. && drl1a>0.5 && drl2a>0.5 && (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection ==5 ) && photon_isprompt==1 && lep1_isprompt==1 && lep2_isprompt==1 )";
-	vector<TString> year={"16","_pre16","17","18"};
+	vector<TString> year={"16","16pre","17","18"};
 	vector<TString> channel={"emu"};
         vector<TString> isBarrel={"barrel","endcap"};
-	for(int ik=2;ik<year.size();ik++){
+	for(int ik=0;ik<year.size();ik++){
 		TFile*fhist=new TFile("weight_"+year[ik]+".root","recreate");
 		for(int k=0;k<isBarrel.size();k++){
 			cout<<" "<<channel[0]<<" "<<year[ik]<<" "<<isBarrel[k]<<endl;
 			double lumi;
-			if(year[ik].Contains("pre16")) lumi=19.52;
+			if(year[ik].Contains("16pre")) lumi=19.52;
 			else if(year[ik].Contains("16")) lumi=16.81;
 			else if(year[ik].Contains("17")) lumi=41.52;
 			else if(year[ik].Contains("18")) lumi=59.7;
@@ -58,24 +58,24 @@ int cal_weight(){
 			TH1D*h5=run(cut3,"outZGJets"+year[ik],channel[0],isBarrel[k],year[ik]);
 			TH1D*h8=run(cut3,"outWGJets"+year[ik],channel[0],isBarrel[k],year[ik]);
 			TH1D*h6=run(cut3,"outST"+year[ik],channel[0],isBarrel[k],year[ik]);
-			TH1D*h7=run(cut3,"outWWG_emu"+year[ik],channel[0],isBarrel[k],year[ik]);
+			TH1D*h7=run(cut3,"outtZq"+year[ik],channel[0],isBarrel[k],year[ik]);
                         h1->Add(hh1);h2->Add(hh2);
                         h1->Add(hhh1);h2->Add(hhh2);
 			h3->Scale(lumi);h4->Scale(lumi);h5->Scale(lumi);
-			h6->Scale(lumi);h7->Scale(lumi);h8->Scale(lumi);
+			h6->Scale(lumi);h8->Scale(lumi);h7->Scale(lumi);
 			fhist->cd();
-			h1->Write();
+//			h1->Write();
 			TString name=h2->GetName();
-			h2->Write(name+"_f");
-			h3->Write();h4->Write();h5->Write();
-			h6->Write();h7->Write();h8->Write();
+//			h2->Write(name+"_f");
+//			h3->Write();h4->Write();h5->Write();
+//			h6->Write();h8->Write();h7->Write();
 			TCanvas*c1=new TCanvas("c1","",900,600);
 			TLegend*l1=new TLegend(0.6,0.6,0.9,0.9);
 			gStyle->SetOptStat(0);
 			h2->Draw();
 			h1->Draw("same");
 			h3->Draw("same");h4->Draw("same");h5->Draw("same");
-			h6->Draw("same");h7->Draw("same");h8->Draw("same");
+			h6->Draw("same");h8->Draw("same");h7->Draw("same");
 			h1->SetLineColor(2);
 			h2->SetLineColor(3);
 			h3->SetLineColor(4);
@@ -90,8 +90,8 @@ int cal_weight(){
 			l1->AddEntry(h4,"TTGJets");
 			l1->AddEntry(h5,"ZGJets");
 			l1->AddEntry(h6,"ST");
+			l1->AddEntry(h7,"tZq");
 			l1->AddEntry(h8,"WGJets");
-			l1->AddEntry(h7,"WWG");
 			l1->Draw();
 			c1->Print("hist_com_"+channel[0]+"_"+isBarrel[k]+year[ik]+".pdf");
 			ifstream f1;
@@ -100,42 +100,50 @@ int cal_weight(){
 				ptbins={20,25,30,35,40,50,60,100,400};
 			else    ptbins={20,25,30,40,50,60,400};
 			const int n=ptbins.size()-1;
-			double fakerate[n];
-			double plj_weight[n];
+			double fakerate[n],lowpt[n],highpt[n],fakerate_down[n],fakerate_up[n];
+			double plj_weight[n],plj_weight_up[n],plj_weight_down[n];
 			ofstream ftxt("pljweight_"+channel[0]+"_"+isBarrel[k]+year[ik]+".txt");
 			TString c;
 			if(channel[0]=="emu") c="ee";
 			else c=channel[0];
 			cout<<channel[0]<<" "<<c<<endl;
 			TH2D*hist=new TH2D("weight_"+isBarrel[k],"",1,0,1,ptbins.size()-1,&ptbins[0]);
+			TH2D*hist_up=new TH2D("weight_"+isBarrel[k]+"_up","",1,0,1,ptbins.size()-1,&ptbins[0]);
+			TH2D*hist_down=new TH2D("weight_"+isBarrel[k]+"_down","",1,0,1,ptbins.size()-1,&ptbins[0]);
 			TString cat[2];
 			if(year[ik]=="17"){
-				cat[0]="Barrel";
-				cat[1]="Endcap";
+				cat[0]="barrel";
+				cat[1]="endcap";
 			}
 			else{
-				cat[0]="Barrel";
-				cat[1]="Endcap";
+				cat[0]="barrel";
+				cat[1]="endcap";
 			}
+			if(year[ik]=="18")
+				f1.open("/data/pku/home/anying/cms/PKU-Cluster/FakePhoton/txt-WWg/fakerate_summary_mu"+cat[k]+year[ik]+".txt");
+			else if(year[ik]=="17")
+				f1.open("/data/pku/home/anying/cms/PKU-Cluster/FakePhoton/txt-WWg/fakerate_summary_mu"+cat[k]+year[ik]+".txt");
+			else if(year[ik].Contains("16"))
+				f1.open("/data/pku/home/anying/cms/PKU-Cluster/FakePhoton/txt-WWg/fakerate_summary_mu"+cat[k]+"16.txt");
+			if(!f1.is_open())  cout<<"can not open file /data/pku/home/anying/cms/PKU-Cluster/FakePhoton/txt-WWg/fakerate_summary_mu"+cat[k]<<year[ik]<<".txt"<<endl;
 			for(int j=0;j<ptbins.size()-1;j++){
-				if(year[ik]=="18")
-					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
-
-				else if(year[ik]=="17")
-					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/"+cat[k]+"Muon/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
-				else if(year[ik].Contains("16"))
-					f1.open(Form("/data/pku/home/anying/cms/PKU-Cluster/RunII2016/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1]));
-				if(!f1.is_open())  cout<<Form("can not open /data/pku/home/anying/cms/PKU-Cluster/RunII20"+year[ik]+"/MakeTemplate/With_sieieCorr/Electron"+cat[k]+"/ZAfit/fractionfitResult_za/txt/fakerate_ZA_pt%0.f_%0.f.txt",ptbins[j],ptbins[j+1])<<endl;
-				f1>>fakerate[j];
+				f1>>lowpt[j]>>highpt[j]>>fakerate[j]>>fakerate_down[j]>>fakerate_up[j];
+				cout<<j<<" "<<lowpt[j]<<" "<<highpt[j]<<" "<<fakerate[j]<<" "<<fakerate_down[j]<<" "<<fakerate_up[j]<<endl;
 				plj_weight[j]=h1->GetBinContent(j+1)/(h2->GetBinContent(j+1)-h3->GetBinContent(j+1)-h4->GetBinContent(j+1)-h5->GetBinContent(j+1)-h6->GetBinContent(j+1)-h7->GetBinContent(j+1))*fakerate[j];
-				cout<<" pt "<<ptbins[j]<<"~"<<ptbins[j+1]<<", fake photon fraction "<<fakerate[j]<<", data yields "<<h1->GetBinContent(j+1)<<", plj yields "<<h2->GetBinContent(j+1)<<", prompt contribution from MC "<<h3->GetBinContent(j+1)+h4->GetBinContent(j+1)+h5->GetBinContent(j+1)+h6->GetBinContent(j+1)+h7->GetBinContent(j+1)+h8->GetBinContent(j+1)<<", event weight "<<plj_weight[j]<<endl;
+				plj_weight_up[j]=h1->GetBinContent(j+1)/(h2->GetBinContent(j+1)-h3->GetBinContent(j+1)-h4->GetBinContent(j+1)-h5->GetBinContent(j+1)-h6->GetBinContent(j+1)-h7->GetBinContent(j+1))*fakerate_up[j];
+				plj_weight_down[j]=h1->GetBinContent(j+1)/(h2->GetBinContent(j+1)-h3->GetBinContent(j+1)-h4->GetBinContent(j+1)-h5->GetBinContent(j+1)-h6->GetBinContent(j+1)-h7->GetBinContent(j+1))*fakerate_down[j];
+				cout<<" pt "<<ptbins[j]<<"~"<<ptbins[j+1]<<", fake photon fraction "<<fakerate[j]<<", data yields "<<h1->GetBinContent(j+1)<<", plj yields "<<h2->GetBinContent(j+1)<<", prompt contribution from MC "<<h3->GetBinContent(j+1)+h4->GetBinContent(j+1)+h5->GetBinContent(j+1)+h6->GetBinContent(j+1)+h7->GetBinContent(j+1)+h8->GetBinContent(j+1)<<", event weight "<<plj_weight[j]<<" "<<plj_weight_up[j]<<" "<<plj_weight_down[j]<<endl;
 
-				ftxt<<fixed<<setprecision(2)<<plj_weight[j]<<endl;
-				f1.close();
+				ftxt<<fixed<<setprecision(2)<<plj_weight[j]<<"\t"<<plj_weight_up[j]<<"\t"<<plj_weight_down[j]<<endl;
 				hist->SetBinContent(1,j+1,plj_weight[j]);
+				hist_up->SetBinContent(1,j+1,plj_weight_up[j]);
+				hist_down->SetBinContent(1,j+1,plj_weight_down[j]);
 			}
 			fhist->cd();
 			hist->Write();
+			hist_up->Write();
+			hist_down->Write();
+			f1.close();
 		}
 		fhist->Close();
 	}

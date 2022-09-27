@@ -1,0 +1,9 @@
+cmsrel CMSSW_10_2_10
+cd CMSSW_10_2_10/src
+cmsenv
+git cms-init
+git cms-merge-topic cms-egamma:EgammaPostRecoTools
+
+cd $CMSSW_BASE/src
+scram b -j12
+

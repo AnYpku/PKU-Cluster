@@ -1,0 +1,22 @@
+ <<< Combine >>> 
+>>> including systematics
+>>> using the Profile Likelihood test statistics not modified for upper limits (Q_Profile)
+>>> method used is HybridNew
+>>> Used OpenSSL to get a really random seed 856664583
+Computing results starting from observation (a-posteriori)
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (645.422) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.907088, JER_muon=1.84103, JES_ele=-0.0539268, JES_muon=-0.685429, QCD_stat_ele=-1.59067, QCD_stat_muon=2.22965, VBS_stat_ele=0.975889, VBS_stat_muon=-2.07919, ele_efficiency=-0.306249, ele_trigger=-1.5589, fakephoton_ele=3.30383, fakephoton_muon=-0.983921, interference=-2.59998, lumi=-1.79928, mu_efficiency=-0.271182, mu_trigger=-0.65219, non_prompt_stat_ele=6.96177, non_prompt_stat_muon=-0.741194, others_stat_ele=-1.31759, others_stat_muon=2.06213, others_xs=0.31741, param=-3.19744, pdf_ele=-0.82708, pdf_muon=2.03727, photon_id=1.03576, pileup=0.815136, scale_ele=-1.92128, scale_muon=2.15666
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (645.422) to force MIGRAD to back out of this region. Error log follows
+Parameter values: JER_ele=0.925365, JER_muon=2.24275, JES_ele=-0.405887, JES_muon=-0.83924, QCD_stat_ele=-3.19134, QCD_stat_muon=2.7292, VBS_stat_ele=0.943566, VBS_stat_muon=-2.46612, ele_efficiency=-0.443219, ele_trigger=-2.16414, fakephoton_ele=4.63622, fakephoton_muon=-1.19242, interference=-3.14769, lumi=-2.31214, mu_efficiency=-0.327209, mu_trigger=-0.792554, non_prompt_stat_ele=6.54397, non_prompt_stat_muon=-0.85273, others_stat_ele=-2.0848, others_stat_muon=2.46408, others_xs=0.16421, param=-3.32559, pdf_ele=-1.46665, pdf_muon=2.53126, photon_id=0.895644, pileup=0.981358, scale_ele=-3.23124, scale_muon=2.71059
+RooProdPdf::model_s[ modelObs_s * nuisancePdf ]
+     getLogVal() top-level p.d.f evaluates to zero @ !pdfs=(modelObs_s = 0/1,nuisancePdf = 1)
+
+
+ -- Hybrid New -- 
+CLsplusb = 0.164 +/- 0.0165592
+Done in 7.75 min (cpu), 7.78 min (real)

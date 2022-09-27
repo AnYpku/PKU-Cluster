@@ -19,6 +19,10 @@ void WWg::Loop(TString name,TString year)
    TFile*fin=new TFile("../cal_weight/weight_"+year+".root");
    TH2D*weight_b=(TH2D*)fin->Get("weight_barrel");
    TH2D*weight_e=(TH2D*)fin->Get("weight_endcap");
+   TH2D*weight_b_up=(TH2D*)fin->Get("weight_barrel_up");
+   TH2D*weight_e_up=(TH2D*)fin->Get("weight_endcap_up");
+   TH2D*weight_b_down=(TH2D*)fin->Get("weight_barrel_down");
+   TH2D*weight_e_down=(TH2D*)fin->Get("weight_endcap_down");
    Long64_t nbytes = 0, nb = 0;
    double lumi;
    if(name.Contains("18")) lumi=59.7;
@@ -39,48 +43,65 @@ void WWg::Loop(TString name,TString year)
       if(photonet>=400) photonet=399;
       if(name.Contains("Muon")||name.Contains("Ele")){scalef=1;photon_isprompt=1;lep1_isprompt=1;lep2_isprompt=1;}
 
-      if(name.Contains("MuonEG")) HLT = (HLT_emu);
+      if(name.Contains("MuonEG"))    HLT = (HLT_emu);
       else if(name.Contains("Muon")) HLT = ( !(HLT_emu) && HLT_mm);
-      else if(name.Contains("Ele")) HLT = ( !(HLT_emu) && !(HLT_mm) && HLT_ee);
-      else HLT = (HLT_ee || HLT_emu || HLT_mm);
+      else if(name.Contains("Ele"))  HLT = ( !(HLT_emu) && !(HLT_mm) && HLT_ee);
+      else                           HLT = (HLT_ee || HLT_emu || HLT_mm);
 
       cut= ( channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1_is_tight==1 && lep2_is_tight==1 &&lep1_charge*lep2_charge<0 && drll>0.5 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep2eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 ) && ( n_photon>0 && photonet > 20. && ( (fabs(photoneta)<1.4442) || ( fabs(photoneta)<2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 && (photon_selection==2 || photon_selection==3 || photon_selection==4 || photon_selection ==5 ) && photon_isprompt==1 && lep1_isprompt==1 && lep2_isprompt==1 ) && (HLT)  ;//selection of fake photon enriched sample 
 
-      if(year.Contains("18")) PrefireWeight=1;
-      actualWeight=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*PrefireWeight*lumi*btag_weight_medium;
+      if(year.Contains("18")) {L1PreFiringWeight_Nom=1;L1PreFiringWeight_Muon_Nom=1;}
+      actualWeight=scalef*ele_id_scale*ele_reco_scale*muon_id_scale*muon_iso_scale*photon_id_scale*photon_veto_scale*puWeight*L1PreFiringWeight_Muon_Nom*L1PreFiringWeight_Nom*lumi*btag_weight_medium;
       if(name.Contains("Muon") || name.Contains("Ele")) actualWeight=1;
       if(name.Contains("Muon")==0 && name.Contains("Ele")==0){
-	      PuppiMET_T1_pt=PuppiMET_T1Smear_pt;
-	      PuppiMET_T1_phi=PuppiMET_T1Smear_phi;
+	      MET_T1_pt =MET_T1Smear_pt;
+	      MET_T1_phi=MET_T1Smear_phi;
       }
 //    cout<<jentry<<" test1"<<weight_b->GetBinContent(weight_b->FindBin(0.5,photonet))<<endl;
       if(cut){
               if(fabs(photoneta)<1.4442){
                       double weight=weight_b->GetBinContent(weight_b->FindBin(0.5,photonet));
+                      double weight_up=weight_b_up->GetBinContent(weight_b_up->FindBin(0.5,photonet));
+                      double weight_down=weight_b_down->GetBinContent(weight_b_down->FindBin(0.5,photonet));
 		      hb->Fill(photonet,actualWeight*weight);          
 		      if(name.Contains("WWG")){
+			      scalef_up=scalef*weight_up*(-1);
+			      scalef_down=scalef*weight_down*(-1);
 			      scalef=scalef*weight*(-1);
 			      cout<<scalef<<" "<<weight<<endl;
 		      }
-		      else
+		      else{
+			      scalef_up=actualWeight*weight_up;
+			      scalef_down=actualWeight*weight_down;
 			      scalef=actualWeight*weight;
+		      }
 	      }
 	      else if( (fabs(photoneta)<2.5 && fabs(photoneta)>1.566) ){
                       double weight=weight_e->GetBinContent(weight_e->FindBin(0.5,photonet));
+                      double weight_up=weight_e_up->GetBinContent(weight_e_up->FindBin(0.5,photonet));
+                      double weight_down=weight_e_down->GetBinContent(weight_e_down->FindBin(0.5,photonet));
 		      he->Fill(photonet,actualWeight*weight);          
 		      if(name.Contains("WWG")){
+                              scalef_up=scalef*weight_up*(-1);
+                              scalef_down=scalef*weight_down*(-1);
 			      scalef=scalef*weight*(-1);
 			      cout<<scalef<<" "<<weight<<endl;
 		      }
-		      else
+		      else{
+                              scalef_up=actualWeight*weight_up;
+                              scalef_down=actualWeight*weight_down;
 			      scalef=actualWeight*weight;
+		      }
 	      }
       }
       else{ 
 	      if(name.Contains("WWG")==0) continue;
       }
-      if(name.Contains("Muon")==0 && name.Contains("Ele")==0 && name.Contains("WWG")==0) 
+      if(name.Contains("Muon")==0 && name.Contains("Ele")==0 && name.Contains("WWG")==0){
+	      scalef_up=scalef_up*(-1);
+	      scalef_down=scalef_down*(-1);
 	      scalef=scalef*(-1);
+      }
       ExTree->Fill();
 //    cout<<jentry<<" test2"<<endl;
    }

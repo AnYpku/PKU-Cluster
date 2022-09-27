@@ -22,21 +22,23 @@ void run(TString dir,TString name,TString cut,TString vec_branchname,vector<doub
      file=new TFile(dir+fname+".root") ;
      cout<<tag<<" "<<name<<" "<<endl;
      TTree*tree=(TTree*)file->Get("outtree");
-     float actualWeight,scalef,mT;
+     float actualWeight,scalef,mT_puppi,mT_pf;
      map<TString, float> variable;
      tree->SetBranchAddress(vec_branchname, &variable[vec_branchname]);
      tree->SetBranchAddress("scalef", &scalef);
      tree->SetBranchAddress("actualWeight", &actualWeight);
-     tree->SetBranchAddress("mT", &mT);
+     tree->SetBranchAddress("mT_pf", &mT_pf);
+     tree->SetBranchAddress("mT_puppi", &mT_puppi);
      TString th2name,th2name_out;
      if(name.Contains("WWG")) {
 	     th2name="sig";
      }
      else  th2name="bkg";
              
+     cout<<bins2.size()<<" "<<bins2[0]<<endl;
      TH2D* h2=new TH2D(th2name,"",bins1.size()-1,&bins1[0],bins2.size()-1,&bins2[0]);
      double lumi;
-     if(tag.Contains("pre16"))lumi=19.5;else if(tag.Contains("16")) lumi=16.8;else if(tag.Contains("17"))lumi=41.52;else if(tag.Contains("18"))lumi=59.7;
+     if(tag.Contains("16pre"))lumi=19.5;else if(tag.Contains("16")) lumi=16.8;else if(tag.Contains("17"))lumi=41.52;else if(tag.Contains("18"))lumi=59.7;
      TTreeFormula *tformula1=new TTreeFormula("formula1", cut, tree);
      for(int i=0;i<tree->GetEntries();i++){
 	     tree->GetEntry(i);
@@ -44,11 +46,11 @@ void run(TString dir,TString name,TString cut,TString vec_branchname,vector<doub
 	     if(name.Contains("plj")||name.Contains("fake")) actualWeight=scalef;
              if(name.Contains("Muon")||name.Contains("Ele")) actualWeight=1;
 	     if (  tformula1->EvalInstance() ){ 
-                if (mT>=bins1[bins1.size()-1])
-                        mT=bins1[bins1.size()-1]-1;
+                if (mT_puppi>=bins1[bins1.size()-1])
+                        mT_puppi=bins1[bins1.size()-1]-1;
                 if(variable[vec_branchname]>=bins2[bins2.size()-1])
                         variable[vec_branchname]=bins2[bins2.size()-1]-1;
-		h2->Fill(mT,variable[vec_branchname],actualWeight);
+		h2->Fill(mT_puppi,variable[vec_branchname],actualWeight);
 	     }
 
      }
@@ -63,41 +65,49 @@ int Build_Hist(){
 	TString LEP = "( channel==1 && fabs(lep1_pid)==13 && fabs(lep2_pid)==11 && lep1pt>20 && lep2pt>25 && fabs(lep1eta) < 2.4 && fabs(lep1eta) < 2.5 && n_loose_ele==1 && n_loose_mu==1 && ptll>30 && mll>20 && lep1_charge*lep2_charge<0 && drll>0.5)";
 	TString photon = "(n_photon>0  && photonet > 20. && ( (fabs(photoneta) < 1.4442) ||  (fabs(photoneta) < 2.5 && fabs(photoneta)>1.566) ) && drl1a>0.5 && drl2a>0.5 )";
 	TString met;
-	vector<TString> tags={"16","_pre16","18","17"};
-        vector<TString> vars={"ml1g","mllg"};
-	vector<vector<Double_t>> bins2;
+	vector<TString> tags={"16","16pre","18","17"};
+        vector<TString> vars={"mllg","photonet","ptllg","mll"};
 	vector<Double_t> mT_bins;
-	vector<Double_t> ml1g_bins={10,80,140,200};
-	vector<Double_t> ml2g_bins={10,50,90,200};
-	vector<Double_t> mllg_bins;
-        bins2.push_back(ml1g_bins);
-        bins2.push_back(mllg_bins);
+	vector<Double_t> vars_bins={20,30,50,400};
         
 	TString dir1;
-	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/SR/output-slimmed-rootfiles/optimal_emua_";
+	dir1="/home/pku/anying/cms/PKU-Cluster/WWg/CR_plot/SR/rootfiles/optimal_emua_";
 	TString Reco;
-	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeL","tZq","WGJets","WWG_emu","MuonEG","Ele","Muon"};
+	vector<TString> names={"ZGJets","TTGJets","VV","ST","plj","fakeL","tZq","WGJets","WWG_emu_tot","MuonEG","Ele","Muon"};
         vector<TString>njets={"0","1","2"};
 	TString jet_cut;
 	for(int ij=0;ij<njets.size();ij++){
-		if(ij==0){ mT_bins={50,95,130,200};mllg_bins={15,155,255,500};}
-		else if(ij==1){ mT_bins={50,105,150,200};mllg_bins={15,155,315,500};}
-		else if(ij==2) mT_bins={50,95,115,200};
+		if(ij==0){
+			mT_bins={50,90,120,160,200};
+		}
+		else if(ij==1){
+			mT_bins={50,90,120,160,200};
+		}
+		else if(ij==2){
+			mT_bins={50,90,120,160,200};
+		}
 		if(ij!=2)
-			jet_cut="(njets30=="+njets[ij]+")";
+			jet_cut="(njets30_pc=="+njets[ij]+")";
 		else
-			jet_cut="(njets30<=1)";
-		for(int k=0;k<tags.size();k++){
-			for(int j=0;j<names.size();j++){     
-				if(names[j].Contains("Muon")==0&&names[j].Contains("Ele")==0)
-					met="(n_bjets20_medium==0 && PuppiMET_T1Smear_pt > 20 && mT>50 && mT2 >20 && "+jet_cut+")";
-				else
-					met="(n_bjets20_medium==0 && PuppiMET_T1_pt > 20 && mT>50 && mT2 > 20 && "+jet_cut+")";
-//				Reco= LEP+"&&"+photon+"&&"+met;
-				Reco= met;
-				for(int i=1;i<vars.size();i++){     
-
-					run(dir1,names[j],Reco,vars[i],mT_bins,mllg_bins,njets[ij],tags[k]);
+			jet_cut="(njets30_pc<=1)";
+		for(int i=0;i<vars.size();i++){     
+			if(vars[i].Contains("mllg"))
+				vars_bins={20,150,250,400};
+			else if(vars[i].Contains("photonet"))
+				vars_bins={20,30,50,400};
+			else if(vars[i].Contains("ptllg"))
+				vars_bins={0,55,80,400};
+			else if(vars[i].Contains("mll"))
+				vars_bins={20,80,140,400};
+			for(int k=0;k<tags.size();k++){
+				for(int j=0;j<names.size();j++){     
+					if(names[j].Contains("Muon")==0&&names[j].Contains("Ele")==0)
+						met="(n_bjets20_medium_deepFlavB_pc==0 && PuppiMET_pt > 20 && mT_puppi>50  && "+jet_cut+")";
+					else
+						met="(n_bjets20_medium_deepFlavB_pc==0 && PuppiMET_pt > 20 && mT_puppi>50 && "+jet_cut+")";
+					Reco= LEP+"&&"+photon+"&&"+met;
+					//Reco= met;
+					run(dir1,names[j],Reco,vars[i],mT_bins,vars_bins,njets[ij],tags[k]);
 				}
 			}
 		}

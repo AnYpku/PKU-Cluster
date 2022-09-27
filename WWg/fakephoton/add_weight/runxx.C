@@ -29,9 +29,9 @@ void runxx(TString year) {
 }
 
 int main(){
-	runxx("18");
-	runxx("17");
-	runxx("_pre16");
+//	runxx("18");
+//	runxx("17");
+	runxx("16pre");
 	runxx("16");
 	return 1;
 }

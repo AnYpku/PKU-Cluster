@@ -10,15 +10,30 @@ void run(TString tag,TString sample,TString type,TString var,TString njets,int n
         if(sample.Contains("WWG")) mc_type="sig"; else mc_type="bkg";
 	cout<<mc_type<<endl;
         TH1D*h1[num];
+        TFile*ff1;TH1D*h2[num];
+	if(tag.Contains("16"))
+		ff1= new TFile("./root/hist_"+sample+"_"+var+"_"+njets+"_"+type+"16pre.root");
         for(int i=0;i<num;i++){
 		h1[i] = (TH1D*)file->Get(Form("hist_"+mc_type+"_%d",i));
+		if(tag.Contains("16")){
+			h2[i] = (TH1D*)ff1->Get(Form("hist_"+mc_type+"_%d",i));
+			h1[i]->Add(h2[i]);
+		}
+
 	}
-	TH1D*hh1[num];
+	TH1D*hh1[num];TH1D*hh2[num];
         if(sample.Contains("Top")){
                 TFile* file1 = new TFile("./root/hist_TTGJets_"+var+"_"+njets+"_"+type+tag+".root");
 		for(int i=0;i<num;i++){
 			hh1[i] = (TH1D*)file->Get(Form("hist_"+mc_type+"_%d",i));
 			h1[i]->Add(hh1[i]);
+		}
+		if(tag.Contains(16)){
+			TFile* file2 = new TFile("./root/hist_TTGJets_"+var+"_"+njets+"_"+type+"16pre.root");
+			for(int i=0;i<num;i++){
+				hh2[i] = (TH1D*)file2->Get(Form("hist_"+mc_type+"_%d",i));
+				h1[i]->Add(hh2[i]);
+			}
 		}
         }
 
@@ -72,19 +87,20 @@ void run(TString tag,TString sample,TString type,TString var,TString njets,int n
 	cout<<endl;
 }
 int uncer(){
-        vector<TString> vars={"ml1g","ml2g","mllg"};
+        vector<TString> vars={"photonet","mllg","mll"};
         vector<TString> types={"btag","l1pref","pileup","pdf","scale","fakephoton","ele_id","ele_reco","muon_id","muon_iso","photon_id","photon_veto"};
 	vector<TString> names;
-        vector<TString> tags={"16","_pre16","17","18"};
+        vector<TString> tags={"16","17","18"};
 	vector<TString> njets={"0jets","1jets","2jets"};
 	int num;
-        for(int i=1;i<njets.size()-1;i++){
+        for(int i=0;i<njets.size();i++){
 		for(int ik=0;ik<types.size();ik++){
-			if(types[ik].Contains("fakephoton")) {names={"plj_unc"};continue;}
+//			if(types[ik].Contains("fakephoton")==0) continue;
+			if(types[ik].Contains("fakephoton")) {names={"plj"};}
 			else if(types[ik].Contains("scale") || types[ik].Contains("pdf"))
-				names={"TTGJets","ST","WWG_emu","Top"};
+				names={"TTGJets","ST","WWG_emu_tot","Top"};
 			else
-				names={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu","Top"};
+				names={"ZGJets","TTGJets","VV","ST","tZq","WGJets","WWG_emu_tot","Top"};
                         if(types[ik].Contains("scale")) num=9;
                         else if(types[ik].Contains("pdf")) num=101;
                         else num=3;
@@ -93,7 +109,7 @@ int uncer(){
 				for(int k=0;k<tags.size();k++){
 					if(types[ik].Contains("l1pref") && tags[k].Contains("18"))
                                                 continue;
-					for(int n=2;n<vars.size();n++){
+					for(int n=0;n<vars.size();n++){
                                                 run(tags[k],names[j],types[ik],vars[n],njets[i],num);
 					}
                                 }

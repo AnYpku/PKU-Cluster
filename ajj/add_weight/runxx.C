@@ -18,9 +18,12 @@ void runxx(TString year,TString dir) {
 		TTree *tree1 = (TTree*) file1->Get("Events");
 		ajj m1(tree1,outname);
 		cout<<"outname: "<<outname<<endl;
-		TH1D*h1=(TH1D*)file1->Get("nEventsGenWeighted");
-		float nevents=0;
-		nevents=h1->GetSum();
+		TH1D*h1;float nevents=0;
+		if(outname.Contains("EGamma")==0 && outname.Contains("Muon")==0){
+			h1=(TH1D*)file1->Get("nEventsGenWeighted");
+			nevents=h1->GetSum();
+		}
+		else nevents=1;
 		cout<<dir<<infilename<<" -> "<<outname<<endl;
 		m1.Loop(outname,nevents,xs,year);
 		m1.endJob();

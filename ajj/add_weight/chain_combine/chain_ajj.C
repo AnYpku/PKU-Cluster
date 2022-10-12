@@ -37,7 +37,7 @@ void chain_ajj::Loop(TString name,float nevents,float xs,TString year)
 	      var["scalef"]=1;
       else
 	      var["scalef"]=1000.*xs/float(nevents)*Generator_weight/fabs(Generator_weight);
-      if(jentry%10000==0) cout<<"nphoton "<<nphoton<<", nlepton "<<nlepton<<", njet "<<njets25<<", scalef "<<var["scalef"]<<endl;  
+
       if(nlepton==1){
               var["channel"]=1;var["lep1pt"]=lepton_corrected_pt[0];var["lep1eta"]=lepton_eta[0];
 	      var["lep1phi"]=lepton_phi[0];var["lep1mass"]=lepton_mass[0];
@@ -56,8 +56,24 @@ void chain_ajj::Loop(TString name,float nevents,float xs,TString year)
       else
 	      var["channel"]=0;
       if(njets25>1){
-	      var["jet1pt"]=jet_pt_nom[0];var["jet1eta"]=jet_eta[0];var["jet1phi"]=jet_phi[0];
-	      var["jet2pt"]=jet_pt_nom[1];var["jet2eta"]=jet_eta[1];var["jet2phi"]=jet_phi[1];
+              int jet1_index=0;float Firstpt=0;
+              for(int i=0;i<njet;i++){
+                      if(jet_pt_nom[i]>Firstpt) {
+                              Firstpt=jet_pt_nom[i];
+                              jet1_index=i;
+                      }
+              }
+              int jet2_index=0;float Secondpt=0;
+              for(int i=0;i<njet;i++){
+                      if(i==jet1_index) continue;
+                      if(jet_pt_nom[i]>Secondpt) {
+                              Secondpt=jet_pt_nom[i];
+                              jet2_index=i;
+                      }
+              }
+              var["jet1pt"]=jet_pt_nom[jet1_index];var["jet1eta"]=jet_eta[jet1_index];var["jet1phi"]=jet_phi[jet1_index];
+              var["jet2pt"]=jet_pt_nom[jet2_index];var["jet2eta"]=jet_eta[jet2_index];var["jet2phi"]=jet_phi[jet2_index];
+              var["jet1mass"]=jet_mass_nom[jet1_index]; var["jet2mass"]=jet_mass_nom[jet2_index];
 	      jet1p4.SetPtEtaPhiM(var["jet1pt"],var["jet1eta"],var["jet1phi"],var["jet1mass"]);
 	      jet2p4.SetPtEtaPhiM(var["jet2pt"],var["jet2eta"],var["jet2phi"],var["jet2mass"]);
               var["mjj"]=(jet1p4+jet2p4).M();
@@ -95,6 +111,8 @@ void chain_ajj::Loop(TString name,float nevents,float xs,TString year)
 	      }
       }
  
+      if(jentry%10000==0) cout<<jentry<<" "<<nentries<<", nphoton "<<nphoton<<", nlepton "<<nlepton<<", njet "<<njets25<<", scalef "<<var["scalef"]<<" "<<var["jet1pt"]<<" "<<var["jet2pt"]<<" "<<var["jet1mass"]<<" "<<var["jet2mass"]<<endl;  
+
       BSL = var["jet1pt"]>30 && var["jet2pt"]>30 && fabs(var["jet1eta"])<4.7 && fabs(var["jet2eta"])<4.7 && var["mjj"]>500; 
       if(!BSL)
 	      continue;

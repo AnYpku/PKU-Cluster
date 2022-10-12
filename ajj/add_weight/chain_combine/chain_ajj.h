@@ -1634,11 +1634,11 @@ public :
    float lep1pt,lep2pt,lep1eta,lep2eta,lep1phi,lep2phi,lep1mass,lep2mass;
    float photonet,photoneta,photonphi,photonmass;
    float Vpt,Veta,Vphi,Vmass;
-   float jet1pt,jet2pt,jet1eta,jet2eta,jet1phi,jet2phi,jet1mss,jet2mass;
+   float jet1pt,jet2pt,jet1eta,jet2eta,jet1phi,jet2phi,jet1mass,jet2mass;
    float drjj,drj1a,drj2a,drl1a,drl2a,drj1l1,drj1l2,drj2l1,drj2l2;
    float mjj,detajj,zepp,dphi;
    map<TString, float> var;
-   vector<TString> treename={"channel","lep1pt","lep2pt","lep1eta","lep2eta","lep1phi","lep2phi","lep1mass","lep2mass","photonet","photoneta","photonphi","photonmass","photonMCmatch","ml1g","ml2g","mllg","Vpt","Veta","Vphi","Vmass","jet1pt","jet2pt","jet1eta","jet2eta","jet1phi","jet2phi","jet1mss","jet2mass","drjj","drj1a","drj2a","drl1a","drl2a","drj1l1","drj1l2","drj2l1","drj2l2","mjj","detajj","zepp","dphi","scalef","photon_id_scale","photon_veto_scale","ele1_id_scale","ele2_id_scale","ele1_reco_scale","ele2_reco_scale","muon1_id_scale","muon2_id_scale","muon1_iso_scale","muon2_iso_scale","HLT_scale"};
+   vector<TString> treename={"channel","lep1pt","lep2pt","lep1eta","lep2eta","lep1phi","lep2phi","lep1mass","lep2mass","photonet","photoneta","photonphi","photonmass","photonMCmatch","ml1g","ml2g","mllg","Vpt","Veta","Vphi","Vmass","jet1pt","jet2pt","jet1eta","jet2eta","jet1phi","jet2phi","jet1mass","jet2mass","drjj","drj1a","drj2a","drl1a","drl2a","drj1l1","drj1l2","drj2l1","drj2l2","mjj","detajj","zepp","dphi","scalef","photon_id_scale","photon_veto_scale","ele1_id_scale","ele2_id_scale","ele1_reco_scale","ele2_reco_scale","muon1_id_scale","muon2_id_scale","muon1_iso_scale","muon2_iso_scale","HLT_scale"};
 
 };
 

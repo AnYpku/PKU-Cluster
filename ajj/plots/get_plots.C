@@ -4,7 +4,7 @@ TH1D*get_hist(TString var, int nbins,float low, float high,TString cut,TString f
 	TString weight;
 	if(filename.Contains("EGamma")||filename.Contains("Muon")){
 		chain=new TChain("Events","");
-		chain->Add("/home/pku/anying/cms/rootfiles/cutjet-out"+filename+"*_"+year+".root");
+		chain->Add("/home/pku/anying/cms/rootfiles/cutjet-out"+filename+"*"+year+"*.root");
 		tree=chain;
 		weight="*scalef";
 	}
@@ -49,8 +49,8 @@ void run(TString data,TString year,TString var,TString title,float nbins,float l
                     histMC[i]->SetMarkerSize(0);
 		    if(year.Contains("18"))
 			    histMC[i]->Scale(lumi);
-		    if(filename[i].Contains("DY") && filename[i].Contains("NLO"))
-			    histMC[i]->Scale(5321/6077.22);
+//		    if(filename[i].Contains("DY") && filename[i].Contains("NLO"))
+//			    histMC[i]->Scale(5321/6077.22);
 		    if(filename[i].Contains("DY") && filename[i].Contains("LO"))
 			    histMC[i]->Scale(6077.2/5321);
 		    hs->Add(histMC[i]);
@@ -73,9 +73,9 @@ int get_plots(){
 	vector<float> high={600,110,2.5,5,800,5,5,500,5,5,2000,10,10,70,200,2.5,5,200,2.5,5};
 	vector<float> nbins={40,40,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30};
 	vector<TString> data={"Muon","EGamma"};
-	for(int i=0;i<data.size();i++){
-		for(int k=0;k<var.size();k++){
-			if(var[k].Contains("jet1pt")==0) continue;
+	for(int i=0;i<data.size()-1;i++){
+		for(int k=0;k<var.size()-1;k++){
+//			if(var[k].Contains("Vpt")==0) continue;
 			run(data[i],"18",var[k],title[k],nbins[k],low[k],high[k]);
 		}
 	}

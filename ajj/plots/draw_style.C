@@ -169,5 +169,5 @@ void draw(TH1D*hdata,THStack* hs,vector<TString> filename,vector<TString> fname,
 	fPads2->Update();
 	CMS_lumi(fPads1, 4, 0, lumiValue);
         TString name=htemp->GetTitle();
-	cv->SaveAs(name+"_"+data+year+".pdf");
+	cv->SaveAs("./"+name+"_"+data+year+".pdf");
 }

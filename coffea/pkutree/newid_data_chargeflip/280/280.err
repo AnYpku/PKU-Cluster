@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/data/pubfs/tyyang99/jupyter_files/pkutree/charge_flip.py", line 207, in <module>
-    loose_elec_sel_pdgmva = (loose_elec_barrel | loose_elec_endcap) & (abs(electrons.eta+electrons.deltaEtaSC) < 2.5) & (electrons.cutBased >= 3) & (electrons.convVeto == 1)
-  File "/home/pku/tyyang99/anaconda3/lib/python3.8/site-packages/awkward/highlevel.py", line 1128, in __getattr__
-    raise AttributeError(
-AttributeError: no field named 'convVeto'
-
-(https://github.com/scikit-hep/awkward-1.0/blob/1.5.1/src/awkward/highlevel.py#L1130)
